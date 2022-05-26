@@ -236,7 +236,7 @@ IRQL3_INT = (IRQL3A # IRQL3A_MASK) & (IRQL3B # IRQL3B_MASK);
    to any value other than 111 by doing an interrupt ack cycle.
 */   
 IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
-IPL1 = !(!IRQL3_INT # IRQL6_INT # !IRQL7_INT);
+IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT);
 IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
 
 /* 
