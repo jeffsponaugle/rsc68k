@@ -233,11 +233,11 @@ IRQL3_INT = (IRQL3A # IRQL3A_MASK) & (IRQL3B # IRQL3B_MASK);
 /* 
    IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
    This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
-   to any value other than 000 by doing an interrupt ack cycle.
+   to any value other than 111 by doing an interrupt ack cycle.
 */   
-IPL0 = !IRQL3_INT # !IRQL5_INT # !IRQL7_INT;
-IPL1 = !IRQL3_INT # IRQL6_INT # !IRQL7_INT;
-IPL2 = !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
+IPL1 = !(!IRQL3_INT # IRQL6_INT # !IRQL7_INT);
+IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
 
 /* 
    active low interupt lines post 8:8 priority encoder 
