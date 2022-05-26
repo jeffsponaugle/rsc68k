@@ -124,9 +124,6 @@ CAS3 =>
 CLK_16M.d  =>
     !CLK_16M
 
-CLK_16M.ar  =>
-    !CPU_RESET
-
 CLK_16M.ck  =>
     CLK_32M
 

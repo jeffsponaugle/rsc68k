@@ -335,7 +335,6 @@ NODE  CLK_2M;
 
 CLK_16M.d = !CLK_16M;
 CLK_16M.ck = CLK_32M;
-CLK_16M.ar = !CPU_RESET;
 
 CLK_8M.d = !CLK_8M;
 CLK_8M.ck = CLK_16M;
