@@ -1,0 +1,460 @@
+Name	 DRAMController;
+PartNo   DRAMCPLD;
+Date     04/18/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1504ispplcc44;
+
+
+/* 
+
+This is the DRAM interface CPLD for the RSC 68k system.  It uses the CPU_AS input combined with
+the DRAM_CS inputs to indicated a DRAM memory access.  For those memory accesses it uses a state machine
+to drive the DRAM CAS and RAS lines, as well as the DRAM address select (DRAM_MEM_AB) and the direction
+of the data buffer.
+
+RAS0 vs RAS 2 - RAS 0 is drive for memeory acceses where A1 = 0, and RAS 2 for A1=1
+CAS0,1,2,3 - CAS 0 and 2 are driven where A1=0, and CAS 1 and 3 are driven when A1=1
+             Also, CAS 0 and 1 are driven with LDS (low byte access)
+            and CAS 2 and 3 are driven with UDS (high byte access)
+
+*/
+/** Inputs **/
+
+Pin[43]  = CLK_32M;
+Pin[1]   = CPU_RESET_IN;    /* Active Low RESET */
+Pin[18]  = CPU_AS;
+Pin[19]  = CPU_UDS;
+Pin[20]  = CPU_LDS;
+Pin[21]  = CPU_RW;
+Pin[27]  = CPU_A1;
+Pin[28]  = DRAM_CS;     /* Active Low to indicate DRAM Access cycle.  This should be syncronized with /AS */
+
+
+/** Outputs **/
+Pin[17]  = CLK_16M;
+Pin[41]  = RAS0;
+Pin[40]  = RAS2;
+Pin[4]   = CAS0;
+Pin[5]   = CAS1;
+Pin[6]   = CAS2;
+Pin[8]   = CAS3;
+Pin[39]  = DRAM_MEM_AB;    /* Flip flop for MEM_AB signal */
+Pin[11]  = CLK_2M;
+Pin[14]  = CLK_1M;
+Pin[16]  = CPU_RESET;
+
+/* Data Direction Flag for data buffers.  0 = into DRAM, 1 = out from DRAM.
+   NOTE - The DRAM data buffer is always enabled, so it is critical to keep the direction going
+   into the DRAM unless there is an active DRAM read in process. 
+*/
+
+Pin[9]  = DRAM_DATA_DIR; 
+ 
+CPU_RESET.d = 'b'0;
+CPU_RESET.ap = !CPU_RESET_IN;
+CPU_RESET.ck = CLK_16M;
+
+CLK_16M.d = !CLK_16M;
+CLK_16M.ck = CLK_32M;
+CLK_16M.ar = !CPU_RESET;
+
+/* ############################################################################################ */
+
+
+/* 
+   Using two flip flops for these two signals delays their output by 1/2 clock cycle
+   because the second flip flip is clocked on the opposite edge 
+*/
+
+/* 
+   REFRESH_TIMER is a time used to trigger refreshes.  It is clocked at 8MHz, and at triggers after
+   a count to 120 (~15us).  That trigger is set in REFRESH_REQUESTED, and then that signal is synced to 
+   /AS in REFRESH_REQUESTED_SYNC.  That sync guarentees the 'refresh cycle' starts at the same time, 
+   so the work can be hidden from normal operation.   The REFRESH_REQUESTED flags are reset by a 
+   REFRESH_COMPLETED flag, which is triggered by the completion of the refresh. 
+*/
+NODE  [REFRESH_TIMER0..7];
+
+/* 
+   As mentioned above the REFRESH_REQUESTED_* flags are set (==1) when it is time for a refresh cycle.
+*/
+NODE REFRESH_REQUESTED_PRE;
+NODE REFRESH_REQUESTED_SYNC;
+NODE REFRESH_COMPLETED;
+
+/* 
+   The DRAM_MEM_CAS and RAS flip flops are used to triggering the RAS and CAS lines during normal
+   memory access.  There are two flipflops in series (with opposite clocks) so we can have 1/2 clock
+   cycle delays.  That is needed to get the memory access to fit within the tight constraints of memory 
+      access AND sneaky refresh.
+*/
+
+
+NODE  DRAM_MEM_CAS_PRE;    /* First flip flop for /MEM_CAS signal */        
+NODE  DRAM_MEM_RAS;          
+NODE  DRAM_MEM_CAS;
+NODE  DRAM_MEM_RAS_PRE;    /* First flip flop for /MEM_RAS signal */
+
+
+/*
+   The REFRESH_COUNTER_RESET_* flip flips are used to trigger a reset of the refresh state machine.  This reset occurs during
+   a normal DRAM memory access cycle, and gives the state machine a known starting point in that cycle.  With that starting point
+   the timing of the sneaky refresh can be done such that it does not interfere with normal DRAM access.
+*/
+NODE REFRESH_COUNTER_RESET_PRE;
+NODE REFRESH_COUNTER_RESET;
+
+/* 
+   The DRAM_REFRESH_CAS and RAS flip flops are used for triggering the RAS and CAS lines during the 
+   sneaky refresh.  As with the DRAM_MEM above, the two stages (for CAS in this case) are used to give us
+   1/2 clock cycle timing accuracy.
+*/
+
+NODE DRAM_REFRESH_CAS_PRE;
+NODE DRAM_REFRESH_RAS;
+NODE DRAM_REFRESH_CAS;
+
+/* 
+   The REFESH_TMER_RESET flag is used to reset the timer used to trigger when a refresh is needed (every 15us)
+*/
+NODE REFRESH_TIMER_RESET;
+
+/* 
+   DRAM_ACCESS_TIMER is the state machine used for normal DRAM memory access.  It starts when the /AS and DRAM_CS are asserted
+   and counts until the end of the /AS cycle.  The states from this machine drive the flip flops that evetually drive 
+   the RAS, CAS, AB, and DIR lines.  This state machine runs for EVERY /AS cycle, regardless of the access type.  Even if 
+   the memory access is only SRAM or ROM, this state machine will run.  The actual DRAM outputs are masked if the DRAM_CS is 
+   not asserted, but this state machine is used to trigger the refresh state machine, so it has to operate all of the time.
+*/
+
+NODE [DRAM_ACCESS_TIMER2..0];
+
+/*
+   The REFRESH_STATE_TIMER is the state machine used for the refresh cycle.  It is reset during the normal memory /AS cycle
+   as a way to have a fixed starting point, and then provides the states need to drive CAS and RAS during the dead part 
+   of the 68k bus cycle
+*/
+
+NODE [REFRESH_STATE_TIMER2..0];
+
+/* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
+   these clock sources will probably get generated elsewhere. */
+
+NODE  CLK_8M;
+CLK_8M.d = !CLK_8M;
+CLK_8M.ck = CLK_16M;
+CLK_8M.ar = !CPU_RESET;
+
+NODE  CLK_4M;
+CLK_4M.d = !CLK_4M;
+CLK_4M.ck = CLK_8M;
+CLK_4M.ar = !CPU_RESET;
+
+CLK_2M.d = !CLK_2M;
+CLK_2M.ck = CLK_4M;
+CLK_2M.ar = !CPU_RESET;
+
+CLK_1M.d = !CLK_1M;
+CLK_1M.ck = CLK_2M;
+CLK_1M.ar = !CPU_RESET;
+
+/* 
+   The field makes it easier to build logic based on the combined value
+   of the counter values.  
+*/
+
+FIELD dram_access_timer_field = [DRAM_ACCESS_TIMER2..0];
+
+/* ################## DRAM ACCESS SECTION ######################### */
+
+/* 
+   mid flip flop for dram /RAS line.  Active for counter values 2,3 
+   Latched by rising edge of CLK_32M. Held in preset(==1) when DRAM_CS is high 
+   ( no dram access in progress )
+
+   output flip flop for DRAM /RAS line. fed from _PRE output Latches on 
+   falling edge of CLK_32M. Held in preset(==1) when AS is high .  Adds 1/2 delay.
+*/
+
+DRAM_MEM_RAS_PRE.ck = CLK_32M;
+DRAM_MEM_RAS_PRE.ap = DRAM_CS;
+DRAM_MEM_RAS.d = DRAM_MEM_RAS_PRE;
+DRAM_MEM_RAS.ck = !CLK_32M;
+DRAM_MEM_RAS.ap = CPU_AS # !CPU_RESET;
+DRAM_MEM_RAS_PRE.d = !(dram_access_timer_field:[2,3]);
+
+
+
+/* 
+   mid flip flop for dram /RAS line.  Active for counter values 3,4,5
+   Latched by rising edge of CLK_32M. Held in preset(==1) when DRAM_CS is high 
+   ( no dram access in progress )
+
+   output flip flop for DRAM /RAS line. fed from _PRE output Latches on 
+   falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
+*/
+
+DRAM_MEM_CAS_PRE.d = !(dram_access_timer_field:[3,4,5]);
+DRAM_MEM_CAS_PRE.ck = CLK_32M;
+DRAM_MEM_CAS_PRE.ap = DRAM_CS;
+DRAM_MEM_CAS.d = DRAM_MEM_CAS_PRE;
+DRAM_MEM_CAS.ck = !CLK_32M;
+DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET;
+
+/*  
+   DRAM_MEM_AB selects which address lines are fed to the DRAM chip.  This toggels after /RAS but before /CAS.
+   This signal is only active is we are doing a bus cycle (/AS).  This is not gated by DRAM_CS, so this will
+   toggle for all bus cycles even without DRAM access occuring.
+*/
+DRAM_MEM_AB.d = !(dram_access_timer_field:[3,4,5]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
+DRAM_MEM_AB.ck = CLK_32M;
+DRAM_MEM_AB.ap = CPU_AS # !CPU_RESET;
+
+/*
+   This is the DRAM access state machine - a 3 bit counter.  Reset is held by /AS, so this will start to count
+   once /AS falls and the next inverted 32MHz clock edge.  It is used to time the driving of the RAS and CAS lines
+   for normal DRAM access, as well as a 'reset' to the refresh timing state machine used to time the RAS and CAS signals
+   for refresh.  This state machine is running for all /AS bus cycles, memory or int ack.
+*/
+DRAM_ACCESS_TIMER0.d = !DRAM_ACCESS_TIMER0;
+DRAM_ACCESS_TIMER1.d = DRAM_ACCESS_TIMER0 $ DRAM_ACCESS_TIMER1;
+DRAM_ACCESS_TIMER2.d = ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER0 )
+                    # ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER1 )
+                    # ( !DRAM_ACCESS_TIMER2 & DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER0 );
+
+[DRAM_ACCESS_TIMER2..0].ck = !CLK_32M;
+[DRAM_ACCESS_TIMER2..0].ar = CPU_AS # !CPU_RESET;
+
+
+/*
+   REFRESH_COUNTER_RESET* is used to reset the refresh signal timing state machine.  This occurs during the middle of 
+   the /AS cycle.   The reason the refresh signal timing state machine can't just be tied to the opposite of /AS is because
+   the refresh cycle actually sneaks a bit into the next /AS cycle.  That is part of the reason the inital /RAS assertion
+   during normal DRAM access is so late.  It could be started earlier, but if it was it would interfere with the minimum 
+   precharge (delay) between RAS asseertions.   This reset needs to be offset by 1/2 clock cycle so it has two flip flops
+   offset by a inverted clock.
+*/
+
+REFRESH_COUNTER_RESET_PRE.d = !(dram_access_timer_field:[1,2]);
+REFRESH_COUNTER_RESET_PRE.ck = CLK_32M;
+REFRESH_COUNTER_RESET_PRE.ar = !CPU_RESET;
+REFRESH_COUNTER_RESET.d = REFRESH_COUNTER_RESET_PRE;
+REFRESH_COUNTER_RESET.ck = !CLK_32M;
+REFRESH_COUNTER_RESET.ar = !CPU_RESET;
+
+
+/* 
+   Data Direction Flag for data buffers.  0 = into DRAM (CPU WRITE), 1 = out from DRAM (CPU READ).
+   NOTE - The DRAM data buffer is always enabled, so it is critical to keep the direction going
+   into the DRAM unless there is an active DRAM read in process. 
+   
+   We turn on out only if we are in a DRAM cycle, and it is a CPU read (CPU_RW == 1).
+   NOTE that DRAM_CS is alreay gated by /AS in the decode CPLS, so this can't accidently drive
+   the data bus unless we are in an actual DRAM memory cycle, and it is a read operation.
+   The bus drivers for the DRAM have the OE signals always asserted, so flipping direction is 
+   what prevents driving of the data bus as the wrong time.  This was done to speed up the data
+   signal.
+*/
+
+DRAM_DATA_DIR = !DRAM_CS & CPU_RW;
+
+/* ################## REFRESH SECTION ######################### */
+
+
+FIELD refresh_state_timer_field = [REFRESH_STATE_TIMER2..0];
+
+/* 
+   This is the state machine used for the refresh signals.  It is held in reset by two things - 
+   First is the REFRESH_REQUESTED_SYNC which is only asserted (1) when the REFRESH_TIMER has triggered
+   indicating we need to do a refresh cycle.  Second it is help in reset by the output of the 
+   DRAM_ACCESS_TIMER state machine, which guarentees this state machine starts incremented at a fixed
+   location relative to a normal memory access cycle (DRAM or not).  When both conditions are met 
+   this state machine will start counting and at specified times trigger the CAS and RAS lines for
+   a refresh cycle.
+
+   REFRESH_COUNTER_RESET is active low, so when it is low we want to assert(high) the reset of the state time flip flops 
+   REFRESH_REQUESTED_SYNC is high when a refresh cycle is needed, so we invert it for the reset flag 
+*/
+REFRESH_STATE_TIMER0.d = !REFRESH_STATE_TIMER0;
+REFRESH_STATE_TIMER1.d = REFRESH_STATE_TIMER0 $ REFRESH_STATE_TIMER1;
+REFRESH_STATE_TIMER2.d = ( REFRESH_STATE_TIMER2 & !REFRESH_STATE_TIMER0 )
+                    # ( REFRESH_STATE_TIMER2 & !REFRESH_STATE_TIMER1 )
+                    # ( !REFRESH_STATE_TIMER2 & REFRESH_STATE_TIMER1 & REFRESH_STATE_TIMER0 );
+
+[REFRESH_STATE_TIMER2..0].ck = CLK_32M;
+[REFRESH_STATE_TIMER2..0].ar = !REFRESH_REQUESTED_SYNC # !REFRESH_COUNTER_RESET;
+
+
+/*
+   The CAS signal for the refresh cycle is based on the above state machine, and uses two flip flops to give it a 1/2 cycle
+   delay.
+*/
+DRAM_REFRESH_CAS_PRE.d = !(refresh_state_timer_field:[2,3]);
+DRAM_REFRESH_CAS_PRE.ck = !CLK_32M;
+DRAM_REFRESH_CAS_PRE.ap = !CPU_RESET;
+
+DRAM_REFRESH_CAS.d = DRAM_REFRESH_CAS_PRE;
+DRAM_REFRESH_CAS.ck = CLK_32M;
+DRAM_REFRESH_CAS.ap = !CPU_RESET;
+
+/*
+   The RAS signal for the refresh cycle is based on the above state machine, and uses one flip flop.  You will notice the
+   CAS state above is triggered for states 2 and 3, and the RAS for states 3 and 4.  Due to the 1/2 extra offset from the 
+   CAS flip flops, the actual CAS signal fires at 2.5 to 3.5, and the RAS from 3.0 to 4.0.   This gives the CAS before RAS
+   a 1/2 clock cycle delay as required by the DRAM
+*/
+
+DRAM_REFRESH_RAS.d = !(refresh_state_timer_field:[3,4]);
+DRAM_REFRESH_RAS.ck = !CLK_32M;
+DRAM_REFRESH_RAS.ap = !CPU_RESET;
+
+/* 
+   REFRESH_COMPLETED is an active low signal that indicates the refresh cycle has completed.
+   This signal resets the REFRESH_REQUESTED_* flip flops.  This is trigger by state 6 of the
+   refresh signal state machine, which occurs for only a 1/2 cycle period before the state 
+   machine itself is reset.   I believe this would also work in state 5.
+*/
+
+REFRESH_COMPLETED.d = !(refresh_state_timer_field:[6]);
+REFRESH_COMPLETED.ck = !CLK_32M;
+REFRESH_COMPLETED.ap = !CPU_RESET;
+
+
+/*  
+   These are the combined RAS and CAS signals.  The REFRESH signals are put on all RAS and CAS lines
+   while the DRAM access ones are only driven based on address bit A1 and the LDS/UDS signals indicating if 
+   we are reading the upper or lower 8 bits.  
+*/
+RAS0 = (DRAM_MEM_RAS # CPU_A1) & DRAM_REFRESH_RAS;
+RAS2 = (DRAM_MEM_RAS # !CPU_A1) & DRAM_REFRESH_RAS;
+CAS0 = (DRAM_MEM_CAS # CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
+CAS1 = (DRAM_MEM_CAS # !CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
+CAS2 = (DRAM_MEM_CAS # CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
+CAS3 = (DRAM_MEM_CAS # !CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
+
+/* TODO VERIFY - Verify the bus drivers follow this same convention.   I thnk they don't right now. */
+
+/* Refresh Timer - should fire every 15us */
+
+/* 
+   Because the reset in the CPLD is async, we buffer it with 
+   a flip flop so it is active for just one cycle.  after one cycle
+   the output of this flip flop will reset the refresh timer, and that reset
+   value will be clocked into this flip flop one cycle later.
+   This means the counter will go 1 tick past the highest bit turning on before 
+   starting again at 0.
+*/
+
+REFRESH_REQUESTED_PRE.d = 'b'1;
+REFRESH_REQUESTED_PRE.ck = REFRESH_TIMER7;
+REFRESH_REQUESTED_PRE.ar = !REFRESH_COMPLETED # !CPU_RESET;
+
+REFRESH_REQUESTED_SYNC.d = REFRESH_REQUESTED_PRE;
+REFRESH_REQUESTED_SYNC.ck = !CPU_AS;
+REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
+
+/* 
+   8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
+   togeher.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
+   up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
+   0x08.  The produces an event every 15us with an 8MHz clock.   
+
+   The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
+   counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
+   0x08.
+*/
+
+REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
+REFRESH_TIMER_RESET.ck = CLK_32M;
+REFRESH_TIMER_RESET.ar = !CPU_RESET;
+
+REFRESH_TIMER0.d = !REFRESH_TIMER0;
+REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
+REFRESH_TIMER2.d = ( REFRESH_TIMER2 & !REFRESH_TIMER0 )
+                    # ( REFRESH_TIMER2 & !REFRESH_TIMER1 )
+                    # ( !REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+REFRESH_TIMER3.d = ( REFRESH_TIMER3 & !REFRESH_TIMER2 )
+                    # ( REFRESH_TIMER3 & !REFRESH_TIMER0 )
+                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
+                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+
+REFRESH_TIMER4.d = !REFRESH_TIMER4;
+REFRESH_TIMER5.d = REFRESH_TIMER4 $ REFRESH_TIMER5;
+REFRESH_TIMER6.d = ( REFRESH_TIMER6 & !REFRESH_TIMER4 )
+                    # ( REFRESH_TIMER6 & !REFRESH_TIMER5 )
+                    # ( !REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
+                    # ( REFRESH_TIMER7 & !REFRESH_TIMER4 )
+                    # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
+                    # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+
+[REFRESH_TIMER0..3].ck = CLK_8M;
+[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3&REFRESH_TIMER2&REFRESH_TIMER1&REFRESH_TIMER0);
+
+/* 	
+	At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
+	From 0x08 to 0x80 will give is the correct time period of 15us.
+*/
+
+[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
+
+
+/*
+
+                                                               
+                                                                 
+                                                                 
+                                 C                               
+                                 P                               
+                                 U    C                          
+                                 _    L                          
+                                 R    K                          
+                  C  C  C        E    _     R  R                 
+                  A  A  A  V     S    3  G  A  A                 
+                  S  S  S  C     E    2  N  S  S                 
+                  2  1  0  C     T    M  D  0  2                 
+               ____________________________________              
+              /   6  5  4  3  2  1 44 43 42 41 40  \             
+         TDI |  7                                39 | DRAM_MEM_AB
+        CAS3 |  8                                38 | TDO        
+RAM_DATA_DIR |  9                                37 |            
+         GND | 10                                36 |            
+      CLK_2M | 11                                35 | VCC        
+             | 12            ATF1504             34 |            
+         TMS | 13          44-Lead PLCC          33 |            
+      CLK_1M | 14                                32 | TCK        
+         VCC | 15                                31 |            
+             | 16                                30 | GND        
+     CLK_16M | 17                                29 |            
+             |   18 19 20 21 22 23 24 25 26 27 28   |            
+              \____________________________________/             
+                 C  C  C  C  G  V           C  D                 
+                 P  P  P  P  N  C           P  R                 
+                 U  U  U  U  D  C           U  A                 
+                 _  _  _  _                 _  M                 
+                 A  U  L  R                 A  _                 
+                 S  D  D  W                 1  C                 
+                    S  S                       S                 
+
+
+
+Total dedicated input used:	2/4 	(50%)
+Total I/O pins used		22/32 	(68%)
+Total Logic cells used 		43/64 	(67%)
+Total Flip-Flop used 		34/64 	(53%)
+Total Foldback logic used 	10/64 	(15%)
+Total Nodes+FB/MCells 		51/64 	(79%)
+Total cascade used 		2
+Total input pins 		12
+Total output pins 		12
+Total Pts 			135
+*/
+
+
+

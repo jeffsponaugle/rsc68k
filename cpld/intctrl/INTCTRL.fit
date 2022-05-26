@@ -1,0 +1,1098 @@
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue May 03 10:39:26 2022
+
+
+fit1508 C:\INTCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
+
+
+****** Initial fitting strategy and property ******
+ Pla_in_file = INTCTRL.tt2
+ Pla_out_file = INTCTRL.tt3
+ Jedec_file = INTCTRL.jed
+ Vector_file = INTCTRL.tmv
+ verilog_file = INTCTRL.vt
+ Time_file = 
+ Log_file = INTCTRL.fit
+ err_file = 
+ Device_name = PLCC84
+ Module_name = 
+ Package_type = PLCC
+ Preassign_file = 
+ Property_file = 
+ Sleep_mode = 
+ Preassignment = 
+ Security_mode = OFF
+ Pin_keep_mode = ON
+ Dedicated_input_clock = 
+ Dedicated_input_reset = 
+ Dedicated_input_oe = 
+ supporter = CUPL
+ optimize = ON
+ Soft_buffer = 
+ Xor_synthesis = OFF
+ Foldback_logic =  on
+ Expander = 
+ Cascade_logic = OFF
+ Dedicated_input = 
+ Output_fast = OFF
+ *******************************
+ Power down pin 1 = OFF
+ Power down pin 2 = OFF
+ power_reset = OFF
+ JTAG = ON
+ TDI pullup = OFF
+ TMS pullup = OFF
+ MC_power = OFF
+ Open_collector = OFF
+ ITD0 = ON
+ ITD1 = ON
+ ITD2 = ON
+ Fast_inlatch = off
+ *******************************
+---------------------------------------------------------
+ Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
+ ... 
+## ERROR : Bad user pin assignement : 85
+ ## ERROR : Bad user pin assignement 
+---------------------------------------------------------
+ Fitter_Pass 2, Preassign = KEEP, NODE ASSIGN : OFF 
+ ... 
+Unable to Keep Fanin of 42 on Block D
+ ## Warning : Grouping fail 
+---------------------------------------------------------
+ Fitter_Pass 3, Preassign = KEEP, CASCADE_LOGIC : (TRY) 
+ ... 
+Unable to Keep Fanin of 45 on Block F
+ ## Warning : Grouping fail 
+---------------------------------------------------------
+ Fitter_Pass 4, Preassign = KEEP, CASCADE_LOGIC : (OFF) 
+ ... 
+
+Performing global Output Enable pin assignments ...
+
+Performing global pin assignments ...
+--------------------------------------
+
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+CLK_16M assigned to pin  83
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+CLK_16M assigned to pin  83
+IRQL7.AP equation needs patching.
+1 control eqution need patching
+
+Attempt to place floating signals ...
+------------------------------------
+IRQL5C_MASK is placed at feedback node 601 (MC 1)
+IRQL5B_MASK is placed at feedback node 602 (MC 2)
+IRQL4A is placed at pin 12 (MC 3)
+IRQL5A_MASK is placed at feedback node 603 (MC 3)
+IRQL4C_MASK is placed at feedback node 604 (MC 4)
+IRQL4B is placed at pin 11 (MC 5)
+IRQL4D_MASK is placed at feedback node 605 (MC 5)
+IRQL4C is placed at pin 10 (MC 6)
+IRQL4B_MASK is placed at feedback node 606 (MC 6)
+IRQL4A_MASK is placed at feedback node 607 (MC 7)
+IRQL4D is placed at pin 9 (MC 8)
+IRQL3D_MASK is placed at feedback node 608 (MC 8)
+IRQL3C_MASK is placed at feedback node 609 (MC 9)
+IRQL3B_MASK is placed at feedback node 610 (MC 10)
+IRQL5A is placed at pin 8 (MC 11)
+IRQL2D_MASK is placed at feedback node 611 (MC 11)
+IRQL3A_MASK is placed at feedback node 612 (MC 12)
+IRQL5B is placed at pin 6 (MC 13)
+IRQL2C_MASK is placed at feedback node 613 (MC 13)
+IRQL5C is placed at pin 5 (MC 14)
+IRQL2B_MASK is placed at feedback node 614 (MC 14)
+Com_Ctrl_210 is placed at foldback expander node 314 (MC 14)
+IRQL2A_MASK is placed at feedback node 615 (MC 15)
+Com_Ctrl_209 is placed at foldback expander node 315 (MC 15)
+IRQL5D is placed at pin 4 (MC 16)
+IRQL1_MASK is placed at feedback node 616 (MC 16)
+Com_Ctrl_208 is placed at foldback expander node 316 (MC 16)
+IRQL2B is placed at pin 22 (MC 17)
+IRQL2C is placed at pin 21 (MC 19)
+IRQL2D is placed at pin 20 (MC 21)
+IRQL7.AP is placed at feedback node 623 (MC 23)
+IRQL3A is placed at pin 18 (MC 24)
+DTACK_TIMER_0 is placed at feedback node 624 (MC 24)
+IRQL3B is placed at pin 17 (MC 25)
+DTACK_TIMER_1 is placed at feedback node 625 (MC 25)
+IRQL7 is placed at feedback node 626 (MC 26)
+IRQL3C is placed at pin 16 (MC 27)
+XXL_214 is placed at feedback node 627 (MC 27)
+IRQL7_MASK is placed at feedback node 628 (MC 28)
+IRQL3D is placed at pin 15 (MC 29)
+IRQL6B_MASK is placed at feedback node 629 (MC 29)
+IRQL6C_MASK is placed at feedback node 630 (MC 30)
+IRQL5D_MASK is placed at feedback node 631 (MC 31)
+Com_Ctrl_211 is placed at foldback expander node 331 (MC 31)
+TDI is placed at pin 14 (MC 32)
+IRQL6A_MASK is placed at feedback node 632 (MC 32)
+Com_Ctrl_208 is placed at foldback expander node 332 (MC 32)
+INTC_CS is placed at pin 31 (MC 35)
+IRQL7_BUTTON is placed at pin 30 (MC 37)
+IRQL1 is placed at pin 29 (MC 38)
+XXL_212 is placed at feedback node 642 (MC 42)
+XXL_223 is placed at feedback node 644 (MC 44)
+DTACK_FROM_INT is placed at pin 25 (MC 45)
+IRQL2A is placed at pin 24 (MC 46)
+XXL_216 is placed at feedback node 646 (MC 46)
+XXL_215 is placed at feedback node 647 (MC 47)
+TMS is placed at pin 23 (MC 48)
+XXL_213 is placed at feedback node 648 (MC 48)
+CPU_RW is placed at pin 41 (MC 49)
+CPU_AS is placed at pin 40 (MC 51)
+CPU_FC0 is placed at pin 39 (MC 53)
+CPU_FC1 is placed at pin 37 (MC 56)
+CPU_FC2 is placed at pin 36 (MC 57)
+IPL0 is placed at pin 35 (MC 59)
+IPL1 is placed at pin 34 (MC 61)
+XXL_229 is placed at feedback node 662 (MC 62)
+XXL_224 is placed at feedback node 663 (MC 63)
+IPL2 is placed at pin 33 (MC 64)
+CPU_INTACK2 is placed at pin 44 (MC 65)
+CPU_INTACK1 is placed at pin 45 (MC 67)
+CPU_INTACK0 is placed at pin 46 (MC 69)
+CPU_RESET is placed at pin 48 (MC 72)
+XXL_218 is placed at feedback node 672 (MC 72)
+XXL_226 is placed at feedback node 674 (MC 74)
+XXL_219 is placed at feedback node 676 (MC 76)
+XXL_228 is placed at feedback node 678 (MC 78)
+XXL_217 is placed at feedback node 679 (MC 79)
+CPU_D0 is placed at pin 54 (MC 83)
+CPU_D1 is placed at pin 55 (MC 85)
+CPU_D2 is placed at pin 56 (MC 86)
+CPU_D3 is placed at pin 57 (MC 88)
+CPU_D4 is placed at pin 58 (MC 91)
+CPU_D5 is placed at pin 60 (MC 93)
+CPU_D6 is placed at pin 61 (MC 94)
+TCK is placed at pin 62 (MC 96)
+XXL_227 is placed at feedback node 696 (MC 96)
+CPU_D7 is placed at pin 63 (MC 97)
+XXL_225 is placed at feedback node 710 (MC 110)
+XXL_221 is placed at feedback node 711 (MC 111)
+TDO is placed at pin 71 (MC 112)
+XXL_220 is placed at feedback node 712 (MC 112)
+IRQL6A is placed at pin 75 (MC 118)
+IRQL6B is placed at pin 76 (MC 120)
+IRQL6C is placed at pin 77 (MC 123)
+XXL_222 is placed at feedback node 727 (MC 127)
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                             C                                      
+                     I I  I I   I I I        L           I I I                      
+                     R R  R R   R R R        K           R R R                      
+                     Q Q  Q Q   Q Q Q        _           Q Q Q                      
+                     L L  L L G L L L V      1 G       V L L L                      
+                     4 4  4 5 N 5 5 5 C      6 N       C 6 6 6                      
+                     B C  D A D B C D C      M D       C C B A                      
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+          IRQL4A | 12                    (*)                   74 |                 
+             VCC | 13                                          73 |                 
+             TDI | 14                                          72 | GND             
+          IRQL3D | 15                                          71 | TDO             
+          IRQL3C | 16                                          70 |                 
+          IRQL3B | 17                                          69 |                 
+          IRQL3A | 18                                          68 |                 
+             GND | 19                                          67 |                 
+          IRQL2D | 20                                          66 | VCC             
+          IRQL2C | 21                                          65 |                 
+          IRQL2B | 22                 ATF1508                  64 |                 
+             TMS | 23               84-Lead PLCC               63 | CPU_D7          
+          IRQL2A | 24                                          62 | TCK             
+  DTACK_FROM_INT | 25                                          61 | CPU_D6          
+             VCC | 26                                          60 | CPU_D5          
+                 | 27                                          59 | GND             
+                 | 28                                          58 | CPU_D4          
+           IRQL1 | 29                                          57 | CPU_D3          
+    IRQL7_BUTTON | 30                                          56 | CPU_D2          
+         INTC_CS | 31                                          55 | CPU_D1          
+             GND | 32                                          54 | CPU_D0          
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                      I I I C C V C C C G V C C C G C         V                     
+                      P P P P P C P P P N C P P P N P         C                     
+                      L L L U U C U U U D C U U U D U         C                     
+                      2 1 0 _ _   _ _ _     _ _ _   _                               
+                            F F   F A R     I I I   R                               
+                            C C   C S W     N N N   E                               
+                            2 1   0         T T T   S                               
+                                            A A A   E                               
+                                            C C C   T                               
+                                            K K K                                   
+                                            2 1 0                                   
+
+
+
+VCC = Supply Voltage pin which must be connected to (5.0V or 3.0V)
+
+GND = GND pin which must be connected to ground
+
+TMS,TDI,TDO,TDI = JTAG pins which must reserved for the JTAG interface
+
+NC = Unused I/O pins which must be unconnected on the board
+
+Universal-Interconnect-Multiplexer assignments
+------------------------------------------------
+FanIn assignment for block A [13]
+{
+CPU_D2,CPU_D5,CPU_RW,CPU_D4,CPU_INTACK0,CPU_D0,CPU_RESET,CPU_D3,CPU_D7,CPU_INTACK1,CPU_D1,CPU_D6,
+INTC_CS,
+}
+Multiplexer assignment for block A
+CPU_D2			(MC3	P)   : MUX 1		Ref (F86p)
+CPU_D5			(MC6	P)   : MUX 4		Ref (F93p)
+CPU_RW			(MC12	P)   : MUX 5		Ref (D49p)
+CPU_D4			(MC5	P)   : MUX 6		Ref (F91p)
+CPU_INTACK0		(MC9	P)   : MUX 11		Ref (E69p)
+CPU_D0			(MC1	P)   : MUX 13		Ref (F83p)
+CPU_RESET		(MC11	P)   : MUX 19		Ref (E72p)
+CPU_D3			(MC4	P)   : MUX 21		Ref (F88p)
+INTC_CS			(MC13	P)   : MUX 23		Ref (C35p)
+CPU_D7			(MC8	P)   : MUX 27		Ref (G97p)
+CPU_INTACK1		(MC10	P)   : MUX 29		Ref (E67p)
+CPU_D1			(MC2	P)   : MUX 31		Ref (F85p)
+CPU_D6			(MC7	P)   : MUX 34		Ref (F94p)
+
+FanIn assignment for block B [26]
+{
+CPU_D5,CPU_RW,CPU_INTACK2,CPU_AS,CPU_INTACK0,CPU_D4,CPU_FC0,CPU_FC2,CPU_RESET,CPU_D7,CPU_D0,CPU_INTACK1,CPU_D6,CPU_FC1,
+DTACK_TIMER_0,DTACK_TIMER_1,
+IRQL2A,IRQL7_BUTTON,IRQL5A,IRQL2B,INTC_CS,IRQL5B,IRQL7.AP,IRQL5A_MASK,IRQL5B_MASK,IRQL2B_MASK,
+}
+Multiplexer assignment for block B
+IRQL2A			(MC19	P)   : MUX 0		Ref (C46p)
+DTACK_TIMER_0		(MC5	FB)  : MUX 2		Ref (B24fb)
+IRQL7_BUTTON		(MC26	P)   : MUX 3		Ref (C37p)
+CPU_D5			(MC9	P)   : MUX 4		Ref (F93p)
+CPU_RW			(MC24	P)   : MUX 5		Ref (D49p)
+CPU_INTACK2		(MC15	P)   : MUX 7		Ref (E65p)
+CPU_AS			(MC20	P)   : MUX 9		Ref (D51p)
+IRQL5A			(MC17	P)   : MUX 10		Ref (A11p)
+CPU_INTACK0		(MC12	P)   : MUX 11		Ref (E69p)
+IRQL2B			(MC18	P)   : MUX 13		Ref (B17p)
+CPU_D4			(MC8	P)   : MUX 16		Ref (F91p)
+CPU_FC0			(MC21	P)   : MUX 17		Ref (D53p)
+CPU_FC2			(MC23	P)   : MUX 18		Ref (D57p)
+CPU_RESET		(MC14	P)   : MUX 19		Ref (E72p)
+INTC_CS			(MC25	P)   : MUX 23		Ref (C35p)
+CPU_D7			(MC11	P)   : MUX 25		Ref (G97p)
+CPU_D0			(MC7	P)   : MUX 27		Ref (F83p)
+IRQL5B			(MC16	P)   : MUX 28		Ref (A13p)
+CPU_INTACK1		(MC13	P)   : MUX 29		Ref (E67p)
+IRQL7.AP		(MC4	FB)  : MUX 32		Ref (B23fb)
+CPU_D6			(MC10	P)   : MUX 34		Ref (F94p)
+CPU_FC1			(MC22	P)   : MUX 35		Ref (D56p)
+IRQL5A_MASK		(MC2	FB)  : MUX 36		Ref (A3fb)
+DTACK_TIMER_1		(MC6	FB)  : MUX 37		Ref (B25fb)
+IRQL5B_MASK		(MC1	FB)  : MUX 38		Ref (A2fb)
+IRQL2B_MASK		(MC3	FB)  : MUX 39		Ref (A14fb)
+
+FanIn assignment for block C [26]
+{
+CPU_INTACK1,CPU_INTACK0,CPU_INTACK2,
+DTACK_TIMER_1,
+IRQL4B,IRQL3C,IRQL5C_MASK,IRQL2A_MASK,IRQL3B_MASK,IRQL5C,IRQL5A,IRQL2B,IRQL3C_MASK,IRQL5B_MASK,IRQL4A,IRQL5A_MASK,IRQL3A_MASK,IRQL4A_MASK,IRQL3A,IRQL2A,IRQL2B_MASK,IRQL5B,IRQL3B,IRQL4C,IRQL4B_MASK,IRQL4C_MASK,
+}
+Multiplexer assignment for block C
+IRQL4B			(MC25	P)   : MUX 1		Ref (A5p)
+IRQL3C			(MC26	P)   : MUX 2		Ref (B27p)
+IRQL5C_MASK		(MC1	FB)  : MUX 4		Ref (A1fb)
+IRQL2A_MASK		(MC11	FB)  : MUX 5		Ref (A15fb)
+IRQL3B_MASK		(MC8	FB)  : MUX 7		Ref (A10fb)
+IRQL5C			(MC22	P)   : MUX 8		Ref (A14p)
+IRQL5A			(MC17	P)   : MUX 10		Ref (A11p)
+CPU_INTACK1		(MC14	P)   : MUX 11		Ref (E67p)
+IRQL2B			(MC18	P)   : MUX 13		Ref (B17p)
+IRQL3C_MASK		(MC7	FB)  : MUX 15		Ref (A9fb)
+IRQL5B_MASK		(MC2	FB)  : MUX 16		Ref (A2fb)
+IRQL4A			(MC20	P)   : MUX 17		Ref (A3p)
+IRQL5A_MASK		(MC3	FB)  : MUX 18		Ref (A3fb)
+IRQL3A_MASK		(MC9	FB)  : MUX 21		Ref (A12fb)
+CPU_INTACK0		(MC13	P)   : MUX 23		Ref (E69p)
+IRQL4A_MASK		(MC6	FB)  : MUX 24		Ref (A7fb)
+IRQL3A			(MC24	P)   : MUX 25		Ref (B24p)
+IRQL2A			(MC19	P)   : MUX 26		Ref (C46p)
+IRQL2B_MASK		(MC10	FB)  : MUX 27		Ref (A14fb)
+IRQL5B			(MC16	P)   : MUX 28		Ref (A13p)
+IRQL3B			(MC23	P)   : MUX 30		Ref (B25p)
+CPU_INTACK2		(MC15	P)   : MUX 31		Ref (E65p)
+IRQL4C			(MC21	P)   : MUX 33		Ref (A6p)
+IRQL4B_MASK		(MC5	FB)  : MUX 34		Ref (A6fb)
+DTACK_TIMER_1		(MC12	FB)  : MUX 37		Ref (B25fb)
+IRQL4C_MASK		(MC4	FB)  : MUX 38		Ref (A4fb)
+
+FanIn assignment for block D [26]
+{
+CPU_INTACK0,CPU_INTACK1,
+IRQL5B,IRQL1_MASK,IRQL4D_MASK,IRQL3A,IRQL5A,IRQL4C,IRQL3B,IRQL1,IRQL5D,IRQL3A_MASK,IRQL4C_MASK,IRQL4D,IRQL7,IRQL3B_MASK,IRQL5D_MASK,IRQL5A_MASK,IRQL7_MASK,IRQL5B_MASK,
+XXL_228,XXL_221,XXL_229,XXL_219,XXL_220,XXL_222,
+}
+Multiplexer assignment for block D
+IRQL5B			(MC19	P)   : MUX 0		Ref (A13p)
+IRQL1_MASK		(MC7	FB)  : MUX 1		Ref (A16fb)
+IRQL4D_MASK		(MC4	FB)  : MUX 2		Ref (A5fb)
+IRQL3A			(MC23	P)   : MUX 3		Ref (B24p)
+XXL_228			(MC13	FB)  : MUX 5		Ref (E78fb)
+XXL_221			(MC14	FB)  : MUX 7		Ref (G111fb)
+CPU_INTACK0		(MC17	P)   : MUX 9		Ref (E69p)
+IRQL5A			(MC20	P)   : MUX 10		Ref (A11p)
+CPU_INTACK1		(MC18	P)   : MUX 11		Ref (E67p)
+XXL_229			(MC11	FB)  : MUX 13		Ref (D62fb)
+IRQL4C			(MC21	P)   : MUX 15		Ref (A6p)
+IRQL3B			(MC22	P)   : MUX 16		Ref (B25p)
+IRQL1			(MC26	P)   : MUX 17		Ref (C38p)
+IRQL5D			(MC25	P)   : MUX 18		Ref (A16p)
+IRQL3A_MASK		(MC6	FB)  : MUX 19		Ref (A12fb)
+IRQL4C_MASK		(MC3	FB)  : MUX 20		Ref (A4fb)
+IRQL4D			(MC24	P)   : MUX 21		Ref (A8p)
+IRQL7			(MC8	FB)  : MUX 23		Ref (B26fb)
+IRQL3B_MASK		(MC5	FB)  : MUX 27		Ref (A10fb)
+XXL_219			(MC12	FB)  : MUX 29		Ref (E76fb)
+IRQL5D_MASK		(MC10	FB)  : MUX 31		Ref (B31fb)
+XXL_220			(MC15	FB)  : MUX 33		Ref (G112fb)
+IRQL5A_MASK		(MC2	FB)  : MUX 36		Ref (A3fb)
+IRQL7_MASK		(MC9	FB)  : MUX 37		Ref (B28fb)
+IRQL5B_MASK		(MC1	FB)  : MUX 38		Ref (A2fb)
+XXL_222			(MC16	FB)  : MUX 39		Ref (H127fb)
+
+FanIn assignment for block E [25]
+{
+CPU_INTACK2,CPU_INTACK1,CPU_INTACK0,
+IRQL5A_MASK,IRQL3C,IRQL5D_MASK,IRQL5C_MASK,IRQL2A_MASK,IRQL5C,IRQL2C,IRQL5A,IRQL2B,IRQL3D_MASK,IRQL3C_MASK,IRQL7,IRQL2A,IRQL7_MASK,IRQL5B,IRQL3D,IRQL2C_MASK,IRQL5B_MASK,IRQL2B_MASK,
+XXL_217,XXL_216,XXL_215,
+}
+Multiplexer assignment for block E
+IRQL5A_MASK		(MC3	FB)  : MUX 0		Ref (A3fb)
+IRQL3C			(MC23	P)   : MUX 2		Ref (B27p)
+IRQL5D_MASK		(MC11	FB)  : MUX 3		Ref (B31fb)
+IRQL5C_MASK		(MC1	FB)  : MUX 4		Ref (A1fb)
+IRQL2A_MASK		(MC8	FB)  : MUX 5		Ref (A15fb)
+CPU_INTACK2		(MC17	P)   : MUX 7		Ref (E65p)
+IRQL5C			(MC22	P)   : MUX 8		Ref (A14p)
+IRQL2C			(MC24	P)   : MUX 9		Ref (B19p)
+IRQL5A			(MC19	P)   : MUX 10		Ref (A11p)
+CPU_INTACK1		(MC16	P)   : MUX 11		Ref (E67p)
+IRQL2B			(MC20	P)   : MUX 15		Ref (B17p)
+IRQL3D_MASK		(MC4	FB)  : MUX 16		Ref (A8fb)
+IRQL3C_MASK		(MC5	FB)  : MUX 17		Ref (A9fb)
+XXL_217			(MC14	FB)  : MUX 19		Ref (E79fb)
+IRQL7			(MC9	FB)  : MUX 21		Ref (B26fb)
+CPU_INTACK0		(MC15	P)   : MUX 23		Ref (E69p)
+XXL_216			(MC12	FB)  : MUX 25		Ref (C46fb)
+IRQL2A			(MC21	P)   : MUX 26		Ref (C46p)
+IRQL7_MASK		(MC10	FB)  : MUX 27		Ref (B28fb)
+IRQL5B			(MC18	P)   : MUX 28		Ref (A13p)
+XXL_215			(MC13	FB)  : MUX 29		Ref (C47fb)
+IRQL3D			(MC25	P)   : MUX 34		Ref (B29p)
+IRQL2C_MASK		(MC6	FB)  : MUX 37		Ref (A13fb)
+IRQL5B_MASK		(MC2	FB)  : MUX 38		Ref (A2fb)
+IRQL2B_MASK		(MC7	FB)  : MUX 39		Ref (A14fb)
+
+FanIn assignment for block F [20]
+{
+CPU_FC0,CPU_FC2,CPU_RESET,CPU_INTACK2,CPU_INTACK0,CPU_AS,CPU_INTACK1,CPU_FC1,
+DTACK_TIMER_0,
+IRQL4A_MASK,IRQL4A,
+XXL_224,XXL_223,XXL_225,XXL_218,XXL_214,XXL_227,XXL_213,XXL_212,XXL_226,
+}
+Multiplexer assignment for block F
+IRQL4A_MASK		(MC1	FB)  : MUX 0		Ref (A7fb)
+CPU_FC0			(MC17	P)   : MUX 3		Ref (D53p)
+CPU_FC2			(MC19	P)   : MUX 4		Ref (D57p)
+CPU_RESET		(MC14	P)   : MUX 5		Ref (E72p)
+CPU_INTACK2		(MC15	P)   : MUX 7		Ref (E65p)
+CPU_INTACK0		(MC12	P)   : MUX 9		Ref (E69p)
+CPU_AS			(MC16	P)   : MUX 13		Ref (D51p)
+XXL_224			(MC7	FB)  : MUX 15		Ref (D63fb)
+IRQL4A			(MC20	P)   : MUX 17		Ref (A3p)
+XXL_223			(MC5	FB)  : MUX 19		Ref (C44fb)
+DTACK_TIMER_0		(MC2	FB)  : MUX 20		Ref (B24fb)
+XXL_225			(MC11	FB)  : MUX 21		Ref (G110fb)
+XXL_218			(MC8	FB)  : MUX 22		Ref (E72fb)
+XXL_214			(MC3	FB)  : MUX 23		Ref (B27fb)
+XXL_227			(MC10	FB)  : MUX 25		Ref (F96fb)
+XXL_213			(MC6	FB)  : MUX 27		Ref (C48fb)
+CPU_INTACK1		(MC13	P)   : MUX 29		Ref (E67p)
+XXL_212			(MC4	FB)  : MUX 33		Ref (C42fb)
+CPU_FC1			(MC18	P)   : MUX 35		Ref (D56p)
+XXL_226			(MC9	FB)  : MUX 39		Ref (E74fb)
+
+FanIn assignment for block G [24]
+{
+CPU_FC2,CPU_INTACK0,CPU_AS,CPU_INTACK1,CPU_RESET,CPU_FC0,CPU_FC1,
+DTACK_TIMER_0,
+IRQL6B,IRQL5C_MASK,IRQL2D_MASK,IRQL5D,IRQL6C_MASK,IRQL6C,IRQL2C,IRQL7,IRQL5C,IRQL6B_MASK,IRQL7_MASK,IRQL6A,IRQL2C_MASK,IRQL2D,IRQL6A_MASK,IRQL5D_MASK,
+}
+Multiplexer assignment for block G
+IRQL6B			(MC23	P)   : MUX 1		Ref (H120p)
+IRQL5C_MASK		(MC1	FB)  : MUX 2		Ref (A1fb)
+IRQL2D_MASK		(MC2	FB)  : MUX 3		Ref (A11fb)
+IRQL5D			(MC19	P)   : MUX 4		Ref (A16p)
+IRQL6C_MASK		(MC8	FB)  : MUX 5		Ref (B30fb)
+CPU_FC2			(MC17	P)   : MUX 6		Ref (D57p)
+IRQL6C			(MC21	P)   : MUX 8		Ref (H123p)
+CPU_INTACK0		(MC11	P)   : MUX 9		Ref (E69p)
+IRQL2C			(MC20	P)   : MUX 11		Ref (B19p)
+CPU_AS			(MC14	P)   : MUX 13		Ref (D51p)
+CPU_INTACK1		(MC12	P)   : MUX 15		Ref (E67p)
+CPU_RESET		(MC13	P)   : MUX 19		Ref (E72p)
+DTACK_TIMER_0		(MC4	FB)  : MUX 20		Ref (B24fb)
+IRQL7			(MC5	FB)  : MUX 21		Ref (B26fb)
+IRQL5C			(MC18	P)   : MUX 22		Ref (A14p)
+IRQL6B_MASK		(MC7	FB)  : MUX 23		Ref (B29fb)
+CPU_FC0			(MC15	P)   : MUX 25		Ref (D53p)
+IRQL7_MASK		(MC6	FB)  : MUX 27		Ref (B28fb)
+IRQL6A			(MC22	P)   : MUX 29		Ref (H118p)
+IRQL2C_MASK		(MC3	FB)  : MUX 31		Ref (A13fb)
+IRQL2D			(MC24	P)   : MUX 33		Ref (B21p)
+CPU_FC1			(MC16	P)   : MUX 35		Ref (D56p)
+IRQL6A_MASK		(MC10	FB)  : MUX 37		Ref (B32fb)
+IRQL5D_MASK		(MC9	FB)  : MUX 39		Ref (B31fb)
+
+FanIn assignment for block H [10]
+{
+IRQL4C_MASK,IRQL6C_MASK,IRQL4D_MASK,IRQL4D,IRQL4B_MASK,IRQL4B,IRQL6C,IRQL4A,IRQL4A_MASK,IRQL4C,
+}
+Multiplexer assignment for block H
+IRQL4C_MASK		(MC1	FB)  : MUX 2		Ref (A4fb)
+IRQL6C_MASK		(MC5	FB)  : MUX 5		Ref (B30fb)
+IRQL4D_MASK		(MC2	FB)  : MUX 6		Ref (A5fb)
+IRQL4D			(MC9	P)   : MUX 7		Ref (A8p)
+IRQL4B_MASK		(MC3	FB)  : MUX 12		Ref (A6fb)
+IRQL4B			(MC8	P)   : MUX 13		Ref (A5p)
+IRQL6C			(MC10	P)   : MUX 14		Ref (H123p)
+IRQL4A			(MC6	P)   : MUX 17		Ref (A3p)
+IRQL4A_MASK		(MC4	FB)  : MUX 20		Ref (A7fb)
+IRQL4C			(MC7	P)   : MUX 27		Ref (A6p)
+
+Creating JEDEC file C:\INTCTRL.jed ...
+
+PLCC84 programmed logic:
+-----------------------------------
+CPU_D0.D = XXL_212;
+
+CPU_D1.D = (XXL_213
+	# XXL_214);
+
+CPU_D2.D = XXL_218;
+
+!CPU_D3.D = (XXL_227
+	# XXL_226);
+
+CPU_D4.D = CPU_INTACK0;
+
+CPU_D5.D = CPU_INTACK1;
+
+CPU_D6.D = CPU_INTACK2;
+
+CPU_D7.D = 1;
+
+DTACK_FROM_INT = !DTACK_TIMER_1.Q;
+
+DTACK_TIMER_0.D = 1;
+
+DTACK_TIMER_1.D = DTACK_TIMER_0.Q;
+
+IPL0 = (XXL_229
+	# XXL_228);
+
+IPL1 = (XXL_219
+	# XXL_220
+	# (!IRQL3A & !IRQL3A_MASK.Q)
+	# (!IRQL3B & !IRQL3B_MASK.Q));
+
+IPL2 = (XXL_221
+	# XXL_222
+	# (!IRQL5A & !IRQL5A_MASK.Q)
+	# (!IRQL5B & !IRQL5B_MASK.Q));
+
+IRQL1_MASK.D = CPU_D3.PIN;
+
+IRQL2A_MASK.D = CPU_D7.PIN;
+
+IRQL2B_MASK.D = CPU_D6.PIN;
+
+IRQL2C_MASK.D = CPU_D5.PIN;
+
+IRQL2D_MASK.D = CPU_D4.PIN;
+
+IRQL3A_MASK.D = CPU_D3.PIN;
+
+IRQL3B_MASK.D = CPU_D2.PIN;
+
+IRQL3C_MASK.D = CPU_D1.PIN;
+
+IRQL3D_MASK.D = CPU_D0.PIN;
+
+IRQL4A_MASK.D = CPU_D7.PIN;
+
+IRQL4B_MASK.D = CPU_D6.PIN;
+
+IRQL4C_MASK.D = CPU_D5.PIN;
+
+IRQL4D_MASK.D = CPU_D4.PIN;
+
+IRQL5A_MASK.D = CPU_D3.PIN;
+
+IRQL5B_MASK.D = CPU_D2.PIN;
+
+IRQL5C_MASK.D = CPU_D1.PIN;
+
+IRQL5D_MASK.D = CPU_D0.PIN;
+
+IRQL6A_MASK.D = CPU_D6.PIN;
+
+IRQL6B_MASK.D = CPU_D5.PIN;
+
+IRQL6C_MASK.D = CPU_D4.PIN;
+
+IRQL7.D = 0;
+
+IRQL7_MASK.D = CPU_D7.PIN;
+
+!Com_Ctrl_208 = (!CPU_INTACK0 & !CPU_INTACK1 & !CPU_RW & !INTC_CS);
+
+!Com_Ctrl_209 = (CPU_INTACK0 & !CPU_INTACK1 & !CPU_RW & !INTC_CS);
+
+!Com_Ctrl_210 = (!CPU_INTACK0 & CPU_INTACK1 & !CPU_RW & !INTC_CS);
+
+!Com_Ctrl_211 = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+XXL_212 = ((CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL5A & !IRQL5A_MASK.Q)
+	# (!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL4A & !IRQL4A_MASK.Q)
+	# (CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL3A & !IRQL3A_MASK.Q)
+	# (!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL2A & !IRQL2A_MASK.Q));
+
+XXL_213 = ((CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL3A_MASK.Q & !IRQL3B & !IRQL3B_MASK.Q)
+	# (CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL3B & !IRQL3B_MASK.Q & IRQL3A)
+	# (!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL2A_MASK.Q & !IRQL2B & !IRQL2B_MASK.Q)
+	# (!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL4B & !IRQL4B_MASK.Q & IRQL4A_MASK.Q)
+	# (!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL4B & !IRQL4B_MASK.Q & IRQL4A));
+
+XXL_214 = ((CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL5B & !IRQL5B_MASK.Q & IRQL5A)
+	# (!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL2B & !IRQL2B_MASK.Q & IRQL2A)
+	# (CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL5B & !IRQL5B_MASK.Q & IRQL5A_MASK.Q));
+
+XXL_215 = ((!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & IRQL4A & IRQL4B & !IRQL4C & !IRQL4C_MASK.Q)
+	# (!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & IRQL4A & !IRQL4C & !IRQL4C_MASK.Q & IRQL4B_MASK.Q)
+	# (!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & IRQL4B & !IRQL4C & !IRQL4C_MASK.Q & IRQL4A_MASK.Q)
+	# (CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL5C & !IRQL5C_MASK.Q & IRQL5A_MASK.Q & IRQL5B)
+	# (CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL5C & !IRQL5C_MASK.Q & IRQL5A_MASK.Q & IRQL5B_MASK.Q));
+
+XXL_216 = ((CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL3A & !IRQL3C & !IRQL3C_MASK.Q & IRQL3B_MASK.Q)
+	# (CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL3B & !IRQL3C & !IRQL3C_MASK.Q & IRQL3A_MASK.Q)
+	# (CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL3C & !IRQL3C_MASK.Q & IRQL3B_MASK.Q & IRQL3A_MASK.Q)
+	# (!CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & !IRQL4C & !IRQL4C_MASK.Q & IRQL4B_MASK.Q & IRQL4A_MASK.Q)
+	# (CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL3A & IRQL3B & !IRQL3C & !IRQL3C_MASK.Q));
+
+XXL_217 = ((!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL2C & !IRQL2C_MASK.Q & IRQL2B & IRQL2A_MASK.Q)
+	# (!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & !IRQL2C & !IRQL2C_MASK.Q & IRQL2B_MASK.Q & IRQL2A_MASK.Q)
+	# (CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & IRQL5A & !IRQL5C & !IRQL5C_MASK.Q & IRQL5B)
+	# (!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL2A & !IRQL2C & !IRQL2C_MASK.Q & IRQL2B)
+	# (!CPU_INTACK0 & CPU_INTACK1 & !CPU_INTACK2 & IRQL2A & !IRQL2C & !IRQL2C_MASK.Q & IRQL2B_MASK.Q));
+
+XXL_218 = (XXL_216
+	# XXL_217
+	# (CPU_INTACK0 & !CPU_INTACK1 & CPU_INTACK2 & IRQL5A & !IRQL5C & !IRQL5C_MASK.Q & IRQL5B_MASK.Q)
+	# XXL_215);
+
+XXL_219 = ((!IRQL7.Q & !IRQL7_MASK.Q)
+	# (!IRQL2A & !IRQL2A_MASK.Q)
+	# (!IRQL2B & !IRQL2B_MASK.Q)
+	# (!IRQL3C & !IRQL3C_MASK.Q)
+	# (!IRQL3D & !IRQL3D_MASK.Q));
+
+XXL_220 = ((!IRQL6A & !IRQL6A_MASK.Q)
+	# (!IRQL6B & !IRQL6B_MASK.Q)
+	# (!IRQL6C & !IRQL6C_MASK.Q)
+	# (!IRQL2C & !IRQL2C_MASK.Q)
+	# (!IRQL2D & !IRQL2D_MASK.Q));
+
+XXL_221 = ((!IRQL7.Q & !IRQL7_MASK.Q)
+	# (!IRQL6A & !IRQL6A_MASK.Q)
+	# (!IRQL6B & !IRQL6B_MASK.Q)
+	# (!IRQL5C & !IRQL5C_MASK.Q)
+	# (!IRQL5D & !IRQL5D_MASK.Q));
+
+XXL_222 = ((!IRQL4B & !IRQL4B_MASK.Q)
+	# (!IRQL4C & !IRQL4C_MASK.Q)
+	# (!IRQL4D & !IRQL4D_MASK.Q)
+	# (!IRQL6C & !IRQL6C_MASK.Q)
+	# (!IRQL4A & !IRQL4A_MASK.Q));
+
+XXL_223 = ((!CPU_INTACK1 & CPU_INTACK0 & !IRQL5A & !IRQL5A_MASK.Q)
+	# (CPU_INTACK1 & CPU_INTACK0 & !IRQL3A & !IRQL3A_MASK.Q)
+	# (!CPU_INTACK1 & !CPU_INTACK0 & !IRQL4B & !IRQL4B_MASK.Q)
+	# (CPU_INTACK1 & !CPU_INTACK0 & !IRQL2B & !IRQL2B_MASK.Q)
+	# (CPU_INTACK1 & !CPU_INTACK0 & !IRQL2A & !IRQL2A_MASK.Q));
+
+XXL_224 = ((CPU_INTACK1 & CPU_INTACK0 & !IRQL3B & !IRQL3B_MASK.Q)
+	# (!CPU_INTACK1 & !CPU_INTACK0 & !IRQL4C & !IRQL4C_MASK.Q)
+	# (!CPU_INTACK1 & !CPU_INTACK0 & IRQL4D)
+	# (!CPU_INTACK1 & !CPU_INTACK0 & IRQL4D_MASK.Q)
+	# (!CPU_INTACK1 & CPU_INTACK0 & !IRQL5B & !IRQL5B_MASK.Q));
+
+XXL_225 = ((CPU_INTACK1 & !CPU_INTACK0 & IRQL2D)
+	# (CPU_INTACK1 & !CPU_INTACK0 & IRQL2D_MASK.Q)
+	# (!CPU_INTACK1 & CPU_INTACK0 & !IRQL5C & !IRQL5C_MASK.Q)
+	# (!CPU_INTACK1 & CPU_INTACK0 & IRQL5D)
+	# (CPU_INTACK1 & !CPU_INTACK0 & !IRQL2C & !IRQL2C_MASK.Q));
+
+XXL_226 = ((CPU_INTACK1 & CPU_INTACK0 & !IRQL3C & !IRQL3C_MASK.Q)
+	# (CPU_INTACK1 & CPU_INTACK0 & IRQL3D)
+	# (CPU_INTACK1 & CPU_INTACK0 & IRQL3D_MASK.Q)
+	# (!CPU_INTACK1 & !CPU_INTACK2)
+	# (!CPU_INTACK1 & CPU_INTACK0 & IRQL5D_MASK.Q));
+
+XXL_227 = ((!CPU_INTACK1 & !CPU_INTACK0 & !IRQL4A & !IRQL4A_MASK.Q)
+	# XXL_223
+	# XXL_224
+	# XXL_225
+	# (CPU_INTACK1 & CPU_INTACK2));
+
+XXL_228 = ((!IRQL3D & !IRQL3D_MASK.Q)
+	# (!IRQL5A & !IRQL5A_MASK.Q)
+	# (!IRQL5B & !IRQL5B_MASK.Q)
+	# (!IRQL5C & !IRQL5C_MASK.Q)
+	# (!IRQL3C & !IRQL3C_MASK.Q));
+
+XXL_229 = ((!IRQL7.Q & !IRQL7_MASK.Q)
+	# (!IRQL1 & !IRQL1_MASK.Q)
+	# (!IRQL3A & !IRQL3A_MASK.Q)
+	# (!IRQL3B & !IRQL3B_MASK.Q)
+	# (!IRQL5D & !IRQL5D_MASK.Q));
+
+CPU_D0.C = DTACK_TIMER_0.Q;
+
+CPU_D0.AR = !CPU_RESET;
+
+CPU_D0.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D1.C = DTACK_TIMER_0.Q;
+
+CPU_D1.AR = !CPU_RESET;
+
+CPU_D1.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D2.C = DTACK_TIMER_0.Q;
+
+CPU_D2.AR = !CPU_RESET;
+
+CPU_D2.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D3.C = DTACK_TIMER_0.Q;
+
+CPU_D3.AR = !CPU_RESET;
+
+CPU_D3.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D4.C = DTACK_TIMER_0.Q;
+
+CPU_D4.AR = !CPU_RESET;
+
+CPU_D4.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D5.C = DTACK_TIMER_0.Q;
+
+CPU_D5.AR = !CPU_RESET;
+
+CPU_D5.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D6.C = DTACK_TIMER_0.Q;
+
+CPU_D6.AR = !CPU_RESET;
+
+CPU_D6.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+CPU_D7.C = DTACK_TIMER_0.Q;
+
+CPU_D7.AR = !CPU_RESET;
+
+CPU_D7.OE = (!CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2);
+
+DTACK_TIMER_0.C = !CLK_16M;
+
+DTACK_TIMER_0.AR = Com_Ctrl_211;
+
+DTACK_TIMER_1.C = !CLK_16M;
+
+DTACK_TIMER_1.AR = Com_Ctrl_211;
+
+IRQL1_MASK.C = Com_Ctrl_210;
+
+IRQL1_MASK.AP = CPU_RESET;
+
+IRQL2A_MASK.C = Com_Ctrl_210;
+
+IRQL2A_MASK.AP = CPU_RESET;
+
+IRQL2B_MASK.C = Com_Ctrl_210;
+
+IRQL2B_MASK.AP = CPU_RESET;
+
+IRQL2C_MASK.C = Com_Ctrl_210;
+
+IRQL2C_MASK.AP = CPU_RESET;
+
+IRQL2D_MASK.C = Com_Ctrl_210;
+
+IRQL2D_MASK.AP = CPU_RESET;
+
+IRQL3A_MASK.C = Com_Ctrl_209;
+
+IRQL3A_MASK.AP = CPU_RESET;
+
+IRQL3B_MASK.C = Com_Ctrl_209;
+
+IRQL3B_MASK.AP = CPU_RESET;
+
+IRQL3C_MASK.C = Com_Ctrl_209;
+
+IRQL3C_MASK.AP = CPU_RESET;
+
+IRQL3D_MASK.C = Com_Ctrl_209;
+
+IRQL3D_MASK.AP = CPU_RESET;
+
+IRQL4A_MASK.C = Com_Ctrl_209;
+
+IRQL4A_MASK.AP = CPU_RESET;
+
+IRQL4B_MASK.C = Com_Ctrl_209;
+
+IRQL4B_MASK.AP = CPU_RESET;
+
+IRQL4C_MASK.C = Com_Ctrl_209;
+
+IRQL4C_MASK.AP = CPU_RESET;
+
+IRQL4D_MASK.C = Com_Ctrl_209;
+
+IRQL4D_MASK.AP = CPU_RESET;
+
+IRQL5A_MASK.C = Com_Ctrl_208;
+
+IRQL5A_MASK.AP = CPU_RESET;
+
+IRQL5B_MASK.C = Com_Ctrl_208;
+
+IRQL5B_MASK.AP = CPU_RESET;
+
+IRQL5C_MASK.C = Com_Ctrl_208;
+
+IRQL5C_MASK.AP = CPU_RESET;
+
+IRQL5D_MASK.C = Com_Ctrl_208;
+
+IRQL5D_MASK.AP = CPU_RESET;
+
+IRQL6A_MASK.C = Com_Ctrl_208;
+
+IRQL6A_MASK.AP = CPU_RESET;
+
+IRQL6B_MASK.C = Com_Ctrl_208;
+
+IRQL6B_MASK.AP = CPU_RESET;
+
+IRQL6C_MASK.C = Com_Ctrl_208;
+
+IRQL6C_MASK.AP = CPU_RESET;
+
+IRQL7.C = !IRQL7_BUTTON;
+
+IRQL7.AP = (!CPU_RESET
+	# (CPU_INTACK0 & CPU_INTACK1 & CPU_INTACK2 & DTACK_TIMER_1.Q));
+
+IRQL7_MASK.C = Com_Ctrl_208;
+
+IRQL7_MASK.AP = CPU_RESET;
+
+
+PLCC84 Pin/Node Placement:
+------------------------------------
+Pin 4  = IRQL5D; /* MC 16 */
+Pin 5  = IRQL5C; /* MC 14 */
+Pin 6  = IRQL5B; /* MC 13 */
+Pin 8  = IRQL5A; /* MC 11 */
+Pin 9  = IRQL4D; /* MC 8 */
+Pin 10 = IRQL4C; /* MC  6 */
+Pin 11 = IRQL4B; /* MC  5 */
+Pin 12 = IRQL4A; /* MC  3 */
+Pin 14 = TDI; /* MC 32 */ 
+Pin 15 = IRQL3D; /* MC 29 */ 
+Pin 16 = IRQL3C; /* MC 27 */ 
+Pin 17 = IRQL3B; /* MC 25 */ 
+Pin 18 = IRQL3A; /* MC 24 */ 
+Pin 20 = IRQL2D; /* MC 21 */ 
+Pin 21 = IRQL2C; /* MC 19 */ 
+Pin 22 = IRQL2B; /* MC 17 */ 
+Pin 23 = TMS; /* MC 48 */ 
+Pin 24 = IRQL2A; /* MC 46 */ 
+Pin 25 = DTACK_FROM_INT; /* MC 45 */ 
+Pin 29 = IRQL1; /* MC 38 */ 
+Pin 30 = IRQL7_BUTTON; /* MC 37 */ 
+Pin 31 = INTC_CS; /* MC 35 */ 
+Pin 33 = IPL2; /* MC 64 */ 
+Pin 34 = IPL1; /* MC 61 */ 
+Pin 35 = IPL0; /* MC 59 */ 
+Pin 36 = CPU_FC2; /* MC 57 */ 
+Pin 37 = CPU_FC1; /* MC 56 */ 
+Pin 39 = CPU_FC0; /* MC 53 */ 
+Pin 40 = CPU_AS; /* MC 51 */ 
+Pin 41 = CPU_RW; /* MC 49 */ 
+Pin 44 = CPU_INTACK2; /* MC 65 */ 
+Pin 45 = CPU_INTACK1; /* MC 67 */ 
+Pin 46 = CPU_INTACK0; /* MC 69 */ 
+Pin 48 = CPU_RESET; /* MC 72 */ 
+Pin 54 = CPU_D0; /* MC 83 */ 
+Pin 55 = CPU_D1; /* MC 85 */ 
+Pin 56 = CPU_D2; /* MC 86 */ 
+Pin 57 = CPU_D3; /* MC 88 */ 
+Pin 58 = CPU_D4; /* MC 91 */ 
+Pin 60 = CPU_D5; /* MC 93 */ 
+Pin 61 = CPU_D6; /* MC 94 */ 
+Pin 62 = TCK; /* MC 96 */ 
+Pin 63 = CPU_D7; /* MC 97 */ 
+Pin 71 = TDO; /* MC 112 */ 
+Pin 75 = IRQL6A; /* MC 118 */ 
+Pin 76 = IRQL6B; /* MC 120 */ 
+Pin 77 = IRQL6C; /* MC 123 */ 
+Pin 83 = CLK_16M;
+PINNODE 314 = Com_Ctrl_210; /* MC 14 Foldback */
+PINNODE 315 = Com_Ctrl_209; /* MC 15 Foldback */
+PINNODE 316 = Com_Ctrl_208; /* MC 16 Foldback */
+PINNODE 331 = Com_Ctrl_211; /* MC 31 Foldback */
+PINNODE 332 = Com_Ctrl_208; /* MC 32 Foldback */
+PINNODE 601 = IRQL5C_MASK; /* MC 1 Feedback */
+PINNODE 602 = IRQL5B_MASK; /* MC 2 Feedback */
+PINNODE 603 = IRQL5A_MASK; /* MC 3 Feedback */
+PINNODE 604 = IRQL4C_MASK; /* MC 4 Feedback */
+PINNODE 605 = IRQL4D_MASK; /* MC 5 Feedback */
+PINNODE 606 = IRQL4B_MASK; /* MC 6 Feedback */
+PINNODE 607 = IRQL4A_MASK; /* MC 7 Feedback */
+PINNODE 608 = IRQL3D_MASK; /* MC 8 Feedback */
+PINNODE 609 = IRQL3C_MASK; /* MC 9 Feedback */
+PINNODE 610 = IRQL3B_MASK; /* MC 10 Feedback */
+PINNODE 611 = IRQL2D_MASK; /* MC 11 Feedback */
+PINNODE 612 = IRQL3A_MASK; /* MC 12 Feedback */
+PINNODE 613 = IRQL2C_MASK; /* MC 13 Feedback */
+PINNODE 614 = IRQL2B_MASK; /* MC 14 Feedback */
+PINNODE 615 = IRQL2A_MASK; /* MC 15 Feedback */
+PINNODE 616 = IRQL1_MASK; /* MC 16 Feedback */
+PINNODE 623 = IRQL7.AP; /* MC 23 Feedback */
+PINNODE 624 = DTACK_TIMER_0; /* MC 24 Feedback */
+PINNODE 625 = DTACK_TIMER_1; /* MC 25 Feedback */
+PINNODE 626 = IRQL7; /* MC 26 Feedback */
+PINNODE 627 = XXL_214; /* MC 27 Feedback */
+PINNODE 628 = IRQL7_MASK; /* MC 28 Feedback */
+PINNODE 629 = IRQL6B_MASK; /* MC 29 Feedback */
+PINNODE 630 = IRQL6C_MASK; /* MC 30 Feedback */
+PINNODE 631 = IRQL5D_MASK; /* MC 31 Feedback */
+PINNODE 632 = IRQL6A_MASK; /* MC 32 Feedback */
+PINNODE 642 = XXL_212; /* MC 42 Feedback */
+PINNODE 644 = XXL_223; /* MC 44 Feedback */
+PINNODE 646 = XXL_216; /* MC 46 Feedback */
+PINNODE 647 = XXL_215; /* MC 47 Feedback */
+PINNODE 648 = XXL_213; /* MC 48 Feedback */
+PINNODE 662 = XXL_229; /* MC 62 Feedback */
+PINNODE 663 = XXL_224; /* MC 63 Feedback */
+PINNODE 672 = XXL_218; /* MC 72 Feedback */
+PINNODE 674 = XXL_226; /* MC 74 Feedback */
+PINNODE 676 = XXL_219; /* MC 76 Feedback */
+PINNODE 678 = XXL_228; /* MC 78 Feedback */
+PINNODE 679 = XXL_217; /* MC 79 Feedback */
+PINNODE 696 = XXL_227; /* MC 96 Feedback */
+PINNODE 710 = XXL_225; /* MC 110 Feedback */
+PINNODE 711 = XXL_221; /* MC 111 Feedback */
+PINNODE 712 = XXL_220; /* MC 112 Feedback */
+PINNODE 727 = XXL_222; /* MC 127 Feedback */
+
+** Resource Usage **
+
+
+DCERP Field = Summary of Allocations.
+|||||
+|||||_Preset [p,-]       ==  p = PT preset, - No Preset.
+||||
+||||__Reset [g,r,-]      ==  g= Global AR, r = PT reset, - No reset.
+|||
+|||___Clock Enable [e,-] ==  e = Product Term, - always enabled, - none.
+||
+||____Clock [c,g,-],     ==  c = Product term, g = Global term, - No Clock.
+|
+|_____Type [C,D,L,T],    ==  Register type C= combin, D=dff, L=latch, T=tff.
+
+For input only = INPUT.
+
+MCell Pin# Oe   PinDrive       DCERP  FBDrive       DCERP  Foldback     CascadeOut     TotPT output_slew
+MC1   0         --                    IRQL5C_MASK   Dc--p  --           --             3     slow
+MC2   0         --                    IRQL5B_MASK   Dc--p  --           --             3     slow
+MC3   12   --   IRQL4A         INPUT  IRQL5A_MASK   Dc--p  --           --             3     slow
+MC4   0         --                    IRQL4C_MASK   Dc--p  --           --             3     slow
+MC5   11   --   IRQL4B         INPUT  IRQL4D_MASK   Dc--p  --           --             3     slow
+MC6   10   --   IRQL4C         INPUT  IRQL4B_MASK   Dc--p  --           --             3     slow
+MC7   0         --                    IRQL4A_MASK   Dc--p  --           --             3     slow
+MC8   9    --   IRQL4D         INPUT  IRQL3D_MASK   Dc--p  --           --             3     slow
+MC9   0         --                    IRQL3C_MASK   Dc--p  --           --             3     slow
+MC10  0         --                    IRQL3B_MASK   Dc--p  --           --             3     slow
+MC11  8    --   IRQL5A         INPUT  IRQL2D_MASK   Dc--p  --           --             3     slow
+MC12  0         --                    IRQL3A_MASK   Dc--p  --           --             3     slow
+MC13  6    --   IRQL5B         INPUT  IRQL2C_MASK   Dc--p  --           --             3     slow
+MC14  5    --   IRQL5C         INPUT  IRQL2B_MASK   Dc--p  Com_Ctrl_210 --             4     slow
+MC15  0         --                    IRQL2A_MASK   Dc--p  Com_Ctrl_209 --             4     slow
+MC16  4    --   IRQL5D         INPUT  IRQL1_MASK    Dc--p  Com_Ctrl_208 --             4     slow
+MC17  22   --   IRQL2B         INPUT  --                   --           --             0     slow
+MC18  0         --                    --                   --           --             0     slow
+MC19  21   --   IRQL2C         INPUT  --                   --           --             0     slow
+MC20  0         --                    --                   --           --             0     slow
+MC21  20   --   IRQL2D         INPUT  --                   --           --             0     slow
+MC22  0         --                    --                   --           --             0     slow
+MC23  0         --                    IRQL7.AP      C----  --           --             2     slow
+MC24  18   --   IRQL3A         INPUT  DTACK_TIMER_0 Dg-r-  --           --             1     slow
+MC25  17   --   IRQL3B         INPUT  DTACK_TIMER_1 Dg-r-  --           --             2     slow
+MC26  0         --                    IRQL7         Dc--p  --           --             2     slow
+MC27  16   --   IRQL3C         INPUT  XXL_214       C----  --           --             3     slow
+MC28  0         --                    IRQL7_MASK    Dc--p  --           --             3     slow
+MC29  15   --   IRQL3D         INPUT  IRQL6B_MASK   Dc--p  --           --             3     slow
+MC30  0         --                    IRQL6C_MASK   Dc--p  --           --             3     slow
+MC31  0         --                    IRQL5D_MASK   Dc--p  Com_Ctrl_211 --             4     slow
+MC32  14   --   TDI            INPUT  IRQL6A_MASK   Dc--p  Com_Ctrl_208 --             4     slow
+MC33  0         --                    --                   --           --             0     slow
+MC34  0         --                    --                   --           --             0     slow
+MC35  31   --   INTC_CS        INPUT  --                   --           --             0     slow
+MC36  0         --                    --                   --           --             0     slow
+MC37  30   --   IRQL7_BUTTON   INPUT  --                   --           --             0     slow
+MC38  29   --   IRQL1          INPUT  --                   --           --             0     slow
+MC39  0         --                    --                   --           --             0     slow
+MC40  28        --                    --                   --           --             0     slow
+MC41  0         --                    --                   --           --             0     slow
+MC42  0         --                    XXL_212       C----  --           --             4     slow
+MC43  27        --                    --                   --           --             0     slow
+MC44  0         --                    XXL_223       C----  NA           --             5     slow
+MC45  25   on   DTACK_FROM_INT C----  --                   --           --             1     slow
+MC46  24   --   IRQL2A         INPUT  XXL_216       C----  NA           --             5     slow
+MC47  0         --                    XXL_215       C----  NA           --             5     slow
+MC48  23   --   TMS            INPUT  XXL_213       C----  NA           --             5     slow
+MC49  41   --   CPU_RW         INPUT  --                   --           --             0     slow
+MC50  0         --                    --                   --           --             0     slow
+MC51  40   --   CPU_AS         INPUT  --                   --           --             0     slow
+MC52  0         --                    --                   --           --             0     slow
+MC53  39   --   CPU_FC0        INPUT  --                   --           --             0     slow
+MC54  0         --                    --                   --           --             0     slow
+MC55  0         --                    --                   --           --             0     slow
+MC56  37   --   CPU_FC1        INPUT  --                   --           --             0     slow
+MC57  36   --   CPU_FC2        INPUT  --                   --           --             0     slow
+MC58  0         --                    --                   --           --             0     slow
+MC59  35   on   IPL0           C----  --                   --           --             2     slow
+MC60  0         --                    --                   --           --             0     slow
+MC61  34   on   IPL1           C----  --                   --           --             4     slow
+MC62  0         --                    XXL_229       C----  NA           --             5     slow
+MC63  0         --                    XXL_224       C----  NA           --             5     slow
+MC64  33   on   IPL2           C----  --                   --           --             4     slow
+MC65  44   --   CPU_INTACK2    INPUT  --                   --           --             0     slow
+MC66  0         --                    --                   --           --             0     slow
+MC67  45   --   CPU_INTACK1    INPUT  --                   --           --             0     slow
+MC68  0         --                    --                   --           --             0     slow
+MC69  46   --   CPU_INTACK0    INPUT  --                   --           --             0     slow
+MC70  0         --                    --                   --           --             0     slow
+MC71  0         --                    --                   --           --             0     slow
+MC72  48   --   CPU_RESET      INPUT  XXL_218       C----  --           --             4     slow
+MC73  49        --                    --                   --           --             0     slow
+MC74  0         --                    XXL_226       C----  NA           --             5     slow
+MC75  50        --                    --                   --           --             0     slow
+MC76  0         --                    XXL_219       C----  NA           --             5     slow
+MC77  51        --                    --                   --           --             0     slow
+MC78  0         --                    XXL_228       C----  NA           --             5     slow
+MC79  0         --                    XXL_217       C----  NA           --             5     slow
+MC80  52        --                    --                   --           --             0     slow
+MC81  0         --                    --                   --           --             0     slow
+MC82  0         --                    --                   --           --             0     slow
+MC83  54   PT   CPU_D0         Dc-r-  --                   --           --             4     slow
+MC84  0         --                    --                   --           --             0     slow
+MC85  55   PT   CPU_D1         Dc-r-  --                   NA           --             5     slow
+MC86  56   PT   CPU_D2         Dc-r-  --                   --           --             4     slow
+MC87  0         --                    --                   --           --             0     slow
+MC88  57   PT   CPU_D3         Dc-r-  --                   NA           --             5     slow
+MC89  0         --                    --                   --           --             0     slow
+MC90  0         --                    --                   --           --             0     slow
+MC91  58   PT   CPU_D4         Dc-r-  --                   --           --             4     slow
+MC92  0         --                    --                   --           --             0     slow
+MC93  60   PT   CPU_D5         Dc-r-  --                   --           --             4     slow
+MC94  61   PT   CPU_D6         Dc-r-  --                   --           --             4     slow
+MC95  0         --                    --                   --           --             0     slow
+MC96  62   --   TCK            INPUT  XXL_227       C----  NA           --             5     slow
+MC97  63   PT   CPU_D7         Dc-r-  --                   --           --             3     slow
+MC98  0         --                    --                   --           --             0     slow
+MC99  64        --                    --                   --           --             0     slow
+MC100 0         --                    --                   --           --             0     slow
+MC101 65        --                    --                   --           --             0     slow
+MC102 0         --                    --                   --           --             0     slow
+MC103 0         --                    --                   --           --             0     slow
+MC104 67        --                    --                   --           --             0     slow
+MC105 68        --                    --                   --           --             0     slow
+MC106 0         --                    --                   --           --             0     slow
+MC107 69        --                    --                   --           --             0     slow
+MC108 0         --                    --                   --           --             0     slow
+MC109 70        --                    --                   --           --             0     slow
+MC110 0         --                    XXL_225       C----  NA           --             5     slow
+MC111 0         --                    XXL_221       C----  NA           --             5     slow
+MC112 71   --   TDO            INPUT  XXL_220       C----  NA           --             5     slow
+MC113 0         --                    --                   --           --             0     slow
+MC114 0         --                    --                   --           --             0     slow
+MC115 73        --                    --                   --           --             0     slow
+MC116 0         --                    --                   --           --             0     slow
+MC117 74        --                    --                   --           --             0     slow
+MC118 75   --   IRQL6A         INPUT  --                   --           --             0     slow
+MC119 0         --                    --                   --           --             0     slow
+MC120 76   --   IRQL6B         INPUT  --                   --           --             0     slow
+MC121 0         --                    --                   --           --             0     slow
+MC122 0         --                    --                   --           --             0     slow
+MC123 77   --   IRQL6C         INPUT  --                   --           --             0     slow
+MC124 0         --                    --                   --           --             0     slow
+MC125 79        --                    --                   --           --             0     slow
+MC126 80        --                    --                   --           --             0     slow
+MC127 0         --                    XXL_222       C----  NA           --             5     slow
+MC128 81        --                    --                   --           --             0     slow
+MC0   2         --                    --                   --           --             0     slow
+MC0   1         --                    --                   --           --             0     slow
+MC0   84        --                    --                   --           --             0     slow
+MC0   83        CLK_16M        INPUT  --                   --           --             0     slow
+
+Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
+A: LC1	- LC16		16/16(100%)	8/16(50%)	3/16(18%)	51/80(63%)	(13)	0
+B: LC17	- LC32		10/16(62%)	8/16(50%)	2/16(12%)	27/80(33%)	(26)	0
+C: LC33	- LC48		6/16(37%)	6/16(37%)	0/16(0%)	25/80(31%)	(26)	0
+D: LC49	- LC64		5/16(31%)	8/16(50%)	0/16(0%)	20/80(25%)	(26)	0
+E: LC65	- LC80		5/16(31%)	4/16(25%)	0/16(0%)	24/80(30%)	(25)	0
+F: LC81	- LC96		8/16(50%)	8/16(50%)	0/16(0%)	35/80(43%)	(20)	0
+G: LC97	- LC112		4/16(25%)	2/16(12%)	0/16(0%)	18/80(22%)	(24)	0
+H: LC113- LC128		1/16(6%)	3/16(18%)	0/16(0%)	5/80(6%)	(10)	0
+
+Total dedicated input used:	1/4 	(25%)
+Total I/O pins used		47/64 	(73%)
+Total Logic cells used 		55/128 	(42%)
+Total Flip-Flop used 		32/128 	(25%)
+Total Foldback logic used 	5/128 	(3%)
+Total Nodes+FB/MCells 		60/128 	(46%)
+Total cascade used 		0
+Total input pins 		36
+Total output pins 		12
+Total Pts 			205
+Creating pla file C:\INTCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+
+----------------  End fitter, Design FITS
+$Device PLCC84 fits 
+FIT1508 completed in 0.00 seconds

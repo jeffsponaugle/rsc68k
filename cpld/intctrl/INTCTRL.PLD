@@ -1,0 +1,479 @@
+Name	 INTController;
+PartNo   INTCTRLCPLD;
+Date     04/18/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1508ispplcc84;
+
+/** Inputs **/
+
+Pin[48]   = CPU_RESET;    /* Active Low RESET */
+Pin[40]   = CPU_AS;
+Pin[36,37,39]   = [CPU_FC2..0];
+Pin[44,45,46]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
+Pin[83]   = CLK_16M;
+Pin[30]   = IRQL7_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
+Pin[75,76,77]   = IRQL6A,IRQL6B,IRQL6C;
+Pin[8,6,5,4]   = IRQL5A,IRQL5B,IRQL5C,IRQL5D;
+Pin[12,11,10,9]   = IRQL4A,IRQL4B,IRQL4C,IRQL4D;
+Pin[18,17,16,15]   = IRQL3A,IRQL3B,IRQL3C,IRQL3D;
+Pin[24,22,21,20]   = IRQL2A,IRQL2B,IRQL2C,IRQL2D;
+Pin[29]   = IRQL1;
+Pin[31]   = INTC_CS;     /* Active low chip select.  Goes low with /AS */
+Pin[41]   = CPU_RW;
+
+CPU_A1 = CPU_INTACK0;
+CPU_A2 = CPU_INTACK1;
+
+/** Outputs **/
+
+Pin[33,34,35]  = [IPL2..0];
+Pin[25]  = DTACK_FROM_INT;
+Pin[63,61,60,58,57,56,55,54]  = [CPU_D7..0];
+
+NODE DTACK_TIMER_0, DTACK_TIMER_1;
+NODE IRQL7_MASK,IRQL6A_MASK,IRQL6B_MASK,IRQL6C_MASK;
+NODE IRQL5A_MASK,IRQL5B_MASK,IRQL5C_MASK,IRQL5D_MASK;
+NODE IRQL4A_MASK,IRQL4B_MASK,IRQL4C_MASK,IRQL4D_MASK;
+NODE IRQL3A_MASK,IRQL3B_MASK,IRQL3C_MASK,IRQL3D_MASK;
+NODE IRQL2A_MASK,IRQL2B_MASK,IRQL2C_MASK,IRQL2D_MASK;
+NODE IRQL1_MASK;
+
+/* 
+   We will create an internal synthetic IRQ7L request that is triggered
+   by a falling edge of the IRQL7_BUTTON, and is reset by either system 
+   reset, or by the IRQL7_ACK signal which happens when the interrupt is
+   acknowleged.
+*/
+NODE IRQL7;
+IRQL7.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
+IRQL7.ap = !CPU_RESET # IRQL7_ACK;
+IRQL7.ck = !IRQL7_BUTTON;
+
+/* 
+   This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
+   being acknowleged is 7.  The rising edge of this signal will clear the 
+   IRQL7 node above, which clears the interrupt request for IRQ7.
+*/
+IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
+
+/* Pins for Testing */
+
+
+/** Internal Variables and nodes **/
+
+/* Interupt Mask Registers -  0 = allow interrupt, 1 = block interrupt */
+
+/* First group, A1=0, A2=0 */
+IRQL7_MASK.d = CPU_D7.io;
+IRQL7_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL7_MASK.ar = CPU_RESET;  /* Special - On RESET enabled */
+
+IRQL6A_MASK.d = CPU_D6.io;
+IRQL6A_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL6A_MASK.ap = CPU_RESET;
+
+IRQL6B_MASK.d = CPU_D5.io;
+IRQL6B_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL6B_MASK.ap = CPU_RESET;
+
+IRQL6C_MASK.d = CPU_D4.io;
+IRQL6C_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL6C_MASK.ap = CPU_RESET;
+
+IRQL5A_MASK.d = CPU_D3.io;
+IRQL5A_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL5A_MASK.ap = CPU_RESET;
+
+IRQL5B_MASK.d = CPU_D2.io;
+IRQL5B_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL5B_MASK.ap = CPU_RESET;
+
+IRQL5C_MASK.d = CPU_D1.io;
+IRQL5C_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL5C_MASK.ap = CPU_RESET;
+
+IRQL5D_MASK.d = CPU_D0.io;
+IRQL5D_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+IRQL5D_MASK.ap = CPU_RESET;
+
+IRQL4A_MASK.d = CPU_D7.io;
+IRQL4A_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL4A_MASK.ap = CPU_RESET;
+
+IRQL4B_MASK.d = CPU_D6.io;
+IRQL4B_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL4B_MASK.ap = CPU_RESET;
+
+IRQL4C_MASK.d = CPU_D5.io;
+IRQL4C_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL4C_MASK.ap = CPU_RESET;
+
+IRQL4D_MASK.d = CPU_D4.io;
+IRQL4D_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL4D_MASK.ap = CPU_RESET;
+
+IRQL3A_MASK.d = CPU_D3.io;
+IRQL3A_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL3A_MASK.ap = CPU_RESET;
+
+IRQL3B_MASK.d = CPU_D2.io;
+IRQL3B_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL3B_MASK.ap = CPU_RESET;
+
+IRQL3C_MASK.d = CPU_D1.io;
+IRQL3C_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL3C_MASK.ap = CPU_RESET;
+
+IRQL3D_MASK.d = CPU_D0.io;
+IRQL3D_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+IRQL3D_MASK.ap = CPU_RESET;
+
+IRQL2A_MASK.d = CPU_D7.io;
+IRQL2A_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+IRQL2A_MASK.ap = CPU_RESET;
+
+IRQL2B_MASK.d = CPU_D6.io;
+IRQL2B_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+IRQL2B_MASK.ap = CPU_RESET;
+
+IRQL2C_MASK.d = CPU_D5.io;
+IRQL2C_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+IRQL2C_MASK.ap = CPU_RESET;
+
+IRQL2D_MASK.d = CPU_D4.io;
+IRQL2D_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+IRQL2D_MASK.ap = CPU_RESET;
+
+IRQL1_MASK.d = CPU_D3.io;
+IRQL1_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+IRQL1_MASK.ap = CPU_RESET;
+
+/* 
+   INT_ACK goes high when the CPU indicates an interrupt ack cycle is in progress.
+   Since this signal combines with AS it will go low at the end of that cycle. 
+*/
+INT_ACK = CPU_FC2 & CPU_FC1 & CPU_FC0 & !CPU_AS;
+
+/* 
+   DTACK_TIMER_0 and 1 make up a small counter that starts when INT_ACK is asserted (because the
+   inverse of INT_ACK holds the FFs in reset).  DTACK_TIMER_0 will increment to 1 on the following 
+   falling edge of CLK_16M, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
+   both outputs stay at 1 until the flipflops are reset by INT_ACK going low.
+
+   The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
+   back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
+   present on the databus.
+*/
+
+DTACK_TIMER_0.d = 'b'1;
+DTACK_TIMER_0.ar = !INT_ACK;
+DTACK_TIMER_0.ck = !CLK_16M;
+
+DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
+DTACK_TIMER_1.ar = !INT_ACK;
+DTACK_TIMER_1.ck = !CLK_16M;
+
+/* 
+   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
+   is zero it will get asserted on the CPU.   It is tied to the inverse of DTACK_TIMER_1 which is set to 0 
+   on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
+*/
+
+DTACK_FROM_INT = !DTACK_TIMER_1;
+
+/* 
+   Active low grouping of external active low interrupts.  If any of these inputs are low,
+   the group is low.  That group is used to select the interrupt level that goes to the CPU.
+*/
+
+IRQL7_INT = (IRQL7 # IRQL7_MASK);
+IRQL6_INT = (IRQL6A # IRQL6A_MASK) & (IRQL6B # IRQL6B_MASK) & (IRQL6C # IRQL6C_MASK);
+IRQL5_INT = (IRQL5A # IRQL5A_MASK) & (IRQL5B # IRQL5B_MASK) & (IRQL5C # IRQL5C_MASK) & (IRQL5D # IRQL5D_MASK);
+IRQL4_INT = (IRQL4A # IRQL4A_MASK) & (IRQL4B # IRQL4B_MASK) & (IRQL4C # IRQL4C_MASK) & (IRQL4D # IRQL4D_MASK);
+IRQL3_INT = (IRQL3A # IRQL3A_MASK) & (IRQL3B # IRQL3B_MASK) & (IRQL3C # IRQL3C_MASK) & (IRQL3D # IRQL3D_MASK);
+IRQL2_INT = (IRQL2A # IRQL2A_MASK) & (IRQL2B # IRQL2B_MASK) & (IRQL2C # IRQL2C_MASK) & (IRQL2D # IRQL2D_MASK);
+IRQL1_INT = (IRQL1 # IRQL1_MASK);
+
+
+/* 
+   IPL Drive using 8:3 priority encoder.   This output is driven from the above grouped signals.  
+   This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
+   to any value other than 000 by doing an interrupt ack cycle.
+*/   
+IPL0 = !IRQL1_INT # !IRQL3_INT # !IRQL5_INT # !IRQL7_INT;
+IPL1 = !IRQL2_INT # !IRQL3_INT # !IRQL6_INT # !IRQL7_INT;
+IPL2 = !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+
+/* 
+   active low interupt lines post 8:8 priority encoder 
+   These groups of lines form a priority selector for each group.  Within 
+   a group there are up to 4 interrupt sources (A-D), with A being the highest
+   priority.  Within each group only one of the signals will be asserted(ow) at any time.
+   These are active low sigals coming in, and going out. 
+*/
+
+IRQL7_PE = (IRQL7 # IRQL7_MASK);
+
+IRQL6A_PE = (IRQL6A # IRQL6A_MASK);
+IRQL6B_PE = (IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
+IRQL6C_PE = (IRQL6C # IRQL6C_MASK) # !(IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
+
+IRQL5A_PE = (IRQL5A # IRQL5A_MASK);
+IRQL5B_PE = (IRQL5B # IRQL5B_MASK) # !(IRQL5A # IRQL5A_MASK);
+IRQL5C_PE = (IRQL5C # IRQL5C_MASK) # !(IRQL5B # IRQL5B_MASK) # !(IRQL5A # IRQL5A_MASK);
+IRQL5D_PE = (IRQL5D # IRQL5D_MASK) # !(IRQL5C # IRQL5C_MASK) # !(IRQL5B # IRQL5B_MASK) # !(IRQL5A # IRQL5A_MASK);
+
+IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
+IRQL4B_PE = (IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK) ;
+IRQL4C_PE = (IRQL4C # IRQL4C_MASK) # !(IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
+IRQL4D_PE = (IRQL4D # IRQL4D_MASK) # !(IRQL4C # IRQL4C_MASK) # !(IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
+
+IRQL3A_PE = (IRQL3A # IRQL3A_MASK) ;
+IRQL3B_PE = (IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+IRQL3C_PE = (IRQL3C # IRQL3C_MASK) # !(IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+IRQL3D_PE = (IRQL3D # IRQL3D_MASK) # !(IRQL3C # IRQL3C_MASK) # !(IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+
+IRQL2A_PE = (IRQL2A # IRQL2A_MASK);
+IRQL2B_PE = (IRQL2B # IRQL2B_MASK) # !(IRQL2A # IRQL2A_MASK);
+IRQL2C_PE = (IRQL2C # IRQL2C_MASK) # !(IRQL2B # IRQL2B_MASK) # !(IRQL2A # IRQL2A_MASK);
+IRQL2D_PE = (IRQL2D # IRQL2D_MASK) # !(IRQL2C # IRQL2C_MASK) # !(IRQL2B # IRQL2B_MASK) # !(IRQL2A # IRQL2A_MASK);
+
+IRQL1_PE = ( IRQL1 # IRQL1_MASK);
+
+/* This field is created so we can select on it using the :[number] method below */
+
+field interrupt_ack_num = [CPU_INTACK2..0];
+
+/* 
+   These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
+   acknowlegement process.  These are driven on the databus during the int ack cycle.
+   The vector number is formed by doing the followig:
+      The highest bit is set to 1 due to the available vectors starting at 64. 
+      The next three highest bits are set to the IPL value that has been acknowleged.  This
+      will be between 'b'001 and 'b;111.  It could be '000' if an interrupt line dissapears
+      before the ack cycle is incomplete.   The CPU should be programmed to catch this vector 
+      as a spurious interrupt.
+      The lower 4 bits are driven by the specific sub interrupt for the level selected above.
+      Since we support 4 sub interrupts, the vector uses 1 bit for each.
+
+      IRQ         Vector#              System Use
+      ------      --------             -------------------------------
+      IRQL7       11110000 (0xF0)      Debugger (Button)
+      IRQL6A      11100001 (0xE1)      PTC #1 (Programmable Timer)
+      IRQL6B      11100010 (0xE2)      PTC #2 (Programmable Timer)
+      IRQL6C      11100100 (0xE4)      PTC #3 (Programmable Timer)
+      IRQL5A      11010001 (0xD1)      UARTA
+      IRQL5B      11010010 (0xD2)      UARTB
+      IRQL5C      11010100 (0xD4)      Keyboard/Mouse
+      IRQL5D      11011000 (0xD8)      RTC (1 second clock)
+      IRQL4A      11000001 (0xC1)      ISA1
+      IRQL4B      11000010 (0xC2)      ISA2
+      IRQL4C      11000100 (0xC4)      ISA3
+      IRQL4D      11001000 (0xC8)      ISA4
+      IRQL3A      10110001 (0xB1)      NIC
+      IRQL3B      10110010 (0xB2)      IDE
+      IRQL3C      10110100 (0xB4)      BUSARB
+      IRQL3D      10111000 (0xB8)      N/C  
+      IRQL2A      10100001 (0xA1)      ISA5
+      IRQL2B      10100010 (0xA2)      ISA6
+      IRQL2C      10100100 (0xA4)      ISA7
+      IRQL2D      10101000 (0xA8)      ISA8
+      IRQL1       10010000 (0x90)      N/C
+
+      Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
+
+*/
+
+
+VECTORD7 = 'b'1;
+VECTORD6 = CPU_INTACK2;
+VECTORD5 = CPU_INTACK1;
+VECTORD4 = CPU_INTACK0;
+VECTORD3 = (interrupt_ack_num:['d'5] &!IRQL5D_PE )
+            # ( interrupt_ack_num:[4]&!IRQL4D_PE)
+            # ( interrupt_ack_num:[3]&!IRQL3D_PE)
+            # ( interrupt_ack_num:[2]&!IRQL2D_PE);
+VECTORD2 = (interrupt_ack_num:[5]&!IRQL5C_PE )
+            # ( interrupt_ack_num:[4]&!IRQL4C_PE)
+            # ( interrupt_ack_num:[3]&!IRQL3C_PE)
+            # ( interrupt_ack_num:[2]&!IRQL2C_PE);
+            
+VECTORD1 = (interrupt_ack_num:[5]&!IRQL5B_PE )
+            # ( interrupt_ack_num:[4]&!IRQL4B_PE)
+            # ( interrupt_ack_num:[3]&!IRQL3B_PE)
+            # ( interrupt_ack_num:[2]&!IRQL2B_PE);
+           
+VECTORD0 = (interrupt_ack_num:[5]&!IRQL5A_PE )
+            # ( interrupt_ack_num:[4]&!IRQL4A_PE)
+            # ( interrupt_ack_num:[3]&!IRQL3A_PE)
+            # ( interrupt_ack_num:[2]&!IRQL2A_PE);
+
+/*
+   Registers for driving the data bus to tell the CPU the vector number.  We latch into these flipflops
+   1 cycle after the INT_ACK assertion happens via the DTACK_TIMER_0 signal.  The output enable is driven by 
+   the same INT_ACK signal, so this output enable should happen before the latch change.   The databus will
+   be undriven once INT_ACK unasserts, which happens as soon as /AS goes high.
+*/
+
+CPU_D7.d = VECTORD7;
+CPU_D6.d = VECTORD6;
+CPU_D5.d = VECTORD5;
+CPU_D4.d = VECTORD4;
+CPU_D3.d = VECTORD3;
+CPU_D2.d = VECTORD2;
+CPU_D1.d = VECTORD1;
+CPU_D0.d = VECTORD0;
+[CPU_D7..0].ck = DTACK_TIMER_0;
+[CPU_D7..0].ar = !CPU_RESET;
+[CPU_D7..0].oe = INT_ACK;
+
+/* ############################################################################################ */
+/* 
+   TESTING PINS /AS Generator 
+   Generate a sample /AS signal using the CLK_32M signal.   This will need a 3 NODE counter.
+*/
+/*
+   Pin[37] =  AS_GENERATOR;
+   NODE RESET_SYNC_TO_CLK;
+   RESET_SYNC_TO_CLK.d='b'1;
+   RESET_SYNC_TO_CLK.ar = !CPU_RESET;
+   RESET_SYNC_TO_CLK.ck = !CLK_32M;
+
+   CLK_16M.d = !CLK_16M;
+   CLK_16M.ck = CLK_32M;
+   CLR_16M.ar = !RESET_SYNC_TO_CLK;
+
+   NODE [AS_GEN_COUNT2..0];
+   AS_GEN_COUNT0.d = !AS_GEN_COUNT0;
+   AS_GEN_COUNT1.d = AS_GEN_COUNT0 $ AS_GEN_COUNT1;
+   AS_GEN_COUNT2.d = ( AS_GEN_COUNT2 & !AS_GEN_COUNT0 )
+                     # ( AS_GEN_COUNT2 & !AS_GEN_COUNT1 )
+                     # ( !AS_GEN_COUNT2 & AS_GEN_COUNT1 & AS_GEN_COUNT0 );
+   [AS_GEN_COUNT2..0].ck = !CLK_32M;
+   [AS_GEN_COUNT2..0].ar = !RESET_SYNC_TO_CLK;
+   FIELD as_gen_count_field = [AS_GEN_COUNT2..0];
+   AS_GENERATOR.d = !(as_gen_count_field:[2,3,4,5,6]);
+   AS_GENERATOR.ck = CLK_32M;
+   AS_GENERATOR.ar = !RESET_SYNC_TO_CLK;
+*/
+
+/* ############################################################################################ */
+
+
+
+/*
+CLK_16M assigned to pin  83
+IRQL4A is placed at pin 12 (MC 3)
+IRQL4B is placed at pin 11 (MC 5)
+IRQL4C is placed at pin 10 (MC 6)
+IRQL4D is placed at pin 9 (MC 8)
+IRQL5A is placed at pin 8 (MC 11)
+IRQL5B is placed at pin 6 (MC 13)
+IRQL5C is placed at pin 5 (MC 14)
+IRQL5D is placed at pin 4 (MC 16)
+IRQL2B is placed at pin 22 (MC 17)
+IRQL2C is placed at pin 21 (MC 19)
+IRQL2D is placed at pin 20 (MC 21)
+IRQL3A is placed at pin 18 (MC 24)
+IRQL3B is placed at pin 17 (MC 25)
+IRQL3C is placed at pin 16 (MC 27)
+IRQL3D is placed at pin 15 (MC 29)
+TDI is placed at pin 14 (MC 32)
+INTC_CS is placed at pin 31 (MC 35)
+IRQL7_BUTTON is placed at pin 30 (MC 37)
+IRQL1 is placed at pin 29 (MC 38)
+DTACK_FROM_INT is placed at pin 25 (MC 45)
+IRQL2A is placed at pin 24 (MC 46)
+TMS is placed at pin 23 (MC 48)
+CPU_RW is placed at pin 41 (MC 49)
+CPU_AS is placed at pin 40 (MC 51)
+CPU_FC0 is placed at pin 39 (MC 53)
+CPU_FC1 is placed at pin 37 (MC 56)
+CPU_FC2 is placed at pin 36 (MC 57)
+IPL0 is placed at pin 35 (MC 59)
+IPL1 is placed at pin 34 (MC 61)
+IPL2 is placed at pin 33 (MC 64)
+CPU_INTACK2 is placed at pin 44 (MC 65)
+CPU_INTACK1 is placed at pin 45 (MC 67)
+CPU_INTACK0 is placed at pin 46 (MC 69)
+CPU_RESET is placed at pin 48 (MC 72)
+CPU_D0 is placed at pin 54 (MC 83)
+CPU_D1 is placed at pin 55 (MC 85)
+CPU_D2 is placed at pin 56 (MC 86)
+CPU_D3 is placed at pin 57 (MC 88)
+CPU_D4 is placed at pin 58 (MC 91)
+CPU_D5 is placed at pin 60 (MC 93)
+CPU_D6 is placed at pin 61 (MC 94)
+TCK is placed at pin 62 (MC 96)
+CPU_D7 is placed at pin 63 (MC 97)
+TDO is placed at pin 71 (MC 112)
+IRQL6A is placed at pin 75 (MC 118)
+IRQL6B is placed at pin 76 (MC 120)
+IRQL6C is placed at pin 77 (MC 123)
+
+Total dedicated input used:	1/4 	(25%)
+Total I/O pins used		47/64 	(73%)
+Total Logic cells used 		55/128 	(42%)
+Total Flip-Flop used 		32/128 	(25%)
+Total Foldback logic used 	5/128 	(3%)
+Total Nodes+FB/MCells 		60/128 	(46%)
+Total cascade used 		0
+Total input pins 		36
+Total output pins 		12
+Total Pts 			205
+
+               
+                                                                                    
+                                             C                                      
+                     I I  I I   I I I        L           I I I                      
+                     R R  R R   R R R        K           R R R                      
+                     Q Q  Q Q   Q Q Q        _           Q Q Q                      
+                     L L  L L G L L L V      1 G       V L L L                      
+                     4 4  4 5 N 5 5 5 C      6 N       C 6 6 6                      
+                     B C  D A D B C D C      M D       C C B A                      
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+          IRQL4A | 12                    (*)                   74 |                 
+             VCC | 13                                          73 |                 
+             TDI | 14                                          72 | GND             
+          IRQL3D | 15                                          71 | TDO             
+          IRQL3C | 16                                          70 |                 
+          IRQL3B | 17                                          69 |                 
+          IRQL3A | 18                                          68 |                 
+             GND | 19                                          67 |                 
+          IRQL2D | 20                                          66 | VCC             
+          IRQL2C | 21                                          65 |                 
+          IRQL2B | 22                 ATF1508                  64 |                 
+             TMS | 23               84-Lead PLCC               63 | CPU_D7          
+          IRQL2A | 24                                          62 | TCK             
+  DTACK_FROM_INT | 25                                          61 | CPU_D6          
+             VCC | 26                                          60 | CPU_D5          
+                 | 27                                          59 | GND             
+                 | 28                                          58 | CPU_D4          
+           IRQL1 | 29                                          57 | CPU_D3          
+    IRQL7_BUTTON | 30                                          56 | CPU_D2          
+         INTC_CS | 31                                          55 | CPU_D1          
+             GND | 32                                          54 | CPU_D0          
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                      I I I C C V C C C G V C C C G C         V                     
+                      P P P P P C P P P N C P P P N P         C                     
+                      L L L U U C U U U D C U U U D U         C                     
+                      2 1 0 _ _   _ _ _     _ _ _   _                               
+                            F F   F A R     I I I   R                               
+                            C C   C S W     N N N   E                               
+                            2 1   0         T T T   S                               
+                                            A A A   E                               
+                                            C C C   T                               
+                                            K K K                                   
+                                            2 1 0                   
+                                            
+
+*/
+

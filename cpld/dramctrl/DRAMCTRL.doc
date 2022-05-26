@@ -1,0 +1,599 @@
+
+*******************************************************************************
+                                DRAMController
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1504ispplcc44  Library DLIB-h-40-1
+Created         Thu May 05 07:04:48 2022
+Name            DRAMController
+Partno          DRAMCPLD
+Revision        01
+Date            04/18/2022
+Designer        Sponaugle
+Company         Ratiometric
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+CAS0 =>
+    DRAM_MEM_CAS & DRAM_REFRESH_CAS
+  # CPU_A1 & DRAM_REFRESH_CAS
+  # CPU_LDS & DRAM_REFRESH_CAS
+
+CAS1 =>
+    DRAM_MEM_CAS & DRAM_REFRESH_CAS
+  # !CPU_A1 & DRAM_REFRESH_CAS
+  # CPU_LDS & DRAM_REFRESH_CAS
+
+CAS2 =>
+    DRAM_MEM_CAS & DRAM_REFRESH_CAS
+  # CPU_A1 & DRAM_REFRESH_CAS
+  # CPU_UDS & DRAM_REFRESH_CAS
+
+CAS3 =>
+    DRAM_MEM_CAS & DRAM_REFRESH_CAS
+  # !CPU_A1 & DRAM_REFRESH_CAS
+  # CPU_UDS & DRAM_REFRESH_CAS
+
+CLK_16M.d  =>
+    !CLK_16M
+
+CLK_16M.ar  =>
+    !CPU_RESET
+
+CLK_16M.ck  =>
+    CLK_32M
+
+CLK_1M.d  =>
+    !CLK_1M
+
+CLK_1M.ar  =>
+    !CPU_RESET
+
+CLK_1M.ck  =>
+    CLK_2M
+
+CLK_2M.d  =>
+    !CLK_2M
+
+CLK_2M.ar  =>
+    !CPU_RESET
+
+CLK_2M.ck  =>
+    CLK_4M
+
+CLK_4M.d  =>
+    !CLK_4M
+
+CLK_4M.ar  =>
+    !CPU_RESET
+
+CLK_4M.ck  =>
+    CLK_8M
+
+CLK_8M.d  =>
+    !CLK_8M
+
+CLK_8M.ar  =>
+    !CPU_RESET
+
+CLK_8M.ck  =>
+    CLK_16M
+
+CPU_RESET.d  =>
+    0 
+
+CPU_RESET.ap  =>
+    !CPU_RESET_IN
+
+CPU_RESET.ck  =>
+    CLK_16M
+
+DRAM_ACCESS_TIMER0.d  =>
+    !DRAM_ACCESS_TIMER0
+
+DRAM_ACCESS_TIMER0.ar  =>
+    CPU_AS
+  # !CPU_RESET
+
+DRAM_ACCESS_TIMER0.ck  =>
+    !CLK_32M
+
+DRAM_ACCESS_TIMER1.d  =>
+    DRAM_ACCESS_TIMER0 & !DRAM_ACCESS_TIMER1
+  # !DRAM_ACCESS_TIMER0 & DRAM_ACCESS_TIMER1
+
+DRAM_ACCESS_TIMER1.ar  =>
+    CPU_AS
+  # !CPU_RESET
+
+DRAM_ACCESS_TIMER1.ck  =>
+    !CLK_32M
+
+DRAM_ACCESS_TIMER2.d  =>
+    !DRAM_ACCESS_TIMER0 & DRAM_ACCESS_TIMER2
+  # !DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER2
+  # DRAM_ACCESS_TIMER0 & DRAM_ACCESS_TIMER1 & !DRAM_ACCESS_TIMER2
+
+DRAM_ACCESS_TIMER2.ar  =>
+    CPU_AS
+  # !CPU_RESET
+
+DRAM_ACCESS_TIMER2.ck  =>
+    !CLK_32M
+
+DRAM_DATA_DIR =>
+    CPU_RW & !DRAM_CS
+
+DRAM_MEM_AB.d  =>
+    DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER2
+  # !DRAM_ACCESS_TIMER1 & !DRAM_ACCESS_TIMER2
+  # !DRAM_ACCESS_TIMER0 & DRAM_ACCESS_TIMER1
+  # !DRAM_ACCESS_TIMER0 & !DRAM_ACCESS_TIMER2
+
+DRAM_MEM_AB.ap  =>
+    CPU_AS
+  # !CPU_RESET
+
+DRAM_MEM_AB.ck  =>
+    CLK_32M
+
+DRAM_MEM_CAS.d  =>
+    DRAM_MEM_CAS_PRE
+
+DRAM_MEM_CAS.ap  =>
+    CPU_AS
+  # !CPU_RESET
+
+DRAM_MEM_CAS.ck  =>
+    !CLK_32M
+
+DRAM_MEM_CAS_PRE.d  =>
+    DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER2
+  # !DRAM_ACCESS_TIMER1 & !DRAM_ACCESS_TIMER2
+  # !DRAM_ACCESS_TIMER0 & DRAM_ACCESS_TIMER1
+  # !DRAM_ACCESS_TIMER0 & !DRAM_ACCESS_TIMER2
+
+DRAM_MEM_CAS_PRE.ap  =>
+    DRAM_CS
+
+DRAM_MEM_CAS_PRE.ck  =>
+    CLK_32M
+
+DRAM_MEM_RAS.d  =>
+    DRAM_MEM_RAS_PRE
+
+DRAM_MEM_RAS.ap  =>
+    CPU_AS
+  # !CPU_RESET
+
+DRAM_MEM_RAS.ck  =>
+    !CLK_32M
+
+DRAM_MEM_RAS_PRE.d  =>
+    DRAM_ACCESS_TIMER2
+  # !DRAM_ACCESS_TIMER1
+
+DRAM_MEM_RAS_PRE.ap  =>
+    DRAM_CS
+
+DRAM_MEM_RAS_PRE.ck  =>
+    CLK_32M
+
+DRAM_REFRESH_CAS.d  =>
+    DRAM_REFRESH_CAS_PRE
+
+DRAM_REFRESH_CAS.ap  =>
+    !CPU_RESET
+
+DRAM_REFRESH_CAS.ck  =>
+    CLK_32M
+
+DRAM_REFRESH_CAS_PRE.d  =>
+    REFRESH_STATE_TIMER2
+  # !REFRESH_STATE_TIMER1
+
+DRAM_REFRESH_CAS_PRE.ap  =>
+    !CPU_RESET
+
+DRAM_REFRESH_CAS_PRE.ck  =>
+    !CLK_32M
+
+DRAM_REFRESH_RAS.d  =>
+    REFRESH_STATE_TIMER1 & REFRESH_STATE_TIMER2
+  # REFRESH_STATE_TIMER0 & REFRESH_STATE_TIMER2
+  # !REFRESH_STATE_TIMER1 & !REFRESH_STATE_TIMER2
+  # REFRESH_STATE_TIMER0 & !REFRESH_STATE_TIMER1
+  # !REFRESH_STATE_TIMER0 & !REFRESH_STATE_TIMER2
+  # !REFRESH_STATE_TIMER0 & REFRESH_STATE_TIMER1
+
+DRAM_REFRESH_RAS.ap  =>
+    !CPU_RESET
+
+DRAM_REFRESH_RAS.ck  =>
+    !CLK_32M
+
+RAS0 =>
+    DRAM_MEM_RAS & DRAM_REFRESH_RAS
+  # CPU_A1 & DRAM_REFRESH_RAS
+
+RAS2 =>
+    DRAM_MEM_RAS & DRAM_REFRESH_RAS
+  # !CPU_A1 & DRAM_REFRESH_RAS
+
+REFRESH_COMPLETED.d  =>
+    !REFRESH_STATE_TIMER2
+  # !REFRESH_STATE_TIMER1
+  # REFRESH_STATE_TIMER0
+
+REFRESH_COMPLETED.ap  =>
+    !CPU_RESET
+
+REFRESH_COMPLETED.ck  =>
+    !CLK_32M
+
+REFRESH_COUNTER_RESET.d  =>
+    REFRESH_COUNTER_RESET_PRE
+
+REFRESH_COUNTER_RESET.ar  =>
+    !CPU_RESET
+
+REFRESH_COUNTER_RESET.ck  =>
+    !CLK_32M
+
+REFRESH_COUNTER_RESET_PRE.d  =>
+    DRAM_ACCESS_TIMER2
+  # DRAM_ACCESS_TIMER0 & DRAM_ACCESS_TIMER1
+  # !DRAM_ACCESS_TIMER0 & !DRAM_ACCESS_TIMER1
+
+REFRESH_COUNTER_RESET_PRE.ar  =>
+    !CPU_RESET
+
+REFRESH_COUNTER_RESET_PRE.ck  =>
+    CLK_32M
+
+REFRESH_REQUESTED_PRE.d  =>
+    1 
+
+REFRESH_REQUESTED_PRE.ar  =>
+    !REFRESH_COMPLETED
+  # !CPU_RESET
+
+REFRESH_REQUESTED_PRE.ck  =>
+    REFRESH_TIMER7
+
+REFRESH_REQUESTED_SYNC.d  =>
+    REFRESH_REQUESTED_PRE
+
+REFRESH_REQUESTED_SYNC.ar  =>
+    !REFRESH_COMPLETED
+  # !CPU_RESET
+
+REFRESH_REQUESTED_SYNC.ck  =>
+    !CPU_AS
+
+REFRESH_STATE_TIMER0.d  =>
+    !REFRESH_STATE_TIMER0
+
+REFRESH_STATE_TIMER0.ar  =>
+    !REFRESH_REQUESTED_SYNC
+  # !REFRESH_COUNTER_RESET
+
+REFRESH_STATE_TIMER0.ck  =>
+    CLK_32M
+
+REFRESH_STATE_TIMER1.d  =>
+    REFRESH_STATE_TIMER0 & !REFRESH_STATE_TIMER1
+  # !REFRESH_STATE_TIMER0 & REFRESH_STATE_TIMER1
+
+REFRESH_STATE_TIMER1.ar  =>
+    !REFRESH_REQUESTED_SYNC
+  # !REFRESH_COUNTER_RESET
+
+REFRESH_STATE_TIMER1.ck  =>
+    CLK_32M
+
+REFRESH_STATE_TIMER2.d  =>
+    !REFRESH_STATE_TIMER0 & REFRESH_STATE_TIMER2
+  # !REFRESH_STATE_TIMER1 & REFRESH_STATE_TIMER2
+  # REFRESH_STATE_TIMER0 & REFRESH_STATE_TIMER1 & !REFRESH_STATE_TIMER2
+
+REFRESH_STATE_TIMER2.ar  =>
+    !REFRESH_REQUESTED_SYNC
+  # !REFRESH_COUNTER_RESET
+
+REFRESH_STATE_TIMER2.ck  =>
+    CLK_32M
+
+REFRESH_TIMER0.d  =>
+    !REFRESH_TIMER0
+
+REFRESH_TIMER0.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER0.ck  =>
+    CLK_8M
+
+REFRESH_TIMER1.d  =>
+    REFRESH_TIMER0 & !REFRESH_TIMER1
+  # !REFRESH_TIMER0 & REFRESH_TIMER1
+
+REFRESH_TIMER1.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER1.ck  =>
+    CLK_8M
+
+REFRESH_TIMER2.d  =>
+    !REFRESH_TIMER0 & REFRESH_TIMER2
+  # !REFRESH_TIMER1 & REFRESH_TIMER2
+  # REFRESH_TIMER0 & REFRESH_TIMER1 & !REFRESH_TIMER2
+
+REFRESH_TIMER2.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER2.ck  =>
+    CLK_8M
+
+REFRESH_TIMER3.d  =>
+    !REFRESH_TIMER2 & REFRESH_TIMER3
+  # !REFRESH_TIMER0 & REFRESH_TIMER3
+  # !REFRESH_TIMER1 & REFRESH_TIMER3
+  # REFRESH_TIMER0 & REFRESH_TIMER1 & REFRESH_TIMER2 & !REFRESH_TIMER3
+
+REFRESH_TIMER3.ap  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER3.ck  =>
+    CLK_8M
+
+REFRESH_TIMER4.d  =>
+    !REFRESH_TIMER4
+
+REFRESH_TIMER4.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER4.ck  =>
+    !REFRESH_TIMER3
+  # !REFRESH_TIMER2
+  # !REFRESH_TIMER1
+  # !REFRESH_TIMER0
+
+REFRESH_TIMER5.d  =>
+    REFRESH_TIMER4 & !REFRESH_TIMER5
+  # !REFRESH_TIMER4 & REFRESH_TIMER5
+
+REFRESH_TIMER5.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER5.ck  =>
+    !REFRESH_TIMER3
+  # !REFRESH_TIMER2
+  # !REFRESH_TIMER1
+  # !REFRESH_TIMER0
+
+REFRESH_TIMER6.d  =>
+    !REFRESH_TIMER4 & REFRESH_TIMER6
+  # !REFRESH_TIMER5 & REFRESH_TIMER6
+  # REFRESH_TIMER4 & REFRESH_TIMER5 & !REFRESH_TIMER6
+
+REFRESH_TIMER6.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER6.ck  =>
+    !REFRESH_TIMER3
+  # !REFRESH_TIMER2
+  # !REFRESH_TIMER1
+  # !REFRESH_TIMER0
+
+REFRESH_TIMER7.d  =>
+    !REFRESH_TIMER6 & REFRESH_TIMER7
+  # !REFRESH_TIMER4 & REFRESH_TIMER7
+  # !REFRESH_TIMER5 & REFRESH_TIMER7
+  # REFRESH_TIMER4 & REFRESH_TIMER5 & REFRESH_TIMER6 & !REFRESH_TIMER7
+
+REFRESH_TIMER7.ar  =>
+    REFRESH_TIMER_RESET
+  # !CPU_RESET
+
+REFRESH_TIMER7.ck  =>
+    !REFRESH_TIMER3
+  # !REFRESH_TIMER2
+  # !REFRESH_TIMER1
+  # !REFRESH_TIMER0
+
+REFRESH_TIMER_RESET.d  =>
+    REFRESH_TIMER7
+
+REFRESH_TIMER_RESET.ar  =>
+    !CPU_RESET
+
+REFRESH_TIMER_RESET.ck  =>
+    CLK_32M
+
+dram_access_timer_field =>
+    DRAM_ACCESS_TIMER2 , DRAM_ACCESS_TIMER1 , DRAM_ACCESS_TIMER0
+
+refresh_state_timer_field =>
+    REFRESH_STATE_TIMER2 , REFRESH_STATE_TIMER1 , REFRESH_STATE_TIMER0
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    CAS0                        4        V        3       0       1     
+    CAS1                        5        V        3       0       1     
+    CAS2                        6        V        3       0       1     
+    CAS3                        8        V        3       0       1     
+    CLK_16M                     17       V        -       -       -     
+    CLK_16M             d       17       X        1       0       1     
+    CLK_16M             ar      17       X        1       0       1     
+    CLK_16M             ck      17       X        1       0       1     
+    CLK_1M                      14       V        -       -       -     
+    CLK_1M              d       14       X        1       0       1     
+    CLK_1M              ar      14       X        1       0       1     
+    CLK_1M              ck      14       X        1       0       1     
+    CLK_2M                      11       V        -       -       -     
+    CLK_2M              d       11       X        1       0       1     
+    CLK_2M              ar      11       X        1       0       1     
+    CLK_2M              ck      11       X        1       0       1     
+    CLK_32M                     43       V        -       -       -     
+    CLK_4M                      73       N        -       -       -     
+    CLK_4M              d       73       M        1       0       1     
+    CLK_4M              ar      73       M        1       0       1     
+    CLK_4M              ck      73       M        1       0       1     
+    CLK_8M                      72       N        -       -       -     
+    CLK_8M              d       72       M        1       0       1     
+    CLK_8M              ar      72       M        1       0       1     
+    CLK_8M              ck      72       M        1       0       1     
+    CPU_A1                      27       V        -       -       -     
+    CPU_AS                      18       V        -       -       -     
+    CPU_LDS                     20       V        -       -       -     
+    CPU_RESET                   16       V        -       -       -     
+    CPU_RESET           d       16       X        1       0       1     
+    CPU_RESET           ap      16       X        1       0       1     
+    CPU_RESET           ck      16       X        1       0       1     
+    CPU_RESET_IN                1        V        -       -       -     
+    CPU_RW                      21       V        -       -       -     
+    CPU_UDS                     19       V        -       -       -     
+    DRAM_ACCESS_TIMER0          68       N        -       -       -     
+    DRAM_ACCESS_TIMER0  d       68       M        1       0       1     
+    DRAM_ACCESS_TIMER0  ar      68       M        2       0       1     
+    DRAM_ACCESS_TIMER0  ck      68       M        1       0       1     
+    DRAM_ACCESS_TIMER1          67       N        -       -       -     
+    DRAM_ACCESS_TIMER1  d       67       M        2       0       1     
+    DRAM_ACCESS_TIMER1  ar      67       M        2       0       1     
+    DRAM_ACCESS_TIMER1  ck      67       M        1       0       1     
+    DRAM_ACCESS_TIMER2          66       N        -       -       -     
+    DRAM_ACCESS_TIMER2  d       66       M        3       0       1     
+    DRAM_ACCESS_TIMER2  ar      66       M        2       0       1     
+    DRAM_ACCESS_TIMER2  ck      66       M        1       0       1     
+    DRAM_CS                     28       V        -       -       -     
+    DRAM_DATA_DIR               9        V        1       0       1     
+    DRAM_MEM_AB                 39       V        -       -       -     
+    DRAM_MEM_AB         d       39       X        4       0       1     
+    DRAM_MEM_AB         ap      39       X        2       0       1     
+    DRAM_MEM_AB         ck      39       X        1       0       1     
+    DRAM_MEM_CAS                58       N        -       -       -     
+    DRAM_MEM_CAS        d       58       M        1       0       1     
+    DRAM_MEM_CAS        ap      58       M        2       0       1     
+    DRAM_MEM_CAS        ck      58       M        1       0       1     
+    DRAM_MEM_CAS_PRE            56       N        -       -       -     
+    DRAM_MEM_CAS_PRE    d       56       M        4       0       1     
+    DRAM_MEM_CAS_PRE    ap      56       M        1       0       1     
+    DRAM_MEM_CAS_PRE    ck      56       M        1       0       1     
+    DRAM_MEM_RAS                57       N        -       -       -     
+    DRAM_MEM_RAS        d       57       M        1       0       1     
+    DRAM_MEM_RAS        ap      57       M        2       0       1     
+    DRAM_MEM_RAS        ck      57       M        1       0       1     
+    DRAM_MEM_RAS_PRE            59       N        -       -       -     
+    DRAM_MEM_RAS_PRE    d       59       M        2       0       1     
+    DRAM_MEM_RAS_PRE    ap      59       M        1       0       1     
+    DRAM_MEM_RAS_PRE    ck      59       M        1       0       1     
+    DRAM_REFRESH_CAS            64       N        -       -       -     
+    DRAM_REFRESH_CAS    d       64       M        1       0       1     
+    DRAM_REFRESH_CAS    ap      64       M        1       0       1     
+    DRAM_REFRESH_CAS    ck      64       M        1       0       1     
+    DRAM_REFRESH_CAS_PRE        62       N        -       -       -     
+    DRAM_REFRESH_CAS_PREd       62       M        2       0       1     
+    DRAM_REFRESH_CAS_PREap      62       M        1       0       1     
+    DRAM_REFRESH_CAS_PREck      62       M        1       0       1     
+    DRAM_REFRESH_RAS            63       N        -       -       -     
+    DRAM_REFRESH_RAS    d       63       M        6       0       1     
+    DRAM_REFRESH_RAS    ap      63       M        1       0       1     
+    DRAM_REFRESH_RAS    ck      63       M        1       0       1     
+    RAS0                        41       V        2       0       1     
+    RAS2                        40       V        2       0       1     
+    REFRESH_COMPLETED           55       N        -       -       -     
+    REFRESH_COMPLETED   d       55       M        3       0       1     
+    REFRESH_COMPLETED   ap      55       M        1       0       1     
+    REFRESH_COMPLETED   ck      55       M        1       0       1     
+    REFRESH_COUNTER_RESET        61       N        -       -       -     
+    REFRESH_COUNTER_RESETd       61       M        1       0       1     
+    REFRESH_COUNTER_RESETar      61       M        1       0       1     
+    REFRESH_COUNTER_RESETck      61       M        1       0       1     
+    REFRESH_COUNTER_RESET_PRE        60       N        -       -       -     
+    REFRESH_COUNTER_RESET_PREd       60       M        3       0       1     
+    REFRESH_COUNTER_RESET_PREar      60       M        1       0       1     
+    REFRESH_COUNTER_RESET_PREck      60       M        1       0       1     
+    REFRESH_REQUESTED_PRE        53       N        -       -       -     
+    REFRESH_REQUESTED_PREd       53       M        1       0       1     
+    REFRESH_REQUESTED_PREar      53       M        2       0       1     
+    REFRESH_REQUESTED_PREck      53       M        1       0       1     
+    REFRESH_REQUESTED_SYNC        54       N        -       -       -     
+    REFRESH_REQUESTED_SYNCd       54       M        1       0       1     
+    REFRESH_REQUESTED_SYNCar      54       M        2       0       1     
+    REFRESH_REQUESTED_SYNCck      54       M        1       0       1     
+    REFRESH_STATE_TIMER0        71       N        -       -       -     
+    REFRESH_STATE_TIMER0d       71       M        1       0       1     
+    REFRESH_STATE_TIMER0ar      71       M        2       0       1     
+    REFRESH_STATE_TIMER0ck      71       M        1       0       1     
+    REFRESH_STATE_TIMER1        70       N        -       -       -     
+    REFRESH_STATE_TIMER1d       70       M        2       0       1     
+    REFRESH_STATE_TIMER1ar      70       M        2       0       1     
+    REFRESH_STATE_TIMER1ck      70       M        1       0       1     
+    REFRESH_STATE_TIMER2        69       N        -       -       -     
+    REFRESH_STATE_TIMER2d       69       M        3       0       1     
+    REFRESH_STATE_TIMER2ar      69       M        2       0       1     
+    REFRESH_STATE_TIMER2ck      69       M        1       0       1     
+    REFRESH_TIMER0              45       N        -       -       -     
+    REFRESH_TIMER0      d       45       M        1       0       1     
+    REFRESH_TIMER0      ar      45       M        2       0       1     
+    REFRESH_TIMER0      ck      45       M        1       0       1     
+    REFRESH_TIMER1              46       N        -       -       -     
+    REFRESH_TIMER1      d       46       M        2       0       1     
+    REFRESH_TIMER1      ar      46       M        2       0       1     
+    REFRESH_TIMER1      ck      46       M        1       0       1     
+    REFRESH_TIMER2              47       N        -       -       -     
+    REFRESH_TIMER2      d       47       M        3       0       1     
+    REFRESH_TIMER2      ar      47       M        2       0       1     
+    REFRESH_TIMER2      ck      47       M        1       0       1     
+    REFRESH_TIMER3              48       N        -       -       -     
+    REFRESH_TIMER3      d       48       M        4       0       1     
+    REFRESH_TIMER3      ap      48       M        2       0       1     
+    REFRESH_TIMER3      ck      48       M        1       0       1     
+    REFRESH_TIMER4              49       N        -       -       -     
+    REFRESH_TIMER4      d       49       M        1       0       1     
+    REFRESH_TIMER4      ar      49       M        2       0       1     
+    REFRESH_TIMER4      ck      49       M        4       0       1     
+    REFRESH_TIMER5              50       N        -       -       -     
+    REFRESH_TIMER5      d       50       M        2       0       1     
+    REFRESH_TIMER5      ar      50       M        2       0       1     
+    REFRESH_TIMER5      ck      50       M        4       0       1     
+    REFRESH_TIMER6              51       N        -       -       -     
+    REFRESH_TIMER6      d       51       M        3       0       1     
+    REFRESH_TIMER6      ar      51       M        2       0       1     
+    REFRESH_TIMER6      ck      51       M        4       0       1     
+    REFRESH_TIMER7              52       N        -       -       -     
+    REFRESH_TIMER7      d       52       M        4       0       1     
+    REFRESH_TIMER7      ar      52       M        2       0       1     
+    REFRESH_TIMER7      ck      52       M        4       0       1     
+    REFRESH_TIMER_RESET         65       N        -       -       -     
+    REFRESH_TIMER_RESET d       65       M        1       0       1     
+    REFRESH_TIMER_RESET ar      65       M        1       0       1     
+    REFRESH_TIMER_RESET ck      65       M        1       0       1     
+    dram_access_timer_field        0        F        -       -       -     
+    refresh_state_timer_field        0        F        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

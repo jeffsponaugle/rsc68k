@@ -1,0 +1,551 @@
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+  1:Name     INTController;
+  2:PartNo   INTCTRLCPLD;
+  3:Date     04/18/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1508ispplcc84;
+ 10:
+ 11:/** Inputs **/
+ 12:
+ 13:Pin[48]   = CPU_RESET;    /* Active Low RESET */
+ 14:Pin[40]   = CPU_AS;
+ 15:Pin[36,37,39]   = [CPU_FC2..0];
+ 16:Pin[44,45,46]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
+ 17:Pin[83]   = CLK_16M;
+ 18:Pin[30]   = IRQL7_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
+ 19:Pin[75,76,77]   = IRQL6A,IRQL6B,IRQL6C;
+ 20:Pin[8,6,5,4]   = IRQL5A,IRQL5B,IRQL5C,IRQL5D;
+ 21:Pin[12,11,10,9]   = IRQL4A,IRQL4B,IRQL4C,IRQL4D;
+ 22:Pin[18,17,16,15]   = IRQL3A,IRQL3B,IRQL3C,IRQL3D;
+ 23:Pin[24,22,21,20]   = IRQL2A,IRQL2B,IRQL2C,IRQL2D;
+ 24:Pin[29]   = IRQL1;
+ 25:Pin[31]   = INTC_CS;     /* Active low chip select.  Goes low with /AS */
+ 26:Pin[41]   = CPU_RW;
+ 27:
+ 28:CPU_A1 = CPU_INTACK0;
+ 29:CPU_A2 = CPU_INTACK1;
+ 30:
+ 31:/** Outputs **/
+ 32:
+ 33:Pin[33,34,35]  = [IPL2..0];
+ 34:Pin[25]  = DTACK_FROM_INT;
+ 35:Pin[63,61,60,58,57,56,55,54]  = [CPU_D7..0];
+ 36:
+ 37:NODE DTACK_TIMER_0, DTACK_TIMER_1;
+ 38:NODE IRQL7_MASK,IRQL6A_MASK,IRQL6B_MASK,IRQL6C_MASK;
+ 39:NODE IRQL5A_MASK,IRQL5B_MASK,IRQL5C_MASK,IRQL5D_MASK;
+ 40:NODE IRQL4A_MASK,IRQL4B_MASK,IRQL4C_MASK,IRQL4D_MASK;
+ 41:NODE IRQL3A_MASK,IRQL3B_MASK,IRQL3C_MASK,IRQL3D_MASK;
+ 42:NODE IRQL2A_MASK,IRQL2B_MASK,IRQL2C_MASK,IRQL2D_MASK;
+ 43:NODE IRQL1_MASK;
+ 44:
+ 45:/* 
+ 46:   We will create an internal synthetic IRQ7L request that is triggered
+ 47:   by a falling edge of the IRQL7_BUTTON, and is reset by either system 
+ 48:   reset, or by the IRQL7_ACK signal which happens when the interrupt is
+ 49:   acknowleged.
+ 50:*/
+ 51:NODE IRQL7;
+ 52:IRQL7.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
+ 53:IRQL7.ap = !CPU_RESET # IRQL7_ACK;
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+ 54:IRQL7.ck = !IRQL7_BUTTON;
+ 55:
+ 56:/* 
+ 57:   This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
+ 58:   being acknowleged is 7.  The rising edge of this signal will clear the 
+ 59:   IRQL7 node above, which clears the interrupt request for IRQ7.
+ 60:*/
+ 61:IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
+ 62:
+ 63:/* Pins for Testing */
+ 64:
+ 65:
+ 66:/** Internal Variables and nodes **/
+ 67:
+ 68:/* Interupt Mask Registers -  0 = allow interrupt, 1 = block interrupt */
+ 69:
+ 70:/* First group, A1=0, A2=0 */
+ 71:IRQL7_MASK.d = CPU_D7.io;
+ 72:IRQL7_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 73:IRQL7_MASK.ap = CPU_RESET;
+ 74:
+ 75:IRQL6A_MASK.d = CPU_D6.io;
+ 76:IRQL6A_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 77:IRQL6A_MASK.ap = CPU_RESET;
+ 78:
+ 79:IRQL6B_MASK.d = CPU_D5.io;
+ 80:IRQL6B_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 81:IRQL6B_MASK.ap = CPU_RESET;
+ 82:
+ 83:IRQL6C_MASK.d = CPU_D4.io;
+ 84:IRQL6C_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 85:IRQL6C_MASK.ap = CPU_RESET;
+ 86:
+ 87:IRQL5A_MASK.d = CPU_D3.io;
+ 88:IRQL5A_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 89:IRQL5A_MASK.ap = CPU_RESET;
+ 90:
+ 91:IRQL5B_MASK.d = CPU_D2.io;
+ 92:IRQL5B_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 93:IRQL5B_MASK.ap = CPU_RESET;
+ 94:
+ 95:IRQL5C_MASK.d = CPU_D1.io;
+ 96:IRQL5C_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+ 97:IRQL5C_MASK.ap = CPU_RESET;
+ 98:
+ 99:IRQL5D_MASK.d = CPU_D0.io;
+100:IRQL5D_MASK.ck = INTC_CS # (CPU_A1 # CPU_A2) # CPU_RW;
+101:IRQL5D_MASK.ap = CPU_RESET;
+102:
+103:IRQL4A_MASK.d = CPU_D7.io;
+104:IRQL4A_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+105:IRQL4A_MASK.ap = CPU_RESET;
+106:
+107:IRQL4B_MASK.d = CPU_D6.io;
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+108:IRQL4B_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+109:IRQL4B_MASK.ap = CPU_RESET;
+110:
+111:IRQL4C_MASK.d = CPU_D5.io;
+112:IRQL4C_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+113:IRQL4C_MASK.ap = CPU_RESET;
+114:
+115:IRQL4D_MASK.d = CPU_D4.io;
+116:IRQL4D_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+117:IRQL4D_MASK.ap = CPU_RESET;
+118:
+119:IRQL3A_MASK.d = CPU_D3.io;
+120:IRQL3A_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+121:IRQL3A_MASK.ap = CPU_RESET;
+122:
+123:IRQL3B_MASK.d = CPU_D2.io;
+124:IRQL3B_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+125:IRQL3B_MASK.ap = CPU_RESET;
+126:
+127:IRQL3C_MASK.d = CPU_D1.io;
+128:IRQL3C_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+129:IRQL3C_MASK.ap = CPU_RESET;
+130:
+131:IRQL3D_MASK.d = CPU_D0.io;
+132:IRQL3D_MASK.ck = INTC_CS # (!CPU_A1 # CPU_A2) # CPU_RW;
+133:IRQL3D_MASK.ap = CPU_RESET;
+134:
+135:IRQL2A_MASK.d = CPU_D7.io;
+136:IRQL2A_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+137:IRQL2A_MASK.ap = CPU_RESET;
+138:
+139:IRQL2B_MASK.d = CPU_D6.io;
+140:IRQL2B_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+141:IRQL2B_MASK.ap = CPU_RESET;
+142:
+143:IRQL2C_MASK.d = CPU_D5.io;
+144:IRQL2C_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+145:IRQL2C_MASK.ap = CPU_RESET;
+146:
+147:IRQL2D_MASK.d = CPU_D4.io;
+148:IRQL2D_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+149:IRQL2D_MASK.ap = CPU_RESET;
+150:
+151:IRQL1_MASK.d = CPU_D3.io;
+152:IRQL1_MASK.ck = INTC_CS # (CPU_A1 # !CPU_A2) # CPU_RW;
+153:IRQL1_MASK.ap = CPU_RESET;
+154:
+155:/* 
+156:   INT_ACK goes high when the CPU indicates an interrupt ack cycle is in progress.
+157:   Since this signal combines with AS it will go low at the end of that cycle. 
+158:*/
+159:INT_ACK = CPU_FC2 & CPU_FC1 & CPU_FC0 & !CPU_AS;
+160:
+161:/* 
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+162:   DTACK_TIMER_0 and 1 make up a small counter that starts when INT_ACK is asserted (because the
+163:   inverse of INT_ACK holds the FFs in reset).  DTACK_TIMER_0 will increment to 1 on the following 
+164:   falling edge of CLK_16M, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
+165:   both outputs stay at 1 until the flipflops are reset by INT_ACK going low.
+166:
+167:   The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
+168:   back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
+169:   present on the databus.
+170:*/
+171:
+172:DTACK_TIMER_0.d = 'b'1;
+173:DTACK_TIMER_0.ar = !INT_ACK;
+174:DTACK_TIMER_0.ck = !CLK_16M;
+175:
+176:DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
+177:DTACK_TIMER_1.ar = !INT_ACK;
+178:DTACK_TIMER_1.ck = !CLK_16M;
+179:
+180:/* 
+181:   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
+182:   is zero it will get asserted on the CPU.   It is tied to the inverse of DTACK_TIMER_1 which is set to 0 
+183:   on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
+184:*/
+185:
+186:DTACK_FROM_INT = !DTACK_TIMER_1;
+187:
+188:/* 
+189:   Active low grouping of external active low interrupts.  If any of these inputs are low,
+190:   the group is low.  That group is used to select the interrupt level that goes to the CPU.
+191:*/
+192:
+193:IRQL7_INT = (IRQL7 # IRQL7_MASK);
+194:IRQL6_INT = (IRQL6A # IRQL6A_MASK) & (IRQL6B # IRQL6B_MASK) & (IRQL6C # IRQL6C_MASK);
+195:IRQL5_INT = (IRQL5A # IRQL5A_MASK) & (IRQL5B # IRQL5B_MASK) & (IRQL5C # IRQL5C_MASK) & (IRQL5D # IRQL5D_MASK);
+196:IRQL4_INT = (IRQL4A # IRQL4A_MASK) & (IRQL4B # IRQL4B_MASK) & (IRQL4C # IRQL4C_MASK) & (IRQL4D # IRQL4D_MASK);
+197:IRQL3_INT = (IRQL3A # IRQL3A_MASK) & (IRQL3B # IRQL3B_MASK) & (IRQL3C # IRQL3C_MASK) & (IRQL3D # IRQL3D_MASK);
+198:IRQL2_INT = (IRQL2A # IRQL2A_MASK) & (IRQL2B # IRQL2B_MASK) & (IRQL2C # IRQL2C_MASK) & (IRQL2D # IRQL2D_MASK);
+199:IRQL1_INT = (IRQL1 # IRQL1_MASK);
+200:
+201:
+202:/* 
+203:   IPL Drive using 8:3 priority encoder.   This output is driven from the above grouped signals.  
+204:   This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
+205:   to any value other than 000 by doing an interrupt ack cycle.
+206:*/   
+207:IPL0 = !IRQL1_INT # !IRQL3_INT # !IRQL5_INT # !IRQL7_INT;
+208:IPL1 = !IRQL2_INT # !IRQL3_INT # !IRQL6_INT # !IRQL7_INT;
+209:IPL2 = !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+210:
+211:/* 
+212:   active low interupt lines post 8:8 priority encoder 
+213:   These groups of lines form a priority selector for each group.  Within 
+214:   a group there are up to 4 interrupt sources (A-D), with A being the highest
+215:   priority.  Within each group only one of the signals will be asserted(ow) at any time.
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+216:   These are active low sigals coming in, and going out. 
+217:*/
+218:
+219:IRQL7_PE = (IRQL7 # IRQL7_MASK);
+220:
+221:IRQL6A_PE = (IRQL6A # IRQL6A_MASK);
+222:IRQL6B_PE = (IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
+223:IRQL6C_PE = (IRQL6C # IRQL6C_MASK) # !(IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
+224:
+225:IRQL5A_PE = (IRQL5A # IRQL5A_MASK);
+226:IRQL5B_PE = (IRQL5B # IRQL5B_MASK) # !(IRQL5A # IRQL5A_MASK);
+227:IRQL5C_PE = (IRQL5C # IRQL5C_MASK) # !(IRQL5B # IRQL5B_MASK) # !(IRQL5A # IRQL5A_MASK);
+228:IRQL5D_PE = (IRQL5D # IRQL5D_MASK) # !(IRQL5C # IRQL5C_MASK) # !(IRQL5B # IRQL5B_MASK) # !(IRQL5A # IRQL5A_MASK);
+229:
+230:IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
+231:IRQL4B_PE = (IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK) ;
+232:IRQL4C_PE = (IRQL4C # IRQL4C_MASK) # !(IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
+233:IRQL4D_PE = (IRQL4D # IRQL4D_MASK) # !(IRQL4C # IRQL4C_MASK) # !(IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
+234:
+235:IRQL3A_PE = (IRQL3A # IRQL3A_MASK) ;
+236:IRQL3B_PE = (IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+237:IRQL3C_PE = (IRQL3C # IRQL3C_MASK) # !(IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+238:IRQL3D_PE = (IRQL3D # IRQL3D_MASK) # !(IRQL3C # IRQL3C_MASK) # !(IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+239:
+240:IRQL2A_PE = (IRQL2A # IRQL2A_MASK);
+241:IRQL2B_PE = (IRQL2B # IRQL2B_MASK) # !(IRQL2A # IRQL2A_MASK);
+242:IRQL2C_PE = (IRQL2C # IRQL2C_MASK) # !(IRQL2B # IRQL2B_MASK) # !(IRQL2A # IRQL2A_MASK);
+243:IRQL2D_PE = (IRQL2D # IRQL2D_MASK) # !(IRQL2C # IRQL2C_MASK) # !(IRQL2B # IRQL2B_MASK) # !(IRQL2A # IRQL2A_MASK);
+244:
+245:IRQL1_PE = ( IRQL1 # IRQL1_MASK);
+246:
+247:/* This field is created so we can select on it using the :[number] method below */
+248:
+249:field interrupt_ack_num = [CPU_INTACK2..0];
+250:
+251:/* 
+252:   These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
+253:   acknowlegement process.  These are driven on the databus during the int ack cycle.
+254:   The vector number is formed by doing the followig:
+255:      The highest bit is set to 1 due to the available vectors starting at 64. 
+256:      The next three highest bits are set to the IPL value that has been acknowleged.  This
+257:      will be between 'b'001 and 'b;111.  It could be '000' if an interrupt line dissapears
+258:      before the ack cycle is incomplete.   The CPU should be programmed to catch this vector 
+259:      as a spurious interrupt.
+260:      The lower 4 bits are driven by the specific sub interrupt for the level selected above.
+261:      Since we support 4 sub interrupts, the vector uses 1 bit for each.
+262:
+263:      IRQ         Vector#              System Use
+264:      ------      --------             -------------------------------
+265:      IRQL7       11110000 (0xF0)      Debugger (Button)
+266:      IRQL6A      11100001 (0xE1)      PTC #1 (Programmable Timer)
+267:      IRQL6B      11100010 (0xE2)      PTC #2 (Programmable Timer)
+268:      IRQL6C      11100100 (0xE4)      PTC #3 (Programmable Timer)
+269:      IRQL5A      11010001 (0xD1)      UARTA
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 6
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+270:      IRQL5B      11010010 (0xD2)      UARTB
+271:      IRQL5C      11010100 (0xD4)      Keyboard/Mouse
+272:      IRQL5D      11011000 (0xD8)      RTC (1 second clock)
+273:      IRQL4A      11000001 (0xC1)      ISA1
+274:      IRQL4B      11000010 (0xC2)      ISA2
+275:      IRQL4C      11000100 (0xC4)      ISA3
+276:      IRQL4D      11001000 (0xC8)      ISA4
+277:      IRQL3A      10110001 (0xB1)      NIC
+278:      IRQL3B      10110010 (0xB2)      IDE
+279:      IRQL3C      10110100 (0xB4)      BUSARB
+280:      IRQL3D      10111000 (0xB8)      N/C  
+281:      IRQL2A      10100001 (0xA1)      ISA5
+282:      IRQL2B      10100010 (0xA2)      ISA6
+283:      IRQL2C      10100100 (0xA4)      ISA7
+284:      IRQL2D      10101000 (0xA8)      ISA8
+285:      IRQL1       10010000 (0x90)      N/C
+286:
+287:      Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
+288:
+289:*/
+290:
+291:
+292:VECTORD7 = 'b'1;
+293:VECTORD6 = CPU_INTACK2;
+294:VECTORD5 = CPU_INTACK1;
+295:VECTORD4 = CPU_INTACK0;
+296:VECTORD3 = (interrupt_ack_num:['d'5] &!IRQL5D_PE )
+297:            # ( interrupt_ack_num:[4]&!IRQL4D_PE)
+298:            # ( interrupt_ack_num:[3]&!IRQL3D_PE)
+299:            # ( interrupt_ack_num:[2]&!IRQL2D_PE);
+300:VECTORD2 = (interrupt_ack_num:[5]&!IRQL5C_PE )
+301:            # ( interrupt_ack_num:[4]&!IRQL4C_PE)
+302:            # ( interrupt_ack_num:[3]&!IRQL3C_PE)
+303:            # ( interrupt_ack_num:[2]&!IRQL2C_PE);
+304:            
+305:VECTORD1 = (interrupt_ack_num:[5]&!IRQL5B_PE )
+306:            # ( interrupt_ack_num:[4]&!IRQL4B_PE)
+307:            # ( interrupt_ack_num:[3]&!IRQL3B_PE)
+308:            # ( interrupt_ack_num:[2]&!IRQL2B_PE);
+309:           
+310:VECTORD0 = (interrupt_ack_num:[5]&!IRQL5A_PE )
+311:            # ( interrupt_ack_num:[4]&!IRQL4A_PE)
+312:            # ( interrupt_ack_num:[3]&!IRQL3A_PE)
+313:            # ( interrupt_ack_num:[2]&!IRQL2A_PE);
+314:
+315:/*
+316:   Registers for driving the data bus to tell the CPU the vector number.  We latch into these flipflops
+317:   1 cycle after the INT_ACK assertion happens via the DTACK_TIMER_0 signal.  The output enable is driven by 
+318:   the same INT_ACK signal, so this output enable should happen before the latch change.   The databus will
+319:   be undriven once INT_ACK unasserts, which happens as soon as /AS goes high.
+320:*/
+321:
+322:CPU_D7.d = VECTORD7;
+323:CPU_D6.d = VECTORD6;
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 7
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+324:CPU_D5.d = VECTORD5;
+325:CPU_D4.d = VECTORD4;
+326:CPU_D3.d = VECTORD3;
+327:CPU_D2.d = VECTORD2;
+328:CPU_D1.d = VECTORD1;
+329:CPU_D0.d = VECTORD0;
+330:[CPU_D7..0].ck = DTACK_TIMER_0;
+331:[CPU_D7..0].ar = !CPU_RESET;
+332:[CPU_D7..0].oe = INT_ACK;
+333:
+334:/* ############################################################################################ */
+335:/* 
+336:   TESTING PINS /AS Generator 
+337:   Generate a sample /AS signal using the CLK_32M signal.   This will need a 3 NODE counter.
+338:*/
+339:/*
+340:   Pin[37] =  AS_GENERATOR;
+341:   NODE RESET_SYNC_TO_CLK;
+342:   RESET_SYNC_TO_CLK.d='b'1;
+343:   RESET_SYNC_TO_CLK.ar = !CPU_RESET;
+344:   RESET_SYNC_TO_CLK.ck = !CLK_32M;
+345:
+346:   CLK_16M.d = !CLK_16M;
+347:   CLK_16M.ck = CLK_32M;
+348:   CLR_16M.ar = !RESET_SYNC_TO_CLK;
+349:
+350:   NODE [AS_GEN_COUNT2..0];
+351:   AS_GEN_COUNT0.d = !AS_GEN_COUNT0;
+352:   AS_GEN_COUNT1.d = AS_GEN_COUNT0 $ AS_GEN_COUNT1;
+353:   AS_GEN_COUNT2.d = ( AS_GEN_COUNT2 & !AS_GEN_COUNT0 )
+354:                     # ( AS_GEN_COUNT2 & !AS_GEN_COUNT1 )
+355:                     # ( !AS_GEN_COUNT2 & AS_GEN_COUNT1 & AS_GEN_COUNT0 );
+356:   [AS_GEN_COUNT2..0].ck = !CLK_32M;
+357:   [AS_GEN_COUNT2..0].ar = !RESET_SYNC_TO_CLK;
+358:   FIELD as_gen_count_field = [AS_GEN_COUNT2..0];
+359:   AS_GENERATOR.d = !(as_gen_count_field:[2,3,4,5,6]);
+360:   AS_GENERATOR.ck = CLK_32M;
+361:   AS_GENERATOR.ar = !RESET_SYNC_TO_CLK;
+362:*/
+363:
+364:/* ############################################################################################ */
+365:
+366:
+367:
+368:/*
+369:CLK_16M assigned to pin  83
+370:IRQL4A is placed at pin 12 (MC 3)
+371:IRQL4B is placed at pin 11 (MC 5)
+372:IRQL4C is placed at pin 10 (MC 6)
+373:IRQL4D is placed at pin 9 (MC 8)
+374:IRQL5A is placed at pin 8 (MC 11)
+375:IRQL5B is placed at pin 6 (MC 13)
+376:IRQL5C is placed at pin 5 (MC 14)
+377:IRQL5D is placed at pin 4 (MC 16)
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 8
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+378:IRQL2B is placed at pin 22 (MC 17)
+379:IRQL2C is placed at pin 21 (MC 19)
+380:IRQL2D is placed at pin 20 (MC 21)
+381:IRQL3A is placed at pin 18 (MC 24)
+382:IRQL3B is placed at pin 17 (MC 25)
+383:IRQL3C is placed at pin 16 (MC 27)
+384:IRQL3D is placed at pin 15 (MC 29)
+385:INTC_CS is placed at pin 31 (MC 35)
+386:IRQL7 is placed at pin 30 (MC 37)
+387:IRQL1 is placed at pin 29 (MC 38)
+388:DTACK_FROM_INT is placed at pin 25 (MC 45)
+389:IRQL2A is placed at pin 24 (MC 46)
+390:CPU_RW is placed at pin 41 (MC 49)
+391:CPU_AS is placed at pin 40 (MC 51)
+392:CPU_FC0 is placed at pin 39 (MC 53)
+393:CPU_FC1 is placed at pin 37 (MC 56)
+394:CPU_FC2 is placed at pin 36 (MC 57)
+395:IPL0 is placed at pin 35 (MC 59)
+396:IPL1 is placed at pin 34 (MC 61)
+397:IPL2 is placed at pin 33 (MC 64)
+398:CPU_INTACK2 is placed at pin 44 (MC 65)
+399:CPU_INTACK1 is placed at pin 45 (MC 67)
+400:CPU_INTACK0 is placed at pin 46 (MC 69)
+401:CPU_RESET is placed at pin 48 (MC 72)
+402:CPU_D0 is placed at pin 54 (MC 83)
+403:CPU_D1 is placed at pin 55 (MC 85)
+404:CPU_D2 is placed at pin 56 (MC 86)
+405:CPU_D3 is placed at pin 57 (MC 88)
+406:CPU_D4 is placed at pin 58 (MC 91)
+407:CPU_D5 is placed at pin 60 (MC 93)
+408:CPU_D6 is placed at pin 61 (MC 94)
+409:CPU_D7 is placed at pin 63 (MC 97)
+410:IRQL6A is placed at pin 75 (MC 118)
+411:IRQL6B is placed at pin 76 (MC 120)
+412:IRQL6C is placed at pin 77 (MC 123)
+413:
+414:
+415:Total dedicated input used:     1/4     (25%)
+416:Total I/O pins used             47/64   (73%)
+417:Total Logic cells used          53/128  (41%)
+418:Total Flip-Flop used            31/128  (24%)
+419:Total Foldback logic used       5/128   (3%)
+420:Total Nodes+FB/MCells           58/128  (45%)
+421:Total cascade used              0
+422:Total input pins                36
+423:Total output pins               12
+424:Total Pts                       201
+425:
+426:                                                                                    
+427:                                             C                                      
+428:                     I I  I I   I I I        L           I I I                      
+429:                     R R  R R   R R R        K           R R R                      
+430:                     Q Q  Q Q   Q Q Q        _           Q Q Q                      
+431:                     L L  L L G L L L V      1 G       V L L L                      
+
+LISTING FOR LOGIC DESCRIPTION FILE: INTCTRL.pld                      Page 9
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue May 03 10:39:26 2022
+
+432:                     4 4  4 5 N 5 5 5 C      6 N       C 6 6 6                      
+433:                     B C  D A D B C D C      M D       C C B A                      
+434:                    -------------------------------------------                     
+435:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+436:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+437:          IRQL4A | 12                    (*)                   74 |                 
+438:             VCC | 13                                          73 |                 
+439:             TDI | 14                                          72 | GND             
+440:          IRQL3D | 15                                          71 | TDO             
+441:          IRQL3C | 16                                          70 |                 
+442:          IRQL3B | 17                                          69 |                 
+443:          IRQL3A | 18                                          68 |                 
+444:             GND | 19                                          67 |                 
+445:          IRQL2D | 20                                          66 | VCC             
+446:          IRQL2C | 21                                          65 |                 
+447:          IRQL2B | 22                 ATF1508                  64 |                 
+448:             TMS | 23               84-Lead PLCC               63 | CPU_D7          
+449:          IRQL2A | 24                                          62 | TCK             
+450:  DTACK_FROM_INT | 25                                          61 | CPU_D6          
+451:             VCC | 26                                          60 | CPU_D5          
+452:                 | 27                                          59 | GND             
+453:                 | 28                                          58 | CPU_D4          
+454:           IRQL1 | 29                                          57 | CPU_D3          
+455:           IRQL7 | 30                                          56 | CPU_D2          
+456:         INTC_CS | 31                                          55 | CPU_D1          
+457:             GND | 32                                          54 | CPU_D0          
+458:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+459:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+460:                    --------------------------------------------                     
+461:                      I I I C C V C C C G V C C C G C         V                     
+462:                      P P P P P C P P P N C P P P N P         C                     
+463:                      L L L U U C U U U D C U U U D U         C                     
+464:                      2 1 0 _ _   _ _ _     _ _ _   _                               
+465:                            F F   F A R     I I I   R                               
+466:                            C C   C S W     N N N   E                               
+467:                            2 1   0         T T T   S                               
+468:                                            A A A   E                               
+469:                                            C C C   T                               
+470:                                            K K K                                   
+471:                                            2 1 0     
+472:                                            
+473:
+474:*/
+475:
+476:
+477:
+
+
+

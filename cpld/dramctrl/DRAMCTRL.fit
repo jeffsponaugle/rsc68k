@@ -1,0 +1,724 @@
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Thu May 05 07:04:48 2022
+
+
+fit1504 C:\DRAMCTRL.tt2 -CUPL -dev P1504C44 -JTAG ON
+
+
+****** Initial fitting strategy and property ******
+ Pla_in_file = DRAMCTRL.tt2
+ Pla_out_file = DRAMCTRL.tt3
+ Jedec_file = DRAMCTRL.jed
+ Vector_file = DRAMCTRL.tmv
+ verilog_file = DRAMCTRL.vt
+ Time_file = 
+ Log_file = DRAMCTRL.fit
+ err_file = 
+ Device_name = PLCC44
+ Module_name = 
+ Package_type = PLCC
+ Preassign_file = 
+ Property_file = 
+ Sleep_mode = 
+ Preassignment = 
+ Security_mode = OFF
+ Pin_keep_mode = ON
+ Dedicated_input_clock = 
+ Dedicated_input_reset = 
+ Dedicated_input_oe = 
+ supporter = CUPL
+ optimize = ON
+ Soft_buffer = 
+ Xor_synthesis = OFF
+ Foldback_logic =  on
+ Expander = 
+ Cascade_logic = OFF
+ Dedicated_input = 
+ Output_fast = OFF
+ *******************************
+ Power down pin 1 = OFF
+ Power down pin 2 = OFF
+ power_reset = OFF
+ JTAG = ON
+ TDI pullup = OFF
+ TMS pullup = OFF
+ MC_power = OFF
+ Open_collector = OFF
+ ITD0 = ON
+ ITD1 = ON
+ ITD2 = ON
+ Fast_inlatch = off
+ *******************************
+---------------------------------------------------------
+ Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
+ ... 
+## ERROR : Bad user pin assignement : 73
+ ## ERROR : Bad user pin assignement 
+---------------------------------------------------------
+ Fitter_Pass 2, Preassign = KEEP, NODE ASSIGN : OFF 
+ ... 
+
+Performing global Output Enable pin assignments ...
+
+Performing global pin assignments ...
+--------------------------------------
+
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+CLK_32M assigned to pin  43
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+CLK_32M assigned to pin  43
+CPU_RESET_IN assigned to pin  1
+
+Attempt to place floating signals ...
+------------------------------------
+REFRESH_TIMER4 is placed at feedback node 601 (MC 1)
+DRAM_ACCESS_TIMER1 is placed at feedback node 602 (MC 2)
+CLK_2M is placed at pin 11 (MC 3)
+DRAM_DATA_DIR is placed at pin 9 (MC 4)
+CAS3 is placed at pin 8 (MC 5)
+REFRESH_TIMER5 is placed at feedback node 606 (MC 6)
+REFRESH_TIMER2 is placed at feedback node 607 (MC 7)
+TDI is placed at pin 7 (MC 8)
+DRAM_ACCESS_TIMER2 is placed at feedback node 608 (MC 8)
+REFRESH_TIMER7 is placed at feedback node 610 (MC 10)
+CAS2 is placed at pin 6 (MC 11)
+FB_194 is placed at foldback expander node 312 (MC 12)
+REFRESH_TIMER3 is placed at feedback node 613 (MC 13)
+Com_Ctrl_192 is placed at foldback expander node 313 (MC 13)
+CAS1 is placed at pin 5 (MC 14)
+Com_Ctrl_189 is placed at foldback expander node 314 (MC 14)
+REFRESH_TIMER6 is placed at feedback node 615 (MC 15)
+CAS0 is placed at pin 4 (MC 16)
+Com_Ctrl_188 is placed at foldback expander node 316 (MC 16)
+CPU_RW is placed at pin 21 (MC 17)
+REFRESH_STATE_TIMER0 is placed at feedback node 617 (MC 17)
+DRAM_REFRESH_CAS_PRE is placed at feedback node 618 (MC 18)
+CPU_LDS is placed at pin 20 (MC 19)
+REFRESH_COMPLETED is placed at feedback node 619 (MC 19)
+CPU_UDS is placed at pin 19 (MC 20)
+REFRESH_STATE_TIMER1 is placed at feedback node 620 (MC 20)
+CPU_AS is placed at pin 18 (MC 21)
+REFRESH_REQUESTED_PRE is placed at feedback node 621 (MC 21)
+REFRESH_TIMER0 is placed at feedback node 622 (MC 22)
+REFRESH_REQUESTED_SYNC is placed at feedback node 623 (MC 23)
+CLK_16M is placed at pin 17 (MC 24)
+CPU_RESET is placed at pin 16 (MC 25)
+DRAM_MEM_RAS is placed at feedback node 626 (MC 26)
+DRAM_MEM_CAS is placed at feedback node 627 (MC 27)
+DRAM_ACCESS_TIMER0 is placed at feedback node 628 (MC 28)
+Com_Ctrl_193 is placed at foldback expander node 328 (MC 28)
+DRAM_REFRESH_RAS is placed at feedback node 629 (MC 29)
+Com_Ctrl_192 is placed at foldback expander node 329 (MC 29)
+CLK_1M is placed at pin 14 (MC 30)
+Com_Ctrl_191 is placed at foldback expander node 330 (MC 30)
+REFRESH_STATE_TIMER2 is placed at feedback node 631 (MC 31)
+Com_Ctrl_190 is placed at foldback expander node 331 (MC 31)
+TMS is placed at pin 13 (MC 32)
+REFRESH_TIMER1 is placed at feedback node 632 (MC 32)
+Com_Ctrl_189 is placed at foldback expander node 332 (MC 32)
+CPU_A1 is placed at pin 27 (MC 37)
+DRAM_REFRESH_CAS is placed at feedback node 639 (MC 39)
+DRAM_CS is placed at pin 28 (MC 40)
+REFRESH_TIMER_RESET is placed at feedback node 640 (MC 40)
+DRAM_MEM_RAS_PRE is placed at feedback node 642 (MC 42)
+REFRESH_COUNTER_RESET is placed at feedback node 643 (MC 43)
+CLK_4M is placed at feedback node 644 (MC 44)
+CLK_8M is placed at feedback node 645 (MC 45)
+DRAM_MEM_CAS_PRE is placed at feedback node 647 (MC 47)
+TCK is placed at pin 32 (MC 48)
+REFRESH_COUNTER_RESET_PRE is placed at feedback node 648 (MC 48)
+TDO is placed at pin 38 (MC 56)
+DRAM_MEM_AB is placed at pin 39 (MC 57)
+RAS2 is placed at pin 40 (MC 62)
+RAS0 is placed at pin 41 (MC 64)
+Com_Ctrl_193 is placed at foldback expander node 364 (MC 64)
+
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                      C                          
+                                      L                          
+                                      K                          
+                  C  C  C             _     R  R                 
+                  A  A  A  V          3  G  A  A                 
+                  S  S  S  C          2  N  S  S                 
+                  2  1  0  C          M  D  0  2                 
+               ____________________________________              
+              /   6  5  4  3  2  1 44 43 42 41 40  \             
+         TDI |  7                                39 | DRAM_MEM_AB
+        CAS3 |  8                                38 | TDO        
+RAM_DATA_DIR |  9                                37 |            
+         GND | 10                                36 |            
+      CLK_2M | 11                                35 | VCC        
+             | 12            ATF1504             34 |            
+         TMS | 13          44-Lead PLCC          33 |            
+      CLK_1M | 14                                32 | TCK        
+         VCC | 15                                31 |            
+   CPU_RESET | 16                                30 | GND        
+     CLK_16M | 17                                29 |            
+             |   18 19 20 21 22 23 24 25 26 27 28   |            
+              \____________________________________/             
+                 C  C  C  C  G  V           C  D                 
+                 P  P  P  P  N  C           P  R                 
+                 U  U  U  U  D  C           U  A                 
+                 _  _  _  _                 _  M                 
+                 A  U  L  R                 A  _                 
+                 S  D  D  W                 1  C                 
+                    S  S                       S                 
+
+
+
+VCC = Supply Voltage pin which must be connected to (5.0V or 3.0V)
+
+GND = GND pin which must be connected to ground
+
+TMS,TDI,TDO,TDI = JTAG pins which must reserved for the JTAG interface
+
+NC = Unused I/O pins which must be unconnected on the board
+
+Universal-Interconnect-Multiplexer assignments
+------------------------------------------------
+FanIn assignment for block A [25]
+{
+CLK_8M,CPU_AS,CLK_2M,CPU_A1,CPU_RW,CPU_LDS,CLK_4M,CPU_RESET,CPU_UDS,CLK_32M,
+DRAM_ACCESS_TIMER1,DRAM_CS,DRAM_REFRESH_CAS,DRAM_MEM_CAS,DRAM_ACCESS_TIMER0,DRAM_ACCESS_TIMER2,
+REFRESH_TIMER0,REFRESH_TIMER7,REFRESH_TIMER4,REFRESH_TIMER1,REFRESH_TIMER_RESET,REFRESH_TIMER5,REFRESH_TIMER2,REFRESH_TIMER3,REFRESH_TIMER6,
+}
+Multiplexer assignment for block A
+DRAM_ACCESS_TIMER1		(MC2	FB)  : MUX 0		Ref (A2fb)
+CLK_8M			(MC18	FB)  : MUX 1		Ref (C45fb)
+REFRESH_TIMER0		(MC10	FB)  : MUX 2		Ref (B22fb)
+DRAM_CS			(MC22	P)   : MUX 3		Ref (C40p)
+CPU_AS			(MC20	P)   : MUX 5		Ref (B21p)
+DRAM_REFRESH_CAS		(MC15	FB)  : MUX 6		Ref (C39fb)
+REFRESH_TIMER7		(MC7	FB)  : MUX 7		Ref (A10fb)
+REFRESH_TIMER4		(MC1	FB)  : MUX 8		Ref (A1fb)
+REFRESH_TIMER1		(MC14	FB)  : MUX 9		Ref (B32fb)
+REFRESH_TIMER_RESET		(MC16	FB)  : MUX 10		Ref (C40fb)
+CLK_2M			(MC3	P)   : MUX 11		Ref (A3p)
+CPU_A1			(MC21	P)   : MUX 17		Ref (C37p)
+REFRESH_TIMER5		(MC4	FB)  : MUX 20		Ref (A6fb)
+CPU_RW			(MC25	P)   : MUX 21		Ref (B17p)
+REFRESH_TIMER2		(MC5	FB)  : MUX 22		Ref (A7fb)
+CPU_LDS			(MC23	P)   : MUX 23		Ref (B19p)
+REFRESH_TIMER3		(MC8	FB)  : MUX 25		Ref (A13fb)
+CLK_4M			(MC17	FB)  : MUX 29		Ref (C44fb)
+REFRESH_TIMER6		(MC9	FB)  : MUX 31		Ref (A15fb)
+DRAM_MEM_CAS		(MC12	FB)  : MUX 33		Ref (B27fb)
+CPU_RESET		(MC11	P)   : MUX 34		Ref (B25p)
+CPU_UDS			(MC24	P)   : MUX 35		Ref (B20p)
+DRAM_ACCESS_TIMER0		(MC13	FB)  : MUX 37		Ref (B28fb)
+DRAM_ACCESS_TIMER2		(MC6	FB)  : MUX 38		Ref (A8fb)
+CLK_32M			(MC19	FB)  : MUX 39		Ref (GCLK)
+
+FanIn assignment for block B [22]
+{
+CPU_AS,CLK_1M,CLK_2M,CLK_16M,CLK_8M,CPU_RESET_IN,CPU_RESET,CLK_32M,
+DRAM_MEM_CAS_PRE,DRAM_MEM_RAS_PRE,DRAM_ACCESS_TIMER0,
+REFRESH_TIMER0,REFRESH_REQUESTED_SYNC,REFRESH_TIMER7,REFRESH_REQUESTED_PRE,REFRESH_TIMER1,REFRESH_STATE_TIMER2,REFRESH_TIMER_RESET,REFRESH_STATE_TIMER1,REFRESH_COUNTER_RESET,REFRESH_COMPLETED,REFRESH_STATE_TIMER0,
+}
+Multiplexer assignment for block B
+CPU_AS			(MC21	P)   : MUX 1		Ref (B21p)
+REFRESH_TIMER0		(MC7	FB)  : MUX 2		Ref (B22fb)
+DRAM_MEM_CAS_PRE		(MC19	FB)  : MUX 3		Ref (C47fb)
+REFRESH_REQUESTED_SYNC		(MC8	FB)  : MUX 4		Ref (B23fb)
+CLK_1M			(MC12	P)   : MUX 6		Ref (B30p)
+REFRESH_TIMER7		(MC2	FB)  : MUX 7		Ref (A10fb)
+REFRESH_REQUESTED_PRE		(MC6	FB)  : MUX 8		Ref (B21fb)
+REFRESH_TIMER1		(MC14	FB)  : MUX 9		Ref (B32fb)
+CLK_2M			(MC1	P)   : MUX 11		Ref (A3p)
+REFRESH_STATE_TIMER2		(MC13	FB)  : MUX 13		Ref (B31fb)
+CLK_16M			(MC9	P)   : MUX 15		Ref (B24p)
+REFRESH_TIMER_RESET		(MC15	FB)  : MUX 18		Ref (C40fb)
+CLK_8M			(MC18	FB)  : MUX 19		Ref (C45fb)
+REFRESH_STATE_TIMER1		(MC5	FB)  : MUX 20		Ref (B20fb)
+REFRESH_COUNTER_RESET		(MC17	FB)  : MUX 23		Ref (C43fb)
+REFRESH_COMPLETED		(MC4	FB)  : MUX 24		Ref (B19fb)
+DRAM_MEM_RAS_PRE		(MC16	FB)  : MUX 25		Ref (C42fb)
+REFRESH_STATE_TIMER0		(MC3	FB)  : MUX 28		Ref (B17fb)
+DRAM_ACCESS_TIMER0		(MC11	FB)  : MUX 29		Ref (B28fb)
+CPU_RESET_IN		(MC22	FB)  : MUX 32		Ref (GCLR)
+CPU_RESET		(MC10	P)   : MUX 34		Ref (B25p)
+CLK_32M			(MC20	FB)  : MUX 37		Ref (GCLK)
+
+FanIn assignment for block C [12]
+{
+CLK_8M,CLK_16M,CPU_RESET,CLK_4M,CLK_32M,
+DRAM_ACCESS_TIMER1,DRAM_CS,DRAM_ACCESS_TIMER2,DRAM_ACCESS_TIMER0,DRAM_REFRESH_CAS_PRE,
+REFRESH_TIMER7,REFRESH_COUNTER_RESET_PRE,
+}
+Multiplexer assignment for block C
+DRAM_ACCESS_TIMER1		(MC1	FB)  : MUX 0		Ref (A2fb)
+CLK_8M			(MC9	FB)  : MUX 1		Ref (C45fb)
+REFRESH_TIMER7		(MC3	FB)  : MUX 7		Ref (A10fb)
+REFRESH_COUNTER_RESET_PRE		(MC10	FB)  : MUX 9		Ref (C48fb)
+CLK_16M			(MC5	P)   : MUX 13		Ref (B24p)
+DRAM_CS			(MC12	P)   : MUX 15		Ref (C40p)
+CPU_RESET		(MC6	P)   : MUX 22		Ref (B25p)
+DRAM_ACCESS_TIMER2		(MC2	FB)  : MUX 24		Ref (A8fb)
+DRAM_ACCESS_TIMER0		(MC7	FB)  : MUX 25		Ref (B28fb)
+CLK_4M			(MC8	FB)  : MUX 35		Ref (C44fb)
+CLK_32M			(MC11	FB)  : MUX 37		Ref (GCLK)
+DRAM_REFRESH_CAS_PRE		(MC4	FB)  : MUX 38		Ref (B18fb)
+
+FanIn assignment for block D [8]
+{
+CPU_AS,CPU_A1,CPU_RESET,
+DRAM_ACCESS_TIMER1,DRAM_REFRESH_RAS,DRAM_ACCESS_TIMER2,DRAM_ACCESS_TIMER0,DRAM_MEM_RAS,
+}
+Multiplexer assignment for block D
+DRAM_ACCESS_TIMER1		(MC1	FB)  : MUX 0		Ref (A2fb)
+CPU_AS			(MC7	P)   : MUX 1		Ref (B21p)
+CPU_A1			(MC8	P)   : MUX 3		Ref (C37p)
+DRAM_REFRESH_RAS		(MC6	FB)  : MUX 11		Ref (B29fb)
+CPU_RESET		(MC3	P)   : MUX 22		Ref (B25p)
+DRAM_ACCESS_TIMER2		(MC2	FB)  : MUX 24		Ref (A8fb)
+DRAM_ACCESS_TIMER0		(MC5	FB)  : MUX 25		Ref (B28fb)
+DRAM_MEM_RAS		(MC4	FB)  : MUX 27		Ref (B26fb)
+
+Creating JEDEC file C:\DRAMCTRL.jed ...
+
+PLCC44 programmed logic:
+-----------------------------------
+!CAS2 = ((!CPU_A1 & !CPU_UDS & !DRAM_MEM_CAS.Q)
+	# !DRAM_REFRESH_CAS.Q);
+
+!CAS0 = ((!CPU_A1 & !CPU_LDS & !DRAM_MEM_CAS.Q)
+	# !DRAM_REFRESH_CAS.Q);
+
+!CAS1 = ((CPU_A1 & !CPU_LDS & !DRAM_MEM_CAS.Q)
+	# !DRAM_REFRESH_CAS.Q);
+
+!CAS3 = (!DRAM_REFRESH_CAS.Q
+	# (CPU_A1 & !CPU_UDS & !DRAM_MEM_CAS.Q));
+
+CLK_16M.D = !CLK_16M.Q;
+
+CLK_1M.D = !CLK_1M.Q;
+
+CLK_2M.D = !CLK_2M.Q;
+
+CLK_4M.D = !CLK_4M.Q;
+
+CLK_8M.D = !CLK_8M.Q;
+
+CPU_RESET.D = 0;
+
+DRAM_ACCESS_TIMER0.D = !DRAM_ACCESS_TIMER0.Q;
+
+DRAM_ACCESS_TIMER1.D = ((DRAM_ACCESS_TIMER0.Q & !DRAM_ACCESS_TIMER1.Q)
+	# (!DRAM_ACCESS_TIMER0.Q & DRAM_ACCESS_TIMER1.Q));
+
+DRAM_ACCESS_TIMER2.D = ((!DRAM_ACCESS_TIMER2.Q & DRAM_ACCESS_TIMER1.Q & DRAM_ACCESS_TIMER0.Q)
+	# (DRAM_ACCESS_TIMER2.Q & !DRAM_ACCESS_TIMER0.Q)
+	# (DRAM_ACCESS_TIMER2.Q & !DRAM_ACCESS_TIMER1.Q));
+
+DRAM_DATA_DIR = (CPU_RW & !DRAM_CS);
+
+!DRAM_MEM_AB.D = ((!DRAM_ACCESS_TIMER1.Q & DRAM_ACCESS_TIMER2.Q)
+	# (DRAM_ACCESS_TIMER1.Q & !DRAM_ACCESS_TIMER2.Q & DRAM_ACCESS_TIMER0.Q));
+
+DRAM_MEM_CAS.D = DRAM_MEM_CAS_PRE.Q;
+
+!DRAM_MEM_CAS_PRE.D = ((!DRAM_ACCESS_TIMER1.Q & DRAM_ACCESS_TIMER2.Q)
+	# (DRAM_ACCESS_TIMER1.Q & !DRAM_ACCESS_TIMER2.Q & DRAM_ACCESS_TIMER0.Q));
+
+DRAM_MEM_RAS.D = DRAM_MEM_RAS_PRE.Q;
+
+!DRAM_MEM_RAS_PRE.D = (DRAM_ACCESS_TIMER1.Q & !DRAM_ACCESS_TIMER2.Q);
+
+DRAM_REFRESH_CAS.D = DRAM_REFRESH_CAS_PRE.Q;
+
+!DRAM_REFRESH_CAS_PRE.D = (REFRESH_STATE_TIMER1.Q & !REFRESH_STATE_TIMER2.Q);
+
+!DRAM_REFRESH_RAS.D = ((REFRESH_STATE_TIMER0.Q & REFRESH_STATE_TIMER1.Q & !REFRESH_STATE_TIMER2.Q)
+	# (!REFRESH_STATE_TIMER0.Q & !REFRESH_STATE_TIMER1.Q & REFRESH_STATE_TIMER2.Q));
+
+RAS0 = ((DRAM_REFRESH_RAS.Q & DRAM_MEM_RAS.Q)
+	# (DRAM_REFRESH_RAS.Q & CPU_A1));
+
+!REFRESH_COMPLETED.D = (!REFRESH_STATE_TIMER0.Q & REFRESH_STATE_TIMER1.Q & REFRESH_STATE_TIMER2.Q);
+
+RAS2 = ((DRAM_REFRESH_RAS.Q & DRAM_MEM_RAS.Q)
+	# (DRAM_REFRESH_RAS.Q & !CPU_A1));
+
+REFRESH_COUNTER_RESET.D = REFRESH_COUNTER_RESET_PRE.Q;
+
+!REFRESH_COUNTER_RESET_PRE.D = ((!DRAM_ACCESS_TIMER0.Q & DRAM_ACCESS_TIMER1.Q & !DRAM_ACCESS_TIMER2.Q)
+	# (DRAM_ACCESS_TIMER0.Q & !DRAM_ACCESS_TIMER1.Q & !DRAM_ACCESS_TIMER2.Q));
+
+REFRESH_REQUESTED_PRE.D = 1;
+
+REFRESH_REQUESTED_SYNC.D = REFRESH_REQUESTED_PRE.Q;
+
+REFRESH_STATE_TIMER0.D = !REFRESH_STATE_TIMER0.Q;
+
+REFRESH_STATE_TIMER1.D = ((REFRESH_STATE_TIMER0.Q & !REFRESH_STATE_TIMER1.Q)
+	# (!REFRESH_STATE_TIMER0.Q & REFRESH_STATE_TIMER1.Q));
+
+REFRESH_STATE_TIMER2.D = ((!REFRESH_STATE_TIMER2.Q & REFRESH_STATE_TIMER1.Q & REFRESH_STATE_TIMER0.Q)
+	# (REFRESH_STATE_TIMER2.Q & !REFRESH_STATE_TIMER0.Q)
+	# (REFRESH_STATE_TIMER2.Q & !REFRESH_STATE_TIMER1.Q));
+
+REFRESH_TIMER0.D = !REFRESH_TIMER0.Q;
+
+REFRESH_TIMER1.D = ((REFRESH_TIMER0.Q & !REFRESH_TIMER1.Q)
+	# (!REFRESH_TIMER0.Q & REFRESH_TIMER1.Q));
+
+REFRESH_TIMER2.D = ((!REFRESH_TIMER2.Q & REFRESH_TIMER1.Q & REFRESH_TIMER0.Q)
+	# (REFRESH_TIMER2.Q & !REFRESH_TIMER0.Q)
+	# (REFRESH_TIMER2.Q & !REFRESH_TIMER1.Q));
+
+REFRESH_TIMER3.D = ((REFRESH_TIMER3.Q & !REFRESH_TIMER1.Q)
+	# (!REFRESH_TIMER3.Q & REFRESH_TIMER0.Q & REFRESH_TIMER1.Q & REFRESH_TIMER2.Q)
+	# (REFRESH_TIMER3.Q & !REFRESH_TIMER2.Q)
+	# (REFRESH_TIMER3.Q & !REFRESH_TIMER0.Q));
+
+REFRESH_TIMER4.D = !REFRESH_TIMER4.Q;
+
+REFRESH_TIMER5.D = ((REFRESH_TIMER4.Q & !REFRESH_TIMER5.Q)
+	# (!REFRESH_TIMER4.Q & REFRESH_TIMER5.Q));
+
+REFRESH_TIMER6.D = ((!REFRESH_TIMER6.Q & REFRESH_TIMER5.Q & REFRESH_TIMER4.Q)
+	# (REFRESH_TIMER6.Q & !REFRESH_TIMER4.Q)
+	# (REFRESH_TIMER6.Q & !REFRESH_TIMER5.Q));
+
+REFRESH_TIMER7.D = ((REFRESH_TIMER7.Q & !REFRESH_TIMER5.Q)
+	# (!REFRESH_TIMER7.Q & REFRESH_TIMER4.Q & REFRESH_TIMER5.Q & REFRESH_TIMER6.Q)
+	# (REFRESH_TIMER7.Q & !REFRESH_TIMER6.Q)
+	# (REFRESH_TIMER7.Q & !REFRESH_TIMER4.Q));
+
+REFRESH_TIMER_RESET.D = REFRESH_TIMER7.Q;
+
+!Com_Ctrl_188 = (REFRESH_TIMER0.Q & REFRESH_TIMER1.Q & REFRESH_TIMER2.Q & REFRESH_TIMER3.Q);
+
+!Com_Ctrl_189 = (CPU_RESET.Q & !REFRESH_TIMER_RESET.Q);
+
+!Com_Ctrl_190 = (REFRESH_COUNTER_RESET.Q & REFRESH_REQUESTED_SYNC.Q);
+
+!Com_Ctrl_191 = (CPU_RESET.Q & REFRESH_COMPLETED.Q);
+
+!Com_Ctrl_192 = (!CPU_AS & CPU_RESET.Q);
+
+!Com_Ctrl_193 = (!CPU_AS & CPU_RESET.Q);
+
+!FB_194 = (CPU_RESET.Q & !REFRESH_TIMER_RESET.Q);
+
+CLK_16M.C = CLK_32M;
+
+CLK_16M.AR = !CPU_RESET.Q;
+
+CLK_1M.C = CLK_2M.Q;
+
+CLK_1M.AR = !CPU_RESET.Q;
+
+CLK_2M.C = CLK_4M.Q;
+
+CLK_2M.AR = !CPU_RESET.Q;
+
+CLK_4M.C = CLK_8M.Q;
+
+CLK_4M.AR = !CPU_RESET.Q;
+
+CLK_8M.C = CLK_16M.Q;
+
+CLK_8M.AR = !CPU_RESET.Q;
+
+CPU_RESET.C = CLK_16M.Q;
+
+CPU_RESET.AP = !CPU_RESET_IN;
+
+DRAM_ACCESS_TIMER0.C = !CLK_32M;
+
+DRAM_ACCESS_TIMER0.AR = Com_Ctrl_192;
+
+DRAM_ACCESS_TIMER1.C = !CLK_32M;
+
+DRAM_ACCESS_TIMER1.AR = Com_Ctrl_192;
+
+DRAM_ACCESS_TIMER2.C = !CLK_32M;
+
+DRAM_ACCESS_TIMER2.AR = Com_Ctrl_192;
+
+DRAM_MEM_AB.C = CLK_32M;
+
+DRAM_MEM_AB.AP = Com_Ctrl_193;
+
+DRAM_MEM_CAS.C = !CLK_32M;
+
+DRAM_MEM_CAS.AP = Com_Ctrl_193;
+
+DRAM_MEM_CAS_PRE.C = CLK_32M;
+
+DRAM_MEM_CAS_PRE.AP = DRAM_CS;
+
+DRAM_MEM_RAS.C = !CLK_32M;
+
+DRAM_MEM_RAS.AP = Com_Ctrl_193;
+
+DRAM_MEM_RAS_PRE.C = CLK_32M;
+
+DRAM_MEM_RAS_PRE.AP = DRAM_CS;
+
+DRAM_REFRESH_CAS.C = CLK_32M;
+
+DRAM_REFRESH_CAS.AP = !CPU_RESET.Q;
+
+DRAM_REFRESH_CAS_PRE.C = !CLK_32M;
+
+DRAM_REFRESH_CAS_PRE.AP = !CPU_RESET.Q;
+
+DRAM_REFRESH_RAS.C = !CLK_32M;
+
+DRAM_REFRESH_RAS.AP = !CPU_RESET.Q;
+
+REFRESH_COMPLETED.C = !CLK_32M;
+
+REFRESH_COMPLETED.AP = !CPU_RESET.Q;
+
+REFRESH_COUNTER_RESET.C = !CLK_32M;
+
+REFRESH_COUNTER_RESET.AR = !CPU_RESET.Q;
+
+REFRESH_COUNTER_RESET_PRE.C = CLK_32M;
+
+REFRESH_COUNTER_RESET_PRE.AR = !CPU_RESET.Q;
+
+REFRESH_REQUESTED_PRE.C = REFRESH_TIMER7.Q;
+
+REFRESH_REQUESTED_PRE.AR = Com_Ctrl_191;
+
+REFRESH_REQUESTED_SYNC.C = !CPU_AS;
+
+REFRESH_REQUESTED_SYNC.AR = Com_Ctrl_191;
+
+REFRESH_STATE_TIMER0.C = CLK_32M;
+
+REFRESH_STATE_TIMER0.AR = Com_Ctrl_190;
+
+REFRESH_STATE_TIMER1.C = CLK_32M;
+
+REFRESH_STATE_TIMER1.AR = Com_Ctrl_190;
+
+REFRESH_STATE_TIMER2.C = CLK_32M;
+
+REFRESH_STATE_TIMER2.AR = Com_Ctrl_190;
+
+REFRESH_TIMER0.C = CLK_8M.Q;
+
+REFRESH_TIMER0.AR = Com_Ctrl_189;
+
+REFRESH_TIMER1.C = CLK_8M.Q;
+
+REFRESH_TIMER1.AR = Com_Ctrl_189;
+
+REFRESH_TIMER2.C = CLK_8M.Q;
+
+REFRESH_TIMER2.AR = Com_Ctrl_189;
+
+REFRESH_TIMER3.C = CLK_8M.Q;
+
+REFRESH_TIMER3.AP = FB_194;
+
+REFRESH_TIMER4.C = Com_Ctrl_188;
+
+REFRESH_TIMER4.AR = Com_Ctrl_189;
+
+REFRESH_TIMER5.C = Com_Ctrl_188;
+
+REFRESH_TIMER5.AR = Com_Ctrl_189;
+
+REFRESH_TIMER6.C = Com_Ctrl_188;
+
+REFRESH_TIMER6.AR = Com_Ctrl_189;
+
+REFRESH_TIMER7.C = Com_Ctrl_188;
+
+REFRESH_TIMER7.AR = Com_Ctrl_189;
+
+REFRESH_TIMER_RESET.C = CLK_32M;
+
+REFRESH_TIMER_RESET.AR = !CPU_RESET.Q;
+
+
+PLCC44 Pin/Node Placement:
+------------------------------------
+Pin 1  = CPU_RESET_IN;
+Pin 4  = CAS0; /* MC 16 */
+Pin 5  = CAS1; /* MC 14 */
+Pin 6  = CAS2; /* MC 11 */
+Pin 7  = TDI; /* MC 8 */
+Pin 8  = CAS3; /* MC 5 */
+Pin 9  = DRAM_DATA_DIR; /* MC 4 */
+Pin 11 = CLK_2M; /* MC  3 */
+Pin 13 = TMS; /* MC 32 */ 
+Pin 14 = CLK_1M; /* MC 30 */ 
+Pin 16 = CPU_RESET; /* MC 25 */ 
+Pin 17 = CLK_16M; /* MC 24 */ 
+Pin 18 = CPU_AS; /* MC 21 */ 
+Pin 19 = CPU_UDS; /* MC 20 */ 
+Pin 20 = CPU_LDS; /* MC 19 */ 
+Pin 21 = CPU_RW; /* MC 17 */ 
+Pin 27 = CPU_A1; /* MC 37 */ 
+Pin 28 = DRAM_CS; /* MC 40 */ 
+Pin 32 = TCK; /* MC 48 */ 
+Pin 38 = TDO; /* MC 56 */ 
+Pin 39 = DRAM_MEM_AB; /* MC 57 */ 
+Pin 40 = RAS2; /* MC 62 */ 
+Pin 41 = RAS0; /* MC 64 */ 
+Pin 43 = CLK_32M;
+PINNODE 312 = FB_194; /* MC 12 Foldback */
+PINNODE 313 = Com_Ctrl_192; /* MC 13 Foldback */
+PINNODE 314 = Com_Ctrl_189; /* MC 14 Foldback */
+PINNODE 316 = Com_Ctrl_188; /* MC 16 Foldback */
+PINNODE 328 = Com_Ctrl_193; /* MC 28 Foldback */
+PINNODE 329 = Com_Ctrl_192; /* MC 29 Foldback */
+PINNODE 330 = Com_Ctrl_191; /* MC 30 Foldback */
+PINNODE 331 = Com_Ctrl_190; /* MC 31 Foldback */
+PINNODE 332 = Com_Ctrl_189; /* MC 32 Foldback */
+PINNODE 364 = Com_Ctrl_193; /* MC 64 Foldback */
+PINNODE 601 = REFRESH_TIMER4; /* MC 1 Feedback */
+PINNODE 602 = DRAM_ACCESS_TIMER1; /* MC 2 Feedback */
+PINNODE 606 = REFRESH_TIMER5; /* MC 6 Feedback */
+PINNODE 607 = REFRESH_TIMER2; /* MC 7 Feedback */
+PINNODE 608 = DRAM_ACCESS_TIMER2; /* MC 8 Feedback */
+PINNODE 610 = REFRESH_TIMER7; /* MC 10 Feedback */
+PINNODE 613 = REFRESH_TIMER3; /* MC 13 Feedback */
+PINNODE 615 = REFRESH_TIMER6; /* MC 15 Feedback */
+PINNODE 617 = REFRESH_STATE_TIMER0; /* MC 17 Feedback */
+PINNODE 618 = DRAM_REFRESH_CAS_PRE; /* MC 18 Feedback */
+PINNODE 619 = REFRESH_COMPLETED; /* MC 19 Feedback */
+PINNODE 620 = REFRESH_STATE_TIMER1; /* MC 20 Feedback */
+PINNODE 621 = REFRESH_REQUESTED_PRE; /* MC 21 Feedback */
+PINNODE 622 = REFRESH_TIMER0; /* MC 22 Feedback */
+PINNODE 623 = REFRESH_REQUESTED_SYNC; /* MC 23 Feedback */
+PINNODE 626 = DRAM_MEM_RAS; /* MC 26 Feedback */
+PINNODE 627 = DRAM_MEM_CAS; /* MC 27 Feedback */
+PINNODE 628 = DRAM_ACCESS_TIMER0; /* MC 28 Feedback */
+PINNODE 629 = DRAM_REFRESH_RAS; /* MC 29 Feedback */
+PINNODE 631 = REFRESH_STATE_TIMER2; /* MC 31 Feedback */
+PINNODE 632 = REFRESH_TIMER1; /* MC 32 Feedback */
+PINNODE 639 = DRAM_REFRESH_CAS; /* MC 39 Feedback */
+PINNODE 640 = REFRESH_TIMER_RESET; /* MC 40 Feedback */
+PINNODE 642 = DRAM_MEM_RAS_PRE; /* MC 42 Feedback */
+PINNODE 643 = REFRESH_COUNTER_RESET; /* MC 43 Feedback */
+PINNODE 644 = CLK_4M; /* MC 44 Feedback */
+PINNODE 645 = CLK_8M; /* MC 45 Feedback */
+PINNODE 647 = DRAM_MEM_CAS_PRE; /* MC 47 Feedback */
+PINNODE 648 = REFRESH_COUNTER_RESET_PRE; /* MC 48 Feedback */
+
+** Resource Usage **
+
+
+DCERP Field = Summary of Allocations.
+|||||
+|||||_Preset [p,-]       ==  p = PT preset, - No Preset.
+||||
+||||__Reset [g,r,-]      ==  g= Global AR, r = PT reset, - No reset.
+|||
+|||___Clock Enable [e,-] ==  e = Product Term, - always enabled, - none.
+||
+||____Clock [c,g,-],     ==  c = Product term, g = Global term, - No Clock.
+|
+|_____Type [C,D,L,T],    ==  Register type C= combin, D=dff, L=latch, T=tff.
+
+For input only = INPUT.
+
+MCell Pin# Oe   PinDrive      DCERP  FBDrive                   DCERP  Foldback     CascadeOut        TotPT output_slew
+MC1   12        --                   REFRESH_TIMER4            Dc-r-  --           --                3     slow
+MC2   0         --                   DRAM_ACCESS_TIMER1        Dc-r-  --           --                4     slow
+MC3   11   on   CLK_2M        Dc-r-  --                               --           --                3     slow
+MC4   9    on   DRAM_DATA_DIR C----  --                               --           --                1     slow
+MC5   8    on   CAS3          C----  --                               --           --                2     slow
+MC6   0         --                   REFRESH_TIMER5            Dc-r-  --           --                4     slow
+MC7   0         --                   REFRESH_TIMER2            Dc-r-  NA           --                5     slow
+MC8   7    --   TDI           INPUT  DRAM_ACCESS_TIMER2        Dc-r-  NA           --                5     slow
+MC9   0         --                   --                               --           -> REFRESH_TIMER7 4     slow
+MC10  0         --                   REFRESH_TIMER7            Dc-r-  --           --                2     slow
+MC11  6    on   CAS2          C----  --                               --           --                2     slow
+MC12  0         --                   --                               FB_194       -> REFRESH_TIMER3 5     slow
+MC13  0         --                   REFRESH_TIMER3            Dc--p  Com_Ctrl_192 --                3     slow
+MC14  5    on   CAS1          C----  --                               Com_Ctrl_189 --                3     slow
+MC15  0         --                   REFRESH_TIMER6            Dc-r-  NA           --                5     slow
+MC16  4    on   CAS0          C----  --                               Com_Ctrl_188 --                3     slow
+MC17  21   --   CPU_RW        INPUT  REFRESH_STATE_TIMER0      Dg-r-  --           --                2     slow
+MC18  0         --                   DRAM_REFRESH_CAS_PRE      Dc--p  --           --                3     slow
+MC19  20   --   CPU_LDS       INPUT  REFRESH_COMPLETED         Dc--p  --           --                3     slow
+MC20  19   --   CPU_UDS       INPUT  REFRESH_STATE_TIMER1      Dg-r-  --           --                3     slow
+MC21  18   --   CPU_AS        INPUT  REFRESH_REQUESTED_PRE     Dc-r-  --           --                2     slow
+MC22  0         --                   REFRESH_TIMER0            Dc-r-  --           --                3     slow
+MC23  0         --                   REFRESH_REQUESTED_SYNC    Dc-r-  --           --                3     slow
+MC24  17   on   CLK_16M       Dg-r-  --                               --           --                2     slow
+MC25  16   on   CPU_RESET     Dc--p  --                               --           --                2     slow
+MC26  0         --                   DRAM_MEM_RAS              Dc--p  --           --                3     slow
+MC27  0         --                   DRAM_MEM_CAS              Dc--p  --           --                3     slow
+MC28  0         --                   DRAM_ACCESS_TIMER0        Dc-r-  Com_Ctrl_193 --                4     slow
+MC29  0         --                   DRAM_REFRESH_RAS          Dc--p  Com_Ctrl_192 --                5     slow
+MC30  14   on   CLK_1M        Dc-r-  --                               Com_Ctrl_191 --                4     slow
+MC31  0         --                   REFRESH_STATE_TIMER2      Dg-r-  Com_Ctrl_190 --                5     slow
+MC32  13   --   TMS           INPUT  REFRESH_TIMER1            Dc-r-  Com_Ctrl_189 --                5     slow
+MC33  24        --                   --                               --           --                0     slow
+MC34  0         --                   --                               --           --                0     slow
+MC35  25        --                   --                               --           --                0     slow
+MC36  26        --                   --                               --           --                0     slow
+MC37  27   --   CPU_A1        INPUT  --                               --           --                0     slow
+MC38  0         --                   --                               --           --                0     slow
+MC39  0         --                   DRAM_REFRESH_CAS          Dg--p  --           --                2     slow
+MC40  28   --   DRAM_CS       INPUT  REFRESH_TIMER_RESET       Dg-r-  --           --                2     slow
+MC41  29        --                   --                               --           --                0     slow
+MC42  0         --                   DRAM_MEM_RAS_PRE          Dg--p  --           --                2     slow
+MC43  0         --                   REFRESH_COUNTER_RESET     Dc-r-  --           --                3     slow
+MC44  0         --                   CLK_4M                    Dc-r-  --           --                3     slow
+MC45  0         --                   CLK_8M                    Dc-r-  --           --                3     slow
+MC46  31        --                   --                               --           --                0     slow
+MC47  0         --                   DRAM_MEM_CAS_PRE          Dg--p  --           --                3     slow
+MC48  32   --   TCK           INPUT  REFRESH_COUNTER_RESET_PRE Dg-r-  --           --                3     slow
+MC49  33        --                   --                               --           --                0     slow
+MC50  0         --                   --                               --           --                0     slow
+MC51  34        --                   --                               --           --                0     slow
+MC52  36        --                   --                               --           --                0     slow
+MC53  37        --                   --                               --           --                0     slow
+MC54  0         --                   --                               --           --                0     slow
+MC55  0         --                   --                               --           --                0     slow
+MC56  38   --   TDO           INPUT  --                               --           --                0     slow
+MC57  39   on   DRAM_MEM_AB   Dg--p  --                               --           --                3     slow
+MC58  0         --                   --                               --           --                0     slow
+MC59  0         --                   --                               --           --                0     slow
+MC60  0         --                   --                               --           --                0     slow
+MC61  0         --                   --                               --           --                0     slow
+MC62  40   on   RAS2          C----  --                               --           --                2     slow
+MC63  0         --                   --                               --           --                0     slow
+MC64  41   on   RAS0          C----  --                               Com_Ctrl_193 --                3     slow
+MC0   2         --                   --                               --           --                0     slow
+MC0   1         CPU_RESET_IN  INPUT  --                               --           --                0     slow
+MC0   44        --                   --                               --           --                0     slow
+MC0   43        CLK_32M       INPUT  --                               --           --                0     slow
+
+Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
+A: LC1	- LC16		14/16(87%)	7/16(43%)	4/16(25%)	54/80(67%)	(25)	2
+B: LC17	- LC32		16/16(100%)	8/16(50%)	5/16(31%)	52/80(65%)	(22)	0
+C: LC33	- LC48		8/16(50%)	3/16(18%)	0/16(0%)	21/80(26%)	(12)	0
+D: LC49	- LC64		3/16(18%)	4/16(25%)	1/16(6%)	8/80(10%)	(8)	0
+
+Total dedicated input used:	2/4 	(50%)
+Total I/O pins used		22/32 	(68%)
+Total Logic cells used 		43/64 	(67%)
+Total Flip-Flop used 		34/64 	(53%)
+Total Foldback logic used 	10/64 	(15%)
+Total Nodes+FB/MCells 		51/64 	(79%)
+Total cascade used 		2
+Total input pins 		12
+Total output pins 		12
+Total Pts 			135
+Creating pla file C:\DRAMCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+
+----------------  End fitter, Design FITS
+$Device PLCC44 fits 
+FIT1504 completed in 0.00 seconds
