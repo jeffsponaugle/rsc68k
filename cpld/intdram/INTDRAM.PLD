@@ -71,8 +71,6 @@ NODE IRQL3A_MASK,IRQL3B_MASK;
 NODE RESET_REQ;
 NODE RESET_REQ_OUT;
 
-
-
 /* 
    We will create an internal synthetic IRQ7L request that is triggered
    by a falling edge of the IRQL7_BUTTON, and is reset by either system 
@@ -91,7 +89,7 @@ IRQL7.ck = !IRQL7_BUTTON;
    IRQL7 node above, which clears the interrupt request for IRQ7.
 */
 
-IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
+IRQL7_ACK = !CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1;
 
 /* Pins for Testing */
 
@@ -259,7 +257,7 @@ IRQL3B_PE = (IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
 
 /* This field is created so we can select on it using the :[number] method below */
 
-FIELD interrupt_ack_num=[CPU_INTACK2..0];
+FIELD interrupt_ack_num=![CPU_INTACK2..0];
 
 /* 
    These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
@@ -651,6 +649,8 @@ REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
    up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
    0x08.  The produces an event every 15us with an 8MHz clock.   
 
+   If the clock rate is not 32MHz for the core input, this will need to be adjusted.
+
    The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
    counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
    0x08.
@@ -680,7 +680,14 @@ REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
                     # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
                     # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
 
-[REFRESH_TIMER0..3].ck = CLK_8M;
+/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
+8MHz CPU Clock, this CLK_16M is actually Mhz */
+/*[REFRESH_TIMER0..3].ck = CLK_8M;*/
+[REFRESH_TIMER0..3].ck = CLK_16M;
+
+/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
+8MHz CPU Clock, this CLK_16M is actually Mhz */
+
 [REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3&REFRESH_TIMER2&REFRESH_TIMER1&REFRESH_TIMER0);
 
 /* 	
