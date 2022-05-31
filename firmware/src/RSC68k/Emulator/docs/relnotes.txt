@@ -1,0 +1,175 @@
+Build 995
+---------
+* Release that includes patient drop-down list/treatment
+
+* Start of MagStim support
+
+Beta 9
+------
+* Completely revamped window/widget APIs and operation to be mouse centric
+rather than touch screen centric
+
+* Eliminated unused sg_bTouchScreenOverride functionality and sg_bPointerValid
+and all underlying code that went with it. No longer needed.
+
+* Added support API for keyboard input routine(s) with WidgetKeyHit() API
+
+* Removed bOffWidgetTracking from widget.h/SWidget structure. Not used any longer.
+
+* Added vpUserData and pCallbackDestroy function pointers/data for user defined
+data associated with a widget (and a callback when the widget is destroyed)
+
+Beta 8
+------
+* Completely rewrote message layering. Now it's all based off of callbacks and
+no messages are lost
+
+* Added display of MagPro intensity setting in MRTClient
+
+* Massively extended MagPro simulator code to allow for manual disable/enable
+from the virtual MagPro side and adjustability of the intensity. Also acts like
+a real MagPro, in that it disables itself after 5 minutes
+
+* MRTClient can survive having a USB cable being removed as long as it's not
+within a training cycle
+
+* Vastly improved startup/shutdown time
+
+* MRTClient pauses now when the MagPro is disabled from its front panel
+
+* Added several MagPro helper functions to keep MagPro command handling out
+of the MRT mainline code (MagProSetEnable() and MagProSendIntensity())
+
+* Bug fix to training-side display code (wasn't using red numbering when in
+a train period). Also fixed an off-by-one problem with it.
+
+* Split up MagPro init to an init/preinit so semaphores, etc.. could be
+initialized before any MagPro activity was ready (needed for session init)
+
+* Modified TreatmentTerminate() so it could selectively enable or disable the
+UI's buttons
+
+* Code now sends enable commands at the beginning of a start of a session and
+if a session is resumed (prevents the MagPro from getting disabled)
+
+* Fixed "off by 1" bug in "periods complete" display (was displaying one too 
+few)
+
+* Added GCSerialIsOpen() API to see if a serial port has disappeared or not
+without having to rely on side effects of its operation
+
+Beta 7 
+------
+* Modified release code so it uses Windows' heap management instead of the
+debug heap manager (reduces overall memory utilization)
+
+* Moved log information into a Logs folder
+
+* Added unicode support
+
+* Modified script parsing code so it can accepts // style comments and blank
+lines
+
+* Fixed nonresponsive UI problem (queue code rewritten)
+
+* Updated dial position to correspond with new graphics
+
+* Bug fix to keep code from seg faulting at end of treatment
+
+* Fix to countdown dial so it displays the remaining time properly
+
+* Added coil position display
+
+* Added total periods/periods remaining display
+
+* Many internal changes and updates/upgrades
+
+Beta 5
+------
+* Fixed textual overdraw/turds problem. This had to do with the advance of
+a font character not being as large as the X size of the pixels for the
+character
+
+* Fixed bug where clicking +1 Period during a paused MRT state causes the
+train/intertrain timer to disappear
+
+* Removed setting of MagPro settings upon startup. This is a request from
+Alex.
+
+* Turned raw data dumping to the log file back on again. This is only for
+this release to figure out where bytes are being dropped/missed via the
+MagPro, but will likely screw up the pulse timing.
+
+Beta 4
+------
+* +1 Period counter display now stays and doesn't disappear when additional
+periods are executed
+
+* Fixed inability to shut down when "Searching" for the MagPro
+
+* Reordered subsystem shutdown components to prevent intermittent seg faults
+during shutdown
+
+* Fixed UI so all MRT buttons are disabled on start (so they don't glitch on
+startup)
+
+* Moved logging to its own thread. This eliminates the possibility of the
+logging process from holding up the main code.
+
+* Modified the treatment thread so it would continue to run to the end of its
+train period even if the application has crashed elsewhere. This ensures the
+patient doesn't get treatment interrupted in the case of an app crash.
+
+* Modified message receive thread to reset the receive character state machine
+when it times out. This may help alleviate/fix startup/shutdown reconnection
+issues with the MagPro.
+
+* Added thread names so it's easier to debug under MSVC 2005
+
+* Added text in "About" so we can tell what version we're dealing with
+
+Beta 3
+------
+* Added full screen setting for release mode (no longer windowed), but still
+windowed for debug mode
+
+* Added ability to shut down the app with the in-app "X". Synchronized all
+threads so they cleanly shut down.
+
+* Fixed +1 period. It was adding the intertrain period twice instead of the
+train + intertrain time
+
+* Limited total additional periods to 10. +1 Period button gets disabled when
+it reaches 10.
+
+* Fixed treatment pause time so the train phase would continue to pulse when
+it was resumed. The treatment timer was looking at linear time instead of
+cumulative time.
+
+* Changed +1 Period display to display the number of periods added and doesn't
+count down as it did before
+
+* Drastically improved the flickering issue with the period timer
+
+* When a session is paused during the training cycle and resumed, it will not
+issue train pulses for the remainder of the training cycle
+
+* Modified code to use reminder_background.png for the demo
+
+Beta 2
+------
+* Added sound engine and train warning sound
+
+* Added pause/resume button changing based upon state of the treatment
+
+* Added volume control and train warning sound slider support
+
+* Fixed pausing so it wouldn't continue to run the 1SEC timer (internal 
+only, not visible to the user)
+
+* Collapsed "was button hit" code into a single routine which radically 
+simplified the code
+
+Beta 1
+------
+* First functional release

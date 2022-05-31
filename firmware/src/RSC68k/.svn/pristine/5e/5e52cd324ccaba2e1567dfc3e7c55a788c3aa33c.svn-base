@@ -1,0 +1,9 @@
+; Memory Map/Scatter file
+; Do not edit -- automatically generated file
+Init  
+{
+    BOOT_CODE 
+    {
+			Startup.o	(Init, +First)
+    }
+}

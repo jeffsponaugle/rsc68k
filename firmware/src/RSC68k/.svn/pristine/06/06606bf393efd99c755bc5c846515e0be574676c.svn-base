@@ -1,0 +1,2 @@
+char *g_pu8SVNInfo = "$WCREV$";
+volatile char *g_pu8SVNInfoTag = "NBRL:$WCREV$:SVNTAG";

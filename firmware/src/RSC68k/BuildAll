@@ -1,0 +1,14 @@
+rm RSC68kFlash.bin RSC68kFlashEven.bin RSC68kFlashOdd.bin
+cd BIOS
+gmake clean
+gmake -j
+cd ..
+cd BootLoader
+gmake clean
+gmake -j
+cd ..
+Utils/ROMTool/ROMTool RSC68kFlash.map
+Utils/split/split RSC68kFlash.bin
+/opt/cross/bin/m68k-elf-objdump -d BootLoader/BootLoader.a >BootLoader.asm
+/opt/cross/bin/m68k-elf-objdump -d BIOS/BIOS.a >BIOS.asm
+
