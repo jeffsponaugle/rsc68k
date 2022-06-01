@@ -9,6 +9,11 @@ Location None;
 Device   f1508ispplcc84;
 
 
+/* 
+   Version 1.0 
+   History:  First update.
+*/
+
 /** Inputs **/
 
 Pin[83]  = CLK_16M;
@@ -71,7 +76,7 @@ SBUS_BUFFER_D_DIR = 'b'1;
 
 
 /* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
-    and /AS is low
+    and /AS is low.   FC is allowed to be any state except 111.
 */
 
 ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
@@ -97,7 +102,8 @@ CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT;
 /*
    MAP_FLASH_TO_ZERO starts out set to 0 (from the CPU_RESET), and switches to 1 as soon as a memory
    access occurs with the highest bit set to 1.  This is used for the boot up process.  During the first 8 cycles
-   the CPU will request 4 word starting at address 0, and this flag maps those requests to FLASH
+   the CPU will request 4 word starting at address 0, and this flag maps those requests to FLASH.
+   if MAP_FLASH_TO_ZERO==0, the FLASH is at address 0, else the SRAM is at address 0.
 */
 NODE MAP_FLASH_TO_ZERO;
 MAP_FLASH_TO_ZERO.d = 'b'1;
@@ -127,7 +133,7 @@ FLASH_CONFIG_STATE1.d = CPU_D1;
 FLASH_CONFIG_STATE0.d = CPU_D0;
 
 /*  SRAM_IN_FLASH_AREA is high if we are doing a read or write and SRAM should respond in the flash area */ 
-SRAM_IN_FLASH_AREA = (CPU_RW & !FLASH_CONFIG_STATE1) # ( !CPU_RW & FLASH_CONFIG_STATE3 );
+SRAM_IN_FLASH_AREA = (CPU_RW & FLASH_CONFIG_STATE1) # ( !CPU_RW & !FLASH_CONFIG_STATE3 );
 FLASH_A18 = (CPU_RW & FLASH_CONFIG_STATE0) # ( !CPU_RW & FLASH_CONFIG_STATE2 );
 
 
