@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
  54:Pin[65]  = DRAM_DATA_DIR; 
  55:Pin[63]  = DRAM_RW;     /* READ/WRITE signal for DRAM - Gated and masked */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 108:                  bit 2 - IRQL4A_MASK
 109:                  bit 1 - IRQL4B_MASK
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 162:   resetting the system.  That change in CPU_RESET will clear the RESET_REQ,
 163:   and on the next CLK_500K rising edge RESET_REQ_OUT will go high, when then 
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 216:   is zero it will get asserted on the CPU.   It is tied to the inverse of DTACK_TIMER_1 which is set to 0 
 217:   on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 270:      will be between 'b'001 and 'b;111.  It could be '000' if an interrupt line dissapears
 271:      before the ack cycle is incomplete.   The CPU should be programmed to catch this vector 
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 324:[CPU_D7..0].ar = !CPU_RESET;
 325:[CPU_D7..0].oe = 'b'0;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 378:   As mentioned above the REFRESH_REQUESTED_* flags are set (==1) when it is time for a refresh cycle.
 379:*/
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 432:   The REFRESH_STATE_TIMER is the state machine used for the refresh cycle.  It is reset during the normal memory /AS cycle
 433:   as a way to have a fixed starting point, and then provides the states need to drive CAS and RAS during the dead part 
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 486:   toggle for all bus cycles even without DRAM access occuring.
 487:*/
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 540:   into the DRAM unless there is an active DRAM read in process. 
 541:   
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 594:   The RAS signal for the refresh cycle is based on the above state machine, and uses one flip flop.  You will notice the
 595:   CAS state above is triggered for states 2 and 3, and the RAS for states 3 and 4.  Due to the 1/2 extra offset from the 
@@ -746,7 +746,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 648:
 649:/* 
@@ -808,7 +808,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 702:[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
 703:REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
@@ -870,7 +870,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 01 21:56:57 2022
+Created Wed Jun 01 22:39:27 2022
 
 756:                      D D S 0 1   2 3 4     5 6     7       _                       
 757:                      S S                                   F                       
