@@ -191,7 +191,7 @@ CPU_D0.ck  =>
     DTACK_TIMER_0
 
 CPU_D0.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D1.d  =>
     CPU_INTACK0 & !CPU_INTACK1 & !CPU_INTACK2 & IRQL6A_MASK & !IRQL6B & !IRQL6B_MASK
@@ -210,7 +210,7 @@ CPU_D1.ck  =>
     DTACK_TIMER_0
 
 CPU_D1.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D2.d  =>
     0 
@@ -222,7 +222,7 @@ CPU_D2.ck  =>
     DTACK_TIMER_0
 
 CPU_D2.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D3.d  =>
     0 
@@ -234,7 +234,7 @@ CPU_D3.ck  =>
     DTACK_TIMER_0
 
 CPU_D3.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D4.d  =>
     CPU_INTACK0
@@ -246,7 +246,7 @@ CPU_D4.ck  =>
     DTACK_TIMER_0
 
 CPU_D4.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D5.d  =>
     CPU_INTACK1
@@ -258,7 +258,7 @@ CPU_D5.ck  =>
     DTACK_TIMER_0
 
 CPU_D5.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D6.d  =>
     CPU_INTACK2
@@ -270,7 +270,7 @@ CPU_D6.ck  =>
     DTACK_TIMER_0
 
 CPU_D6.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_D7.d  =>
     0 
@@ -282,7 +282,7 @@ CPU_D7.ck  =>
     DTACK_TIMER_0
 
 CPU_D7.oe  =>
-    !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
+    0 
 
 CPU_HALT =>
     CPU_RESET
@@ -836,7 +836,7 @@ IRQL7_INT =>
 IRQL7_MASK.d  =>
     CPU_D7.io 
 
-IRQL7_MASK.ar  =>
+IRQL7_MASK.ap  =>
     !CPU_RESET
 
 IRQL7_MASK.ck  =>
