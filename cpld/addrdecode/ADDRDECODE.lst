@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
   1:Name     AddressDecoder;
   2:PartNo   ADDRDECODE;
@@ -17,405 +17,407 @@ Created Tue Jun 07 10:13:40 2022
  10:
  11:
  12:/* 
- 13:   Version 1.0 
- 14:   History:  First update.
- 15:*/
- 16:
- 17:/** Inputs **/
+ 13:   Version 1.2 
+ 14:   History:  Fixed RTS off/on state.
+ 15:             Fixes DTACK reply for local state variables.
+ 16:             Removed UART hacks.
+ 17:*/
  18:
- 19:Pin[83]  = CLK_16M;
- 20:Pin[84]  = CPU_RESET;
- 21:Pin[6]   = CPU_AS;
- 22:Pin[5]   = CPU_UDS;
- 23:Pin[4]   = CPU_LDS;
- 24:Pin[2]   = CPU_RW;       /* 1 = read, 0 = write */
- 25:Pin[44]  = CPU_BG;  
- 26:Pin[17,18,20,21,22,24,25,27,28,29,30,31,33,34,35,36]  = [CPU_A23..8];    /* 16 */
- 27:Pin[37,39,40]  = [CPU_FC2..0];    /* 3 */
- 28:Pin[11,10,9,8]  = [CPU_D3..0];     /* 4 */
- 29:Pin[41]  = DTACK_FROM_INT;  /* DTACK signal from Interrupt Controller */
- 30:
- 31:/** Outputs **/
+ 19:/** Inputs **/
+ 20:
+ 21:Pin[83]  = CLK_16M;
+ 22:Pin[84]  = CPU_RESET;
+ 23:Pin[6]   = CPU_AS;
+ 24:Pin[5]   = CPU_UDS;
+ 25:Pin[4]   = CPU_LDS;
+ 26:Pin[2]   = CPU_RW;       /* 1 = read, 0 = write */
+ 27:Pin[44]  = CPU_BG;  
+ 28:Pin[17,18,20,21,22,24,25,27,28,29,30,31,33,34,35,36]  = [CPU_A23..8];    /* 16 */
+ 29:Pin[37,39,40]  = [CPU_FC2..0];    /* 3 */
+ 30:Pin[11,10,9,8]  = [CPU_D3..0];     /* 4 */
+ 31:Pin[41]  = DTACK_FROM_INT;  /* DTACK signal from Interrupt Controller */
  32:
- 33:Pin[15]  = MEM_OE;   
- 34:Pin[45]  = CPU_DTACK;
- 35:Pin[70]  = DRAM_CS;
- 36:Pin[79]  = SRAM0_LOW_CS;
- 37:Pin[77]  = SRAM0_HIGH_CS;
- 38:Pin[76]  = FLASH_LOW_CS;
- 39:Pin[75]  = FLASH_HIGH_CS;
- 40:Pin[74]  = FLASH_A18;               /* Used to select lower or upper half of FLASH */
- 41:Pin[80]  = LED_LATCH_CS;
- 42:Pin[73]  = NIC_CS;
- 43:Pin[65]  = IDE_CSA;
- 44:Pin[64]  = IDE_CSB;
- 45:Pin[63]  = UART_CSA;
- 46:Pin[61]  = UART_CSB;
- 47:Pin[60]  = SEVENSEG_LATCH_CS;
- 48:Pin[58]  = RTS_D_SEL;
- 49:Pin[57]  = RTS_CS;
- 50:Pin[56]  = RTS_A_SEL;
- 51:Pin[55]  = PTC_CS;
- 52:Pin[54]  = K8042_CS;
- 53:Pin[52]  = IDE_BUFFER_EN;
+ 33:/** Outputs **/
+ 34:
+ 35:Pin[15]  = MEM_OE;   
+ 36:Pin[45]  = CPU_DTACK;
+ 37:Pin[70]  = DRAM_CS;
+ 38:Pin[79]  = SRAM0_LOW_CS;
+ 39:Pin[77]  = SRAM0_HIGH_CS;
+ 40:Pin[76]  = FLASH_LOW_CS;
+ 41:Pin[75]  = FLASH_HIGH_CS;
+ 42:Pin[74]  = FLASH_A18;               /* Used to select lower or upper half of FLASH */
+ 43:Pin[80]  = LED_LATCH_CS;
+ 44:Pin[73]  = NIC_CS;
+ 45:Pin[65]  = IDE_CSA;
+ 46:Pin[64]  = IDE_CSB;
+ 47:Pin[63]  = UART_CSA;
+ 48:Pin[61]  = UART_CSB;
+ 49:Pin[60]  = SEVENSEG_LATCH_CS;
+ 50:Pin[58]  = RTS_D_SEL;
+ 51:Pin[57]  = RTS_CS;
+ 52:Pin[56]  = RTS_A_SEL;
+ 53:Pin[55]  = PTC_CS;
 
 LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
- 54:Pin[68]  = ITC_CS;
- 55:
- 56:
- 57:/* Worker CPU Related signals */
+ 54:Pin[54]  = K8042_CS;
+ 55:Pin[52]  = IDE_BUFFER_EN;
+ 56:Pin[68]  = ITC_CS;
+ 57:
  58:
- 59:Pin[12]  = SPY_SETUP_LATCH_CS;
- 60:Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS;
- 61:Pin[50]  = WORKER_BARRIER_CS;
- 62:Pin[69]  = WORKER_BUS_REQUEST;
- 63:Pin[67]  = WORKER_BUS_GRANT;
- 64:Pin[48]  = SBUS_BUFFER_ACD_EN;
- 65:Pin[51]  = SBUS_BUFFER_AC_DIR;
- 66:Pin[46]  = SBUS_BUFFER_D_DIR;
- 67:
- 68:/* Pins for Testing */
+ 59:/* Worker CPU Related signals */
+ 60:
+ 61:Pin[12]  = SPY_SETUP_LATCH_CS;
+ 62:Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS;
+ 63:Pin[50]  = WORKER_BARRIER_CS;
+ 64:Pin[69]  = WORKER_BUS_REQUEST;
+ 65:Pin[67]  = WORKER_BUS_GRANT;
+ 66:Pin[48]  = SBUS_BUFFER_ACD_EN;
+ 67:Pin[51]  = SBUS_BUFFER_AC_DIR;
+ 68:Pin[46]  = SBUS_BUFFER_D_DIR;
  69:
- 70:WORKER_BUS_REQUEST = WORKER_BUS_GRANT # CPU_BG;
- 71:SBUS_BUFFER_ACD_EN = 'b'1;
- 72:SBUS_BUFFER_AC_DIR = 'b'1;
- 73:SBUS_BUFFER_D_DIR = 'b'1;
- 74:
- 75:/** Internal Variables and nodes **/
+ 70:/* Pins for Testing */
+ 71:
+ 72:WORKER_BUS_REQUEST = WORKER_BUS_GRANT # CPU_BG;
+ 73:SBUS_BUFFER_ACD_EN = 'b'1;
+ 74:SBUS_BUFFER_AC_DIR = 'b'1;
+ 75:SBUS_BUFFER_D_DIR = 'b'1;
  76:
- 77:
- 78:/* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
- 79:    and /AS is low.   FC is allowed to be any state except 111.
- 80:*/
- 81:
- 82:ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
+ 77:/** Internal Variables and nodes **/
+ 78:
+ 79:
+ 80:/* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
+ 81:    and /AS is low.   FC is allowed to be any state except 111.
+ 82:*/
  83:
- 84:/* DTACK driven back to the CPU based on what kind of access is happening. */
- 85:/* DTACK_MEMORY_0W is high if an access is happening that is 0W */
- 86:
- 87:DTACK_MEMORY_0W = !SRAM0_HIGH_CS # !SRAM0_LOW_CS # !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS
- 88:                  # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
- 89:                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS # !NIC_CS # !SPY_SETUP_LATCH_CS 
- 90:                  # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS;
- 91:
- 92:/* 
- 93:   If we are doing a 0W access, assert DTACK when /AS is asserted.
- 94:   Merge in DTACK_FROM_INT, which is a DTACK signal from the interrupt controller.  It is used
- 95:   during an interrupt acknowledgement cycle to indicate the data bus has the interrupt vector
- 96:   present.  It will only be asserted (0) by the interrupt controller during an interrupt acknowledgement 
- 97:   cycle.
- 98:*/
- 99:
-100:CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT;
+ 84:ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
+ 85:
+ 86:/* DTACK driven back to the CPU based on what kind of access is happening. */
+ 87:/* DTACK_MEMORY_0W is high if an access is happening that is 0W */
+ 88:
+ 89:DTACK_MEMORY_0W = !SRAM0_HIGH_CS # !SRAM0_LOW_CS # !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS
+ 90:                  # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
+ 91:                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS # !NIC_CS # !SPY_SETUP_LATCH_CS 
+ 92:                  # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS # !FLASH_CONFIG_CLOCK # !ITC_CS;
+ 93:
+ 94:/* 
+ 95:   If we are doing a 0W access, assert DTACK when /AS is asserted.
+ 96:   Merge in DTACK_FROM_INT, which is a DTACK signal from the interrupt controller.  It is used
+ 97:   during an interrupt acknowledgement cycle to indicate the data bus has the interrupt vector
+ 98:   present.  It will only be asserted (0) by the interrupt controller during an interrupt acknowledgement 
+ 99:   cycle.
+100:*/
 101:
-102:/*
-103:   MAP_FLASH_TO_ZERO starts out set to 0 (from the CPU_RESET), and switches to 1 as soon as a memory
-104:   access occurs with the highest bit set to 1.  This is used for the boot up process.  During the first 8 cycles
-105:   the CPU will request 4 word starting at address 0, and this flag maps those requests to FLASH.
-106:   if MAP_FLASH_TO_ZERO==0, the FLASH is at address 0, else the SRAM is at address 0.
-107:*/
+102:CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT;
+103:
+104:/*
+105:   MAP_FLASH_TO_ZERO starts out set to 0 (from the CPU_RESET), and switches to 1 as soon as a memory
+106:   access occurs with the highest bit set to 1.  This is used for the boot up process.  During the first 8 cycles
+107:   the CPU will request 4 word starting at address 0, and this flag maps those requests to FLASH.
 
 LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 3
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
-108:NODE MAP_FLASH_TO_ZERO;
-109:MAP_FLASH_TO_ZERO.d = 'b'1;
-110:MAP_FLASH_TO_ZERO.ar = !CPU_RESET;
-111:MAP_FLASH_TO_ZERO.ck = CPU_A23 & !CPU_AS;
-112:
-113:FIELD cpu_address_bus = [CPU_A23..8];  /* upper 16 bit of address bus */
+108:   if MAP_FLASH_TO_ZERO==0, the FLASH is at address 0, else the SRAM is at address 0.
+109:*/
+110:NODE MAP_FLASH_TO_ZERO;
+111:MAP_FLASH_TO_ZERO.d = 'b'1;
+112:MAP_FLASH_TO_ZERO.ar = !CPU_RESET;
+113:MAP_FLASH_TO_ZERO.ck = CPU_A23 & !CPU_AS;
 114:
-115:/* 
-116:   These flipflops are clocked on the rising edge of the /AS signal when the correct 
-117:   address is present.  These hold the config info for how flash and ram are mapped.
-118:   bit 1,0:  00 -> Read from FLASH, A18=0
-119:             01 -> Read from FLASH, A18=1
-120:             1x -> Read from SRAM
-121:   bit 3,2:  00 -> Write to SRAM
-122:             10 -> Write to FLASH, A18=0
-123:             11 -> Write to FLASH, A18=1
-124:*/
-125:
-126:FLASH_CONFIG_CLOCK = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF87XX & !CPU_UDS & !CPU_RW);
-127:NODE [FLASH_CONFIG_STATE3..0];
-128:[FLASH_CONFIG_STATE3..0].ar = !CPU_RESET;
-129:[FLASH_CONFIG_STATE3..0].ck = FLASH_CONFIG_CLOCK;
-130:FLASH_CONFIG_STATE3.d = CPU_D3;
-131:FLASH_CONFIG_STATE2.d = CPU_D2;
-132:FLASH_CONFIG_STATE1.d = CPU_D1;
-133:FLASH_CONFIG_STATE0.d = CPU_D0;
-134:
-135:/*  SRAM_IN_FLASH_AREA is high if we are doing a read or write and SRAM should respond in the flash area */ 
-136:SRAM_IN_FLASH_AREA = (CPU_RW & FLASH_CONFIG_STATE1) # ( !CPU_RW & !FLASH_CONFIG_STATE3 );
-137:FLASH_A18 = (CPU_RW & FLASH_CONFIG_STATE0) # ( !CPU_RW & FLASH_CONFIG_STATE2 );
-138:
-139:
+115:FIELD cpu_address_bus = [CPU_A23..8];  /* upper 16 bit of address bus */
+116:
+117:/* 
+118:   These flipflops are clocked on the rising edge of the /AS signal when the correct 
+119:   address is present.  These hold the config info for how flash and ram are mapped.
+120:   bit 1,0:  00 -> Read from FLASH, A18=0
+121:             01 -> Read from FLASH, A18=1
+122:             1x -> Read from SRAM
+123:   bit 3,2:  00 -> Write to SRAM
+124:             10 -> Write to FLASH, A18=0
+125:             11 -> Write to FLASH, A18=1
+126:*/
+127:
+128:FLASH_CONFIG_CLOCK = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF87XX & !CPU_UDS & !CPU_RW);
+129:NODE [FLASH_CONFIG_STATE3..0];
+130:[FLASH_CONFIG_STATE3..0].ar = !CPU_RESET;
+131:[FLASH_CONFIG_STATE3..0].ck = FLASH_CONFIG_CLOCK;
+132:FLASH_CONFIG_STATE3.d = CPU_D3;  /* Pin 11 - CPU_D11 */
+133:FLASH_CONFIG_STATE2.d = CPU_D2;  /* Pin 10 - CPU_D10 */
+134:FLASH_CONFIG_STATE1.d = CPU_D1;  /* Pin 9 - CPU_D9 */
+135:FLASH_CONFIG_STATE0.d = CPU_D0;  /* Pin 8 - CPU_D8 */
+136:
+137:/*  SRAM_IN_FLASH_AREA is high if we are doing a read or write and SRAM should respond in the flash area */ 
+138:SRAM_IN_FLASH_AREA = (CPU_RW & FLASH_CONFIG_STATE1) # ( !CPU_RW & !FLASH_CONFIG_STATE3 );
+139:FLASH_A18 = (CPU_RW & FLASH_CONFIG_STATE0) # ( !CPU_RW & FLASH_CONFIG_STATE2 );
 140:
 141:/* 
-142:   Enable SRAM if we are accessing the lower 512k, or the FLASH area and SRAM_IN_FLASH_AREA==1
-143:*/
-144:
-145:SRAM0_LOW_CS = !(
-146:                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & MAP_FLASH_TO_ZERO)
-147:                  # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
-148:                );
-149:
-150:SRAM0_HIGH_CS = !(
-151:                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & MAP_FLASH_TO_ZERO)
-152:                  # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & SRAM_IN_FLASH_AREA)
-153:                );
-154:
-155:
-156:DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
-157:                        # cpu_address_bus:'h'XX2XXXXX
-158:                        # cpu_address_bus:'h'XX3XXXXX
-159:                        # cpu_address_bus:'h'XX4XXXXX
-160:                        # cpu_address_bus:'h'XX5XXXXX
-161:                        # cpu_address_bus:'h'XX6XXXXX
+142:   Enable SRAM if we are accessing the lower 512k, or the FLASH area and SRAM_IN_FLASH_AREA==1.
+143:   MAP_FLASH_TO_ZERO starts out at 0 on reset, so SRAM access will be disable.  Once a single access
+144:   occurs to something with A23=1 (a jump into the flash area), MAP_FLASH_TO_ZERO is set to 1 which will
+145:   enable SRAM access at low memory.
+146:*/
+147:
+148:SRAM0_LOW_CS = !(
+149:                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & MAP_FLASH_TO_ZERO)
+150:                # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
+151:                );
+152:
+153:SRAM0_HIGH_CS = !(
+154:                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & MAP_FLASH_TO_ZERO)
+155:                  # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & SRAM_IN_FLASH_AREA)
+156:                );
+157:/*
+158:   Flash range is 0xF00000 - 0xF7FFFF 
+159:   IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
+160:   is set from the FLASH_CONFIG_STATE, so it should already be set.
+161:   MAP_FLASH_TO_ZERO is set to 0 at reset, which will enable the FLASH at 0x00000 for the reset vector fetch.
 
 LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 4
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
-162:                        # cpu_address_bus:'h'XX7XXXXX
-163:                        # cpu_address_bus:'h'XX8XXXXX
-164:                        # cpu_address_bus:'h'XX9XXXXX
-165:                        # cpu_address_bus:'h'XXAXXXXX
-166:                        # cpu_address_bus:'h'XXBXXXXX
-167:                        ));
-168:/* 
-169:   Flash range is 0xF00000 - 0xF7FFFF 
-170:   IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
-171:   is set from the FLASH_CONFIG_STATE, so it should already be set.
-172:   MAP_FLASH_TO_ZERO is set to 0 at reset, which will enable the FLASH at 0x00000 for the reset vector fetch.
-173:*/
-174:FLASH_LOW_CS  = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !SRAM_IN_FLASH_AREA)
-175:                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !MAP_FLASH_TO_ZERO) );
-176:FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
-177:                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !MAP_FLASH_TO_ZERO) );
-178:
-179:/* Memory OE is low for a read operation, so invert of RW line from CPU */
-180:MEM_OE = !CPU_RW;
-181:
-182:SEVENSEG_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF00XX );
-183:UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
-184:
-185:
-186:/* Hack to extend UART_CSA longer */
-187:/*
-188:UART_CSA.d = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
-189:UART_CSA.ck = !CLK_16M;
-190:UART_CSA.ap = !CPU_RESET;
-191:*/
-192:
-193:UART_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF02XX );
-194:IDE_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF03XX );
-195:IDE_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF04XX );
-196:LED_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF05XX );
-197:RTS_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF85XX );
-198:PTC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF8AXX );
-199:NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF88XX );
-200:SPY_SETUP_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
-201:WORKER_RESET_PRESENCE_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF80XX );
-202:WORKER_BARRIER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF89XX );
-203:/*SLOT_ID_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF06XX );*/
-204:K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
-205:ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
-206:IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
-207:
-208:/*
-209:   RTS_AS_SEL is used to change the address/data select lines going to the DS Real Time Clock IC.
-210:   It is also used to drive the DS line on the RTC.  The flip flop is reset while RTS_CS is off 
-211:   (which is tied to /AS), and then increments to 1 on the next falling edge.  It will stay at 1
-212:   until the end of the bus cycle.
-213:*/
-214:
-215:RTS_A_SEL.d = 'b'1;
+162:*/
+163:FLASH_LOW_CS  = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !SRAM_IN_FLASH_AREA)
+164:                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !MAP_FLASH_TO_ZERO) );
+165:FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
+166:                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !MAP_FLASH_TO_ZERO) );
+167:
+168:DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
+169:                        # cpu_address_bus:'h'XX2XXXXX
+170:                        # cpu_address_bus:'h'XX3XXXXX
+171:                        # cpu_address_bus:'h'XX4XXXXX
+172:                        # cpu_address_bus:'h'XX5XXXXX
+173:                        # cpu_address_bus:'h'XX6XXXXX
+174:                        # cpu_address_bus:'h'XX7XXXXX
+175:                        # cpu_address_bus:'h'XX8XXXXX
+176:                        # cpu_address_bus:'h'XX9XXXXX
+177:                        # cpu_address_bus:'h'XXAXXXXX
+178:                        # cpu_address_bus:'h'XXBXXXXX
+179:                        ));
+180:
+181:/* Memory OE is low for a read operation, so invert of RW line from CPU */
+182:MEM_OE = !CPU_RW;
+183:
+184:SEVENSEG_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF00XX );
+185:UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
+186:
+187:
+188:/* Hack to extend UART_CSA longer */
+189:/*
+190:UART_CSA.d = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
+191:UART_CSA.ck = !CLK_16M;
+192:UART_CSA.ap = !CPU_RESET;
+193:*/
+194:
+195:UART_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF02XX );
+196:IDE_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF03XX );
+197:IDE_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF04XX );
+198:LED_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF05XX );
+199:RTS_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF85XX );
+200:PTC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF8AXX );
+201:NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF88XX );
+202:SPY_SETUP_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
+203:WORKER_RESET_PRESENCE_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF80XX );
+204:WORKER_BARRIER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF89XX );
+205:/*SLOT_ID_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF06XX );*/
+206:K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
+207:ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
+208:IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
+209:
+210:/*
+211:   RTS_AS_SEL is used to change the address/data select lines going to the DS Real Time Clock IC.
+212:   It is also used to drive the DS line on the RTC.  The flip flop is reset while RTS_CS is off 
+213:   (which is tied to /AS), and then increments to 1 on the next falling edge.  It will stay at 1
+214:   until the end of the bus cycle.
+215:*/
 
 LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 5
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
-216:RTS_A_SEL.ck = !CLK_16M;
-217:RTS_A_SEL.ar = !RTS_CS;
-218:
-219:RTS_D_SEL = !RTS_A_SEL;
+216:
+217:RTS_A_SEL.d = 'b'1;
+218:RTS_A_SEL.ck = !CLK_16M;
+219:RTS_A_SEL.ar = RTS_CS;    /* RTS_CS is active low, so it will be high while RTS is not being accesses */
 220:
-221:/*
+221:RTS_D_SEL = !RTS_A_SEL;   /* Since RTA_A_SEL is held at zero when no access, this will be held at one which is off */
 222:
-223:Total dedicated input used:     3/4     (75%)
-224:Total I/O pins used             62/64   (96%)
-225:Total Logic cells used          39/128  (30%)
-226:Total Flip-Flop used            6/128   (4%)
-227:Total Foldback logic used       0/128   (0%)
-228:Total Nodes+FB/MCells           39/128  (30%)
-229:Total cascade used              0
-230:Total input pins                36
-231:Total output pins               29
-232:Total Pts                       112
-233:
-234:*/
+223:/*
+224:
+225:Total dedicated input used:     3/4     (75%)
+226:Total I/O pins used             62/64   (96%)
+227:Total Logic cells used          39/128  (30%)
+228:Total Flip-Flop used            6/128   (4%)
+229:Total Foldback logic used       0/128   (0%)
+230:Total Nodes+FB/MCells           39/128  (30%)
+231:Total cascade used              0
+232:Total input pins                36
+233:Total output pins               29
+234:Total Pts                       112
 235:
-236:/*
-237:CPU_RW assigned to pin  2
-238:CLK_32M assigned to pin  83
-239:
-240:Attempt to place floating signals ...
-241:------------------------------------
-242:SPY_SETUP_LATCH_CS is placed at pin 12 (MC 3)
-243:CPU_D3 is placed at pin 11 (MC 5)
-244:CPU_D2 is placed at pin 10 (MC 6)
-245:CPU_D1 is placed at pin 9 (MC 8)
-246:CPU_D0 is placed at pin 8 (MC 11)
-247:CPU_AS is placed at pin 6 (MC 13)
-248:CPU_UDS is placed at pin 5 (MC 14)
-249:CPU_LDS is placed at pin 4 (MC 16)
-250:CPU_A19 is placed at pin 22 (MC 17)
-251:CPU_A20 is placed at pin 21 (MC 19)
-252:CPU_A21 is placed at pin 20 (MC 21)
-253:CPU_A22 is placed at pin 18 (MC 24)
-254:CPU_A23 is placed at pin 17 (MC 25)
-255:CPU_RESET is placed at pin 16 (MC 27)
-256:CLK_16M is placed at pin 15 (MC 29)
-257:TDI is placed at pin 14 (MC 32)
-258:CPU_A12 is placed at pin 31 (MC 35)
-259:CPU_A13 is placed at pin 30 (MC 37)
-260:CPU_A14 is placed at pin 29 (MC 38)
-261:CPU_A15 is placed at pin 28 (MC 40)
-262:CPU_A16 is placed at pin 27 (MC 43)
-263:CPU_A17 is placed at pin 25 (MC 45)
-264:CPU_A18 is placed at pin 24 (MC 46)
-265:TMS is placed at pin 23 (MC 48)
-266:DTACK_FROM_INT is placed at pin 41 (MC 49)
-267:CPU_FC0 is placed at pin 40 (MC 51)
-268:CPU_FC1 is placed at pin 39 (MC 53)
-269:CPU_FC2 is placed at pin 37 (MC 56)
+236:*/
+237:
+238:/*
+239:CPU_RW assigned to pin  2
+240:CLK_32M assigned to pin  83
+241:
+242:Attempt to place floating signals ...
+243:------------------------------------
+244:SPY_SETUP_LATCH_CS is placed at pin 12 (MC 3)
+245:CPU_D3 is placed at pin 11 (MC 5)
+246:CPU_D2 is placed at pin 10 (MC 6)
+247:CPU_D1 is placed at pin 9 (MC 8)
+248:CPU_D0 is placed at pin 8 (MC 11)
+249:CPU_AS is placed at pin 6 (MC 13)
+250:CPU_UDS is placed at pin 5 (MC 14)
+251:CPU_LDS is placed at pin 4 (MC 16)
+252:CPU_A19 is placed at pin 22 (MC 17)
+253:CPU_A20 is placed at pin 21 (MC 19)
+254:CPU_A21 is placed at pin 20 (MC 21)
+255:CPU_A22 is placed at pin 18 (MC 24)
+256:CPU_A23 is placed at pin 17 (MC 25)
+257:CPU_RESET is placed at pin 16 (MC 27)
+258:CLK_16M is placed at pin 15 (MC 29)
+259:TDI is placed at pin 14 (MC 32)
+260:CPU_A12 is placed at pin 31 (MC 35)
+261:CPU_A13 is placed at pin 30 (MC 37)
+262:CPU_A14 is placed at pin 29 (MC 38)
+263:CPU_A15 is placed at pin 28 (MC 40)
+264:CPU_A16 is placed at pin 27 (MC 43)
+265:CPU_A17 is placed at pin 25 (MC 45)
+266:CPU_A18 is placed at pin 24 (MC 46)
+267:TMS is placed at pin 23 (MC 48)
+268:DTACK_FROM_INT is placed at pin 41 (MC 49)
+269:CPU_FC0 is placed at pin 40 (MC 51)
 
 LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 6
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
-270:CPU_A8 is placed at pin 36 (MC 57)
-271:CPU_A9 is placed at pin 35 (MC 59)
-272:CPU_A10 is placed at pin 34 (MC 61)
-273:CPU_A11 is placed at pin 33 (MC 64)
-274:CPU_BG is placed at pin 44 (MC 65)
-275:CPU_DTACK is placed at pin 45 (MC 67)
-276:SBUS_BUFFER_D_DIR is placed at pin 46 (MC 69)
-277:SBUS_BUFFER_ACD_EN is placed at pin 48 (MC 72)
-278:WORKER_RESET_PRESENCE_LATCH_CS is placed at pin 49 (MC 73)
-279:WORKER_BARRIER_CS is placed at pin 50 (MC 75)
-280:SBUS_BUFFER_AC_DIR is placed at pin 51 (MC 77)
-281:NIC_CS is placed at pin 52 (MC 80)
-282:K8042_CS is placed at pin 54 (MC 83)
-283:PTC_CS is placed at pin 55 (MC 85)
-284:RTS_AD_SEL is placed at pin 56 (MC 86)
-285:RTS_CS is placed at pin 57 (MC 88)
-286:LED_LATCH_CS is placed at pin 58 (MC 91)
-287:SEVENSEG_LATCH_CS is placed at pin 60 (MC 93)
-288:UART_CSB is placed at pin 61 (MC 94)
-289:TCK is placed at pin 62 (MC 96)
-290:UART_CSA is placed at pin 63 (MC 97)
-291:IDE_CSB is placed at pin 64 (MC 99)
-292:IDE_CSA is placed at pin 65 (MC 101)
-293:WORKER_BUS_GRANT is placed at pin 67 (MC 104)
-294:WORKER_BUS_REQUEST is placed at pin 69 (MC 107)
-295:DRAM_CS is placed at pin 70 (MC 109)
-296:TDO is placed at pin 71 (MC 112)
-297:FLASH_WE is placed at pin 73 (MC 115)
-298:FLASH_A18 is placed at pin 74 (MC 117)
-299:FLASH_HIGH_CS is placed at pin 75 (MC 118)
-300:FLASH_LOW_CS is placed at pin 76 (MC 120)
-301:SRAM0_HIGH_CS is placed at pin 77 (MC 123)
-302:SRAM0_LOW_CS is placed at pin 79 (MC 125)
-303:MEM_OE is placed at pin 80 (MC 126)
-304:CPU_RESET_IN is placed at pin 81 (MC 128)
-305:
-306:
-307:                                                                                    
-308:                                                   L S     F                        
-309:                                                   E R     L                        
-310:                                                   D A     A                        
-311:                                           C       _ M     S                        
-312:                                           P       L 0     H                        
-313:                                  C C      U C     A _     _                        
-314:                     C C  C C   C P P   C  _ L     T L     L                        
-315:                     P P  P P   P U U   P  R K     C O     O                        
-316:                     U U  U U   U _ _   U  E _     H W     W                        
-317:                     _ _  _ _ G _ U L V _  S 1 G   _ _ V   _                        
-318:                     D D  D D N A D D C R  E 6 N   C C C   C                        
-319:                     3 2  1 0 D S S S C W  T M D   S S C   S                        
-320:                    -------------------------------------------                     
-321:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
-322:                  /    10   8   6   4   2  84  82  80  78  76    \                 
-323:Y_SETUP_LATCH_CS | 12                    (*)                   74 | FLASH_A18       
+270:CPU_FC1 is placed at pin 39 (MC 53)
+271:CPU_FC2 is placed at pin 37 (MC 56)
+272:CPU_A8 is placed at pin 36 (MC 57)
+273:CPU_A9 is placed at pin 35 (MC 59)
+274:CPU_A10 is placed at pin 34 (MC 61)
+275:CPU_A11 is placed at pin 33 (MC 64)
+276:CPU_BG is placed at pin 44 (MC 65)
+277:CPU_DTACK is placed at pin 45 (MC 67)
+278:SBUS_BUFFER_D_DIR is placed at pin 46 (MC 69)
+279:SBUS_BUFFER_ACD_EN is placed at pin 48 (MC 72)
+280:WORKER_RESET_PRESENCE_LATCH_CS is placed at pin 49 (MC 73)
+281:WORKER_BARRIER_CS is placed at pin 50 (MC 75)
+282:SBUS_BUFFER_AC_DIR is placed at pin 51 (MC 77)
+283:NIC_CS is placed at pin 52 (MC 80)
+284:K8042_CS is placed at pin 54 (MC 83)
+285:PTC_CS is placed at pin 55 (MC 85)
+286:RTS_AD_SEL is placed at pin 56 (MC 86)
+287:RTS_CS is placed at pin 57 (MC 88)
+288:LED_LATCH_CS is placed at pin 58 (MC 91)
+289:SEVENSEG_LATCH_CS is placed at pin 60 (MC 93)
+290:UART_CSB is placed at pin 61 (MC 94)
+291:TCK is placed at pin 62 (MC 96)
+292:UART_CSA is placed at pin 63 (MC 97)
+293:IDE_CSB is placed at pin 64 (MC 99)
+294:IDE_CSA is placed at pin 65 (MC 101)
+295:WORKER_BUS_GRANT is placed at pin 67 (MC 104)
+296:WORKER_BUS_REQUEST is placed at pin 69 (MC 107)
+297:DRAM_CS is placed at pin 70 (MC 109)
+298:TDO is placed at pin 71 (MC 112)
+299:FLASH_WE is placed at pin 73 (MC 115)
+300:FLASH_A18 is placed at pin 74 (MC 117)
+301:FLASH_HIGH_CS is placed at pin 75 (MC 118)
+302:FLASH_LOW_CS is placed at pin 76 (MC 120)
+303:SRAM0_HIGH_CS is placed at pin 77 (MC 123)
+304:SRAM0_LOW_CS is placed at pin 79 (MC 125)
+305:MEM_OE is placed at pin 80 (MC 126)
+306:CPU_RESET_IN is placed at pin 81 (MC 128)
+307:
+308:
+309:                                                                                    
+310:                                                   L S     F                        
+311:                                                   E R     L                        
+312:                                                   D A     A                        
+313:                                           C       _ M     S                        
+314:                                           P       L 0     H                        
+315:                                  C C      U C     A _     _                        
+316:                     C C  C C   C P P   C  _ L     T L     L                        
+317:                     P P  P P   P U U   P  R K     C O     O                        
+318:                     U U  U U   U _ _   U  E _     H W     W                        
+319:                     _ _  _ _ G _ U L V _  S 1 G   _ _ V   _                        
+320:                     D D  D D N A D D C R  E 6 N   C C C   C                        
+321:                     3 2  1 0 D S S S C W  T M D   S S C   S                        
+322:                    -------------------------------------------                     
+323:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
 
 LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 7
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 07 10:13:40 2022
+Created Tue Jun 07 10:49:03 2022
 
-324:             VCC | 13                                          73 | NIC_CS          
-325:             TDI | 14                                          72 | GND             
-326:          MEM_OE | 15                                          71 | TDO             
-327:                 | 16                                          70 | DRAM_CS         
-328:         CPU_A23 | 17                                          69 | WORKER_BUS_REQUEST
-329:         CPU_A22 | 18                                          68 | ITC_CS          
-330:             GND | 19                                          67 | WORKER_BUS_GRANT
-331:         CPU_A21 | 20                                          66 | VCC             
-332:         CPU_A20 | 21                                          65 | IDE_CSA         
-333:         CPU_A19 | 22                 ATF1508                  64 | IDE_CSB         
-334:             TMS | 23               84-Lead PLCC               63 | UART_CSA        
-335:         CPU_A18 | 24                                          62 | TCK             
-336:         CPU_A17 | 25                                          61 | UART_CSB        
-337:             VCC | 26                                          60 | SEVENSEG_LATCH_CS
-338:         CPU_A16 | 27                                          59 | GND             
-339:         CPU_A15 | 28                                          58 | RTS_D_SEL       
-340:         CPU_A14 | 29                                          57 | RTS_CS          
-341:         CPU_A13 | 30                                          56 | RTS_A_SEL       
-342:         CPU_A12 | 31                                          55 | PTC_CS          
-343:             GND | 32                                          54 | K8042_CS        
-344:                  \     34  36  38  40  42  44  46  48  50  52   /                 
-345:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
-346:                    --------------------------------------------                     
-347:                      C C C C C V C C D G V C C S G S W W S I V                     
-348:                      P P P P P C P P T N C P P B N B O O B D C                     
-349:                      U U U U U C U U A D C U U U D U R R U E C                     
-350:                      _ _ _ _ _   _ _ C     _ _ S   S K K S _                       
-351:                      A A A A F   F F K     B D _   _ E E _ B                       
-352:                      1 1 9 8 C   C C _     G T B   B R R B U                       
-353:                      1 0     2   1 0 F       A U   U _ _ U F                       
-354:                                      R       C F   F R B F F                       
-355:                                      O       K F   F E A F E                       
-356:                                      M         E   E S R E R                       
-357:                                      _         R   R E R R _                       
-358:                                      I         _   _ T I _ E                       
-359:                                      N         D   A _ E A N                       
-360:
-361:*/
+324:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+325:Y_SETUP_LATCH_CS | 12                    (*)                   74 | FLASH_A18       
+326:             VCC | 13                                          73 | NIC_CS          
+327:             TDI | 14                                          72 | GND             
+328:          MEM_OE | 15                                          71 | TDO             
+329:                 | 16                                          70 | DRAM_CS         
+330:         CPU_A23 | 17                                          69 | WORKER_BUS_REQUEST
+331:         CPU_A22 | 18                                          68 | ITC_CS          
+332:             GND | 19                                          67 | WORKER_BUS_GRANT
+333:         CPU_A21 | 20                                          66 | VCC             
+334:         CPU_A20 | 21                                          65 | IDE_CSA         
+335:         CPU_A19 | 22                 ATF1508                  64 | IDE_CSB         
+336:             TMS | 23               84-Lead PLCC               63 | UART_CSA        
+337:         CPU_A18 | 24                                          62 | TCK             
+338:         CPU_A17 | 25                                          61 | UART_CSB        
+339:             VCC | 26                                          60 | SEVENSEG_LATCH_CS
+340:         CPU_A16 | 27                                          59 | GND             
+341:         CPU_A15 | 28                                          58 | RTS_D_SEL       
+342:         CPU_A14 | 29                                          57 | RTS_CS          
+343:         CPU_A13 | 30                                          56 | RTS_A_SEL       
+344:         CPU_A12 | 31                                          55 | PTC_CS          
+345:             GND | 32                                          54 | K8042_CS        
+346:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+347:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+348:                    --------------------------------------------                     
+349:                      C C C C C V C C D G V C C S G S W W S I V                     
+350:                      P P P P P C P P T N C P P B N B O O B D C                     
+351:                      U U U U U C U U A D C U U U D U R R U E C                     
+352:                      _ _ _ _ _   _ _ C     _ _ S   S K K S _                       
+353:                      A A A A F   F F K     B D _   _ E E _ B                       
+354:                      1 1 9 8 C   C C _     G T B   B R R B U                       
+355:                      1 0     2   1 0 F       A U   U _ _ U F                       
+356:                                      R       C F   F R B F F                       
+357:                                      O       K F   F E A F E                       
+358:                                      M         E   E S R E R                       
+359:                                      _         R   R E R R _                       
+360:                                      I         _   _ T I _ E                       
+361:                                      N         D   A _ E A N                       
 362:
-363:
+363:*/
+364:
+365:
 
 
 

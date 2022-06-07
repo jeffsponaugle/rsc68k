@@ -10,8 +10,10 @@ Device   f1508ispplcc84;
 
 
 /* 
-   Version 1.0 
-   History:  First update.
+   Version 1.2 
+   History:  Fixed RTS off/on state.
+             Fixes DTACK reply for local state variables.
+             Removed UART hacks.
 */
 
 /** Inputs **/
@@ -87,7 +89,7 @@ ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
 DTACK_MEMORY_0W = !SRAM0_HIGH_CS # !SRAM0_LOW_CS # !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS
                   # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
                   # !LED_LATCH_CS # !RTS_CS # !PTC_CS # !NIC_CS # !SPY_SETUP_LATCH_CS 
-                  # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS;
+                  # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS # !FLASH_CONFIG_CLOCK # !ITC_CS;
 
 /* 
    If we are doing a 0W access, assert DTACK when /AS is asserted.
@@ -127,31 +129,41 @@ FLASH_CONFIG_CLOCK = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF87XX & !CPU_UDS &
 NODE [FLASH_CONFIG_STATE3..0];
 [FLASH_CONFIG_STATE3..0].ar = !CPU_RESET;
 [FLASH_CONFIG_STATE3..0].ck = FLASH_CONFIG_CLOCK;
-FLASH_CONFIG_STATE3.d = CPU_D3;
-FLASH_CONFIG_STATE2.d = CPU_D2;
-FLASH_CONFIG_STATE1.d = CPU_D1;
-FLASH_CONFIG_STATE0.d = CPU_D0;
+FLASH_CONFIG_STATE3.d = CPU_D3;  /* Pin 11 - CPU_D11 */
+FLASH_CONFIG_STATE2.d = CPU_D2;  /* Pin 10 - CPU_D10 */
+FLASH_CONFIG_STATE1.d = CPU_D1;  /* Pin 9 - CPU_D9 */
+FLASH_CONFIG_STATE0.d = CPU_D0;  /* Pin 8 - CPU_D8 */
 
 /*  SRAM_IN_FLASH_AREA is high if we are doing a read or write and SRAM should respond in the flash area */ 
 SRAM_IN_FLASH_AREA = (CPU_RW & FLASH_CONFIG_STATE1) # ( !CPU_RW & !FLASH_CONFIG_STATE3 );
 FLASH_A18 = (CPU_RW & FLASH_CONFIG_STATE0) # ( !CPU_RW & FLASH_CONFIG_STATE2 );
 
-
-
 /* 
-   Enable SRAM if we are accessing the lower 512k, or the FLASH area and SRAM_IN_FLASH_AREA==1
+   Enable SRAM if we are accessing the lower 512k, or the FLASH area and SRAM_IN_FLASH_AREA==1.
+   MAP_FLASH_TO_ZERO starts out at 0 on reset, so SRAM access will be disable.  Once a single access
+   occurs to something with A23=1 (a jump into the flash area), MAP_FLASH_TO_ZERO is set to 1 which will
+   enable SRAM access at low memory.
 */
 
 SRAM0_LOW_CS = !(
                   (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & MAP_FLASH_TO_ZERO)
-                  # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
+                # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
                 );
 
 SRAM0_HIGH_CS = !(
                   (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & MAP_FLASH_TO_ZERO)
                   # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & SRAM_IN_FLASH_AREA)
                 );
-
+/*
+   Flash range is 0xF00000 - 0xF7FFFF 
+   IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
+   is set from the FLASH_CONFIG_STATE, so it should already be set.
+   MAP_FLASH_TO_ZERO is set to 0 at reset, which will enable the FLASH at 0x00000 for the reset vector fetch.
+*/
+FLASH_LOW_CS  = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !SRAM_IN_FLASH_AREA)
+                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !MAP_FLASH_TO_ZERO) );
+FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
+                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !MAP_FLASH_TO_ZERO) );
 
 DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         # cpu_address_bus:'h'XX2XXXXX
@@ -165,16 +177,6 @@ DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         # cpu_address_bus:'h'XXAXXXXX
                         # cpu_address_bus:'h'XXBXXXXX
                         ));
-/* 
-   Flash range is 0xF00000 - 0xF7FFFF 
-   IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
-   is set from the FLASH_CONFIG_STATE, so it should already be set.
-   MAP_FLASH_TO_ZERO is set to 0 at reset, which will enable the FLASH at 0x00000 for the reset vector fetch.
-*/
-FLASH_LOW_CS  = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !SRAM_IN_FLASH_AREA)
-                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !MAP_FLASH_TO_ZERO) );
-FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
-                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !MAP_FLASH_TO_ZERO) );
 
 /* Memory OE is low for a read operation, so invert of RW line from CPU */
 MEM_OE = !CPU_RW;
@@ -214,9 +216,9 @@ IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
 
 RTS_A_SEL.d = 'b'1;
 RTS_A_SEL.ck = !CLK_16M;
-RTS_A_SEL.ar = !RTS_CS;
+RTS_A_SEL.ar = RTS_CS;    /* RTS_CS is active low, so it will be high while RTS is not being accesses */
 
-RTS_D_SEL = !RTS_A_SEL;
+RTS_D_SEL = !RTS_A_SEL;   /* Since RTA_A_SEL is held at zero when no access, this will be held at one which is off */
 
 /*
 
