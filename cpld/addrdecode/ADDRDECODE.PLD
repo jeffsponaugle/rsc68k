@@ -180,14 +180,15 @@ FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXX
 MEM_OE = !CPU_RW;
 
 SEVENSEG_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF00XX );
-/*UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );*/
+UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
 
 
 /* Hack to extend UART_CSA longer */
-
+/*
 UART_CSA.d = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
 UART_CSA.ck = !CLK_16M;
 UART_CSA.ap = !CPU_RESET;
+*/
 
 UART_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF02XX );
 IDE_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF03XX );

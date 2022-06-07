@@ -6,10 +6,10 @@ CPU_D1					: 9
 CPU_D0					: 8
 CPU_AS					: 6
 CPU_UDS					: 5
-Com_Ctrl_106					: 614
-XXL_110					: 615
+Com_Ctrl_103					: 614
+XXL_106					: 615
 CPU_LDS					: 4
-XXL_107					: 616
+XXL_105					: 616
 CPU_A19					: 22
 CPU_A20					: 21
 CPU_A21					: 20
@@ -21,9 +21,9 @@ FLASH_CONFIG_STATE3					: 626
 FLASH_CONFIG_STATE0					: 628
 MEM_OE					: 15
 MAP_FLASH_TO_ZERO					: 630
-XXL_109					: 631
+XXL_107					: 631
 TDI					: 14
-XXL_108					: 632
+XXL_104					: 632
 CPU_A12					: 31
 CPU_A13					: 30
 CPU_A14					: 29

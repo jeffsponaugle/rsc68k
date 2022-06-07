@@ -9,10 +9,10 @@ BEGIN
     "CPU_D0"                                  : INPUT_PIN = 8 ;
     "CPU_AS"                                  : INPUT_PIN = 6 ;
     "CPU_UDS"                                 : INPUT_PIN = 5 ;
-    "Com_Ctrl_106"                            : NODE_NUM = 614 ;
-    "XXL_110"                                 : NODE_NUM = 615 ;
+    "Com_Ctrl_103"                            : NODE_NUM = 614 ;
+    "XXL_106"                                 : NODE_NUM = 615 ;
     "CPU_LDS"                                 : INPUT_PIN = 4 ;
-    "XXL_107"                                 : NODE_NUM = 616 ;
+    "XXL_105"                                 : NODE_NUM = 616 ;
     "CPU_A19"                                 : INPUT_PIN = 22 ;
     "CPU_A20"                                 : INPUT_PIN = 21 ;
     "CPU_A21"                                 : INPUT_PIN = 20 ;
@@ -24,9 +24,9 @@ BEGIN
     "FLASH_CONFIG_STATE0"                     : NODE_NUM = 628 ;
     "MEM_OE"                                  : OUTPUT_PIN = 15 ;
     "MAP_FLASH_TO_ZERO"                       : NODE_NUM = 630 ;
-    "XXL_109"                                 : NODE_NUM = 631 ;
+    "XXL_107"                                 : NODE_NUM = 631 ;
     "TDI"                                     : INPUT_PIN = 14 ;
-    "XXL_108"                                 : NODE_NUM = 632 ;
+    "XXL_104"                                 : NODE_NUM = 632 ;
     "CPU_A12"                                 : INPUT_PIN = 31 ;
     "CPU_A13"                                 : INPUT_PIN = 30 ;
     "CPU_A14"                                 : INPUT_PIN = 29 ;
