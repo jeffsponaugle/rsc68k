@@ -1,11 +1,11 @@
-{COMPONENT C:\USERS\JEFF\SRC\RSC68K\CPLD\INTDRAM\INTDRAM.SYM
+{COMPONENT C:\INTDRAM.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Thu Jun 02 11:17:50 2022 "}
+  {DBtime "Wed Jun 08 18:06:36 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -82,6 +82,7 @@
    {P CAS3 {Pt "I/O"}{Lq 0}{Ploc 360 200}}
    {P RAS2 {Pt "I/O"}{Lq 0}{Ploc 360 220}}
    {P RAS0 {Pt "I/O"}{Lq 0}{Ploc 360 240}}
+   {P CPU_RE {Pt "I/O"}{Lq 0}{Ploc 360 260}}
   }
 
   {PKG
@@ -142,8 +143,9 @@
    {Pnl 340 210}
    {Pnl 340 230}
    {Pnl 340 250}
+   {Pnl 340 270}
 
-   {Sd A 83 1 2 4 5 6 8 9 10 11 17 18 21 22 24 29 30 31 33 34 35 36 37 39 40 41 44 45 48 54 55 56 57 58 63 64 84 20 25 27 28 52 65 67 68 69 70 73 74}
+   {Sd A 83 1 2 4 5 6 8 9 10 11 17 18 21 22 24 29 30 31 33 34 35 36 37 39 40 41 44 45 48 54 55 56 57 58 63 64 84 20 25 27 28 52 65 67 68 69 70 73 74 75}
   }
 
   {PIC
@@ -200,6 +202,7 @@
    {L 330 200 360 200}
    {L 330 220 360 220}
    {L 330 240 360 240}
+   {L 330 260 360 260}
    [Ly "PINNAM"]
    [Tj "LC"]
    {T "IRQL7_BU" 140 760}
@@ -252,6 +255,7 @@
    {T "CAS3" 320 200}
    {T "RAS2" 320 220}
    {T "RAS0" 320 240}
+   {T "CPU_RE" 320 260}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1508ISPPLCC84" 230 -10}
@@ -265,7 +269,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\JEFF\SRC\RSC68K\CPLD\INTDRAM\INTDRAM 230 780}
+    {At PLD C:\INTDRAM 230 780}
    }
   }
  }
@@ -372,6 +376,8 @@
    {N RAS2
    }
    {N RAS0
+   }
+   {N CPU_RE
    }
   }
 
