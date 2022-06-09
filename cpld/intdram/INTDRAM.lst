@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
  54:Pin[65]  = DRAM_DATA_DIR; 
  55:Pin[63]  = DRAM_RW;     /* READ/WRITE signal for DRAM - Gated and masked */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 108:                  bit 4 - IRQL5A_MASK
 109:                  bit 3 - IRQL5B_MASK
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 162:   the RESET_REQUEST_OUT will go low on the next CLK_500K rising edge.  That 
 163:   output (0) will trigger the CPU_RESET node to be reset into low, 
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 216:/* 
 217:   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 270:      The highest bit is set to 1 due to the available vectors starting at 64. 
 271:      The next three highest bits are set to the IPL value that has been acknowleged.  This
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 324:
 325:[CPU_D7..0].ck = DTACK_TIMER_0;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 378:
 379:/* 
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 432:
 433:/*
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 486:   DRAM_MEM_AB selects which address lines are fed to the DRAM chip.  This toggels after /RAS but before /CAS.
 487:   This signal is only active is we are doing a bus cycle (/AS).  This is not gated by DRAM_CS, so this will
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 540:   Data Direction Flag for data buffers.  0 = into DRAM (CPU WRITE), 1 = out from DRAM (CPU READ).
 541:   NOTE - The DRAM data buffer is always enabled, so it is critical to keep the direction going
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 594:
 595:/*
@@ -746,7 +746,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 648:REFRESH_REQUESTED_SYNC.ck = !CPU_AS;
 649:REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
@@ -808,7 +808,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 702:
 703:[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
@@ -870,7 +870,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Jun 08 18:06:35 2022
+Created Thu Jun 09 13:52:48 2022
 
 756:                      _ _ _ _ _   _ _ _     _ _     _       C                       
 757:                      U L A D D   D D D     D D     D       K                       
