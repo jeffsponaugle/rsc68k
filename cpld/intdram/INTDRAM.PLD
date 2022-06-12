@@ -400,7 +400,7 @@ NODE  DRAM_MEM_AB_PRE;
    a normal DRAM memory access cycle, and gives the state machine a known starting point in that cycle.  With that starting point
    the timing of the sneaky refresh can be done such that it does not interfere with normal DRAM access.
 */
-NODE REFRESH_COUNTER_RESET_PRE;
+
 NODE REFRESH_COUNTER_RESET;
 
 /* 
@@ -537,7 +537,7 @@ DRAM_ACCESS_TIMER2.d = ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER0 )
 */
 
 REFRESH_COUNTER_RESET.d = !(dram_access_timer_field:[1,2]);
-REFRESH_COUNTER_RESET.ck = CLK_32M;
+REFRESH_COUNTER_RESET.ck = !CLK_32M;
 REFRESH_COUNTER_RESET.ar = !CPU_RESET;
 
 /*
