@@ -326,7 +326,6 @@ CPU_D0.d = VECTORD0;
 [CPU_D7..0].ar = !CPU_RESET;
 [CPU_D7..0].oe = INT_ACK;
 
-/*INT_ACK;*/
 
 
 
@@ -390,12 +389,10 @@ NODE REFRESH_COMPLETED;
    cycle delays.  That is needed to get the memory access to fit within the tight constraints of memory 
       access AND sneaky refresh.
 */
-
-
-NODE  DRAM_MEM_CAS_PRE;    /* First flip flop for /MEM_CAS signal */        
+       
 NODE  DRAM_MEM_RAS;          
 NODE  DRAM_MEM_CAS;
-NODE  DRAM_MEM_RAS_PRE;    /* First flip flop for /MEM_RAS signal */
+NODE  DRAM_MEM_AB_PRE; 
 
 
 /*
@@ -458,12 +455,16 @@ FIELD dram_access_timer_field = [DRAM_ACCESS_TIMER2..0];
    falling edge of CLK_32M. Held in preset(==1) when AS is high .  Adds 1/2 delay.
 */
 
-DRAM_MEM_RAS_PRE.ck = CLK_32M;
-DRAM_MEM_RAS_PRE.ap = DRAM_CS;
-DRAM_MEM_RAS.d = DRAM_MEM_RAS_PRE;
 DRAM_MEM_RAS.ck = !CLK_32M;
+DRAM_MEM_RAS.ap = DRAM_CS # CPU_AS # !CPU_RESET;
+DRAM_MEM_RAS.d = !(dram_access_timer_field:[2,3]);
+
+
+/*
+DRAM_MEM_RAS.ck = CLK_32M;
 DRAM_MEM_RAS.ap = CPU_AS # !CPU_RESET;
-DRAM_MEM_RAS_PRE.d = !(dram_access_timer_field:[2,3]);
+DRAM_MEM_RAS.d = DRAM_MEM_RAS_PRE;
+*/
 
 
 
@@ -476,19 +477,25 @@ DRAM_MEM_RAS_PRE.d = !(dram_access_timer_field:[2,3]);
    falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
 */
 
-DRAM_MEM_CAS_PRE.d = !(dram_access_timer_field:[3,4,5]);
-DRAM_MEM_CAS_PRE.ck = CLK_32M;
-DRAM_MEM_CAS_PRE.ap = DRAM_CS;
-DRAM_MEM_CAS.d = DRAM_MEM_CAS_PRE;
+DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
 DRAM_MEM_CAS.ck = !CLK_32M;
+DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
+/*
+DRAM_MEM_CAS.d = DRAM_MEM_CAS_PRE;
+DRAM_MEM_CAS.ck = CLK_32M;
 DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET;
+*/
 
 /*  
    DRAM_MEM_AB selects which address lines are fed to the DRAM chip.  This toggels after /RAS but before /CAS.
-   This signal is only active is we are doing a bus cycle (/AS).  This is not gated by DRAM_CS, so this will
-   toggle for all bus cycles even without DRAM access occuring.
+   This signal is only active is we are doing a bus cycle (/AS).  
 */
-DRAM_MEM_AB.d = !(dram_access_timer_field:[3,4,5]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
+
+DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[2,3,4]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
+DRAM_MEM_AB_PRE.ck = !CLK_32M;
+DRAM_MEM_AB_PRE.ap = DRAM_CS;
+
+DRAM_MEM_AB.d = DRAM_MEM_AB_PRE;         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
 DRAM_MEM_AB.ck = CLK_32M;
 DRAM_MEM_AB.ap = CPU_AS # !CPU_RESET;
 
@@ -516,7 +523,7 @@ DRAM_ACCESS_TIMER2.d = ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER0 )
                     # ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER1 )
                     # ( !DRAM_ACCESS_TIMER2 & DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER0 );
 
-[DRAM_ACCESS_TIMER2..0].ck = !CLK_32M;
+[DRAM_ACCESS_TIMER2..0].ck = CLK_32M;
 [DRAM_ACCESS_TIMER2..0].ar = CPU_AS # !CPU_RESET;
 
 
@@ -529,13 +536,15 @@ DRAM_ACCESS_TIMER2.d = ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER0 )
    offset by a inverted clock.
 */
 
-REFRESH_COUNTER_RESET_PRE.d = !(dram_access_timer_field:[1,2]);
-REFRESH_COUNTER_RESET_PRE.ck = CLK_32M;
-REFRESH_COUNTER_RESET_PRE.ar = !CPU_RESET;
+REFRESH_COUNTER_RESET.d = !(dram_access_timer_field:[1,2]);
+REFRESH_COUNTER_RESET.ck = CLK_32M;
+REFRESH_COUNTER_RESET.ar = !CPU_RESET;
+
+/*
 REFRESH_COUNTER_RESET.d = REFRESH_COUNTER_RESET_PRE;
 REFRESH_COUNTER_RESET.ck = !CLK_32M;
 REFRESH_COUNTER_RESET.ar = !CPU_RESET;
-
+*/
 
 /* 
    Data Direction Flag for data buffers.  0 = into DRAM (CPU WRITE), 1 = out from DRAM (CPU READ).
