@@ -551,7 +551,7 @@ REFRESH_COUNTER_RESET.ar = !CPU_RESET;
    NOTE - The DRAM data buffer is always enabled, so it is critical to keep the direction going
    into the DRAM unless there is an active DRAM read in process. 
    
-   We turn on out only if we are in a DRAM cycle, and it is a CPU read (CPU_RW == 1).
+   We turn on output only if we are in a DRAM cycle, and it is a CPU read (CPU_RW == 1).
    NOTE that DRAM_CS is alreay gated by /AS in the decode CPLS, so this can't accidently drive
    the data bus unless we are in an actual DRAM memory cycle, and it is a read operation.
    The bus drivers for the DRAM have the OE signals always asserted, so flipping direction is 
@@ -615,7 +615,7 @@ DRAM_REFRESH_RAS.ap = !CPU_RESET;
 
 /* 
    REFRESH_COMPLETED is an active low signal that indicates the refresh cycle has completed.
-   This signal resets the REFRESH_REQUESTED_* flip flops.  This is trigger by state 6 of the
+   This signal resets the REFRESH_REQUESTED_* flip flops.  This is triggered by state 6 of the
    refresh signal state machine, which occurs for only a 1/2 cycle period before the state 
    machine itself is reset.   I believe this would also work in state 5.
 */
@@ -660,7 +660,7 @@ REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
 
 /* 
    8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
-   togeher.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
+   together.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
    up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
    0x08.  The produces an event every 15us with an 8MHz clock.   
 
@@ -700,10 +700,7 @@ REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
 /*[REFRESH_TIMER0..3].ck = CLK_8M;*/
 [REFRESH_TIMER0..3].ck = CLK_16M;
 
-/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
-8MHz CPU Clock, this CLK_16M is actually Mhz */
-
-[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3&REFRESH_TIMER2&REFRESH_TIMER1&REFRESH_TIMER0);
+[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
 
 /* 	
 	At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
