@@ -477,7 +477,7 @@ DRAM_MEM_RAS.d = DRAM_MEM_RAS_PRE;
    falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
 */
 
-DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
+DRAM_MEM_CAS.d = !(dram_access_timer_field:[3,4,5]);
 DRAM_MEM_CAS.ck = !CLK_32M;
 DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
 /*

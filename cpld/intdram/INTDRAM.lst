@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
  54:Pin[65]  = DRAM_DATA_DIR; 
  55:Pin[63]  = DRAM_RW;     /* READ/WRITE signal for DRAM - Gated and masked */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 108:                  bit 4 - IRQL5A_MASK
 109:                  bit 3 - IRQL5B_MASK
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 162:   the RESET_REQUEST_OUT will go low on the next CLK_500K rising edge.  That 
 163:   output (0) will trigger the CPU_RESET node to be reset into low, 
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 216:/* 
 217:   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 270:      The highest bit is set to 1 due to the available vectors starting at 64. 
 271:      The next three highest bits are set to the IPL value that has been acknowleged.  This
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 324:
 325:[CPU_D7..0].ck = DTACK_TIMER_0;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 378:
 379:/* 
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 432:   The REFRESH_STATE_TIMER is the state machine used for the refresh cycle.  It is reset during the normal memory /AS cycle
 433:   as a way to have a fixed starting point, and then provides the states need to drive CAS and RAS during the dead part 
@@ -548,7 +548,7 @@ Created Sun Jun 12 12:42:53 2022
 477:   falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
 478:*/
 479:
-480:DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
+480:DRAM_MEM_CAS.d = !(dram_access_timer_field:[3,4,5]);
 481:DRAM_MEM_CAS.ck = !CLK_32M;
 482:DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
 483:/*
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 486:DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET;
 487:*/
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 540:REFRESH_COUNTER_RESET.ck = !CLK_32M;
 541:REFRESH_COUNTER_RESET.ar = !CPU_RESET;
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 594:   delay.
 595:*/
@@ -746,7 +746,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 648:   value will be clocked into this flip flop one cycle later.
 649:   This means the counter will go 1 tick past the highest bit turning on before 
@@ -808,7 +808,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 702:
 703:/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
@@ -870,7 +870,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sun Jun 12 12:42:53 2022
+Created Sun Jun 12 20:49:47 2022
 
 756:       CPU_RESET | 29                                          57 | CPU_INTACK1     
 757:         CLK_16M | 30                                          56 | CPU_INTACK2     
