@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Mon Jun 13 13:09:23 2022
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Mon Jun 13 16:32:08 2022
 
 
 fit1508 C:\INTDRAM.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -513,9 +513,9 @@ PLCC84 programmed logic:
 	# (!CPU_INTACK0 & !CPU_LDS & !DRAM_MEM_CAS.Q));
 
 !CAS1 = (!DRAM_REFRESH_CAS.Q
-	# (CPU_INTACK0 & !CPU_LDS & !DRAM_MEM_CAS.Q));
+	# (!CPU_INTACK0 & !CPU_UDS & !DRAM_MEM_CAS.Q));
 
-!CAS2 = ((!CPU_INTACK0 & !CPU_UDS & !DRAM_MEM_CAS.Q)
+!CAS2 = ((CPU_INTACK0 & !CPU_LDS & !DRAM_MEM_CAS.Q)
 	# !DRAM_REFRESH_CAS.Q);
 
 !CAS3 = ((CPU_INTACK0 & !CPU_UDS & !DRAM_MEM_CAS.Q)
