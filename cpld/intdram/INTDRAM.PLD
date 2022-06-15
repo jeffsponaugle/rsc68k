@@ -9,6 +9,9 @@ Location None;
 Device   f1508ispplcc84;
 
 PROPERTY ATMEL {open_collector=CPU_RESET,CPU_HALT};
+PROPERTY ATMEL {TDI_PULLUP = ON};
+PROPERTY ATMEL {TMS_PULLUP = ON};
+
 /** Inputs ################################################ **/
 
 /* Interrupt Controller */

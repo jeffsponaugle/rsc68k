@@ -1,7 +1,7 @@
 #$ TOOL CUPL
 # Berkeley PLA format generated using CUPL(WM) 5.0a
 # Serial#  60008009
-# Created  Tue Jun 14 17:48:04 2022
+# Created  Tue Jun 14 22:01:03 2022
 #
 #    Name        INTController
 #    Partno      INTCTRLCPLD
@@ -14,6 +14,8 @@
 #
 #$ TITLE  INTController
 #$ PROPERTY ATMEL open_collector = CPU_RESET, CPU_HALT
+#$ PROPERTY ATMEL TDI_PULLUP = ON
+#$ PROPERTY ATMEL TMS_PULLUP = ON
 #$ MODULE  INTContr
 #$ JEDECFILE  INTContr
 #$ DEVICE  f1508ispplcc84

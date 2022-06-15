@@ -1,7 +1,7 @@
 #$ TOOL CUPL
 # Berkeley PLA format generated using CUPL(WM) 5.0a
 # Serial#  60008009
-# Created  Tue Jun 07 10:49:03 2022
+# Created  Tue Jun 14 22:01:16 2022
 #
 #    Name        AddressDecoder
 #    Partno      ADDRDECODE
@@ -13,6 +13,8 @@
 #    Location    None
 #
 #$ TITLE  AddressDecoder
+#$ PROPERTY ATMEL TDI_PULLUP = ON
+#$ PROPERTY ATMEL TMS_PULLUP = ON
 #$ MODULE  AddressD
 #$ JEDECFILE  AddressD
 #$ DEVICE  f1508ispplcc84
