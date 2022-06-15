@@ -62,6 +62,8 @@ Pin[29]  = CPU_RESET;    /* Active Low RESET */
 Pin[20]  = CPU_HALT;
 Pin[30]  = CLK_16M;
 Pin[75]  = CPU_RESET_INV;
+Pin[76]  = REFRESH_REQUESTED_PRE; 
+Pin[77]  = REFRESH_REQUESTED_SYNC;
 
 CPU_RESET_INV = !CPU_RESET;
 
@@ -382,8 +384,11 @@ NODE  [REFRESH_TIMER0..7];
 /* 
    As mentioned above the REFRESH_REQUESTED_* flags are set (==1) when it is time for a refresh cycle.
 */
+
+/* TEMP for TESTING (added as pin 76,77)
 NODE REFRESH_REQUESTED_PRE;
 NODE REFRESH_REQUESTED_SYNC;
+*/
 NODE REFRESH_COMPLETED;
 
 /* 
