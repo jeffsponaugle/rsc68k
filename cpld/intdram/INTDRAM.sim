@@ -422,6 +422,7 @@ DRAM_RW.d  =>
 DRAM_RW.ap  =>
     CPU_AS
   # !DRAM_REFRESH_RAS
+  # !DRAM_REFRESH_CAS
   # !CPU_RESET
 
 DRAM_RW.ck  =>

@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
  54:Pin[65]  = DRAM_DATA_DIR; 
  55:Pin[63]  = DRAM_RW;     /* READ/WRITE signal for DRAM - Gated and masked */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 108:                  bit 4 - IRQL5A_MASK
 109:                  bit 3 - IRQL5B_MASK
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 162:   the RESET_REQUEST_OUT will go low on the next CLK_500K rising edge.  That 
 163:   output (0) will trigger the CPU_RESET node to be reset into low, 
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 216:/* 
 217:   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 270:      The highest bit is set to 1 due to the available vectors starting at 64. 
 271:      The next three highest bits are set to the IPL value that has been acknowleged.  This
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 324:
 325:[CPU_D7..0].ck = DTACK_TIMER_0;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 378:
 379:/* 
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 432:   The REFRESH_STATE_TIMER is the state machine used for the refresh cycle.  It is reset during the normal memory /AS cycle
 433:   as a way to have a fixed starting point, and then provides the states need to drive CAS and RAS during the dead part 
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 486:DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET;
 487:*/
@@ -587,7 +587,7 @@ Created Mon Jun 13 16:32:07 2022
 508:*/
 509:DRAM_RW.d = CPU_RW;
 510:DRAM_RW.ck = CLK_32M;
-511:DRAM_RW.ap = CPU_AS # !DRAM_REFRESH_RAS # !CPU_RESET;
+511:DRAM_RW.ap = CPU_AS # !DRAM_REFRESH_RAS  # !DRAM_REFRESH_CAS # !CPU_RESET;
 512:
 513:
 514:/*
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 540:REFRESH_COUNTER_RESET.ck = !CLK_32M;
 541:REFRESH_COUNTER_RESET.ar = !CPU_RESET;
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
 594:   delay.
 595:*/
@@ -726,189 +726,190 @@ Created Mon Jun 13 16:32:07 2022
 631:   we are reading the upper or lower 8 bits.  
 632:*/
 633:RAS0 = (DRAM_MEM_RAS # CPU_A1) & DRAM_REFRESH_RAS;
-634:RAS2 = (DRAM_MEM_RAS # !CPU_A1) & DRAM_REFRESH_RAS;
-635:CAS0 = (DRAM_MEM_CAS # CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
-636:CAS2 = (DRAM_MEM_CAS # !CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
-637:CAS1 = (DRAM_MEM_CAS # CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
-638:CAS3 = (DRAM_MEM_CAS # !CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
-639:
+634:CAS0 = (DRAM_MEM_CAS # CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
+635:CAS1 = (DRAM_MEM_CAS # CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
+636:
+637:RAS2 = (DRAM_MEM_RAS # !CPU_A1) & DRAM_REFRESH_RAS;
+638:CAS2 = (DRAM_MEM_CAS # !CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
+639:CAS3 = (DRAM_MEM_CAS # !CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
 640:
-641:/* Refresh Timer - should fire every 15us */
-642:
-643:/* 
-644:   Because the reset in the CPLD is async, we buffer it with 
-645:   a flip flop so it is active for just one cycle.  after one cycle
-646:   the output of this flip flop will reset the refresh timer, and that reset
-647:   value will be clocked into this flip flop one cycle later.
+641:
+642:/* Refresh Timer - should fire every 15us */
+643:
+644:/* 
+645:   Because the reset in the CPLD is async, we buffer it with 
+646:   a flip flop so it is active for just one cycle.  after one cycle
+647:   the output of this flip flop will reset the refresh timer, and that reset
 
 LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
-648:   This means the counter will go 1 tick past the highest bit turning on before 
-649:   starting again at 0.
-650:*/
-651:
-652:REFRESH_REQUESTED_PRE.d = 'b'1;
-653:REFRESH_REQUESTED_PRE.ck = REFRESH_TIMER7;
-654:REFRESH_REQUESTED_PRE.ar = !REFRESH_COMPLETED # !CPU_RESET;
-655:
-656:REFRESH_REQUESTED_SYNC.d = REFRESH_REQUESTED_PRE;
-657:REFRESH_REQUESTED_SYNC.ck = !CPU_AS;
-658:REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
-659:
-660:/* 
-661:   8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
-662:   together.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
-663:   up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
-664:   0x08.  The produces an event every 15us with an 8MHz clock.   
-665:
-666:   If the clock rate is not 32MHz for the core input, this will need to be adjusted.
-667:
-668:   The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
-669:   counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
-670:   0x08.
-671:*/
-672:
-673:REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
-674:REFRESH_TIMER_RESET.ck = CLK_32M;
-675:REFRESH_TIMER_RESET.ar = !CPU_RESET;
-676:
-677:REFRESH_TIMER0.d = !REFRESH_TIMER0;
-678:REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
-679:REFRESH_TIMER2.d = ( REFRESH_TIMER2 & !REFRESH_TIMER0 )
-680:                    # ( REFRESH_TIMER2 & !REFRESH_TIMER1 )
-681:                    # ( !REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
-682:REFRESH_TIMER3.d = ( REFRESH_TIMER3 & !REFRESH_TIMER2 )
-683:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER0 )
-684:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
-685:                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
-686:
-687:REFRESH_TIMER4.d = !REFRESH_TIMER4;
-688:REFRESH_TIMER5.d = REFRESH_TIMER4 $ REFRESH_TIMER5;
-689:REFRESH_TIMER6.d = ( REFRESH_TIMER6 & !REFRESH_TIMER4 )
-690:                    # ( REFRESH_TIMER6 & !REFRESH_TIMER5 )
-691:                    # ( !REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
-692:REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
-693:                    # ( REFRESH_TIMER7 & !REFRESH_TIMER4 )
-694:                    # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
-695:                    # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
-696:
-697:/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
-698:8MHz CPU Clock, this CLK_16M is actually Mhz */
-699:/*[REFRESH_TIMER0..3].ck = CLK_8M;*/
-700:[REFRESH_TIMER0..3].ck = CLK_16M;
-701:
+648:   value will be clocked into this flip flop one cycle later.
+649:   This means the counter will go 1 tick past the highest bit turning on before 
+650:   starting again at 0.
+651:*/
+652:
+653:REFRESH_REQUESTED_PRE.d = 'b'1;
+654:REFRESH_REQUESTED_PRE.ck = REFRESH_TIMER7;
+655:REFRESH_REQUESTED_PRE.ar = !REFRESH_COMPLETED # !CPU_RESET;
+656:
+657:REFRESH_REQUESTED_SYNC.d = REFRESH_REQUESTED_PRE;
+658:REFRESH_REQUESTED_SYNC.ck = !CPU_AS;
+659:REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
+660:
+661:/* 
+662:   8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
+663:   together.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
+664:   up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
+665:   0x08.  The produces an event every 15us with an 8MHz clock.   
+666:
+667:   If the clock rate is not 32MHz for the core input, this will need to be adjusted.
+668:
+669:   The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
+670:   counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
+671:   0x08.
+672:*/
+673:
+674:REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
+675:REFRESH_TIMER_RESET.ck = CLK_32M;
+676:REFRESH_TIMER_RESET.ar = !CPU_RESET;
+677:
+678:REFRESH_TIMER0.d = !REFRESH_TIMER0;
+679:REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
+680:REFRESH_TIMER2.d = ( REFRESH_TIMER2 & !REFRESH_TIMER0 )
+681:                    # ( REFRESH_TIMER2 & !REFRESH_TIMER1 )
+682:                    # ( !REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+683:REFRESH_TIMER3.d = ( REFRESH_TIMER3 & !REFRESH_TIMER2 )
+684:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER0 )
+685:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
+686:                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+687:
+688:REFRESH_TIMER4.d = !REFRESH_TIMER4;
+689:REFRESH_TIMER5.d = REFRESH_TIMER4 $ REFRESH_TIMER5;
+690:REFRESH_TIMER6.d = ( REFRESH_TIMER6 & !REFRESH_TIMER4 )
+691:                    # ( REFRESH_TIMER6 & !REFRESH_TIMER5 )
+692:                    # ( !REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+693:REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
+694:                    # ( REFRESH_TIMER7 & !REFRESH_TIMER4 )
+695:                    # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
+696:                    # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+697:
+698:/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
+699:8MHz CPU Clock, this CLK_16M is actually Mhz */
+700:/*[REFRESH_TIMER0..3].ck = CLK_8M;*/
+701:[REFRESH_TIMER0..3].ck = CLK_16M;
 
 LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
-702:[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
-703:
-704:/*      
-705:        At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
-706:        From 0x08 to 0x80 will give is the correct time period of 15us.
-707:*/
-708:
-709:[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
-710:[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
-711:REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
-712:
+702:
+703:[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
+704:
+705:/*      
+706:        At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
+707:        From 0x08 to 0x80 will give is the correct time period of 15us.
+708:*/
+709:
+710:[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+711:[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+712:REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
 713:
-714:/* ############################################################################################ */
-715:
-716:/*
-717:
+714:
+715:/* ############################################################################################ */
+716:
+717:/*
 718:
-719:                                                                                    
-720:                                             I                                      
-721:                                             R                                      
-722:                                             Q                                      
-723:                                             L                                      
-724:                       C                     7                                      
-725:                       L                     _                                      
-726:                     C K  I I   I I I   I II B                                      
-727:                     L _  R R   R R R   R RR U                                      
-728:                     K 5  Q Q   Q Q Q   Q QQ T                                      
-729:                     _ 0  L L G L L L V L LL T G       V                            
-730:                     1 0  3 3 N 4 4 5 C 5 66 O N       C                            
-731:                     M K  B A D B A B C A BA N D       C                            
-732:                    -------------------------------------------                     
-733:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
-734:                  /    10   8   6   4   2  84  82  80  78  76    \                 
-735:                 | 12                    (*)                   74 | RAS0            
-736:             VCC | 13                                          73 | RAS2            
-737:             TDI | 14                                          72 | GND             
-738:                 | 15                                          71 | TDO             
-739:                 | 16                                          70 | CAS3            
-740:    CPU_RESET_IN | 17                                          69 | CAS2            
-741:         CLK_32M | 18                                          68 | CAS1            
-742:             GND | 19                                          67 | CAS0            
-743:        CPU_HALT | 20                                          66 | VCC             
-744:         CPU_FC0 | 21                                          65 | DRAM_DATA_DIR   
-745:         CPU_FC1 | 22                 ATF1508                  64 | DRAM_MEM_AB     
-746:             TMS | 23               84-Lead PLCC               63 | DRAM_RW         
-747:         CPU_FC2 | 24                                          62 | TCK             
-748:            IPL0 | 25                                          61 |                 
-749:             VCC | 26                                          60 |                 
-750:            IPL1 | 27                                          59 | GND             
-751:            IPL2 | 28                                          58 | CPU_INTACK0     
-752:       CPU_RESET | 29                                          57 | CPU_INTACK1     
-753:         CLK_16M | 30                                          56 | CPU_INTACK2     
-754:          CPU_RW | 31                                          55 | INTC_CS         
-755:             GND | 32                                          54 | DRAM_CS         
+719:
+720:                                                                                    
+721:                                             I                                      
+722:                                             R                                      
+723:                                             Q                                      
+724:                                             L                                      
+725:                       C                     7                                      
+726:                       L                     _                                      
+727:                     C K  I I   I I I   I II B                                      
+728:                     L _  R R   R R R   R RR U                                      
+729:                     K 5  Q Q   Q Q Q   Q QQ T                                      
+730:                     _ 0  L L G L L L V L LL T G       V                            
+731:                     1 0  3 3 N 4 4 5 C 5 66 O N       C                            
+732:                     M K  B A D B A B C A BA N D       C                            
+733:                    -------------------------------------------                     
+734:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+735:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+736:                 | 12                    (*)                   74 | RAS0            
+737:             VCC | 13                                          73 | RAS2            
+738:             TDI | 14                                          72 | GND             
+739:                 | 15                                          71 | TDO             
+740:                 | 16                                          70 | CAS3            
+741:    CPU_RESET_IN | 17                                          69 | CAS2            
+742:         CLK_32M | 18                                          68 | CAS1            
+743:             GND | 19                                          67 | CAS0            
+744:        CPU_HALT | 20                                          66 | VCC             
+745:         CPU_FC0 | 21                                          65 | DRAM_DATA_DIR   
+746:         CPU_FC1 | 22                 ATF1508                  64 | DRAM_MEM_AB     
+747:             TMS | 23               84-Lead PLCC               63 | DRAM_RW         
+748:         CPU_FC2 | 24                                          62 | TCK             
+749:            IPL0 | 25                                          61 |                 
+750:             VCC | 26                                          60 |                 
+751:            IPL1 | 27                                          59 | GND             
+752:            IPL2 | 28                                          58 | CPU_INTACK0     
+753:       CPU_RESET | 29                                          57 | CPU_INTACK1     
+754:         CLK_16M | 30                                          56 | CPU_INTACK2     
+755:          CPU_RW | 31                                          55 | INTC_CS         
 
 LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 13 16:32:07 2022
+Created Tue Jun 14 17:48:03 2022
 
-756:                  \     34  36  38  40  42  44  46  48  50  52   /                 
-757:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
-758:                    --------------------------------------------                     
-759:                      C C C C C V C C C G V C C   G C       D V                     
-760:                      P P P P P C P P P N C P P   N P       T C                     
-761:                      U U U U U C U U U D C U U   D U       A C                     
-762:                      _ _ _ _ _   _ _ _     _ _     _       C                       
-763:                      U L A D D   D D D     D D     D       K                       
-764:                      D D S 0 1   2 3 4     5 6     7       _                       
-765:                      S S                                   F                       
-766:                                                            R                       
-767:                                                            O                       
-768:                                                            M                       
-769:                                                            _                       
-770:                                                            I                       
-771:                                                            N                       
-772:
+756:             GND | 32                                          54 | DRAM_CS         
+757:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+758:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+759:                    --------------------------------------------                     
+760:                      C C C C C V C C C G V C C   G C       D V                     
+761:                      P P P P P C P P P N C P P   N P       T C                     
+762:                      U U U U U C U U U D C U U   D U       A C                     
+763:                      _ _ _ _ _   _ _ _     _ _     _       C                       
+764:                      U L A D D   D D D     D D     D       K                       
+765:                      D D S 0 1   2 3 4     5 6     7       _                       
+766:                      S S                                   F                       
+767:                                                            R                       
+768:                                                            O                       
+769:                                                            M                       
+770:                                                            _                       
+771:                                                            I                       
+772:                                                            N                       
 773:
 774:
 775:
-776:Total dedicated input used:     4/4     (100%)
-777:Total I/O pins used             49/64   (76%)
-778:Total Logic cells used          78/128  (60%)
-779:Total Flip-Flop used            58/128  (45%)
-780:Total Foldback logic used       17/128  (13%)
-781:Total Nodes+FB/MCells           95/128  (74%)
-782:Total cascade used              0
-783:Total input pins                27
-784:Total output pins               26
-785:Total Pts                       266
-786:
+776:
+777:Total dedicated input used:     4/4     (100%)
+778:Total I/O pins used             49/64   (76%)
+779:Total Logic cells used          78/128  (60%)
+780:Total Flip-Flop used            58/128  (45%)
+781:Total Foldback logic used       17/128  (13%)
+782:Total Nodes+FB/MCells           95/128  (74%)
+783:Total cascade used              0
+784:Total input pins                27
+785:Total output pins               26
+786:Total Pts                       266
 787:
-788:*/
-789:
+788:
+789:*/
 790:
 791:
 792:
+793:
 
 
 
