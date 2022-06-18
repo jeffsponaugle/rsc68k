@@ -73,10 +73,18 @@ NODE IRQL5A_MASK,IRQL5B_MASK;
 NODE IRQL4A_MASK,IRQL4B_MASK;
 NODE IRQL3A_MASK,IRQL3B_MASK;
 
+NODE AS_GATED;
+
 /* flip-flop for the system requesting a reset */
 
 NODE RESET_REQ;
 NODE RESET_REQ_OUT;
+
+/* create a gated version of the AS signal that sets on the falling clk_16, but resets to 1 as soon as AS resets */
+
+AS_GATED.d = CPU_AS;
+AS_GATED.ck = !CLK_16M;
+AS_GATED.AP = CPU_AS;
 
 /* 
    We will create an internal synthetic IRQ7L request that is triggered
@@ -465,16 +473,7 @@ FIELD dram_access_timer_field = [DRAM_ACCESS_TIMER2..0];
 
 DRAM_MEM_RAS.ck = !CLK_32M;
 DRAM_MEM_RAS.ap = DRAM_CS # CPU_AS # !CPU_RESET;
-DRAM_MEM_RAS.d = !(dram_access_timer_field:[2,3]);
-
-
-/*
-DRAM_MEM_RAS.ck = CLK_32M;
-DRAM_MEM_RAS.ap = CPU_AS # !CPU_RESET;
-DRAM_MEM_RAS.d = DRAM_MEM_RAS_PRE;
-*/
-
-
+DRAM_MEM_RAS.d = !(dram_access_timer_field:[1,2]);
 
 /* 
    mid flip flop for dram /RAS line.  Active for counter values 3,4,5
@@ -485,21 +484,16 @@ DRAM_MEM_RAS.d = DRAM_MEM_RAS_PRE;
    falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
 */
 
-DRAM_MEM_CAS.d = !(dram_access_timer_field:[3,4,5]);
+DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
 DRAM_MEM_CAS.ck = !CLK_32M;
 DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
-/*
-DRAM_MEM_CAS.d = DRAM_MEM_CAS_PRE;
-DRAM_MEM_CAS.ck = CLK_32M;
-DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET;
-*/
 
 /*  
    DRAM_MEM_AB selects which address lines are fed to the DRAM chip.  This toggels after /RAS but before /CAS.
    This signal is only active is we are doing a bus cycle (/AS).  
 */
 
-DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[2,3,4]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
+DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[1,2,3]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
 DRAM_MEM_AB_PRE.ck = !CLK_32M;
 DRAM_MEM_AB_PRE.ap = DRAM_CS;
 
@@ -532,7 +526,7 @@ DRAM_ACCESS_TIMER2.d = ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER0 )
                     # ( !DRAM_ACCESS_TIMER2 & DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER0 );
 
 [DRAM_ACCESS_TIMER2..0].ck = CLK_32M;
-[DRAM_ACCESS_TIMER2..0].ar = CPU_AS # !CPU_RESET;
+[DRAM_ACCESS_TIMER2..0].ar = AS_GATED # !CPU_RESET;
 
 
 /*
@@ -602,13 +596,13 @@ REFRESH_STATE_TIMER2.d = ( REFRESH_STATE_TIMER2 & !REFRESH_STATE_TIMER0 )
    delay.
 */
 
-DRAM_REFRESH_CAS_PRE.d = !(refresh_state_timer_field:[2,3]);
+DRAM_REFRESH_CAS_PRE.d = !(refresh_state_timer_field:[1,2]);
 DRAM_REFRESH_CAS_PRE.ck = !CLK_32M;
-DRAM_REFRESH_CAS_PRE.ap = !CPU_RESET;
+DRAM_REFRESH_CAS_PRE.ap = !CPU_RESET # !REFRESH_COUNTER_RESET;
 
 DRAM_REFRESH_CAS.d = DRAM_REFRESH_CAS_PRE;
 DRAM_REFRESH_CAS.ck = CLK_32M;
-DRAM_REFRESH_CAS.ap = !CPU_RESET;
+DRAM_REFRESH_CAS.ap = !CPU_RESET # !REFRESH_COUNTER_RESET;
 
 /*
    The RAS signal for the refresh cycle is based on the above state machine, and uses one flip flop.  You will notice the
@@ -617,9 +611,9 @@ DRAM_REFRESH_CAS.ap = !CPU_RESET;
    a 1/2 clock cycle delay as required by the DRAM
 */
 
-DRAM_REFRESH_RAS.d = !(refresh_state_timer_field:[3,4]);
+DRAM_REFRESH_RAS.d = !(refresh_state_timer_field:[2,3]);
 DRAM_REFRESH_RAS.ck = !CLK_32M;
-DRAM_REFRESH_RAS.ap = !CPU_RESET;
+DRAM_REFRESH_RAS.ap = !CPU_RESET # !REFRESH_COUNTER_RESET;
 
 /* 
    REFRESH_COMPLETED is an active low signal that indicates the refresh cycle has completed.
@@ -628,7 +622,7 @@ DRAM_REFRESH_RAS.ap = !CPU_RESET;
    machine itself is reset.   I believe this would also work in state 5.
 */
 
-REFRESH_COMPLETED.d = !(refresh_state_timer_field:[6]);
+REFRESH_COMPLETED.d = !(refresh_state_timer_field:[5]);
 REFRESH_COMPLETED.ck = !CLK_32M;
 REFRESH_COMPLETED.ap = !CPU_RESET;
 
@@ -663,7 +657,7 @@ REFRESH_REQUESTED_PRE.ck = REFRESH_TIMER7;
 REFRESH_REQUESTED_PRE.ar = !REFRESH_COMPLETED # !CPU_RESET;
 
 REFRESH_REQUESTED_SYNC.d = REFRESH_REQUESTED_PRE;
-REFRESH_REQUESTED_SYNC.ck = !CPU_AS;
+REFRESH_REQUESTED_SYNC.ck = !AS_GATED;
 REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
 
 /* 
