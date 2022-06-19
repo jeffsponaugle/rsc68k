@@ -408,7 +408,7 @@ NODE REFRESH_COMPLETED;
        
 NODE  DRAM_MEM_RAS;          
 NODE  DRAM_MEM_CAS;
-NODE  DRAM_MEM_AB_PRE; 
+NODE  DRAM_MEM_CAS_PRE; 
 
 
 /*
@@ -483,23 +483,38 @@ DRAM_MEM_RAS.d = !(dram_access_timer_field:[1,2]);
    output flip flop for DRAM /RAS line. fed from _PRE output Latches on 
    falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
 */
+/* - Working at 12Mhz
+      DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
+      DRAM_MEM_CAS.ck = !CLK_32M;
+      DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
+*/
 
-DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
-DRAM_MEM_CAS.ck = !CLK_32M;
+/* Move CAS back 1/2 cycle by using 1, plus 1/2 delay */
+DRAM_MEM_CAS_PRE.d = !(dram_access_timer_field:[1,2,3,4]);
+DRAM_MEM_CAS_PRE.ck = !CLK_32M;
+DRAM_MEM_CAS_PRE.ap = CPU_AS # !CPU_RESET # DRAM_CS;
+
+DRAM_MEM_CAS.d = DRAM_MEM_CAS_PRE;
+DRAM_MEM_CAS.ck = CLK_32M;
 DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
 
 /*  
    DRAM_MEM_AB selects which address lines are fed to the DRAM chip.  This toggels after /RAS but before /CAS.
    This signal is only active is we are doing a bus cycle (/AS).  
 */
+/* - Working at 12Mhz
+      DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[1,2,3]);         
+      DRAM_MEM_AB_PRE.ck = !CLK_32M;
+      DRAM_MEM_AB_PRE.ap = DRAM_CS;
+      DRAM_MEM_AB.d = DRAM_MEM_AB_PRE;         
+      DRAM_MEM_AB.ck = CLK_32M;
+      DRAM_MEM_AB.ap = CPU_AS # !CPU_RESET;
+*/
 
-DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[1,2,3]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
-DRAM_MEM_AB_PRE.ck = !CLK_32M;
-DRAM_MEM_AB_PRE.ap = DRAM_CS;
-
-DRAM_MEM_AB.d = DRAM_MEM_AB_PRE;         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
-DRAM_MEM_AB.ck = CLK_32M;
-DRAM_MEM_AB.ap = CPU_AS # !CPU_RESET;
+/* Lets do AB at the same time as RAS asserts */
+DRAM_MEM_AB.d = !(dram_access_timer_field:[1,2,3,4]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
+DRAM_MEM_AB.ck = !CLK_32M;
+DRAM_MEM_AB.ap = DRAM_CS # CPU_AS # !CPU_RESET;
 
 /*
    DRAM_RW is the R/W line to the DRAM memory, and it is a buffered version of the CPU R/W line.  It is held 
