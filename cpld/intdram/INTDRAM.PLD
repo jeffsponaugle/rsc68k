@@ -511,9 +511,9 @@ DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
       DRAM_MEM_AB.ap = CPU_AS # !CPU_RESET;
 */
 
-/* Lets do AB at the same time as RAS asserts */
-DRAM_MEM_AB.d = !(dram_access_timer_field:[1,2,3,4]);         /* Same as CAS signal, but the CAS signal is delayed by a second flip flop */
-DRAM_MEM_AB.ck = !CLK_32M;
+/* Lets do AB at the same time as RAS asserts, but slightly delayed. */
+DRAM_MEM_AB.d = 'b'0;         
+DRAM_MEM_AB.ck = !DRAM_MEM_RAS;
 DRAM_MEM_AB.ap = DRAM_CS # CPU_AS # !CPU_RESET;
 
 /*

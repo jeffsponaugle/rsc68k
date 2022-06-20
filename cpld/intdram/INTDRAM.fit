@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Sun Jun 19 17:30:41 2022
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Mon Jun 20 11:22:16 2022
 
 
 fit1508 C:\INTDRAM.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -477,33 +477,31 @@ IRQL3A_MASK		(MC13	FB)  : MUX 33		Ref (B32fb)
 IRQL6A			(MC25	FB)  : MUX 35		Ref (OE1)
 REFRESH_TIMER0		(MC1	FB)  : MUX 36		Ref (A3fb)
 
-FanIn assignment for block G [20]
+FanIn assignment for block G [18]
 {
-CLK_4M,CPU_LDS,CLK_32M,CPU_RW,CPU_RESET,CPU_AS,CLK_8M,CPU_INTACK0,CPU_UDS,
-DRAM_ACCESS_TIMER0,DRAM_REFRESH_RAS,DRAM_ACCESS_TIMER2,DRAM_CS,DRAM_MEM_CAS,DRAM_REFRESH_CAS,DRAM_ACCESS_TIMER1,
+CLK_4M,CLK_32M,CPU_RW,CPU_AS,CPU_LDS,CPU_RESET,CPU_INTACK0,CLK_8M,CPU_UDS,
+DRAM_MEM_CAS,DRAM_REFRESH_RAS,DRAM_CS,DRAM_MEM_RAS,DRAM_REFRESH_CAS,
 REFRESH_TIMER4,REFRESH_TIMER5,REFRESH_TIMER6,REFRESH_TIMER7,
 }
 Multiplexer assignment for block G
-CLK_4M			(MC13	FB)  : MUX 1		Ref (G111fb)
-REFRESH_TIMER4		(MC3	FB)  : MUX 2		Ref (A4fb)
-DRAM_ACCESS_TIMER0		(MC1	FB)  : MUX 4		Ref (A1fb)
-REFRESH_TIMER5		(MC6	FB)  : MUX 5		Ref (A12fb)
-CPU_LDS			(MC17	P)   : MUX 8		Ref (D61p)
-CLK_32M			(MC14	P)   : MUX 9		Ref (B24p)
-DRAM_REFRESH_RAS		(MC2	FB)  : MUX 10		Ref (A2fb)
-DRAM_ACCESS_TIMER2		(MC7	FB)  : MUX 11		Ref (A14fb)
-CPU_RW			(MC15	P)   : MUX 15		Ref (C35p)
-CPU_RESET		(MC11	P)   : MUX 17		Ref (C38p)
-REFRESH_TIMER6		(MC8	FB)  : MUX 19		Ref (A16fb)
-DRAM_CS			(MC19	P)   : MUX 21		Ref (F83p)
-DRAM_MEM_CAS		(MC10	FB)  : MUX 22		Ref (B19fb)
-REFRESH_TIMER7		(MC4	FB)  : MUX 24		Ref (A7fb)
-CPU_AS			(MC16	P)   : MUX 26		Ref (D59p)
-DRAM_REFRESH_CAS		(MC9	FB)  : MUX 28		Ref (B18fb)
-DRAM_ACCESS_TIMER1		(MC5	FB)  : MUX 31		Ref (A9fb)
-CLK_8M			(MC12	FB)  : MUX 33		Ref (D61fb)
-CPU_INTACK0		(MC20	P)   : MUX 34		Ref (F91p)
-CPU_UDS			(MC18	P)   : MUX 38		Ref (D64p)
+DRAM_MEM_CAS		(MC8	FB)  : MUX 0		Ref (B19fb)
+CLK_4M			(MC11	FB)  : MUX 1		Ref (G111fb)
+REFRESH_TIMER4		(MC2	FB)  : MUX 2		Ref (A4fb)
+CLK_32M			(MC12	P)   : MUX 3		Ref (B24p)
+REFRESH_TIMER5		(MC5	FB)  : MUX 5		Ref (A12fb)
+CPU_RW			(MC13	P)   : MUX 9		Ref (C35p)
+DRAM_REFRESH_RAS		(MC1	FB)  : MUX 10		Ref (A2fb)
+CPU_AS			(MC14	P)   : MUX 16		Ref (D59p)
+REFRESH_TIMER6		(MC6	FB)  : MUX 19		Ref (A16fb)
+CPU_LDS			(MC15	P)   : MUX 20		Ref (D61p)
+DRAM_CS			(MC17	P)   : MUX 21		Ref (F83p)
+REFRESH_TIMER7		(MC3	FB)  : MUX 24		Ref (A7fb)
+CPU_RESET		(MC9	P)   : MUX 25		Ref (C38p)
+DRAM_MEM_RAS		(MC4	FB)  : MUX 27		Ref (A11fb)
+DRAM_REFRESH_CAS		(MC7	FB)  : MUX 28		Ref (B18fb)
+CPU_INTACK0		(MC18	P)   : MUX 34		Ref (F91p)
+CLK_8M			(MC10	FB)  : MUX 37		Ref (D61fb)
+CPU_UDS			(MC16	P)   : MUX 38		Ref (D64p)
 
 FanIn assignment for block H [9]
 {
@@ -587,9 +585,7 @@ DRAM_ACCESS_TIMER2.D = ((DRAM_ACCESS_TIMER2.Q & !DRAM_ACCESS_TIMER0.Q)
 
 DRAM_DATA_DIR = (CPU_RW & !DRAM_CS);
 
-DRAM_MEM_AB.D = ((!DRAM_ACCESS_TIMER2.Q & !DRAM_ACCESS_TIMER0.Q & !DRAM_ACCESS_TIMER1.Q)
-	# (DRAM_ACCESS_TIMER2.Q & DRAM_ACCESS_TIMER1.Q)
-	# (DRAM_ACCESS_TIMER2.Q & DRAM_ACCESS_TIMER0.Q));
+DRAM_MEM_AB.D = 0;
 
 DRAM_MEM_CAS.D = DRAM_MEM_CAS_PRE.Q;
 
@@ -852,7 +848,7 @@ DRAM_ACCESS_TIMER2.C = CLK_32M;
 
 DRAM_ACCESS_TIMER2.AR = Com_Ctrl_337;
 
-DRAM_MEM_AB.C = !CLK_32M;
+DRAM_MEM_AB.C = !DRAM_MEM_RAS.Q;
 
 DRAM_MEM_AB.AP = Com_Ctrl_339;
 
@@ -1248,7 +1244,7 @@ MC95  0         --                            XXL_345               C----  NA   
 MC96  62   --   TCK                    INPUT  XXL_347               C----  NA           --             5     slow
 MC97  63   on   DRAM_RW                Dc--p  --                           --           --             3     slow
 MC98  0         --                            --                           --           --             0     slow
-MC99  64   on   DRAM_MEM_AB            Dc--p  --                           NA           --             5     slow
+MC99  64   on   DRAM_MEM_AB            Dc--p  --                           --           --             2     slow
 MC100 0         --                            --                           --           --             0     slow
 MC101 65   on   DRAM_DATA_DIR          C----  --                           --           --             1     slow
 MC102 0         --                            --                           --           --             0     slow
@@ -1290,7 +1286,7 @@ C: LC33	- LC48		8/16(50%)	8/16(50%)	2/16(12%)	31/80(38%)	(25)	0
 D: LC49	- LC64		11/16(68%)	8/16(50%)	1/16(6%)	37/80(46%)	(25)	0
 E: LC65	- LC80		8/16(50%)	4/16(25%)	0/16(0%)	25/80(31%)	(25)	0
 F: LC81	- LC96		4/16(25%)	6/16(37%)	0/16(0%)	15/80(18%)	(25)	0
-G: LC97	- LC112		9/16(56%)	8/16(50%)	2/16(12%)	26/80(32%)	(20)	0
+G: LC97	- LC112		9/16(56%)	8/16(50%)	2/16(12%)	23/80(28%)	(18)	0
 H: LC113- LC128		5/16(31%)	5/16(31%)	1/16(6%)	12/80(15%)	(9)	0
 
 Total dedicated input used:	4/4 	(100%)
@@ -1302,7 +1298,7 @@ Total Nodes+FB/MCells 		96/128 	(75%)
 Total cascade used 		0
 Total input pins 		27
 Total output pins 		29
-Total Pts 			265
+Total Pts 			262
 Creating pla file C:\INTDRAM.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
