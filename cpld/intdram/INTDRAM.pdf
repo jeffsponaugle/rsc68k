@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sun Jun 19 16:31:46 2022 "}
+  {DBtime "Sun Jun 19 17:30:40 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -69,8 +69,8 @@
    {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
    {P DRAM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
    {P DRAM_MEM {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P REFRESH {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P AS_GATED {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
    {P IRQL6A {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P CPU_HALT {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P IPL0 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
@@ -247,8 +247,8 @@
    {T "CPU_IN0" 140 120}
    {T "DRAM_RW" 140 100}
    {T "DRAM_MEM" 140 80}
-   {T "REFRESH_" 140 60}
-   {T "REFRESH" 140 40}
+   {T "AS_GATED" 140 60}
+   {T "REFRESH_" 140 40}
    {T "IRQL6A" 140 20}
    [Tj "RC"]
    {T "CPU_HALT" 320 20}
@@ -359,9 +359,9 @@
    }
    {N DRAM_MEM
    }
-   {N REFRESH_
+   {N AS_GATED
    }
-   {N REFRESH
+   {N REFRESH_
    }
    {N IRQL6A
    }
