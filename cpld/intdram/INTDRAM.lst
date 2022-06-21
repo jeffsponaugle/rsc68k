@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
  54:Pin[64]  = DRAM_MEM_AB;    /* Flip flop for MEM_AB signal */
  55:Pin[10]  = CLK_500K;
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 108:
 109:/* Pins for Testing */
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 162:IRQL4B_MASK.ck = INTC_CS # CPU_A1 # CPU_A2 # CPU_RW;
 163:IRQL4B_MASK.ap = !CPU_RESET;
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 216:   The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
 217:   back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 270:IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
 271:IRQL4B_PE = (IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 324:   1 cycle after the INT_ACK assertion happens via the DTACK_TIMER_0 signal.  The output enable is driven by 
 325:   the same INT_ACK signal, so this output enable should happen before the latch change.   The databus will
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 378:/* 
 379:   Using two flip flops for these two signals delays their output by 1/2 clock cycle
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 432:/* 
 433:   The REFESH_TMER_RESET flag is used to reset the timer used to trigger when a refresh is needed (every 15us)
@@ -542,9 +542,9 @@ Created Mon Jun 20 11:22:15 2022
 471:   falling edge of CLK_32M. Held in preset(==1) when AS is high .  Adds 1/2 delay.
 472:*/
 473:
-474:DRAM_MEM_RAS.ck = !CLK_32M;
+474:DRAM_MEM_RAS.ck = CLK_16M;
 475:DRAM_MEM_RAS.ap = DRAM_CS # CPU_AS # !CPU_RESET;
-476:DRAM_MEM_RAS.d = !(dram_access_timer_field:[1,2]);
+476:DRAM_MEM_RAS.d = !(dram_access_timer_field:[1]);
 477:
 478:/* 
 479:   mid flip flop for dram /RAS line.  Active for counter values 3,4,5
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 486:/* - Working at 12Mhz
 487:      DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 540:                    # ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER1 )
 541:                    # ( !DRAM_ACCESS_TIMER2 & DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER0 );
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 594:
 595:   REFRESH_COUNTER_RESET is active low, so when it is low we want to assert(high) the reset of the state time flip flops 
@@ -746,7 +746,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 648:   we are reading the upper or lower 8 bits.  
 649:*/
@@ -808,7 +808,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 702:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
 703:                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
@@ -870,7 +870,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 756:                 | 15                                          71 | TDO             
 757:                 | 16                                          70 | CAS3            
@@ -932,7 +932,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 16
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Jun 20 11:22:15 2022
+Created Mon Jun 20 17:51:43 2022
 
 810:
 

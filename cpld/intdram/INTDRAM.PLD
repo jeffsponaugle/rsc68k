@@ -471,9 +471,9 @@ FIELD dram_access_timer_field = [DRAM_ACCESS_TIMER2..0];
    falling edge of CLK_32M. Held in preset(==1) when AS is high .  Adds 1/2 delay.
 */
 
-DRAM_MEM_RAS.ck = !CLK_32M;
+DRAM_MEM_RAS.ck = CLK_16M;
 DRAM_MEM_RAS.ap = DRAM_CS # CPU_AS # !CPU_RESET;
-DRAM_MEM_RAS.d = !(dram_access_timer_field:[1,2]);
+DRAM_MEM_RAS.d = !(dram_access_timer_field:[1]);
 
 /* 
    mid flip flop for dram /RAS line.  Active for counter values 3,4,5
