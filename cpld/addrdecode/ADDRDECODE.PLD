@@ -44,7 +44,7 @@ Pin[76]  = FLASH_LOW_CS;
 Pin[75]  = FLASH_HIGH_CS;
 Pin[74]  = FLASH_A18;               /* Used to select lower or upper half of FLASH */
 Pin[80]  = LED_LATCH_CS;
-Pin[73]  = NIC_CS;
+/*Pin[73]  = NIC_CS;*/
 Pin[65]  = IDE_CSA;
 Pin[64]  = IDE_CSB;
 Pin[63]  = UART_CSA;
@@ -54,7 +54,7 @@ Pin[58]  = RTS_D_SEL;
 Pin[57]  = RTS_CS;
 Pin[56]  = RTS_A_SEL;
 Pin[55]  = PTC_CS;
-Pin[54]  = K8042_CS;
+/*Pin[54]  = K8042_CS;*/
 Pin[52]  = IDE_BUFFER_EN;
 Pin[68]  = ITC_CS;
 
@@ -91,7 +91,7 @@ ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
 
 DTACK_MEMORY_0W = !SRAM0_HIGH_CS # !SRAM0_LOW_CS # !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS
                   # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
-                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS # !NIC_CS # !SPY_SETUP_LATCH_CS 
+                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS  # !SPY_SETUP_LATCH_CS 
                   # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS # !FLASH_CONFIG_CLOCK # !ITC_CS;
 
 /* 
@@ -186,29 +186,26 @@ MEM_OE = !CPU_RW;
 
 SEVENSEG_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF00XX );
 UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
-
-
-/* Hack to extend UART_CSA longer */
-/*
-UART_CSA.d = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
-UART_CSA.ck = !CLK_16M;
-UART_CSA.ap = !CPU_RESET;
-*/
-
 UART_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF02XX );
 IDE_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF03XX );
 IDE_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF04XX );
 LED_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF05XX );
 RTS_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF85XX );
 PTC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF8AXX );
-NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF88XX );
+
 SPY_SETUP_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
 WORKER_RESET_PRESENCE_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF80XX );
 WORKER_BARRIER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF89XX );
 /*SLOT_ID_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF06XX );*/
-K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
+
 ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
 IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
+
+/*
+We are going to free up these two pins to allow the slots on the expansion connector to be used. 
+NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF88XX );
+K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
+*/
 
 /*
    RTS_AS_SEL is used to change the address/data select lines going to the DS Real Time Clock IC.
@@ -220,7 +217,6 @@ IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
 RTS_A_SEL.d = 'b'1;
 RTS_A_SEL.ck = !CLK_16M;
 RTS_A_SEL.ar = RTS_CS;    /* RTS_CS is active low, so it will be high while RTS is not being accesses */
-
 RTS_D_SEL = !RTS_A_SEL;   /* Since RTA_A_SEL is held at zero when no access, this will be held at one which is off */
 
 /*

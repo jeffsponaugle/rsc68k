@@ -62,10 +62,12 @@ Pin[29]  = CPU_RESET;    /* Active Low RESET */
 Pin[20]  = CPU_HALT;
 Pin[30]  = CLK_16M;
 Pin[75]  = CPU_RESET_INV;
-Pin[76]  = AS_GATED; 
-Pin[77]  = REFRESH_REQUESTED_SYNC;
+Pin[76]  = INT_DSWAP; /* signal to swap data bus values to fix board error */
+
 
 CPU_RESET_INV = !CPU_RESET;
+
+NODE AS_GATED;
 
 NODE DTACK_TIMER_0, DTACK_TIMER_1;
 NODE IRQL7_MASK,IRQL6A_MASK,IRQL6B_MASK;
@@ -74,6 +76,7 @@ NODE IRQL4A_MASK,IRQL4B_MASK;
 NODE IRQL3A_MASK,IRQL3B_MASK;
 
 NODE REFRESH_REQUESTED_PRE;
+NODE REFRESH_REQUESTED_SYNC;
 
 /* flip-flop for the system requesting a reset */
 
@@ -338,6 +341,7 @@ CPU_D0.d = VECTORD0;
 [CPU_D7..0].ck = DTACK_TIMER_0;
 [CPU_D7..0].ar = !CPU_RESET;
 [CPU_D7..0].oe = INT_ACK;
+INT_DSWAP = !INT_ACK;
 
 
 
