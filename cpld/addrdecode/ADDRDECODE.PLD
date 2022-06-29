@@ -147,7 +147,7 @@ FLASH_A18 = (CPU_RW & FLASH_CONFIG_STATE0) # ( !CPU_RW & FLASH_CONFIG_STATE2 );
    occurs to something with A23=1 (a jump into the flash area), MAP_FLASH_TO_ZERO is set to 1 which will
    enable SRAM access at low memory.
 */
-
+/*  Disable this section so we can test using DRAM in the lower SRAM space 
 SRAM0_LOW_CS = !(
                   (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & MAP_FLASH_TO_ZERO)
                 # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
@@ -157,6 +157,18 @@ SRAM0_HIGH_CS = !(
                   (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & MAP_FLASH_TO_ZERO)
                   # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & SRAM_IN_FLASH_AREA)
                 );
+*/
+
+SRAM0_LOW_CS = !(
+                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
+                );
+
+SRAM0_HIGH_CS = !(
+                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & SRAM_IN_FLASH_AREA)
+                );
+
+
+
 /*
    Flash range is 0xF00000 - 0xF7FFFF 
    IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
@@ -168,9 +180,10 @@ FLASH_LOW_CS  = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXX
 FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
                     # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !MAP_FLASH_TO_ZERO) );
 
-/* Start DRAM after the first 512k of SRAM, and fill in all the way to 0xBFFFFF */
+/* Start DRAM at address 0 (unless flash is mapped in for bootup) and fill in all the way to 0xBFFFFF */
 DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         # cpu_address_bus:'b'XXXXXXX00001XXXXXXXXXXXXXXXXXXX
+                       # (cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & MAP_FLASH_TO_ZERO)
                         # cpu_address_bus:'h'XX2XXXXX
                         # cpu_address_bus:'h'XX3XXXXX
                         # cpu_address_bus:'h'XX4XXXXX

@@ -242,11 +242,11 @@ DTACK_FROM_INT = !DTACK_TIMER_1;
    the group is low.  That group is used to select the interrupt level that goes to the CPU.
 */
 
-IRQL7_INT = (IRQL7 # IRQL7_MASK);
-IRQL6_INT = (IRQL6A # IRQL6A_MASK) & (IRQL6B # IRQL6B_MASK);
-IRQL5_INT = (IRQL5A # IRQL5A_MASK) & (IRQL5B # IRQL5B_MASK);
-IRQL4_INT = (IRQL4A # IRQL4A_MASK) & (IRQL4B # IRQL4B_MASK);
-IRQL3_INT = (IRQL3A # IRQL3A_MASK) & (IRQL3B # IRQL3B_MASK);
+IRQL7_INT = IRQL7_PE;
+IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
+IRQL5_INT = (IRQL5A_PE & IRQL5B_PE) # !IRQL6_INT # !IRQL7_INT;
+IRQL4_INT = (IRQL4A_PE & IRQL4B_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IRQL3_INT = (IRQL3A_PE & IRQL3B_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
 
 /* 
    IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  

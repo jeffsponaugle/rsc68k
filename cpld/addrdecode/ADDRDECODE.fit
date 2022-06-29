@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue Jun 28 12:55:51 2022
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue Jun 28 21:32:43 2022
 
 
 fit1508 C:\ADDRDECODE.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -454,73 +454,76 @@ CPU_A19			(MC14	P)   : MUX 33		Ref (B17p)
 RTS_CS			(MC2	P)   : MUX 35		Ref (F88p)
 CPU_A11			(MC6	P)   : MUX 38		Ref (D64p)
 
-FanIn assignment for block G [22]
+FanIn assignment for block G [23]
 {
-CPU_FC2,CPU_FC1,CPU_A8,CPU_AS,CPU_A14,CPU_A10,CPU_A12,CPU_A16,CPU_A21,CPU_A9,CPU_BG,CPU_A23,CPU_A17,CPU_A13,CPU_A18,CPU_A15,CPU_A22,CPU_FC0,CPU_A20,CPU_A19,CPU_A11,
+CPU_FC2,CPU_FC1,CPU_A8,CPU_AS,CPU_A14,CPU_A10,CPU_A12,CPU_A16,CPU_A21,CPU_A9,CPU_FC0,CPU_A23,CPU_A17,CPU_A13,CPU_A18,CPU_A15,CPU_A22,CPU_A20,CPU_A19,CPU_A11,CPU_BG,
+MAP_FLASH_TO_ZERO,
 WORKER_BUS_GRANT,
 }
 Multiplexer assignment for block G
-CPU_FC2			(MC19	P)   : MUX 1		Ref (D56p)
-CPU_FC1			(MC18	P)   : MUX 3		Ref (D53p)
-CPU_A8			(MC1	P)   : MUX 4		Ref (D57p)
-CPU_AS			(MC17	P)   : MUX 6		Ref (A13p)
-CPU_A14			(MC7	P)   : MUX 7		Ref (C38p)
-CPU_A10			(MC3	P)   : MUX 8		Ref (D61p)
-CPU_A12			(MC5	P)   : MUX 9		Ref (C35p)
-CPU_A16			(MC9	P)   : MUX 10		Ref (C43p)
-CPU_A21			(MC14	P)   : MUX 11		Ref (B21p)
-CPU_A9			(MC2	P)   : MUX 12		Ref (D59p)
-CPU_BG			(MC21	P)   : MUX 13		Ref (E65p)
-WORKER_BUS_GRANT		(MC22	P)   : MUX 15		Ref (G104p)
-CPU_A23			(MC16	P)   : MUX 16		Ref (B25p)
-CPU_A17			(MC10	P)   : MUX 18		Ref (C45p)
-CPU_A13			(MC6	P)   : MUX 19		Ref (C37p)
-CPU_A18			(MC11	P)   : MUX 20		Ref (C46p)
-CPU_A15			(MC8	P)   : MUX 21		Ref (C40p)
-CPU_A22			(MC15	P)   : MUX 23		Ref (B24p)
-CPU_FC0			(MC20	P)   : MUX 27		Ref (D51p)
-CPU_A20			(MC13	P)   : MUX 29		Ref (B19p)
-CPU_A19			(MC12	P)   : MUX 33		Ref (B17p)
-CPU_A11			(MC4	P)   : MUX 38		Ref (D64p)
+CPU_FC2			(MC20	P)   : MUX 1		Ref (D56p)
+CPU_FC1			(MC19	P)   : MUX 3		Ref (D53p)
+CPU_A8			(MC2	P)   : MUX 4		Ref (D57p)
+CPU_AS			(MC18	P)   : MUX 6		Ref (A13p)
+CPU_A14			(MC8	P)   : MUX 7		Ref (C38p)
+CPU_A10			(MC4	P)   : MUX 8		Ref (D61p)
+CPU_A12			(MC6	P)   : MUX 9		Ref (C35p)
+CPU_A16			(MC10	P)   : MUX 10		Ref (C43p)
+CPU_A21			(MC15	P)   : MUX 11		Ref (B21p)
+CPU_A9			(MC3	P)   : MUX 12		Ref (D59p)
+CPU_FC0			(MC21	P)   : MUX 13		Ref (D51p)
+WORKER_BUS_GRANT		(MC23	P)   : MUX 15		Ref (G104p)
+CPU_A23			(MC17	P)   : MUX 16		Ref (B25p)
+CPU_A17			(MC11	P)   : MUX 18		Ref (C45p)
+CPU_A13			(MC7	P)   : MUX 19		Ref (C37p)
+CPU_A18			(MC12	P)   : MUX 20		Ref (C46p)
+CPU_A15			(MC9	P)   : MUX 21		Ref (C40p)
+CPU_A22			(MC16	P)   : MUX 23		Ref (B24p)
+MAP_FLASH_TO_ZERO		(MC1	FB)  : MUX 27		Ref (A11fb)
+CPU_A20			(MC14	P)   : MUX 29		Ref (B19p)
+CPU_A19			(MC13	P)   : MUX 33		Ref (B17p)
+CPU_A11			(MC5	P)   : MUX 38		Ref (D64p)
+CPU_BG			(MC22	P)   : MUX 39		Ref (E65p)
 
-FanIn assignment for block H [31]
+FanIn assignment for block H [32]
 {
 CPU_A8,CPU_AS,CPU_UDS,CPU_A12,CPU_A16,CPU_A20,CPU_A9,CPU_FC0,CPU_FC2,CPU_A23,CPU_A21,CPU_A17,CPU_A13,CPU_A18,CPU_RW,CPU_A22,CPU_FC1,CPU_A15,CPU_A19,CPU_LDS,CPU_A14,CPU_A10,CPU_A11,
-FLASH_CONFIG_STATE0,FLASH_CONFIG_STATE2,FLASH_CONFIG_STATE1,
+FLASH_CONFIG_STATE0,FLASH_CONFIG_STATE2,FLASH_CONFIG_STATE3,FLASH_CONFIG_STATE1,
 MAP_FLASH_TO_ZERO,
 XXL_102,XXL_103,XXL_105,XXL_104,
 }
 Multiplexer assignment for block H
 XXL_102			(MC5	FB)  : MUX 1		Ref (A16fb)
 MAP_FLASH_TO_ZERO		(MC1	FB)  : MUX 3		Ref (A11fb)
-CPU_A8			(MC9	P)   : MUX 4		Ref (D57p)
-FLASH_CONFIG_STATE0		(MC8	FB)  : MUX 5		Ref (D63fb)
-CPU_AS			(MC25	P)   : MUX 6		Ref (A13p)
+CPU_A8			(MC10	P)   : MUX 4		Ref (D57p)
+FLASH_CONFIG_STATE0		(MC9	FB)  : MUX 5		Ref (D63fb)
+CPU_AS			(MC26	P)   : MUX 6		Ref (A13p)
 XXL_103			(MC4	FB)  : MUX 7		Ref (A15fb)
-CPU_UDS			(MC29	P)   : MUX 8		Ref (A14p)
-CPU_A12			(MC13	P)   : MUX 9		Ref (C35p)
-CPU_A16			(MC17	P)   : MUX 10		Ref (C43p)
-CPU_A20			(MC21	P)   : MUX 11		Ref (B19p)
-CPU_A9			(MC10	P)   : MUX 12		Ref (D59p)
-CPU_FC0			(MC28	P)   : MUX 13		Ref (D51p)
-CPU_FC2			(MC27	P)   : MUX 15		Ref (D56p)
-CPU_A23			(MC24	P)   : MUX 16		Ref (B25p)
-CPU_A21			(MC22	P)   : MUX 17		Ref (B21p)
-CPU_A17			(MC18	P)   : MUX 18		Ref (C45p)
-CPU_A13			(MC14	P)   : MUX 19		Ref (C37p)
-CPU_A18			(MC19	P)   : MUX 20		Ref (C46p)
-FLASH_CONFIG_STATE2		(MC7	FB)  : MUX 21		Ref (D62fb)
-CPU_RW			(MC30	FB)  : MUX 22		Ref (OE2)
-CPU_A22			(MC23	P)   : MUX 23		Ref (B24p)
-CPU_FC1			(MC26	P)   : MUX 25		Ref (D53p)
+CPU_UDS			(MC30	P)   : MUX 8		Ref (A14p)
+CPU_A12			(MC14	P)   : MUX 9		Ref (C35p)
+CPU_A16			(MC18	P)   : MUX 10		Ref (C43p)
+CPU_A20			(MC22	P)   : MUX 11		Ref (B19p)
+CPU_A9			(MC11	P)   : MUX 12		Ref (D59p)
+CPU_FC0			(MC29	P)   : MUX 13		Ref (D51p)
+CPU_FC2			(MC28	P)   : MUX 15		Ref (D56p)
+CPU_A23			(MC25	P)   : MUX 16		Ref (B25p)
+CPU_A21			(MC23	P)   : MUX 17		Ref (B21p)
+CPU_A17			(MC19	P)   : MUX 18		Ref (C45p)
+CPU_A13			(MC15	P)   : MUX 19		Ref (C37p)
+CPU_A18			(MC20	P)   : MUX 20		Ref (C46p)
+FLASH_CONFIG_STATE2		(MC8	FB)  : MUX 21		Ref (D62fb)
+CPU_RW			(MC31	FB)  : MUX 22		Ref (OE2)
+CPU_A22			(MC24	P)   : MUX 23		Ref (B24p)
+CPU_FC1			(MC27	P)   : MUX 25		Ref (D53p)
 XXL_105			(MC3	FB)  : MUX 27		Ref (A14fb)
-CPU_A15			(MC16	P)   : MUX 29		Ref (C40p)
-CPU_A19			(MC20	P)   : MUX 31		Ref (B17p)
-CPU_LDS			(MC31	P)   : MUX 32		Ref (A16p)
-CPU_A14			(MC15	P)   : MUX 35		Ref (C38p)
-CPU_A10			(MC11	P)   : MUX 36		Ref (D61p)
-XXL_104			(MC2	FB)  : MUX 37		Ref (A13fb)
-CPU_A11			(MC12	P)   : MUX 38		Ref (D64p)
+CPU_A15			(MC17	P)   : MUX 29		Ref (C40p)
+CPU_A19			(MC21	P)   : MUX 31		Ref (B17p)
+CPU_LDS			(MC32	P)   : MUX 32		Ref (A16p)
+XXL_104			(MC2	FB)  : MUX 33		Ref (A13fb)
+CPU_A14			(MC16	P)   : MUX 35		Ref (C38p)
+CPU_A10			(MC12	P)   : MUX 36		Ref (D61p)
+FLASH_CONFIG_STATE3		(MC7	FB)  : MUX 37		Ref (D61fb)
+CPU_A11			(MC13	P)   : MUX 38		Ref (D64p)
 FLASH_CONFIG_STATE1		(MC6	FB)  : MUX 39		Ref (B31fb)
 
 Creating JEDEC file C:\ADDRDECODE.jed ...
@@ -531,8 +534,8 @@ FLASH_CONFIG_STATE0.D = CPU_D0;
 
 DRAM_CS = ((CPU_FC0 & CPU_FC1 & CPU_FC2)
 	# CPU_AS
-	# (CPU_A22 & CPU_A23)
-	# (!CPU_A22 & !CPU_A23 & !CPU_A19 & !CPU_A20 & !CPU_A21));
+	# (!CPU_A22 & !CPU_A23 & !CPU_A19 & !CPU_A20 & !CPU_A21 & !MAP_FLASH_TO_ZERO.Q)
+	# (CPU_A22 & CPU_A23));
 
 FLASH_A18 = ((CPU_RW & FLASH_CONFIG_STATE0.Q)
 	# (!CPU_RW & FLASH_CONFIG_STATE2.Q));
@@ -589,11 +592,8 @@ SBUS_BUFFER_D_DIR = 1;
 	# (CPU_A8 & !CPU_A9 & CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !CPU_A14 & CPU_A15 & CPU_A16 & CPU_A17 & CPU_A18 & CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_FC2)
 	# (CPU_A8 & !CPU_A9 & CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !CPU_A14 & CPU_A15 & CPU_A16 & CPU_A17 & CPU_A18 & CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_FC0));
 
-!SRAM0_HIGH_CS = ((!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_UDS & MAP_FLASH_TO_ZERO.Q & !CPU_FC0)
-	# (!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_UDS & MAP_FLASH_TO_ZERO.Q & !CPU_FC1)
-	# XXL_104
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_UDS & CPU_RW & FLASH_CONFIG_STATE1.Q & !CPU_FC1)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_UDS & CPU_RW & FLASH_CONFIG_STATE1.Q & !CPU_FC2));
+!SRAM0_HIGH_CS = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_RW & !CPU_UDS & !FLASH_CONFIG_STATE3.Q & !CPU_FC1)
+	# XXL_104);
 
 SBUS_BUFFER_ACD_EN = 1;
 
@@ -615,11 +615,8 @@ SBUS_BUFFER_AC_DIR = 1;
 	# (!CPU_A8 & !CPU_A9 & !CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !CPU_A14 & CPU_A15 & CPU_A16 & CPU_A17 & CPU_A18 & CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_FC2)
 	# (!CPU_A8 & !CPU_A9 & !CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !CPU_A14 & CPU_A15 & CPU_A16 & CPU_A17 & CPU_A18 & CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_FC0));
 
-!SRAM0_LOW_CS = ((!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_LDS & MAP_FLASH_TO_ZERO.Q & !CPU_FC0)
-	# (!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_LDS & MAP_FLASH_TO_ZERO.Q & !CPU_FC1)
-	# XXL_105
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & CPU_RW & FLASH_CONFIG_STATE1.Q & !CPU_FC1)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & CPU_RW & FLASH_CONFIG_STATE1.Q & !CPU_FC2));
+!SRAM0_LOW_CS = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_RW & !FLASH_CONFIG_STATE3.Q & !CPU_FC1)
+	# XXL_105);
 
 !UART_CSA = ((CPU_A8 & !CPU_A9 & !CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !CPU_A14 & !CPU_A15 & CPU_A16 & CPU_A17 & CPU_A18 & CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_FC1)
 	# (CPU_A8 & !CPU_A9 & !CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !CPU_A14 & !CPU_A15 & CPU_A16 & CPU_A17 & CPU_A18 & CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_FC2)
@@ -654,17 +651,17 @@ XXL_103 = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LD
 	# (!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_FC2 & !MAP_FLASH_TO_ZERO.Q)
 	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_FC0 & !CPU_RW & FLASH_CONFIG_STATE3.Q));
 
-XXL_104 = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_UDS & !CPU_RW & !FLASH_CONFIG_STATE3.Q & !CPU_FC1)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_UDS & !CPU_RW & !FLASH_CONFIG_STATE3.Q & !CPU_FC2)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_UDS & !CPU_FC0 & CPU_RW & FLASH_CONFIG_STATE1.Q)
-	# (!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_UDS & !CPU_FC2 & MAP_FLASH_TO_ZERO.Q)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_UDS & !CPU_FC0 & !CPU_RW & !FLASH_CONFIG_STATE3.Q));
+XXL_104 = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & CPU_RW & !CPU_UDS & FLASH_CONFIG_STATE1.Q & !CPU_FC1)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & CPU_RW & !CPU_UDS & FLASH_CONFIG_STATE1.Q & !CPU_FC2)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_RW & !CPU_UDS & !CPU_FC0 & !FLASH_CONFIG_STATE3.Q)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_RW & !CPU_UDS & !CPU_FC2 & !FLASH_CONFIG_STATE3.Q)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & CPU_RW & !CPU_UDS & !CPU_FC0 & FLASH_CONFIG_STATE1.Q));
 
-XXL_105 = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_RW & !FLASH_CONFIG_STATE3.Q & !CPU_FC1)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_RW & !FLASH_CONFIG_STATE3.Q & !CPU_FC2)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_FC0 & CPU_RW & FLASH_CONFIG_STATE1.Q)
-	# (!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_FC2 & MAP_FLASH_TO_ZERO.Q)
-	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_FC0 & !CPU_RW & !FLASH_CONFIG_STATE3.Q));
+XXL_105 = ((!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & CPU_RW & FLASH_CONFIG_STATE1.Q & !CPU_FC1)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & CPU_RW & FLASH_CONFIG_STATE1.Q & !CPU_FC2)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_RW & !CPU_FC0 & !FLASH_CONFIG_STATE3.Q)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & !CPU_RW & !CPU_FC2 & !FLASH_CONFIG_STATE3.Q)
+	# (!CPU_A19 & CPU_A20 & CPU_A21 & CPU_A22 & CPU_A23 & !CPU_AS & !CPU_LDS & CPU_RW & !CPU_FC0 & FLASH_CONFIG_STATE1.Q));
 
 XXL_106 = ((DTACK_FROM_INT & DRAM_CS & FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & LED_LATCH_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & SPY_SETUP_LATCH_CS & SRAM0_HIGH_CS & SRAM0_LOW_CS & UART_CSA & UART_CSB & WORKER_BARRIER_CS & WORKER_RESET_PRESENCE_LATCH_CS & !CPU_A22)
 	# (DTACK_FROM_INT & DRAM_CS & FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & LED_LATCH_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & SPY_SETUP_LATCH_CS & SRAM0_HIGH_CS & SRAM0_LOW_CS & UART_CSA & UART_CSB & WORKER_BARRIER_CS & WORKER_RESET_PRESENCE_LATCH_CS & !CPU_A21)
@@ -935,9 +932,9 @@ MC119 0         --                                    --                        
 MC120 76   on   FLASH_LOW_CS                   C----  --                         NA        --             5     slow
 MC121 0         --                                    --                         --        --             0     slow
 MC122 0         --                                    --                         --        --             0     slow
-MC123 77   on   SRAM0_HIGH_CS                  C----  --                         NA        --             5     slow
+MC123 77   on   SRAM0_HIGH_CS                  C----  --                         --        --             2     slow
 MC124 0         --                                    --                         --        --             0     slow
-MC125 79   on   SRAM0_LOW_CS                   C----  --                         NA        --             5     slow
+MC125 79   on   SRAM0_LOW_CS                   C----  --                         --        --             2     slow
 MC126 80   on   LED_LATCH_CS                   C----  --                         --        --             3     slow
 MC127 0         --                                    --                         --        --             0     slow
 MC128 81        --                                    --                         --        --             0     slow
@@ -953,8 +950,8 @@ C: LC33	- LC48		2/16(12%)	8/16(50%)	0/16(0%)	10/80(12%)	(28)	0
 D: LC49	- LC64		4/16(25%)	8/16(50%)	0/16(0%)	14/80(17%)	(28)	0
 E: LC65	- LC80		7/16(43%)	8/16(50%)	0/16(0%)	11/80(13%)	(26)	0
 F: LC81	- LC96		6/16(37%)	7/16(43%)	0/16(0%)	14/80(17%)	(22)	0
-G: LC97	- LC112		6/16(37%)	8/16(50%)	0/16(0%)	17/80(21%)	(22)	0
-H: LC113- LC128		6/16(37%)	6/16(37%)	0/16(0%)	25/80(31%)	(31)	0
+G: LC97	- LC112		6/16(37%)	8/16(50%)	0/16(0%)	17/80(21%)	(23)	0
+H: LC113- LC128		6/16(37%)	6/16(37%)	0/16(0%)	19/80(23%)	(32)	0
 
 Total dedicated input used:	3/4 	(75%)
 Total I/O pins used		60/64 	(93%)
@@ -965,7 +962,7 @@ Total Nodes+FB/MCells 		41/128 	(32%)
 Total cascade used 		0
 Total input pins 		36
 Total output pins 		27
-Total Pts 			128
+Total Pts 			122
 Creating pla file C:\ADDRDECODE.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
