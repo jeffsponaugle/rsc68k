@@ -283,7 +283,7 @@ CPU_D6.oe  =>
     !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
 
 CPU_D7.d  =>
-    0 
+    1 
 
 CPU_D7.ar  =>
     !CPU_RESET
@@ -1499,6 +1499,6 @@ VECTORD6 =>
     CPU_INTACK2
 
 VECTORD7 =>
-    0 
+    1 
 
 %END

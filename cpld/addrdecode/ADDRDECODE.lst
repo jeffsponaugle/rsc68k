@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
   1:Name     AddressDecoder;
   2:PartNo   ADDRDECODE;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
  54:Pin[57]  = RTS_CS;
  55:Pin[56]  = RTS_A_SEL;
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
 108:   MAP_FLASH_TO_ZERO starts out set to 0 (from the CPU_RESET), and switches to 1 as soon as a memory
 109:   access occurs with the highest bit set to 1.  This is used for the boot up process.  During the first 8 cycles
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
 162:SRAM0_LOW_CS = !(
 163:                  (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
 216:ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
 217:IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
 270:CPU_A23 is placed at pin 17 (MC 25)
 271:CPU_RESET is placed at pin 16 (MC 27)
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
 324:                                                   L S     F                        
 325:                                                   E R     L                        
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: ADDRDECODE.pld                   Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Tue Jun 28 21:32:42 2022
+Created Thu Jun 30 16:43:07 2022
 
 378:
 379:

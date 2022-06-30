@@ -203,7 +203,6 @@ CPU_RESET.ck = CLK_16M;
 
 CPU_HALT = CPU_RESET;
 
-
 /* 
    INT_ACK goes high when the CPU indicates an interrupt ack cycle is in progress.
    Since this signal combines with AS it will go low at the end of that cycle. 
@@ -306,7 +305,7 @@ FIELD interrupt_ack_num=![CPU_INTACK2..0];
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 
 */
-VECTORD7 = 'h'0;
+VECTORD7 = 'h'1;
 VECTORD6 = CPU_INTACK2;
 VECTORD5 = CPU_INTACK1;
 VECTORD4 = CPU_INTACK0;
