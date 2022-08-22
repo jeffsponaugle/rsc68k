@@ -8,6 +8,12 @@ Assembly None;
 Location None;
 Device   f1508ispplcc84;
 
+
+/* 
+   Version 1.4
+   History:  Still needs DH/DL patch fix.
+*/
+
 PROPERTY ATMEL {open_collector=CPU_RESET,CPU_HALT};
 PROPERTY ATMEL {TDI_PULLUP = ON};
 PROPERTY ATMEL {TMS_PULLUP = ON};
@@ -62,8 +68,12 @@ Pin[29]  = CPU_RESET;    /* Active Low RESET */
 Pin[20]  = CPU_HALT;
 Pin[30]  = CLK_16M;
 Pin[75]  = CPU_RESET_INV;
-Pin[76]  = IRQL7_MASK; /* signal to swap data bus values to fix board error */
-Pin[77]  = LATCHCLOCK;
+Pin[76]  = INT_DSWAP; /* signal to swap data bus values to fix board error */
+
+/* Debugging pins */
+
+Pin[77]  = INT_ACK;
+Pin[79]  = IRQL7;
 
 
 CPU_RESET_INV = !CPU_RESET;
@@ -71,6 +81,7 @@ CPU_RESET_INV = !CPU_RESET;
 NODE AS_GATED;
 
 NODE DTACK_TIMER_0, DTACK_TIMER_1;
+NODE IRQL7_MASK;
 NODE IRQL6A_MASK,IRQL6B_MASK;
 NODE IRQL5A_MASK,IRQL5B_MASK;
 NODE IRQL4A_MASK,IRQL4B_MASK;
@@ -97,7 +108,8 @@ AS_GATED.AP = CPU_AS;
    acknowleged.
 */
 
-NODE IRQL7;
+/* NODE IRQL7; REMOVED FOR DEBUGGING PIN */
+
 IRQL7.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
 IRQL7.ap = !CPU_RESET # IRQL7_ACK;
 IRQL7.ck = !IRQL7_BUTTON;
@@ -108,7 +120,7 @@ IRQL7.ck = !IRQL7_BUTTON;
    IRQL7 node above, which clears the interrupt request for IRQ7.
 */
 
-IRQL7_ACK = !CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1;
+IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
 
 /* Pins for Testing */
 
@@ -308,7 +320,7 @@ FIELD interrupt_ack_num=![CPU_INTACK2..0];
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 
 */
-VECTORD7 = 'h'0;
+VECTORD7 = 'h'1;
 VECTORD6 = CPU_INTACK2;
 VECTORD5 = CPU_INTACK1;
 VECTORD4 = CPU_INTACK0;

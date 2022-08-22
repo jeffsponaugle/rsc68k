@@ -44,7 +44,7 @@ Pin[76]  = FLASH_LOW_CS;
 Pin[75]  = FLASH_HIGH_CS;
 Pin[74]  = FLASH_A18;               /* Used to select lower or upper half of FLASH */
 Pin[80]  = LED_LATCH_CS;
-/*Pin[73]  = NIC_CS;*/
+/*Pin[73]  = NIC_CS;*/              /* Turned off since this is used by intfix. */
 Pin[65]  = IDE_CSA;
 Pin[64]  = IDE_CSB;
 Pin[63]  = UART_CSA;
@@ -54,7 +54,7 @@ Pin[58]  = RTS_D_SEL;
 Pin[57]  = RTS_CS;
 Pin[56]  = RTS_A_SEL;
 Pin[55]  = PTC_CS;
-/*Pin[54]  = K8042_CS;*/
+/*Pin[54]  = K8042_CS;*/              /* Tured off since this is used by intfix */
 Pin[52]  = IDE_BUFFER_EN;
 Pin[68]  = ITC_CS;
 
