@@ -130,7 +130,7 @@ IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
 /* Interupt Mask Registers -  0 = allow interrupt, 1 = block interrupt */
 /*
 
-Write to FF0700 Upper 8 bits:
+Write to FF0700 Upper 8 bits: 
                   bit 7 - IRQL7_MASK
                   bit 6 - IRQL6A_MASK
                   bit 5 - IRQL6B_MASK
@@ -291,7 +291,7 @@ IRQL3B_PE = (IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
 
 /* This field is created so we can select on it using the :[number] method below */
 
-FIELD interrupt_ack_num=![CPU_INTACK2..0];
+FIELD interrupt_ack_num=[CPU_INTACK2..0];
 
 /* 
    These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
