@@ -73,7 +73,7 @@ Pin[76]  = INT_DSWAP; /* signal to swap data bus values to fix board error */
 /* Debugging pins */
 
 Pin[77]  = INT_ACK;
-Pin[79]  = IRQL7;
+Pin[79]  = IRQL7 ;
 
 
 CPU_RESET_INV = !CPU_RESET;
