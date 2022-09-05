@@ -26,7 +26,7 @@ Pin[56,57,58]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 line
 Pin[83]    = IRQL7_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
 Pin[84,1]  = IRQL6A,IRQL6B;
 Pin[2,4]   = IRQL5A,IRQL5B;
-Pin[5,6]   = IRQL4A,IRQL4B;
+Pin[5,6]   = IRQL4A_EDGE,IRQL4B;
 Pin[8,9]   = IRQL3A,IRQL3B;
 Pin[55]    = INTC_CS;     /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
 
@@ -115,15 +115,31 @@ IRQL7.ap = !CPU_RESET # IRQL7_ACK;
 IRQL7.ck = !IRQL7_BUTTON;
 
 /* 
+   IRQ4A (RTC) needs to be edge triggered, so lets rename the input to IRQL4A_EDGE, and use that 
+   edge to clock in a flipflop.  It is reset by RESET, or the ACK of IRQ4A.
+*/
+
+NODE IRQL4A;
+IRQL4A.d = 'b'0;
+IRQL4A.ap = !CPU_RESET # IRQL4A_ACK;
+IRQL4A.ck = !IRQL4A_EDGE;
+
+/* 
    This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
    being acknowleged is 7.  The rising edge of this signal will clear the 
    IRQL7 node above, which clears the interrupt request for IRQ7.
+
+   IRQL4A_ACK is the same, but for interrupt level 4 acks.
+   NOTE since any level 4 interrupt ack will show up with the INTACK bits, we are also
+   adding the presence of IRQL4A_PE, which is set to 0 if we are servicing the particular
+   4A variant of the level 4 interrupts.  This should prevent IDE interrupts from clearing this.
+
 */
 
 IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
+IRQL4A_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL4A_PE;
 
 /* Pins for Testing */
-
 
 /** Internal Variables and nodes **/
 

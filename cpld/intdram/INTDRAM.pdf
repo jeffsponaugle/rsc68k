@@ -1,11 +1,11 @@
-{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM.SYM
+{COMPONENT C:\INTDRAM.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sun Sep 04 12:46:47 2022 "}
+  {DBtime "Sun Sep 04 20:11:07 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -37,7 +37,7 @@
    {P IRQL6B {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
    {P IRQL5A {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
    {P IRQL5B {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
-   {P IRQL4A {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P IRQL4A_E {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
    {P IRQL4B {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
    {P IRQL3A {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
    {P IRQL3B {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
@@ -218,7 +218,7 @@
    {T "IRQL6B" 140 740}
    {T "IRQL5A" 140 720}
    {T "IRQL5B" 140 700}
-   {T "IRQL4A" 140 680}
+   {T "IRQL4A_E" 140 680}
    {T "IRQL4B" 140 660}
    {T "IRQL3A" 140 640}
    {T "IRQL3B" 140 620}
@@ -281,7 +281,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM 230 800}
+    {At PLD C:\INTDRAM 230 800}
    }
   }
  }
@@ -299,7 +299,7 @@
    }
    {N IRQL5B
    }
-   {N IRQL4A
+   {N IRQL4A_E
    }
    {N IRQL4B
    }
