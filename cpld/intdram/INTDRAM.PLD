@@ -24,7 +24,7 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 Pin[24,22,21]   = [CPU_FC2..0];
 Pin[56,57,58]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
 Pin[83]    = IRQL7_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
-Pin[84,1]  = IRQL6A,IRQL6B;
+Pin[84,1]  = IRQL6A_EDGE,IRQL6B_EDGE;
 Pin[2,4]   = IRQL5A,IRQL5B;
 Pin[5,6]   = IRQL4A_EDGE,IRQL4B;
 Pin[8,9]   = IRQL3A,IRQL3B;
@@ -124,6 +124,17 @@ IRQL4A.d = 'b'0;
 IRQL4A.ap = !CPU_RESET # IRQL4A_ACK;
 IRQL4A.ck = !IRQL4A_EDGE;
 
+NODE IRQL6A,IRQL6B;
+
+IRQL6A.d = 'b'0;
+IRQL6A.ap = !CPU_RESET # IRQL6A_ACK;
+IRQL6A.ck = !IRQL6A_EDGE;
+
+IRQL6B.d = 'b'0;
+IRQL6B.ap = !CPU_RESET # IRQL6B_ACK;
+IRQL6B.ck = !IRQL6B_EDGE;
+
+
 /* 
    This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
    being acknowleged is 7.  The rising edge of this signal will clear the 
@@ -133,11 +144,12 @@ IRQL4A.ck = !IRQL4A_EDGE;
    NOTE since any level 4 interrupt ack will show up with the INTACK bits, we are also
    adding the presence of IRQL4A_PE, which is set to 0 if we are servicing the particular
    4A variant of the level 4 interrupts.  This should prevent IDE interrupts from clearing this.
-
 */
 
 IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
 IRQL4A_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL4A_PE;
+IRQL6A_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6A_PE;
+IRQL6B_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6B_PE;
 
 /* Pins for Testing */
 
