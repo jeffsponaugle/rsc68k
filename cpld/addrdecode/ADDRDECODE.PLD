@@ -159,6 +159,7 @@ SRAM0_HIGH_CS = !(
                 );
 */
 
+/*
 SRAM0_LOW_CS = !(
                   (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & SRAM_IN_FLASH_AREA)
                 );
@@ -168,7 +169,9 @@ SRAM0_HIGH_CS = !(
                 );
 
 
-
+*/
+SRAM0_LOW_CS = 'b'1;
+SRAM0_HIGH_CS = 'b'1;
 /*
    Flash range is 0xF00000 - 0xF7FFFF 
    IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
@@ -183,7 +186,8 @@ FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXX
 /* Start DRAM at address 0 (unless flash is mapped in for bootup) and fill in all the way to 0xBFFFFF */
 DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         # cpu_address_bus:'b'XXXXXXX00001XXXXXXXXXXXXXXXXXXX
-                       # (cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & MAP_FLASH_TO_ZERO)
+                        # (cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & MAP_FLASH_TO_ZERO)
+                        # (cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & SRAM_IN_FLASH_AREA)
                         # cpu_address_bus:'h'XX2XXXXX
                         # cpu_address_bus:'h'XX3XXXXX
                         # cpu_address_bus:'h'XX4XXXXX

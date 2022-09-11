@@ -1,11 +1,11 @@
-{COMPONENT C:\ADDRDECODE.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE\ADDRDECODE.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Mon Aug 22 13:09:08 2022 "}
+  {DBtime "Wed Sep 07 17:17:24 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -305,7 +305,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\ADDRDECODE 230 700}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE\ADDRDECODE 230 700}
    }
   }
  }
