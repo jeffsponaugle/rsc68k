@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sat Sep 10 20:38:40 2022 "}
+  {DBtime "Sun Sep 11 09:04:27 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,14 +33,14 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P IRQL7_BU {Pt "INPUT"}{Lq 0}{Ploc 100 780}}
-   {P IRQL6B_E {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
-   {P IRQL5A {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
-   {P IRQL5B {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
-   {P IRQL4A_E {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
-   {P IRQL4B {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
-   {P IRQL3A {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
-   {P IRQL3B {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P DEBUG_BU {Pt "INPUT"}{Lq 0}{Ploc 100 780}}
+   {P PTC2_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
+   {P UARTA_IR {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
+   {P UARTB_IR {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P RTC_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P IDE_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P EXPA_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P EXPB_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
    {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
    {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
    {P CPU_RES {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
@@ -69,8 +69,8 @@
    {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
    {P DRAM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
    {P DRAM_MEM {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P IRQL7 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P IRQL6A_E {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P DEBUG_IN {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P PTC1_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P CPU_HALT {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P IPL0 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
    {P IPL1 {Pt "I/O"}{Lq 0}{Ploc 360 60}}
@@ -217,14 +217,14 @@
    {L 330 320 360 320}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "IRQL7_BU" 140 780}
-   {T "IRQL6B_E" 140 740}
-   {T "IRQL5A" 140 720}
-   {T "IRQL5B" 140 700}
-   {T "IRQL4A_E" 140 680}
-   {T "IRQL4B" 140 660}
-   {T "IRQL3A" 140 640}
-   {T "IRQL3B" 140 620}
+   {T "DEBUG_BU" 140 780}
+   {T "PTC2_IRQ" 140 740}
+   {T "UARTA_IR" 140 720}
+   {T "UARTB_IR" 140 700}
+   {T "RTC_IRQ" 140 680}
+   {T "IDE_IRQ" 140 660}
+   {T "EXPA_IRQ" 140 640}
+   {T "EXPB_IRQ" 140 620}
    {T "CLK_500K" 140 600}
    {T "CLK_1M" 140 580}
    {T "CPU_RES" 140 560}
@@ -253,8 +253,8 @@
    {T "CPU_IN0" 140 100}
    {T "DRAM_RW" 140 80}
    {T "DRAM_MEM" 140 60}
-   {T "IRQL7" 140 40}
-   {T "IRQL6A_E" 140 20}
+   {T "DEBUG_IN" 140 40}
+   {T "PTC1_IRQ" 140 20}
    [Tj "RC"]
    {T "CPU_HALT" 320 20}
    {T "IPL0" 320 40}
@@ -295,21 +295,21 @@
   }
 
   {NET_DEF
-   {N IRQL7_BU
+   {N DEBUG_BU
    }
-   {N IRQL6B_E
+   {N PTC2_IRQ
    }
-   {N IRQL5A
+   {N UARTA_IR
    }
-   {N IRQL5B
+   {N UARTB_IR
    }
-   {N IRQL4A_E
+   {N RTC_IRQ
    }
-   {N IRQL4B
+   {N IDE_IRQ
    }
-   {N IRQL3A
+   {N EXPA_IRQ
    }
-   {N IRQL3B
+   {N EXPB_IRQ
    }
    {N CLK_500K
    }
@@ -367,9 +367,9 @@
    }
    {N DRAM_MEM
    }
-   {N IRQL7
+   {N DEBUG_IN
    }
-   {N IRQL6A_E
+   {N PTC1_IRQ
    }
    {N CPU_HALT
    }

@@ -23,11 +23,11 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 /* Interrupt Controller */
 Pin[24,22,21]   = [CPU_FC2..0];
 Pin[56,57,58]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
-Pin[83]    = IRQL7_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
-Pin[84,1]  = IRQL6A_EDGE,IRQL6B_EDGE;
-Pin[2,4]   = IRQL5A,IRQL5B;
-Pin[5,6]   = IRQL4A_EDGE,IRQL4B;
-Pin[8,9]   = IRQL3A,IRQL3B;
+Pin[83]    = DEBUG_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
+Pin[84,1]  = PTC1_IRQ,PTC2_IRQ;
+Pin[2,4]   = UARTA_IRQ,UARTB_IRQ;
+Pin[5,6]   = RTC_IRQ,IDE_IRQ;
+Pin[8,9]   = EXPA_IRQ,EXPB_IRQ;
 Pin[55]    = INTC_CS;     /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
 
 /* DRAM Controller */
@@ -74,7 +74,7 @@ Pin[76]  = INT_DSWAP; /* signal to swap data bus values to fix board error */
 /* Debugging pins */
 
 Pin[77]  = INT_ACK;
-Pin[79]  = IRQL7 ;
+Pin[79]  = DEBUG_INT ;
 
 
 CPU_RESET_INV = !CPU_RESET;
@@ -86,11 +86,11 @@ CPU_RESET_INV = !CPU_RESET;
 NODE AS_GATED;
 
 NODE DTACK_TIMER_0, DTACK_TIMER_1;
-NODE IRQL7_MASK;
+NODE DEBUG_BUTTON_MASK;
 NODE IRQL6A_MASK,IRQL6B_MASK;
-NODE IRQL5A_MASK,IRQL5B_MASK;
-NODE IRQL4A_MASK,IRQL4B_MASK;
-NODE IRQL3A_MASK,IRQL3B_MASK;
+NODE UARTA_IRQ_MASK,UARTB_IRQ_MASK;
+NODE IRQL4A_MASK,IDE_IRQ_MASK;
+NODE EXPA_IRQ_MASK,EXPB_IRQ_MASK;
 
 NODE REFRESH_REQUESTED_PRE;
 NODE REFRESH_REQUESTED_SYNC;
@@ -108,42 +108,42 @@ AS_GATED.AP = CPU_AS;
 
 /* 
    We will create an internal synthetic IRQ7L request that is triggered
-   by a falling edge of the IRQL7_BUTTON, and is reset by either system 
-   reset, or by the IRQL7_ACK signal which happens when the interrupt is
+   by a falling edge of the DEBUG_INT_BUTTON, and is reset by either system 
+   reset, or by the DEBUG_INT_ACK signal which happens when the interrupt is
    acknowleged.
 */
 
-/* NODE IRQL7; REMOVED FOR DEBUGGING PIN */
+/* NODE DEBUG_INT; REMOVED FOR DEBUGGING PIN */
 
-IRQL7.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
-IRQL7.ap = !CPU_RESET # IRQL7_ACK;
-IRQL7.ck = !IRQL7_BUTTON;
+DEBUG_INT.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
+DEBUG_INT.ap = !CPU_RESET # IRQL7_ACK;
+DEBUG_INT.ck = !DEBUG_BUTTON;
 
 /* 
-   IRQ4A (RTC) needs to be edge triggered, so lets rename the input to IRQL4A_EDGE, and use that 
+   IRQ4A (RTC) needs to be edge triggered, so lets rename the input to RTC_IRQ, and use that 
    edge to clock in a flipflop.  It is reset by RESET, or the ACK of IRQ4A.
 */
 
 NODE IRQL4A;
 IRQL4A.d = 'b'0;
 IRQL4A.ap = !CPU_RESET # IRQL4A_ACK;
-IRQL4A.ck = !IRQL4A_EDGE;
+IRQL4A.ck = !RTC_IRQ;
 
 NODE IRQL6A,IRQL6B;
 
 IRQL6A.d = 'b'0;
 IRQL6A.ap = !CPU_RESET # IRQL6A_ACK;
-IRQL6A.ck = !IRQL6A_EDGE;
+IRQL6A.ck = !PTC1_IRQ;
 
 IRQL6B.d = 'b'0;
 IRQL6B.ap = !CPU_RESET # IRQL6B_ACK;
-IRQL6B.ck = !IRQL6B_EDGE;
+IRQL6B.ck = !PTC2_IRQ;
 
 
 /* 
    This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
    being acknowleged is 7.  The rising edge of this signal will clear the 
-   IRQL7 node above, which clears the interrupt request for IRQ7.
+   DEBUG_INT node above, which clears the interrupt request for IRQ7.
 
    IRQL4A_ACK is the same, but for interrupt level 4 acks.
    NOTE since any level 4 interrupt ack will show up with the INTACK bits, we are also
@@ -164,18 +164,18 @@ IRQL6B_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6B_
 /*
 
 Write to FF0700 Upper 8 bits: 
-                  bit 7 - IRQL7_MASK
+                  bit 7 - DEBUG_BUTTON_MASK
                   bit 6 - IRQL6A_MASK
                   bit 5 - IRQL6B_MASK
-                  bit 4 - IRQL5A_MASK
-                  bit 3 - IRQL5B_MASK
+                  bit 4 - UARTA_IRQ_MASK
+                  bit 3 - UARTB_IRQ_MASK
                   bit 2 - IRQL4A_MASK
-                  bit 1 - IRQL4B_MASK
+                  bit 1 - IDE_IRQ_MASK
                   bit 0 - Unused
 
  Write to FF0702 Upper 8 bits:
-                  bit 7 - IRQL3A_MASK
-                  bit 6 - IRQL3B_MASK
+                  bit 7 - EXPA_IRQ_MASK
+                  bit 6 - EXPB_IRQ_MASK
 
  Write to FF0706 Upper 8 bits:
                   bit 7 - REQUEST_RESET (Set to 1 to force CPU_RESET)
@@ -184,9 +184,9 @@ Write to FF0700 Upper 8 bits:
 
 LATCHCLOCK =  INTC_CS # CPU_A1 # CPU_A2 # CPU_RW;
 
-IRQL7_MASK.d = CPU_D7.io;
-IRQL7_MASK.ck = LATCHCLOCK;
-IRQL7_MASK.ap = !CPU_RESET;  /* Special - On RESET this is still enabled (NMI) */
+DEBUG_BUTTON_MASK.d = CPU_D7.io;
+DEBUG_BUTTON_MASK.ck = LATCHCLOCK;
+DEBUG_BUTTON_MASK.ap = !CPU_RESET;  /* Special - On RESET this is still enabled (NMI) */
 /* changed to preset */
 
 IRQL6A_MASK.d = CPU_D6.io;
@@ -197,29 +197,29 @@ IRQL6B_MASK.d = CPU_D5.io;
 IRQL6B_MASK.ck = LATCHCLOCK;
 IRQL6B_MASK.ap = !CPU_RESET;
 
-IRQL5A_MASK.d = CPU_D4.io;
-IRQL5A_MASK.ck = LATCHCLOCK;
-IRQL5A_MASK.ap = !CPU_RESET;
+UARTA_IRQ_MASK.d = CPU_D4.io;
+UARTA_IRQ_MASK.ck = LATCHCLOCK;
+UARTA_IRQ_MASK.ap = !CPU_RESET;
 
-IRQL5B_MASK.d = CPU_D3.io;
-IRQL5B_MASK.ck = LATCHCLOCK;
-IRQL5B_MASK.ap = !CPU_RESET;
+UARTB_IRQ_MASK.d = CPU_D3.io;
+UARTB_IRQ_MASK.ck = LATCHCLOCK;
+UARTB_IRQ_MASK.ap = !CPU_RESET;
 
 IRQL4A_MASK.d = CPU_D2.io;
 IRQL4A_MASK.ck = LATCHCLOCK;
 IRQL4A_MASK.ap = !CPU_RESET;
 
-IRQL4B_MASK.d = CPU_D1.io;
-IRQL4B_MASK.ck = LATCHCLOCK;
-IRQL4B_MASK.ap = !CPU_RESET;
+IDE_IRQ_MASK.d = CPU_D1.io;
+IDE_IRQ_MASK.ck = LATCHCLOCK;
+IDE_IRQ_MASK.ap = !CPU_RESET;
 
-IRQL3A_MASK.d = CPU_D7.io;
-IRQL3A_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
-IRQL3A_MASK.ap = !CPU_RESET;
+EXPA_IRQ_MASK.d = CPU_D7.io;
+EXPA_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+EXPA_IRQ_MASK.ap = !CPU_RESET;
 
-IRQL3B_MASK.d = CPU_D6.io;
-IRQL3B_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
-IRQL3B_MASK.ap = !CPU_RESET;
+EXPB_IRQ_MASK.d = CPU_D6.io;
+EXPB_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+EXPB_IRQ_MASK.ap = !CPU_RESET;
 
 /* 
    RESET Request flip flip.  0 at reset.  If you write 1 to it
@@ -304,11 +304,11 @@ CPU_VPA = 'b'1;
    the group is low.  That group is used to select the interrupt level that goes to the CPU.
 */
 
-IRQL7_INT = IRQL7_PE;
+IRQL7_INT = DEBUG_INT_PE;
 IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
-IRQL5_INT = (IRQL5A_PE & IRQL5B_PE) # !IRQL6_INT # !IRQL7_INT;
-IRQL4_INT = (IRQL4A_PE & IRQL4B_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
-IRQL3_INT = (IRQL3A_PE & IRQL3B_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IRQL5_INT = (UARTA_IRQ_PE & UARTB_IRQ_PE) # !IRQL6_INT # !IRQL7_INT;
+IRQL4_INT = (IRQL4A_PE & IDE_IRQ_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IRQL3_INT = (EXPA_IRQ_PE & EXPB_IRQ_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
 
 /* 
    IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
@@ -326,23 +326,23 @@ IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
    priority.  Within each group only one of the signals will be asserted(ow) at any time.
    These are active low sigals coming in, and going out.
 
-   NOTE IRQL5A and IRQL5B, coming from the UART, are active high signals.   It is critical to note
+   NOTE UARTA_IRQ and UARTB_IRQ, coming from the UART, are active high signals.   It is critical to note
    that the 16C2550 on init has MCR bit3=0, which disables the INT output, which results in the CPLD pullup 
    pulling that signal high.  You MUST change the MCR bit3 to 1 before enabling interrupts.  This will allow the
    UART to correctly signal and interrupt.
 
-   Since IRQL5A and B are active high, they are inverted in the assignments below.
+   Since UARTA_IRQ and B are active high, they are inverted in the assignments below.
 */
 
-IRQL7_PE = (IRQL7 # IRQL7_MASK);
+DEBUG_INT_PE = (DEBUG_INT # DEBUG_BUTTON_MASK);
 IRQL6A_PE = (IRQL6A # IRQL6A_MASK);
 IRQL6B_PE = (IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
-IRQL5A_PE = (!IRQL5A # IRQL5A_MASK);
-IRQL5B_PE = (!IRQL5B # IRQL5B_MASK) # !(!IRQL5A # IRQL5A_MASK);
+UARTA_IRQ_PE = (!UARTA_IRQ # UARTA_IRQ_MASK);
+UARTB_IRQ_PE = (!UARTB_IRQ # UARTB_IRQ_MASK) # !(!UARTA_IRQ # UARTA_IRQ_MASK);
 IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
-IRQL4B_PE = (IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
-IRQL3A_PE = (IRQL3A # IRQL3A_MASK) ;
-IRQL3B_PE = (IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+EXPA_IRQ_PE = (EXPA_IRQ # EXPA_IRQ_MASK) ;
+EXPB_IRQ_PE = (EXPB_IRQ # EXPB_IRQ_MASK) # !(EXPA_IRQ # EXPA_IRQ_MASK);
 
 /* This field is created so we can select on it using the :[number] method below */
 
@@ -362,15 +362,15 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
 
       IRQ      AVector#    Vector#              System Use
       ------   --------    --------             -------------------------------
-      IRQL7     0x1F       11110000 (0xF0)      Debugger (Button)
+      DEBUG_INT     0x1F       11110000 (0xF0)      Debugger (Button)
       IRQL6A    0x1E       11100001 (0xE1)      PTC #1 (Programmable Timer)
       IRQL6B    0x1D       11100010 (0xE2)      PTC #2 (Programmable Timer)
-      IRQL5A    0x1C       11010001 (0xD1)      UARTA
-      IRQL5B    0x1B       11010010 (0xD2)      UARTB
+      UARTA_IRQ    0x1C       11010001 (0xD1)      UARTA
+      UARTB_IRQ    0x1B       11010010 (0xD2)      UARTB
       IRQL4A    0x1A       11000001 (0xC1)      RTC
-      IRQL4B               11000010 (0xC2)      IDE
-      IRQL3A               10110001 (0xB1)      Keyboard
-      IRQL3B               10110010 (0xB2)      NIC
+      IDE_IRQ               11000010 (0xC2)      IDE
+      EXPA_IRQ               10110001 (0xB1)      Keyboard
+      EXPB_IRQ               10110010 (0xB2)      NIC
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 
@@ -382,14 +382,14 @@ VECTORD4 = CPU_INTACK0;
 VECTORD3 = 'h'0;
 VECTORD2 = 'h'0;
 VECTORD1 = (interrupt_ack_num:[6]&!IRQL6B_PE) 
-            # (interrupt_ack_num:[5]&!IRQL5B_PE)   
-            # (interrupt_ack_num:[4]&!IRQL4B_PE)
-            # (interrupt_ack_num:[3]&!IRQL3B_PE);
+            # (interrupt_ack_num:[5]&!UARTB_IRQ_PE)   
+            # (interrupt_ack_num:[4]&!IDE_IRQ_PE)
+            # (interrupt_ack_num:[3]&!EXPB_IRQ_PE);
 
 VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE) 
-            # (interrupt_ack_num:[5]&!IRQL5A_PE) 
+            # (interrupt_ack_num:[5]&!UARTA_IRQ_PE) 
             # (interrupt_ack_num:[4]&!IRQL4A_PE)
-            # (interrupt_ack_num:[3]&!IRQL3A_PE);
+            # (interrupt_ack_num:[3]&!EXPA_IRQ_PE);
 
 /*
    Registers for driving the data bus to tell the CPU the vector number.  We latch into these flipflops

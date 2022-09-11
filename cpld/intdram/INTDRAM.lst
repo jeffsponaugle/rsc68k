@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -30,11 +30,11 @@ Created Sat Sep 10 20:38:32 2022
  23:/* Interrupt Controller */
  24:Pin[24,22,21]   = [CPU_FC2..0];
  25:Pin[56,57,58]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
- 26:Pin[83]    = IRQL7_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
- 27:Pin[84,1]  = IRQL6A_EDGE,IRQL6B_EDGE;
- 28:Pin[2,4]   = IRQL5A,IRQL5B;
- 29:Pin[5,6]   = IRQL4A_EDGE,IRQL4B;
- 30:Pin[8,9]   = IRQL3A,IRQL3B;
+ 26:Pin[83]    = DEBUG_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
+ 27:Pin[84,1]  = PTC1_IRQ,PTC2_IRQ;
+ 28:Pin[2,4]   = UARTA_IRQ,UARTB_IRQ;
+ 29:Pin[5,6]   = RTC_IRQ,IDE_IRQ;
+ 30:Pin[8,9]   = EXPA_IRQ,EXPB_IRQ;
  31:Pin[55]    = INTC_CS;     /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
  32:
  33:/* DRAM Controller */
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
  54:/* DRAM Controller */
  55:Pin[74]  = RAS0;
@@ -89,7 +89,7 @@ Created Sat Sep 10 20:38:32 2022
  74:/* Debugging pins */
  75:
  76:Pin[77]  = INT_ACK;
- 77:Pin[79]  = IRQL7 ;
+ 77:Pin[79]  = DEBUG_INT ;
  78:
  79:
  80:CPU_RESET_INV = !CPU_RESET;
@@ -101,11 +101,11 @@ Created Sat Sep 10 20:38:32 2022
  86:NODE AS_GATED;
  87:
  88:NODE DTACK_TIMER_0, DTACK_TIMER_1;
- 89:NODE IRQL7_MASK;
+ 89:NODE DEBUG_BUTTON_MASK;
  90:NODE IRQL6A_MASK,IRQL6B_MASK;
- 91:NODE IRQL5A_MASK,IRQL5B_MASK;
- 92:NODE IRQL4A_MASK,IRQL4B_MASK;
- 93:NODE IRQL3A_MASK,IRQL3B_MASK;
+ 91:NODE UARTA_IRQ_MASK,UARTB_IRQ_MASK;
+ 92:NODE IRQL4A_MASK,IDE_IRQ_MASK;
+ 93:NODE EXPA_IRQ_MASK,EXPB_IRQ_MASK;
  94:
  95:NODE REFRESH_REQUESTED_PRE;
  96:NODE REFRESH_REQUESTED_SYNC;
@@ -126,47 +126,47 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 108:
 109:/* 
 110:   We will create an internal synthetic IRQ7L request that is triggered
-111:   by a falling edge of the IRQL7_BUTTON, and is reset by either system 
-112:   reset, or by the IRQL7_ACK signal which happens when the interrupt is
+111:   by a falling edge of the DEBUG_INT_BUTTON, and is reset by either system 
+112:   reset, or by the DEBUG_INT_ACK signal which happens when the interrupt is
 113:   acknowleged.
 114:*/
 115:
-116:/* NODE IRQL7; REMOVED FOR DEBUGGING PIN */
+116:/* NODE DEBUG_INT; REMOVED FOR DEBUGGING PIN */
 117:
-118:IRQL7.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
-119:IRQL7.ap = !CPU_RESET # IRQL7_ACK;
-120:IRQL7.ck = !IRQL7_BUTTON;
+118:DEBUG_INT.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
+119:DEBUG_INT.ap = !CPU_RESET # IRQL7_ACK;
+120:DEBUG_INT.ck = !DEBUG_BUTTON;
 121:
 122:/* 
-123:   IRQ4A (RTC) needs to be edge triggered, so lets rename the input to IRQL4A_EDGE, and use that 
+123:   IRQ4A (RTC) needs to be edge triggered, so lets rename the input to RTC_IRQ, and use that 
 124:   edge to clock in a flipflop.  It is reset by RESET, or the ACK of IRQ4A.
 125:*/
 126:
 127:NODE IRQL4A;
 128:IRQL4A.d = 'b'0;
 129:IRQL4A.ap = !CPU_RESET # IRQL4A_ACK;
-130:IRQL4A.ck = !IRQL4A_EDGE;
+130:IRQL4A.ck = !RTC_IRQ;
 131:
 132:NODE IRQL6A,IRQL6B;
 133:
 134:IRQL6A.d = 'b'0;
 135:IRQL6A.ap = !CPU_RESET # IRQL6A_ACK;
-136:IRQL6A.ck = !IRQL6A_EDGE;
+136:IRQL6A.ck = !PTC1_IRQ;
 137:
 138:IRQL6B.d = 'b'0;
 139:IRQL6B.ap = !CPU_RESET # IRQL6B_ACK;
-140:IRQL6B.ck = !IRQL6B_EDGE;
+140:IRQL6B.ck = !PTC2_IRQ;
 141:
 142:
 143:/* 
 144:   This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
 145:   being acknowleged is 7.  The rising edge of this signal will clear the 
-146:   IRQL7 node above, which clears the interrupt request for IRQ7.
+146:   DEBUG_INT node above, which clears the interrupt request for IRQ7.
 147:
 148:   IRQL4A_ACK is the same, but for interrupt level 4 acks.
 149:   NOTE since any level 4 interrupt ack will show up with the INTACK bits, we are also
@@ -188,25 +188,25 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 162:
 163:/* Interupt Mask Registers -  0 = allow interrupt, 1 = block interrupt */
 164:/*
 165:
 166:Write to FF0700 Upper 8 bits: 
-167:                  bit 7 - IRQL7_MASK
+167:                  bit 7 - DEBUG_BUTTON_MASK
 168:                  bit 6 - IRQL6A_MASK
 169:                  bit 5 - IRQL6B_MASK
-170:                  bit 4 - IRQL5A_MASK
-171:                  bit 3 - IRQL5B_MASK
+170:                  bit 4 - UARTA_IRQ_MASK
+171:                  bit 3 - UARTB_IRQ_MASK
 172:                  bit 2 - IRQL4A_MASK
-173:                  bit 1 - IRQL4B_MASK
+173:                  bit 1 - IDE_IRQ_MASK
 174:                  bit 0 - Unused
 175:
 176: Write to FF0702 Upper 8 bits:
-177:                  bit 7 - IRQL3A_MASK
-178:                  bit 6 - IRQL3B_MASK
+177:                  bit 7 - EXPA_IRQ_MASK
+178:                  bit 6 - EXPB_IRQ_MASK
 179:
 180: Write to FF0706 Upper 8 bits:
 181:                  bit 7 - REQUEST_RESET (Set to 1 to force CPU_RESET)
@@ -215,9 +215,9 @@ Created Sat Sep 10 20:38:32 2022
 184:
 185:LATCHCLOCK =  INTC_CS # CPU_A1 # CPU_A2 # CPU_RW;
 186:
-187:IRQL7_MASK.d = CPU_D7.io;
-188:IRQL7_MASK.ck = LATCHCLOCK;
-189:IRQL7_MASK.ap = !CPU_RESET;  /* Special - On RESET this is still enabled (NMI) */
+187:DEBUG_BUTTON_MASK.d = CPU_D7.io;
+188:DEBUG_BUTTON_MASK.ck = LATCHCLOCK;
+189:DEBUG_BUTTON_MASK.ap = !CPU_RESET;  /* Special - On RESET this is still enabled (NMI) */
 190:/* changed to preset */
 191:
 192:IRQL6A_MASK.d = CPU_D6.io;
@@ -228,21 +228,21 @@ Created Sat Sep 10 20:38:32 2022
 197:IRQL6B_MASK.ck = LATCHCLOCK;
 198:IRQL6B_MASK.ap = !CPU_RESET;
 199:
-200:IRQL5A_MASK.d = CPU_D4.io;
-201:IRQL5A_MASK.ck = LATCHCLOCK;
-202:IRQL5A_MASK.ap = !CPU_RESET;
+200:UARTA_IRQ_MASK.d = CPU_D4.io;
+201:UARTA_IRQ_MASK.ck = LATCHCLOCK;
+202:UARTA_IRQ_MASK.ap = !CPU_RESET;
 203:
-204:IRQL5B_MASK.d = CPU_D3.io;
-205:IRQL5B_MASK.ck = LATCHCLOCK;
-206:IRQL5B_MASK.ap = !CPU_RESET;
+204:UARTB_IRQ_MASK.d = CPU_D3.io;
+205:UARTB_IRQ_MASK.ck = LATCHCLOCK;
+206:UARTB_IRQ_MASK.ap = !CPU_RESET;
 207:
 208:IRQL4A_MASK.d = CPU_D2.io;
 209:IRQL4A_MASK.ck = LATCHCLOCK;
 210:IRQL4A_MASK.ap = !CPU_RESET;
 211:
-212:IRQL4B_MASK.d = CPU_D1.io;
-213:IRQL4B_MASK.ck = LATCHCLOCK;
-214:IRQL4B_MASK.ap = !CPU_RESET;
+212:IDE_IRQ_MASK.d = CPU_D1.io;
+213:IDE_IRQ_MASK.ck = LATCHCLOCK;
+214:IDE_IRQ_MASK.ap = !CPU_RESET;
 215:
 
 LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
@@ -250,15 +250,15 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
-216:IRQL3A_MASK.d = CPU_D7.io;
-217:IRQL3A_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
-218:IRQL3A_MASK.ap = !CPU_RESET;
+216:EXPA_IRQ_MASK.d = CPU_D7.io;
+217:EXPA_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+218:EXPA_IRQ_MASK.ap = !CPU_RESET;
 219:
-220:IRQL3B_MASK.d = CPU_D6.io;
-221:IRQL3B_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
-222:IRQL3B_MASK.ap = !CPU_RESET;
+220:EXPB_IRQ_MASK.d = CPU_D6.io;
+221:EXPB_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+222:EXPB_IRQ_MASK.ap = !CPU_RESET;
 223:
 224:/* 
 225:   RESET Request flip flip.  0 at reset.  If you write 1 to it
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 270:   DTACK_TIMER_1 is also used to assert the VPA pin if the interrupt system is switched
 271:   to autovector mode.  In that mode there is no need to drive the databus with a vector.
@@ -351,11 +351,11 @@ Created Sat Sep 10 20:38:32 2022
 304:   the group is low.  That group is used to select the interrupt level that goes to the CPU.
 305:*/
 306:
-307:IRQL7_INT = IRQL7_PE;
+307:IRQL7_INT = DEBUG_INT_PE;
 308:IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
-309:IRQL5_INT = (IRQL5A_PE & IRQL5B_PE) # !IRQL6_INT # !IRQL7_INT;
-310:IRQL4_INT = (IRQL4A_PE & IRQL4B_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
-311:IRQL3_INT = (IRQL3A_PE & IRQL3B_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+309:IRQL5_INT = (UARTA_IRQ_PE & UARTB_IRQ_PE) # !IRQL6_INT # !IRQL7_INT;
+310:IRQL4_INT = (IRQL4A_PE & IDE_IRQ_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+311:IRQL3_INT = (EXPA_IRQ_PE & EXPB_IRQ_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
 312:
 313:/* 
 314:   IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
@@ -374,30 +374,30 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 324:   These groups of lines form a priority selector for each group.  Within 
 325:   a group there are up to 4 interrupt sources (A-D), with A being the highest
 326:   priority.  Within each group only one of the signals will be asserted(ow) at any time.
 327:   These are active low sigals coming in, and going out.
 328:
-329:   NOTE IRQL5A and IRQL5B, coming from the UART, are active high signals.   It is critical to note
+329:   NOTE UARTA_IRQ and UARTB_IRQ, coming from the UART, are active high signals.   It is critical to note
 330:   that the 16C2550 on init has MCR bit3=0, which disables the INT output, which results in the CPLD pullup 
 331:   pulling that signal high.  You MUST change the MCR bit3 to 1 before enabling interrupts.  This will allow the
 332:   UART to correctly signal and interrupt.
 333:
-334:   Since IRQL5A and B are active high, they are inverted in the assignments below.
+334:   Since UARTA_IRQ and B are active high, they are inverted in the assignments below.
 335:*/
 336:
-337:IRQL7_PE = (IRQL7 # IRQL7_MASK);
+337:DEBUG_INT_PE = (DEBUG_INT # DEBUG_BUTTON_MASK);
 338:IRQL6A_PE = (IRQL6A # IRQL6A_MASK);
 339:IRQL6B_PE = (IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
-340:IRQL5A_PE = (!IRQL5A # IRQL5A_MASK);
-341:IRQL5B_PE = (!IRQL5B # IRQL5B_MASK) # !(!IRQL5A # IRQL5A_MASK);
+340:UARTA_IRQ_PE = (!UARTA_IRQ # UARTA_IRQ_MASK);
+341:UARTB_IRQ_PE = (!UARTB_IRQ # UARTB_IRQ_MASK) # !(!UARTA_IRQ # UARTA_IRQ_MASK);
 342:IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
-343:IRQL4B_PE = (IRQL4B # IRQL4B_MASK) # !(IRQL4A # IRQL4A_MASK);
-344:IRQL3A_PE = (IRQL3A # IRQL3A_MASK) ;
-345:IRQL3B_PE = (IRQL3B # IRQL3B_MASK) # !(IRQL3A # IRQL3A_MASK);
+343:IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+344:EXPA_IRQ_PE = (EXPA_IRQ # EXPA_IRQ_MASK) ;
+345:EXPB_IRQ_PE = (EXPB_IRQ # EXPB_IRQ_MASK) # !(EXPA_IRQ # EXPA_IRQ_MASK);
 346:
 347:/* This field is created so we can select on it using the :[number] method below */
 348:
@@ -417,15 +417,15 @@ Created Sat Sep 10 20:38:32 2022
 362:
 363:      IRQ      AVector#    Vector#              System Use
 364:      ------   --------    --------             -------------------------------
-365:      IRQL7     0x1F       11110000 (0xF0)      Debugger (Button)
+365:      DEBUG_INT     0x1F       11110000 (0xF0)      Debugger (Button)
 366:      IRQL6A    0x1E       11100001 (0xE1)      PTC #1 (Programmable Timer)
 367:      IRQL6B    0x1D       11100010 (0xE2)      PTC #2 (Programmable Timer)
-368:      IRQL5A    0x1C       11010001 (0xD1)      UARTA
-369:      IRQL5B    0x1B       11010010 (0xD2)      UARTB
+368:      UARTA_IRQ    0x1C       11010001 (0xD1)      UARTA
+369:      UARTB_IRQ    0x1B       11010010 (0xD2)      UARTB
 370:      IRQL4A    0x1A       11000001 (0xC1)      RTC
-371:      IRQL4B               11000010 (0xC2)      IDE
-372:      IRQL3A               10110001 (0xB1)      Keyboard
-373:      IRQL3B               10110010 (0xB2)      NIC
+371:      IDE_IRQ               11000010 (0xC2)      IDE
+372:      EXPA_IRQ               10110001 (0xB1)      Keyboard
+373:      EXPB_IRQ               10110010 (0xB2)      NIC
 374:
 375:      Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 376:
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 378:VECTORD7 = 'h'1;
 379:VECTORD6 = CPU_INTACK2;
@@ -445,14 +445,14 @@ Created Sat Sep 10 20:38:32 2022
 382:VECTORD3 = 'h'0;
 383:VECTORD2 = 'h'0;
 384:VECTORD1 = (interrupt_ack_num:[6]&!IRQL6B_PE) 
-385:            # (interrupt_ack_num:[5]&!IRQL5B_PE)   
-386:            # (interrupt_ack_num:[4]&!IRQL4B_PE)
-387:            # (interrupt_ack_num:[3]&!IRQL3B_PE);
+385:            # (interrupt_ack_num:[5]&!UARTB_IRQ_PE)   
+386:            # (interrupt_ack_num:[4]&!IDE_IRQ_PE)
+387:            # (interrupt_ack_num:[3]&!EXPB_IRQ_PE);
 388:
 389:VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE) 
-390:            # (interrupt_ack_num:[5]&!IRQL5A_PE) 
+390:            # (interrupt_ack_num:[5]&!UARTA_IRQ_PE) 
 391:            # (interrupt_ack_num:[4]&!IRQL4A_PE)
-392:            # (interrupt_ack_num:[3]&!IRQL3A_PE);
+392:            # (interrupt_ack_num:[3]&!EXPA_IRQ_PE);
 393:
 394:/*
 395:   Registers for driving the data bus to tell the CPU the vector number.  We latch into these flipflops
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 432:
 433:/* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 486:NODE REFRESH_REQUESTED_SYNC;
 487:*/
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 540:
 541:NODE [REFRESH_STATE_TIMER2..0];
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 594:      DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[1,2,3]);         
 595:      DRAM_MEM_AB_PRE.ck = !CLK_32M;
@@ -746,7 +746,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 648:/*
 649:REFRESH_COUNTER_RESET.d = REFRESH_COUNTER_RESET_PRE;
@@ -808,7 +808,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 702:DRAM_REFRESH_CAS_PRE.d = !(refresh_state_timer_field:[1,2]);
 703:DRAM_REFRESH_CAS_PRE.ck = !CLK_32M;
@@ -870,7 +870,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 756:*/
 757:
@@ -932,7 +932,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 16
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 810:/*      
 811:        At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
@@ -994,7 +994,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 17
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:38:32 2022
+Created Sun Sep 11 09:04:19 2022
 
 864:                    --------------------------------------------                     
 865:                      C C C C C V C C C G V C C C G         D V                     
