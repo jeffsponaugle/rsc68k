@@ -81,7 +81,7 @@ CPU_RESET_INV = !CPU_RESET;
 
 /* For now, keep VPA at 1.  We will use this to switch to autovectoring interrupts */
 
-CPU_VPA = 'b'1;
+
 
 NODE AS_GATED;
 
@@ -282,7 +282,14 @@ DTACK_TIMER_1.ck = !CLK_16M;
    on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
 */
 
+/*    
+   To switch to autovectoring, set DTACK_FROM_INT high all the time, and make VPA active furig INT_ACK. 
+   DTACK_FROM_INT = 'b'1;
+   CPU_VPA = !DTACK_TIMER_1;
+*/
+
 DTACK_FROM_INT = !DTACK_TIMER_1;
+CPU_VPA = 'b'1;
 
 /* 
    Active low grouping of external active low interrupts.  If any of these inputs are low,
@@ -345,17 +352,17 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
       The lower 4 bits are driven by the specific sub interrupt for the level selected above.
       Since we support 4 sub interrupts, the vector uses 1 bit for each.
 
-      IRQ         Vector#              System Use
-      ------      --------             -------------------------------
-      IRQL7       11110000 (0xF0)      Debugger (Button)
-      IRQL6A      11100001 (0xE1)      PTC #1 (Programmable Timer)
-      IRQL6B      11100010 (0xE2)      PTC #2 (Programmable Timer)
-      IRQL5A      11010001 (0xD1)      UARTA
-      IRQL5B      11010010 (0xD2)      UARTB
-      IRQL4A      11000001 (0xC1)      RTC
-      IRQL4B      11000010 (0xC2)      IDE
-      IRQL3A      10110001 (0xB1)      Keyboard
-      IRQL3B      10110010 (0xB2)      NIC
+      IRQ      AVector#    Vector#              System Use
+      ------   --------    --------             -------------------------------
+      IRQL7     0x1F       11110000 (0xF0)      Debugger (Button)
+      IRQL6A    0x1E       11100001 (0xE1)      PTC #1 (Programmable Timer)
+      IRQL6B    0x1D       11100010 (0xE2)      PTC #2 (Programmable Timer)
+      IRQL5A    0x1C       11010001 (0xD1)      UARTA
+      IRQL5B    0x1B       11010010 (0xD2)      UARTB
+      IRQL4A    0x1A       11000001 (0xC1)      RTC
+      IRQL4B               11000010 (0xC2)      IDE
+      IRQL3A               10110001 (0xB1)      Keyboard
+      IRQL3B               10110010 (0xB2)      NIC
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 
@@ -394,8 +401,15 @@ CPU_D0.d = VECTORD0;
 
 [CPU_D7..0].ck = DTACK_TIMER_0;
 [CPU_D7..0].ar = !CPU_RESET;
-[CPU_D7..0].oe = INT_ACK;
 
+/* 
+   The two lines below should be changed if you switch to autovectoring.
+   The .oe should be disabled, and the INT_DWAP should be set to 'b'1;
+   This will turn off the vector drive on the databus, and the bus swapping
+   bug fix.
+*/
+
+[CPU_D7..0].oe = INT_ACK;
 INT_DSWAP = !INT_ACK;
 
 
