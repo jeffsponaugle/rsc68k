@@ -49,6 +49,7 @@ Pin[31]   = CPU_RW;
 Pin[28,27,25]  = [IPL2..0];
 Pin[52]        = DTACK_FROM_INT;
 Pin[46,45,44,41,40,39,37,36]  = [CPU_D7..0];
+Pin[60]        = CPU_VPA;
 
 /* DRAM Controller */
 Pin[74]  = RAS0;
@@ -77,6 +78,10 @@ Pin[79]  = IRQL7 ;
 
 
 CPU_RESET_INV = !CPU_RESET;
+
+/* For now, keep VPA at 1.  We will use this to switch to autovectoring interrupts */
+
+CPU_VPA = 'b'1;
 
 NODE AS_GATED;
 
