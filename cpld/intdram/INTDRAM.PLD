@@ -266,6 +266,9 @@ INT_ACK = CPU_FC2 & CPU_FC1 & CPU_FC0 & !CPU_AS;
    The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
    back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
    present on the databus.
+
+   DTACK_TIMER_1 is also used to assert the VPA pin if the interrupt system is switched
+   to autovector mode.  In that mode there is no need to drive the databus with a vector.
 */
 
 DTACK_TIMER_0.d = 'b'1;
@@ -284,12 +287,17 @@ DTACK_TIMER_1.ck = !CLK_16M;
 
 /*    
    To switch to autovectoring, set DTACK_FROM_INT high all the time, and make VPA active furig INT_ACK. 
+   Autovector:
    DTACK_FROM_INT = 'b'1;
    CPU_VPA = !DTACK_TIMER_1;
+   Regular Vector:
+   DTACK_FROM_INT = !DTACK_TIMER_1;
+   CPU_VPA = 'b'1;
+
 */
 
-DTACK_FROM_INT = !DTACK_TIMER_1;
-CPU_VPA = 'b'1;
+DTACK_FROM_INT = 'b'1;
+CPU_VPA = !DTACK_TIMER_1;
 
 /* 
    Active low grouping of external active low interrupts.  If any of these inputs are low,
@@ -407,13 +415,20 @@ CPU_D0.d = VECTORD0;
    The .oe should be disabled, and the INT_DWAP should be set to 'b'1;
    This will turn off the vector drive on the databus, and the bus swapping
    bug fix.
+   Autovector:
+
+   [CPU_D7..0].oe = 'b'0;
+   INT_DSWAP = 'b'1';
+
+   Regular Vector:
+   
+   [CPU_D7..0].oe = INT_ACK;
+   INT_DSWAP = !INT_ACK;
+
 */
 
-[CPU_D7..0].oe = INT_ACK;
-INT_DSWAP = !INT_ACK;
-
-
-
+[CPU_D7..0].oe = 'b'0;
+INT_DSWAP = 'b'1;
 
 /* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
    these clock sources will probably get generated elsewhere. */
