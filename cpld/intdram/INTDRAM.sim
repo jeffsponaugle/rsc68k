@@ -206,7 +206,7 @@ CPU_D0.ck  =>
     DTACK_TIMER_0
 
 CPU_D0.oe  =>
-    0 
+    INT_ACK
 
 CPU_D1.d  =>
     !CPU_INTACK0 & CPU_INTACK1 & CPU_INTACK2 & IRQL6A_MASK & !IRQL6B & !IRQL6B_MASK
@@ -225,7 +225,7 @@ CPU_D1.ck  =>
     DTACK_TIMER_0
 
 CPU_D1.oe  =>
-    0 
+    INT_ACK
 
 CPU_D2.d  =>
     0 
@@ -237,7 +237,7 @@ CPU_D2.ck  =>
     DTACK_TIMER_0
 
 CPU_D2.oe  =>
-    0 
+    INT_ACK
 
 CPU_D3.d  =>
     0 
@@ -249,7 +249,7 @@ CPU_D3.ck  =>
     DTACK_TIMER_0
 
 CPU_D3.oe  =>
-    0 
+    INT_ACK
 
 CPU_D4.d  =>
     CPU_INTACK0
@@ -261,7 +261,7 @@ CPU_D4.ck  =>
     DTACK_TIMER_0
 
 CPU_D4.oe  =>
-    0 
+    INT_ACK
 
 CPU_D5.d  =>
     CPU_INTACK1
@@ -273,7 +273,7 @@ CPU_D5.ck  =>
     DTACK_TIMER_0
 
 CPU_D5.oe  =>
-    0 
+    INT_ACK
 
 CPU_D6.d  =>
     CPU_INTACK2
@@ -285,7 +285,7 @@ CPU_D6.ck  =>
     DTACK_TIMER_0
 
 CPU_D6.oe  =>
-    0 
+    INT_ACK
 
 CPU_D7.d  =>
     1 
@@ -297,7 +297,7 @@ CPU_D7.ck  =>
     DTACK_TIMER_0
 
 CPU_D7.oe  =>
-    0 
+    INT_ACK
 
 CPU_HALT =>
     CPU_RESET
@@ -316,7 +316,7 @@ CPU_RESET_INV =>
     !CPU_RESET
 
 CPU_VPA =>
-    !DTACK_TIMER_1
+    1 
 
 DRAM_ACCESS_TIMER0.d  =>
     !DRAM_ACCESS_TIMER0
@@ -448,7 +448,7 @@ DRAM_RW.ck  =>
     CLK_32M
 
 DTACK_FROM_INT =>
-    1 
+    !DTACK_TIMER_1
 
 DTACK_TIMER_0.d  =>
     1 
@@ -472,7 +472,7 @@ INT_ACK =>
     !CPU_AS & CPU_FC0 & CPU_FC1 & CPU_FC2
 
 INT_DSWAP =>
-    1 
+    !INT_ACK
 
 IPL0 =>
     !IRQL6A & !IRQL6A_MASK & IRQL7

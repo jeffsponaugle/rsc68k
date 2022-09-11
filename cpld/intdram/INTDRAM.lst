@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
   1:Name     INTController;
   2:PartNo   INTCTRLCPLD;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
  54:/* DRAM Controller */
  55:Pin[74]  = RAS0;
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 108:
 109:/* 
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 162:
 163:/* Interupt Mask Registers -  0 = allow interrupt, 1 = block interrupt */
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 216:IRQL3A_MASK.d = CPU_D7.io;
 217:IRQL3A_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 270:   DTACK_TIMER_1 is also used to assert the VPA pin if the interrupt system is switched
 271:   to autovector mode.  In that mode there is no need to drive the databus with a vector.
@@ -343,8 +343,8 @@ Created Sat Sep 10 20:29:51 2022
 296:
 297:*/
 298:
-299:DTACK_FROM_INT = 'b'1;
-300:CPU_VPA = !DTACK_TIMER_1;
+299:DTACK_FROM_INT = !DTACK_TIMER_1;
+300:CPU_VPA = 'b'1;
 301:
 302:/* 
 303:   Active low grouping of external active low interrupts.  If any of these inputs are low,
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 324:   These groups of lines form a priority selector for each group.  Within 
 325:   a group there are up to 4 interrupt sources (A-D), with A being the highest
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 378:VECTORD7 = 'h'1;
 379:VECTORD6 = CPU_INTACK2;
@@ -490,15 +490,15 @@ Created Sat Sep 10 20:29:51 2022
 427:
 428:*/
 429:
-430:[CPU_D7..0].oe = 'b'0;
-431:INT_DSWAP = 'b'1;
+430:[CPU_D7..0].oe = INT_ACK;
+431:INT_DSWAP = !INT_ACK;
 
 LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 9
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 432:
 433:/* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 486:NODE REFRESH_REQUESTED_SYNC;
 487:*/
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 540:
 541:NODE [REFRESH_STATE_TIMER2..0];
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 594:      DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[1,2,3]);         
 595:      DRAM_MEM_AB_PRE.ck = !CLK_32M;
@@ -746,7 +746,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 13
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 648:/*
 649:REFRESH_COUNTER_RESET.d = REFRESH_COUNTER_RESET_PRE;
@@ -808,7 +808,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 14
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 702:DRAM_REFRESH_CAS_PRE.d = !(refresh_state_timer_field:[1,2]);
 703:DRAM_REFRESH_CAS_PRE.ck = !CLK_32M;
@@ -870,7 +870,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 15
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 756:*/
 757:
@@ -932,7 +932,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 16
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 810:/*      
 811:        At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
@@ -949,19 +949,19 @@ Created Sat Sep 10 20:29:51 2022
 822:/*
 823:
 824:
-825:                                                                                    
+825:                                                                                            
 826:                                             I                                      
-827:                                             R                                      
-828:                                             Q                                      
-829:                                             L                                      
-830:                       C                     7                                      
-831:                       L                     _                                      
-832:                     C K  I I   I I I   I II B                                      
-833:                     L _  R R   R R R   R RR U                                      
-834:                     K 5  Q Q   Q Q Q   Q QQ T                                      
-835:                     _ 0  L L G L L L V L LL T G       V                            
-836:                     1 0  3 3 N 4 4 5 C 5 66 O N       C                            
-837:                     M K  B A D B A B C A BA N D       C                            
+827:                                  I       II R                                      
+828:                                  R       RR Q                                      
+829:                                  Q       QQ L             I                        
+830:                       C          L       LL 7             N                        
+831:                       L          4       66 _           I T                        
+832:                     C K  I I   I A I   I BA B           N _                        
+833:                     L _  R R   R _ R   R __ U       I   T D                        
+834:                     K 5  Q Q   Q E Q   Q EE T       R   _ S                        
+835:                     _ 0  L L G L D L V L DD T G     Q V A W                        
+836:                     1 0  3 3 N 4 G 5 C 5 GG O N     L C C A                        
+837:                     M K  B A D B E B C A EE N D     7 C K P                        
 838:                    -------------------------------------------                     
 839:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
 840:                  /    10   8   6   4   2  84  82  80  78  76    \                 
@@ -979,7 +979,7 @@ Created Sat Sep 10 20:29:51 2022
 852:             TMS | 23               84-Lead PLCC               63 | DRAM_RW         
 853:         CPU_FC2 | 24                                          62 | TCK             
 854:            IPL0 | 25                                          61 |                 
-855:             VCC | 26                                          60 |                 
+855:             VCC | 26                                          60 | CPU_VPA         
 856:            IPL1 | 27                                          59 | GND             
 857:            IPL2 | 28                                          58 | CPU_INTACK0     
 858:       CPU_RESET | 29                                          57 | CPU_INTACK1     
@@ -994,15 +994,15 @@ LISTING FOR LOGIC DESCRIPTION FILE: INTDRAM.pld                      Page 17
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Sat Sep 10 20:29:51 2022
+Created Sat Sep 10 20:38:32 2022
 
 864:                    --------------------------------------------                     
-865:                      C C C C C V C C C G V C C   G C       D V                     
-866:                      P P P P P C P P P N C P P   N P       T C                     
-867:                      U U U U U C U U U D C U U   D U       A C                     
-868:                      _ _ _ _ _   _ _ _     _ _     _       C                       
-869:                      U L A D D   D D D     D D     D       K                       
-870:                      D D S 0 1   2 3 4     5 6     7       _                       
+865:                      C C C C C V C C C G V C C C G         D V                     
+866:                      P P P P P C P P P N C P P P N         T C                     
+867:                      U U U U U C U U U D C U U U D         A C                     
+868:                      _ _ _ _ _   _ _ _     _ _ _           C                       
+869:                      U L A D D   D D D     D D D           K                       
+870:                      D D S 0 1   2 3 4     5 6 7           _                       
 871:                      S S                                   F                       
 872:                                                            R                       
 873:                                                            O                       
@@ -1011,26 +1011,22 @@ Created Sat Sep 10 20:29:51 2022
 876:                                                            I                       
 877:                                                            N                       
 878:
-879:
-880:
-881:
-882:Total dedicated input used:     4/4     (100%)
-883:Total I/O pins used             49/64   (76%)
-884:Total Logic cells used          78/128  (60%)
-885:Total Flip-Flop used            58/128  (45%)
-886:Total Foldback logic used       17/128  (13%)
-887:Total Nodes+FB/MCells           95/128  (74%)
-888:Total cascade used              0
-889:Total input pins                27
-890:Total output pins               26
-891:Total Pts                       266
+879:Total dedicated input used:     4/4     (100%)
+880:Total I/O pins used             54/64   (84%)
+881:Total Logic cells used          103/128         (80%)
+882:Total Flip-Flop used            60/128  (46%)
+883:Total Foldback logic used       16/128  (12%)
+884:Total Nodes+FB/MCells           119/128         (92%)
+885:Total cascade used              0
+886:Total input pins                27
+887:Total output pins               31
+888:Total Pts                       347
+889:
+890:*/
+891:
 892:
 893:
-894:*/
-895:
-896:
-897:
-898:
+894:
 
 
 
