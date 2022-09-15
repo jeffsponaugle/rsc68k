@@ -286,7 +286,7 @@ DTACK_TIMER_1.ck = !CLK_16M;
 */
 
 /*    
-   To switch to autovectoring, set DTACK_FROM_INT high all the time, and make VPA active furig INT_ACK. 
+   To switch to AUTOVECTORING set DTACK_FROM_INT high all the time, and make VPA active durig INT_ACK. 
    Autovector:
    DTACK_FROM_INT = 'b'1;
    CPU_VPA = !DTACK_TIMER_1;
@@ -360,17 +360,17 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
       The lower 4 bits are driven by the specific sub interrupt for the level selected above.
       Since we support 4 sub interrupts, the vector uses 1 bit for each.
 
-      IRQ      AVector#    Vector#              System Use
-      ------   --------    --------             -------------------------------
-      DEBUG_INT     0x1F       11110000 (0xF0)      Debugger (Button)
-      IRQL6A    0x1E       11100001 (0xE1)      PTC #1 (Programmable Timer)
-      IRQL6B    0x1D       11100010 (0xE2)      PTC #2 (Programmable Timer)
-      UARTA_IRQ    0x1C       11010001 (0xD1)      UARTA
-      UARTB_IRQ    0x1B       11010010 (0xD2)      UARTB
-      IRQL4A    0x1A       11000001 (0xC1)      RTC
-      IDE_IRQ               11000010 (0xC2)      IDE
-      EXPA_IRQ               10110001 (0xB1)      Keyboard
-      EXPB_IRQ               10110010 (0xB2)      NIC
+      IRQ        AVector#    Vector#              System Use
+      ------     --------    --------             -------------------------------
+      DEBUG_INT  0x1F        11110000 (0xF0)      Debugger (Button)
+      IRQL6A     0x1E        11100001 (0xE1)      PTC #1 (Programmable Timer)
+      IRQL6B     0x1D        11100010 (0xE2)      PTC #2 (Programmable Timer)
+      UARTA_IRQ  0x1C        11010001 (0xD1)      UARTA
+      UARTB_IRQ  0x1B        11010010 (0xD2)      UARTB
+      IRQL4A     0x1A        11000001 (0xC1)      RTC
+      IDE_IRQ    NA          11000010 (0xC2)      IDE
+      EXPA_IRQ   NA          10110001 (0xB1)      Keyboard
+      EXPB_IRQ   NA          10110010 (0xB2)      NIC
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 

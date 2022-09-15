@@ -1,11 +1,11 @@
-{COMPONENT C:\INTDRAM.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sun Sep 11 09:04:27 2022 "}
+  {DBtime "Thu Sep 15 09:35:37 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -285,7 +285,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\INTDRAM 230 800}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM 230 800}
    }
   }
  }

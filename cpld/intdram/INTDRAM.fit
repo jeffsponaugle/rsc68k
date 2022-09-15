@@ -1,7 +1,7 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Sun Sep 11 09:04:28 2022
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu Sep 15 09:35:38 2022
 
 
-fit1508 C:\INTDRAM.tt2 -CUPL -dev P1508C84 -JTAG ON
+fit1508 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM.tt2 -CUPL -dev P1508C84 -JTAG ON
 
 
 ****** Initial fitting strategy and property ******
@@ -577,7 +577,7 @@ INT_ACK			(MC8	P)   : MUX 32		Ref (H123p)
 IRQL6B.AP		(MC7	FB)  : MUX 33		Ref (D61fb)
 IRQL6A.AP		(MC6	FB)  : MUX 38		Ref (D55fb)
 
-Creating JEDEC file C:\INTDRAM.jed ...
+Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM.jed ...
 
 PLCC84 programmed logic:
 -----------------------------------
@@ -1508,7 +1508,7 @@ Total cascade used 		0
 Total input pins 		27
 Total output pins 		31
 Total Pts 			359
-Creating pla file C:\INTDRAM.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM\INTDRAM.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
 $Device PLCC84 fits 
