@@ -201,11 +201,11 @@ DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         ));
 
 /* Memory OE is low for a read operation, so invert of RW line from CPU */
-MEM_OE = !CPU_RW;
+MEM_OE = !CPU_RW # CPU_AS;
 
 SEVENSEG_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF00XX );
-UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX );
-UART_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF02XX );
+UART_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF01XX ) # CPU_UDS;
+UART_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF02XX ) # CPU_UDS;
 IDE_CSA = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF03XX );
 IDE_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF04XX );
 LED_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF05XX );

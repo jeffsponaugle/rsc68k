@@ -335,11 +335,15 @@ IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
 */
 
 DEBUG_INT_PE = (DEBUG_INT # DEBUG_BUTTON_MASK);
+
 IRQL6A_PE = (IRQL6A # IRQL6A_MASK);
 IRQL6B_PE = (IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
+
 UARTA_IRQ_PE = (!UARTA_IRQ # UARTA_IRQ_MASK);
 UARTB_IRQ_PE = (!UARTB_IRQ # UARTB_IRQ_MASK) # !(!UARTA_IRQ # UARTA_IRQ_MASK);
+
 IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
+
 IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
 EXPA_IRQ_PE = (EXPA_IRQ # EXPA_IRQ_MASK) ;
 EXPB_IRQ_PE = (EXPB_IRQ # EXPB_IRQ_MASK) # !(EXPA_IRQ # EXPA_IRQ_MASK);
@@ -360,17 +364,17 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
       The lower 4 bits are driven by the specific sub interrupt for the level selected above.
       Since we support 4 sub interrupts, the vector uses 1 bit for each.
 
-      IRQ        AVector#    Vector#              System Use
-      ------     --------    --------             -------------------------------
-      DEBUG_INT  0x1F        11110000 (0xF0)      Debugger (Button)
-      IRQL6A     0x1E        11100001 (0xE1)      PTC #1 (Programmable Timer)
-      IRQL6B     0x1D        11100010 (0xE2)      PTC #2 (Programmable Timer)
-      UARTA_IRQ  0x1C        11010001 (0xD1)      UARTA
-      UARTB_IRQ  0x1B        11010010 (0xD2)      UARTB
-      IRQL4A     0x1A        11000001 (0xC1)      RTC
-      IDE_IRQ    NA          11000010 (0xC2)      IDE
-      EXPA_IRQ   NA          10110001 (0xB1)      Keyboard
-      EXPB_IRQ   NA          10110010 (0xB2)      NIC
+      IRQ        AVector#    AVIRQL      Vector#              System Use
+      ------     --------    ------      --------             -------------------------------
+      DEBUG_INT  0x1F        7           11110000 (0xF0)      Debugger (Button)
+      IRQL6A     0x1E        6           11100001 (0xE1)      PTC #1 (Programmable Timer)
+      IRQL6B     0x1D        5           11100010 (0xE2)      PTC #2 (Programmable Timer)
+      UARTA_IRQ  0x1C        4           11010001 (0xD1)      UARTA
+      UARTB_IRQ  0x1B        3           11010010 (0xD2)      UARTB
+      IRQL4A     0x1A        2           11000001 (0xC1)      RTC
+      IDE_IRQ    NA          NA          11000010 (0xC2)      IDE
+      EXPA_IRQ   NA          NA          10110001 (0xB1)      Keyboard
+      EXPB_IRQ   NA          NA          10110010 (0xB2)      NIC
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 

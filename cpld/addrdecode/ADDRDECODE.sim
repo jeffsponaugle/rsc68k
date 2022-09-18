@@ -426,6 +426,7 @@ MAP_FLASH_TO_ZERO.ck  =>
 
 MEM_OE =>
     !CPU_RW
+  # CPU_AS
 
 PTC_CS =>
     CPU_FC0 & CPU_FC1 & CPU_FC2
@@ -557,6 +558,7 @@ UART_CSA =>
   # CPU_A10
   # CPU_A9
   # !CPU_A8
+  # CPU_UDS
 
 UART_CSB =>
     CPU_FC0 & CPU_FC1 & CPU_FC2
@@ -577,6 +579,7 @@ UART_CSB =>
   # CPU_A10
   # !CPU_A9
   # CPU_A8
+  # CPU_UDS
 
 WORKER_BARRIER_CS =>
     CPU_FC0 & CPU_FC1 & CPU_FC2
