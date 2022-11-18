@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Fri Sep 30 15:12:02 2022 "}
+  {DBtime "Thu Oct 13 10:08:16 2022 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -90,7 +90,8 @@
    {P FLASH_18 {Pt "I/O"}{Lq 0}{Ploc 360 420}}
    {P FLASH_HI {Pt "I/O"}{Lq 0}{Ploc 360 440}}
    {P FLASH_LO {Pt "I/O"}{Lq 0}{Ploc 360 460}}
-   {P LED_LATC {Pt "I/O"}{Lq 0}{Ploc 360 480}}
+   {P IDE_WR {Pt "I/O"}{Lq 0}{Ploc 360 480}}
+   {P LED_LATC {Pt "I/O"}{Lq 0}{Ploc 360 500}}
   }
 
   {PKG
@@ -160,8 +161,9 @@
    {Pnl 340 450}
    {Pnl 340 470}
    {Pnl 340 490}
+   {Pnl 340 510}
 
-   {Sd A 83 2 4 5 6 8 9 10 11 17 18 20 21 22 24 25 27 28 29 30 31 33 34 35 36 37 39 40 41 44 56 67 73 84 12 15 45 46 48 49 50 51 52 55 57 58 60 61 63 64 65 68 69 70 74 75 76 80}
+   {Sd A 83 2 4 5 6 8 9 10 11 17 18 20 21 22 24 25 27 28 29 30 31 33 34 35 36 37 39 40 41 44 56 67 73 84 12 15 45 46 48 49 50 51 52 55 57 58 60 61 63 64 65 68 69 70 74 75 76 77 80}
   }
 
   {PIC
@@ -227,6 +229,7 @@
    {L 330 440 360 440}
    {L 330 460 360 460}
    {L 330 480 360 480}
+   {L 330 500 360 500}
    [Ly "PINNAM"]
    [Tj "LC"]
    {T "CLK_16M" 140 700}
@@ -287,7 +290,8 @@
    {T "FLASH_18" 320 420}
    {T "FLASH_HI" 320 440}
    {T "FLASH_LO" 320 460}
-   {T "LED_LATC" 320 480}
+   {T "IDE_WR" 320 480}
+   {T "LED_LATC" 320 500}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1508ISPPLCC84" 230 -10}
@@ -424,6 +428,8 @@
    {N FLASH_HI
    }
    {N FLASH_LO
+   }
+   {N IDE_WR
    }
    {N LED_LATC
    }

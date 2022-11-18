@@ -54,6 +54,7 @@ Pin[56]  = RTS_A_SEL;
 Pin[55]  = PTC_CS;
 Pin[52]  = IDE_BUFFER_EN;
 Pin[68]  = ITC_CS;
+Pin[77]  = IDE_WR;
 
 
 /* Worker CPU Related signals */
@@ -75,6 +76,8 @@ SBUS_BUFFER_AC_DIR = 'b'1;
 SBUS_BUFFER_D_DIR = 'b'1;
 
 /** Internal Variables and nodes **/
+
+NODE IDE_WR_DELAY1,IDE_WR_DELAY2;
 
 
 /* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
@@ -215,6 +218,20 @@ WORKER_BARRIER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF89XX );
 
 ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
 IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
+
+IDE_WR = CPU_RW # IDE_WR_DELAY2;
+
+
+
+IDE_WR_DELAY1.d = 'b'1;
+IDE_WR_DELAY1.ck = CLK_16M;
+IDE_WR_DELAY1.ar = CPU_AS # !CPU_RESET;
+
+IDE_WR_DELAY2.d = IDE_WR_DELAY1;
+IDE_WR_DELAY2.ck = CLK_16M;
+IDE_WR_DELAY2.ar = CPU_AS # !CPU_RESET;
+
+
 
 /*
 We are going to free up these two pins to allow the slots on the expansion connector to be used. 
