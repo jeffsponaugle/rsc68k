@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu Oct 13 10:08:17 2022
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu Nov 17 20:17:23 2022
 
 
 fit1508 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE2\ADDRDECODE.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -509,10 +509,11 @@ Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE2\ADDRDECOD
 
 PLCC84 programmed logic:
 -----------------------------------
-DRAM_CS = ((CPU_FC0 & CPU_FC1 & CPU_FC2)
+DRAM_CS = ((CPU_A22 & CPU_A23 & CPU_A19 & CPU_A18)
+	# (CPU_FC0 & CPU_FC1 & CPU_FC2)
 	# CPU_AS
 	# XXL_108
-	# (CPU_A19 & CPU_A22 & CPU_A23));
+	# (!CPU_A20 & CPU_A22 & CPU_A23));
 
 FLASH_A18 = ((!CPU_RW & FLASH_CONFIG_STATE2.Q)
 	# (CPU_RW & FLASH_CONFIG_STATE0.Q));
@@ -621,7 +622,7 @@ Com_Ctrl_106 = ((CPU_A8 & CPU_A9 & CPU_A10 & !CPU_A11 & !CPU_A12 & !CPU_A13 & !C
 !Com_Ctrl_107 = (!CPU_AS & CPU_RESET);
 
 XXL_108 = ((CPU_A22 & CPU_A23 & CPU_RW & !FLASH_CONFIG_STATE1.Q)
-	# (!CPU_A20 & CPU_A22 & CPU_A23)
+	# (CPU_A19 & CPU_A22 & CPU_A23 & CPU_A17)
 	# (CPU_A22 & CPU_A23 & !CPU_RW & FLASH_CONFIG_STATE3.Q)
 	# (!CPU_A21 & CPU_A22 & CPU_A23)
 	# (!CPU_A19 & !CPU_A20 & !CPU_A21 & !CPU_A22 & !CPU_A23 & !MAP_FLASH_TO_ZERO.Q));
@@ -901,7 +902,7 @@ MC105 68   on   ITC_CS                         C----  --                        
 MC106 0         --                                    --                         --           --             0     slow
 MC107 69   on   WORKER_BUS_REQUEST             C----  --                         --           --             1     slow
 MC108 0         --                                    --                         --           --             0     slow
-MC109 70   on   DRAM_CS                        C----  --                         --           --             4     slow
+MC109 70   on   DRAM_CS                        C----  --                         NA           --             5     slow
 MC110 0         --                                    --                         --           --             0     slow
 MC111 0         --                                    --                         --           --             0     slow
 MC112 71   --   TDO                            INPUT  --                         --           --             0     slow
@@ -933,7 +934,7 @@ C: LC33	- LC48		2/16(12%)	8/16(50%)	0/16(0%)	8/80(10%)	(27)	0
 D: LC49	- LC64		5/16(31%)	8/16(50%)	0/16(0%)	21/80(26%)	(24)	0
 E: LC65	- LC80		7/16(43%)	8/16(50%)	0/16(0%)	11/80(13%)	(26)	0
 F: LC81	- LC96		7/16(43%)	7/16(43%)	0/16(0%)	19/80(23%)	(27)	0
-G: LC97	- LC112		6/16(37%)	8/16(50%)	0/16(0%)	17/80(21%)	(24)	0
+G: LC97	- LC112		6/16(37%)	8/16(50%)	0/16(0%)	18/80(22%)	(24)	0
 H: LC113- LC128		5/16(31%)	5/16(31%)	0/16(0%)	16/80(20%)	(30)	0
 
 Total dedicated input used:	3/4 	(75%)
@@ -945,7 +946,7 @@ Total Nodes+FB/MCells 		42/128 	(32%)
 Total cascade used 		0
 Total input pins 		36
 Total output pins 		26
-Total Pts 			119
+Total Pts 			120
 Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE2\ADDRDECODE.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS

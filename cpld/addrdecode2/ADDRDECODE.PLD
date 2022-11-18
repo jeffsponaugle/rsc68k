@@ -10,7 +10,7 @@ Device   f1508ispplcc84;
 
 
 /* 
-   Version 1.2 
+   Version 1 PCB V2 
    History:  Fixed RTS off/on state.
              Fixes DTACK reply for local state variables.
              Removed UART hacks.
@@ -187,6 +187,7 @@ DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         # cpu_address_bus:'b'XXXXXXX00001XXXXXXXXXXXXXXXXXXX
                         # (cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & MAP_FLASH_TO_ZERO)
                         # (cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & SRAM_IN_FLASH_AREA)
+                        # (cpu_address_bus:'b'XXXXXXX1111100XXXXXXXXXXXXXXXXX & SRAM_IN_FLASH_AREA)
                         # cpu_address_bus:'h'XX2XXXXX
                         # cpu_address_bus:'h'XX3XXXXX
                         # cpu_address_bus:'h'XX4XXXXX
