@@ -77,6 +77,7 @@ Pin[81]  = UARTADSR;
  /* Power Control */
 
 Pin[75] = POWERCTL_STATE;
+
 NODE POWERCTL_OE;
 
 CPU_RESET_INV = !CPU_RESET;
@@ -92,6 +93,7 @@ NODE IRQL6A_MASK,IRQL6B_MASK;
 NODE UARTA_IRQ_MASK,UARTB_IRQ_MASK;
 NODE IRQL4A_MASK,IDE_IRQ_MASK;
 NODE EXPA_IRQ_MASK,EXPB_IRQ_MASK;
+NODE POWER_IRQ_MASK;
 
 NODE REFRESH_REQUESTED_PRE;
 NODE REFRESH_REQUESTED_SYNC;
@@ -130,7 +132,7 @@ IRQL4A.d = 'b'0;
 IRQL4A.ap = !CPU_RESET # IRQL4A_ACK;
 IRQL4A.ck = !RTC_IRQ;
 
-NODE IRQL6A,IRQL6B;
+NODE IRQL6A,IRQL6B,POWERBUTTON_IRQ;
 
 IRQL6A.d = 'b'0;
 IRQL6A.ap = !CPU_RESET # IRQL6A_ACK;
@@ -186,6 +188,8 @@ Write to FF0700 Upper 8 bits:
 
  Write to FF0706 Upper 8 bits:
                   bit 7 - REQUEST_RESET (Set to 1 to force CPU_RESET)
+                  bit 0 - POWERCTRL pin state value
+                  bit 1 - POWERCTRL pin output enable
 
 */
 
@@ -248,7 +252,7 @@ POWERCTL_OE.ar = !CPU_RESET;
 POWERCTL_STATE.d = CPU_D0.io;
 POWERCTL_STATE.ck = INTC_CS # !CPU_A1 # !CPU_A2 # CPU_RW;
 POWERCTL_STATE.ar = !CPU_RESET;
-POWERCTK_STATE.oe = POWERCTL;
+POWERCTK_STATE.oe = POWERCTL_OE;
 
 /* 
    RESET Request flip flip.  0 at reset.  If you write 1 to it
