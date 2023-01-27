@@ -74,13 +74,14 @@ Pin[12]  = CPU_RESET_INV;
 /* Debugging pins */
 Pin[81]  = UARTADSR;
  
+ /* Power Control */
 
+Pin[75] = POWERCTL_STATE;
+NODE POWERCTL_OE;
 
 CPU_RESET_INV = !CPU_RESET;
 
 /* For now, keep VPA at 1.  We will use this to switch to autovectoring interrupts */
-
-
 
 NODE AS_GATED;
 NODE INT_ACK,DEBUG_INT;
@@ -220,6 +221,24 @@ EXPA_IRQ_MASK.ap = !CPU_RESET;
 EXPB_IRQ_MASK.d = CPU_D6.io;
 EXPB_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
 EXPB_IRQ_MASK.ap = !CPU_RESET;
+
+/* Power Control Logic */
+
+/* 
+   Latch the POWERCTL_STATE register if a write to 0xFF0706 happens, and use bit 0 for the STATE.  
+   On RESET this will be set to 0.
+   Latch the POWERCTL_OE register if a write to 0xFF0706 happens, and use bit 1 for the OE.
+   On RESET this will be set to 0.   A value of 0 indicated output is not enabled.
+*/
+
+POWERCTL_OE.d = CPU_D1.io;
+POWERCTL_OE.ck = INTC_CS # !CPU_A1 # !CPU_A2 # CPU_RW;
+POWERCTL_OE.ar = !CPU_RESET;
+
+POWERCTL_STATE.d = CPU_D0.io;
+POWERCTL_STATE.ck = INTC_CS # !CPU_A1 # !CPU_A2 # CPU_RW;
+POWERCTL_STATE.ar = !CPU_RESET;
+POWERCTK_STATE.oe = POWERCTL;
 
 /* 
    RESET Request flip flip.  0 at reset.  If you write 1 to it
