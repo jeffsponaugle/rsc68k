@@ -140,6 +140,10 @@ IRQL6B.d = 'b'0;
 IRQL6B.ap = !CPU_RESET # IRQL6B_ACK;
 IRQL6B.ck = !PTC2_IRQ;
 
+POWERBUTTON_IRQ.d = 'b'0;
+POWERBUTTON_IRQ.ck = POWERCTL_STATE.io;
+POWERBUTTON_IRQ.ap = !CPU_RESET # IRQL2_ACK;
+
 
 /* 
    This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
@@ -156,6 +160,7 @@ IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
 IRQL4A_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL4A_PE;
 IRQL6A_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6A_PE;
 IRQL6B_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6B_PE;
+IRQL2_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1;
 
 /* Pins for Testing */
 
@@ -177,6 +182,7 @@ Write to FF0700 Upper 8 bits:
  Write to FF0702 Upper 8 bits:
                   bit 7 - EXPA_IRQ_MASK
                   bit 6 - EXPB_IRQ_MASK
+                  bit 5 - POWER_IRQ_MASK
 
  Write to FF0706 Upper 8 bits:
                   bit 7 - REQUEST_RESET (Set to 1 to force CPU_RESET)
@@ -221,6 +227,10 @@ EXPA_IRQ_MASK.ap = !CPU_RESET;
 EXPB_IRQ_MASK.d = CPU_D6.io;
 EXPB_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
 EXPB_IRQ_MASK.ap = !CPU_RESET;
+
+POWER_IRQ_MASK.d = CPU_D5.io;
+POWER_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+POWER_IRQ_MASK.ap = !CPU_RESET;
 
 /* Power Control Logic */
 
@@ -328,15 +338,17 @@ IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
 IRQL5_INT = (UARTA_IRQ_PE & UARTB_IRQ_PE) # !IRQL6_INT # !IRQL7_INT;
 IRQL4_INT = (IRQL4A_PE & IDE_IRQ_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
 IRQL3_INT = (EXPA_IRQ_PE & EXPB_IRQ_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IRQL2_INT = (POWER_INT_PE) # !IRQL3_INT #!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
 
 /* 
    IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
    This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
    to any value other than 111 by doing an interrupt ack cycle.
 */   
+
 IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
 IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT);
-IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
+IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
 
 /* 
    active low interupt lines post 8:8 priority encoder 
@@ -366,6 +378,7 @@ IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
 IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
 EXPA_IRQ_PE = (EXPA_IRQ # EXPA_IRQ_MASK) ;
 EXPB_IRQ_PE = (EXPB_IRQ # EXPB_IRQ_MASK) # !(EXPA_IRQ # EXPA_IRQ_MASK);
+POWER_INT_PE = (POWERBUTTON_IRQ # POWER_IRQ_MASK);
 
 /* This field is created so we can select on it using the :[number] method below */
 
