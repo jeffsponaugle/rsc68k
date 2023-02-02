@@ -1,11 +1,11 @@
-{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM2\INTDRAM.SYM
+{COMPONENT C:\INTDRAM.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Thu Oct 06 13:28:32 2022 "}
+  {DBtime "Wed Feb 01 17:00:40 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,42 +33,43 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P DEBUG_BU {Pt "INPUT"}{Lq 0}{Ploc 100 780}}
-   {P PTC2_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
-   {P UARTA_IR {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
-   {P UARTB_IR {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
-   {P RTC_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
-   {P IDE_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
-   {P EXPA_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
-   {P EXPB_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
-   {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
-   {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
-   {P CPU_RES {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
-   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
-   {P CPU_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
-   {P CPU_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
-   {P CPU_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
-   {P CPU_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
-   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P CPU_RW {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P CPU_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P CPU_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P CPU_AS {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P CPU_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P CPU_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P CPU_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P CPU_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P CPU_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P CPU_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P CPU_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P CPU_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P DRAM_CS {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P INTC_CS {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P CPU_IN2 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P CPU_IN1 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P DRAM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P DRAM_MEM {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P DEBUG_BU {Pt "INPUT"}{Lq 0}{Ploc 100 800}}
+   {P PTC2_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 760}}
+   {P UARTA_IR {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
+   {P UARTB_IR {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
+   {P RTC_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P IDE_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P EXPA_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P EXPB_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P CPU_RES {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P CPU_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P CPU_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P CPU_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P CPU_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P CPU_RW {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CPU_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P CPU_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P CPU_AS {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P CPU_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P CPU_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P CPU_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P CPU_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P CPU_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P CPU_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P CPU_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P DRAM_CS {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P INTC_CS {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P CPU_IN2 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P CPU_IN1 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P DRAM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P DRAM_MEM {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P POWERCTL {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
    {P UARTADSR {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
    {P PTC1_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P CPU_RE {Pt "I/O"}{Lq 0}{Ploc 360 20}}
@@ -90,12 +91,13 @@
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 230 810}
+   {Rdl 230 830}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 790}
+   {Pnl 120 810}
    [Ts 15][Tj "RC"]
+   {Pnl 120 770}
    {Pnl 120 750}
    {Pnl 120 730}
    {Pnl 120 710}
@@ -149,15 +151,16 @@
    {Pnl 340 270}
    {Pnl 340 290}
 
-   {Sd A 83 1 2 4 5 6 8 9 10 11 17 18 21 22 24 29 30 31 33 34 35 36 37 39 40 41 44 45 46 54 55 56 57 58 63 64 81 84 12 16 20 25 27 28 52 65 67 68 69 70 73 74}
+   {Sd A 83 1 2 4 5 6 8 9 10 11 17 18 21 22 24 29 30 31 33 34 35 36 37 39 40 41 44 45 46 54 55 56 57 58 63 64 75 81 84 12 16 20 25 27 28 52 65 67 68 69 70 73 74}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 800 330 0}
-   {L 130 780 100 780}
-   {L 130 790 140 780 130 770}
+   {R 130 820 330 0}
+   {L 130 800 100 800}
+   {L 130 810 140 800 130 790}
+   {L 130 760 100 760}
    {L 130 740 100 740}
    {L 130 720 100 720}
    {L 130 700 100 700}
@@ -211,42 +214,43 @@
    {L 330 280 360 280}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "DEBUG_BU" 140 780}
-   {T "PTC2_IRQ" 140 740}
-   {T "UARTA_IR" 140 720}
-   {T "UARTB_IR" 140 700}
-   {T "RTC_IRQ" 140 680}
-   {T "IDE_IRQ" 140 660}
-   {T "EXPA_IRQ" 140 640}
-   {T "EXPB_IRQ" 140 620}
-   {T "CLK_500K" 140 600}
-   {T "CLK_1M" 140 580}
-   {T "CPU_RES" 140 560}
-   {T "CLK_32M" 140 540}
-   {T "CPU_FC0" 140 520}
-   {T "CPU_FC1" 140 500}
-   {T "CPU_FC2" 140 480}
-   {T "CPU_RESE" 140 460}
-   {T "CLK_16M" 140 440}
-   {T "CPU_RW" 140 420}
-   {T "CPU_UDS" 140 400}
-   {T "CPU_LDS" 140 380}
-   {T "CPU_AS" 140 360}
-   {T "CPU_D0" 140 340}
-   {T "CPU_D1" 140 320}
-   {T "CPU_D2" 140 300}
-   {T "CPU_D3" 140 280}
-   {T "CPU_D4" 140 260}
-   {T "CPU_D5" 140 240}
-   {T "CPU_D6" 140 220}
-   {T "CPU_D7" 140 200}
-   {T "DRAM_CS" 140 180}
-   {T "INTC_CS" 140 160}
-   {T "CPU_IN2" 140 140}
-   {T "CPU_IN1" 140 120}
-   {T "CPU_IN0" 140 100}
-   {T "DRAM_RW" 140 80}
-   {T "DRAM_MEM" 140 60}
+   {T "DEBUG_BU" 140 800}
+   {T "PTC2_IRQ" 140 760}
+   {T "UARTA_IR" 140 740}
+   {T "UARTB_IR" 140 720}
+   {T "RTC_IRQ" 140 700}
+   {T "IDE_IRQ" 140 680}
+   {T "EXPA_IRQ" 140 660}
+   {T "EXPB_IRQ" 140 640}
+   {T "CLK_500K" 140 620}
+   {T "CLK_1M" 140 600}
+   {T "CPU_RES" 140 580}
+   {T "CLK_32M" 140 560}
+   {T "CPU_FC0" 140 540}
+   {T "CPU_FC1" 140 520}
+   {T "CPU_FC2" 140 500}
+   {T "CPU_RESE" 140 480}
+   {T "CLK_16M" 140 460}
+   {T "CPU_RW" 140 440}
+   {T "CPU_UDS" 140 420}
+   {T "CPU_LDS" 140 400}
+   {T "CPU_AS" 140 380}
+   {T "CPU_D0" 140 360}
+   {T "CPU_D1" 140 340}
+   {T "CPU_D2" 140 320}
+   {T "CPU_D3" 140 300}
+   {T "CPU_D4" 140 280}
+   {T "CPU_D5" 140 260}
+   {T "CPU_D6" 140 240}
+   {T "CPU_D7" 140 220}
+   {T "DRAM_CS" 140 200}
+   {T "INTC_CS" 140 180}
+   {T "CPU_IN2" 140 160}
+   {T "CPU_IN1" 140 140}
+   {T "CPU_IN0" 140 120}
+   {T "DRAM_RW" 140 100}
+   {T "DRAM_MEM" 140 80}
+   {T "POWERCTL" 140 60}
    {T "UARTADSR" 140 40}
    {T "PTC1_IRQ" 140 20}
    [Tj "RC"]
@@ -277,7 +281,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM2\INTDRAM 230 800}
+    {At PLD C:\INTDRAM 230 820}
    }
   }
  }
@@ -358,6 +362,8 @@
    {N DRAM_RW
    }
    {N DRAM_MEM
+   }
+   {N POWERCTL
    }
    {N UARTADSR
    }
