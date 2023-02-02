@@ -351,8 +351,8 @@ IRQL2_INT = (POWER_INT_PE) # !IRQL3_INT #!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # 
 */   
 
 IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
-IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT);
-IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
+IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
+IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
 
 /* 
    active low interupt lines post 8:8 priority encoder 
@@ -411,6 +411,7 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
       IDE_IRQ    NA          NA          11000010 (0xC2)      IDE
       EXPA_IRQ   NA          NA          10110001 (0xB1)      Keyboard
       EXPB_IRQ   NA          NA          10110010 (0xB2)      NIC
+      POWER_INT  --          --          10100000 (0xA0)      Power Controller Interrupt
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 
