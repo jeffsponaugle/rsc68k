@@ -1,0 +1,412 @@
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+  1:Name     VGA4B;
+  2:PartNo   VGA4B;
+  3:Date     04/18/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1508ispplcc84;
+ 10:
+ 11:
+ 12:Pin  0  = CLKIN;
+ 13:Pin  0  = A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15;  
+ 14:Pin  0  = VADDR_INCREMENT;  /* == 1 to increment */
+ 15:Pin  0  = VADDR_RESET;
+ 16:
+ 17:Pin [0..0] = [CPU_D0..8];         /* Databus inputs for latching from the CPU*/
+ 18:Pin  0  = VGA_CONFIG_WRITE;
+ 19:Pin  0  = VGA_RESET;
+ 20:Pin  0  = FONTSEL0,FONTSEL1;
+ 21:Pin  0  = GRAPH_MODE;
+ 22:
+ 23:NODE [OFFSET0..5];
+ 24:
+ 25:OFFSET0.d = CPU_D0.io;
+ 26:OFFSET0.ar = !VGA_RESET;
+ 27:OFFSET0.ck = !VGA_CONFIG_WRITE;
+ 28:
+ 29:OFFSET1.d = CPU_D1.io;
+ 30:OFFSET1.ar = !VGA_RESET;
+ 31:OFFSET1.ck = !VGA_CONFIG_WRITE;
+ 32:
+ 33:OFFSET2.d = CPU_D2.io;
+ 34:OFFSET2.ar = !VGA_RESET;
+ 35:OFFSET2.ck = !VGA_CONFIG_WRITE;
+ 36:
+ 37:OFFSET3.d = CPU_D3.io;
+ 38:OFFSET3.ar = !VGA_RESET;
+ 39:OFFSET3.ck = !VGA_CONFIG_WRITE;
+ 40:
+ 41:OFFSET4.d = CPU_D4.io;
+ 42:OFFSET4.ar = !VGA_RESET;
+ 43:OFFSET4.ck = !VGA_CONFIG_WRITE;
+ 44:
+ 45:OFFSET5.d = CPU_D5.io;
+ 46:OFFSET5.ar = !VGA_RESET;
+ 47:OFFSET5.ck = !VGA_CONFIG_WRITE;
+ 48:
+ 49:
+ 50:FONTSEL0.d = CPU_D6.io;
+ 51:FONTSEL0.ar = !VGA_RESET;
+ 52:FONTSEL0.ck = !VGA_CONFIG_WRITE;
+ 53:
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+ 54:FONTSEL1.d = CPU_D7.io;
+ 55:FONTSEL1.ar = !VGA_RESET;
+ 56:FONTSEL1.ck = !VGA_CONFIG_WRITE;
+ 57:
+ 58:GRAPH_MODE.d = CPU_D8.io;
+ 59:GRAPH_MODE.ar = !VGA_RESET;
+ 60:GRAPH_MODE.ck = !VGA_CONFIG_WRITE;
+ 61:
+ 62:
+ 63:A0.d =  (  (VADDR_INCREMENT&!A0) 
+ 64:        # (!VADDR_INCREMENT&A0)
+ 65:        ) & !VADDR_RESET;     
+ 66:A0.ck = CLKIN;
+ 67:
+ 68:A1.d =  (  (VADDR_INCREMENT&((A0&!A1) # (!A0&A1))) 
+ 69:        # ((!VADDR_INCREMENT&A1))
+ 70:        ) & !VADDR_RESET;
+ 71:A1.ck = CLKIN;
+ 72:
+ 73:A2T = A0&A1;
+ 74:A2.d =  (  (VADDR_INCREMENT&((A2T&!A2) # (!A2T&A2))) 
+ 75:        # ((!VADDR_INCREMENT&A2))
+ 76:        ) & !VADDR_RESET;
+ 77:A2.ck = CLKIN;
+ 78:
+ 79:A3T = A2T&A2;
+ 80:A3.d =  ( (VADDR_INCREMENT&((A3T&!A3) # (!A3T&A3))) 
+ 81:        # ((!VADDR_INCREMENT&A3))
+ 82:        ) & !VADDR_RESET;
+ 83:A3.ck = CLKIN;
+ 84:
+ 85:A4T = A3T&A3;
+ 86:A4.d =  ( (VADDR_INCREMENT&((A4T&!A4) # (!A4T&A4))) 
+ 87:        # ((!VADDR_INCREMENT&A4))
+ 88:        ) & !VADDR_RESET;
+ 89:A4.ck = CLKIN;
+ 90:
+ 91:A5T = A4T&A4;
+ 92:A5.d =  ( (VADDR_INCREMENT&((A5T&!A5) # (!A5T&A5))) 
+ 93:        # ((!VADDR_INCREMENT&A5))
+ 94:        ) & !VADDR_RESET;
+ 95:A5.ck = CLKIN;
+ 96:
+ 97:A6T = A5T&A5;
+ 98:A6.d =  ( (VADDR_INCREMENT&((A6T&!A6) # (!A6T&A6))) 
+ 99:        # ((!VADDR_INCREMENT&A6))
+100:        ) & !VADDR_RESET;
+101:A6.ck = CLKIN;
+102:
+103:/*  These addresses have OFFSET on reset. */
+104:
+105:A7T = A6T&A6;
+106:A7.d =  (
+107:          ( (VADDR_INCREMENT&((A7T&!A7) # (!A7T&A7))) 
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+108:            # ((!VADDR_INCREMENT&A7))
+109:          ) & !VADDR_RESET
+110:        ) 
+111:        #
+112:        (
+113:            VADDR_RESET & OFFSET0
+114:        );
+115:A7.ck = CLKIN;
+116:
+117:A8T = A7T&A7;
+118:A8.d =  (
+119:          ( (VADDR_INCREMENT&((A8T&!A8) # (!A8T&A8))) 
+120:            # ((!VADDR_INCREMENT&A8))
+121:          ) & !VADDR_RESET
+122:        ) 
+123:        #
+124:        (
+125:            VADDR_RESET & OFFSET1
+126:        );
+127:A8.ck = CLKIN;
+128:
+129:A9T = A8T&A8;
+130:A9.d =  (
+131:          ( (VADDR_INCREMENT&((A9T&!A9) # (!A9T&A9))) 
+132:            # ((!VADDR_INCREMENT&A9))
+133:          ) & !VADDR_RESET
+134:        ) 
+135:        #
+136:        (
+137:            VADDR_RESET & OFFSET2
+138:        );
+139:A9.ck = CLKIN;
+140:
+141:A10T = A9T&A9;
+142:A10.d = (
+143:          ( (VADDR_INCREMENT&((A10T&!A10) # (!A10T&A10))) 
+144:            # ((!VADDR_INCREMENT&A10))
+145:          ) & !VADDR_RESET
+146:        ) 
+147:        #
+148:        (
+149:            VADDR_RESET & OFFSET3
+150:        );
+151:A10.ck = CLKIN;
+152:
+153:A11T = A10T&A10;
+154:A11.d = (
+155:          ( (VADDR_INCREMENT&((A11T&!A11) # (!A11T&A11))) 
+156:            # ((!VADDR_INCREMENT&A11))
+157:          ) & !VADDR_RESET
+158:        ) 
+159:        #
+160:        (
+161:            VADDR_RESET & OFFSET4
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+162:        );
+163:A11.ck = CLKIN;
+164:
+165:A12T = A11T&A11;
+166:A12.d = (
+167:          ( (VADDR_INCREMENT&((A12T&!A12) # (!A12T&A12))) 
+168:            # ((!VADDR_INCREMENT&A12))
+169:          ) & !VADDR_RESET
+170:        ) 
+171:        #
+172:        (
+173:            VADDR_RESET & OFFSET5
+174:        );
+175:A12.ck = CLKIN;
+176:
+177:A13T = A12T&A12;
+178:A13.d = (  (VADDR_INCREMENT&((A13T&!A13) # (!A13T&A13))) 
+179:        # ((!VADDR_INCREMENT&A13))
+180:        ) & !VADDR_RESET;
+181:A13.ck = CLKIN;
+182:
+183:A14T = A13T&A13;
+184:A14.d = ( (VADDR_INCREMENT&((A14T&!A14) # (!A14T&A14))) 
+185:        # ((!VADDR_INCREMENT&A14))
+186:        ) & !VADDR_RESET;
+187:A14.ck = CLKIN;
+188:
+189:A15T = A14T&A14;
+190:A15.d = ( (VADDR_INCREMENT&((A15T&!A15) # (!A15T&A15))) 
+191:        # ((!VADDR_INCREMENT&A15))
+192:        ) & !VADDR_RESET;
+193:A15.ck = CLKIN;
+194:
+195:
+196:/*
+197:
+198:INCREMENT and RESET and OFFSET Implemented
+199:
+200:Total dedicated input used:     1/4     (25%)
+201:Total I/O pins used             28/32   (87%)
+202:Total Logic cells used          42/64   (65%)
+203:Total Flip-Flop used            16/64   (25%)
+204:Total Foldback logic used       0/64    (0%)
+205:Total Nodes+FB/MCells           42/64   (65%)
+206:Total cascade used              0
+207:Total input pins                13
+208:Total output pins               16
+209:Total Pts                       184
+210:
+211:*/
+212:
+213:
+214:/* Second 8 bit counter, but clocked by the first counters high bit 1 to 0 transition */
+215:
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+216:/*
+217:A8.d = !A8;
+218:A8.ck = !A7;
+219:A9.d = (A8&!A9) # (!A8&A9);
+220:A9.ck = !A7;
+221:
+222:A10T = A8&A9;
+223:A10.d = (A10T&!A10) # (!A10T&A10);
+224:A10.ck = !A7;
+225:
+226:A11T = A10T&A10;
+227:A11.d = (A11T&!A11) # (!A11T&A11);
+228:A11.ck = !A7;
+229:
+230:A12T = A11T&A11;
+231:A12.d = (A12T&!A12) # (!A12T&A12);
+232:A12.ck = !A7;
+233:
+234:A13T = A12T&A12;
+235:A13.d = (A13T&!A13) # (!A13T&A13);
+236:A13.ck = !A7;
+237:
+238:A14T = A13T&A13;
+239:A14.d = (A14T&!A14) # (!A14T&A14);
+240:A14.ck = !A7;
+241:
+242:A15T = A14T&A14;
+243:A15.d = (A15T&!A15) # (!A15T&A15);
+244:A15.ck = !A7;
+245:*/
+246:
+247:
+248:
+249:
+250:/*
+251:A8T = A7T&A7;
+252:A8.d = (A8T&!A8) # (!A8T&A8);
+253:A8.ck = CLKIN;
+254:A9T = A8T&A8;
+255:A9.d = (A9T&!A9) # (!A9T&A9);
+256:A9.ck = CLKIN;
+257:
+258:A10T = A9T&A9;
+259:A10.d = (A10T&!A10) # (!A10T&A10);
+260:A10.ck = CLKIN;
+261:
+262:A11T = A10T&A10;
+263:A11.d = (A11T&!A11) # (!A11T&A11);
+264:A11.ck = CLKIN;
+265:
+266:A12T = A11T&A11;
+267:A12.d = (A12T&!A12) # (!A12T&A12);
+268:A12.ck = CLKIN;
+269:
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 6
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+270:A13T = A12T&A12;
+271:A13.d = (A13T&!A13) # (!A13T&A13);
+272:A13.ck = CLKIN;
+273:
+274:A14T = A13T&A13;
+275:A14.d = (A14T&!A14) # (!A14T&A14);
+276:A14.ck = CLKIN;
+277:
+278:A15T = A14T&A14;
+279:A15.d = (A15T&!A15) # (!A15T&A15);
+280:A15.ck = CLKIN;
+281:*/
+282:
+283:
+284:
+285:
+286:
+287:/*
+288:
+289:8 bit counter:
+290:    Total dedicated input used: 1/4     (25%)
+291:    Total I/O pins used         12/32   (37%)
+292:    Total Logic cells used              11/64   (17%)
+293:    Total Flip-Flop used                8/64    (12%)
+294:    Total Foldback logic used   0/64    (0%)
+295:    Total Nodes+FB/MCells               8/64    (12%)
+296:    Total cascade used          3
+297:    Total input pins            5
+298:    Total output pins           8
+299:    Total Pts                   36
+300:
+301:10 bit counter:
+302:    Total dedicated input used: 1/4     (25%)
+303:    Total I/O pins used         14/32   (43%)
+304:    Total Logic cells used              15/64   (23%)
+305:    Total Flip-Flop used                10/64   (15%)
+306:    Total Foldback logic used   0/64    (0%)
+307:    Total Nodes+FB/MCells               14/64   (21%)
+308:    Total cascade used          1
+309:    Total input pins            5
+310:    Total output pins           10
+311:    Total Pts                   59
+312:12 bit counter:
+313:    Total dedicated input used: 1/4     (25%)
+314:    Total I/O pins used         16/32   (50%)
+315:    Total Logic cells used              21/64   (32%)
+316:    Total Flip-Flop used                12/64   (18%)
+317:    Total Foldback logic used   0/64    (0%)
+318:    Total Nodes+FB/MCells               20/64   (31%)
+319:    Total cascade used          1
+320:    Total input pins            5
+321:    Total output pins           12
+322:    Total Pts                   86
+323:16 bit counter:
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 7
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Feb 25 20:19:51 2023
+
+324:    Total dedicated input used: 1/4     (25%)
+325:    Total I/O pins used         20/32   (62%)
+326:    Total Logic cells used              37/64   (57%)
+327:    Total Flip-Flop used                16/64   (25%)
+328:    Total Foldback logic used   0/64    (0%)
+329:    Total Nodes+FB/MCells               37/64   (57%)
+330:    Total cascade used          0
+331:    Total input pins            5
+332:    Total output pins           16
+333:    Total Pts                   157
+334:
+335:16 bit counter w/2 8 bit cascasded counters:
+336:    Total dedicated input used: 1/4     (25%)
+337:    Total I/O pins used         20/32   (62%)
+338:    Total Logic cells used              23/64   (35%)
+339:    Total Flip-Flop used                16/64   (25%)
+340:    Total Foldback logic used   0/64    (0%)
+341:    Total Nodes+FB/MCells               23/64   (35%)
+342:    Total cascade used          0
+343:    Total input pins            5
+344:    Total output pins           16
+345:    Total Pts                   87
+346:
+347:
+348:*/
+349:
+350:
+351:
+352:
+353:
+354:
+
+
+

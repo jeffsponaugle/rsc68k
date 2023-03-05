@@ -1,0 +1,920 @@
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Sat Feb 25 20:19:52 2023
+
+
+fit1508 C:\VGA4B.tt2 -CUPL -dev P1508C84 -JTAG ON
+
+
+****** Initial fitting strategy and property ******
+ Pla_in_file = VGA4B.tt2
+ Pla_out_file = VGA4B.tt3
+ Jedec_file = VGA4B.jed
+ Vector_file = VGA4B.tmv
+ verilog_file = VGA4B.vt
+ Time_file = 
+ Log_file = VGA4B.fit
+ err_file = 
+ Device_name = PLCC84
+ Module_name = 
+ Package_type = PLCC
+ Preassign_file = 
+ Property_file = 
+ Sleep_mode = 
+ Preassignment = 
+ Security_mode = OFF
+ Pin_keep_mode = ON
+ Dedicated_input_clock = 
+ Dedicated_input_reset = 
+ Dedicated_input_oe = 
+ supporter = CUPL
+ optimize = ON
+ Soft_buffer = 
+ Xor_synthesis = OFF
+ Foldback_logic =  on
+ Expander = 
+ Cascade_logic = OFF
+ Dedicated_input = 
+ Output_fast = OFF
+ *******************************
+ Power down pin 1 = OFF
+ Power down pin 2 = OFF
+ power_reset = OFF
+ JTAG = ON
+ TDI pullup = OFF
+ TMS pullup = OFF
+ MC_power = OFF
+ Open_collector = OFF
+ ITD0 = ON
+ ITD1 = ON
+ ITD2 = ON
+ Fast_inlatch = off
+ *******************************
+---------------------------------------------------------
+ Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
+ ... 
+## ERROR : Bad user pin assignement : 85
+ ## ERROR : Bad user pin assignement 
+---------------------------------------------------------
+ Fitter_Pass 2, Preassign = KEEP, NODE ASSIGN : OFF 
+ ... 
+ ## Warning : Placement fail 
+---------------------------------------------------------
+ Fitter_Pass 3, Preassign = KEEP, CASCADE_LOGIC : (TRY) 
+ ... 
+ ## Warning : Placement fail 
+---------------------------------------------------------
+ Fitter_Pass 4, Preassign = KEEP, CASCADE_LOGIC : (OFF) 
+ ... 
+
+Performing global Output Enable pin assignments ...
+
+Performing global pin assignments ...
+--------------------------------------
+
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+CLKIN assigned to pin  2
+VGA_CONFIG_WRITE assigned to pin  83
+VGA_RESET assigned to pin  1
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+CLKIN assigned to pin  2
+VGA_CONFIG_WRITE assigned to pin  83
+VGA_RESET assigned to pin  1
+
+Attempt to place floating signals ...
+------------------------------------
+A1 is placed at pin 12 (MC 3)
+A14 is placed at pin 11 (MC 5)
+A2 is placed at pin 10 (MC 6)
+A9 is placed at pin 9 (MC 8)
+XXL_138 is placed at feedback node 610 (MC 10)
+A6 is placed at pin 8 (MC 11)
+XXL_124 is placed at feedback node 612 (MC 12)
+A3 is placed at pin 6 (MC 13)
+A15 is placed at pin 5 (MC 14)
+XXL_130 is placed at feedback node 615 (MC 15)
+A10 is placed at pin 4 (MC 16)
+A7 is placed at pin 22 (MC 17)
+A0 is placed at pin 21 (MC 19)
+A4 is placed at pin 20 (MC 21)
+XXL_132 is placed at feedback node 622 (MC 22)
+XXL_126 is placed at feedback node 623 (MC 23)
+A12 is placed at pin 18 (MC 24)
+A11 is placed at pin 17 (MC 25)
+XXL_125 is placed at feedback node 626 (MC 26)
+A8 is placed at pin 16 (MC 27)
+XXL_142 is placed at feedback node 628 (MC 28)
+A5 is placed at pin 15 (MC 29)
+XXL_127 is placed at feedback node 630 (MC 30)
+XXL_129 is placed at feedback node 631 (MC 31)
+TDI is placed at pin 14 (MC 32)
+XXL_131 is placed at feedback node 632 (MC 32)
+XXL_145 is placed at feedback node 633 (MC 33)
+XXL_128 is placed at feedback node 634 (MC 34)
+XXL_140 is placed at feedback node 635 (MC 35)
+XXL_141 is placed at feedback node 636 (MC 36)
+XXL_137 is placed at feedback node 637 (MC 37)
+XXL_134 is placed at feedback node 638 (MC 38)
+XXL_146 is placed at feedback node 639 (MC 39)
+FONTSEL1 is placed at pin 28 (MC 40)
+XXL_133 is placed at feedback node 641 (MC 41)
+XXL_147 is placed at feedback node 642 (MC 42)
+GRAPH_MODE is placed at pin 27 (MC 43)
+XXL_144 is placed at feedback node 644 (MC 44)
+FONTSEL0 is placed at pin 25 (MC 45)
+A13 is placed at pin 24 (MC 46)
+XXL_136 is placed at feedback node 647 (MC 47)
+TMS is placed at pin 23 (MC 48)
+XXL_139 is placed at feedback node 648 (MC 48)
+VADDR_RESET is placed at pin 41 (MC 49)
+OFFSET3 is placed at feedback node 650 (MC 50)
+VADDR_INCREMENT is placed at pin 40 (MC 51)
+OFFSET2 is placed at feedback node 652 (MC 52)
+CPU_D6 is placed at pin 39 (MC 53)
+OFFSET1 is placed at feedback node 654 (MC 54)
+OFFSET0 is placed at feedback node 655 (MC 55)
+CPU_D8 is placed at pin 37 (MC 56)
+CPU_D7 is placed at pin 36 (MC 57)
+XXL_135 is placed at feedback node 658 (MC 58)
+CPU_D0 is placed at pin 35 (MC 59)
+XXL_148 is placed at feedback node 660 (MC 60)
+OFFSET4 is placed at feedback node 661 (MC 61)
+XXL_143 is placed at feedback node 662 (MC 62)
+XXL_149 is placed at feedback node 663 (MC 63)
+OFFSET5 is placed at feedback node 664 (MC 64)
+CPU_D1 is placed at pin 44 (MC 65)
+CPU_D2 is placed at pin 45 (MC 67)
+CPU_D3 is placed at pin 46 (MC 69)
+CPU_D5 is placed at pin 48 (MC 72)
+CPU_D4 is placed at pin 49 (MC 73)
+TCK is placed at pin 62 (MC 96)
+TDO is placed at pin 71 (MC 112)
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                          V                                         
+                                          G                                         
+                                          A                                         
+                                          _                                         
+                                        C R                                         
+                                        L E                                         
+                     A        G   A A V K S    G       V                            
+                     1 A  A A N A 1 1 C I E    N       C                            
+                     4 2  9 6 D 3 5 0 C N T    D       C                            
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+              A1 | 12                    (*)                   74 |                 
+             VCC | 13                                          73 |                 
+             TDI | 14                                          72 | GND             
+              A5 | 15                                          71 | TDO             
+              A8 | 16                                          70 |                 
+             A11 | 17                                          69 |                 
+             A12 | 18                                          68 |                 
+             GND | 19                                          67 |                 
+              A4 | 20                                          66 | VCC             
+              A0 | 21                                          65 |                 
+              A7 | 22                 ATF1508                  64 |                 
+             TMS | 23               84-Lead PLCC               63 |                 
+             A13 | 24                                          62 | TCK             
+        FONTSEL0 | 25                                          61 |                 
+             VCC | 26                                          60 |                 
+      GRAPH_MODE | 27                                          59 | GND             
+        FONTSEL1 | 28                                          58 |                 
+                 | 29                                          57 |                 
+                 | 30                                          56 |                 
+                 | 31                                          55 |                 
+             GND | 32                                          54 |                 
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                          C C C V C V V G V C C C G C C       V                     
+                          P P P C P A A N C P P P N P P       C                     
+                          U U U C U D D D C U U U D U U       C                     
+                          _ _ _   _ D D     _ _ _   _ _                             
+                          D D D   D R R     D D D   D D                             
+                          0 7 8   6 _ _     1 2 3   5 4                             
+                                    I R                                             
+                                    N E                                             
+                                    C S                                             
+                                    R E                                             
+                                    E T                                             
+                                    M                                               
+                                    E                                               
+
+
+
+VCC = Supply Voltage pin which must be connected to (5.0V or 3.0V)
+
+GND = GND pin which must be connected to ground
+
+TMS,TDI,TDO,TDI = JTAG pins which must reserved for the JTAG interface
+
+NC = Unused I/O pins which must be unconnected on the board
+
+Universal-Interconnect-Multiplexer assignments
+------------------------------------------------
+FanIn assignment for block A [25]
+{
+A14,A9,A6,A1,A2,A10,A0,A15,A4,A3,
+OFFSET3,OFFSET2,
+VADDR_RESET,VADDR_INCREMENT,
+XXL_141,XXL_140,XXL_130,XXL_132,XXL_138,XXL_126,XXL_136,XXL_139,XXL_137,XXL_129,XXL_131,
+}
+Multiplexer assignment for block A
+XXL_141			(MC18	FB)  : MUX 0		Ref (C36fb)
+A14			(MC2	P)   : MUX 1		Ref (A5p)
+XXL_140			(MC17	FB)  : MUX 2		Ref (C35fb)
+A9			(MC4	P)   : MUX 3		Ref (A8p)
+XXL_130			(MC9	FB)  : MUX 5		Ref (A15fb)
+A6			(MC6	P)   : MUX 6		Ref (A11p)
+A1			(MC1	P)   : MUX 7		Ref (A3p)
+XXL_132			(MC13	FB)  : MUX 8		Ref (B22fb)
+A2			(MC3	P)   : MUX 9		Ref (A6p)
+A10			(MC10	P)   : MUX 10		Ref (A16p)
+A0			(MC11	P)   : MUX 11		Ref (B19p)
+A15			(MC8	P)   : MUX 12		Ref (A14p)
+XXL_138			(MC5	FB)  : MUX 13		Ref (A10fb)
+XXL_126			(MC14	FB)  : MUX 14		Ref (B23fb)
+XXL_136			(MC20	FB)  : MUX 15		Ref (C47fb)
+OFFSET3			(MC22	FB)  : MUX 16		Ref (D50fb)
+A4			(MC12	P)   : MUX 17		Ref (B21p)
+XXL_139			(MC21	FB)  : MUX 21		Ref (C48fb)
+XXL_137			(MC19	FB)  : MUX 22		Ref (C37fb)
+VADDR_RESET		(MC24	P)   : MUX 23		Ref (D49p)
+OFFSET2			(MC23	FB)  : MUX 24		Ref (D52fb)
+XXL_129			(MC15	FB)  : MUX 25		Ref (B31fb)
+A3			(MC7	P)   : MUX 28		Ref (A13p)
+XXL_131			(MC16	FB)  : MUX 29		Ref (B32fb)
+VADDR_INCREMENT		(MC25	P)   : MUX 31		Ref (D51p)
+
+FanIn assignment for block B [25]
+{
+A8,A9,A3,A1,A2,A6,A0,A4,A10,A5,A7,
+VADDR_RESET,VADDR_INCREMENT,
+XXL_133,XXL_128,XXL_124,XXL_147,XXL_127,XXL_125,XXL_134,XXL_148,XXL_135,XXL_149,XXL_142,XXL_143,
+}
+Multiplexer assignment for block B
+A8			(MC12	P)   : MUX 0		Ref (B27p)
+XXL_133			(MC18	FB)  : MUX 1		Ref (C41fb)
+A9			(MC3	P)   : MUX 3		Ref (A8p)
+XXL_128			(MC16	FB)  : MUX 4		Ref (C34fb)
+XXL_124			(MC5	FB)  : MUX 5		Ref (A12fb)
+A3			(MC6	P)   : MUX 6		Ref (A13p)
+A1			(MC1	P)   : MUX 7		Ref (A3p)
+A2			(MC2	P)   : MUX 9		Ref (A6p)
+A6			(MC4	P)   : MUX 10		Ref (A11p)
+A0			(MC9	P)   : MUX 11		Ref (B19p)
+XXL_147			(MC19	FB)  : MUX 15		Ref (C42fb)
+A4			(MC10	P)   : MUX 17		Ref (B21p)
+A10			(MC7	P)   : MUX 18		Ref (A16p)
+XXL_127			(MC15	FB)  : MUX 19		Ref (B30fb)
+XXL_125			(MC11	FB)  : MUX 21		Ref (B26fb)
+VADDR_RESET		(MC24	P)   : MUX 23		Ref (D49p)
+XXL_134			(MC17	FB)  : MUX 24		Ref (C38fb)
+XXL_148			(MC21	FB)  : MUX 25		Ref (D60fb)
+XXL_135			(MC20	FB)  : MUX 29		Ref (D58fb)
+VADDR_INCREMENT		(MC25	P)   : MUX 31		Ref (D51p)
+A5			(MC14	P)   : MUX 32		Ref (B29p)
+A7			(MC8	P)   : MUX 33		Ref (B17p)
+XXL_149			(MC23	FB)  : MUX 35		Ref (D63fb)
+XXL_142			(MC13	FB)  : MUX 37		Ref (B28fb)
+XXL_143			(MC22	FB)  : MUX 39		Ref (D62fb)
+
+FanIn assignment for block C [25]
+{
+A3,A12,A1,A15,A2,A6,A4,A7,A5,A14,A9,A8,A13,A0,A11,A10,
+CPU_D8,CPU_D7,CPU_D6,
+OFFSET1,
+VADDR_RESET,VADDR_INCREMENT,
+XXL_145,XXL_146,XXL_144,
+}
+Multiplexer assignment for block C
+A3			(MC6	P)   : MUX 0		Ref (A13p)
+CPU_D8			(MC24	P)   : MUX 1		Ref (D56p)
+A12			(MC12	P)   : MUX 3		Ref (B24p)
+CPU_D7			(MC25	P)   : MUX 6		Ref (D57p)
+A1			(MC1	P)   : MUX 7		Ref (A3p)
+A15			(MC7	P)   : MUX 8		Ref (A14p)
+A2			(MC3	P)   : MUX 9		Ref (A6p)
+A6			(MC5	P)   : MUX 10		Ref (A11p)
+A4			(MC11	P)   : MUX 11		Ref (B21p)
+OFFSET1			(MC20	FB)  : MUX 12		Ref (D54fb)
+XXL_145			(MC16	FB)  : MUX 14		Ref (C33fb)
+A7			(MC9	P)   : MUX 15		Ref (B17p)
+A5			(MC15	P)   : MUX 16		Ref (B29p)
+CPU_D6			(MC23	P)   : MUX 17		Ref (D53p)
+A14			(MC2	P)   : MUX 19		Ref (A5p)
+A9			(MC4	P)   : MUX 21		Ref (A8p)
+VADDR_RESET		(MC21	P)   : MUX 23		Ref (D49p)
+A8			(MC14	P)   : MUX 24		Ref (B27p)
+A13			(MC19	P)   : MUX 26		Ref (C46p)
+A0			(MC10	P)   : MUX 29		Ref (B19p)
+A11			(MC13	P)   : MUX 30		Ref (B25p)
+VADDR_INCREMENT		(MC22	P)   : MUX 31		Ref (D51p)
+A10			(MC8	P)   : MUX 32		Ref (A16p)
+XXL_146			(MC17	FB)  : MUX 34		Ref (C39fb)
+XXL_144			(MC18	FB)  : MUX 39		Ref (C44fb)
+
+FanIn assignment for block D [21]
+{
+A12,A3,A1,A2,A6,A0,A11,A4,A7,A5,
+CPU_D4,CPU_D2,CPU_D0,CPU_D5,CPU_D3,CPU_D1,
+OFFSET5,OFFSET4,OFFSET0,
+VADDR_RESET,VADDR_INCREMENT,
+}
+Multiplexer assignment for block D
+CPU_D4			(MC21	P)   : MUX 0		Ref (E73p)
+A12			(MC8	P)   : MUX 3		Ref (B24p)
+VADDR_RESET		(MC14	P)   : MUX 5		Ref (D49p)
+A3			(MC4	P)   : MUX 6		Ref (A13p)
+A1			(MC1	P)   : MUX 7		Ref (A3p)
+A2			(MC2	P)   : MUX 9		Ref (A6p)
+A6			(MC3	P)   : MUX 10		Ref (A11p)
+A0			(MC6	P)   : MUX 11		Ref (B19p)
+A11			(MC9	P)   : MUX 14		Ref (B25p)
+CPU_D2			(MC18	P)   : MUX 15		Ref (E67p)
+CPU_D0			(MC16	P)   : MUX 16		Ref (D59p)
+A4			(MC7	P)   : MUX 17		Ref (B21p)
+CPU_D5			(MC20	P)   : MUX 19		Ref (E72p)
+VADDR_INCREMENT		(MC15	P)   : MUX 27		Ref (D51p)
+OFFSET5			(MC13	FB)  : MUX 29		Ref (D64fb)
+A7			(MC5	P)   : MUX 31		Ref (B17p)
+A5			(MC10	P)   : MUX 32		Ref (B29p)
+CPU_D3			(MC19	P)   : MUX 33		Ref (E69p)
+OFFSET4			(MC12	FB)  : MUX 37		Ref (D61fb)
+OFFSET0			(MC11	FB)  : MUX 38		Ref (D55fb)
+CPU_D1			(MC17	P)   : MUX 39		Ref (E65p)
+
+Creating JEDEC file C:\VGA4B.jed ...
+
+PLCC84 programmed logic:
+-----------------------------------
+A1.D = ((!A1.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q)
+	# (A1.Q & !VADDR_RESET & !A0.Q)
+	# (A1.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+A0.D = ((!A0.Q & VADDR_INCREMENT & !VADDR_RESET)
+	# (A0.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+A3.D = ((!A3.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q)
+	# (A3.Q & !VADDR_RESET & !A2.Q)
+	# (A3.Q & !VADDR_RESET & !A0.Q)
+	# (A3.Q & !VADDR_RESET & !A1.Q)
+	# (A3.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+A2.D = ((!A2.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q)
+	# (A2.Q & !VADDR_RESET & !A0.Q)
+	# (A2.Q & !VADDR_RESET & !A1.Q)
+	# (A2.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+A4.D = ((A4.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_124);
+
+A5.D = ((A5.Q & !VADDR_RESET & !A1.Q)
+	# (A5.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_125);
+
+A6.D = ((A6.Q & !VADDR_RESET & !A0.Q)
+	# (A6.Q & !VADDR_RESET & !A1.Q)
+	# (A6.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_126);
+
+A7.D = (XXL_142
+	# XXL_143);
+
+A8.D = ((A8.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_127
+	# XXL_128);
+
+A9.D = ((VADDR_RESET & OFFSET2.Q)
+	# (A9.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_129
+	# XXL_130);
+
+A10.D = ((A10.Q & !VADDR_RESET & !A1.Q)
+	# (VADDR_RESET & OFFSET3.Q)
+	# (A10.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_131
+	# XXL_132);
+
+A11.D = (XXL_133
+	# XXL_134
+	# XXL_135);
+
+A13.D = (XXL_144
+	# XXL_145
+	# XXL_146);
+
+A12.D = (XXL_147
+	# XXL_148
+	# XXL_149);
+
+A14.D = ((A14.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_136
+	# XXL_137
+	# XXL_138);
+
+A15.D = ((A15.Q & !VADDR_RESET & !A1.Q)
+	# (A15.Q & !VADDR_INCREMENT & !VADDR_RESET)
+	# XXL_139
+	# XXL_140
+	# XXL_141);
+
+FONTSEL0.D = CPU_D6;
+
+FONTSEL1.D = CPU_D7;
+
+GRAPH_MODE.D = CPU_D8;
+
+OFFSET1.D = CPU_D1;
+
+OFFSET0.D = CPU_D0;
+
+OFFSET2.D = CPU_D2;
+
+OFFSET3.D = CPU_D3;
+
+OFFSET4.D = CPU_D4;
+
+OFFSET5.D = CPU_D5;
+
+XXL_124 = ((!A4.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q)
+	# (A4.Q & !VADDR_RESET & !A3.Q)
+	# (A4.Q & !VADDR_RESET & !A2.Q)
+	# (A4.Q & !VADDR_RESET & !A0.Q)
+	# (A4.Q & !VADDR_RESET & !A1.Q));
+
+XXL_125 = ((!A5.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q)
+	# (A5.Q & !VADDR_RESET & !A4.Q)
+	# (A5.Q & !VADDR_RESET & !A3.Q)
+	# (A5.Q & !VADDR_RESET & !A2.Q)
+	# (A5.Q & !VADDR_RESET & !A0.Q));
+
+XXL_126 = ((!A6.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q)
+	# (A6.Q & !VADDR_RESET & !A5.Q)
+	# (A6.Q & !VADDR_RESET & !A4.Q)
+	# (A6.Q & !VADDR_RESET & !A3.Q)
+	# (A6.Q & !VADDR_RESET & !A2.Q));
+
+XXL_127 = ((!A8.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q)
+	# (A8.Q & !VADDR_RESET & !A7.Q)
+	# (A8.Q & !VADDR_RESET & !A6.Q)
+	# (A8.Q & !VADDR_RESET & !A5.Q)
+	# (A8.Q & !VADDR_RESET & !A4.Q));
+
+XXL_128 = ((A8.Q & !VADDR_RESET & !A3.Q)
+	# (A8.Q & !VADDR_RESET & !A2.Q)
+	# (A8.Q & !VADDR_RESET & !A0.Q)
+	# (A8.Q & !VADDR_RESET & !A1.Q)
+	# (VADDR_RESET & OFFSET1.Q));
+
+XXL_129 = ((!A9.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q)
+	# (A9.Q & !VADDR_RESET & !A8.Q)
+	# (A9.Q & !VADDR_RESET & !A7.Q)
+	# (A9.Q & !VADDR_RESET & !A6.Q)
+	# (A9.Q & !VADDR_RESET & !A5.Q));
+
+XXL_130 = ((A9.Q & !VADDR_RESET & !A4.Q)
+	# (A9.Q & !VADDR_RESET & !A3.Q)
+	# (A9.Q & !VADDR_RESET & !A2.Q)
+	# (A9.Q & !VADDR_RESET & !A0.Q)
+	# (A9.Q & !VADDR_RESET & !A1.Q));
+
+XXL_131 = ((!A10.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q & A9.Q)
+	# (A10.Q & !VADDR_RESET & !A9.Q)
+	# (A10.Q & !VADDR_RESET & !A8.Q)
+	# (A10.Q & !VADDR_RESET & !A7.Q)
+	# (A10.Q & !VADDR_RESET & !A6.Q));
+
+XXL_132 = ((A10.Q & !VADDR_RESET & !A5.Q)
+	# (A10.Q & !VADDR_RESET & !A4.Q)
+	# (A10.Q & !VADDR_RESET & !A3.Q)
+	# (A10.Q & !VADDR_RESET & !A2.Q)
+	# (A10.Q & !VADDR_RESET & !A0.Q));
+
+XXL_133 = ((!A11.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q & A9.Q & A10.Q)
+	# (A11.Q & !VADDR_RESET & !A10.Q)
+	# (A11.Q & !VADDR_RESET & !A9.Q)
+	# (A11.Q & !VADDR_RESET & !A8.Q)
+	# (A11.Q & !VADDR_RESET & !A7.Q));
+
+XXL_134 = ((A11.Q & !VADDR_RESET & !A6.Q)
+	# (A11.Q & !VADDR_RESET & !A5.Q)
+	# (A11.Q & !VADDR_RESET & !A4.Q)
+	# (A11.Q & !VADDR_RESET & !A3.Q)
+	# (A11.Q & !VADDR_RESET & !A2.Q));
+
+XXL_135 = ((A11.Q & !VADDR_RESET & !A0.Q)
+	# (A11.Q & !VADDR_RESET & !A1.Q)
+	# (VADDR_RESET & OFFSET4.Q)
+	# (A11.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+XXL_136 = ((!A14.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q & A9.Q & A10.Q & A11.Q & A12.Q & A13.Q)
+	# (A14.Q & !VADDR_RESET & !A13.Q)
+	# (A14.Q & !VADDR_RESET & !A12.Q)
+	# (A14.Q & !VADDR_RESET & !A11.Q)
+	# (A14.Q & !VADDR_RESET & !A10.Q));
+
+XXL_137 = ((A14.Q & !VADDR_RESET & !A9.Q)
+	# (A14.Q & !VADDR_RESET & !A8.Q)
+	# (A14.Q & !VADDR_RESET & !A7.Q)
+	# (A14.Q & !VADDR_RESET & !A6.Q)
+	# (A14.Q & !VADDR_RESET & !A5.Q));
+
+XXL_138 = ((A14.Q & !VADDR_RESET & !A4.Q)
+	# (A14.Q & !VADDR_RESET & !A3.Q)
+	# (A14.Q & !VADDR_RESET & !A2.Q)
+	# (A14.Q & !VADDR_RESET & !A0.Q)
+	# (A14.Q & !VADDR_RESET & !A1.Q));
+
+XXL_139 = ((!A15.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q & A9.Q & A10.Q & A11.Q & A12.Q & A13.Q & A14.Q)
+	# (A15.Q & !VADDR_RESET & !A14.Q)
+	# (A15.Q & !VADDR_RESET & !A13.Q)
+	# (A15.Q & !VADDR_RESET & !A12.Q)
+	# (A15.Q & !VADDR_RESET & !A11.Q));
+
+XXL_140 = ((A15.Q & !VADDR_RESET & !A10.Q)
+	# (A15.Q & !VADDR_RESET & !A9.Q)
+	# (A15.Q & !VADDR_RESET & !A8.Q)
+	# (A15.Q & !VADDR_RESET & !A7.Q)
+	# (A15.Q & !VADDR_RESET & !A6.Q));
+
+XXL_141 = ((A15.Q & !VADDR_RESET & !A5.Q)
+	# (A15.Q & !VADDR_RESET & !A4.Q)
+	# (A15.Q & !VADDR_RESET & !A3.Q)
+	# (A15.Q & !VADDR_RESET & !A2.Q)
+	# (A15.Q & !VADDR_RESET & !A0.Q));
+
+XXL_142 = ((!A7.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q)
+	# (A7.Q & !VADDR_RESET & !A6.Q)
+	# (A7.Q & !VADDR_RESET & !A5.Q)
+	# (A7.Q & !VADDR_RESET & !A4.Q)
+	# (A7.Q & !VADDR_RESET & !A3.Q));
+
+XXL_143 = ((A7.Q & !VADDR_RESET & !A2.Q)
+	# (A7.Q & !VADDR_RESET & !A0.Q)
+	# (A7.Q & !VADDR_RESET & !A1.Q)
+	# (VADDR_RESET & OFFSET0.Q)
+	# (A7.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+XXL_144 = ((!A13.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q & A9.Q & A10.Q & A11.Q & A12.Q)
+	# (A13.Q & !VADDR_RESET & !A12.Q)
+	# (A13.Q & !VADDR_RESET & !A11.Q)
+	# (A13.Q & !VADDR_RESET & !A10.Q)
+	# (A13.Q & !VADDR_RESET & !A9.Q));
+
+XXL_145 = ((A13.Q & !VADDR_RESET & !A8.Q)
+	# (A13.Q & !VADDR_RESET & !A7.Q)
+	# (A13.Q & !VADDR_RESET & !A6.Q)
+	# (A13.Q & !VADDR_RESET & !A5.Q)
+	# (A13.Q & !VADDR_RESET & !A4.Q));
+
+XXL_146 = ((A13.Q & !VADDR_RESET & !A3.Q)
+	# (A13.Q & !VADDR_RESET & !A2.Q)
+	# (A13.Q & !VADDR_RESET & !A0.Q)
+	# (A13.Q & !VADDR_RESET & !A1.Q)
+	# (A13.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+XXL_147 = ((!A12.Q & VADDR_INCREMENT & !VADDR_RESET & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q & A6.Q & A7.Q & A8.Q & A9.Q & A10.Q & A11.Q)
+	# (A12.Q & !VADDR_RESET & !A11.Q)
+	# (A12.Q & !VADDR_RESET & !A10.Q)
+	# (A12.Q & !VADDR_RESET & !A9.Q)
+	# (A12.Q & !VADDR_RESET & !A8.Q));
+
+XXL_148 = ((A12.Q & !VADDR_RESET & !A7.Q)
+	# (A12.Q & !VADDR_RESET & !A6.Q)
+	# (A12.Q & !VADDR_RESET & !A5.Q)
+	# (A12.Q & !VADDR_RESET & !A4.Q)
+	# (A12.Q & !VADDR_RESET & !A3.Q));
+
+XXL_149 = ((A12.Q & !VADDR_RESET & !A2.Q)
+	# (A12.Q & !VADDR_RESET & !A0.Q)
+	# (A12.Q & !VADDR_RESET & !A1.Q)
+	# (VADDR_RESET & OFFSET5.Q)
+	# (A12.Q & !VADDR_INCREMENT & !VADDR_RESET));
+
+A1.C = CLKIN;
+
+A0.C = CLKIN;
+
+A3.C = CLKIN;
+
+A2.C = CLKIN;
+
+A4.C = CLKIN;
+
+A5.C = CLKIN;
+
+A6.C = CLKIN;
+
+A7.C = CLKIN;
+
+A8.C = CLKIN;
+
+A9.C = CLKIN;
+
+A10.C = CLKIN;
+
+A11.C = CLKIN;
+
+A13.C = CLKIN;
+
+A12.C = CLKIN;
+
+A14.C = CLKIN;
+
+A15.C = CLKIN;
+
+FONTSEL0.C = !VGA_CONFIG_WRITE;
+
+FONTSEL0.AR = !VGA_RESET;
+
+FONTSEL1.C = !VGA_CONFIG_WRITE;
+
+FONTSEL1.AR = !VGA_RESET;
+
+GRAPH_MODE.C = !VGA_CONFIG_WRITE;
+
+GRAPH_MODE.AR = !VGA_RESET;
+
+OFFSET1.C = !VGA_CONFIG_WRITE;
+
+OFFSET1.AR = !VGA_RESET;
+
+OFFSET0.C = !VGA_CONFIG_WRITE;
+
+OFFSET0.AR = !VGA_RESET;
+
+OFFSET2.C = !VGA_CONFIG_WRITE;
+
+OFFSET2.AR = !VGA_RESET;
+
+OFFSET3.C = !VGA_CONFIG_WRITE;
+
+OFFSET3.AR = !VGA_RESET;
+
+OFFSET4.C = !VGA_CONFIG_WRITE;
+
+OFFSET4.AR = !VGA_RESET;
+
+OFFSET5.C = !VGA_CONFIG_WRITE;
+
+OFFSET5.AR = !VGA_RESET;
+
+
+PLCC84 Pin/Node Placement:
+------------------------------------
+Pin 1  = VGA_RESET;
+Pin 2  = CLKIN;
+Pin 4  = A10; /* MC 16 */
+Pin 5  = A15; /* MC 14 */
+Pin 6  = A3; /* MC 13 */
+Pin 8  = A6; /* MC 11 */
+Pin 9  = A9; /* MC 8 */
+Pin 10 = A2; /* MC  6 */
+Pin 11 = A14; /* MC  5 */
+Pin 12 = A1; /* MC  3 */
+Pin 14 = TDI; /* MC 32 */ 
+Pin 15 = A5; /* MC 29 */ 
+Pin 16 = A8; /* MC 27 */ 
+Pin 17 = A11; /* MC 25 */ 
+Pin 18 = A12; /* MC 24 */ 
+Pin 20 = A4; /* MC 21 */ 
+Pin 21 = A0; /* MC 19 */ 
+Pin 22 = A7; /* MC 17 */ 
+Pin 23 = TMS; /* MC 48 */ 
+Pin 24 = A13; /* MC 46 */ 
+Pin 25 = FONTSEL0; /* MC 45 */ 
+Pin 27 = GRAPH_MODE; /* MC 43 */ 
+Pin 28 = FONTSEL1; /* MC 40 */ 
+Pin 35 = CPU_D0; /* MC 59 */ 
+Pin 36 = CPU_D7; /* MC 57 */ 
+Pin 37 = CPU_D8; /* MC 56 */ 
+Pin 39 = CPU_D6; /* MC 53 */ 
+Pin 40 = VADDR_INCREMENT; /* MC 51 */ 
+Pin 41 = VADDR_RESET; /* MC 49 */ 
+Pin 44 = CPU_D1; /* MC 65 */ 
+Pin 45 = CPU_D2; /* MC 67 */ 
+Pin 46 = CPU_D3; /* MC 69 */ 
+Pin 48 = CPU_D5; /* MC 72 */ 
+Pin 49 = CPU_D4; /* MC 73 */ 
+Pin 62 = TCK; /* MC 96 */ 
+Pin 71 = TDO; /* MC 112 */ 
+Pin 83 = VGA_CONFIG_WRITE;
+PINNODE 610 = XXL_138; /* MC 10 Feedback */
+PINNODE 612 = XXL_124; /* MC 12 Feedback */
+PINNODE 615 = XXL_130; /* MC 15 Feedback */
+PINNODE 622 = XXL_132; /* MC 22 Feedback */
+PINNODE 623 = XXL_126; /* MC 23 Feedback */
+PINNODE 626 = XXL_125; /* MC 26 Feedback */
+PINNODE 628 = XXL_142; /* MC 28 Feedback */
+PINNODE 630 = XXL_127; /* MC 30 Feedback */
+PINNODE 631 = XXL_129; /* MC 31 Feedback */
+PINNODE 632 = XXL_131; /* MC 32 Feedback */
+PINNODE 633 = XXL_145; /* MC 33 Feedback */
+PINNODE 634 = XXL_128; /* MC 34 Feedback */
+PINNODE 635 = XXL_140; /* MC 35 Feedback */
+PINNODE 636 = XXL_141; /* MC 36 Feedback */
+PINNODE 637 = XXL_137; /* MC 37 Feedback */
+PINNODE 638 = XXL_134; /* MC 38 Feedback */
+PINNODE 639 = XXL_146; /* MC 39 Feedback */
+PINNODE 641 = XXL_133; /* MC 41 Feedback */
+PINNODE 642 = XXL_147; /* MC 42 Feedback */
+PINNODE 644 = XXL_144; /* MC 44 Feedback */
+PINNODE 647 = XXL_136; /* MC 47 Feedback */
+PINNODE 648 = XXL_139; /* MC 48 Feedback */
+PINNODE 650 = OFFSET3; /* MC 50 Feedback */
+PINNODE 652 = OFFSET2; /* MC 52 Feedback */
+PINNODE 654 = OFFSET1; /* MC 54 Feedback */
+PINNODE 655 = OFFSET0; /* MC 55 Feedback */
+PINNODE 658 = XXL_135; /* MC 58 Feedback */
+PINNODE 660 = XXL_148; /* MC 60 Feedback */
+PINNODE 661 = OFFSET4; /* MC 61 Feedback */
+PINNODE 662 = XXL_143; /* MC 62 Feedback */
+PINNODE 663 = XXL_149; /* MC 63 Feedback */
+PINNODE 664 = OFFSET5; /* MC 64 Feedback */
+
+** Resource Usage **
+
+
+DCERP Field = Summary of Allocations.
+|||||
+|||||_Preset [p,-]       ==  p = PT preset, - No Preset.
+||||
+||||__Reset [g,r,-]      ==  g= Global AR, r = PT reset, - No reset.
+|||
+|||___Clock Enable [e,-] ==  e = Product Term, - always enabled, - none.
+||
+||____Clock [c,g,-],     ==  c = Product term, g = Global term, - No Clock.
+|
+|_____Type [C,D,L,T],    ==  Register type C= combin, D=dff, L=latch, T=tff.
+
+For input only = INPUT.
+
+MCell Pin# Oe   PinDrive         DCERP  FBDrive  DCERP  Foldback  CascadeOut     TotPT output_slew
+MC1   0         --                      --              --        --             0     slow
+MC2   0         --                      --              --        --             0     slow
+MC3   12   on   A1               Dg---  --              --        --             3     slow
+MC4   0         --                      --              --        --             0     slow
+MC5   11   on   A14              Dg---  --              --        --             4     slow
+MC6   10   on   A2               Dg---  --              --        --             4     slow
+MC7   0         --                      --              --        --             0     slow
+MC8   9    on   A9               Dg---  --              --        --             4     slow
+MC9   0         --                      --              --        --             0     slow
+MC10  0         --                      XXL_138  C----  NA        --             5     slow
+MC11  8    on   A6               Dg---  --              --        --             4     slow
+MC12  0         --                      XXL_124  C----  NA        --             5     slow
+MC13  6    on   A3               Dg---  --              NA        --             5     slow
+MC14  5    on   A15              Dg---  --              NA        --             5     slow
+MC15  0         --                      XXL_130  C----  NA        --             5     slow
+MC16  4    on   A10              Dg---  --              NA        --             5     slow
+MC17  22   on   A7               Dg---  --              --        --             2     slow
+MC18  0         --                      --              --        --             0     slow
+MC19  21   on   A0               Dg---  --              --        --             2     slow
+MC20  0         --                      --              --        --             0     slow
+MC21  20   on   A4               Dg---  --              --        --             2     slow
+MC22  0         --                      XXL_132  C----  NA        --             5     slow
+MC23  0         --                      XXL_126  C----  NA        --             5     slow
+MC24  18   on   A12              Dg---  --              --        --             3     slow
+MC25  17   on   A11              Dg---  --              --        --             3     slow
+MC26  0         --                      XXL_125  C----  NA        --             5     slow
+MC27  16   on   A8               Dg---  --              --        --             3     slow
+MC28  0         --                      XXL_142  C----  NA        --             5     slow
+MC29  15   on   A5               Dg---  --              --        --             3     slow
+MC30  0         --                      XXL_127  C----  NA        --             5     slow
+MC31  0         --                      XXL_129  C----  NA        --             5     slow
+MC32  14   --   TDI              INPUT  XXL_131  C----  NA        --             5     slow
+MC33  0         --                      XXL_145  C----  NA        --             5     slow
+MC34  0         --                      XXL_128  C----  NA        --             5     slow
+MC35  31        --                      XXL_140  C----  NA        --             5     slow
+MC36  0         --                      XXL_141  C----  NA        --             5     slow
+MC37  30        --                      XXL_137  C----  NA        --             5     slow
+MC38  29        --                      XXL_134  C----  NA        --             5     slow
+MC39  0         --                      XXL_146  C----  NA        --             5     slow
+MC40  28   on   FONTSEL1         Dg-g-  --              --        --             1     slow
+MC41  0         --                      XXL_133  C----  NA        --             5     slow
+MC42  0         --                      XXL_147  C----  NA        --             5     slow
+MC43  27   on   GRAPH_MODE       Dg-g-  --              --        --             1     slow
+MC44  0         --                      XXL_144  C----  NA        --             5     slow
+MC45  25   on   FONTSEL0         Dg-g-  --              --        --             1     slow
+MC46  24   on   A13              Dg---  --              --        --             3     slow
+MC47  0         --                      XXL_136  C----  NA        --             5     slow
+MC48  23   --   TMS              INPUT  XXL_139  C----  NA        --             5     slow
+MC49  41   --   VADDR_RESET      INPUT  --              --        --             0     slow
+MC50  0         --                      OFFSET3  Dg-g-  --        --             1     slow
+MC51  40   --   VADDR_INCREMENT  INPUT  --              --        --             0     slow
+MC52  0         --                      OFFSET2  Dg-g-  --        --             1     slow
+MC53  39   --   CPU_D6           INPUT  --              --        --             0     slow
+MC54  0         --                      OFFSET1  Dg-g-  --        --             1     slow
+MC55  0         --                      OFFSET0  Dg-g-  --        --             1     slow
+MC56  37   --   CPU_D8           INPUT  --              --        --             0     slow
+MC57  36   --   CPU_D7           INPUT  --              --        --             0     slow
+MC58  0         --                      XXL_135  C----  --        --             4     slow
+MC59  35   --   CPU_D0           INPUT  --              --        --             0     slow
+MC60  0         --                      XXL_148  C----  NA        --             5     slow
+MC61  34        --                      OFFSET4  Dg-g-  --        --             1     slow
+MC62  0         --                      XXL_143  C----  NA        --             5     slow
+MC63  0         --                      XXL_149  C----  NA        --             5     slow
+MC64  33        --                      OFFSET5  Dg-g-  --        --             1     slow
+MC65  44   --   CPU_D1           INPUT  --              --        --             0     slow
+MC66  0         --                      --              --        --             0     slow
+MC67  45   --   CPU_D2           INPUT  --              --        --             0     slow
+MC68  0         --                      --              --        --             0     slow
+MC69  46   --   CPU_D3           INPUT  --              --        --             0     slow
+MC70  0         --                      --              --        --             0     slow
+MC71  0         --                      --              --        --             0     slow
+MC72  48   --   CPU_D5           INPUT  --              --        --             0     slow
+MC73  49   --   CPU_D4           INPUT  --              --        --             0     slow
+MC74  0         --                      --              --        --             0     slow
+MC75  50        --                      --              --        --             0     slow
+MC76  0         --                      --              --        --             0     slow
+MC77  51        --                      --              --        --             0     slow
+MC78  0         --                      --              --        --             0     slow
+MC79  0         --                      --              --        --             0     slow
+MC80  52        --                      --              --        --             0     slow
+MC81  0         --                      --              --        --             0     slow
+MC82  0         --                      --              --        --             0     slow
+MC83  54        --                      --              --        --             0     slow
+MC84  0         --                      --              --        --             0     slow
+MC85  55        --                      --              --        --             0     slow
+MC86  56        --                      --              --        --             0     slow
+MC87  0         --                      --              --        --             0     slow
+MC88  57        --                      --              --        --             0     slow
+MC89  0         --                      --              --        --             0     slow
+MC90  0         --                      --              --        --             0     slow
+MC91  58        --                      --              --        --             0     slow
+MC92  0         --                      --              --        --             0     slow
+MC93  60        --                      --              --        --             0     slow
+MC94  61        --                      --              --        --             0     slow
+MC95  0         --                      --              --        --             0     slow
+MC96  62   --   TCK              INPUT  --              --        --             0     slow
+MC97  63        --                      --              --        --             0     slow
+MC98  0         --                      --              --        --             0     slow
+MC99  64        --                      --              --        --             0     slow
+MC100 0         --                      --              --        --             0     slow
+MC101 65        --                      --              --        --             0     slow
+MC102 0         --                      --              --        --             0     slow
+MC103 0         --                      --              --        --             0     slow
+MC104 67        --                      --              --        --             0     slow
+MC105 68        --                      --              --        --             0     slow
+MC106 0         --                      --              --        --             0     slow
+MC107 69        --                      --              --        --             0     slow
+MC108 0         --                      --              --        --             0     slow
+MC109 70        --                      --              --        --             0     slow
+MC110 0         --                      --              --        --             0     slow
+MC111 0         --                      --              --        --             0     slow
+MC112 71   --   TDO              INPUT  --              --        --             0     slow
+MC113 0         --                      --              --        --             0     slow
+MC114 0         --                      --              --        --             0     slow
+MC115 73        --                      --              --        --             0     slow
+MC116 0         --                      --              --        --             0     slow
+MC117 74        --                      --              --        --             0     slow
+MC118 75        --                      --              --        --             0     slow
+MC119 0         --                      --              --        --             0     slow
+MC120 76        --                      --              --        --             0     slow
+MC121 0         --                      --              --        --             0     slow
+MC122 0         --                      --              --        --             0     slow
+MC123 77        --                      --              --        --             0     slow
+MC124 0         --                      --              --        --             0     slow
+MC125 79        --                      --              --        --             0     slow
+MC126 80        --                      --              --        --             0     slow
+MC127 0         --                      --              --        --             0     slow
+MC128 81        --                      --              --        --             0     slow
+MC0   2         CLKIN            INPUT  --              --        --             0     slow
+MC0   1         VGA_RESET        INPUT  --              --        --             0     slow
+MC0   84        --                      --              --        --             0     slow
+MC0   83        VGA_CONFIG_WRITE INPUT  --              --        --             0     slow
+
+Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
+A: LC1	- LC16		11/16(68%)	8/16(50%)	0/16(0%)	49/80(61%)	(25)	0
+B: LC17	- LC32		14/16(87%)	8/16(50%)	0/16(0%)	53/80(66%)	(25)	0
+C: LC33	- LC48		16/16(100%)	5/16(31%)	0/16(0%)	66/80(82%)	(25)	0
+D: LC49	- LC64		10/16(62%)	6/16(37%)	0/16(0%)	25/80(31%)	(21)	0
+E: LC65	- LC80		0/16(0%)	5/16(31%)	0/16(0%)	0/80(0%)	(0)	0
+F: LC81	- LC96		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	(0)	0
+G: LC97	- LC112		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	(0)	0
+H: LC113- LC128		0/16(0%)	0/16(0%)	0/16(0%)	0/80(0%)	(0)	0
+
+Total dedicated input used:	3/4 	(75%)
+Total I/O pins used		34/64 	(53%)
+Total Logic cells used 		51/128 	(39%)
+Total Flip-Flop used 		25/128 	(19%)
+Total Foldback logic used 	0/128 	(0%)
+Total Nodes+FB/MCells 		51/128 	(39%)
+Total cascade used 		0
+Total input pins 		18
+Total output pins 		19
+Total Pts 			193
+Creating pla file C:\VGA4B.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+
+----------------  End fitter, Design FITS
+$Device PLCC84 fits 
+FIT1508 completed in 0.00 seconds

@@ -1,0 +1,359 @@
+LISTING FOR LOGIC DESCRIPTION FILE: COUNTER2.pld                     Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Feb 23 21:07:00 2023
+
+  1:Name     COUNTER;
+  2:PartNo   COUNTER;
+  3:Date     04/18/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1504ispplcc44;
+ 10:
+ 11:
+ 12:Pin  0  = CLKIN;
+ 13:Pin  0  = Q0,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Q11,Q12,Q13,Q14,Q15;  
+ 14:Pin  0  = INCREMENT;  /* == 1 to increment */
+ 15:Pin  0  = RESET_TO_OFFSET;
+ 16:Pin [0..0] = [OFFSET0..5];
+ 17:
+ 18:Q0.d =  (  (INCREMENT&!Q0) 
+ 19:        # (!INCREMENT&Q0)
+ 20:        ) & !RESET_TO_OFFSET;     
+ 21:Q0.ck = CLKIN;
+ 22:
+ 23:Q1.d =  (  (INCREMENT&((Q0&!Q1) # (!Q0&Q1))) 
+ 24:        # ((!INCREMENT&Q1))
+ 25:        ) & !RESET_TO_OFFSET;
+ 26:Q1.ck = CLKIN;
+ 27:
+ 28:Q2T = Q0&Q1;
+ 29:Q2.d =  (  (INCREMENT&((Q2T&!Q2) # (!Q2T&Q2))) 
+ 30:        # ((!INCREMENT&Q2))
+ 31:        ) & !RESET_TO_OFFSET;
+ 32:Q2.ck = CLKIN;
+ 33:
+ 34:Q3T = Q2T&Q2;
+ 35:Q3.d =  ( (INCREMENT&((Q3T&!Q3) # (!Q3T&Q3))) 
+ 36:        # ((!INCREMENT&Q3))
+ 37:        ) & !RESET_TO_OFFSET;
+ 38:Q3.ck = CLKIN;
+ 39:
+ 40:Q4T = Q3T&Q3;
+ 41:Q4.d =  ( (INCREMENT&((Q4T&!Q4) # (!Q4T&Q4))) 
+ 42:        # ((!INCREMENT&Q4))
+ 43:        ) & !RESET_TO_OFFSET;
+ 44:Q4.ck = CLKIN;
+ 45:
+ 46:Q5T = Q4T&Q4;
+ 47:Q5.d =  ( (INCREMENT&((Q5T&!Q5) # (!Q5T&Q5))) 
+ 48:        # ((!INCREMENT&Q5))
+ 49:        ) & !RESET_TO_OFFSET;
+ 50:Q5.ck = CLKIN;
+ 51:
+ 52:Q6T = Q5T&Q5;
+ 53:Q6.d =  ( (INCREMENT&((Q6T&!Q6) # (!Q6T&Q6))) 
+
+LISTING FOR LOGIC DESCRIPTION FILE: COUNTER2.pld                     Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Feb 23 21:07:00 2023
+
+ 54:        # ((!INCREMENT&Q6))
+ 55:        ) & !RESET_TO_OFFSET;
+ 56:Q6.ck = CLKIN;
+ 57:
+ 58:/*  These addresses have OFFSET on reset. */
+ 59:
+ 60:Q7T = Q6T&Q6;
+ 61:Q7.d =  (
+ 62:          ( (INCREMENT&((Q7T&!Q7) # (!Q7T&Q7))) 
+ 63:            # ((!INCREMENT&Q7))
+ 64:          ) & !RESET_TO_OFFSET
+ 65:        ) 
+ 66:        #
+ 67:        (
+ 68:            RESET_TO_OFFSET & OFFSET0
+ 69:        );
+ 70:Q7.ck = CLKIN;
+ 71:
+ 72:Q8T = Q7T&Q7;
+ 73:Q8.d =  (
+ 74:          ( (INCREMENT&((Q8T&!Q8) # (!Q8T&Q8))) 
+ 75:            # ((!INCREMENT&Q8))
+ 76:          ) & !RESET_TO_OFFSET
+ 77:        ) 
+ 78:        #
+ 79:        (
+ 80:            RESET_TO_OFFSET & OFFSET1
+ 81:        );
+ 82:Q8.ck = CLKIN;
+ 83:
+ 84:Q9T = Q8T&Q8;
+ 85:Q9.d =  (
+ 86:          ( (INCREMENT&((Q9T&!Q9) # (!Q9T&Q9))) 
+ 87:            # ((!INCREMENT&Q9))
+ 88:          ) & !RESET_TO_OFFSET
+ 89:        ) 
+ 90:        #
+ 91:        (
+ 92:            RESET_TO_OFFSET & OFFSET2
+ 93:        );
+ 94:Q9.ck = CLKIN;
+ 95:
+ 96:Q10T = Q9T&Q9;
+ 97:Q10.d = (
+ 98:          ( (INCREMENT&((Q10T&!Q10) # (!Q10T&Q10))) 
+ 99:            # ((!INCREMENT&Q10))
+100:          ) & !RESET_TO_OFFSET
+101:        ) 
+102:        #
+103:        (
+104:            RESET_TO_OFFSET & OFFSET3
+105:        );
+106:Q10.ck = CLKIN;
+107:
+
+LISTING FOR LOGIC DESCRIPTION FILE: COUNTER2.pld                     Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Feb 23 21:07:00 2023
+
+108:Q11T = Q10T&Q10;
+109:Q11.d = (
+110:          ( (INCREMENT&((Q11T&!Q11) # (!Q11T&Q11))) 
+111:            # ((!INCREMENT&Q11))
+112:          ) & !RESET_TO_OFFSET
+113:        ) 
+114:        #
+115:        (
+116:            RESET_TO_OFFSET & OFFSET4
+117:        );
+118:Q11.ck = CLKIN;
+119:
+120:Q12T = Q11T&Q11;
+121:Q12.d = (
+122:          ( (INCREMENT&((Q12T&!Q12) # (!Q12T&Q12))) 
+123:            # ((!INCREMENT&Q12))
+124:          ) & !RESET_TO_OFFSET
+125:        ) 
+126:        #
+127:        (
+128:            RESET_TO_OFFSET & OFFSET5
+129:        );
+130:Q12.ck = CLKIN;
+131:
+132:Q13T = Q12T&Q12;
+133:Q13.d = (  (INCREMENT&((Q13T&!Q13) # (!Q13T&Q13))) 
+134:        # ((!INCREMENT&Q13))
+135:        ) & !RESET_TO_OFFSET;
+136:Q13.ck = CLKIN;
+137:
+138:Q14T = Q13T&Q13;
+139:Q14.d = ( (INCREMENT&((Q14T&!Q14) # (!Q14T&Q14))) 
+140:        # ((!INCREMENT&Q14))
+141:        ) & !RESET_TO_OFFSET;
+142:Q14.ck = CLKIN;
+143:
+144:Q15T = Q14T&Q14;
+145:Q15.d = ( (INCREMENT&((Q15T&!Q15) # (!Q15T&Q15))) 
+146:        # ((!INCREMENT&Q15))
+147:        ) & !RESET_TO_OFFSET;
+148:Q15.ck = CLKIN;
+149:
+150:
+151:/*
+152:
+153:INCREMENT and RESET Implemented
+154:
+155:Total dedicated input used:     1/4     (25%)
+156:Total I/O pins used             22/32   (68%)
+157:Total Logic cells used          40/64   (62%)
+158:Total Flip-Flop used            16/64   (25%)
+159:Total Foldback logic used       0/64    (0%)
+160:Total Nodes+FB/MCells           40/64   (62%)
+161:Total cascade used              0
+
+LISTING FOR LOGIC DESCRIPTION FILE: COUNTER2.pld                     Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Feb 23 21:07:00 2023
+
+162:Total input pins                7
+163:Total output pins               16
+164:Total Pts                       176
+165:
+166:*/
+167:
+168:
+169:/* Second 8 bit counter, but clocked by the first counters high bit 1 to 0 transition */
+170:
+171:/*
+172:Q8.d = !Q8;
+173:Q8.ck = !Q7;
+174:Q9.d = (Q8&!Q9) # (!Q8&Q9);
+175:Q9.ck = !Q7;
+176:
+177:Q10T = Q8&Q9;
+178:Q10.d = (Q10T&!Q10) # (!Q10T&Q10);
+179:Q10.ck = !Q7;
+180:
+181:Q11T = Q10T&Q10;
+182:Q11.d = (Q11T&!Q11) # (!Q11T&Q11);
+183:Q11.ck = !Q7;
+184:
+185:Q12T = Q11T&Q11;
+186:Q12.d = (Q12T&!Q12) # (!Q12T&Q12);
+187:Q12.ck = !Q7;
+188:
+189:Q13T = Q12T&Q12;
+190:Q13.d = (Q13T&!Q13) # (!Q13T&Q13);
+191:Q13.ck = !Q7;
+192:
+193:Q14T = Q13T&Q13;
+194:Q14.d = (Q14T&!Q14) # (!Q14T&Q14);
+195:Q14.ck = !Q7;
+196:
+197:Q15T = Q14T&Q14;
+198:Q15.d = (Q15T&!Q15) # (!Q15T&Q15);
+199:Q15.ck = !Q7;
+200:*/
+201:
+202:
+203:
+204:
+205:/*
+206:Q8T = Q7T&Q7;
+207:Q8.d = (Q8T&!Q8) # (!Q8T&Q8);
+208:Q8.ck = CLKIN;
+209:Q9T = Q8T&Q8;
+210:Q9.d = (Q9T&!Q9) # (!Q9T&Q9);
+211:Q9.ck = CLKIN;
+212:
+213:Q10T = Q9T&Q9;
+214:Q10.d = (Q10T&!Q10) # (!Q10T&Q10);
+215:Q10.ck = CLKIN;
+
+LISTING FOR LOGIC DESCRIPTION FILE: COUNTER2.pld                     Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Feb 23 21:07:00 2023
+
+216:
+217:Q11T = Q10T&Q10;
+218:Q11.d = (Q11T&!Q11) # (!Q11T&Q11);
+219:Q11.ck = CLKIN;
+220:
+221:Q12T = Q11T&Q11;
+222:Q12.d = (Q12T&!Q12) # (!Q12T&Q12);
+223:Q12.ck = CLKIN;
+224:
+225:Q13T = Q12T&Q12;
+226:Q13.d = (Q13T&!Q13) # (!Q13T&Q13);
+227:Q13.ck = CLKIN;
+228:
+229:Q14T = Q13T&Q13;
+230:Q14.d = (Q14T&!Q14) # (!Q14T&Q14);
+231:Q14.ck = CLKIN;
+232:
+233:Q15T = Q14T&Q14;
+234:Q15.d = (Q15T&!Q15) # (!Q15T&Q15);
+235:Q15.ck = CLKIN;
+236:*/
+237:
+238:
+239:
+240:
+241:
+242:/*
+243:
+244:8 bit counter:
+245:    Total dedicated input used: 1/4     (25%)
+246:    Total I/O pins used         12/32   (37%)
+247:    Total Logic cells used              11/64   (17%)
+248:    Total Flip-Flop used                8/64    (12%)
+249:    Total Foldback logic used   0/64    (0%)
+250:    Total Nodes+FB/MCells               8/64    (12%)
+251:    Total cascade used          3
+252:    Total input pins            5
+253:    Total output pins           8
+254:    Total Pts                   36
+255:
+256:10 bit counter:
+257:    Total dedicated input used: 1/4     (25%)
+258:    Total I/O pins used         14/32   (43%)
+259:    Total Logic cells used              15/64   (23%)
+260:    Total Flip-Flop used                10/64   (15%)
+261:    Total Foldback logic used   0/64    (0%)
+262:    Total Nodes+FB/MCells               14/64   (21%)
+263:    Total cascade used          1
+264:    Total input pins            5
+265:    Total output pins           10
+266:    Total Pts                   59
+267:12 bit counter:
+268:    Total dedicated input used: 1/4     (25%)
+269:    Total I/O pins used         16/32   (50%)
+
+LISTING FOR LOGIC DESCRIPTION FILE: COUNTER2.pld                     Page 6
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Feb 23 21:07:00 2023
+
+270:    Total Logic cells used              21/64   (32%)
+271:    Total Flip-Flop used                12/64   (18%)
+272:    Total Foldback logic used   0/64    (0%)
+273:    Total Nodes+FB/MCells               20/64   (31%)
+274:    Total cascade used          1
+275:    Total input pins            5
+276:    Total output pins           12
+277:    Total Pts                   86
+278:16 bit counter:
+279:    Total dedicated input used: 1/4     (25%)
+280:    Total I/O pins used         20/32   (62%)
+281:    Total Logic cells used              37/64   (57%)
+282:    Total Flip-Flop used                16/64   (25%)
+283:    Total Foldback logic used   0/64    (0%)
+284:    Total Nodes+FB/MCells               37/64   (57%)
+285:    Total cascade used          0
+286:    Total input pins            5
+287:    Total output pins           16
+288:    Total Pts                   157
+289:
+290:16 bit counter w/2 8 bit cascasded counters:
+291:    Total dedicated input used: 1/4     (25%)
+292:    Total I/O pins used         20/32   (62%)
+293:    Total Logic cells used              23/64   (35%)
+294:    Total Flip-Flop used                16/64   (25%)
+295:    Total Foldback logic used   0/64    (0%)
+296:    Total Nodes+FB/MCells               23/64   (35%)
+297:    Total cascade used          0
+298:    Total input pins            5
+299:    Total output pins           16
+300:    Total Pts                   87
+301:
+302:
+303:*/
+304:
+305:
+306:
+307:
+308:
+309:
+
+
+

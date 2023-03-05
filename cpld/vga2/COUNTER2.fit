@@ -1,0 +1,738 @@
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Thu Feb 23 21:07:01 2023
+
+
+fit1504 C:\COUNTER2.tt2 -CUPL -dev P1504C44 -JTAG ON
+
+
+****** Initial fitting strategy and property ******
+ Pla_in_file = COUNTER2.tt2
+ Pla_out_file = COUNTER2.tt3
+ Jedec_file = COUNTER2.jed
+ Vector_file = COUNTER2.tmv
+ verilog_file = COUNTER2.vt
+ Time_file = 
+ Log_file = COUNTER2.fit
+ err_file = 
+ Device_name = PLCC44
+ Module_name = 
+ Package_type = PLCC
+ Preassign_file = 
+ Property_file = 
+ Sleep_mode = 
+ Preassignment = 
+ Security_mode = OFF
+ Pin_keep_mode = ON
+ Dedicated_input_clock = 
+ Dedicated_input_reset = 
+ Dedicated_input_oe = 
+ supporter = CUPL
+ optimize = ON
+ Soft_buffer = 
+ Xor_synthesis = OFF
+ Foldback_logic =  on
+ Expander = 
+ Cascade_logic = OFF
+ Dedicated_input = 
+ Output_fast = OFF
+ *******************************
+ Power down pin 1 = OFF
+ Power down pin 2 = OFF
+ power_reset = OFF
+ JTAG = ON
+ TDI pullup = OFF
+ TMS pullup = OFF
+ MC_power = OFF
+ Open_collector = OFF
+ ITD0 = ON
+ ITD1 = ON
+ ITD2 = ON
+ Fast_inlatch = off
+ *******************************
+---------------------------------------------------------
+ Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
+ ... 
+ ## Warning : Placement fail 
+---------------------------------------------------------
+ Fitter_Pass 2, Preassign = KEEP, CASCADE_LOGIC : (TRY) 
+ ... 
+ ## Warning : Placement fail 
+---------------------------------------------------------
+ Fitter_Pass 3, Preassign = KEEP, CASCADE_LOGIC : (OFF) 
+ ... 
+
+Performing global Output Enable pin assignments ...
+
+Performing global pin assignments ...
+--------------------------------------
+
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+CLKIN assigned to pin  43
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+CLKIN assigned to pin  43
+
+Attempt to place floating signals ...
+------------------------------------
+Q2 is placed at pin 12 (MC 1)
+Q6 is placed at pin 11 (MC 3)
+Q9 is placed at pin 9 (MC 4)
+Q14 is placed at pin 8 (MC 5)
+TDI is placed at pin 7 (MC 8)
+Q3 is placed at pin 6 (MC 11)
+XXL_91 is placed at feedback node 612 (MC 12)
+XXL_74 is placed at feedback node 613 (MC 13)
+Q15 is placed at pin 5 (MC 14)
+XXL_83 is placed at feedback node 615 (MC 15)
+Q10 is placed at pin 4 (MC 16)
+Q0 is placed at pin 21 (MC 17)
+XXL_80 is placed at feedback node 618 (MC 18)
+Q4 is placed at pin 20 (MC 19)
+Q12 is placed at pin 19 (MC 20)
+Q11 is placed at pin 18 (MC 21)
+XXL_87 is placed at feedback node 622 (MC 22)
+XXL_75 is placed at feedback node 623 (MC 23)
+Q1 is placed at pin 17 (MC 24)
+Q8 is placed at pin 16 (MC 25)
+XXL_98 is placed at feedback node 626 (MC 26)
+XXL_90 is placed at feedback node 627 (MC 27)
+XXL_88 is placed at feedback node 628 (MC 28)
+XXL_79 is placed at feedback node 629 (MC 29)
+Q5 is placed at pin 14 (MC 30)
+XXL_76 is placed at feedback node 631 (MC 31)
+TMS is placed at pin 13 (MC 32)
+XXL_92 is placed at feedback node 632 (MC 32)
+RESET_TO_OFFSET is placed at pin 24 (MC 33)
+XXL_77 is placed at feedback node 634 (MC 34)
+INCREMENT is placed at pin 25 (MC 35)
+XXL_82 is placed at feedback node 636 (MC 36)
+XXL_93 is placed at feedback node 637 (MC 37)
+XXL_94 is placed at feedback node 638 (MC 38)
+XXL_96 is placed at feedback node 639 (MC 39)
+XXL_85 is placed at feedback node 640 (MC 40)
+Q7 is placed at pin 29 (MC 41)
+XXL_89 is placed at feedback node 642 (MC 42)
+XXL_97 is placed at feedback node 643 (MC 43)
+XXL_86 is placed at feedback node 644 (MC 44)
+XXL_95 is placed at feedback node 645 (MC 45)
+Q13 is placed at pin 31 (MC 46)
+XXL_84 is placed at feedback node 647 (MC 47)
+TCK is placed at pin 32 (MC 48)
+XXL_81 is placed at feedback node 648 (MC 48)
+OFFSET3 is placed at pin 33 (MC 49)
+OFFSET2 is placed at pin 34 (MC 51)
+OFFSET1 is placed at pin 36 (MC 52)
+OFFSET5 is placed at pin 37 (MC 53)
+TDO is placed at pin 38 (MC 56)
+OFFSET0 is placed at pin 39 (MC 57)
+XXL_99 is placed at feedback node 660 (MC 60)
+XXL_78 is placed at feedback node 661 (MC 61)
+OFFSET4 is placed at pin 40 (MC 62)
+
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                               O                 
+                                               F                 
+                                      C        F                 
+                                      L        S                 
+                     Q  Q  V          K  G     E                 
+                  Q  1  1  C          I  N     T                 
+                  3  5  0  C          N  D     4                 
+               ____________________________________              
+              /   6  5  4  3  2  1 44 43 42 41 40  \             
+         TDI |  7                                39 | OFFSET0    
+         Q14 |  8                                38 | TDO        
+          Q9 |  9                                37 | OFFSET5    
+         GND | 10                                36 | OFFSET1    
+          Q6 | 11                                35 | VCC        
+          Q2 | 12            ATF1504             34 | OFFSET2    
+         TMS | 13          44-Lead PLCC          33 | OFFSET3    
+          Q5 | 14                                32 | TCK        
+         VCC | 15                                31 | Q13        
+          Q8 | 16                                30 | GND        
+          Q1 | 17                                29 | Q7         
+             |   18 19 20 21 22 23 24 25 26 27 28   |            
+              \____________________________________/             
+                 Q  Q  Q  Q  G  V  R  I                          
+                 1  1  4  0  N  C  E  N                          
+                 1  2        D  C  S  C                          
+                                   E  R                          
+                                   T  E                          
+                                   _  M                          
+                                   T  E                          
+                                   O  N                          
+                                   _  T                          
+                                   O                             
+                                   F                             
+                                   F                             
+
+
+
+VCC = Supply Voltage pin which must be connected to (5.0V or 3.0V)
+
+GND = GND pin which must be connected to ground
+
+TMS,TDI,TDO,TDI = JTAG pins which must reserved for the JTAG interface
+
+NC = Unused I/O pins which must be unconnected on the board
+
+Universal-Interconnect-Multiplexer assignments
+------------------------------------------------
+FanIn assignment for block A [25]
+{
+INCREMENT,
+OFFSET3,OFFSET2,
+Q2,Q3,Q6,Q9,Q1,Q14,Q4,Q0,Q15,Q10,
+RESET_TO_OFFSET,
+XXL_85,XXL_87,XXL_84,XXL_81,XXL_91,XXL_79,XXL_80,XXL_86,XXL_82,XXL_83,XXL_90,
+}
+Multiplexer assignment for block A
+XXL_85			(MC18	FB)  : MUX 0		Ref (C40fb)
+Q2			(MC1	P)   : MUX 1		Ref (A1p)
+XXL_87			(MC13	FB)  : MUX 2		Ref (B22fb)
+XXL_84			(MC20	FB)  : MUX 3		Ref (C47fb)
+XXL_81			(MC21	FB)  : MUX 5		Ref (C48fb)
+Q3			(MC5	P)   : MUX 6		Ref (A11p)
+Q6			(MC2	P)   : MUX 7		Ref (A3p)
+Q9			(MC3	P)   : MUX 9		Ref (A4p)
+OFFSET3			(MC24	P)   : MUX 11		Ref (D49p)
+OFFSET2			(MC25	P)   : MUX 13		Ref (D51p)
+Q1			(MC14	P)   : MUX 15		Ref (B24p)
+XXL_91			(MC6	FB)  : MUX 17		Ref (A12fb)
+XXL_79			(MC16	FB)  : MUX 19		Ref (B29fb)
+Q14			(MC4	P)   : MUX 21		Ref (A5p)
+XXL_80			(MC11	FB)  : MUX 22		Ref (B18fb)
+Q4			(MC12	P)   : MUX 23		Ref (B19p)
+Q0			(MC10	P)   : MUX 25		Ref (B17p)
+INCREMENT		(MC23	P)   : MUX 27		Ref (C35p)
+Q15			(MC7	P)   : MUX 28		Ref (A14p)
+XXL_86			(MC19	FB)  : MUX 29		Ref (C44fb)
+XXL_82			(MC17	FB)  : MUX 30		Ref (C36fb)
+XXL_83			(MC8	FB)  : MUX 31		Ref (A15fb)
+XXL_90			(MC15	FB)  : MUX 33		Ref (B27fb)
+Q10			(MC9	P)   : MUX 36		Ref (A16p)
+RESET_TO_OFFSET		(MC22	P)   : MUX 37		Ref (C33p)
+
+FanIn assignment for block B [25]
+{
+INCREMENT,
+Q3,Q11,Q2,Q5,Q6,Q9,Q1,Q0,Q8,Q4,Q10,Q7,Q12,
+RESET_TO_OFFSET,
+XXL_93,XXL_92,XXL_75,XXL_94,XXL_76,XXL_74,XXL_88,XXL_89,XXL_77,XXL_78,
+}
+Multiplexer assignment for block B
+Q3			(MC4	P)   : MUX 0		Ref (A11p)
+Q11			(MC10	P)   : MUX 1		Ref (B21p)
+Q2			(MC1	P)   : MUX 3		Ref (A1p)
+XXL_93			(MC19	FB)  : MUX 4		Ref (C37fb)
+XXL_92			(MC17	FB)  : MUX 5		Ref (B32fb)
+Q5			(MC15	P)   : MUX 6		Ref (B30p)
+Q6			(MC2	P)   : MUX 7		Ref (A3p)
+Q9			(MC3	P)   : MUX 9		Ref (A4p)
+XXL_75			(MC11	FB)  : MUX 10		Ref (B23fb)
+XXL_94			(MC20	FB)  : MUX 12		Ref (C38fb)
+XXL_76			(MC16	FB)  : MUX 13		Ref (B31fb)
+Q1			(MC12	P)   : MUX 15		Ref (B24p)
+Q0			(MC7	P)   : MUX 21		Ref (B17p)
+Q8			(MC13	P)   : MUX 22		Ref (B25p)
+Q4			(MC8	P)   : MUX 23		Ref (B19p)
+XXL_74			(MC5	FB)  : MUX 25		Ref (A13fb)
+INCREMENT		(MC25	P)   : MUX 27		Ref (C35p)
+XXL_88			(MC14	FB)  : MUX 29		Ref (B28fb)
+Q10			(MC6	P)   : MUX 30		Ref (A16p)
+XXL_89			(MC22	FB)  : MUX 31		Ref (C42fb)
+Q7			(MC21	P)   : MUX 34		Ref (C41p)
+Q12			(MC9	P)   : MUX 35		Ref (B20p)
+RESET_TO_OFFSET		(MC24	P)   : MUX 37		Ref (C33p)
+XXL_77			(MC18	FB)  : MUX 38		Ref (C34fb)
+XXL_78			(MC23	FB)  : MUX 39		Ref (D61fb)
+
+FanIn assignment for block C [25]
+{
+INCREMENT,
+OFFSET1,OFFSET5,
+Q3,Q2,Q5,Q11,Q6,Q13,Q1,Q9,Q14,Q8,Q4,Q0,Q15,Q10,Q7,Q12,
+RESET_TO_OFFSET,
+XXL_95,XXL_96,XXL_99,XXL_98,XXL_97,
+}
+Multiplexer assignment for block C
+Q3			(MC5	P)   : MUX 0		Ref (A11p)
+XXL_95			(MC19	FB)  : MUX 1		Ref (C45fb)
+Q2			(MC1	P)   : MUX 3		Ref (A1p)
+Q5			(MC15	P)   : MUX 4		Ref (B30p)
+Q11			(MC11	P)   : MUX 5		Ref (B21p)
+XXL_96			(MC16	FB)  : MUX 6		Ref (C39fb)
+Q6			(MC2	P)   : MUX 7		Ref (A3p)
+XXL_99			(MC21	FB)  : MUX 9		Ref (D60fb)
+Q13			(MC20	P)   : MUX 10		Ref (C46p)
+OFFSET1			(MC24	P)   : MUX 13		Ref (D52p)
+Q1			(MC12	P)   : MUX 15		Ref (B24p)
+Q9			(MC3	P)   : MUX 17		Ref (A4p)
+Q14			(MC4	P)   : MUX 21		Ref (A5p)
+Q8			(MC13	P)   : MUX 22		Ref (B25p)
+Q4			(MC9	P)   : MUX 23		Ref (B19p)
+Q0			(MC8	P)   : MUX 25		Ref (B17p)
+INCREMENT		(MC23	P)   : MUX 27		Ref (C35p)
+Q15			(MC6	P)   : MUX 28		Ref (A14p)
+Q10			(MC7	P)   : MUX 30		Ref (A16p)
+OFFSET5			(MC25	P)   : MUX 31		Ref (D53p)
+Q7			(MC17	P)   : MUX 32		Ref (C41p)
+Q12			(MC10	P)   : MUX 33		Ref (B20p)
+XXL_98			(MC14	FB)  : MUX 35		Ref (B26fb)
+RESET_TO_OFFSET		(MC22	P)   : MUX 37		Ref (C33p)
+XXL_97			(MC18	FB)  : MUX 39		Ref (C43fb)
+
+FanIn assignment for block D [9]
+{
+INCREMENT,
+OFFSET0,OFFSET4,
+Q11,Q2,Q1,Q0,Q7,
+RESET_TO_OFFSET,
+}
+Multiplexer assignment for block D
+Q11			(MC3	P)   : MUX 1		Ref (B21p)
+Q2			(MC1	P)   : MUX 3		Ref (A1p)
+OFFSET0			(MC8	P)   : MUX 8		Ref (D57p)
+Q1			(MC4	P)   : MUX 13		Ref (B24p)
+Q0			(MC2	P)   : MUX 21		Ref (B17p)
+RESET_TO_OFFSET		(MC6	P)   : MUX 23		Ref (C33p)
+INCREMENT		(MC7	P)   : MUX 25		Ref (C35p)
+OFFSET4			(MC9	P)   : MUX 26		Ref (D62p)
+Q7			(MC5	P)   : MUX 32		Ref (C41p)
+
+Creating JEDEC file C:\COUNTER2.jed ...
+
+PLCC44 programmed logic:
+-----------------------------------
+Q1.D = ((INCREMENT & !Q1.Q & !RESET_TO_OFFSET & Q0.Q)
+	# (Q1.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (!INCREMENT & Q1.Q & !RESET_TO_OFFSET));
+
+Q0.D = ((INCREMENT & !Q0.Q & !RESET_TO_OFFSET)
+	# (!INCREMENT & Q0.Q & !RESET_TO_OFFSET));
+
+Q2.D = ((INCREMENT & !Q2.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q)
+	# (Q2.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q2.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (!INCREMENT & Q2.Q & !RESET_TO_OFFSET));
+
+Q4.D = ((!INCREMENT & Q4.Q & !RESET_TO_OFFSET)
+	# XXL_74);
+
+Q3.D = ((INCREMENT & !Q3.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q)
+	# (Q3.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q3.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q3.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (!INCREMENT & Q3.Q & !RESET_TO_OFFSET));
+
+Q5.D = ((Q5.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (!INCREMENT & Q5.Q & !RESET_TO_OFFSET)
+	# XXL_75);
+
+Q11.D = (XXL_76
+	# XXL_77
+	# XXL_78);
+
+Q10.D = ((Q10.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (RESET_TO_OFFSET & OFFSET3)
+	# (!INCREMENT & Q10.Q & !RESET_TO_OFFSET)
+	# XXL_79
+	# XXL_80);
+
+Q12.D = (XXL_92
+	# XXL_93
+	# XXL_94);
+
+Q14.D = ((!INCREMENT & Q14.Q & !RESET_TO_OFFSET)
+	# XXL_81
+	# XXL_82
+	# XXL_83);
+
+Q13.D = (XXL_95
+	# XXL_96
+	# XXL_97);
+
+Q15.D = ((Q15.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (!INCREMENT & Q15.Q & !RESET_TO_OFFSET)
+	# XXL_84
+	# XXL_85
+	# XXL_86);
+
+Q7.D = (XXL_98
+	# XXL_99);
+
+Q6.D = ((Q6.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q6.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (!INCREMENT & Q6.Q & !RESET_TO_OFFSET)
+	# XXL_87);
+
+Q8.D = ((!INCREMENT & Q8.Q & !RESET_TO_OFFSET)
+	# XXL_88
+	# XXL_89);
+
+Q9.D = ((RESET_TO_OFFSET & OFFSET2)
+	# (!INCREMENT & Q9.Q & !RESET_TO_OFFSET)
+	# XXL_90
+	# XXL_91);
+
+XXL_74 = ((INCREMENT & !Q4.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q)
+	# (Q4.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q4.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q4.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q4.Q & !RESET_TO_OFFSET & !Q1.Q));
+
+XXL_75 = ((INCREMENT & !Q5.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q)
+	# (Q5.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q5.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q5.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q5.Q & !RESET_TO_OFFSET & !Q0.Q));
+
+XXL_76 = ((INCREMENT & !Q11.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q10.Q & Q6.Q & Q7.Q & Q8.Q & Q9.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q10.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q9.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q8.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q7.Q));
+
+XXL_77 = ((Q11.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q2.Q));
+
+XXL_78 = ((Q11.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q11.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (RESET_TO_OFFSET & OFFSET4)
+	# (!INCREMENT & Q11.Q & !RESET_TO_OFFSET));
+
+XXL_79 = ((INCREMENT & !Q10.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q6.Q & Q7.Q & Q8.Q & Q9.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q9.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q8.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q6.Q));
+
+XXL_80 = ((Q10.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q10.Q & !RESET_TO_OFFSET & !Q0.Q));
+
+XXL_81 = ((INCREMENT & !Q14.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q10.Q & Q11.Q & Q12.Q & Q13.Q & Q6.Q & Q7.Q & Q8.Q & Q9.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q13.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q12.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q11.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q10.Q));
+
+XXL_82 = ((Q14.Q & !RESET_TO_OFFSET & !Q9.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q8.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q5.Q));
+
+XXL_83 = ((Q14.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q14.Q & !RESET_TO_OFFSET & !Q1.Q));
+
+XXL_84 = ((INCREMENT & !Q15.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q10.Q & Q11.Q & Q12.Q & Q13.Q & Q14.Q & Q6.Q & Q7.Q & Q8.Q & Q9.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q14.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q13.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q12.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q11.Q));
+
+XXL_85 = ((Q15.Q & !RESET_TO_OFFSET & !Q10.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q9.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q8.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q6.Q));
+
+XXL_86 = ((Q15.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q15.Q & !RESET_TO_OFFSET & !Q0.Q));
+
+XXL_87 = ((INCREMENT & !Q6.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q)
+	# (Q6.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q6.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q6.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q6.Q & !RESET_TO_OFFSET & !Q2.Q));
+
+XXL_88 = ((INCREMENT & !Q8.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q6.Q & Q7.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q4.Q));
+
+XXL_89 = ((Q8.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q8.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (RESET_TO_OFFSET & OFFSET1));
+
+XXL_90 = ((INCREMENT & !Q9.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q6.Q & Q7.Q & Q8.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q8.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q5.Q));
+
+XXL_91 = ((Q9.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q9.Q & !RESET_TO_OFFSET & !Q1.Q));
+
+XXL_92 = ((INCREMENT & !Q12.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q10.Q & Q11.Q & Q6.Q & Q7.Q & Q8.Q & Q9.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q11.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q10.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q9.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q8.Q));
+
+XXL_93 = ((Q12.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q3.Q));
+
+XXL_94 = ((Q12.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q12.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (RESET_TO_OFFSET & OFFSET5)
+	# (!INCREMENT & Q12.Q & !RESET_TO_OFFSET));
+
+XXL_95 = ((INCREMENT & !Q13.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q10.Q & Q11.Q & Q12.Q & Q6.Q & Q7.Q & Q8.Q & Q9.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q12.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q11.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q10.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q9.Q));
+
+XXL_96 = ((Q13.Q & !RESET_TO_OFFSET & !Q8.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q7.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q4.Q));
+
+XXL_97 = ((Q13.Q & !RESET_TO_OFFSET & !Q3.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q13.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (!INCREMENT & Q13.Q & !RESET_TO_OFFSET));
+
+XXL_98 = ((INCREMENT & !Q7.Q & !RESET_TO_OFFSET & Q0.Q & Q1.Q & Q2.Q & Q3.Q & Q4.Q & Q5.Q & Q6.Q)
+	# (Q7.Q & !RESET_TO_OFFSET & !Q6.Q)
+	# (Q7.Q & !RESET_TO_OFFSET & !Q5.Q)
+	# (Q7.Q & !RESET_TO_OFFSET & !Q4.Q)
+	# (Q7.Q & !RESET_TO_OFFSET & !Q3.Q));
+
+XXL_99 = ((Q7.Q & !RESET_TO_OFFSET & !Q2.Q)
+	# (Q7.Q & !RESET_TO_OFFSET & !Q0.Q)
+	# (Q7.Q & !RESET_TO_OFFSET & !Q1.Q)
+	# (RESET_TO_OFFSET & OFFSET0)
+	# (!INCREMENT & Q7.Q & !RESET_TO_OFFSET));
+
+Q1.C = CLKIN;
+
+Q0.C = CLKIN;
+
+Q2.C = CLKIN;
+
+Q4.C = CLKIN;
+
+Q3.C = CLKIN;
+
+Q5.C = CLKIN;
+
+Q11.C = CLKIN;
+
+Q10.C = CLKIN;
+
+Q12.C = CLKIN;
+
+Q14.C = CLKIN;
+
+Q13.C = CLKIN;
+
+Q15.C = CLKIN;
+
+Q7.C = CLKIN;
+
+Q6.C = CLKIN;
+
+Q8.C = CLKIN;
+
+Q9.C = CLKIN;
+
+
+PLCC44 Pin/Node Placement:
+------------------------------------
+Pin 4  = Q10; /* MC 16 */
+Pin 5  = Q15; /* MC 14 */
+Pin 6  = Q3; /* MC 11 */
+Pin 7  = TDI; /* MC 8 */
+Pin 8  = Q14; /* MC 5 */
+Pin 9  = Q9; /* MC 4 */
+Pin 11 = Q6; /* MC  3 */
+Pin 12 = Q2; /* MC  1 */
+Pin 13 = TMS; /* MC 32 */ 
+Pin 14 = Q5; /* MC 30 */ 
+Pin 16 = Q8; /* MC 25 */ 
+Pin 17 = Q1; /* MC 24 */ 
+Pin 18 = Q11; /* MC 21 */ 
+Pin 19 = Q12; /* MC 20 */ 
+Pin 20 = Q4; /* MC 19 */ 
+Pin 21 = Q0; /* MC 17 */ 
+Pin 24 = RESET_TO_OFFSET; /* MC 33 */ 
+Pin 25 = INCREMENT; /* MC 35 */ 
+Pin 29 = Q7; /* MC 41 */ 
+Pin 31 = Q13; /* MC 46 */ 
+Pin 32 = TCK; /* MC 48 */ 
+Pin 33 = OFFSET3; /* MC 49 */ 
+Pin 34 = OFFSET2; /* MC 51 */ 
+Pin 36 = OFFSET1; /* MC 52 */ 
+Pin 37 = OFFSET5; /* MC 53 */ 
+Pin 38 = TDO; /* MC 56 */ 
+Pin 39 = OFFSET0; /* MC 57 */ 
+Pin 40 = OFFSET4; /* MC 62 */ 
+Pin 43 = CLKIN;
+PINNODE 612 = XXL_91; /* MC 12 Feedback */
+PINNODE 613 = XXL_74; /* MC 13 Feedback */
+PINNODE 615 = XXL_83; /* MC 15 Feedback */
+PINNODE 618 = XXL_80; /* MC 18 Feedback */
+PINNODE 622 = XXL_87; /* MC 22 Feedback */
+PINNODE 623 = XXL_75; /* MC 23 Feedback */
+PINNODE 626 = XXL_98; /* MC 26 Feedback */
+PINNODE 627 = XXL_90; /* MC 27 Feedback */
+PINNODE 628 = XXL_88; /* MC 28 Feedback */
+PINNODE 629 = XXL_79; /* MC 29 Feedback */
+PINNODE 631 = XXL_76; /* MC 31 Feedback */
+PINNODE 632 = XXL_92; /* MC 32 Feedback */
+PINNODE 634 = XXL_77; /* MC 34 Feedback */
+PINNODE 636 = XXL_82; /* MC 36 Feedback */
+PINNODE 637 = XXL_93; /* MC 37 Feedback */
+PINNODE 638 = XXL_94; /* MC 38 Feedback */
+PINNODE 639 = XXL_96; /* MC 39 Feedback */
+PINNODE 640 = XXL_85; /* MC 40 Feedback */
+PINNODE 642 = XXL_89; /* MC 42 Feedback */
+PINNODE 643 = XXL_97; /* MC 43 Feedback */
+PINNODE 644 = XXL_86; /* MC 44 Feedback */
+PINNODE 645 = XXL_95; /* MC 45 Feedback */
+PINNODE 647 = XXL_84; /* MC 47 Feedback */
+PINNODE 648 = XXL_81; /* MC 48 Feedback */
+PINNODE 660 = XXL_99; /* MC 60 Feedback */
+PINNODE 661 = XXL_78; /* MC 61 Feedback */
+
+** Resource Usage **
+
+
+DCERP Field = Summary of Allocations.
+|||||
+|||||_Preset [p,-]       ==  p = PT preset, - No Preset.
+||||
+||||__Reset [g,r,-]      ==  g= Global AR, r = PT reset, - No reset.
+|||
+|||___Clock Enable [e,-] ==  e = Product Term, - always enabled, - none.
+||
+||____Clock [c,g,-],     ==  c = Product term, g = Global term, - No Clock.
+|
+|_____Type [C,D,L,T],    ==  Register type C= combin, D=dff, L=latch, T=tff.
+
+For input only = INPUT.
+
+MCell Pin# Oe   PinDrive        DCERP  FBDrive  DCERP  Foldback  CascadeOut     TotPT output_slew
+MC1   12   on   Q2              Dg---  --              --        --             4     slow
+MC2   0         --                     --              --        --             0     slow
+MC3   11   on   Q6              Dg---  --              --        --             4     slow
+MC4   9    on   Q9              Dg---  --              --        --             4     slow
+MC5   8    on   Q14             Dg---  --              --        --             4     slow
+MC6   0         --                     --              --        --             0     slow
+MC7   0         --                     --              --        --             0     slow
+MC8   7    --   TDI             INPUT  --              --        --             0     slow
+MC9   0         --                     --              --        --             0     slow
+MC10  0         --                     --              --        --             0     slow
+MC11  6    on   Q3              Dg---  --              NA        --             5     slow
+MC12  0         --                     XXL_91   C----  NA        --             5     slow
+MC13  0         --                     XXL_74   C----  NA        --             5     slow
+MC14  5    on   Q15             Dg---  --              NA        --             5     slow
+MC15  0         --                     XXL_83   C----  NA        --             5     slow
+MC16  4    on   Q10             Dg---  --              NA        --             5     slow
+MC17  21   on   Q0              Dg---  --              --        --             2     slow
+MC18  0         --                     XXL_80   C----  NA        --             5     slow
+MC19  20   on   Q4              Dg---  --              --        --             2     slow
+MC20  19   on   Q12             Dg---  --              --        --             3     slow
+MC21  18   on   Q11             Dg---  --              --        --             3     slow
+MC22  0         --                     XXL_87   C----  NA        --             5     slow
+MC23  0         --                     XXL_75   C----  NA        --             5     slow
+MC24  17   on   Q1              Dg---  --              --        --             3     slow
+MC25  16   on   Q8              Dg---  --              --        --             3     slow
+MC26  0         --                     XXL_98   C----  NA        --             5     slow
+MC27  0         --                     XXL_90   C----  NA        --             5     slow
+MC28  0         --                     XXL_88   C----  NA        --             5     slow
+MC29  0         --                     XXL_79   C----  NA        --             5     slow
+MC30  14   on   Q5              Dg---  --              --        --             3     slow
+MC31  0         --                     XXL_76   C----  NA        --             5     slow
+MC32  13   --   TMS             INPUT  XXL_92   C----  NA        --             5     slow
+MC33  24   --   RESET_TO_OFFSET INPUT  --              --        --             0     slow
+MC34  0         --                     XXL_77   C----  NA        --             5     slow
+MC35  25   --   INCREMENT       INPUT  --              --        --             0     slow
+MC36  26        --                     XXL_82   C----  NA        --             5     slow
+MC37  27        --                     XXL_93   C----  NA        --             5     slow
+MC38  0         --                     XXL_94   C----  NA        --             5     slow
+MC39  0         --                     XXL_96   C----  NA        --             5     slow
+MC40  28        --                     XXL_85   C----  NA        --             5     slow
+MC41  29   on   Q7              Dg---  --              --        --             2     slow
+MC42  0         --                     XXL_89   C----  NA        --             5     slow
+MC43  0         --                     XXL_97   C----  NA        --             5     slow
+MC44  0         --                     XXL_86   C----  NA        --             5     slow
+MC45  0         --                     XXL_95   C----  NA        --             5     slow
+MC46  31   on   Q13             Dg---  --              --        --             3     slow
+MC47  0         --                     XXL_84   C----  NA        --             5     slow
+MC48  32   --   TCK             INPUT  XXL_81   C----  NA        --             5     slow
+MC49  33   --   OFFSET3         INPUT  --              --        --             0     slow
+MC50  0         --                     --              --        --             0     slow
+MC51  34   --   OFFSET2         INPUT  --              --        --             0     slow
+MC52  36   --   OFFSET1         INPUT  --              --        --             0     slow
+MC53  37   --   OFFSET5         INPUT  --              --        --             0     slow
+MC54  0         --                     --              --        --             0     slow
+MC55  0         --                     --              --        --             0     slow
+MC56  38   --   TDO             INPUT  --              --        --             0     slow
+MC57  39   --   OFFSET0         INPUT  --              --        --             0     slow
+MC58  0         --                     --              --        --             0     slow
+MC59  0         --                     --              --        --             0     slow
+MC60  0         --                     XXL_99   C----  NA        --             5     slow
+MC61  0         --                     XXL_78   C----  --        --             4     slow
+MC62  40   --   OFFSET4         INPUT  --              --        --             0     slow
+MC63  0         --                     --              --        --             0     slow
+MC64  41        --                     --              --        --             0     slow
+MC0   2         --                     --              --        --             0     slow
+MC0   1         --                     --              --        --             0     slow
+MC0   44        --                     --              --        --             0     slow
+MC0   43        CLKIN           INPUT  --              --        --             0     slow
+
+Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
+A: LC1	- LC16		10/16(62%)	8/16(50%)	0/16(0%)	46/80(57%)	(25)	0
+B: LC17	- LC32		16/16(100%)	8/16(50%)	0/16(0%)	64/80(80%)	(25)	0
+C: LC33	- LC48		14/16(87%)	5/16(31%)	0/16(0%)	65/80(81%)	(25)	0
+D: LC49	- LC64		2/16(12%)	7/16(43%)	0/16(0%)	9/80(11%)	(9)	0
+
+Total dedicated input used:	1/4 	(25%)
+Total I/O pins used		28/32 	(87%)
+Total Logic cells used 		42/64 	(65%)
+Total Flip-Flop used 		16/64 	(25%)
+Total Foldback logic used 	0/64 	(0%)
+Total Nodes+FB/MCells 		42/64 	(65%)
+Total cascade used 		0
+Total input pins 		13
+Total output pins 		16
+Total Pts 			184
+Creating pla file C:\COUNTER2.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+
+----------------  End fitter, Design FITS
+$Device PLCC44 fits 
+FIT1504 completed in 0.00 seconds

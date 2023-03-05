@@ -1,0 +1,396 @@
+
+*******************************************************************************
+                                    COUNTER
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1504ispplcc44  Library DLIB-h-40-1
+Created         Thu Feb 23 21:07:00 2023
+Name            COUNTER
+Partno          COUNTER
+Revision        01
+Date            04/18/2022
+Designer        Sponaugle
+Company         Ratiometric
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+Q0.d  =>
+    !INCREMENT & Q0 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & !RESET_TO_OFFSET
+
+Q0.ck  =>
+    CLKIN
+
+Q1.d  =>
+    !INCREMENT & Q1 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & !Q1 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q1 & !RESET_TO_OFFSET
+
+Q1.ck  =>
+    CLKIN
+
+Q10T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6 & Q7 & Q8 & Q9
+
+Q2.d  =>
+    !INCREMENT & Q2 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & !Q2 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q2 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q2 & !RESET_TO_OFFSET
+
+Q2.ck  =>
+    CLKIN
+
+Q3.d  =>
+    !INCREMENT & Q3 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & !Q3 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q3 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q3 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q3 & !RESET_TO_OFFSET
+
+Q3.ck  =>
+    CLKIN
+
+Q4.d  =>
+    !INCREMENT & Q4 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & !Q4 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q4 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q4 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q4 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q4 & !RESET_TO_OFFSET
+
+Q4.ck  =>
+    CLKIN
+
+Q5.d  =>
+    !INCREMENT & Q5 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & !Q5 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q5 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q5 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q5 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q5 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q5 & !RESET_TO_OFFSET
+
+Q5.ck  =>
+    CLKIN
+
+Q10.d  =>
+    !INCREMENT & Q10 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & !Q10 & Q6 & Q7 & Q8 & Q9 & 
+      !RESET_TO_OFFSET
+  # INCREMENT & Q10 & !Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q10 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q10 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q10 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q10 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q10 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q10 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q10 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q10 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q10 & !RESET_TO_OFFSET
+  # OFFSET3 & RESET_TO_OFFSET
+
+Q10.ck  =>
+    CLKIN
+
+Q11.d  =>
+    !INCREMENT & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & !Q11 & Q6 & Q7 & Q8 & Q9 & 
+      !RESET_TO_OFFSET
+  # INCREMENT & !Q10 & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & Q11 & !Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q11 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q11 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q11 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q11 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q11 & !RESET_TO_OFFSET
+  # OFFSET4 & RESET_TO_OFFSET
+
+Q11.ck  =>
+    CLKIN
+
+Q11T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q6 & Q7 & Q8 & Q9
+
+Q12.d  =>
+    !INCREMENT & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & !Q12 & Q6 & Q7 & Q8 & 
+      Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q11 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & !Q10 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & Q12 & !Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q12 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q12 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q12 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q12 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q12 & !RESET_TO_OFFSET
+  # OFFSET5 & RESET_TO_OFFSET
+
+Q12.ck  =>
+    CLKIN
+
+Q12T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q6 & Q7 & Q8 & Q9
+
+Q13.d  =>
+    !INCREMENT & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q12 & !Q13 & Q6 & 
+      Q7 & Q8 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q12 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q11 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q10 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & Q13 & !Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q13 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q13 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q13 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q13 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q13 & !RESET_TO_OFFSET
+
+Q13.ck  =>
+    CLKIN
+
+Q13T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q12 & Q6 & Q7 & Q8 & Q9
+
+Q14.d  =>
+    !INCREMENT & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q12 & Q13 & !Q14 & 
+      Q6 & Q7 & Q8 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q13 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q12 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q11 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q10 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & Q14 & !Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q14 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q14 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q14 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q14 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q14 & !RESET_TO_OFFSET
+
+Q14.ck  =>
+    CLKIN
+
+Q14T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q12 & Q13 & Q6 & Q7 & Q8 & Q9
+
+Q15.d  =>
+    !INCREMENT & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q12 & Q13 & Q14 & 
+      !Q15 & Q6 & Q7 & Q8 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q14 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q13 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q12 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q11 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q10 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & Q15 & !Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q15 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q15 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q15 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q15 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q15 & !RESET_TO_OFFSET
+
+Q15.ck  =>
+    CLKIN
+
+Q15T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q10 & Q11 & Q12 & Q13 & Q14 & Q6 & Q7 & Q8 & 
+      Q9
+
+Q2T =>
+    Q0 & Q1
+
+Q3T =>
+    Q0 & Q1 & Q2
+
+Q4T =>
+    Q0 & Q1 & Q2 & Q3
+
+Q5T =>
+    Q0 & Q1 & Q2 & Q3 & Q4
+
+Q6.d  =>
+    !INCREMENT & Q6 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & !Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q6 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q6 & !RESET_TO_OFFSET
+
+Q6.ck  =>
+    CLKIN
+
+Q6T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5
+
+Q7.d  =>
+    !INCREMENT & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6 & !Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q6 & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q7 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q7 & !RESET_TO_OFFSET
+  # OFFSET0 & RESET_TO_OFFSET
+
+Q7.ck  =>
+    CLKIN
+
+Q7T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6
+
+Q8.d  =>
+    !INCREMENT & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6 & Q7 & !Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q7 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q6 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q8 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q8 & !RESET_TO_OFFSET
+  # OFFSET1 & RESET_TO_OFFSET
+
+Q8.ck  =>
+    CLKIN
+
+Q8T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6 & Q7
+
+Q9.d  =>
+    !INCREMENT & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6 & Q7 & Q8 & !Q9 & 
+      !RESET_TO_OFFSET
+  # INCREMENT & !Q8 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q7 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q6 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q5 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q4 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q3 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q2 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q0 & Q9 & !RESET_TO_OFFSET
+  # INCREMENT & !Q1 & Q9 & !RESET_TO_OFFSET
+  # OFFSET2 & RESET_TO_OFFSET
+
+Q9.ck  =>
+    CLKIN
+
+Q9T =>
+    Q0 & Q1 & Q2 & Q3 & Q4 & Q5 & Q6 & Q7 & Q8
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    CLKIN                       0        V        -       -       -     
+    INCREMENT                   0        V        -       -       -     
+    OFFSET0                     0        V        -       -       -     
+    OFFSET1                     0        V        -       -       -     
+    OFFSET2                     0        V        -       -       -     
+    OFFSET3                     0        V        -       -       -     
+    OFFSET4                     0        V        -       -       -     
+    OFFSET5                     0        V        -       -       -     
+    Q0                          0        V        -       -       -     
+    Q0                  d       0        X        2       0       1     
+    Q0                  ck      0        X        1       0       1     
+    Q1                          0        V        -       -       -     
+    Q1                  d       0        X        3       0       1     
+    Q1                  ck      0        X        1       0       1     
+    Q10T                        0        I        1       -       -     
+    Q2                          0        V        -       -       -     
+    Q2                  d       0        X        4       0       1     
+    Q2                  ck      0        X        1       0       1     
+    Q3                          0        V        -       -       -     
+    Q3                  d       0        X        5       0       1     
+    Q3                  ck      0        X        1       0       1     
+    Q4                          0        V        -       -       -     
+    Q4                  d       0        X        6       0       1     
+    Q4                  ck      0        X        1       0       1     
+    Q5                          0        V        -       -       -     
+    Q5                  d       0        X        7       0       1     
+    Q5                  ck      0        X        1       0       1     
+    Q10                         0        V        -       -       -     
+    Q10                 d       0        X        13      0       1     
+    Q10                 ck      0        X        1       0       1     
+    Q11                         0        V        -       -       -     
+    Q11                 d       0        X        14      0       1     
+    Q11                 ck      0        X        1       0       1     
+    Q11T                        0        I        1       -       -     
+    Q12                         0        V        -       -       -     
+    Q12                 d       0        X        15      0       1     
+    Q12                 ck      0        X        1       0       1     
+    Q12T                        0        I        1       -       -     
+    Q13                         0        V        -       -       -     
+    Q13                 d       0        X        15      0       1     
+    Q13                 ck      0        X        1       0       1     
+    Q13T                        0        I        1       -       -     
+    Q14                         0        V        -       -       -     
+    Q14                 d       0        X        16      0       1     
+    Q14                 ck      0        X        1       0       1     
+    Q14T                        0        I        1       -       -     
+    Q15                         0        V        -       -       -     
+    Q15                 d       0        X        17      0       1     
+    Q15                 ck      0        X        1       0       1     
+    Q15T                        0        I        1       -       -     
+    Q2T                         0        I        1       -       -     
+    Q3T                         0        I        1       -       -     
+    Q4T                         0        I        1       -       -     
+    Q5T                         0        I        1       -       -     
+    Q6                          0        V        -       -       -     
+    Q6                  d       0        X        8       0       1     
+    Q6                  ck      0        X        1       0       1     
+    Q6T                         0        I        1       -       -     
+    Q7                          0        V        -       -       -     
+    Q7                  d       0        X        10      0       1     
+    Q7                  ck      0        X        1       0       1     
+    Q7T                         0        I        1       -       -     
+    Q8                          0        V        -       -       -     
+    Q8                  d       0        X        11      0       1     
+    Q8                  ck      0        X        1       0       1     
+    Q8T                         0        I        1       -       -     
+    Q9                          0        V        -       -       -     
+    Q9                  d       0        X        12      0       1     
+    Q9                  ck      0        X        1       0       1     
+    Q9T                         0        I        1       -       -     
+    RESET_TO_OFFSET             0        V        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

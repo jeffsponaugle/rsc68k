@@ -1,0 +1,387 @@
+{COMPONENT C:\VGA3.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Thu Feb 09 08:20:26 2023 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P CLK_25M {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P VGA_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CPU_VGA {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P SR_CE {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P VGA_VSYN {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P FONTSEL0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P FONTSEL1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P CPU_VRAM {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P VGA_HSYN {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P GRAPH_MO {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P CPU_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P CPU_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P CPU_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P SR_LOAD {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P CPU_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P CPU_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P CPU_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P CPU_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P CPU_RW {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P CPU_VGA_ {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P CPU_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P CPU_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P VDB_A10 {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P VDB_A9 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
+   {P VDB_A8 {Pt "I/O"}{Lq 0}{Ploc 360 60}}
+   {P VDB_A7 {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P VDB_A11 {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P VDB_A12 {Pt "I/O"}{Lq 0}{Ploc 360 120}}
+   {P VDB_A0 {Pt "I/O"}{Lq 0}{Ploc 360 140}}
+   {P VDB_A1 {Pt "I/O"}{Lq 0}{Ploc 360 160}}
+   {P VDB_A2 {Pt "I/O"}{Lq 0}{Ploc 360 180}}
+   {P VDB_A3 {Pt "I/O"}{Lq 0}{Ploc 360 200}}
+   {P VDB_A4 {Pt "I/O"}{Lq 0}{Ploc 360 220}}
+   {P VDB_A5 {Pt "I/O"}{Lq 0}{Ploc 360 240}}
+   {P VDB_A6 {Pt "I/O"}{Lq 0}{Ploc 360 260}}
+   {P VRAM_HIG {Pt "I/O"}{Lq 0}{Ploc 360 280}}
+   {P VRAM_LOW {Pt "I/O"}{Lq 0}{Ploc 360 300}}
+   {P VDP_HTOL {Pt "I/O"}{Lq 0}{Ploc 360 320}}
+   {P FRAM_A0 {Pt "I/O"}{Lq 0}{Ploc 360 340}}
+   {P VRAM_OE {Pt "I/O"}{Lq 0}{Ploc 360 360}}
+   {P FRAM_A1 {Pt "I/O"}{Lq 0}{Ploc 360 380}}
+   {P FRAM_A2 {Pt "I/O"}{Lq 0}{Ploc 360 400}}
+   {P FRAM_A3 {Pt "I/O"}{Lq 0}{Ploc 360 420}}
+   {P VDB_A13 {Pt "I/O"}{Lq 0}{Ploc 360 440}}
+   {P VDB_A14 {Pt "I/O"}{Lq 0}{Ploc 360 460}}
+   {P SBUS_TO_ {Pt "I/O"}{Lq 0}{Ploc 360 480}}
+   {P VDB_A15 {Pt "I/O"}{Lq 0}{Ploc 360 500}}
+   {P VRAM_WE {Pt "I/O"}{Lq 0}{Ploc 360 520}}
+   {P VERT_SYN {Pt "I/O"}{Lq 0}{Ploc 360 540}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 230 570}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 490}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 450}
+   {Pnl 120 430}
+   {Pnl 120 410}
+   {Pnl 120 390}
+   {Pnl 120 370}
+   {Pnl 120 350}
+   {Pnl 120 330}
+   {Pnl 120 310}
+   {Pnl 120 290}
+   {Pnl 120 270}
+   {Pnl 120 250}
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 340 30}
+   {Pnl 340 50}
+   {Pnl 340 70}
+   {Pnl 340 90}
+   {Pnl 340 110}
+   {Pnl 340 130}
+   {Pnl 340 150}
+   {Pnl 340 170}
+   {Pnl 340 190}
+   {Pnl 340 210}
+   {Pnl 340 230}
+   {Pnl 340 250}
+   {Pnl 340 270}
+   {Pnl 340 290}
+   {Pnl 340 310}
+   {Pnl 340 330}
+   {Pnl 340 350}
+   {Pnl 340 370}
+   {Pnl 340 390}
+   {Pnl 340 410}
+   {Pnl 340 430}
+   {Pnl 340 450}
+   {Pnl 340 470}
+   {Pnl 340 490}
+   {Pnl 340 510}
+   {Pnl 340 530}
+   {Pnl 340 550}
+
+   {Sd A 83 1 2 9 10 11 12 17 24 35 44 45 46 48 49 54 55 56 57 73 74 75 76 4 5 6 8 15 16 18 20 21 22 25 27 28 29 30 31 33 34 36 37 39 40 41 50 51 52 61}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 560 330 0}
+   {L 130 480 100 480}
+   {L 130 490 140 480 130 470}
+   {L 130 440 100 440}
+   {L 130 420 100 420}
+   {L 130 400 100 400}
+   {L 130 380 100 380}
+   {L 130 360 100 360}
+   {L 130 340 100 340}
+   {L 130 320 100 320}
+   {L 130 300 100 300}
+   {L 130 280 100 280}
+   {L 130 260 100 260}
+   {L 130 240 100 240}
+   {L 130 220 100 220}
+   {L 130 200 100 200}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 330 20 360 20}
+   {L 330 40 360 40}
+   {L 330 60 360 60}
+   {L 330 80 360 80}
+   {L 330 100 360 100}
+   {L 330 120 360 120}
+   {L 330 140 360 140}
+   {L 330 160 360 160}
+   {L 330 180 360 180}
+   {L 330 200 360 200}
+   {L 330 220 360 220}
+   {L 330 240 360 240}
+   {L 330 260 360 260}
+   {L 330 280 360 280}
+   {L 330 300 360 300}
+   {L 330 320 360 320}
+   {L 330 340 360 340}
+   {L 330 360 360 360}
+   {L 330 380 360 380}
+   {L 330 400 360 400}
+   {L 330 420 360 420}
+   {L 330 440 360 440}
+   {L 330 460 360 460}
+   {L 330 480 360 480}
+   {L 330 500 360 500}
+   {L 330 520 360 520}
+   {L 330 540 360 540}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "CLK_25M" 140 480}
+   {T "VGA_RESE" 140 440}
+   {T "CPU_VGA" 140 420}
+   {T "SR_CE" 140 400}
+   {T "VGA_VSYN" 140 380}
+   {T "FONTSEL0" 140 360}
+   {T "FONTSEL1" 140 340}
+   {T "CPU_VRAM" 140 320}
+   {T "VGA_HSYN" 140 300}
+   {T "GRAPH_MO" 140 280}
+   {T "CPU_LDS" 140 260}
+   {T "CPU_D0" 140 240}
+   {T "CPU_D1" 140 220}
+   {T "CPU_D2" 140 200}
+   {T "SR_LOAD" 140 180}
+   {T "CPU_D3" 140 160}
+   {T "CPU_D4" 140 140}
+   {T "CPU_D5" 140 120}
+   {T "CPU_D6" 140 100}
+   {T "CPU_RW" 140 80}
+   {T "CPU_VGA_" 140 60}
+   {T "CPU_D7" 140 40}
+   {T "CPU_UDS" 140 20}
+   [Tj "RC"]
+   {T "VDB_A10" 320 20}
+   {T "VDB_A9" 320 40}
+   {T "VDB_A8" 320 60}
+   {T "VDB_A7" 320 80}
+   {T "VDB_A11" 320 100}
+   {T "VDB_A12" 320 120}
+   {T "VDB_A0" 320 140}
+   {T "VDB_A1" 320 160}
+   {T "VDB_A2" 320 180}
+   {T "VDB_A3" 320 200}
+   {T "VDB_A4" 320 220}
+   {T "VDB_A5" 320 240}
+   {T "VDB_A6" 320 260}
+   {T "VRAM_HIG" 320 280}
+   {T "VRAM_LOW" 320 300}
+   {T "VDP_HTOL" 320 320}
+   {T "FRAM_A0" 320 340}
+   {T "VRAM_OE" 320 360}
+   {T "FRAM_A1" 320 380}
+   {T "FRAM_A2" 320 400}
+   {T "FRAM_A3" 320 420}
+   {T "VDB_A13" 320 440}
+   {T "VDB_A14" 320 460}
+   {T "SBUS_TO_" 320 480}
+   {T "VDB_A15" 320 500}
+   {T "VRAM_WE" 320 520}
+   {T "VERT_SYN" 320 540}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "F1508ISPPLCC84" 230 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\VGA3 230 560}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N CLK_25M
+   }
+   {N VGA_RESE
+   }
+   {N CPU_VGA
+   }
+   {N SR_CE
+   }
+   {N VGA_VSYN
+   }
+   {N FONTSEL0
+   }
+   {N FONTSEL1
+   }
+   {N CPU_VRAM
+   }
+   {N VGA_HSYN
+   }
+   {N GRAPH_MO
+   }
+   {N CPU_LDS
+   }
+   {N CPU_D0
+   }
+   {N CPU_D1
+   }
+   {N CPU_D2
+   }
+   {N SR_LOAD
+   }
+   {N CPU_D3
+   }
+   {N CPU_D4
+   }
+   {N CPU_D5
+   }
+   {N CPU_D6
+   }
+   {N CPU_RW
+   }
+   {N CPU_VGA_
+   }
+   {N CPU_D7
+   }
+   {N CPU_UDS
+   }
+   {N VDB_A10
+   }
+   {N VDB_A9
+   }
+   {N VDB_A8
+   }
+   {N VDB_A7
+   }
+   {N VDB_A11
+   }
+   {N VDB_A12
+   }
+   {N VDB_A0
+   }
+   {N VDB_A1
+   }
+   {N VDB_A2
+   }
+   {N VDB_A3
+   }
+   {N VDB_A4
+   }
+   {N VDB_A5
+   }
+   {N VDB_A6
+   }
+   {N VRAM_HIG
+   }
+   {N VRAM_LOW
+   }
+   {N VDP_HTOL
+   }
+   {N FRAM_A0
+   }
+   {N VRAM_OE
+   }
+   {N FRAM_A1
+   }
+   {N FRAM_A2
+   }
+   {N FRAM_A3
+   }
+   {N VDB_A13
+   }
+   {N VDB_A14
+   }
+   {N SBUS_TO_
+   }
+   {N VDB_A15
+   }
+   {N VRAM_WE
+   }
+   {N VERT_SYN
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

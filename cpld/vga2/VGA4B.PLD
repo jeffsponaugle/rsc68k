@@ -1,0 +1,367 @@
+Name	 VGA4B;
+PartNo   VGA4B;
+Date     04/18/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1508ispplcc84;
+
+
+Pin  = CLKIN;
+Pin  = A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15;  
+Pin  = VADDR_INCREMENT;  /* == 1 to increment */
+Pin  = VADDR_RESET;
+Pin  = [CPU_D0..8];         /* Databus inputs for latching from the CPU*/
+Pin  = VGA_CONFIG_WRITE;
+Pin  = VGA_RESET;
+Pin  = FONTSEL0,FONTSEL1;
+Pin  = GRAPH_MODE;
+
+NODE [OFFSET0..5];
+
+OFFSET0.d = CPU_D0.io;
+OFFSET0.ar = !VGA_RESET;
+OFFSET0.ck = !VGA_CONFIG_WRITE;
+
+OFFSET1.d = CPU_D1.io;
+OFFSET1.ar = !VGA_RESET;
+OFFSET1.ck = !VGA_CONFIG_WRITE;
+
+OFFSET2.d = CPU_D2.io;
+OFFSET2.ar = !VGA_RESET;
+OFFSET2.ck = !VGA_CONFIG_WRITE;
+
+OFFSET3.d = CPU_D3.io;
+OFFSET3.ar = !VGA_RESET;
+OFFSET3.ck = !VGA_CONFIG_WRITE;
+
+OFFSET4.d = CPU_D4.io;
+OFFSET4.ar = !VGA_RESET;
+OFFSET4.ck = !VGA_CONFIG_WRITE;
+
+OFFSET5.d = CPU_D5.io;
+OFFSET5.ar = !VGA_RESET;
+OFFSET5.ck = !VGA_CONFIG_WRITE;
+
+
+FONTSEL0.d = CPU_D6.io;
+FONTSEL0.ar = !VGA_RESET;
+FONTSEL0.ck = !VGA_CONFIG_WRITE;
+
+FONTSEL1.d = CPU_D7.io;
+FONTSEL1.ar = !VGA_RESET;
+FONTSEL1.ck = !VGA_CONFIG_WRITE;
+
+GRAPH_MODE.d = CPU_D8.io;
+GRAPH_MODE.ar = !VGA_RESET;
+GRAPH_MODE.ck = !VGA_CONFIG_WRITE;
+
+/*  
+   VRAM Address is based on the HSYNC counter bit 3-9 plus the VSYNC counter bits 0-8.
+   A0-A6 = HSYNC_COUNTER3-9
+   A7-A15 = VSYNC_COUNTER0-8
+
+   This results in each 640 pixel line being 80 bytes of data, but 128 bytes apart.  Each Row takes 128 bytes 
+   of memory with the first 80 bytes being display data and the remaining 48 bytes unused. 
+   There are 480 rows, so a total of 480*128 = 61440 bytes of memory, thus 16 address lines.
+
+   This is a slightly inefficient memory layout due to the horiontal counter not being a precise power of two.  This could be
+   solved with a second 16 bit counter that is incremented during the correct parts of the horizontal cycle, however that would 
+   require quite a bit of CPLD resources. (A 16 bit counter uses 16 FF and 37 logic cells if implemented as a single counter, 
+   and 16FF and 23 logic cells if implemented as 2 8 bit counters with ripple)
+*/
+
+
+
+A0.d =  (  (VADDR_INCREMENT&!A0) 
+        # (!VADDR_INCREMENT&A0)
+        ) & !VADDR_RESET;     
+A0.ck = CLKIN;
+
+A1.d =  (  (VADDR_INCREMENT&((A0&!A1) # (!A0&A1))) 
+        # ((!VADDR_INCREMENT&A1))
+        ) & !VADDR_RESET;
+A1.ck = CLKIN;
+
+A2T = A0&A1;
+A2.d =  (  (VADDR_INCREMENT&((A2T&!A2) # (!A2T&A2))) 
+        # ((!VADDR_INCREMENT&A2))
+        ) & !VADDR_RESET;
+A2.ck = CLKIN;
+
+A3T = A2T&A2;
+A3.d =  ( (VADDR_INCREMENT&((A3T&!A3) # (!A3T&A3))) 
+        # ((!VADDR_INCREMENT&A3))
+        ) & !VADDR_RESET;
+A3.ck = CLKIN;
+
+A4T = A3T&A3;
+A4.d =  ( (VADDR_INCREMENT&((A4T&!A4) # (!A4T&A4))) 
+        # ((!VADDR_INCREMENT&A4))
+        ) & !VADDR_RESET;
+A4.ck = CLKIN;
+
+A5T = A4T&A4;
+A5.d =  ( (VADDR_INCREMENT&((A5T&!A5) # (!A5T&A5))) 
+        # ((!VADDR_INCREMENT&A5))
+        ) & !VADDR_RESET;
+A5.ck = CLKIN;
+
+A6T = A5T&A5;
+A6.d =  ( (VADDR_INCREMENT&((A6T&!A6) # (!A6T&A6))) 
+        # ((!VADDR_INCREMENT&A6))
+        ) & !VADDR_RESET;
+A6.ck = CLKIN;
+
+/*  These addresses have OFFSET on reset. */
+
+A7T = A6T&A6;
+A7.d =  (
+          ( (VADDR_INCREMENT&((A7T&!A7) # (!A7T&A7))) 
+            # ((!VADDR_INCREMENT&A7))
+          ) & !VADDR_RESET
+        ) 
+        #
+        (
+            VADDR_RESET & OFFSET0
+        );
+A7.ck = CLKIN;
+
+A8T = A7T&A7;
+A8.d =  (
+          ( (VADDR_INCREMENT&((A8T&!A8) # (!A8T&A8))) 
+            # ((!VADDR_INCREMENT&A8))
+          ) & !VADDR_RESET
+        ) 
+        #
+        (
+            VADDR_RESET & OFFSET1
+        );
+A8.ck = CLKIN;
+
+A9T = A8T&A8;
+A9.d =  (
+          ( (VADDR_INCREMENT&((A9T&!A9) # (!A9T&A9))) 
+            # ((!VADDR_INCREMENT&A9))
+          ) & !VADDR_RESET
+        ) 
+        #
+        (
+            VADDR_RESET & OFFSET2
+        );
+A9.ck = CLKIN;
+
+A10T = A9T&A9;
+A10.d = (
+          ( (VADDR_INCREMENT&((A10T&!A10) # (!A10T&A10))) 
+            # ((!VADDR_INCREMENT&A10))
+          ) & !VADDR_RESET
+        ) 
+        #
+        (
+            VADDR_RESET & OFFSET3
+        );
+A10.ck = CLKIN;
+
+A11T = A10T&A10;
+A11.d = (
+          ( (VADDR_INCREMENT&((A11T&!A11) # (!A11T&A11))) 
+            # ((!VADDR_INCREMENT&A11))
+          ) & !VADDR_RESET
+        ) 
+        #
+        (
+            VADDR_RESET & OFFSET4
+        );
+A11.ck = CLKIN;
+
+A12T = A11T&A11;
+A12.d = (
+          ( (VADDR_INCREMENT&((A12T&!A12) # (!A12T&A12))) 
+            # ((!VADDR_INCREMENT&A12))
+          ) & !VADDR_RESET
+        ) 
+        #
+        (
+            VADDR_RESET & OFFSET5
+        );
+A12.ck = CLKIN;
+
+A13T = A12T&A12;
+A13.d = (  (VADDR_INCREMENT&((A13T&!A13) # (!A13T&A13))) 
+        # ((!VADDR_INCREMENT&A13))
+        ) & !VADDR_RESET;
+A13.ck = CLKIN;
+
+A14T = A13T&A13;
+A14.d = ( (VADDR_INCREMENT&((A14T&!A14) # (!A14T&A14))) 
+        # ((!VADDR_INCREMENT&A14))
+        ) & !VADDR_RESET;
+A14.ck = CLKIN;
+
+A15T = A14T&A14;
+A15.d = ( (VADDR_INCREMENT&((A15T&!A15) # (!A15T&A15))) 
+        # ((!VADDR_INCREMENT&A15))
+        ) & !VADDR_RESET;
+A15.ck = CLKIN;
+
+
+/*
+
+INCREMENT and RESET and OFFSET Implemented
+
+Total dedicated input used:	3/4 	(75%)
+Total I/O pins used		34/64 	(53%)
+Total Logic cells used 		51/128 	(39%)
+Total Flip-Flop used 		25/128 	(19%)
+Total Foldback logic used 	0/128 	(0%)
+Total Nodes+FB/MCells 		51/128 	(39%)
+Total cascade used 		0
+Total input pins 		18
+Total output pins 		19
+Total Pts 			193
+
+*/
+
+
+/* Second 8 bit counter, but clocked by the first counters high bit 1 to 0 transition */
+
+/*
+A8.d = !A8;
+A8.ck = !A7;
+A9.d = (A8&!A9) # (!A8&A9);
+A9.ck = !A7;
+
+A10T = A8&A9;
+A10.d = (A10T&!A10) # (!A10T&A10);
+A10.ck = !A7;
+
+A11T = A10T&A10;
+A11.d = (A11T&!A11) # (!A11T&A11);
+A11.ck = !A7;
+
+A12T = A11T&A11;
+A12.d = (A12T&!A12) # (!A12T&A12);
+A12.ck = !A7;
+
+A13T = A12T&A12;
+A13.d = (A13T&!A13) # (!A13T&A13);
+A13.ck = !A7;
+
+A14T = A13T&A13;
+A14.d = (A14T&!A14) # (!A14T&A14);
+A14.ck = !A7;
+
+A15T = A14T&A14;
+A15.d = (A15T&!A15) # (!A15T&A15);
+A15.ck = !A7;
+*/
+
+
+
+
+/*
+A8T = A7T&A7;
+A8.d = (A8T&!A8) # (!A8T&A8);
+A8.ck = CLKIN;
+A9T = A8T&A8;
+A9.d = (A9T&!A9) # (!A9T&A9);
+A9.ck = CLKIN;
+
+A10T = A9T&A9;
+A10.d = (A10T&!A10) # (!A10T&A10);
+A10.ck = CLKIN;
+
+A11T = A10T&A10;
+A11.d = (A11T&!A11) # (!A11T&A11);
+A11.ck = CLKIN;
+
+A12T = A11T&A11;
+A12.d = (A12T&!A12) # (!A12T&A12);
+A12.ck = CLKIN;
+
+A13T = A12T&A12;
+A13.d = (A13T&!A13) # (!A13T&A13);
+A13.ck = CLKIN;
+
+A14T = A13T&A13;
+A14.d = (A14T&!A14) # (!A14T&A14);
+A14.ck = CLKIN;
+
+A15T = A14T&A14;
+A15.d = (A15T&!A15) # (!A15T&A15);
+A15.ck = CLKIN;
+*/
+
+
+
+
+
+/*
+
+8 bit counter:
+    Total dedicated input used:	1/4 	(25%)
+    Total I/O pins used		12/32 	(37%)
+    Total Logic cells used 		11/64 	(17%)
+    Total Flip-Flop used 		8/64 	(12%)
+    Total Foldback logic used 	0/64 	(0%)
+    Total Nodes+FB/MCells 		8/64 	(12%)
+    Total cascade used 		3
+    Total input pins 		5
+    Total output pins 		8
+    Total Pts 			36
+
+10 bit counter:
+    Total dedicated input used:	1/4 	(25%)
+    Total I/O pins used		14/32 	(43%)
+    Total Logic cells used 		15/64 	(23%)
+    Total Flip-Flop used 		10/64 	(15%)
+    Total Foldback logic used 	0/64 	(0%)
+    Total Nodes+FB/MCells 		14/64 	(21%)
+    Total cascade used 		1
+    Total input pins 		5
+    Total output pins 		10
+    Total Pts 			59
+12 bit counter:
+    Total dedicated input used:	1/4 	(25%)
+    Total I/O pins used		16/32 	(50%)
+    Total Logic cells used 		21/64 	(32%)
+    Total Flip-Flop used 		12/64 	(18%)
+    Total Foldback logic used 	0/64 	(0%)
+    Total Nodes+FB/MCells 		20/64 	(31%)
+    Total cascade used 		1
+    Total input pins 		5
+    Total output pins 		12
+    Total Pts 			86
+16 bit counter:
+    Total dedicated input used:	1/4 	(25%)
+    Total I/O pins used		20/32 	(62%)
+    Total Logic cells used 		37/64 	(57%)
+    Total Flip-Flop used 		16/64 	(25%)
+    Total Foldback logic used 	0/64 	(0%)
+    Total Nodes+FB/MCells 		37/64 	(57%)
+    Total cascade used 		0
+    Total input pins 		5
+    Total output pins 		16
+    Total Pts 			157
+
+16 bit counter w/2 8 bit cascasded counters:
+    Total dedicated input used:	1/4 	(25%)
+    Total I/O pins used		20/32 	(62%)
+    Total Logic cells used 		23/64 	(35%)
+    Total Flip-Flop used 		16/64 	(25%)
+    Total Foldback logic used 	0/64 	(0%)
+    Total Nodes+FB/MCells 		23/64 	(35%)
+    Total cascade used 		0
+    Total input pins 		5
+    Total output pins 		16
+    Total Pts 			87
+
+
+*/
+
+
+
+

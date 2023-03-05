@@ -1,0 +1,237 @@
+{COMPONENT C:\VGA4A.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Mon Feb 27 19:39:55 2023 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P CLK_25M {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
+   {P VGA_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P CPU_VGA {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P SR_CE {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P VGA_VSYN {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P CPU_VRAM {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P VGA_HSYN {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P GRAPH_MO {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P CPU_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P SR_LOAD {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P CPU_RW {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P CPU_VGA_ {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P CPU_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P VGA_CONF {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P VRAM_HIG {Pt "I/O"}{Lq 0}{Ploc 360 40}}
+   {P VRAM_LOW {Pt "I/O"}{Lq 0}{Ploc 360 60}}
+   {P VDP_HTOL {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P FRAM_A0 {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P VRAM_OE {Pt "I/O"}{Lq 0}{Ploc 360 120}}
+   {P FRAM_A1 {Pt "I/O"}{Lq 0}{Ploc 360 140}}
+   {P FRAM_A2 {Pt "I/O"}{Lq 0}{Ploc 360 160}}
+   {P FRAM_A3 {Pt "I/O"}{Lq 0}{Ploc 360 180}}
+   {P SBUS_TO_ {Pt "I/O"}{Lq 0}{Ploc 360 200}}
+   {P VRAM_WE {Pt "I/O"}{Lq 0}{Ploc 360 220}}
+   {P VERT_SYN {Pt "I/O"}{Lq 0}{Ploc 360 240}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 230 770}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 750}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 710}
+   {Pnl 120 690}
+   {Pnl 120 670}
+   {Pnl 120 650}
+   {Pnl 120 630}
+   {Pnl 120 610}
+   {Pnl 120 590}
+   {Pnl 120 570}
+   {Pnl 120 550}
+   {Pnl 120 530}
+   {Pnl 120 510}
+   {Pnl 120 490}
+   [Ts 15][Tj "LC"]
+   {Pnl 340 30}
+   {Pnl 340 50}
+   {Pnl 340 70}
+   {Pnl 340 90}
+   {Pnl 340 110}
+   {Pnl 340 130}
+   {Pnl 340 150}
+   {Pnl 340 170}
+   {Pnl 340 190}
+   {Pnl 340 210}
+   {Pnl 340 230}
+   {Pnl 340 250}
+
+   {Sd A 83 1 2 9 10 17 24 35 44 49 73 74 76 4 29 30 31 33 34 36 37 39 50 52 61}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 760 330 0}
+   {L 130 740 100 740}
+   {L 130 750 140 740 130 730}
+   {L 130 700 100 700}
+   {L 130 680 100 680}
+   {L 130 660 100 660}
+   {L 130 640 100 640}
+   {L 130 620 100 620}
+   {L 130 600 100 600}
+   {L 130 580 100 580}
+   {L 130 560 100 560}
+   {L 130 540 100 540}
+   {L 130 520 100 520}
+   {L 130 500 100 500}
+   {L 130 480 100 480}
+   {L 330 20 360 20}
+   {L 330 40 360 40}
+   {L 330 60 360 60}
+   {L 330 80 360 80}
+   {L 330 100 360 100}
+   {L 330 120 360 120}
+   {L 330 140 360 140}
+   {L 330 160 360 160}
+   {L 330 180 360 180}
+   {L 330 200 360 200}
+   {L 330 220 360 220}
+   {L 330 240 360 240}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "CLK_25M" 140 740}
+   {T "VGA_RESE" 140 700}
+   {T "CPU_VGA" 140 680}
+   {T "SR_CE" 140 660}
+   {T "VGA_VSYN" 140 640}
+   {T "CPU_VRAM" 140 620}
+   {T "VGA_HSYN" 140 600}
+   {T "GRAPH_MO" 140 580}
+   {T "CPU_LDS" 140 560}
+   {T "SR_LOAD" 140 540}
+   {T "CPU_RW" 140 520}
+   {T "CPU_VGA_" 140 500}
+   {T "CPU_UDS" 140 480}
+   [Tj "RC"]
+   {T "VGA_CONF" 320 20}
+   {T "VRAM_HIG" 320 40}
+   {T "VRAM_LOW" 320 60}
+   {T "VDP_HTOL" 320 80}
+   {T "FRAM_A0" 320 100}
+   {T "VRAM_OE" 320 120}
+   {T "FRAM_A1" 320 140}
+   {T "FRAM_A2" 320 160}
+   {T "FRAM_A3" 320 180}
+   {T "SBUS_TO_" 320 200}
+   {T "VRAM_WE" 320 220}
+   {T "VERT_SYN" 320 240}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "F1508ISPPLCC84" 230 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 480}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\VGA4A 230 760}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N CLK_25M
+   }
+   {N VGA_RESE
+   }
+   {N CPU_VGA
+   }
+   {N SR_CE
+   }
+   {N VGA_VSYN
+   }
+   {N CPU_VRAM
+   }
+   {N VGA_HSYN
+   }
+   {N GRAPH_MO
+   }
+   {N CPU_LDS
+   }
+   {N SR_LOAD
+   }
+   {N CPU_RW
+   }
+   {N CPU_VGA_
+   }
+   {N CPU_UDS
+   }
+   {N VGA_CONF
+   }
+   {N VRAM_HIG
+   }
+   {N VRAM_LOW
+   }
+   {N VDP_HTOL
+   }
+   {N FRAM_A0
+   }
+   {N VRAM_OE
+   }
+   {N FRAM_A1
+   }
+   {N FRAM_A2
+   }
+   {N FRAM_A3
+   }
+   {N SBUS_TO_
+   }
+   {N VRAM_WE
+   }
+   {N VERT_SYN
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}
