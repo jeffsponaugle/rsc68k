@@ -59,14 +59,22 @@ Pin[77]  = IDE_WR;
 
 /* Worker CPU Related signals */
 
-Pin[12]  = SPY_SETUP_LATCH_CS;
-Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS;
-Pin[50]  = WORKER_BARRIER_CS;
-Pin[69]  = WORKER_BUS_REQUEST;
-Pin[67]  = WORKER_BUS_GRANT;
-Pin[48]  = SBUS_BUFFER_ACD_EN;
-Pin[51]  = SBUS_BUFFER_AC_DIR;
-Pin[46]  = SBUS_BUFFER_D_DIR;
+Pin[12]  = SPY_SETUP_LATCH_CS;      /* SBUS Connector:CPLD_CS_A */
+Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS; /* SBUS Connector:CPLD_1 */
+Pin[50]  = WORKER_BARRIER_CS; /* SBUS Connector:CPLD_2 */
+Pin[69]  = WORKER_BUS_REQUEST; /* Unused, called CPLD_6, not routed anywhere */
+Pin[67]  = WORKER_BUS_GRANT; /* SBUS Connector:CPLD_5 */
+Pin[48]  = SBUS_BUFFER_ACD_EN; /* SBUS Connector:CPLS_CS_C */
+Pin[51]  = SBUS_BUFFER_AC_DIR; /* SBUS Connector:CPLD_3 */
+Pin[46]  = SBUS_BUFFER_D_DIR; /* SBUS Connector:CPLD_CS_B */
+Pin[54]  = CPLD_4   /* SBUS Connector:CPLD_4 */
+
+/* 
+   For VGA we need two chip selects, plus a return DTACK signal.
+   CPU_VGA_VRAM_CS <- CPLD_CS_C (pin 48 on CPLD)
+   CPU_VGA_CFG_CS <- CPLD_CS_B (pin 46 on CPLD)
+   CPU_VRAM_DTACK -> CPLD_1 (pin 49 on CPLD)
+*/
 
 /* Pins for Testing */
 
@@ -220,10 +228,17 @@ WORKER_BARRIER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF89XX );
 ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
 IDE_BUFFER_EN = IDE_CSA & IDE_CSB;
 
+/* 
+      IDE_WR signal goes directly to the /WR pin on the IDE interface.   This signal is asserted (low) as soon as
+      the CPU_RW signal goes low, which normally happens write at the start of an /AS cycle.  The IDE_WR_DELAY1 and DELAY2 
+      flip flops are configured such that they both start at 0 when an AS cycle starts.  After 2 CLK_16M cycles the 
+      DELAY2 signal is set to 1, which directly unasserts the IDE /WR pin.  The allows the /WR pin to have an active rising
+      edge BEFORE the end of the CPU cpu cycle.  This is critical to allow the IDE interface to latch data, since at the end
+      of the cycle the output buffers to the IDE inteface are turned off.  This was a fix from the original design which 
+      assumed the rising edge of the write signal would be sufficienctly ahead of the buffers getting turned off. 
+*/
+
 IDE_WR = CPU_RW # IDE_WR_DELAY2;
-
-
-
 IDE_WR_DELAY1.d = 'b'1;
 IDE_WR_DELAY1.ck = CLK_16M;
 IDE_WR_DELAY1.ar = CPU_AS # !CPU_RESET;

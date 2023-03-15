@@ -35,7 +35,7 @@ Device   f1508ispplcc84;
     SR_CE               SR_CE                                           SR_CE
     HSYNC               !(hsync_counter_field:['d'664..'d'759]);        same
     VSYNC               !(vsync_counter_field:['d'490..'d'491]);        same
-    GRAPH_MODE          'b'0                                            'b'1
+    GRAPH_MODE0          'b'0                                            'b'1
 
     If extra pin/io, add two output bits for the A13/A14 in text mode, as that will allow selection of text
     pages to display.
@@ -74,86 +74,71 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 
 Pin[83] = CLK_25M;
 Pin[1]  = VGA_RESET;               /* Active Low Reset */
-Pin[2]  = CPU_VGA_VRAM_CS;
-Pin[74] = CPU_VGA_CFG_CS;
-Pin[76] = CPU_UDS;
-Pin[44] = CPU_LDS;
-Pin[73] = CPU_RW;
+Pin[8]  = CPU_VGA_VRAM_CS;
+Pin[9] = CPU_VGA_CFG_CS;
+Pin[10] = CPU_UDS;
+Pin[11] = CPU_LDS;
+Pin[12] = CPU_RW;
+Pin[17,18,20,21,22,24,25,27] = [SREG_IN0..7];
 
 /** Outputs **/
-Pin[24] = VGA_HSYNC;
-Pin[10] = VGA_VSYNC;
-Pin[30] = VRAM_LOW_CE;
-Pin[29] = VRAM_HIGH_CE;
-Pin[34] = VRAM_OE;          /* Could also be used for FRAM_OE - Consider CPU Access? */
-Pin[52] = VRAM_WE;
-Pin[31] = VDP_HTOL;
-Pin[35] = GRAPH_MODE;       /* 0 = TEXT, 1=GRAPHICS */
-
-Pin = [SREG_IN0..7];
+Pin[4] = VGA_HSYNC;
+Pin[5] = VGA_VSYNC;
+Pin[29] = VRAM_LOW_CE;
+Pin[30] = VRAM_HIGH_CE;
+Pin[31] = VRAM_OE;          /* Could also be used for FRAM_OE - Consider CPU Access? */
+Pin[33] = VRAM_WE;
+Pin[48,46] = GRAPH_MODE0,GRAPH_MODE1;       /* 00 = TEXT, 01=GRAPHICS */
 
 /* 
    Video Ram data bus input, RGB output, and internal lataches for data bus input.
 */
-Pin = [VMEM_SRCD0..7];
-Pin = [VRED_OUT0..1];
-Pin = [VGREEN_OUT0..1];
-Pin = [VBLUE_OUT0..0];
-NODE [VMEM_SRC_LATCHED0..7];
+
+Pin [74,73,70,69,68,67,65,64,63,61,60,58,57,56,55,54]= [VMEM_SRCD0..15];
+Pin [81,80]= [VRED_OUT0..1];
+Pin [79,77]= [VGREEN_OUT0..1];
+Pin [76,75]= [VBLUE_OUT0..1];
+Pin [35,34]= [FONTSEL0..1];
 
 /* Address lines that go to the character rom for text mode.  */
-Pin[33,36,37,39] = [FRAM_A0..3];         
+Pin[40,39,37,36] = [FRAM_A0..3];         
 
 /* Signals back to the host CPU */
-Pin[17] = CPU_VRAM_DTACK;
-Pin[61] = VERT_SYNC_INTERRUPT;
+Pin[15] = CPU_VRAM_DTACK;
+Pin[16] = VERT_SYNC_INTERRUPT;
 
 /* control line for CPU to Video RAM interface */
-Pin[50] = SBUS_TO_VRAM_AD_OE;
+Pin[41] = SBUS_TO_VRAM_AD_OE;
+Pin[44] = VGA_CONFIG_WRITE;
+Pin[52,51,50] = [VADDR_MODE0..2];
 
 /* Pins to second CPLD 
     VGA_CONFIG_WRITE: Signal that the CPU is writing to the config register inside the address CPLD.
 
     VADDR_MODE: 3 bit signal to tell the address generation CPLD what to do on the next clock cycle.
-            000 = Do nothing.
-            001 = [VADDR_INCREMENT] Increment Address by 1
-            010 =
-            011 = 
-            100 = [VADDR_RESET_ALL] Reset All Address Bits back to TOP
-            101 =
-            110 = [VADDR_RESET_L6] Reset Lower 6 bits of Address - For Text Mode to repeat a line (for char font)
-            111 = [VADDR_RESET_L6I] Reset Lower 6 bits of Address, and increment remaining upper bits by 1.  (NEXT LINE)
 
+     [VADDR_MODE0..2] - Address Increment Mode
+        000  DO NOTHING   vaddr_mode_field:['d'0] 
+        001  INCREMENT    vaddr_mode_field:['d'1] Increment Address by 1
+        010  RESET_A6     vaddr_mode_field:['d'2] Reset Lower 6 bits of Address - For Text Mode to repeat a line (for char font)
+        011  RESET_A6I    vaddr_mode_field:['d'3] Reset Lower 6 bits of Address, and increment remaining upper bits by 1.  (NEXT LINE)
+        100  RESET_ALL    vaddr_mode_field:['d'4] Reset All Address Bits back to TOP
+        101  RESET_ALL    vaddr_mode_field:['d'5] Reset All Address Bits back to TOP
+        110  RESET_ALL    vaddr_mode_field:['d'6] Reset All Address Bits back to TOP
+        111  RESET_ALL    vaddr_mode_field:['d'7] Reset All Address Bits back to TOP
+                          vaddr_mode_field:['d'4..'d'7]
 */
 
-Pin[4] = VGA_CONFIG_WRITE;
-Pin = [VADDR_MODE0..2];
 
+
+NODE [VMEM_SRC_LATCHED0..15];
 NODE [HSYNC_COUNTER0..9];
 NODE [VSYNC_COUNTER0..9];
 NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
-NODE SR_LOAD_PRE;
+NODE SREG_LOAD,SREG_SHIFT;
 NODE VGA_BUSY,VGA_BUSY_CSLOCKED, CPU_VRAM_CS_CLOCKED , CPU_VRAM_ACCESS_ENABLED;
 NODE RAM_OE;
 NODE [SREG_D0..7];
-
-
-/*  Temporary values just to force pin creation.  FIX */
-/*  ************************************************* */
-SREG_LOAD = !SR_LOAD;
-SREG_SHIFT = !SR_CE;
-/*  ************************************************* */
-
-/* Address Mode Generation 
-     Address Mode is controlled by the 3 bit field VADDR_MODE[0,1,2].   Since it is an encoded field
-     we will generate the control variables for each condition, and use those to generate the final
-     mode.
-*/
-
-VADDR_INCREMENT;
-VADDR_RESET_ALL;
-VADDR_RESET_L6;
-VADDR_RESET_L6I;
 
 /*  ________________________________________________________________ */
 /* Shift Register Implementation 
@@ -196,11 +181,6 @@ SREG_D7.ar = !VGA_RESET;
 
 
 /* 
-
-    Pin = [VRED_OUT0..1];
-    Pin = [VGREEN_OUT0..1];
-    Pin = [VBLUE_OUT0..0];
-
     Video Out MUX:  In Text mode, pass thru the RGB _IN to _OUT if SREG_D7==1 and we are in the active region.
                     In Graphics mode, pass thru RGB _IN to +_OUT all of the time if we are in the active region. 
                     Active Region is RAM_OE.
@@ -209,43 +189,60 @@ SREG_D7.ar = !VGA_RESET;
 
 */
 
+/* active high signal to latch new value from SRC */
+
+VMEM_SRC_LATCH_LOW = SREG_LOAD;
+VMEM_SRC_LATCH_HIGH = SREG_LOAD;
+
 /* VMEM_SRC_LATCHED0..7 */
 
-VMEM_SRC_LATCHED0.d = (!SR_LOAD & VMEM_SRCD0) # (SR_LOAD & VMEM_SRCD0);
-VMEM_SRC_LATCHED1.d = (!SR_LOAD & VMEM_SRCD1) # (SR_LOAD & VMEM_SRCD1);
-VMEM_SRC_LATCHED2.d = (!SR_LOAD & VMEM_SRCD2) # (SR_LOAD & VMEM_SRCD2);
-VMEM_SRC_LATCHED3.d = (!SR_LOAD & VMEM_SRCD3) # (SR_LOAD & VMEM_SRCD3);
-VMEM_SRC_LATCHED4.d = (!SR_LOAD & VMEM_SRCD4) # (SR_LOAD & VMEM_SRCD4);
-VMEM_SRC_LATCHED5.d = (!SR_LOAD & VMEM_SRCD5) # (SR_LOAD & VMEM_SRCD5);
-VMEM_SRC_LATCHED6.d = (!SR_LOAD & VMEM_SRCD6) # (SR_LOAD & VMEM_SRCD6);
-VMEM_SRC_LATCHED7.d = (!SR_LOAD & VMEM_SRCD7) # (SR_LOAD & VMEM_SRCD7);
+VMEM_SRC_LATCHED0.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED0) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD0);
+VMEM_SRC_LATCHED1.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED1) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD1);
+VMEM_SRC_LATCHED2.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED2) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD2);
+VMEM_SRC_LATCHED3.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED3) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD3);
+VMEM_SRC_LATCHED4.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED4) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD4);
+VMEM_SRC_LATCHED5.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED5) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD5);
+VMEM_SRC_LATCHED6.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED6) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD6);
+VMEM_SRC_LATCHED7.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED7) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD7);
 
-VMEM_SRC_LATCHED0.ck = CLK_25M;
-VMEM_SRC_LATCHED1.ck = CLK_25M;
-VMEM_SRC_LATCHED2.ck = CLK_25M;
-VMEM_SRC_LATCHED3.ck = CLK_25M;
-VMEM_SRC_LATCHED4.ck = CLK_25M;
-VMEM_SRC_LATCHED5.ck = CLK_25M;
-VMEM_SRC_LATCHED6.ck = CLK_25M;
-VMEM_SRC_LATCHED7.ck = CLK_25M;
+VMEM_SRC_LATCHED8.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED8) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD8);
+VMEM_SRC_LATCHED9.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED9) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD9);
+VMEM_SRC_LATCHED10.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED10) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD10);
+VMEM_SRC_LATCHED11.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED11) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD11);
+VMEM_SRC_LATCHED12.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED12) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD12);
+VMEM_SRC_LATCHED13.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED13) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD13);
+VMEM_SRC_LATCHED14.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED14) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD14);
+VMEM_SRC_LATCHED15.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED15) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD15);
 
-VMEM_SRC_LATCHED0.ar = !VGA_RESET;
-VMEM_SRC_LATCHED1.ar = !VGA_RESET;
-VMEM_SRC_LATCHED2.ar = !VGA_RESET;
-VMEM_SRC_LATCHED3.ar = !VGA_RESET;
-VMEM_SRC_LATCHED4.ar = !VGA_RESET;
-VMEM_SRC_LATCHED5.ar = !VGA_RESET;
-VMEM_SRC_LATCHED6.ar = !VGA_RESET;
-VMEM_SRC_LATCHED7.ar = !VGA_RESET;
+[VMEM_SRC_LATCHED0..15].ck = CLK_25M;
+[VMEM_SRC_LATCHED0..15].ar = !VGA_RESET;
 
-VRED_OUT0 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED0) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED0);
-VRED_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED1) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED1);
+/* 
+      output color signal 
+      GRAPHMODE == 0 (Text Mode) , Shift Reg & Attrib bits (VMEM bits 8,9,10,11,12,13)
+      GRAPHMODE == 1 (Graph Mode), VMEM bits. VDP_HORL switches between L and H pixel data.
+*/
 
-VGREEN_OUT0 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED2) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED2);
-VGREEN_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED3) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED3);
+VRED_OUT0 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED8) 
+          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED8) # (!VDP_HORL & VMEM_SRC_LATCHED0)));
 
-VBLUE_OUT0 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED4) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED4);
-VBLUE_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED5) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED5);
+VRED_OUT1 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED9) 
+          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED9) # (!VDP_HORL & VMEM_SRC_LATCHED1)));
+
+VGREEN_OUT0 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED10) 
+          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED10) # (!VDP_HORL & VMEM_SRC_LATCHED2)));
+
+VGREEN_OUT1 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED11) 
+          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED11) # (!VDP_HORL & VMEM_SRC_LATCHED3)));
+
+VBLUE_OUT0 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED12) 
+          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED12) # (!VDP_HORL & VMEM_SRC_LATCHED4)));
+
+VBLUE_OUT1 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED13) 
+          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED13) # (!VDP_HORL & VMEM_SRC_LATCHED5)));
+
+FONTSEL0 = VMEM_SRC_LATCHED14;
+FONTSEL1 = VMEM_SRC_LATCHED15;
 
 
 /*
@@ -266,107 +263,17 @@ VBLUE_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED5) # (GRAPH_MODE
 
 VGA_CONFIG_WRITE = !(CPU_VGA_CFG_CS # CPU_RW);
 
-/* VGA_BUSY is 1 when the VGA memory is bring used by the VGA interface *
-
-/*  
-   VRAM Address is based on the HSYNC counter bit 3-9 plus the VSYNC counter bits 0-8.
-   A0-A6 = HSYNC_COUNTER3-9
-   A7-A15 = VSYNC_COUNTER0-8
-
-   This results in each 640 pixel line being 80 bytes of data, but 128 bytes apart.  Each Row takes 128 bytes 
-   of memory with the first 80 bytes being display data and the remaining 48 bytes unused. 
-   There are 480 rows, so a total of 480*128 = 61440 bytes of memory, thus 16 address lines.
-
-   This is a slightly inefficient memory layout due to the horiontal counter not being a precise power of two.  This could be
-   solved with a second 16 bit counter that is incremented during the correct parts of the horizontal cycle, however that would 
-   require quite a bit of CPLD resources. (A 16 bit counter uses 16 FF and 37 logic cells if implemented as a single counter, 
-   and 16FF and 23 logic cells if implemented as 2 8 bit counters with ripple)
-*/
-/*
-VDB_A0 = (!GRAPH_MODE & HSYNC_COUNTER3)
-         # ((GRAPH_MODE & HSYNC_COUNTER4));
-VDB_A1 = (!GRAPH_MODE & HSYNC_COUNTER4)
-         # ((GRAPH_MODE & HSYNC_COUNTER5));
-VDB_A2 = (!GRAPH_MODE & HSYNC_COUNTER5)
-         # ((GRAPH_MODE & HSYNC_COUNTER6));
-VDB_A3 = (!GRAPH_MODE & HSYNC_COUNTER6)
-         # ((GRAPH_MODE & HSYNC_COUNTER7));
-VDB_A4 = (!GRAPH_MODE & HSYNC_COUNTER7)
-         # ((GRAPH_MODE & HSYNC_COUNTER8));
-VDB_A5 = (!GRAPH_MODE & HSYNC_COUNTER8)
-         # ((GRAPH_MODE & HSYNC_COUNTER9));
-VDB_A6 = (!GRAPH_MODE & HSYNC_COUNTER9)
-         # ((GRAPH_MODE & VSYNC_COUNTER0));
-*/
-
-/* These 6 VDB address lines have adder results for text mode */
-
-/* 6 bits of addition - VSYNC_COUNTER4-9 + TXTOFFSET0-4 */
-/*
-P_TXTA7 = (VSYNC_COUNTER4 $ TXTOFFSET0);
-G_TXTA7 = (VSYNC_COUNTER4 & TXTOFFSET0);
-S_TXTA7 = P_TXTA7;
-CO_TXTA7 = G_TXTA7;
-
-P_TXTA8 = (VSYNC_COUNTER5 $ TXTOFFSET1);
-G_TXTA8 = (VSYNC_COUNTER5 & TXTOFFSET1);
-S_TXTA8 = P_TXTA8 $ CO_TXTA7;
-CO_TXTA8 = G_TXTA8 # (P_TXTA8 & CO_TXTA7);
-
-P_TXTA9 = (VSYNC_COUNTER6 $ TXTOFFSET2);
-G_TXTA9 = (VSYNC_COUNTER6 & TXTOFFSET2);
-S_TXTA9 = P_TXTA9 $ CO_TXTA8;
-CO_TXTA9 = G_TXTA9 # (P_TXTA9 & CO_TXTA8);
-
-P_TXTA10 = (VSYNC_COUNTER7 $ TXTOFFSET3);
-G_TXTA10 = (VSYNC_COUNTER7 & TXTOFFSET3);
-S_TXTA10 = P_TXTA10 $ CO_TXTA9;
-CO_TXTA10 = G_TXTA10 # (P_TXTA10 & CO_TXTA9);
-
-P_TXTA11 = (VSYNC_COUNTER8 $ TXTOFFSET4);
-G_TXTA11 = (VSYNC_COUNTER8 & TXTOFFSET4);
-S_TXTA11 = P_TXTA11 $ CO_TXTA10;
-CO_TXTA11 = G_TXTA11 # (P_TXTA11 & CO_TXTA10);
-
-P_TXTA12 = (VSYNC_COUNTER9);
-S_TXTA12 = P_TXTA11 $ CO_TXTA11;
-CO_TXTA12 = (P_TXTA11 & CO_TXTA11);
+/* VGA_BUSY is 1 when the VGA memory is bring used by the VGA interface */
 
 
-VDB_A7  = (!GRAPH_MODE & S_TXTA7)
-         # ((GRAPH_MODE & VSYNC_COUNTER1));
-VDB_A8  = (!GRAPH_MODE & S_TXTA8)
-         # ((GRAPH_MODE & VSYNC_COUNTER2));
-VDB_A9  = (!GRAPH_MODE & S_TXTA9)
-         # ((GRAPH_MODE & VSYNC_COUNTER3));
-VDB_A10 = (!GRAPH_MODE & S_TXTA10)
-         # ((GRAPH_MODE & VSYNC_COUNTER4));
-VDB_A11 = (!GRAPH_MODE & S_TXTA11)
-         # ((GRAPH_MODE & VSYNC_COUNTER5));
-VDB_A12 = (!GRAPH_MODE & S_TXTA12)
-         # ((GRAPH_MODE & VSYNC_COUNTER6));
-
-
-
-VDB_A13 = (!GRAPH_MODE & 'd'0)
-         # ((GRAPH_MODE & VSYNC_COUNTER7));
-VDB_A14 = (!GRAPH_MODE & 'd'0)
-         # ((GRAPH_MODE & VSYNC_COUNTER8));
-VDB_A15 = (!GRAPH_MODE & 'd'0)
-         # ((GRAPH_MODE & VSYNC_COUNTER9));
-
-[VDB_A0..15].oe = !RAM_OE;
-*/
-
-
-FRAM_A0 = (!GRAPH_MODE & VSYNC_COUNTER0)
-         # ((GRAPH_MODE & 'd'0));
-FRAM_A1 = (!GRAPH_MODE & VSYNC_COUNTER1)
-         # ((GRAPH_MODE & 'd'0));
-FRAM_A2 = (!GRAPH_MODE & VSYNC_COUNTER2)
-         # ((GRAPH_MODE & 'd'0));
-FRAM_A3 = (!GRAPH_MODE & VSYNC_COUNTER3)
-         # ((GRAPH_MODE & 'd'0));
+FRAM_A0 = (!GRAPH_MODE0 & VSYNC_COUNTER0)
+         # ((GRAPH_MODE0 & 'd'0));
+FRAM_A1 = (!GRAPH_MODE0 & VSYNC_COUNTER1)
+         # ((GRAPH_MODE0 & 'd'0));
+FRAM_A2 = (!GRAPH_MODE0 & VSYNC_COUNTER2)
+         # ((GRAPH_MODE0 & 'd'0));
+FRAM_A3 = (!GRAPH_MODE0 & VSYNC_COUNTER3)
+         # ((GRAPH_MODE0 & 'd'0));
 
 
 /* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
@@ -499,6 +406,8 @@ VSYNC_COUNTER9.ck = VSYNC_CLOCK_B;
 VSYNC_COUNTER9.ar = !VGA_RESET;
 
 FIELD vsync_counter_field = [VSYNC_COUNTER9..0];
+FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
+
 VSYNC_ZERO = !(vsync_counter_field:['d'524]);
 
 /* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row */
@@ -530,29 +439,25 @@ VGA_BUSY.d =  ((hsync_counter_field:[0..'d'647]) # (hsync_counter_field:['d'792.
 VGA_BUSY.ck = !CLK_25M;
 VGA_BUSY.ar = !VGA_RESET;
 
-
 /* Control of VRAM */
 /* CPU_VRAM_ACCESS_ENABLED == 0 when the CPU is doing an active cycle(including chip select), and ==1 when the VGA is in control */
 
-VDP_HTOL =  (GRAPH_MODE & HSYNC_COUNTER3 & !RAM_OE);
+/* In graphics mode, we need to go between the low and high data values.  HC0 -> 0, HC1 -> 1 */
+
+VDP_HORL =  (GRAPH_MODE0 & HSYNC_COUNTER0 & !RAM_OE);
 
 VRAM_LOW_CE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & CPU_LDS );
 VRAM_HIGH_CE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & CPU_UDS );
 VRAM_OE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & !CPU_RW );
 VRAM_WE = (CPU_VRAM_ACCESS_ENABLED # CPU_RW );
 
-SR_LOAD_PRE.d =  (!(hsync_counter_3_field:[6]));
-SR_LOAD_PRE.ck = !CLK_25M;
+SREG_LOAD.d = (hsync_counter_3_field:['d'7] & hsync_counter_field:['d'0..'d'647]);
+SREG_LOAD.ck = !CLK_25M;
+SREG_LOAD.ar = !VGA_RESET;
 
-SR_LOAD.d = SR_LOAD_PRE;
-SR_LOAD.ck = CLK_25M;
-SR_LOAD.ar = !VGA_RESET;
-
-/* SR_CE.d = !((hsync_counter_field:['d'7..'d'647]) & VSYNC_DISPLAY_ACTIVE); */
-
-SR_CE.d = !((hsync_counter_field:['d'7..'d'647]) & (VSYNC_DISPLAY_ACTIVE) );
-SR_CE.ck = !CLK_25M;
-SR_CE.ar = !VGA_RESET;
+SREG_SHIFT.d = (hsync_counter_field:['d'7..'d'647] & vsync_counter_field:['d'0..'d'479]);
+SREG_SHIFT.ck = !CLK_25M;
+SREG_SHIFT.ar = !VGA_RESET;
 
 VGA_HSYNC.d = !(hsync_counter_field:['d'664..'d'759]);
 VGA_HSYNC.ck = !CLK_25M;
@@ -588,8 +493,6 @@ VGA_VSYNC.ar = !VGA_RESET;
          The VRAM OE/WE/CE signals should also be asserted using this same combinatorial. 
 */
 
-
-
 VGA_BUSY_CSLOCKED.d = VGA_BUSY;
 VGA_BUSY_CSLOCKED.ck = !CPU_VGA_VRAM_CS;
 VGA_BUSY_CSLOCKED.ar = !VGA_BUSY # !VGA_RESET;
@@ -610,18 +513,48 @@ CPU_VRAM_DTACK.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
 
 SBUS_TO_VRAM_AD_OE = CPU_VRAM_ACCESS_ENABLED;
 
+/* Address Mode Generation 
+     Address Mode is controlled by the 3 bit field VADDR_MODE[0,1,2].   Since it is an encoded field
+     we will generate the control variables for each condition, and use those to generate the final
+     mode.
+
+     RESET_ALL = In text mode, do at end last line.
+     RESET_L6 = In text mode -
+
+     [VADDR_MODE0..2] - Address Increment Mode
+        000  DO NOTHING   vaddr_mode_field:['d'0] 
+        001  INCREMENT    vaddr_mode_field:['d'1]
+        010  RESET_A6     vaddr_mode_field:['d'2]
+        011  RESET_A6I    vaddr_mode_field:['d'3]
+        100  RESET_ALL    vaddr_mode_field:['d'4]
+        101  RESET_ALL    vaddr_mode_field:['d'5]
+        110  RESET_ALL    vaddr_mode_field:['d'6]
+        111  RESET_ALL    vaddr_mode_field:['d'7]
+                          vaddr_mode_field:['d'4..'d'7]
+
+*/
+
+VADDR_INCREMENT = (hsync_counter_3_field:['d'7] & hsync_counter_field:['d'0..'d'647]);
+VADDR_RESET_ALL = (hsync_counter_field:['d'799] & vsync_counter_field:['d'524]);
+VADDR_RESET_A6 =  (hsync_counter_field:['d'799] & vsync_counter_4_field:['d'0..'d'14]);
+VADDR_RESET_A6I = (hsync_counter_field:['d'799] & vsync_counter_4_field:['d'15]);
+VADDR_MODE0 = VADDR_RESET_A6I # VADDR_INCREMENT;
+VADDR_MODE1 = VADDR_RESET_A6 # VADDR_RESET_A6I;
+VADDR_MODE2 = VADDR_RESET_ALL;
+
 /*
 
-Total dedicated input used:	3/4 	(75%)
-Total I/O pins used		49/64 	(76%)
-Total Logic cells used 		87/128 	(67%)
-Total Flip-Flop used 		49/128 	(38%)
+
+Total dedicated input used:	2/4 	(50%)
+Total I/O pins used		59/64 	(92%)
+Total Logic cells used 		96/128 	(75%)
+Total Flip-Flop used 		56/128 	(43%)
 Total Foldback logic used 	3/128 	(2%)
-Total Nodes+FB/MCells 		88/128 	(68%)
+Total Nodes+FB/MCells 		97/128 	(75%)
 Total cascade used 		2
-Total input pins 		28
-Total output pins 		24
-Total Pts 			262
+Total input pins 		36
+Total output pins 		25
+Total Pts 			300
 
 
 */

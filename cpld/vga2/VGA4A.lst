@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
   1:Name     VGA4A;
   2:PartNo   VGA4A;
@@ -42,7 +42,7 @@ Created Mon Feb 27 19:39:54 2023
  35:    SR_CE               SR_CE                                           SR_CE
  36:    HSYNC               !(hsync_counter_field:['d'664..'d'759]);        same
  37:    VSYNC               !(vsync_counter_field:['d'490..'d'491]);        same
- 38:    GRAPH_MODE          'b'0                                            'b'1
+ 38:    GRAPH_MODE0          'b'0                                            'b'1
  39:
  40:    If extra pin/io, add two output bits for the A13/A14 in text mode, as that will allow selection of text
  41:    pages to display.
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
  54:    VGA_CPU_ACCESS_ALLOWED - (hsync_counter_field:[0..'d'647]) & (VSYNC_DISPLAY_ACTIVE);
  55:    VGA_BUSY - FF clocked to RAM_OE by EXP_CS_C, Cleared to 1 by VGA_BUSY==1.
@@ -89,655 +89,569 @@ Created Mon Feb 27 19:39:54 2023
  74:
  75:Pin[83] = CLK_25M;
  76:Pin[1]  = VGA_RESET;               /* Active Low Reset */
- 77:Pin[2]  = CPU_VGA_VRAM_CS;
- 78:Pin[74] = CPU_VGA_CFG_CS;
- 79:Pin[76] = CPU_UDS;
- 80:Pin[44] = CPU_LDS;
- 81:Pin[73] = CPU_RW;
- 82:
- 83:/** Outputs **/
- 84:Pin[9]  = SR_CE;
- 85:Pin[49] = SR_LOAD;
- 86:Pin[24] = VGA_HSYNC;
- 87:Pin[10] = VGA_VSYNC;
- 88:Pin[30] = VRAM_LOW_CE;
- 89:Pin[29] = VRAM_HIGH_CE;
- 90:Pin[34] = VRAM_OE;          /* Could also be used for FRAM_OE - Consider CPU Access? */
- 91:Pin[52] = VRAM_WE;
- 92:Pin[31] = VDP_HTOL;
- 93:Pin[35] = GRAPH_MODE;       /* 0 = TEXT, 1=GRAPHICS */
+ 77:Pin[8]  = CPU_VGA_VRAM_CS;
+ 78:Pin[9] = CPU_VGA_CFG_CS;
+ 79:Pin[10] = CPU_UDS;
+ 80:Pin[11] = CPU_LDS;
+ 81:Pin[12] = CPU_RW;
+ 82:Pin[17,18,20,21,22,24,25,27] = [SREG_IN0..7];
+ 83:
+ 84:/** Outputs **/
+ 85:Pin[4] = VGA_HSYNC;
+ 86:Pin[5] = VGA_VSYNC;
+ 87:Pin[29] = VRAM_LOW_CE;
+ 88:Pin[30] = VRAM_HIGH_CE;
+ 89:Pin[31] = VRAM_OE;          /* Could also be used for FRAM_OE - Consider CPU Access? */
+ 90:Pin[33] = VRAM_WE;
+ 91:Pin[48,46] = GRAPH_MODE0,GRAPH_MODE1;       /* 0 = TEXT, 1=GRAPHICS */
+ 92:
+ 93:
  94:
- 95:Pin [0..0] = [SREG_IN0..7];
- 96:
- 97:/* 
- 98:   Red, Green, and Blue data input.  In txt mode, this is the attribute for a character.  In graphics mode this is the
- 99:   actual graphics color data
-100:*/
-101:Pin [0..0] = [VMEM_SRCD0..7];
-102:Pin [0..0] = [VRED_OUT0..1];
-103:Pin [0..0] = [VGREEN_OUT0..1];
-104:Pin [0] = [VBLUE_OUT0..0];
-105:NODE [VMEM_SRC_LATCHED0..7];
-106:
-107:Pin[33,36,37,39] = [FRAM_A0..3];          /* Address lines to lower 4 bits of Char ROM, for font row */
+ 95:/* 
+ 96:   Video Ram data bus input, RGB output, and internal lataches for data bus input.
+ 97:*/
+ 98:
+ 99:Pin [74,73,70,69,68,67,65,64,63,61,60,58,57,56,55,54]= [VMEM_SRCD0..15];
+100:Pin [81,80]= [VRED_OUT0..1];
+101:Pin [79,77]= [VGREEN_OUT0..1];
+102:Pin [76,75]= [VBLUE_OUT0..1];
+103:Pin [35,34]= [FONTSEL0..1];
+104:
+105:/* Address lines that go to the character rom for text mode.  */
+106:Pin[40,39,37,36] = [FRAM_A0..3];         
+107:
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 3
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-108:Pin[17] = CPU_VRAM_DTACK;
-109:Pin[50] = SBUS_TO_VRAM_AD_OE;
-110:Pin[61] = VERT_SYNC_INTERRUPT;
+108:/* Signals back to the host CPU */
+109:Pin[15] = CPU_VRAM_DTACK;
+110:Pin[16] = VERT_SYNC_INTERRUPT;
 111:
-112:/* Pins to second CPLD */
-113:Pin[4] = VGA_CONFIG_WRITE;
-114:Pin  0  = VADDR_INCREMENT;  /* == 1 to increment */
-115:Pin  0  = VADDR_RESET;
+112:/* control line for CPU to Video RAM interface */
+113:Pin[41] = SBUS_TO_VRAM_AD_OE;
+114:Pin[44] = VGA_CONFIG_WRITE;
+115:Pin[52,51,50] = [VADDR_MODE0..2];
 116:
-117:NODE [HSYNC_COUNTER0..9];
-118:NODE [VSYNC_COUNTER0..9];
-119:NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
-120:NODE SR_LOAD_PRE;
-121:NODE VGA_BUSY,VGA_BUSY_CSLOCKED, CPU_VRAM_CS_CLOCKED , CPU_VRAM_ACCESS_ENABLED;
-122:NODE RAM_OE;
-123:NODE [SREG_D0..7];
-124:
-125:
-126:/*  Temporary values just to force pin creation.  FIX */
-127:/*  ************************************************* */
-128:SREG_LOAD = !SR_LOAD;
-129:SREG_SHIFT = !SR_CE;
-130:VADDR_INCREMENT = RAM_OE;
-131:VADDR_RESET = HSYNC_ZERO;
-132:/*  ************************************************* */
+117:/* Pins to second CPLD 
+118:    VGA_CONFIG_WRITE: Signal that the CPU is writing to the config register inside the address CPLD.
+119:
+120:    VADDR_MODE: 3 bit signal to tell the address generation CPLD what to do on the next clock cycle.
+121:
+122:     [VADDR_MODE0..2] - Address Increment Mode
+123:        000  DO NOTHING   vaddr_mode_field:['d'0] 
+124:        001  INCREMENT    vaddr_mode_field:['d'1] Increment Address by 1
+125:        010  RESET_A6     vaddr_mode_field:['d'2] Reset Lower 6 bits of Address - For Text Mode to repeat a line (for char font)
+126:        011  RESET_A6I    vaddr_mode_field:['d'3] Reset Lower 6 bits of Address, and increment remaining upper bits by 1.  (NEXT LINE)
+127:        100  RESET_ALL    vaddr_mode_field:['d'4] Reset All Address Bits back to TOP
+128:        101  RESET_ALL    vaddr_mode_field:['d'5] Reset All Address Bits back to TOP
+129:        110  RESET_ALL    vaddr_mode_field:['d'6] Reset All Address Bits back to TOP
+130:        111  RESET_ALL    vaddr_mode_field:['d'7] Reset All Address Bits back to TOP
+131:                          vaddr_mode_field:['d'4..'d'7]
+132:*/
 133:
-134:/*  ________________________________________________________________ */
-135:/* Shift Register Implementation 
-136:    SREG_Dx are the storage registers.  D7 is the output.
-137:    SREG_LOAD is an active high signal to load from SREG_IN the 8 bit value
-138:    SREG_SHIFT is an active high signal to shift from 0-->7 on clock.   
-139:    SREG_LOAD overrides SREG_SHIFT.
-140:    if neither SREG_LOAD or SREG_SHIFT are high the register value stays the same.
-141:*/
-142:
-143:SREG_D0.d = (SREG_LOAD & SREG_IN0) # (!SREG_LOAD & !SREG_SHIFT & SREG_D0);
-144:SREG_D1.d = (SREG_LOAD & SREG_IN1) # (!SREG_LOAD & SREG_SHIFT & SREG_D0) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D1 );
-145:SREG_D2.d = (SREG_LOAD & SREG_IN2) # (!SREG_LOAD & SREG_SHIFT & SREG_D1) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D2 );
-146:SREG_D3.d = (SREG_LOAD & SREG_IN3) # (!SREG_LOAD & SREG_SHIFT & SREG_D2) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D3 );
-147:SREG_D4.d = (SREG_LOAD & SREG_IN4) # (!SREG_LOAD & SREG_SHIFT & SREG_D3) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D4 );
-148:SREG_D5.d = (SREG_LOAD & SREG_IN5) # (!SREG_LOAD & SREG_SHIFT & SREG_D4) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D5 );
-149:SREG_D6.d = (SREG_LOAD & SREG_IN6) # (!SREG_LOAD & SREG_SHIFT & SREG_D5) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D6 );
-150:SREG_D7.d = (SREG_LOAD & SREG_IN7) # (!SREG_LOAD & SREG_SHIFT & SREG_D6) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D7 );
-151:
-152:SREG_D0.ck = CLK_25M;
-153:SREG_D1.ck = CLK_25M;
-154:SREG_D2.ck = CLK_25M;
-155:SREG_D3.ck = CLK_25M;
-156:SREG_D4.ck = CLK_25M;
-157:SREG_D5.ck = CLK_25M;
-158:SREG_D6.ck = CLK_25M;
-159:SREG_D7.ck = CLK_25M;
-160:
-161:SREG_D0.ar = !VGA_RESET;
+134:
+135:
+136:NODE [VMEM_SRC_LATCHED0..15];
+137:NODE [HSYNC_COUNTER0..9];
+138:NODE [VSYNC_COUNTER0..9];
+139:NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
+140:NODE SREG_LOAD,SREG_SHIFT;
+141:NODE VGA_BUSY,VGA_BUSY_CSLOCKED, CPU_VRAM_CS_CLOCKED , CPU_VRAM_ACCESS_ENABLED;
+142:NODE RAM_OE;
+143:NODE [SREG_D0..7];
+144:
+145:/*  ________________________________________________________________ */
+146:/* Shift Register Implementation 
+147:    SREG_Dx are the storage registers.  D7 is the output.
+148:    SREG_LOAD is an active high signal to load from SREG_IN the 8 bit value
+149:    SREG_SHIFT is an active high signal to shift from 0-->7 on clock.   
+150:    SREG_LOAD overrides SREG_SHIFT.
+151:    if neither SREG_LOAD or SREG_SHIFT are high the register value stays the same.
+152:*/
+153:
+154:SREG_D0.d = (SREG_LOAD & SREG_IN0) # (!SREG_LOAD & !SREG_SHIFT & SREG_D0);
+155:SREG_D1.d = (SREG_LOAD & SREG_IN1) # (!SREG_LOAD & SREG_SHIFT & SREG_D0) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D1 );
+156:SREG_D2.d = (SREG_LOAD & SREG_IN2) # (!SREG_LOAD & SREG_SHIFT & SREG_D1) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D2 );
+157:SREG_D3.d = (SREG_LOAD & SREG_IN3) # (!SREG_LOAD & SREG_SHIFT & SREG_D2) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D3 );
+158:SREG_D4.d = (SREG_LOAD & SREG_IN4) # (!SREG_LOAD & SREG_SHIFT & SREG_D3) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D4 );
+159:SREG_D5.d = (SREG_LOAD & SREG_IN5) # (!SREG_LOAD & SREG_SHIFT & SREG_D4) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D5 );
+160:SREG_D6.d = (SREG_LOAD & SREG_IN6) # (!SREG_LOAD & SREG_SHIFT & SREG_D5) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D6 );
+161:SREG_D7.d = (SREG_LOAD & SREG_IN7) # (!SREG_LOAD & SREG_SHIFT & SREG_D6) # ( !SREG_LOAD & !SREG_SHIFT & SREG_D7 );
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 4
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-162:SREG_D1.ar = !VGA_RESET;
-163:SREG_D2.ar = !VGA_RESET;
-164:SREG_D3.ar = !VGA_RESET;
-165:SREG_D4.ar = !VGA_RESET;
-166:SREG_D5.ar = !VGA_RESET;
-167:SREG_D6.ar = !VGA_RESET;
-168:SREG_D7.ar = !VGA_RESET;
-169:
-170:
-171:/*  ________________________________________________________________ */
-172:
-173:
-174:/* 
-175:
-176:    Pin = [VRED_OUT0..1];
-177:    Pin = [VGREEN_OUT0..1];
-178:    Pin = [VBLUE_OUT0..0];
-179:
-180:    Video Out MUX:  In Text mode, pass thru the RGB _IN to _OUT if SREG_D7==1 and we are in the active region.
-181:                    In Graphics mode, pass thru RGB _IN to +_OUT all of the time if we are in the active region. 
-182:                    Active Region is RAM_OE.
-183:    SRC Latch activated by CLK_25 as well as SR_LOAD.  SR_LOAD is used to both latch this data as well
-184:    as latch data into the shift register.
-185:
-186:*/
-187:
-188:/* VMEM_SRC_LATCHED0..7 */
-189:
-190:VMEM_SRC_LATCHED0.d = (!SR_LOAD & VMEM_SRCD0) # (SR_LOAD & VMEM_SRCD0);
-191:VMEM_SRC_LATCHED1.d = (!SR_LOAD & VMEM_SRCD1) # (SR_LOAD & VMEM_SRCD1);
-192:VMEM_SRC_LATCHED2.d = (!SR_LOAD & VMEM_SRCD2) # (SR_LOAD & VMEM_SRCD2);
-193:VMEM_SRC_LATCHED3.d = (!SR_LOAD & VMEM_SRCD3) # (SR_LOAD & VMEM_SRCD3);
-194:VMEM_SRC_LATCHED4.d = (!SR_LOAD & VMEM_SRCD4) # (SR_LOAD & VMEM_SRCD4);
-195:VMEM_SRC_LATCHED5.d = (!SR_LOAD & VMEM_SRCD5) # (SR_LOAD & VMEM_SRCD5);
-196:VMEM_SRC_LATCHED6.d = (!SR_LOAD & VMEM_SRCD6) # (SR_LOAD & VMEM_SRCD6);
-197:VMEM_SRC_LATCHED7.d = (!SR_LOAD & VMEM_SRCD7) # (SR_LOAD & VMEM_SRCD7);
+162:
+163:SREG_D0.ck = CLK_25M;
+164:SREG_D1.ck = CLK_25M;
+165:SREG_D2.ck = CLK_25M;
+166:SREG_D3.ck = CLK_25M;
+167:SREG_D4.ck = CLK_25M;
+168:SREG_D5.ck = CLK_25M;
+169:SREG_D6.ck = CLK_25M;
+170:SREG_D7.ck = CLK_25M;
+171:
+172:SREG_D0.ar = !VGA_RESET;
+173:SREG_D1.ar = !VGA_RESET;
+174:SREG_D2.ar = !VGA_RESET;
+175:SREG_D3.ar = !VGA_RESET;
+176:SREG_D4.ar = !VGA_RESET;
+177:SREG_D5.ar = !VGA_RESET;
+178:SREG_D6.ar = !VGA_RESET;
+179:SREG_D7.ar = !VGA_RESET;
+180:
+181:
+182:/*  ________________________________________________________________ */
+183:
+184:
+185:/* 
+186:    Video Out MUX:  In Text mode, pass thru the RGB _IN to _OUT if SREG_D7==1 and we are in the active region.
+187:                    In Graphics mode, pass thru RGB _IN to +_OUT all of the time if we are in the active region. 
+188:                    Active Region is RAM_OE.
+189:    SRC Latch activated by CLK_25 as well as SR_LOAD.  SR_LOAD is used to both latch this data as well
+190:    as latch data into the shift register.
+191:
+192:*/
+193:
+194:/* active high signal to latch new value from SRC */
+195:
+196:VMEM_SRC_LATCH_LOW = SREG_LOAD;
+197:VMEM_SRC_LATCH_HIGH = SREG_LOAD;
 198:
-199:VMEM_SRC_LATCHED0.ck = CLK_25M;
-200:VMEM_SRC_LATCHED1.ck = CLK_25M;
-201:VMEM_SRC_LATCHED2.ck = CLK_25M;
-202:VMEM_SRC_LATCHED3.ck = CLK_25M;
-203:VMEM_SRC_LATCHED4.ck = CLK_25M;
-204:VMEM_SRC_LATCHED5.ck = CLK_25M;
-205:VMEM_SRC_LATCHED6.ck = CLK_25M;
-206:VMEM_SRC_LATCHED7.ck = CLK_25M;
-207:
-208:VMEM_SRC_LATCHED0.ar = !VGA_RESET;
-209:VMEM_SRC_LATCHED1.ar = !VGA_RESET;
-210:VMEM_SRC_LATCHED2.ar = !VGA_RESET;
-211:VMEM_SRC_LATCHED3.ar = !VGA_RESET;
-212:VMEM_SRC_LATCHED4.ar = !VGA_RESET;
-213:VMEM_SRC_LATCHED5.ar = !VGA_RESET;
-214:VMEM_SRC_LATCHED6.ar = !VGA_RESET;
-215:VMEM_SRC_LATCHED7.ar = !VGA_RESET;
+199:/* VMEM_SRC_LATCHED0..7 */
+200:
+201:VMEM_SRC_LATCHED0.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED0) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD0);
+202:VMEM_SRC_LATCHED1.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED1) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD1);
+203:VMEM_SRC_LATCHED2.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED2) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD2);
+204:VMEM_SRC_LATCHED3.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED3) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD3);
+205:VMEM_SRC_LATCHED4.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED4) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD4);
+206:VMEM_SRC_LATCHED5.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED5) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD5);
+207:VMEM_SRC_LATCHED6.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED6) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD6);
+208:VMEM_SRC_LATCHED7.d = (!VMEM_SRC_LATCH_LOW & VMEM_SRC_LATCHED7) # (VMEM_SRC_LATCH_LOW & VMEM_SRCD7);
+209:
+210:VMEM_SRC_LATCHED8.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED8) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD8);
+211:VMEM_SRC_LATCHED9.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED9) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD9);
+212:VMEM_SRC_LATCHED10.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED10) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD10);
+213:VMEM_SRC_LATCHED11.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED11) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD11);
+214:VMEM_SRC_LATCHED12.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED12) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD12);
+215:VMEM_SRC_LATCHED13.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED13) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD13);
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 5
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-216:
-217:
-218:VRED_OUT0 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED0) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED0);
-219:VRED_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED1) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED1);
-220:
-221:VGREEN_OUT0 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED2) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED2);
-222:VGREEN_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED3) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED3);
-223:
-224:VBLUE_OUT0 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED4) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED4);
-225:VBLUE_OUT1 = (!GRAPH_MODE & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED5) # (GRAPH_MODE & !RAM_OE & VMEM_SRC_LATCHED5);
-226:
+216:VMEM_SRC_LATCHED14.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED14) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD14);
+217:VMEM_SRC_LATCHED15.d = (!VMEM_SRC_LATCH_HIGH & VMEM_SRC_LATCHED15) # (VMEM_SRC_LATCH_HIGH & VMEM_SRCD15);
+218:
+219:[VMEM_SRC_LATCHED0..15].ck = CLK_25M;
+220:[VMEM_SRC_LATCHED0..15].ar = !VGA_RESET;
+221:
+222:/* 
+223:      output color signal 
+224:      GRAPHMODE == 0 (Text Mode) , Shift Reg & Attrib bits (VMEM bits 8,9,10,11,12,13)
+225:      GRAPHMODE == 1 (Graph Mode), VMEM bits. VDP_HORL switches between L and H pixel data.
+226:*/
 227:
-228:/*
-229:   VGA Config registers.  WRITE ONLY, BYTE WRITE ONLY.
-230:      bit 0 = MODE, 0 for TXT, 1 for Graphics; 0 on RESET
-231:      bit 1 = FONTSEL0   FONTSEL selects from 4 font libraries stored in the FONT ROM
-232:      bit 2 = FONTSEL1
+228:VRED_OUT0 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED8) 
+229:          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED8) # (!VDP_HORL & VMEM_SRC_LATCHED0)));
+230:
+231:VRED_OUT1 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED9) 
+232:          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED9) # (!VDP_HORL & VMEM_SRC_LATCHED1)));
 233:
-234:      This register to clocked at the end of the write cycle with the deassertion of CS and R/W
-235:
-236:*/
-237:
-238:/*
-239:   Access to VGA Config registers from CPU 
-240:   CPU will assert /CPU_VGA_CFG_CS and /CPU_RW to indicate a write to the CGA config register.
-241:   VGA_CONFIG_WRITE==1 when both CPU_CGA_CFG_CS and CPU_RW are asserted (==0). 
-242:*/
-243:
-244:VGA_CONFIG_WRITE = !(CPU_VGA_CFG_CS # CPU_RW);
+234:VGREEN_OUT0 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED10) 
+235:          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED10) # (!VDP_HORL & VMEM_SRC_LATCHED2)));
+236:
+237:VGREEN_OUT1 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED11) 
+238:          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED11) # (!VDP_HORL & VMEM_SRC_LATCHED3)));
+239:
+240:VBLUE_OUT0 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED12) 
+241:          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED12) # (!VDP_HORL & VMEM_SRC_LATCHED4)));
+242:
+243:VBLUE_OUT1 = (!GRAPH_MODE0 & SREG_D7 & !RAM_OE & VMEM_SRC_LATCHED13) 
+244:          # (GRAPH_MODE0 & !RAM_OE & ((VDP_HORL & VMEM_SRC_LATCHED13) # (!VDP_HORL & VMEM_SRC_LATCHED5)));
 245:
-246:/* VGA_BUSY is 1 when the VGA memory is bring used by the VGA interface *
-247:
-248:/*  
-249:   VRAM Address is based on the HSYNC counter bit 3-9 plus the VSYNC counter bits 0-8.
-250:   A0-A6 = HSYNC_COUNTER3-9
-251:   A7-A15 = VSYNC_COUNTER0-8
-252:
-253:   This results in each 640 pixel line being 80 bytes of data, but 128 bytes apart.  Each Row takes 128 bytes 
-254:   of memory with the first 80 bytes being display data and the remaining 48 bytes unused. 
-255:   There are 480 rows, so a total of 480*128 = 61440 bytes of memory, thus 16 address lines.
-256:
-257:   This is a slightly inefficient memory layout due to the horiontal counter not being a precise power of two.  This could be
-258:   solved with a second 16 bit counter that is incremented during the correct parts of the horizontal cycle, however that would 
-259:   require quite a bit of CPLD resources. (A 16 bit counter uses 16 FF and 37 logic cells if implemented as a single counter, 
-260:   and 16FF and 23 logic cells if implemented as 2 8 bit counters with ripple)
-261:*/
-262:/*
-263:VDB_A0 = (!GRAPH_MODE & HSYNC_COUNTER3)
-264:         # ((GRAPH_MODE & HSYNC_COUNTER4));
-265:VDB_A1 = (!GRAPH_MODE & HSYNC_COUNTER4)
-266:         # ((GRAPH_MODE & HSYNC_COUNTER5));
-267:VDB_A2 = (!GRAPH_MODE & HSYNC_COUNTER5)
-268:         # ((GRAPH_MODE & HSYNC_COUNTER6));
-269:VDB_A3 = (!GRAPH_MODE & HSYNC_COUNTER6)
+246:FONTSEL0 = VMEM_SRC_LATCHED14;
+247:FONTSEL1 = VMEM_SRC_LATCHED15;
+248:
+249:
+250:/*
+251:   VGA Config registers.  WRITE ONLY, BYTE WRITE ONLY.
+252:      bit 0 = MODE, 0 for TXT, 1 for Graphics; 0 on RESET
+253:      bit 1 = FONTSEL0   FONTSEL selects from 4 font libraries stored in the FONT ROM
+254:      bit 2 = FONTSEL1
+255:
+256:      This register to clocked at the end of the write cycle with the deassertion of CS and R/W
+257:
+258:*/
+259:
+260:/*
+261:   Access to VGA Config registers from CPU 
+262:   CPU will assert /CPU_VGA_CFG_CS and /CPU_RW to indicate a write to the CGA config register.
+263:   VGA_CONFIG_WRITE==1 when both CPU_CGA_CFG_CS and CPU_RW are asserted (==0). 
+264:*/
+265:
+266:VGA_CONFIG_WRITE = !(CPU_VGA_CFG_CS # CPU_RW);
+267:
+268:/* VGA_BUSY is 1 when the VGA memory is bring used by the VGA interface */
+269:
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 6
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-270:         # ((GRAPH_MODE & HSYNC_COUNTER7));
-271:VDB_A4 = (!GRAPH_MODE & HSYNC_COUNTER7)
-272:         # ((GRAPH_MODE & HSYNC_COUNTER8));
-273:VDB_A5 = (!GRAPH_MODE & HSYNC_COUNTER8)
-274:         # ((GRAPH_MODE & HSYNC_COUNTER9));
-275:VDB_A6 = (!GRAPH_MODE & HSYNC_COUNTER9)
-276:         # ((GRAPH_MODE & VSYNC_COUNTER0));
-277:*/
-278:
-279:/* These 6 VDB address lines have adder results for text mode */
+270:
+271:FRAM_A0 = (!GRAPH_MODE0 & VSYNC_COUNTER0)
+272:         # ((GRAPH_MODE0 & 'd'0));
+273:FRAM_A1 = (!GRAPH_MODE0 & VSYNC_COUNTER1)
+274:         # ((GRAPH_MODE0 & 'd'0));
+275:FRAM_A2 = (!GRAPH_MODE0 & VSYNC_COUNTER2)
+276:         # ((GRAPH_MODE0 & 'd'0));
+277:FRAM_A3 = (!GRAPH_MODE0 & VSYNC_COUNTER3)
+278:         # ((GRAPH_MODE0 & 'd'0));
+279:
 280:
-281:/* 6 bits of addition - VSYNC_COUNTER4-9 + TXTOFFSET0-4 */
-282:/*
-283:P_TXTA7 = (VSYNC_COUNTER4 $ TXTOFFSET0);
-284:G_TXTA7 = (VSYNC_COUNTER4 & TXTOFFSET0);
-285:S_TXTA7 = P_TXTA7;
-286:CO_TXTA7 = G_TXTA7;
-287:
-288:P_TXTA8 = (VSYNC_COUNTER5 $ TXTOFFSET1);
-289:G_TXTA8 = (VSYNC_COUNTER5 & TXTOFFSET1);
-290:S_TXTA8 = P_TXTA8 $ CO_TXTA7;
-291:CO_TXTA8 = G_TXTA8 # (P_TXTA8 & CO_TXTA7);
-292:
-293:P_TXTA9 = (VSYNC_COUNTER6 $ TXTOFFSET2);
-294:G_TXTA9 = (VSYNC_COUNTER6 & TXTOFFSET2);
-295:S_TXTA9 = P_TXTA9 $ CO_TXTA8;
-296:CO_TXTA9 = G_TXTA9 # (P_TXTA9 & CO_TXTA8);
-297:
-298:P_TXTA10 = (VSYNC_COUNTER7 $ TXTOFFSET3);
-299:G_TXTA10 = (VSYNC_COUNTER7 & TXTOFFSET3);
-300:S_TXTA10 = P_TXTA10 $ CO_TXTA9;
-301:CO_TXTA10 = G_TXTA10 # (P_TXTA10 & CO_TXTA9);
-302:
-303:P_TXTA11 = (VSYNC_COUNTER8 $ TXTOFFSET4);
-304:G_TXTA11 = (VSYNC_COUNTER8 & TXTOFFSET4);
-305:S_TXTA11 = P_TXTA11 $ CO_TXTA10;
-306:CO_TXTA11 = G_TXTA11 # (P_TXTA11 & CO_TXTA10);
-307:
-308:P_TXTA12 = (VSYNC_COUNTER9);
-309:S_TXTA12 = P_TXTA11 $ CO_TXTA11;
-310:CO_TXTA12 = (P_TXTA11 & CO_TXTA11);
-311:
-312:
-313:VDB_A7  = (!GRAPH_MODE & S_TXTA7)
-314:         # ((GRAPH_MODE & VSYNC_COUNTER1));
-315:VDB_A8  = (!GRAPH_MODE & S_TXTA8)
-316:         # ((GRAPH_MODE & VSYNC_COUNTER2));
-317:VDB_A9  = (!GRAPH_MODE & S_TXTA9)
-318:         # ((GRAPH_MODE & VSYNC_COUNTER3));
-319:VDB_A10 = (!GRAPH_MODE & S_TXTA10)
-320:         # ((GRAPH_MODE & VSYNC_COUNTER4));
-321:VDB_A11 = (!GRAPH_MODE & S_TXTA11)
-322:         # ((GRAPH_MODE & VSYNC_COUNTER5));
-323:VDB_A12 = (!GRAPH_MODE & S_TXTA12)
+281:/* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
+282:
+283:HSYNC_COUNTER0.d = !HSYNC_COUNTER0 & HSYNC_ZERO;
+284:HSYNC_COUNTER0.ck = CLK_25M;
+285:HSYNC_COUNTER0.ar = !VGA_RESET;
+286:
+287:HSYNC_COUNTER1.d = ((HSYNC_COUNTER0&!HSYNC_COUNTER1) # (!HSYNC_COUNTER0&HSYNC_COUNTER1)) & HSYNC_ZERO;
+288:HSYNC_COUNTER1.ck = CLK_25M;
+289:HSYNC_COUNTER1.ar = !VGA_RESET;
+290:
+291:HSYNC_COUNTER2T = HSYNC_COUNTER0&HSYNC_COUNTER1;
+292:HSYNC_COUNTER2.d = ((HSYNC_COUNTER2T&!HSYNC_COUNTER2) # (!HSYNC_COUNTER2T&HSYNC_COUNTER2)) & HSYNC_ZERO;
+293:HSYNC_COUNTER2.ck = CLK_25M;
+294:HSYNC_COUNTER2.ar = !VGA_RESET;
+295:
+296:HSYNC_COUNTER3T = HSYNC_COUNTER2T&HSYNC_COUNTER2;
+297:HSYNC_COUNTER3.d = ((HSYNC_COUNTER3T&!HSYNC_COUNTER3) # (!HSYNC_COUNTER3T&HSYNC_COUNTER3)) & HSYNC_ZERO;
+298:HSYNC_COUNTER3.ck = CLK_25M;
+299:HSYNC_COUNTER3.ar = !VGA_RESET;
+300:
+301:HSYNC_COUNTER4T = HSYNC_COUNTER3T&HSYNC_COUNTER3;
+302:HSYNC_COUNTER4.d = ((HSYNC_COUNTER4T&!HSYNC_COUNTER4) # (!HSYNC_COUNTER4T&HSYNC_COUNTER4)) & HSYNC_ZERO;
+303:HSYNC_COUNTER4.ck = CLK_25M;
+304:HSYNC_COUNTER4.ar = !VGA_RESET;
+305:
+306:HSYNC_COUNTER5T = HSYNC_COUNTER4T&HSYNC_COUNTER4;
+307:HSYNC_COUNTER5.d = ((HSYNC_COUNTER5T&!HSYNC_COUNTER5) # (!HSYNC_COUNTER5T&HSYNC_COUNTER5)) & HSYNC_ZERO;
+308:HSYNC_COUNTER5.ck = CLK_25M;
+309:HSYNC_COUNTER5.ar = !VGA_RESET;
+310:
+311:HSYNC_COUNTER6T = HSYNC_COUNTER5T&HSYNC_COUNTER5;
+312:HSYNC_COUNTER6.d = ((HSYNC_COUNTER6T&!HSYNC_COUNTER6) # (!HSYNC_COUNTER6T&HSYNC_COUNTER6)) & HSYNC_ZERO;
+313:HSYNC_COUNTER6.ck = CLK_25M;
+314:HSYNC_COUNTER6.ar = !VGA_RESET;
+315:
+316:HSYNC_COUNTER7T = HSYNC_COUNTER6T&HSYNC_COUNTER6;
+317:HSYNC_COUNTER7.d = ((HSYNC_COUNTER7T&!HSYNC_COUNTER7) # (!HSYNC_COUNTER7T&HSYNC_COUNTER7)) & HSYNC_ZERO;
+318:HSYNC_COUNTER7.ck = CLK_25M;
+319:HSYNC_COUNTER7.ar = !VGA_RESET;
+320:
+321:HSYNC_COUNTER8T = HSYNC_COUNTER7T&HSYNC_COUNTER7;
+322:HSYNC_COUNTER8.d = ((HSYNC_COUNTER8T&!HSYNC_COUNTER8) # (!HSYNC_COUNTER8T&HSYNC_COUNTER8)) & HSYNC_ZERO;
+323:HSYNC_COUNTER8.ck = CLK_25M;
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 7
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-324:         # ((GRAPH_MODE & VSYNC_COUNTER6));
+324:HSYNC_COUNTER8.ar = !VGA_RESET;
 325:
-326:
-327:
-328:VDB_A13 = (!GRAPH_MODE & 'd'0)
-329:         # ((GRAPH_MODE & VSYNC_COUNTER7));
-330:VDB_A14 = (!GRAPH_MODE & 'd'0)
-331:         # ((GRAPH_MODE & VSYNC_COUNTER8));
-332:VDB_A15 = (!GRAPH_MODE & 'd'0)
-333:         # ((GRAPH_MODE & VSYNC_COUNTER9));
+326:HSYNC_COUNTER9T = HSYNC_COUNTER8T&HSYNC_COUNTER8;
+327:HSYNC_COUNTER9.d = ((HSYNC_COUNTER9T&!HSYNC_COUNTER9) # (!HSYNC_COUNTER9T&HSYNC_COUNTER9)) & HSYNC_ZERO;
+328:HSYNC_COUNTER9.ck = CLK_25M;
+329:HSYNC_COUNTER9.ar = !VGA_RESET;
+330:
+331:FIELD hsync_counter_field = [HSYNC_COUNTER9..0];
+332:FIELD hsync_counter_3_field = [HSYNC_COUNTER2..0];
+333:FIELD hsync_counter_4_field = [HSYNC_COUNTER3..0];
 334:
-335:
-336:
-337:[VDB_A0..15].oe = !RAM_OE;
-338:*/
-339:
-340:
-341:FRAM_A0 = (!GRAPH_MODE & VSYNC_COUNTER0)
-342:         # ((GRAPH_MODE & 'd'0));
-343:FRAM_A1 = (!GRAPH_MODE & VSYNC_COUNTER1)
-344:         # ((GRAPH_MODE & 'd'0));
-345:FRAM_A2 = (!GRAPH_MODE & VSYNC_COUNTER2)
-346:         # ((GRAPH_MODE & 'd'0));
-347:FRAM_A3 = (!GRAPH_MODE & VSYNC_COUNTER3)
-348:         # ((GRAPH_MODE & 'd'0));
-349:
+335:/* 
+336:   HSYNC_ZERO is 0 when we need to loop the counter.  This is Logical AND'ed with the other inputs to each
+337:   counters .d value, so when we are at the loop location, the next location loaded will be 0.
+338:   HSYNC_ZERO us normally at 1, and goes to 0 for 1 clock cycle ( CLK25 low to CLK25 low ), and that
+339:   edge is also used to increment the vertical counters via VSYNC_CLOCK.
+340:*/
+341:
+342:HSYNC_ZERO = !(hsync_counter_field:['d'799]);
+343:
+344:/* 
+345:   The VSYNC_CLOCK signal is used to increment the V_SYNC counter at the end of each horizontal sync row.   
+346:   The reason for two FFs is to first capture the HSYNC value (on the clock edge opposite of the counter itself changing)
+347:   followed by a second FF to sync the V_SYNC increment with the rising edge of CLK_25M.   This allows both the H_SYNC and V_SYNC 
+348:   counters to be used in logical operations that are clocked on the same clock signal (falling CLK_25M)
+349:*/
 350:
-351:/* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
-352:
-353:HSYNC_COUNTER0.d = !HSYNC_COUNTER0 & HSYNC_ZERO;
-354:HSYNC_COUNTER0.ck = CLK_25M;
-355:HSYNC_COUNTER0.ar = !VGA_RESET;
-356:
-357:HSYNC_COUNTER1.d = ((HSYNC_COUNTER0&!HSYNC_COUNTER1) # (!HSYNC_COUNTER0&HSYNC_COUNTER1)) & HSYNC_ZERO;
-358:HSYNC_COUNTER1.ck = CLK_25M;
-359:HSYNC_COUNTER1.ar = !VGA_RESET;
-360:
-361:HSYNC_COUNTER2T = HSYNC_COUNTER0&HSYNC_COUNTER1;
-362:HSYNC_COUNTER2.d = ((HSYNC_COUNTER2T&!HSYNC_COUNTER2) # (!HSYNC_COUNTER2T&HSYNC_COUNTER2)) & HSYNC_ZERO;
-363:HSYNC_COUNTER2.ck = CLK_25M;
-364:HSYNC_COUNTER2.ar = !VGA_RESET;
+351:
+352:VSYNC_CLOCK_A.d = !HSYNC_ZERO;
+353:VSYNC_CLOCK_A.ck = !CLK_25M;
+354:VSYNC_CLOCK_A.ar = !VGA_RESET;
+355:
+356:VSYNC_CLOCK_B.d = VSYNC_CLOCK_A;
+357:VSYNC_CLOCK_B.ck = CLK_25M;
+358:VSYNC_CLOCK_B.ar = !VGA_RESET;
+359:
+360:/* Vertical Sync 9 bit counter, 0-498.  VSYNC_ZERO is used to reset this counter so it loops from 498 back to 0 */
+361:
+362:VSYNC_COUNTER0.d = (!VSYNC_COUNTER0) & VSYNC_ZERO;
+363:VSYNC_COUNTER0.ck = VSYNC_CLOCK_B;
+364:VSYNC_COUNTER0.ar = !VGA_RESET;
 365:
-366:HSYNC_COUNTER3T = HSYNC_COUNTER2T&HSYNC_COUNTER2;
-367:HSYNC_COUNTER3.d = ((HSYNC_COUNTER3T&!HSYNC_COUNTER3) # (!HSYNC_COUNTER3T&HSYNC_COUNTER3)) & HSYNC_ZERO;
-368:HSYNC_COUNTER3.ck = CLK_25M;
-369:HSYNC_COUNTER3.ar = !VGA_RESET;
-370:
-371:HSYNC_COUNTER4T = HSYNC_COUNTER3T&HSYNC_COUNTER3;
-372:HSYNC_COUNTER4.d = ((HSYNC_COUNTER4T&!HSYNC_COUNTER4) # (!HSYNC_COUNTER4T&HSYNC_COUNTER4)) & HSYNC_ZERO;
-373:HSYNC_COUNTER4.ck = CLK_25M;
-374:HSYNC_COUNTER4.ar = !VGA_RESET;
-375:
-376:HSYNC_COUNTER5T = HSYNC_COUNTER4T&HSYNC_COUNTER4;
-377:HSYNC_COUNTER5.d = ((HSYNC_COUNTER5T&!HSYNC_COUNTER5) # (!HSYNC_COUNTER5T&HSYNC_COUNTER5)) & HSYNC_ZERO;
+366:VSYNC_COUNTER1.d = ((VSYNC_COUNTER0&!VSYNC_COUNTER1) # (!VSYNC_COUNTER0&VSYNC_COUNTER1)) & VSYNC_ZERO;
+367:VSYNC_COUNTER1.ck = VSYNC_CLOCK_B;
+368:VSYNC_COUNTER1.ar = !VGA_RESET;
+369:
+370:VSYNC_COUNTER2T = VSYNC_COUNTER0&VSYNC_COUNTER1;
+371:VSYNC_COUNTER2.d = ((VSYNC_COUNTER2T&!VSYNC_COUNTER2) # (!VSYNC_COUNTER2T&VSYNC_COUNTER2)) & VSYNC_ZERO;
+372:VSYNC_COUNTER2.ck = VSYNC_CLOCK_B;
+373:VSYNC_COUNTER2.ar = !VGA_RESET;
+374:
+375:VSYNC_COUNTER3T = VSYNC_COUNTER2T&VSYNC_COUNTER2;
+376:VSYNC_COUNTER3.d = ((VSYNC_COUNTER3T&!VSYNC_COUNTER3) # (!VSYNC_COUNTER3T&VSYNC_COUNTER3)) & VSYNC_ZERO;
+377:VSYNC_COUNTER3.ck = VSYNC_CLOCK_B;
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 8
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-378:HSYNC_COUNTER5.ck = CLK_25M;
-379:HSYNC_COUNTER5.ar = !VGA_RESET;
-380:
-381:HSYNC_COUNTER6T = HSYNC_COUNTER5T&HSYNC_COUNTER5;
-382:HSYNC_COUNTER6.d = ((HSYNC_COUNTER6T&!HSYNC_COUNTER6) # (!HSYNC_COUNTER6T&HSYNC_COUNTER6)) & HSYNC_ZERO;
-383:HSYNC_COUNTER6.ck = CLK_25M;
-384:HSYNC_COUNTER6.ar = !VGA_RESET;
-385:
-386:HSYNC_COUNTER7T = HSYNC_COUNTER6T&HSYNC_COUNTER6;
-387:HSYNC_COUNTER7.d = ((HSYNC_COUNTER7T&!HSYNC_COUNTER7) # (!HSYNC_COUNTER7T&HSYNC_COUNTER7)) & HSYNC_ZERO;
-388:HSYNC_COUNTER7.ck = CLK_25M;
-389:HSYNC_COUNTER7.ar = !VGA_RESET;
-390:
-391:HSYNC_COUNTER8T = HSYNC_COUNTER7T&HSYNC_COUNTER7;
-392:HSYNC_COUNTER8.d = ((HSYNC_COUNTER8T&!HSYNC_COUNTER8) # (!HSYNC_COUNTER8T&HSYNC_COUNTER8)) & HSYNC_ZERO;
-393:HSYNC_COUNTER8.ck = CLK_25M;
-394:HSYNC_COUNTER8.ar = !VGA_RESET;
-395:
-396:HSYNC_COUNTER9T = HSYNC_COUNTER8T&HSYNC_COUNTER8;
-397:HSYNC_COUNTER9.d = ((HSYNC_COUNTER9T&!HSYNC_COUNTER9) # (!HSYNC_COUNTER9T&HSYNC_COUNTER9)) & HSYNC_ZERO;
-398:HSYNC_COUNTER9.ck = CLK_25M;
-399:HSYNC_COUNTER9.ar = !VGA_RESET;
-400:
-401:FIELD hsync_counter_field = [HSYNC_COUNTER9..0];
-402:FIELD hsync_counter_3_field = [HSYNC_COUNTER2..0];
-403:
-404:/* 
-405:   HSYNC_ZERO is 0 when we need to loop the counter.  This is Logical AND'ed with the other inputs to each
-406:   counters .d value, so when we are at the loop location, the next location loaded will be 0.
-407:   HSYNC_ZERO us normally at 1, and goes to 0 for 1 clock cycle ( CLK25 low to CLK25 low ), and that
-408:   edge is also used to increment the vertical counters via VSYNC_CLOCK.
-409:*/
-410:
-411:HSYNC_ZERO = !(hsync_counter_field:['d'799]);
+378:VSYNC_COUNTER3.ar = !VGA_RESET;
+379:
+380:VSYNC_COUNTER4T = VSYNC_COUNTER3T&VSYNC_COUNTER3;
+381:VSYNC_COUNTER4.d = ((VSYNC_COUNTER4T&!VSYNC_COUNTER4) # (!VSYNC_COUNTER4T&VSYNC_COUNTER4)) & VSYNC_ZERO;
+382:VSYNC_COUNTER4.ck = VSYNC_CLOCK_B;
+383:VSYNC_COUNTER4.ar = !VGA_RESET;
+384:
+385:VSYNC_COUNTER5T = VSYNC_COUNTER4T&VSYNC_COUNTER4;
+386:VSYNC_COUNTER5.d = ((VSYNC_COUNTER5T&!VSYNC_COUNTER5) # (!VSYNC_COUNTER5T&VSYNC_COUNTER5)) & VSYNC_ZERO;
+387:VSYNC_COUNTER5.ck = VSYNC_CLOCK_B;
+388:VSYNC_COUNTER5.ar = !VGA_RESET;
+389:
+390:VSYNC_COUNTER6T = VSYNC_COUNTER5T&VSYNC_COUNTER5;
+391:VSYNC_COUNTER6.d = ((VSYNC_COUNTER6T&!VSYNC_COUNTER6) # (!VSYNC_COUNTER6T&VSYNC_COUNTER6)) & VSYNC_ZERO;
+392:VSYNC_COUNTER6.ck = VSYNC_CLOCK_B;
+393:VSYNC_COUNTER6.ar = !VGA_RESET;
+394:
+395:VSYNC_COUNTER7T = VSYNC_COUNTER6T&VSYNC_COUNTER6;
+396:VSYNC_COUNTER7.d = ((VSYNC_COUNTER7T&!VSYNC_COUNTER7) # (!VSYNC_COUNTER7T&VSYNC_COUNTER7)) & VSYNC_ZERO;
+397:VSYNC_COUNTER7.ck = VSYNC_CLOCK_B;
+398:VSYNC_COUNTER7.ar = !VGA_RESET;
+399:
+400:VSYNC_COUNTER8T = VSYNC_COUNTER7T&VSYNC_COUNTER7;
+401:VSYNC_COUNTER8.d = ((VSYNC_COUNTER8T&!VSYNC_COUNTER8) # (!VSYNC_COUNTER8T&VSYNC_COUNTER8)) & VSYNC_ZERO;
+402:VSYNC_COUNTER8.ck = VSYNC_CLOCK_B;
+403:VSYNC_COUNTER8.ar = !VGA_RESET;
+404:
+405:VSYNC_COUNTER9T = VSYNC_COUNTER8T&VSYNC_COUNTER8;
+406:VSYNC_COUNTER9.d = ((VSYNC_COUNTER9T&!VSYNC_COUNTER9) # (!VSYNC_COUNTER9T&VSYNC_COUNTER9)) & VSYNC_ZERO;
+407:VSYNC_COUNTER9.ck = VSYNC_CLOCK_B;
+408:VSYNC_COUNTER9.ar = !VGA_RESET;
+409:
+410:FIELD vsync_counter_field = [VSYNC_COUNTER9..0];
+411:FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
 412:
-413:/* 
-414:   The VSYNC_CLOCK signal is used to increment the V_SYNC counter at the end of each horizontal sync row.   
-415:   The reason for two FFs is to first capture the HSYNC value (on the clock edge opposite of the counter itself changing)
-416:   followed by a second FF to sync the V_SYNC increment with the rising edge of CLK_25M.   This allows both the H_SYNC and V_SYNC 
-417:   counters to be used in logical operations that are clocked on the same clock signal (falling CLK_25M)
-418:*/
-419:
-420:
-421:VSYNC_CLOCK_A.d = !HSYNC_ZERO;
-422:VSYNC_CLOCK_A.ck = !CLK_25M;
-423:VSYNC_CLOCK_A.ar = !VGA_RESET;
+413:VSYNC_ZERO = !(vsync_counter_field:['d'524]);
+414:
+415:/* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row */
+416:VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:[0..'d'479]);
+417:
+418:/* 
+419:   VERT_SYNC_INTERRUPT is used to tell the CPU that we are entering the vertical refresh interval.
+420:   VERY_SYNC_INTERRUPT goes to 1 during the active part of the display, and the falling edge indicates 
+421:   entering the refresh interval
+422: */
+423:VERT_SYNC_INTERRUPT = VSYNC_DISPLAY_ACTIVE;
 424:
-425:VSYNC_CLOCK_B.d = VSYNC_CLOCK_A;
-426:VSYNC_CLOCK_B.ck = CLK_25M;
-427:VSYNC_CLOCK_B.ar = !VGA_RESET;
-428:
-429:/* Vertical Sync 9 bit counter, 0-498.  VSYNC_ZERO is used to reset this counter so it loops from 498 back to 0 */
+425:/*  NOT USING
+426:VGA_DISPLAY_ACTIVE.d = (hsync_counter_field:['d'8..'d'647]) & (VSYNC_DISPLAY_ACTIVE);
+427:VGA_DISPLAY_ACTIVE.ck = !CLK_25M;
+428:VGA_DISPLAY_ACTIVE.ar = !VGA_RESET;
+429:*/
 430:
-431:VSYNC_COUNTER0.d = (!VSYNC_COUNTER0) & VSYNC_ZERO;
+431:/* 
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 9
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-432:VSYNC_COUNTER0.ck = VSYNC_CLOCK_B;
-433:VSYNC_COUNTER0.ar = !VGA_RESET;
-434:
-435:VSYNC_COUNTER1.d = ((VSYNC_COUNTER0&!VSYNC_COUNTER1) # (!VSYNC_COUNTER0&VSYNC_COUNTER1)) & VSYNC_ZERO;
-436:VSYNC_COUNTER1.ck = VSYNC_CLOCK_B;
-437:VSYNC_COUNTER1.ar = !VGA_RESET;
-438:
-439:VSYNC_COUNTER2T = VSYNC_COUNTER0&VSYNC_COUNTER1;
-440:VSYNC_COUNTER2.d = ((VSYNC_COUNTER2T&!VSYNC_COUNTER2) # (!VSYNC_COUNTER2T&VSYNC_COUNTER2)) & VSYNC_ZERO;
-441:VSYNC_COUNTER2.ck = VSYNC_CLOCK_B;
-442:VSYNC_COUNTER2.ar = !VGA_RESET;
+432:   RAM_OE is used by the VRAM CE ,OE, and WE lines to select when the video adapter is using VRAM.  
+433:   It is active low, so ==0 indicates VRAM is being used by the video adapter 
+434:*/
+435:
+436:RAM_OE.d = !((hsync_counter_field:[0..'d'647]) & (VSYNC_DISPLAY_ACTIVE));
+437:RAM_OE.ck = !CLK_25M;
+438:RAM_OE.ap = !VGA_RESET;
+439:
+440:VGA_BUSY.d =  ((hsync_counter_field:[0..'d'647]) # (hsync_counter_field:['d'792..'d'799]) ) & (VSYNC_DISPLAY_ACTIVE);
+441:VGA_BUSY.ck = !CLK_25M;
+442:VGA_BUSY.ar = !VGA_RESET;
 443:
-444:VSYNC_COUNTER3T = VSYNC_COUNTER2T&VSYNC_COUNTER2;
-445:VSYNC_COUNTER3.d = ((VSYNC_COUNTER3T&!VSYNC_COUNTER3) # (!VSYNC_COUNTER3T&VSYNC_COUNTER3)) & VSYNC_ZERO;
-446:VSYNC_COUNTER3.ck = VSYNC_CLOCK_B;
-447:VSYNC_COUNTER3.ar = !VGA_RESET;
+444:/* Control of VRAM */
+445:/* CPU_VRAM_ACCESS_ENABLED == 0 when the CPU is doing an active cycle(including chip select), and ==1 when the VGA is in control */
+446:
+447:/* In graphics mode, we need to go between the low and high data values.  HC0 -> 0, HC1 -> 1 */
 448:
-449:VSYNC_COUNTER4T = VSYNC_COUNTER3T&VSYNC_COUNTER3;
-450:VSYNC_COUNTER4.d = ((VSYNC_COUNTER4T&!VSYNC_COUNTER4) # (!VSYNC_COUNTER4T&VSYNC_COUNTER4)) & VSYNC_ZERO;
-451:VSYNC_COUNTER4.ck = VSYNC_CLOCK_B;
-452:VSYNC_COUNTER4.ar = !VGA_RESET;
-453:
-454:VSYNC_COUNTER5T = VSYNC_COUNTER4T&VSYNC_COUNTER4;
-455:VSYNC_COUNTER5.d = ((VSYNC_COUNTER5T&!VSYNC_COUNTER5) # (!VSYNC_COUNTER5T&VSYNC_COUNTER5)) & VSYNC_ZERO;
-456:VSYNC_COUNTER5.ck = VSYNC_CLOCK_B;
-457:VSYNC_COUNTER5.ar = !VGA_RESET;
-458:
-459:VSYNC_COUNTER6T = VSYNC_COUNTER5T&VSYNC_COUNTER5;
-460:VSYNC_COUNTER6.d = ((VSYNC_COUNTER6T&!VSYNC_COUNTER6) # (!VSYNC_COUNTER6T&VSYNC_COUNTER6)) & VSYNC_ZERO;
-461:VSYNC_COUNTER6.ck = VSYNC_CLOCK_B;
-462:VSYNC_COUNTER6.ar = !VGA_RESET;
+449:VDP_HORL =  (GRAPH_MODE0 & HSYNC_COUNTER0 & !RAM_OE);
+450:
+451:VRAM_LOW_CE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & CPU_LDS );
+452:VRAM_HIGH_CE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & CPU_UDS );
+453:VRAM_OE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & !CPU_RW );
+454:VRAM_WE = (CPU_VRAM_ACCESS_ENABLED # CPU_RW );
+455:
+456:SREG_LOAD.d = (hsync_counter_3_field:['d'7] & hsync_counter_field:['d'0..'d'647]);
+457:SREG_LOAD.ck = !CLK_25M;
+458:SREG_LOAD.ar = !VGA_RESET;
+459:
+460:SREG_SHIFT.d = (hsync_counter_field:['d'7..'d'647] & vsync_counter_field:['d'0..'d'479]);
+461:SREG_SHIFT.ck = !CLK_25M;
+462:SREG_SHIFT.ar = !VGA_RESET;
 463:
-464:VSYNC_COUNTER7T = VSYNC_COUNTER6T&VSYNC_COUNTER6;
-465:VSYNC_COUNTER7.d = ((VSYNC_COUNTER7T&!VSYNC_COUNTER7) # (!VSYNC_COUNTER7T&VSYNC_COUNTER7)) & VSYNC_ZERO;
-466:VSYNC_COUNTER7.ck = VSYNC_CLOCK_B;
-467:VSYNC_COUNTER7.ar = !VGA_RESET;
-468:
-469:VSYNC_COUNTER8T = VSYNC_COUNTER7T&VSYNC_COUNTER7;
-470:VSYNC_COUNTER8.d = ((VSYNC_COUNTER8T&!VSYNC_COUNTER8) # (!VSYNC_COUNTER8T&VSYNC_COUNTER8)) & VSYNC_ZERO;
-471:VSYNC_COUNTER8.ck = VSYNC_CLOCK_B;
-472:VSYNC_COUNTER8.ar = !VGA_RESET;
-473:
-474:VSYNC_COUNTER9T = VSYNC_COUNTER8T&VSYNC_COUNTER8;
-475:VSYNC_COUNTER9.d = ((VSYNC_COUNTER9T&!VSYNC_COUNTER9) # (!VSYNC_COUNTER9T&VSYNC_COUNTER9)) & VSYNC_ZERO;
-476:VSYNC_COUNTER9.ck = VSYNC_CLOCK_B;
-477:VSYNC_COUNTER9.ar = !VGA_RESET;
-478:
-479:FIELD vsync_counter_field = [VSYNC_COUNTER9..0];
-480:VSYNC_ZERO = !(vsync_counter_field:['d'524]);
+464:VGA_HSYNC.d = !(hsync_counter_field:['d'664..'d'759]);
+465:VGA_HSYNC.ck = !CLK_25M;
+466:VGA_HSYNC.ap = !VGA_RESET;
+467:
+468:VGA_VSYNC.d = !(vsync_counter_field:['d'490..'d'491]);
+469:VGA_VSYNC.ck = !CLK_25M;
+470:VGA_VSYNC.ar = !VGA_RESET;
+471:
+472:/*
+473:      VGA_BUSY is a flag that indicates if the Video memory can be accessed by the CPU.  
+474:         == 1 indicates the video controller is usig the memory
+475:         == 0 indicates the memory is available for CPU access.
+476:         This needs to be active outside of the video access hcount, and during the vertical
+477:         refresh period. It needs a guard band around the start time to guarentee a CPU cycle can
+478:         complete before the video side needs access.  
+479:
+480:         ((hsync_counter_field:[0..'d'647]) # (hsync_counter_field:['d'792..'d'799]) ) & (VSYNC_DISPLAY_ACTIVE);
 481:
-482:/* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row */
-483:VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:[0..'d'479]);
-484:
-485:/* 
+482:
+483:      VGA_BUSY_CSLOCKED is a version of VGA_BUSY that is clocked at the start of a CPU
+484:         access cycle.  It is used to guarentee that the video memory cannot become busy during
+485:         the middle of a CPU access cycle.  As such you have to guarentee there is enough guard 
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 10
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-486:   VERT_SYNC_INTERRUPT is used to tell the CPU that we are entering the vertical refresh interval.
-487:   VERY_SYNC_INTERRUPT goes to 1 during the active part of the display, and the falling edge indicates 
-488:   entering the refresh interval
-489: */
-490:VERT_SYNC_INTERRUPT = VSYNC_DISPLAY_ACTIVE;
-491:
-492:/*  NOT USING
-493:VGA_DISPLAY_ACTIVE.d = (hsync_counter_field:['d'8..'d'647]) & (VSYNC_DISPLAY_ACTIVE);
-494:VGA_DISPLAY_ACTIVE.ck = !CLK_25M;
-495:VGA_DISPLAY_ACTIVE.ar = !VGA_RESET;
+486:         time around VGA_BUSY to account for a full cpu cycle (250ns, or 7 pixle clocks)
+487:         This signal is also used to trigger the SBUS_TO_VRAM_AD_OE output, which turns on the
+488:         buffers that connect the CPU bus to the Video memory bus. SBUS_TO_VRAM_AD_OE in enabled
+489:         when this value is 0 AND CPU_VGA_VRAM_CS is asserted (==0).   
+490:
+491:      CPU_VRAM_DTACK is the DTACK signal back to the CPU.  When it is 1, the CPU will add waitstates
+492:         during an access until it goes to 0.  Once DTACK goes to 0, the CPU will complete the access cycle.
+493:         This gate is clocked on CLK_25M, which guarentees a 19ns delay from when VGA_BUSY falls to 0.  Since the VRAM_AD_OE 
+494:         is enabled as soon as VGA_BUSY falls, the address and data signals will have additional time to get to the VRAM.
+495:         The VRAM OE/WE/CE signals should also be asserted using this same combinatorial. 
 496:*/
 497:
-498:/* 
-499:   RAM_OE is used by the VRAM CE ,OE, and WE lines to select when the video adapter is using VRAM.  
-500:   It is active low, so ==0 indicates VRAM is being used by the video adapter 
-501:*/
-502:
-503:RAM_OE.d = !((hsync_counter_field:[0..'d'647]) & (VSYNC_DISPLAY_ACTIVE));
-504:RAM_OE.ck = !CLK_25M;
-505:RAM_OE.ap = !VGA_RESET;
-506:
-507:VGA_BUSY.d =  ((hsync_counter_field:[0..'d'647]) # (hsync_counter_field:['d'792..'d'799]) ) & (VSYNC_DISPLAY_ACTIVE);
-508:VGA_BUSY.ck = !CLK_25M;
-509:VGA_BUSY.ar = !VGA_RESET;
-510:
-511:
-512:/* Control of VRAM */
-513:/* CPU_VRAM_ACCESS_ENABLED == 0 when the CPU is doing an active cycle(including chip select), and ==1 when the VGA is in control */
-514:
-515:VDP_HTOL =  (GRAPH_MODE & HSYNC_COUNTER3 & !RAM_OE);
-516:
-517:VRAM_LOW_CE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & CPU_LDS );
-518:VRAM_HIGH_CE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & CPU_UDS );
-519:VRAM_OE = (CPU_VRAM_ACCESS_ENABLED & RAM_OE) # (!CPU_VRAM_ACCESS_ENABLED & !CPU_RW );
-520:VRAM_WE = (CPU_VRAM_ACCESS_ENABLED # CPU_RW );
-521:
-522:SR_LOAD_PRE.d =  (!(hsync_counter_3_field:[6]));
-523:SR_LOAD_PRE.ck = !CLK_25M;
-524:
-525:SR_LOAD.d = SR_LOAD_PRE;
-526:SR_LOAD.ck = CLK_25M;
-527:SR_LOAD.ar = !VGA_RESET;
-528:
-529:/* SR_CE.d = !((hsync_counter_field:['d'7..'d'647]) & VSYNC_DISPLAY_ACTIVE); */
-530:
-531:SR_CE.d = !((hsync_counter_field:['d'7..'d'647]) & (VSYNC_DISPLAY_ACTIVE) );
-532:SR_CE.ck = !CLK_25M;
-533:SR_CE.ar = !VGA_RESET;
-534:
-535:VGA_HSYNC.d = !(hsync_counter_field:['d'664..'d'759]);
-536:VGA_HSYNC.ck = !CLK_25M;
-537:VGA_HSYNC.ap = !VGA_RESET;
+498:VGA_BUSY_CSLOCKED.d = VGA_BUSY;
+499:VGA_BUSY_CSLOCKED.ck = !CPU_VGA_VRAM_CS;
+500:VGA_BUSY_CSLOCKED.ar = !VGA_BUSY # !VGA_RESET;
+501:
+502:CPU_VRAM_CS_CLOCKED.d = CPU_VGA_VRAM_CS;
+503:CPU_VRAM_CS_CLOCKED.ck = !CLK_25M;
+504:CPU_VRAM_CS_CLOCKED.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
+505:
+506:CPU_VRAM_ACCESS_ENABLED.d = VGA_BUSY_CSLOCKED # CPU_VRAM_CS_CLOCKED;
+507:CPU_VRAM_ACCESS_ENABLED.ck = CLK_25M;
+508:CPU_VRAM_ACCESS_ENABLED.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
+509:
+510:CPU_VRAM_DTACK.d = CPU_VRAM_ACCESS_ENABLED;
+511:CPU_VRAM_DTACK.ck = !CLK_25M;
+512:CPU_VRAM_DTACK.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
+513:
+514:/* CPU_VRAM_ACCESS_ENABLED == 0 when the CPU is doing an active cycle, and ==1 when the VGA is in control */
+515:
+516:SBUS_TO_VRAM_AD_OE = CPU_VRAM_ACCESS_ENABLED;
+517:
+518:/* Address Mode Generation 
+519:     Address Mode is controlled by the 3 bit field VADDR_MODE[0,1,2].   Since it is an encoded field
+520:     we will generate the control variables for each condition, and use those to generate the final
+521:     mode.
+522:
+523:     RESET_ALL = In text mode, do at end last line.
+524:     RESET_L6 = In text mode -
+525:
+526:     [VADDR_MODE0..2] - Address Increment Mode
+527:        000  DO NOTHING   vaddr_mode_field:['d'0] 
+528:        001  INCREMENT    vaddr_mode_field:['d'1]
+529:        010  RESET_A6     vaddr_mode_field:['d'2]
+530:        011  RESET_A6I    vaddr_mode_field:['d'3]
+531:        100  RESET_ALL    vaddr_mode_field:['d'4]
+532:        101  RESET_ALL    vaddr_mode_field:['d'5]
+533:        110  RESET_ALL    vaddr_mode_field:['d'6]
+534:        111  RESET_ALL    vaddr_mode_field:['d'7]
+535:                          vaddr_mode_field:['d'4..'d'7]
+536:
+537:*/
 538:
-539:VGA_VSYNC.d = !(vsync_counter_field:['d'490..'d'491]);
+539:VADDR_INCREMENT = (hsync_counter_3_field:['d'7] & hsync_counter_field:['d'0..'d'647]);
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 11
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
+Created Tue Mar 14 17:50:19 2023
 
-540:VGA_VSYNC.ck = !CLK_25M;
-541:VGA_VSYNC.ar = !VGA_RESET;
-542:
-543:/*
-544:      VGA_BUSY is a flag that indicates if the Video memory can be accessed by the CPU.  
-545:         == 1 indicates the video controller is usig the memory
-546:         == 0 indicates the memory is available for CPU access.
-547:         This needs to be active outside of the video access hcount, and during the vertical
-548:         refresh period. It needs a guard band around the start time to guarentee a CPU cycle can
-549:         complete before the video side needs access.  
-550:
-551:         ((hsync_counter_field:[0..'d'647]) # (hsync_counter_field:['d'792..'d'799]) ) & (VSYNC_DISPLAY_ACTIVE);
-552:
-553:
-554:      VGA_BUSY_CSLOCKED is a version of VGA_BUSY that is clocked at the start of a CPU
-555:         access cycle.  It is used to guarentee that the video memory cannot become busy during
-556:         the middle of a CPU access cycle.  As such you have to guarentee there is enough guard 
-557:         time around VGA_BUSY to account for a full cpu cycle (250ns, or 7 pixle clocks)
-558:         This signal is also used to trigger the SBUS_TO_VRAM_AD_OE output, which turns on the
-559:         buffers that connect the CPU bus to the Video memory bus. SBUS_TO_VRAM_AD_OE in enabled
-560:         when this value is 0 AND CPU_VGA_VRAM_CS is asserted (==0).   
+540:VADDR_RESET_ALL = (hsync_counter_field:['d'799] & vsync_counter_field:['d'524]);
+541:VADDR_RESET_A6 =  (hsync_counter_field:['d'799] & vsync_counter_4_field:['d'0..'d'14]);
+542:VADDR_RESET_A6I = (hsync_counter_field:['d'799] & vsync_counter_4_field:['d'15]);
+543:VADDR_MODE0 = VADDR_RESET_A6I # VADDR_INCREMENT;
+544:VADDR_MODE1 = VADDR_RESET_A6 # VADDR_RESET_A6I;
+545:VADDR_MODE2 = VADDR_RESET_ALL;
+546:
+547:/*
+548:
+549:
+550:Total dedicated input used:     2/4     (50%)
+551:Total I/O pins used             59/64   (92%)
+552:Total Logic cells used          96/128  (75%)
+553:Total Flip-Flop used            56/128  (43%)
+554:Total Foldback logic used       3/128   (2%)
+555:Total Nodes+FB/MCells           97/128  (75%)
+556:Total cascade used              2
+557:Total input pins                36
+558:Total output pins               25
+559:Total Pts                       300
+560:
 561:
-562:      CPU_VRAM_DTACK is the DTACK signal back to the CPU.  When it is 1, the CPU will add waitstates
-563:         during an access until it goes to 0.  Once DTACK goes to 0, the CPU will complete the access cycle.
-564:         This gate is clocked on CLK_25M, which guarentees a 19ns delay from when VGA_BUSY falls to 0.  Since the VRAM_AD_OE 
-565:         is enabled as soon as VGA_BUSY falls, the address and data signals will have additional time to get to the VRAM.
-566:         The VRAM OE/WE/CE signals should also be asserted using this same combinatorial. 
-567:*/
-568:
-569:
-570:
-571:VGA_BUSY_CSLOCKED.d = VGA_BUSY;
-572:VGA_BUSY_CSLOCKED.ck = !CPU_VGA_VRAM_CS;
-573:VGA_BUSY_CSLOCKED.ar = !VGA_BUSY # !VGA_RESET;
-574:
-575:CPU_VRAM_CS_CLOCKED.d = CPU_VGA_VRAM_CS;
-576:CPU_VRAM_CS_CLOCKED.ck = !CLK_25M;
-577:CPU_VRAM_CS_CLOCKED.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
-578:
-579:CPU_VRAM_ACCESS_ENABLED.d = VGA_BUSY_CSLOCKED # CPU_VRAM_CS_CLOCKED;
-580:CPU_VRAM_ACCESS_ENABLED.ck = CLK_25M;
-581:CPU_VRAM_ACCESS_ENABLED.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
-582:
-583:CPU_VRAM_DTACK.d = CPU_VRAM_ACCESS_ENABLED;
-584:CPU_VRAM_DTACK.ck = !CLK_25M;
-585:CPU_VRAM_DTACK.ap = CPU_VGA_VRAM_CS # !VGA_RESET;
-586:
-587:/* CPU_VRAM_ACCESS_ENABLED == 0 when the CPU is doing an active cycle, and ==1 when the VGA is in control */
-588:
-589:SBUS_TO_VRAM_AD_OE = CPU_VRAM_ACCESS_ENABLED;
-590:
-591:/*
-592:
-593:Total dedicated input used:     3/4     (75%)
-
-LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 12
-
-CUPL(WM): Universal Compiler for Programmable Logic
-Version 5.0a Serial# 60008009
-Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Mon Feb 27 19:39:54 2023
-
-594:Total I/O pins used             46/64   (71%)
-595:Total Logic cells used          79/128  (61%)
-596:Total Flip-Flop used            41/128  (32%)
-597:Total Foldback logic used       3/128   (2%)
-598:Total Nodes+FB/MCells           80/128  (62%)
-599:Total cascade used              2
-600:Total input pins                25
-601:Total output pins               24
-602:Total Pts                       254
-603:
-604:
-605:Pin 1  = VGA_RESET;
-606:Pin 2  = CPU_VGA_VRAM_CS;
-607:Pin 4  = VGA_CONFIG_WRITE;  
-608:Pin 5  = SREG_OUT; 
-609:Pin 9  = SR_CE; 
-610:Pin 10 = VGA_VSYNC; 
-611:Pin 11 = SREG_IN5; 
-612:Pin 12 = SREG_IN7;  
-613:Pin 17 = CPU_VRAM_DTACK;   
-614:Pin 24 = VGA_HSYNC;  
-615:Pin 28 = SREG_IN6; 
-616:Pin 29 = VRAM_HIGH_CE; 
-617:Pin 30 = VRAM_LOW_CE; 
-618:Pin 31 = VDP_HTOL; 
-619:Pin 33 = FRAM_A0; 
-620:Pin 34 = VRAM_OE; 
-621:Pin 35 = GRAPH_MODE; 
-622:Pin 36 = FRAM_A1; 
-623:Pin 37 = FRAM_A2; 
-624:Pin 39 = FRAM_A3; 
-625:Pin 41 = SREG_IN1;  
-626:Pin 44 = CPU_LDS; 
-627:Pin 45 = SREG_IN0;  
-628:Pin 46 = SREG_IN4;  
-629:Pin 48 = SREG_IN2; 
-630:Pin 49 = SR_LOAD;  
-631:Pin 50 = SBUS_TO_VRAM_AD_OE;  
-632:Pin 51 = SREG_IN3;  
-633:Pin 52 = VRAM_WE; 
-634:Pin 61 = VERT_SYNC_INTERRUPT;  
-635:Pin 73 = CPU_RW; 
-636:Pin 74 = CPU_VGA_CFG_CS; 
-637:Pin 76 = CPU_UDS; 
-638:Pin 83 = CLK_25M;
-639:
-640:*/
-641:
-642:
-643:
-644:
-645:
+562:*/
+563:
+564:
+565:
+566:
+567:
 
 
 

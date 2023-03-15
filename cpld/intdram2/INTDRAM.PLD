@@ -77,8 +77,10 @@ Pin[81]  = UARTADSR;
  /* Power Control */
 
 Pin[75] = POWERCTL_STATE;
+Pin[76] =  POWERCTL_OE;
 
-Pin[76]=  POWERCTL_OE;
+Pin[60] = ICPLD_1;
+pin[61] = ICPLD_2;
 
 CPU_RESET_INV = !CPU_RESET;
 
