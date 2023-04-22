@@ -1,0 +1,27 @@
+// 1024K flash total
+//
+// 0x000000-0x01ffff	- Boot loader (128K)
+// 0x020000-0x07ffff	- 384K (Operational image #1)
+// 0x080000-0x09ffff	- Unused (SA4 skipped)
+// 0x0a0000-0x0fffff	- 384K (Operational image #2)
+
+size 100000h;
+
+// Fill everything with 0xffs
+
+fill 0h to 0fffffh with 0ffh;
+
+// Load up the boot loader where it goes (0x000000-0x01ffff)
+
+load "BootLoader/BootLoader.bin" @ 0000h limit 20000h;
+
+// Load up the BIOS into the operational image #1 spot
+
+//load "ComboBox.png" @ 090000h limit 70000h;
+load "BIOS/BIOS.bin" @ 020000h limit 70000h;
+
+// Open up our final output file
+
+save "RSC68kFlash.bin";
+
+

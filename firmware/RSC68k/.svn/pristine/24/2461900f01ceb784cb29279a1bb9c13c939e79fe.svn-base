@@ -1,0 +1,9 @@
+*.ncb
+heap.txt
+Debug
+Release
+*.plg
+*.user
+JET
+EA50
+Trogdor.suo

@@ -1,0 +1,108 @@
+Adjusting intensity on the MagPro itself, incrementally:
+
+MagProReceiveMessage: 23:55:01.596 - RX (0) bytes: 01 04 00 14 
+MagProFind: MagPro setup successful!
+MRTSetMagProState: MagPro Connected
+MagProReceiveMessage: 23:55:02.441 - RX (0) bytes: 01 05 00 14 
+MagProReceiveMessage: 23:55:07.304 - RX (0) bytes: 01 06 00 14 
+MagProReceiveMessage: 23:55:08.294 - RX (0) bytes: 01 07 00 14 
+MagProReceiveMessage: 23:55:09.309 - RX (0) bytes: 01 08 00 14 
+MagProReceiveMessage: 23:55:10.266 - RX (0) bytes: 01 09 00 14 
+MagProReceiveMessage: 23:55:11.304 - RX (0) bytes: 01 0A 00 14 
+MagProReceiveMessage: 23:55:12.404 - RX (0) bytes: 01 0B 00 14 
+MagProReceiveMessage: 23:55:13.366 - RX (0) bytes: 01 0C 00 14 
+MagProReceiveMessage: 23:55:14.117 - RX (0) bytes: 01 0D 00 14 
+MagProReceiveMessage: 23:55:14.771 - RX (0) bytes: 01 0E 00 14 
+MagProReceiveMessage: 23:55:15.318 - RX (0) bytes: 01 0F 00 14 
+MagProReceiveMessage: 23:55:15.817 - RX (0) bytes: 01 10 00 14 
+MagProReceiveMessage: 23:55:16.162 - RX (0) bytes: 01 11 00 14 
+MagProReceiveMessage: 23:55:16.514 - RX (0) bytes: 01 12 00 14 
+MagProReceiveMessage: 23:55:16.820 - RX (0) bytes: 01 13 00 14 
+MagProReceiveMessage: 23:55:21.126 - RX (0) bytes: 01 32 00 14 
+MagProReceiveMessage: 23:55:23.878 - RX (0) bytes: 01 33 00 14  
+MagProReceiveMessage: 23:55:24.724 - RX (0) bytes: 01 34 00 14 
+MagProReceiveMessage: 23:55:25.636 - RX (0) bytes: 01 39 00 14 
+MagProReceiveMessage: 23:55:26.788 - RX (0) bytes: 01 3A 00 14 
+MagProReceiveMessage: 23:55:27.635 - RX (0) bytes: 01 3B 00 14 
+
+Pressing "pulse on the front panel:
+
+MagProReceiveMessage: 00:00:25.050 - RX (0) bytes: 02 54 00 14
+MagProReceiveMessage: 00:00:25.085 - RX (0) bytes: 02 56 00 14
+MagProReceiveMessage: 00:00:25.124 - RX (0) bytes: 02 56 00 14
+MagProReceiveMessage: 00:00:25.253 - RX (0) bytes: 02 56 00 14
+MagProReceiveMessage: 00:00:26.276 - RX (0) bytes: 02 54 00 14
+
+Changing from German to English:
+
+MagProReceiveMessage: 00:04:12.039 - RX (0) bytes: 03 15 3E 14
+MagProReceiveMessage: 00:04:12.334 - RX (0) bytes: 01 00 00 14
+
+Train cycle:
+
+MagProReceiveMessage: 00:05:53.395 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:53.508 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:53.607 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:53.702 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:53.808 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:53.904 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:53.999 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:54.114 - RX (0) bytes: 02 12 00 14 
+MagProReceiveMessage: 00:05:54.209 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:54.318 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:54.423 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:54.512 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:54.624 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:54.719 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:54.835 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:54.930 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.027 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:55.134 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.230 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.330 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:55.447 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.537 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.654 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.751 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.838 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:55.954 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:56.051 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.146 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.263 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.352 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:56.468 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.558 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.654 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:56.769 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.867 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:56.964 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:57.071 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:57.168 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:57.286 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:57.376 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:57.471 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:57.583 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:57.680 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:57.799 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:57.887 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:57.984 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.102 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.198 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:58.295 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.407 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:58.501 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.591 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.708 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.806 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:58.915 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:59.012 - RX (0) bytes: 02 0F 00 14 
+MagProReceiveMessage: 00:05:59.110 - RX (0) bytes: 02 11 00 14 
+MagProReceiveMessage: 00:05:59.217 - RX (0) bytes: 02 11 00 14 
+
+Disable unit:
+
+MagProReceiveMessage: 21:13:52.391 - RX (8) bytes: 01 00 00 04 
+
+Enable unit:
+
+MagProReceiveMessage: 21:13:52.391 - RX (8) bytes: 01 00 00 14 

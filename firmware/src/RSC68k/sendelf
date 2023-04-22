@@ -1,0 +1,5 @@
+# /opt/cross/bin/m68k-elf-strip --strip-all FlashUpdate/FlashUpdate.a
+sz -b -Y -k --tcp-client 10.0.0.16:9000 FlashUpdate/FlashUpdate.a
+
+
+
