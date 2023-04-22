@@ -55,6 +55,7 @@ Pin[55]  = PTC_CS;
 Pin[52]  = IDE_BUFFER_EN;
 Pin[68]  = ITC_CS;
 Pin[77]  = IDE_WR;
+Pin[48]  = K8042_CS; /* SBUS Connector:CPLD_CS_C */
 
 
 /* Worker CPU Related signals */
@@ -64,14 +65,14 @@ Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS; /* SBUS Connector:CPLD_1 */
 Pin[50]  = WORKER_BARRIER_CS; /* SBUS Connector:CPLD_2 */
 Pin[69]  = WORKER_BUS_REQUEST; /* Unused, called CPLD_6, not routed anywhere */
 Pin[67]  = WORKER_BUS_GRANT; /* SBUS Connector:CPLD_5 */
-Pin[48]  = SBUS_BUFFER_ACD_EN; /* SBUS Connector:CPLS_CS_C */
+
 Pin[51]  = SBUS_BUFFER_AC_DIR; /* SBUS Connector:CPLD_3 */
 Pin[46]  = SBUS_BUFFER_D_DIR; /* SBUS Connector:CPLD_CS_B */
-Pin[54]  = CPLD_4   /* SBUS Connector:CPLD_4 */
+Pin[54]  = CPLD_4;   /* SBUS Connector:CPLD_4 */
 
 /* 
    For VGA we need two chip selects, plus a return DTACK signal.
-   CPU_VGA_VRAM_CS <- CPLD_CS_C (pin 48 on CPLD)
+   CPU_VGA_VRAM_CS <- CPLD_CS_C (pin 48 on CPLD) ERROR!! REASSIGN and CHECK HARDWARE
    CPU_VGA_CFG_CS <- CPLD_CS_B (pin 46 on CPLD)
    CPU_VRAM_DTACK -> CPLD_1 (pin 49 on CPLD)
 */
@@ -219,6 +220,8 @@ IDE_CSB = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF04XX );
 LED_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF05XX );
 RTS_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF85XX );
 PTC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF8AXX );
+NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF88XX );
+K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
 
 SPY_SETUP_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
 WORKER_RESET_PRESENCE_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF80XX );

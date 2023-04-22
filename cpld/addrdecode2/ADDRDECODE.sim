@@ -1,5 +1,6 @@
 %SIGNAL
 PIN  83 =  CLK_16M 
+PIN  54 =  CPLD_4 
 PIN  36 =  CPU_A8 
 PIN  35 =  CPU_A9 
 PIN  34 =  CPU_A10 
@@ -46,6 +47,7 @@ PIN  77 =  IDE_WR
 PIN  85 =  IDE_WR_DELAY1 
 PIN  86 =  IDE_WR_DELAY2 
 PIN  68 =  ITC_CS 
+PIN  48 =  K8042_CS 
 PIN  80 =  LED_LATCH_CS 
 PIN  87 =  MAP_FLASH_TO_ZERO 
 PIN  15 =  MEM_OE 
@@ -54,7 +56,6 @@ PIN  55 =  PTC_CS
 PIN  56 =  RTS_A_SEL 
 PIN  57 =  RTS_CS 
 PIN  58 =  RTS_D_SEL 
-PIN  48 =  SBUS_BUFFER_ACD_EN 
 PIN  51 =  SBUS_BUFFER_AC_DIR 
 PIN  46 =  SBUS_BUFFER_D_DIR 
 PIN  60 =  SEVENSEG_LATCH_CS 
@@ -420,6 +421,26 @@ ITC_CS =>
   # !CPU_A9
   # !CPU_A8
 
+K8042_CS =>
+    CPU_FC0 & CPU_FC1 & CPU_FC2
+  # CPU_AS
+  # !CPU_A23
+  # !CPU_A22
+  # !CPU_A21
+  # !CPU_A20
+  # !CPU_A19
+  # !CPU_A18
+  # !CPU_A17
+  # !CPU_A16
+  # !CPU_A15
+  # CPU_A14
+  # CPU_A13
+  # CPU_A12
+  # CPU_A11
+  # !CPU_A10
+  # CPU_A9
+  # CPU_A8
+
 LED_LATCH_CS =>
     CPU_FC0 & CPU_FC1 & CPU_FC2
   # CPU_AS
@@ -452,6 +473,26 @@ MAP_FLASH_TO_ZERO.ck  =>
 MEM_OE =>
     !CPU_RW
   # CPU_AS
+
+NIC_CS =>
+    CPU_FC0 & CPU_FC1 & CPU_FC2
+  # CPU_AS
+  # !CPU_A23
+  # !CPU_A22
+  # !CPU_A21
+  # !CPU_A20
+  # !CPU_A19
+  # !CPU_A18
+  # !CPU_A17
+  # !CPU_A16
+  # !CPU_A15
+  # CPU_A14
+  # CPU_A13
+  # CPU_A12
+  # !CPU_A11
+  # CPU_A10
+  # CPU_A9
+  # CPU_A8
 
 PTC_CS =>
     CPU_FC0 & CPU_FC1 & CPU_FC2
