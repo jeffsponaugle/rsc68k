@@ -1,11 +1,11 @@
-{COMPONENT C:\ADDRDECODE.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE2\ADDRDECODE.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Fri Apr 21 19:00:09 2023 "}
+  {DBtime "Fri Apr 21 19:39:56 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -67,11 +67,11 @@
    {P RTS_A_SE {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
    {P WORKER_ {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
    {P CPU_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
-   {P SPY_SETU {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P K8042_CS {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P MEM_OE {Pt "I/O"}{Lq 0}{Ploc 360 40}}
    {P CPU_DTAC {Pt "I/O"}{Lq 0}{Ploc 360 60}}
    {P SBUS_BU {Pt "I/O"}{Lq 0}{Ploc 360 80}}
-   {P K8042_CS {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P SPY_SETU {Pt "I/O"}{Lq 0}{Ploc 360 100}}
    {P WORKER_R {Pt "I/O"}{Lq 0}{Ploc 360 120}}
    {P WORKER_B {Pt "I/O"}{Lq 0}{Ploc 360 140}}
    {P SBUS_BUF {Pt "I/O"}{Lq 0}{Ploc 360 160}}
@@ -270,11 +270,11 @@
    {T "WORKER_" 140 40}
    {T "CPU_RESE" 140 20}
    [Tj "RC"]
-   {T "SPY_SETU" 320 20}
+   {T "K8042_CS" 320 20}
    {T "MEM_OE" 320 40}
    {T "CPU_DTAC" 320 60}
    {T "SBUS_BU" 320 80}
-   {T "K8042_CS" 320 100}
+   {T "SPY_SETU" 320 100}
    {T "WORKER_R" 320 120}
    {T "WORKER_B" 320 140}
    {T "SBUS_BUF" 320 160}
@@ -309,7 +309,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\ADDRDECODE 230 720}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE2\ADDRDECODE 230 720}
    }
   }
  }
@@ -387,7 +387,7 @@
    }
    {N CPU_RESE
    }
-   {N SPY_SETU
+   {N K8042_CS
    }
    {N MEM_OE
    }
@@ -395,7 +395,7 @@
    }
    {N SBUS_BU
    }
-   {N K8042_CS
+   {N SPY_SETU
    }
    {N WORKER_R
    }

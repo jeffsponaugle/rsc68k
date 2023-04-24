@@ -55,12 +55,12 @@ Pin[55]  = PTC_CS;
 Pin[52]  = IDE_BUFFER_EN;
 Pin[68]  = ITC_CS;
 Pin[77]  = IDE_WR;
-Pin[48]  = K8042_CS; /* SBUS Connector:CPLD_CS_C */
+Pin[12]  = K8042_CS; /* SBUS Connector:CPLD_CS_A */
 
 
 /* Worker CPU Related signals */
 
-Pin[12]  = SPY_SETUP_LATCH_CS;      /* SBUS Connector:CPLD_CS_A */
+Pin[48]  = SPY_SETUP_LATCH_CS;      /* SBUS Connector:CPLD_CS_C */
 Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS; /* SBUS Connector:CPLD_1 */
 Pin[50]  = WORKER_BARRIER_CS; /* SBUS Connector:CPLD_2 */
 Pin[69]  = WORKER_BUS_REQUEST; /* Unused, called CPLD_6, not routed anywhere */
@@ -100,7 +100,7 @@ ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
 
 DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS
                   # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
-                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS  # !SPY_SETUP_LATCH_CS 
+                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS  # !SPY_SETUP_LATCH_CS  # !K8042_CS
                   # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS # !FLASH_CONFIG_CLOCK # !ITC_CS;
 
 /* 

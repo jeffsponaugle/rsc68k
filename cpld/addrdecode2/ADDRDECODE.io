@@ -1,29 +1,31 @@
-CHIP "C:\ADDRDECODE"
+CHIP "C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ADDRDECODE2\ADDRDECODE"
 BEGIN
 
     DEVICE = "PLCC84";
-    "SPY_SETUP_LATCH_CS"                      : OUTPUT_PIN = 12 ;
+    "K8042_CS"                                : OUTPUT_PIN = 12 ;
     "CPU_D3"                                  : INPUT_PIN = 11 ;
     "CPU_D2"                                  : INPUT_PIN = 10 ;
     "CPU_D1"                                  : INPUT_PIN = 9 ;
     "CPU_D0"                                  : INPUT_PIN = 8 ;
-    "FLASH_CONFIG_STATE1"                     : NODE_NUM = 612 ;
+    "MAP_FLASH_TO_ZERO"                       : NODE_NUM = 611 ;
+    "Com_Ctrl_108"                            : NODE_NUM = 612 ;
     "CPU_AS"                                  : INPUT_PIN = 6 ;
-    "MAP_FLASH_TO_ZERO"                       : NODE_NUM = 613 ;
+    "IDE_WR_DELAY2"                           : NODE_NUM = 613 ;
     "CPU_UDS"                                 : INPUT_PIN = 5 ;
-    "Com_Ctrl_107"                            : NODE_NUM = 614 ;
-    "IDE_WR_DELAY2"                           : NODE_NUM = 615 ;
+    "IDE_WR_DELAY1"                           : NODE_NUM = 614 ;
+    "XXL_111"                                 : NODE_NUM = 615 ;
     "CPU_LDS"                                 : INPUT_PIN = 4 ;
-    "IDE_WR_DELAY1"                           : NODE_NUM = 616 ;
+    "XXL_110"                                 : NODE_NUM = 616 ;
     "CPU_A19"                                 : INPUT_PIN = 22 ;
     "CPU_A20"                                 : INPUT_PIN = 21 ;
     "CPU_A21"                                 : INPUT_PIN = 20 ;
     "CPU_A22"                                 : INPUT_PIN = 18 ;
     "CPU_A23"                                 : INPUT_PIN = 17 ;
     "MEM_OE"                                  : OUTPUT_PIN = 15 ;
-    "XXL_115"                                 : NODE_NUM = 631 ;
+    "FLASH_CONFIG_STATE0"                     : NODE_NUM = 630 ;
+    "FLASH_CONFIG_STATE1"                     : NODE_NUM = 631 ;
     "TDI"                                     : INPUT_PIN = 14 ;
-    "XXL_109"                                 : NODE_NUM = 632 ;
+    "XXL_116"                                 : NODE_NUM = 632 ;
     "CPU_A12"                                 : INPUT_PIN = 31 ;
     "CPU_A13"                                 : INPUT_PIN = 30 ;
     "CPU_A14"                                 : INPUT_PIN = 29 ;
@@ -31,7 +33,7 @@ BEGIN
     "CPU_A16"                                 : INPUT_PIN = 27 ;
     "CPU_A17"                                 : INPUT_PIN = 25 ;
     "CPU_A18"                                 : INPUT_PIN = 24 ;
-    "FLASH_CONFIG_STATE0"                     : NODE_NUM = 647 ;
+    "XXL_113"                                 : NODE_NUM = 647 ;
     "TMS"                                     : INPUT_PIN = 23 ;
     "XXL_114"                                 : NODE_NUM = 648 ;
     "DTACK_FROM_INT"                          : INPUT_PIN = 41 ;
@@ -40,17 +42,15 @@ BEGIN
     "CPU_FC2"                                 : INPUT_PIN = 37 ;
     "CPU_A8"                                  : INPUT_PIN = 36 ;
     "CPU_A9"                                  : INPUT_PIN = 35 ;
-    "FLASH_CONFIG_STATE3"                     : NODE_NUM = 660 ;
     "CPU_A10"                                 : INPUT_PIN = 34 ;
-    "FLASH_CONFIG_STATE2"                     : NODE_NUM = 661 ;
-    "XXL_112"                                 : NODE_NUM = 662 ;
-    "XXL_110"                                 : NODE_NUM = 663 ;
+    "FLASH_CONFIG_STATE3"                     : NODE_NUM = 662 ;
+    "FLASH_CONFIG_STATE2"                     : NODE_NUM = 663 ;
     "CPU_A11"                                 : INPUT_PIN = 33 ;
-    "XXL_111"                                 : NODE_NUM = 664 ;
+    "XXL_115"                                 : NODE_NUM = 664 ;
     "CPU_BG"                                  : INPUT_PIN = 44 ;
     "CPU_DTACK"                               : OUTPUT_PIN = 45 ;
     "SBUS_BUFFER_D_DIR"                       : OUTPUT_PIN = 46 ;
-    "K8042_CS"                                : OUTPUT_PIN = 48 ;
+    "SPY_SETUP_LATCH_CS"                      : OUTPUT_PIN = 48 ;
     "WORKER_RESET_PRESENCE_LATCH_CS"          : OUTPUT_PIN = 49 ;
     "WORKER_BARRIER_CS"                       : OUTPUT_PIN = 50 ;
     "SBUS_BUFFER_AC_DIR"                      : OUTPUT_PIN = 51 ;
@@ -62,7 +62,7 @@ BEGIN
     "SEVENSEG_LATCH_CS"                       : OUTPUT_PIN = 60 ;
     "UART_CSB"                                : OUTPUT_PIN = 61 ;
     "TCK"                                     : INPUT_PIN = 62 ;
-    "XXL_113"                                 : NODE_NUM = 696 ;
+    "XXL_112"                                 : NODE_NUM = 696 ;
     "UART_CSA"                                : OUTPUT_PIN = 63 ;
     "IDE_CSB"                                 : OUTPUT_PIN = 64 ;
     "IDE_CSA"                                 : OUTPUT_PIN = 65 ;
