@@ -6,16 +6,17 @@ BEGIN
     "CPU_D3"                                  : INPUT_PIN = 11 ;
     "CPU_D2"                                  : INPUT_PIN = 10 ;
     "CPU_D1"                                  : INPUT_PIN = 9 ;
+    "MAP_FLASH_TO_ZERO"                       : NODE_NUM = 610 ;
     "CPU_D0"                                  : INPUT_PIN = 8 ;
-    "MAP_FLASH_TO_ZERO"                       : NODE_NUM = 611 ;
-    "Com_Ctrl_108"                            : NODE_NUM = 612 ;
+    "Com_Ctrl_109"                            : NODE_NUM = 611 ;
+    "IDE_WR_DELAY1"                           : NODE_NUM = 612 ;
     "CPU_AS"                                  : INPUT_PIN = 6 ;
     "IDE_WR_DELAY2"                           : NODE_NUM = 613 ;
     "CPU_UDS"                                 : INPUT_PIN = 5 ;
-    "IDE_WR_DELAY1"                           : NODE_NUM = 614 ;
+    "XXL_113"                                 : NODE_NUM = 614 ;
     "XXL_111"                                 : NODE_NUM = 615 ;
     "CPU_LDS"                                 : INPUT_PIN = 4 ;
-    "XXL_110"                                 : NODE_NUM = 616 ;
+    "XXL_112"                                 : NODE_NUM = 616 ;
     "CPU_A19"                                 : INPUT_PIN = 22 ;
     "CPU_A20"                                 : INPUT_PIN = 21 ;
     "CPU_A21"                                 : INPUT_PIN = 20 ;
@@ -25,7 +26,7 @@ BEGIN
     "FLASH_CONFIG_STATE0"                     : NODE_NUM = 630 ;
     "FLASH_CONFIG_STATE1"                     : NODE_NUM = 631 ;
     "TDI"                                     : INPUT_PIN = 14 ;
-    "XXL_116"                                 : NODE_NUM = 632 ;
+    "XXL_117"                                 : NODE_NUM = 632 ;
     "CPU_A12"                                 : INPUT_PIN = 31 ;
     "CPU_A13"                                 : INPUT_PIN = 30 ;
     "CPU_A14"                                 : INPUT_PIN = 29 ;
@@ -33,7 +34,7 @@ BEGIN
     "CPU_A16"                                 : INPUT_PIN = 27 ;
     "CPU_A17"                                 : INPUT_PIN = 25 ;
     "CPU_A18"                                 : INPUT_PIN = 24 ;
-    "XXL_113"                                 : NODE_NUM = 647 ;
+    "XXL_115"                                 : NODE_NUM = 647 ;
     "TMS"                                     : INPUT_PIN = 23 ;
     "XXL_114"                                 : NODE_NUM = 648 ;
     "DTACK_FROM_INT"                          : INPUT_PIN = 41 ;
@@ -46,7 +47,7 @@ BEGIN
     "FLASH_CONFIG_STATE3"                     : NODE_NUM = 662 ;
     "FLASH_CONFIG_STATE2"                     : NODE_NUM = 663 ;
     "CPU_A11"                                 : INPUT_PIN = 33 ;
-    "XXL_115"                                 : NODE_NUM = 664 ;
+    "XXL_116"                                 : NODE_NUM = 664 ;
     "CPU_BG"                                  : INPUT_PIN = 44 ;
     "CPU_DTACK"                               : OUTPUT_PIN = 45 ;
     "SBUS_BUFFER_D_DIR"                       : OUTPUT_PIN = 46 ;
@@ -62,7 +63,6 @@ BEGIN
     "SEVENSEG_LATCH_CS"                       : OUTPUT_PIN = 60 ;
     "UART_CSB"                                : OUTPUT_PIN = 61 ;
     "TCK"                                     : INPUT_PIN = 62 ;
-    "XXL_112"                                 : NODE_NUM = 696 ;
     "UART_CSA"                                : OUTPUT_PIN = 63 ;
     "IDE_CSB"                                 : OUTPUT_PIN = 64 ;
     "IDE_CSA"                                 : OUTPUT_PIN = 65 ;

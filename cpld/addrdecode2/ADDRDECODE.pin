@@ -3,16 +3,17 @@ K8042_CS					: 12
 CPU_D3					: 11
 CPU_D2					: 10
 CPU_D1					: 9
+MAP_FLASH_TO_ZERO					: 610
 CPU_D0					: 8
-MAP_FLASH_TO_ZERO					: 611
-Com_Ctrl_108					: 612
+Com_Ctrl_109					: 611
+IDE_WR_DELAY1					: 612
 CPU_AS					: 6
 IDE_WR_DELAY2					: 613
 CPU_UDS					: 5
-IDE_WR_DELAY1					: 614
+XXL_113					: 614
 XXL_111					: 615
 CPU_LDS					: 4
-XXL_110					: 616
+XXL_112					: 616
 CPU_A19					: 22
 CPU_A20					: 21
 CPU_A21					: 20
@@ -22,7 +23,7 @@ MEM_OE					: 15
 FLASH_CONFIG_STATE0					: 630
 FLASH_CONFIG_STATE1					: 631
 TDI					: 14
-XXL_116					: 632
+XXL_117					: 632
 CPU_A12					: 31
 CPU_A13					: 30
 CPU_A14					: 29
@@ -30,7 +31,7 @@ CPU_A15					: 28
 CPU_A16					: 27
 CPU_A17					: 25
 CPU_A18					: 24
-XXL_113					: 647
+XXL_115					: 647
 TMS					: 23
 XXL_114					: 648
 DTACK_FROM_INT					: 41
@@ -43,7 +44,7 @@ CPU_A10					: 34
 FLASH_CONFIG_STATE3					: 662
 FLASH_CONFIG_STATE2					: 663
 CPU_A11					: 33
-XXL_115					: 664
+XXL_116					: 664
 CPU_BG					: 44
 CPU_DTACK					: 45
 SBUS_BUFFER_D_DIR					: 46
@@ -59,7 +60,6 @@ RTS_D_SEL					: 58
 SEVENSEG_LATCH_CS					: 60
 UART_CSB					: 61
 TCK					: 62
-XXL_112					: 696
 UART_CSA					: 63
 IDE_CSB					: 64
 IDE_CSA					: 65
