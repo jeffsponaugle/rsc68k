@@ -1,0 +1,373 @@
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Apr 26 21:14:44 2023
+
+  1:Name     VGA4B;
+  2:PartNo   VGA4B;
+  3:Date     04/18/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1508ispplcc84;
+ 10:
+ 11:
+ 12:/* 
+ 13:   Version 1.12b
+ 14:       Compressed and spread into 2 CPLDS.
+ 15:   
+ 16:*/
+ 17:
+ 18:/* INPUTS */
+ 19:
+ 20:Pin[2]  = CLKIN;
+ 21:Pin[17,18,20,21,22,24,25,27,28,29,30,31,33,34,35,36,37,39,40]  = [CPU_SBUS_A1..19];
+ 22:Pin[84]  = SBUS_TO_VRAM_AD_OE;                          /* Active low signal to enable address buffers from CPU to Video memory */
+ 23:Pin[75,76,77]  = [VADDR_MODE0..2];                      /* Address Mode increment */
+ 24:Pin[4,5,6,8,9,10,11,12,15,16]  = [CPU_D0..9];           /* Databus inputs for latching from the CPU NOTE 9 bits! */
+ 25:Pin[83]  = VGA_CONFIG_WRITE;                            /* Write to internal register from host CPU */
+ 26:Pin[1]  = VGA_RESET;
+ 27:
+ 28:
+ 29:/* OUTPUTS */
+ 30:
+ 31:Pin[68,69]  = FONTLIB0,FONTLIB1;                        /* Outputs to Char ROM bits for selecting font library */
+ 32:Pin[79,80]  = GRAPH_MODE0,GRAPH_MODE1;                  /* Output to other CPLD to indicate selected graphics mode */
+ 33:Pin[41,44,45,46,48,49,50,51,52,54,55,56,57,58,60,61,63,64,65]  = [VA0..18];
+ 34:
+ 35:/* INTERNAL FLIP FLOPS */
+ 36:
+ 37:NODE [A0..18];                                          /* Counter of current video memory address */
+ 38:NODE [OFFSET0..5];                                      /* offset for video memory address on each pass - bits 7,8,9,10,11,12 */
+ 39:
+ 40:/* 
+ 41:   Actual outputs to address lines on Video Ram.  
+ 42:   MUX between the internal counter value and the input from the host CPU
+ 43:   Shared bus.
+ 44:   SBUS_TO_VRAM_AD_OE = 0 for CPU Access to VRAM
+ 45:                      = 1 for VGA Access to VRAM
+ 46:*/
+ 47:VA0 = (SBUS_TO_VRAM_AD_OE & A0) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A1);
+ 48:VA1 = (SBUS_TO_VRAM_AD_OE & A1) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A2);
+ 49:VA2 = (SBUS_TO_VRAM_AD_OE & A2) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A3);
+ 50:VA3 = (SBUS_TO_VRAM_AD_OE & A3) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A4);
+ 51:VA4 = (SBUS_TO_VRAM_AD_OE & A4) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A5);
+ 52:VA5 = (SBUS_TO_VRAM_AD_OE & A5) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A6);
+ 53:VA6 = (SBUS_TO_VRAM_AD_OE & A6) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A7);
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Apr 26 21:14:44 2023
+
+ 54:VA7 = (SBUS_TO_VRAM_AD_OE & A7) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A8);
+ 55:VA8 = (SBUS_TO_VRAM_AD_OE & A8) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A9);
+ 56:VA9 = (SBUS_TO_VRAM_AD_OE & A9) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A10);
+ 57:VA10 = (SBUS_TO_VRAM_AD_OE & A10) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A11);
+ 58:VA11 = (SBUS_TO_VRAM_AD_OE & A11) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A12);
+ 59:VA12 = (SBUS_TO_VRAM_AD_OE & A12) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A13);
+ 60:VA13 = (SBUS_TO_VRAM_AD_OE & A13) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A14);
+ 61:VA14 = (SBUS_TO_VRAM_AD_OE & A14) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A15);
+ 62:VA15 = (SBUS_TO_VRAM_AD_OE & A15) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A16);
+ 63:VA16 = (SBUS_TO_VRAM_AD_OE & A16) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A17);
+ 64:VA17 = (SBUS_TO_VRAM_AD_OE & A17) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A18);
+ 65:VA18 = (SBUS_TO_VRAM_AD_OE & A18) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A19);
+ 66:
+ 67:
+ 68:
+ 69:
+ 70:OFFSET0.d = CPU_D0.io;
+ 71:OFFSET0.ar = !VGA_RESET;
+ 72:OFFSET0.ck = !VGA_CONFIG_WRITE;
+ 73:
+ 74:OFFSET1.d = CPU_D1.io;
+ 75:OFFSET1.ar = !VGA_RESET;
+ 76:OFFSET1.ck = !VGA_CONFIG_WRITE;
+ 77:
+ 78:OFFSET2.d = CPU_D2.io;
+ 79:OFFSET2.ar = !VGA_RESET;
+ 80:OFFSET2.ck = !VGA_CONFIG_WRITE;
+ 81:
+ 82:OFFSET3.d = CPU_D3.io;
+ 83:OFFSET3.ar = !VGA_RESET;
+ 84:OFFSET3.ck = !VGA_CONFIG_WRITE;
+ 85:
+ 86:OFFSET4.d = CPU_D4.io;
+ 87:OFFSET4.ar = !VGA_RESET;
+ 88:OFFSET4.ck = !VGA_CONFIG_WRITE;
+ 89:
+ 90:OFFSET5.d = CPU_D5.io;
+ 91:OFFSET5.ar = !VGA_RESET;
+ 92:OFFSET5.ck = !VGA_CONFIG_WRITE;
+ 93:
+ 94:FONTLIB0.d = CPU_D6.io;
+ 95:FONTLIB0.ar = !VGA_RESET;
+ 96:FONTLIB0.ck = !VGA_CONFIG_WRITE;
+ 97:
+ 98:FONTLIB1.d = CPU_D7.io;
+ 99:FONTLIB1.ar = !VGA_RESET;
+100:FONTLIB1.ck = !VGA_CONFIG_WRITE;
+101:
+102:GRAPH_MODE0.d = CPU_D8.io;
+103:GRAPH_MODE0.ar = !VGA_RESET;
+104:GRAPH_MODE0.ck = !VGA_CONFIG_WRITE;
+105:
+106:GRAPH_MODE1.d = CPU_D9.io;
+107:GRAPH_MODE1.ar = !VGA_RESET;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Apr 26 21:14:44 2023
+
+108:GRAPH_MODE1.ck = !VGA_CONFIG_WRITE;
+109:
+110:/*  
+111:
+112:   TEXT MODE:
+113:        In text mode each character row needs to be read 16 time in repitition so each character value can be driven to the character rom
+114:        as well as attribute bits.  Each text row is 80 characters, consuming 160 bytes of video memory (16 bit wide).  Since we want to be
+115:        able to do hardware scrolling, we will make each text 'row' start on an even power of 2 address.   As result each text row is 256 
+116:        bytes or 128 words long. The extra 48 words are unused and skipped.  The OFFSET0-5 bits are used at reset in VAddress bits 7-12. This
+117:        allows selection of up to 64 different start text lines. (64 line hardware scroll)
+118:
+119:   GRAPHICS MODE:
+120:        In 640x480 6bpp mode, we need 640 bytes of video memory for each scanline, with no repeats.  Address is reset at start of page
+121:        and incremented by 1 every 2 pixels.    
+122:
+123:*/
+124:
+125:/*
+126:
+127:        [VADDR_MODE0..2] - Address Increment Mode
+128:        000  DO NOTHING   vaddr_mode_field:['d'0] 
+129:        001  INCREMENT    vaddr_mode_field:['d'1]
+130:        010  RESET_A6     vaddr_mode_field:['d'2]
+131:        011  RESET_A6I    vaddr_mode_field:['d'3]
+132:        100  RESET_ALL    vaddr_mode_field:['d'4]
+133:        101  RESET_ALL    vaddr_mode_field:['d'5]
+134:        110  RESET_ALL    vaddr_mode_field:['d'6]
+135:        111  RESET_ALL    vaddr_mode_field:['d'7]
+136:                          vaddr_mode_field:['d'4..'d'7]
+137:*/
+138:
+139:FIELD vaddr_mode_field = [VADDR_MODE0..2];
+140:
+141:/* A0-A6 have special reset */
+142:
+143:A0.d =  (  (vaddr_mode_field:['d'1] & !A0) 
+144:        #  (vaddr_mode_field:['d'0] & A0)
+145:        ) & !vaddr_mode_field:['d'2..'d'7];     
+146:A0.ck = CLKIN;
+147:
+148:A1.d =  (  (vaddr_mode_field:['d'1] & ((A0&!A1) # (!A0&A1))) 
+149:        # ((vaddr_mode_field:['d'0] & A1))
+150:        ) & !vaddr_mode_field:['d'2..'d'7];
+151:A1.ck = CLKIN;
+152:
+153:A2T = A0&A1;
+154:A2.d =  (  (vaddr_mode_field:['d'1] & ((A2T&!A2) # (!A2T&A2))) 
+155:        # ((vaddr_mode_field:['d'0] & A2))
+156:        ) & !vaddr_mode_field:['d'2..'d'7];
+157:A2.ck = CLKIN;
+158:
+159:A3T = A2T&A2;
+160:A3.d =  ( (vaddr_mode_field:['d'1] & ((A3T&!A3) # (!A3T&A3))) 
+161:        # ((vaddr_mode_field:['d'0] & A3))
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Apr 26 21:14:44 2023
+
+162:        ) & !vaddr_mode_field:['d'2..'d'7];
+163:A3.ck = CLKIN;
+164:
+165:A4T = A3T&A3;
+166:A4.d =  ( (vaddr_mode_field:['d'1] & ((A4T&!A4) # (!A4T&A4))) 
+167:        # ((vaddr_mode_field:['d'0] & A4))
+168:        ) & !vaddr_mode_field:['d'2..'d'7];
+169:A4.ck = CLKIN;
+170:
+171:A5T = A4T&A4;
+172:A5.d =  ( (vaddr_mode_field:['d'1] & ((A5T&!A5) # (!A5T&A5))) 
+173:        # ((vaddr_mode_field:['d'0] & A5))
+174:        ) & !vaddr_mode_field:['d'2..'d'7];
+175:A5.ck = CLKIN;
+176:
+177:A6T = A5T&A5;
+178:A6.d =  ( (vaddr_mode_field:['d'1] & ((A6T&!A6) # (!A6T&A6))) 
+179:        # ((vaddr_mode_field:['d'0] & A6))
+180:        ) & !vaddr_mode_field:['d'2..'d'7];
+181:A6.ck = CLKIN;
+182:
+183:/*  These addresses have OFFSET on reset. */
+184:
+185:/* 
+186:   A7T is special as it needs to be set to 1 for the RESET_A6I mode.  If we are in INCREMENT, use the 
+187:   A6T&A6, and else if we are in RESET_A6I we want to add 1 (starting with this bit) .  If neither, the value will
+188:   be zero.
+189:*/
+190:
+191:A7T =   ( vaddr_mode_field:['d'1] & A6T&A6)
+192:        #
+193:        ( vaddr_mode_field:['d'3]);
+194:
+195:A7.d =  (
+196:          ( (vaddr_mode_field:['d'1] & ((A7T&!A7) # (!A7T&A7))) 
+197:            # ((vaddr_mode_field:['d'0] & A7))
+198:          ) & !vaddr_mode_field:['d'4..'d'7]
+199:        ) 
+200:        #
+201:        (
+202:            vaddr_mode_field:['d'4..'d'7] & OFFSET0
+203:        );
+204:A7.ck = CLKIN;
+205:
+206:A8T = A7T&A7;
+207:A8.d =  (
+208:          ( (vaddr_mode_field:['d'1] & ((A8T&!A8) # (!A8T&A8))) 
+209:            # ((vaddr_mode_field:['d'0] & A8))
+210:          ) & !vaddr_mode_field:['d'4..'d'7]
+211:        ) 
+212:        #
+213:        (
+214:            vaddr_mode_field:['d'4..'d'7] & OFFSET1
+215:        );
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Apr 26 21:14:44 2023
+
+216:A8.ck = CLKIN;
+217:
+218:A9T = A8T&A8;
+219:A9.d =  (
+220:          ( (vaddr_mode_field:['d'1] & ((A9T&!A9) # (!A9T&A9))) 
+221:            # ((vaddr_mode_field:['d'0] & A9))
+222:          ) & !vaddr_mode_field:['d'4..'d'7]
+223:        ) 
+224:        #
+225:        (
+226:            vaddr_mode_field:['d'4..'d'7] & OFFSET2
+227:        );
+228:A9.ck = CLKIN;
+229:
+230:A10T = A9T&A9;
+231:A10.d = (
+232:          ( (vaddr_mode_field:['d'1] & ((A10T&!A10) # (!A10T&A10))) 
+233:            # ((vaddr_mode_field:['d'0] & A10)) 
+234:          ) & !vaddr_mode_field:['d'4..'d'7]
+235:        ) 
+236:        #
+237:        (
+238:            vaddr_mode_field:['d'4..'d'7] & OFFSET3
+239:        );
+240:A10.ck = CLKIN;
+241:
+242:A11T = A10T&A10;
+243:A11.d = (
+244:          ( (vaddr_mode_field:['d'1] & ((A11T&!A11) # (!A11T&A11))) 
+245:            # ((vaddr_mode_field:['d'0] & A11))
+246:          ) & !vaddr_mode_field:['d'4..'d'7]
+247:        ) 
+248:        #
+249:        (
+250:            vaddr_mode_field:['d'4..'d'7] & OFFSET4
+251:        );
+252:A11.ck = CLKIN;
+253:
+254:A12T = A11T&A11;
+255:A12.d = (
+256:          ( (vaddr_mode_field:['d'1] & ((A12T&!A12) # (!A12T&A12))) 
+257:            # ((vaddr_mode_field:['d'0] & A12))
+258:          ) & !vaddr_mode_field:['d'4..'d'7]
+259:        ) 
+260:        #
+261:        (
+262:            vaddr_mode_field:['d'4..'d'7] & OFFSET5
+263:        );
+264:A12.ck = CLKIN;
+265:
+266:A13T = A12T&A12;
+267:A13.d = (  (vaddr_mode_field:['d'1] & ((A13T&!A13) # (!A13T&A13))) 
+268:        # ((vaddr_mode_field:['d'0] & A13))
+269:        ) & !vaddr_mode_field:['d'4..'d'7];
+
+LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 6
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Apr 26 21:14:44 2023
+
+270:A13.ck = CLKIN;
+271:
+272:A14T = A13T&A13;
+273:A14.d = ( (vaddr_mode_field:['d'1] & ((A14T&!A14) # (!A14T&A14))) 
+274:        # ((vaddr_mode_field:['d'0] & A14))
+275:        ) & !vaddr_mode_field:['d'4..'d'7];
+276:A14.ck = CLKIN;
+277:
+278:A15T = A14T&A14;
+279:A15.d = ( (vaddr_mode_field:['d'1] & ((A15T&!A15) # (!A15T&A15))) 
+280:        # ((vaddr_mode_field:['d'0] & A15))
+281:        ) & !vaddr_mode_field:['d'4..'d'7];
+282:A15.ck = CLKIN;
+283:
+284:A16T = A15T&A15;
+285:A16.d = ( (vaddr_mode_field:['d'1] & ((A16T&!A16) # (!A16T&A16))) 
+286:        # ((vaddr_mode_field:['d'0] & A16))
+287:        ) & !vaddr_mode_field:['d'4..'d'7];
+288:A16.ck = CLKIN;
+289:
+290:A17T = A16T&A16;
+291:A17.d = ( (vaddr_mode_field:['d'1] & ((A17T&!A17) # (!A17T&A17))) 
+292:        # ((vaddr_mode_field:['d'0] & A17))
+293:        ) & !vaddr_mode_field:['d'4..'d'7];
+294:A17.ck = CLKIN;
+295:
+296:A18T = A17T&A17;
+297:A18.d = ( (vaddr_mode_field:['d'1] & ((A18T&!A18) # (!A18T&A18))) 
+298:        # ((vaddr_mode_field:['d'0] & A18))
+299:        ) & !vaddr_mode_field:['d'4..'d'7];
+300:A18.ck = CLKIN;
+301:
+302:
+303:/*
+304:Current Implementation
+305:
+306:Total dedicated input used:     4/4     (100%)
+307:Total I/O pins used             59/64   (92%)
+308:Total Logic cells used          82/128  (64%)
+309:Total Flip-Flop used            29/128  (22%)
+310:Total Foldback logic used       0/128   (0%)
+311:Total Nodes+FB/MCells           74/128  (57%)
+312:Total cascade used              8
+313:Total input pins                40
+314:Total output pins               23
+315:Total Pts                       289
+316:*/
+317:
+318:
+319:
+320:
+321:
+322:
+323:
+
+
+

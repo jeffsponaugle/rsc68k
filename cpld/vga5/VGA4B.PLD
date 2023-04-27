@@ -1,0 +1,321 @@
+Name	 VGA4B;
+PartNo   VGA4B;
+Date     04/18/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1508ispplcc84;
+
+
+/* 
+   Version 1.12b
+       Compressed and spread into 2 CPLDS.
+   
+*/
+
+/* INPUTS */
+
+Pin[2]  = CLKIN;
+Pin[17,18,20,21,22,24,25,27,28,29,30,31,33,34,35,36,37,39,40]  = [CPU_SBUS_A1..19];
+Pin[84]  = SBUS_TO_VRAM_AD_OE;                          /* Active low signal to enable address buffers from CPU to Video memory */
+Pin[75,76,77]  = [VADDR_MODE0..2];                      /* Address Mode increment */
+Pin[4,5,6,8,9,10,11,12,15,16]  = [CPU_D0..9];           /* Databus inputs for latching from the CPU NOTE 9 bits! */
+Pin[83]  = VGA_CONFIG_WRITE;                            /* Write to internal register from host CPU */
+Pin[1]  = VGA_RESET;
+
+
+/* OUTPUTS */
+
+Pin[68,69]  = FONTLIB0,FONTLIB1;                        /* Outputs to Char ROM bits for selecting font library */
+Pin[79,80]  = GRAPH_MODE0,GRAPH_MODE1;                  /* Output to other CPLD to indicate selected graphics mode */
+Pin[41,44,45,46,48,49,50,51,52,54,55,56,57,58,60,61,63,64,65]  = [VA0..18];
+
+/* INTERNAL FLIP FLOPS */
+
+NODE [A0..18];                                          /* Counter of current video memory address */
+NODE [OFFSET0..5];                                      /* offset for video memory address on each pass - bits 7,8,9,10,11,12 */
+
+/* 
+   Actual outputs to address lines on Video Ram.  
+   MUX between the internal counter value and the input from the host CPU
+   Shared bus.
+   SBUS_TO_VRAM_AD_OE = 0 for CPU Access to VRAM
+                      = 1 for VGA Access to VRAM
+*/
+VA0 = (SBUS_TO_VRAM_AD_OE & A0) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A1);
+VA1 = (SBUS_TO_VRAM_AD_OE & A1) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A2);
+VA2 = (SBUS_TO_VRAM_AD_OE & A2) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A3);
+VA3 = (SBUS_TO_VRAM_AD_OE & A3) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A4);
+VA4 = (SBUS_TO_VRAM_AD_OE & A4) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A5);
+VA5 = (SBUS_TO_VRAM_AD_OE & A5) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A6);
+VA6 = (SBUS_TO_VRAM_AD_OE & A6) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A7);
+VA7 = (SBUS_TO_VRAM_AD_OE & A7) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A8);
+VA8 = (SBUS_TO_VRAM_AD_OE & A8) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A9);
+VA9 = (SBUS_TO_VRAM_AD_OE & A9) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A10);
+VA10 = (SBUS_TO_VRAM_AD_OE & A10) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A11);
+VA11 = (SBUS_TO_VRAM_AD_OE & A11) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A12);
+VA12 = (SBUS_TO_VRAM_AD_OE & A12) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A13);
+VA13 = (SBUS_TO_VRAM_AD_OE & A13) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A14);
+VA14 = (SBUS_TO_VRAM_AD_OE & A14) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A15);
+VA15 = (SBUS_TO_VRAM_AD_OE & A15) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A16);
+VA16 = (SBUS_TO_VRAM_AD_OE & A16) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A17);
+VA17 = (SBUS_TO_VRAM_AD_OE & A17) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A18);
+VA18 = (SBUS_TO_VRAM_AD_OE & A18) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A19);
+
+
+
+
+OFFSET0.d = CPU_D0.io;
+OFFSET0.ar = !VGA_RESET;
+OFFSET0.ck = !VGA_CONFIG_WRITE;
+
+OFFSET1.d = CPU_D1.io;
+OFFSET1.ar = !VGA_RESET;
+OFFSET1.ck = !VGA_CONFIG_WRITE;
+
+OFFSET2.d = CPU_D2.io;
+OFFSET2.ar = !VGA_RESET;
+OFFSET2.ck = !VGA_CONFIG_WRITE;
+
+OFFSET3.d = CPU_D3.io;
+OFFSET3.ar = !VGA_RESET;
+OFFSET3.ck = !VGA_CONFIG_WRITE;
+
+OFFSET4.d = CPU_D4.io;
+OFFSET4.ar = !VGA_RESET;
+OFFSET4.ck = !VGA_CONFIG_WRITE;
+
+OFFSET5.d = CPU_D5.io;
+OFFSET5.ar = !VGA_RESET;
+OFFSET5.ck = !VGA_CONFIG_WRITE;
+
+FONTLIB0.d = CPU_D6.io;
+FONTLIB0.ar = !VGA_RESET;
+FONTLIB0.ck = !VGA_CONFIG_WRITE;
+
+FONTLIB1.d = CPU_D7.io;
+FONTLIB1.ar = !VGA_RESET;
+FONTLIB1.ck = !VGA_CONFIG_WRITE;
+
+GRAPH_MODE0.d = CPU_D8.io;
+GRAPH_MODE0.ar = !VGA_RESET;
+GRAPH_MODE0.ck = !VGA_CONFIG_WRITE;
+
+GRAPH_MODE1.d = CPU_D9.io;
+GRAPH_MODE1.ar = !VGA_RESET;
+GRAPH_MODE1.ck = !VGA_CONFIG_WRITE;
+
+/*  
+
+   TEXT MODE:
+        In text mode each character row needs to be read 16 time in repitition so each character value can be driven to the character rom
+        as well as attribute bits.  Each text row is 80 characters, consuming 160 bytes of video memory (16 bit wide).  Since we want to be
+        able to do hardware scrolling, we will make each text 'row' start on an even power of 2 address.   As result each text row is 256 
+        bytes or 128 words long. The extra 48 words are unused and skipped.  The OFFSET0-5 bits are used at reset in VAddress bits 7-12. This
+        allows selection of up to 64 different start text lines. (64 line hardware scroll)
+
+   GRAPHICS MODE:
+        In 640x480 6bpp mode, we need 640 bytes of video memory for each scanline, with no repeats.  Address is reset at start of page
+        and incremented by 1 every 2 pixels.    
+
+*/
+
+/*
+
+        [VADDR_MODE0..2] - Address Increment Mode
+        000  DO NOTHING   vaddr_mode_field:['d'0] 
+        001  INCREMENT    vaddr_mode_field:['d'1]
+        010  RESET_A6     vaddr_mode_field:['d'2]
+        011  RESET_A6I    vaddr_mode_field:['d'3]
+        100  RESET_ALL    vaddr_mode_field:['d'4]
+        101  RESET_ALL    vaddr_mode_field:['d'5]
+        110  RESET_ALL    vaddr_mode_field:['d'6]
+        111  RESET_ALL    vaddr_mode_field:['d'7]
+                          vaddr_mode_field:['d'4..'d'7]
+*/
+
+FIELD vaddr_mode_field = [VADDR_MODE0..2];
+
+/* A0-A6 have special reset */
+
+A0.d =  (  (vaddr_mode_field:['d'1] & !A0) 
+        #  (vaddr_mode_field:['d'0] & A0)
+        ) & !vaddr_mode_field:['d'2..'d'7];     
+A0.ck = CLKIN;
+
+A1.d =  (  (vaddr_mode_field:['d'1] & ((A0&!A1) # (!A0&A1))) 
+        # ((vaddr_mode_field:['d'0] & A1))
+        ) & !vaddr_mode_field:['d'2..'d'7];
+A1.ck = CLKIN;
+
+A2T = A0&A1;
+A2.d =  (  (vaddr_mode_field:['d'1] & ((A2T&!A2) # (!A2T&A2))) 
+        # ((vaddr_mode_field:['d'0] & A2))
+        ) & !vaddr_mode_field:['d'2..'d'7];
+A2.ck = CLKIN;
+
+A3T = A2T&A2;
+A3.d =  ( (vaddr_mode_field:['d'1] & ((A3T&!A3) # (!A3T&A3))) 
+        # ((vaddr_mode_field:['d'0] & A3))
+        ) & !vaddr_mode_field:['d'2..'d'7];
+A3.ck = CLKIN;
+
+A4T = A3T&A3;
+A4.d =  ( (vaddr_mode_field:['d'1] & ((A4T&!A4) # (!A4T&A4))) 
+        # ((vaddr_mode_field:['d'0] & A4))
+        ) & !vaddr_mode_field:['d'2..'d'7];
+A4.ck = CLKIN;
+
+A5T = A4T&A4;
+A5.d =  ( (vaddr_mode_field:['d'1] & ((A5T&!A5) # (!A5T&A5))) 
+        # ((vaddr_mode_field:['d'0] & A5))
+        ) & !vaddr_mode_field:['d'2..'d'7];
+A5.ck = CLKIN;
+
+A6T = A5T&A5;
+A6.d =  ( (vaddr_mode_field:['d'1] & ((A6T&!A6) # (!A6T&A6))) 
+        # ((vaddr_mode_field:['d'0] & A6))
+        ) & !vaddr_mode_field:['d'2..'d'7];
+A6.ck = CLKIN;
+
+/*  These addresses have OFFSET on reset. */
+
+/* 
+   A7T is special as it needs to be set to 1 for the RESET_A6I mode.  If we are in INCREMENT, use the 
+   A6T&A6, and else if we are in RESET_A6I we want to add 1 (starting with this bit) .  If neither, the value will
+   be zero.
+*/
+
+A7T =   ( vaddr_mode_field:['d'1] & A6T&A6)
+        #
+        ( vaddr_mode_field:['d'3]);
+
+A7.d =  (
+          ( (vaddr_mode_field:['d'1] & ((A7T&!A7) # (!A7T&A7))) 
+            # ((vaddr_mode_field:['d'0] & A7))
+          ) & !vaddr_mode_field:['d'4..'d'7]
+        ) 
+        #
+        (
+            vaddr_mode_field:['d'4..'d'7] & OFFSET0
+        );
+A7.ck = CLKIN;
+
+A8T = A7T&A7;
+A8.d =  (
+          ( (vaddr_mode_field:['d'1] & ((A8T&!A8) # (!A8T&A8))) 
+            # ((vaddr_mode_field:['d'0] & A8))
+          ) & !vaddr_mode_field:['d'4..'d'7]
+        ) 
+        #
+        (
+            vaddr_mode_field:['d'4..'d'7] & OFFSET1
+        );
+A8.ck = CLKIN;
+
+A9T = A8T&A8;
+A9.d =  (
+          ( (vaddr_mode_field:['d'1] & ((A9T&!A9) # (!A9T&A9))) 
+            # ((vaddr_mode_field:['d'0] & A9))
+          ) & !vaddr_mode_field:['d'4..'d'7]
+        ) 
+        #
+        (
+            vaddr_mode_field:['d'4..'d'7] & OFFSET2
+        );
+A9.ck = CLKIN;
+
+A10T = A9T&A9;
+A10.d = (
+          ( (vaddr_mode_field:['d'1] & ((A10T&!A10) # (!A10T&A10))) 
+            # ((vaddr_mode_field:['d'0] & A10)) 
+          ) & !vaddr_mode_field:['d'4..'d'7]
+        ) 
+        #
+        (
+            vaddr_mode_field:['d'4..'d'7] & OFFSET3
+        );
+A10.ck = CLKIN;
+
+A11T = A10T&A10;
+A11.d = (
+          ( (vaddr_mode_field:['d'1] & ((A11T&!A11) # (!A11T&A11))) 
+            # ((vaddr_mode_field:['d'0] & A11))
+          ) & !vaddr_mode_field:['d'4..'d'7]
+        ) 
+        #
+        (
+            vaddr_mode_field:['d'4..'d'7] & OFFSET4
+        );
+A11.ck = CLKIN;
+
+A12T = A11T&A11;
+A12.d = (
+          ( (vaddr_mode_field:['d'1] & ((A12T&!A12) # (!A12T&A12))) 
+            # ((vaddr_mode_field:['d'0] & A12))
+          ) & !vaddr_mode_field:['d'4..'d'7]
+        ) 
+        #
+        (
+            vaddr_mode_field:['d'4..'d'7] & OFFSET5
+        );
+A12.ck = CLKIN;
+
+A13T = A12T&A12;
+A13.d = (  (vaddr_mode_field:['d'1] & ((A13T&!A13) # (!A13T&A13))) 
+        # ((vaddr_mode_field:['d'0] & A13))
+        ) & !vaddr_mode_field:['d'4..'d'7];
+A13.ck = CLKIN;
+
+A14T = A13T&A13;
+A14.d = ( (vaddr_mode_field:['d'1] & ((A14T&!A14) # (!A14T&A14))) 
+        # ((vaddr_mode_field:['d'0] & A14))
+        ) & !vaddr_mode_field:['d'4..'d'7];
+A14.ck = CLKIN;
+
+A15T = A14T&A14;
+A15.d = ( (vaddr_mode_field:['d'1] & ((A15T&!A15) # (!A15T&A15))) 
+        # ((vaddr_mode_field:['d'0] & A15))
+        ) & !vaddr_mode_field:['d'4..'d'7];
+A15.ck = CLKIN;
+
+A16T = A15T&A15;
+A16.d = ( (vaddr_mode_field:['d'1] & ((A16T&!A16) # (!A16T&A16))) 
+        # ((vaddr_mode_field:['d'0] & A16))
+        ) & !vaddr_mode_field:['d'4..'d'7];
+A16.ck = CLKIN;
+
+A17T = A16T&A16;
+A17.d = ( (vaddr_mode_field:['d'1] & ((A17T&!A17) # (!A17T&A17))) 
+        # ((vaddr_mode_field:['d'0] & A17))
+        ) & !vaddr_mode_field:['d'4..'d'7];
+A17.ck = CLKIN;
+
+A18T = A17T&A17;
+A18.d = ( (vaddr_mode_field:['d'1] & ((A18T&!A18) # (!A18T&A18))) 
+        # ((vaddr_mode_field:['d'0] & A18))
+        ) & !vaddr_mode_field:['d'4..'d'7];
+A18.ck = CLKIN;
+
+
+/*
+Current Implementation
+
+Total dedicated input used:	4/4 	(100%)
+Total I/O pins used		59/64 	(92%)
+Total Logic cells used 		82/128 	(64%)
+Total Flip-Flop used 		29/128 	(22%)
+Total Foldback logic used 	0/128 	(0%)
+Total Nodes+FB/MCells 		74/128 	(57%)
+Total cascade used 		8
+Total input pins 		40
+Total output pins 		23
+Total Pts 			289
+*/
+
+
+
+
+

@@ -82,8 +82,8 @@ typedef enum
 #define LED_SPARE_SET(x)	if (x) {cli(); PORTB |= (1 << PORTB1); sei();} else {cli(); PORTB &= (uint8_t) ~(1 << PORTB1); sei();}
 #define PWR_OK()			((PINA & (1 << PINA7)) ? true : false)
 #define PSON_SET(x)			if (x) {cli(); PORTB &= (uint8_t) ~(1 << PORTB0); sei();} else {cli(); PORTB |= (1 << PORTB0); sei();}
-#define PWRGR_REQ_SET(x)	if (x) {cli(); INT0_PORT &= (uint8_t) ~(1 << INT0_BIT); INT0_DDR |= (1 << INT0_BIT); sei();} else {cli(); INT0_DDR &= (uint8_t) ~(1 << INT0_BIT); INT0_PORT |= (1 << INT0_BIT); sei();}
-#define PWR_REQ_GET()		((INT0_PIN & (1 << INT0_BIT)) ? false : true)
+#define PWRGR_REQ_SET(x)	if (x) {cli(); INT0_PORT |= (1 << INT0_BIT); INT0_DDR |= (1 << INT0_BIT); sei();} else {cli(); INT0_DDR &= (uint8_t) ~(1 << INT0_BIT); INT0_PORT &= (uint8_t) ~(1 << INT0_BIT); sei();}
+#define PWR_REQ_GET()		((INT0_PIN & (1 << INT0_BIT)) ? true : false)
 
 // Other useful macros
 #define	IRQ_PWRGR_REQ_ENABLE()				GIMSK |= (1 << INT0);
@@ -330,18 +330,22 @@ ISR(TIM0_COMPA_vect, ISR_NOBLOCK)
 // Falling edge of INT0/PB2 is a controlled power request
 ISR(EXT_INT0_vect, ISR_NOBLOCK)
 {
-	if (false == sg_bCoordinatedShutdownMode)
+	// Only look at 0->1 transitions, not 1->0 transitions
+	if (PWR_REQ_GET())
 	{
-		// This is to indicate a coordinated shutdown
-		sg_bCoordinatedShutdownMode = true;
-	}
-	else
-	{
-		// This is a power off request
-		sg_bCoordinatedShutdown = true;
+		if (false == sg_bCoordinatedShutdownMode)
+		{
+			// This is to indicate a coordinated shutdown
+			sg_bCoordinatedShutdownMode = true;
+		}
+		else
+		{
+			// This is a power off request
+			sg_bCoordinatedShutdown = true;
 		
-		// And we power off
-		sg_bPowerRequest = true;
+			// And we power off
+			sg_bPowerRequest = true;
+		}
 	}
 }
 

@@ -1,0 +1,789 @@
+
+*******************************************************************************
+                                     VGA4B
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1508ispplcc84  Library DLIB-h-40-2
+Created         Wed Apr 26 21:14:44 2023
+Name            VGA4B
+Partno          VGA4B
+Revision        01
+Date            04/18/2022
+Designer        Sponaugle
+Company         Ratiometric
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+A0.d  =>
+    A0 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A0.ck  =>
+    CLKIN
+
+A1.d  =>
+    A1 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & !A1 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A1 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A1.ck  =>
+    CLKIN
+
+A10T =>
+    A7 & A8 & A9 & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & 
+      !VADDR_MODE1 & !VADDR_MODE2
+
+A11T =>
+    A0 & A1 & A2 & A10 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & 
+      !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & A7 & A8 & A9 & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+
+A12T =>
+    A10 & A11 & A7 & A8 & A9 & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & 
+      !VADDR_MODE1 & !VADDR_MODE2
+
+A13T =>
+    A0 & A1 & A2 & A10 & A11 & A12 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & 
+      VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & A11 & A12 & A7 & A8 & A9 & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+
+A14T =>
+    A10 & A11 & A12 & A13 & A7 & A8 & A9 & VADDR_MODE0 & VADDR_MODE1 & 
+      !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & 
+      VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A15T =>
+    A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A3 & A4 & A5 & A6 & A7 & A8 & 
+      A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & A11 & A12 & A13 & A14 & A7 & A8 & A9 & VADDR_MODE0 & VADDR_MODE1 & 
+      !VADDR_MODE2
+
+A16T =>
+    A10 & A11 & A12 & A13 & A14 & A15 & A7 & A8 & A9 & VADDR_MODE0 & 
+      VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A15 & A3 & A4 & A5 & A6 & A7 & 
+      A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A17T =>
+    A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A15 & A16 & A3 & A4 & A5 & 
+      A6 & A7 & A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & A11 & A12 & A13 & A14 & A15 & A16 & A7 & A8 & A9 & VADDR_MODE0 & 
+      VADDR_MODE1 & !VADDR_MODE2
+
+A18T =>
+    A10 & A11 & A12 & A13 & A14 & A15 & A16 & A17 & A7 & A8 & A9 & 
+      VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A15 & A16 & A17 & A3 & A4 & 
+      A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A2.d  =>
+    A2 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & !A2 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A2 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A2 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A2.ck  =>
+    CLKIN
+
+A10.d  =>
+    A10 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A10 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A10 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A10 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & !A10 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & 
+      !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A10 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # OFFSET3 & VADDR_MODE2
+
+A10.ck  =>
+    CLKIN
+
+A11.d  =>
+    A11 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A11 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A11 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A11 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A11 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & !A11 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & 
+      VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A11 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # OFFSET4 & VADDR_MODE2
+
+A11.ck  =>
+    CLKIN
+
+A12.d  =>
+    A12 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A12 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A12 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A12 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A12 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A12 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & !A12 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & 
+      VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A12 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # OFFSET5 & VADDR_MODE2
+
+A12.ck  =>
+    CLKIN
+
+A13.d  =>
+    A13 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A12 & A13 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A13 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A13 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A13 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A13 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A13 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & !A13 & A3 & A4 & A5 & A6 & A7 & A8 & A9 & 
+      VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A13 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A13.ck  =>
+    CLKIN
+
+A14.d  =>
+    A14 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A13 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A12 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A14 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & !A14 & A3 & A4 & A5 & A6 & A7 & A8 & 
+      A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A14 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A14.ck  =>
+    CLKIN
+
+A15.d  =>
+    A15 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A14 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A13 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A12 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A15 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & !A15 & A3 & A4 & A5 & A6 & 
+      A7 & A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A15 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A15.ck  =>
+    CLKIN
+
+A16.d  =>
+    A16 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A15 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A14 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A13 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A12 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A16 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A15 & !A16 & A3 & A4 & A5 & 
+      A6 & A7 & A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A16 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A16.ck  =>
+    CLKIN
+
+A17.d  =>
+    A17 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A16 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A15 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A14 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A13 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A12 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A17 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A15 & A16 & !A17 & A3 & A4 & 
+      A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A17 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A17.ck  =>
+    CLKIN
+
+A18.d  =>
+    A18 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A17 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A16 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A15 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A14 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A13 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A12 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A11 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A10 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A18 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A10 & A11 & A12 & A13 & A14 & A15 & A16 & A17 & !A18 & A3 & 
+      A4 & A5 & A6 & A7 & A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A18 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A18.ck  =>
+    CLKIN
+
+A2T =>
+    A0 & A1
+
+A3.d  =>
+    A3 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & !A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A3 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A3.ck  =>
+    CLKIN
+
+A3T =>
+    A0 & A1 & A2
+
+A4.d  =>
+    A4 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & !A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A3 & A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A4 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A4.ck  =>
+    CLKIN
+
+A4T =>
+    A0 & A1 & A2 & A3
+
+A5.d  =>
+    A5 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & !A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A4 & A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A3 & A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A5 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A5.ck  =>
+    CLKIN
+
+A5T =>
+    A0 & A1 & A2 & A3 & A4
+
+A6.d  =>
+    A6 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & A5 & !A6 & VADDR_MODE0 & !VADDR_MODE1 & 
+      !VADDR_MODE2
+  # !A5 & A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A4 & A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A3 & A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A6 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+
+A6.ck  =>
+    CLKIN
+
+A6T =>
+    A0 & A1 & A2 & A3 & A4 & A5
+
+A7.d  =>
+    A7 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A6 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A5 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A4 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A3 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & A5 & A6 & !A7 & VADDR_MODE0 & !VADDR_MODE1 & 
+      !VADDR_MODE2
+  # !A1 & A7 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # OFFSET0 & VADDR_MODE2
+
+A7.ck  =>
+    CLKIN
+
+A7T =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & VADDR_MODE0 & !VADDR_MODE1 & 
+      !VADDR_MODE2
+  # VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+
+A8.d  =>
+    A8 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A7 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A6 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A5 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A4 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A3 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & !A8 & VADDR_MODE0 & !VADDR_MODE1 & 
+      !VADDR_MODE2
+  # !A1 & A8 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # OFFSET1 & VADDR_MODE2
+
+A8.ck  =>
+    CLKIN
+
+A8T =>
+    A7 & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & VADDR_MODE0 & !VADDR_MODE1 & 
+      !VADDR_MODE2
+
+A9.d  =>
+    A9 & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A8 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A7 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A6 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A5 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A4 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A3 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A2 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # !A0 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & !A9 & VADDR_MODE0 & 
+      !VADDR_MODE1 & !VADDR_MODE2
+  # !A1 & A9 & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2
+  # OFFSET2 & VADDR_MODE2
+
+A9.ck  =>
+    CLKIN
+
+A9T =>
+    A0 & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & VADDR_MODE0 & !VADDR_MODE1 & 
+      !VADDR_MODE2
+  # A7 & A8 & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2
+
+FONTLIB0.d  =>
+    CPU_D6.io 
+
+FONTLIB0.ar  =>
+    !VGA_RESET
+
+FONTLIB0.ck  =>
+    !VGA_CONFIG_WRITE
+
+FONTLIB1.d  =>
+    CPU_D7.io 
+
+FONTLIB1.ar  =>
+    !VGA_RESET
+
+FONTLIB1.ck  =>
+    !VGA_CONFIG_WRITE
+
+GRAPH_MODE0.d  =>
+    CPU_D8.io 
+
+GRAPH_MODE0.ar  =>
+    !VGA_RESET
+
+GRAPH_MODE0.ck  =>
+    !VGA_CONFIG_WRITE
+
+GRAPH_MODE1.d  =>
+    CPU_D9.io 
+
+GRAPH_MODE1.ar  =>
+    !VGA_RESET
+
+GRAPH_MODE1.ck  =>
+    !VGA_CONFIG_WRITE
+
+OFFSET0.d  =>
+    CPU_D0.io 
+
+OFFSET0.ar  =>
+    !VGA_RESET
+
+OFFSET0.ck  =>
+    !VGA_CONFIG_WRITE
+
+OFFSET1.d  =>
+    CPU_D1.io 
+
+OFFSET1.ar  =>
+    !VGA_RESET
+
+OFFSET1.ck  =>
+    !VGA_CONFIG_WRITE
+
+OFFSET2.d  =>
+    CPU_D2.io 
+
+OFFSET2.ar  =>
+    !VGA_RESET
+
+OFFSET2.ck  =>
+    !VGA_CONFIG_WRITE
+
+OFFSET3.d  =>
+    CPU_D3.io 
+
+OFFSET3.ar  =>
+    !VGA_RESET
+
+OFFSET3.ck  =>
+    !VGA_CONFIG_WRITE
+
+OFFSET4.d  =>
+    CPU_D4.io 
+
+OFFSET4.ar  =>
+    !VGA_RESET
+
+OFFSET4.ck  =>
+    !VGA_CONFIG_WRITE
+
+OFFSET5.d  =>
+    CPU_D5.io 
+
+OFFSET5.ar  =>
+    !VGA_RESET
+
+OFFSET5.ck  =>
+    !VGA_CONFIG_WRITE
+
+VA0 =>
+    A0 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A1 & !SBUS_TO_VRAM_AD_OE
+
+VA1 =>
+    A1 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A2 & !SBUS_TO_VRAM_AD_OE
+
+VA2 =>
+    A2 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A3 & !SBUS_TO_VRAM_AD_OE
+
+VA3 =>
+    A3 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A4 & !SBUS_TO_VRAM_AD_OE
+
+VA4 =>
+    A4 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A5 & !SBUS_TO_VRAM_AD_OE
+
+VA5 =>
+    A5 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A6 & !SBUS_TO_VRAM_AD_OE
+
+VA6 =>
+    A6 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A7 & !SBUS_TO_VRAM_AD_OE
+
+VA7 =>
+    A7 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A8 & !SBUS_TO_VRAM_AD_OE
+
+VA8 =>
+    A8 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A9 & !SBUS_TO_VRAM_AD_OE
+
+VA9 =>
+    A9 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A10 & !SBUS_TO_VRAM_AD_OE
+
+VA10 =>
+    A10 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A11 & !SBUS_TO_VRAM_AD_OE
+
+VA11 =>
+    A11 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A12 & !SBUS_TO_VRAM_AD_OE
+
+VA12 =>
+    A12 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A13 & !SBUS_TO_VRAM_AD_OE
+
+VA13 =>
+    A13 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A14 & !SBUS_TO_VRAM_AD_OE
+
+VA14 =>
+    A14 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A15 & !SBUS_TO_VRAM_AD_OE
+
+VA15 =>
+    A15 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A16 & !SBUS_TO_VRAM_AD_OE
+
+VA16 =>
+    A16 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A17 & !SBUS_TO_VRAM_AD_OE
+
+VA17 =>
+    A17 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A18 & !SBUS_TO_VRAM_AD_OE
+
+VA18 =>
+    A18 & SBUS_TO_VRAM_AD_OE
+  # CPU_SBUS_A19 & !SBUS_TO_VRAM_AD_OE
+
+vaddr_mode_field =>
+    VADDR_MODE0 , VADDR_MODE1 , VADDR_MODE2
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    A0                          85       N        -       -       -     
+    A0                  d       85       M        2       0       1     
+    A0                  ck      85       M        1       0       1     
+    A1                          86       N        -       -       -     
+    A1                  d       86       M        3       0       1     
+    A1                  ck      86       M        1       0       1     
+    A10T                        0        I        2       -       -     
+    A11T                        0        I        2       -       -     
+    A12T                        0        I        2       -       -     
+    A13T                        0        I        2       -       -     
+    A14T                        0        I        2       -       -     
+    A15T                        0        I        2       -       -     
+    A16T                        0        I        2       -       -     
+    A17T                        0        I        2       -       -     
+    A18T                        0        I        2       -       -     
+    A2                          87       N        -       -       -     
+    A2                  d       87       M        4       0       1     
+    A2                  ck      87       M        1       0       1     
+    A10                         95       N        -       -       -     
+    A10                 d       95       M        13      0       1     
+    A10                 ck      95       M        1       0       1     
+    A11                         96       N        -       -       -     
+    A11                 d       96       M        14      0       1     
+    A11                 ck      96       M        1       0       1     
+    A12                         97       N        -       -       -     
+    A12                 d       97       M        15      0       1     
+    A12                 ck      97       M        1       0       1     
+    A13                         98       N        -       -       -     
+    A13                 d       98       M        15      0       1     
+    A13                 ck      98       M        1       0       1     
+    A14                         99       N        -       -       -     
+    A14                 d       99       M        16      0       1     
+    A14                 ck      99       M        1       0       1     
+    A15                         100      N        -       -       -     
+    A15                 d       100      M        17      0       1     
+    A15                 ck      100      M        1       0       1     
+    A16                         101      N        -       -       -     
+    A16                 d       101      M        18      0       1     
+    A16                 ck      101      M        1       0       1     
+    A17                         102      N        -       -       -     
+    A17                 d       102      M        19      0       1     
+    A17                 ck      102      M        1       0       1     
+    A18                         103      N        -       -       -     
+    A18                 d       103      M        20      0       1     
+    A18                 ck      103      M        1       0       1     
+    A2T                         0        I        1       -       -     
+    A3                          88       N        -       -       -     
+    A3                  d       88       M        5       0       1     
+    A3                  ck      88       M        1       0       1     
+    A3T                         0        I        1       -       -     
+    A4                          89       N        -       -       -     
+    A4                  d       89       M        6       0       1     
+    A4                  ck      89       M        1       0       1     
+    A4T                         0        I        1       -       -     
+    A5                          90       N        -       -       -     
+    A5                  d       90       M        7       0       1     
+    A5                  ck      90       M        1       0       1     
+    A5T                         0        I        1       -       -     
+    A6                          91       N        -       -       -     
+    A6                  d       91       M        8       0       1     
+    A6                  ck      91       M        1       0       1     
+    A6T                         0        I        1       -       -     
+    A7                          92       N        -       -       -     
+    A7                  d       92       M        10      0       1     
+    A7                  ck      92       M        1       0       1     
+    A7T                         0        I        2       -       -     
+    A8                          93       N        -       -       -     
+    A8                  d       93       M        11      0       1     
+    A8                  ck      93       M        1       0       1     
+    A8T                         0        I        2       -       -     
+    A9                          94       N        -       -       -     
+    A9                  d       94       M        12      0       1     
+    A9                  ck      94       M        1       0       1     
+    A9T                         0        I        2       -       -     
+    CLKIN                       2        V        -       -       -     
+    CPU_D0                      4        V        -       -       -     
+    CPU_D0              io      4        X        -       -       -     
+    CPU_D1                      5        V        -       -       -     
+    CPU_D1              io      5        X        -       -       -     
+    CPU_D2                      6        V        -       -       -     
+    CPU_D2              io      6        X        -       -       -     
+    CPU_D3                      8        V        -       -       -     
+    CPU_D3              io      8        X        -       -       -     
+    CPU_D4                      9        V        -       -       -     
+    CPU_D4              io      9        X        -       -       -     
+    CPU_D5                      10       V        -       -       -     
+    CPU_D5              io      10       X        -       -       -     
+    CPU_D6                      11       V        -       -       -     
+    CPU_D6              io      11       X        -       -       -     
+    CPU_D7                      12       V        -       -       -     
+    CPU_D7              io      12       X        -       -       -     
+    CPU_D8                      15       V        -       -       -     
+    CPU_D8              io      15       X        -       -       -     
+    CPU_D9                      16       V        -       -       -     
+    CPU_D9              io      16       X        -       -       -     
+    CPU_SBUS_A1                 17       V        -       -       -     
+    CPU_SBUS_A2                 18       V        -       -       -     
+    CPU_SBUS_A3                 20       V        -       -       -     
+    CPU_SBUS_A4                 21       V        -       -       -     
+    CPU_SBUS_A5                 22       V        -       -       -     
+    CPU_SBUS_A6                 24       V        -       -       -     
+    CPU_SBUS_A7                 25       V        -       -       -     
+    CPU_SBUS_A8                 27       V        -       -       -     
+    CPU_SBUS_A9                 28       V        -       -       -     
+    CPU_SBUS_A10                29       V        -       -       -     
+    CPU_SBUS_A11                30       V        -       -       -     
+    CPU_SBUS_A12                31       V        -       -       -     
+    CPU_SBUS_A13                33       V        -       -       -     
+    CPU_SBUS_A14                34       V        -       -       -     
+    CPU_SBUS_A15                35       V        -       -       -     
+    CPU_SBUS_A16                36       V        -       -       -     
+    CPU_SBUS_A17                37       V        -       -       -     
+    CPU_SBUS_A18                39       V        -       -       -     
+    CPU_SBUS_A19                40       V        -       -       -     
+    FONTLIB0                    68       V        -       -       -     
+    FONTLIB0            d       68       X        1       0       1     
+    FONTLIB0            ar      68       X        1       0       1     
+    FONTLIB0            ck      68       X        1       0       1     
+    FONTLIB1                    69       V        -       -       -     
+    FONTLIB1            d       69       X        1       0       1     
+    FONTLIB1            ar      69       X        1       0       1     
+    FONTLIB1            ck      69       X        1       0       1     
+    GRAPH_MODE0                 79       V        -       -       -     
+    GRAPH_MODE0         d       79       X        1       0       1     
+    GRAPH_MODE0         ar      79       X        1       0       1     
+    GRAPH_MODE0         ck      79       X        1       0       1     
+    GRAPH_MODE1                 80       V        -       -       -     
+    GRAPH_MODE1         d       80       X        1       0       1     
+    GRAPH_MODE1         ar      80       X        1       0       1     
+    GRAPH_MODE1         ck      80       X        1       0       1     
+    OFFSET0                     104      N        -       -       -     
+    OFFSET0             d       104      M        1       0       1     
+    OFFSET0             ar      104      M        1       0       1     
+    OFFSET0             ck      104      M        1       0       1     
+    OFFSET1                     105      N        -       -       -     
+    OFFSET1             d       105      M        1       0       1     
+    OFFSET1             ar      105      M        1       0       1     
+    OFFSET1             ck      105      M        1       0       1     
+    OFFSET2                     106      N        -       -       -     
+    OFFSET2             d       106      M        1       0       1     
+    OFFSET2             ar      106      M        1       0       1     
+    OFFSET2             ck      106      M        1       0       1     
+    OFFSET3                     107      N        -       -       -     
+    OFFSET3             d       107      M        1       0       1     
+    OFFSET3             ar      107      M        1       0       1     
+    OFFSET3             ck      107      M        1       0       1     
+    OFFSET4                     108      N        -       -       -     
+    OFFSET4             d       108      M        1       0       1     
+    OFFSET4             ar      108      M        1       0       1     
+    OFFSET4             ck      108      M        1       0       1     
+    OFFSET5                     109      N        -       -       -     
+    OFFSET5             d       109      M        1       0       1     
+    OFFSET5             ar      109      M        1       0       1     
+    OFFSET5             ck      109      M        1       0       1     
+    SBUS_TO_VRAM_AD_OE          84       V        -       -       -     
+    VA0                         41       V        2       0       1     
+    VA1                         44       V        2       0       1     
+    VA2                         45       V        2       0       1     
+    VA3                         46       V        2       0       1     
+    VA4                         48       V        2       0       1     
+    VA5                         49       V        2       0       1     
+    VA6                         50       V        2       0       1     
+    VA7                         51       V        2       0       1     
+    VA8                         52       V        2       0       1     
+    VA9                         54       V        2       0       1     
+    VA10                        55       V        2       0       1     
+    VA11                        56       V        2       0       1     
+    VA12                        57       V        2       0       1     
+    VA13                        58       V        2       0       1     
+    VA14                        60       V        2       0       1     
+    VA15                        61       V        2       0       1     
+    VA16                        63       V        2       0       1     
+    VA17                        64       V        2       0       1     
+    VA18                        65       V        2       0       1     
+    VADDR_MODE0                 75       V        -       -       -     
+    VADDR_MODE1                 76       V        -       -       -     
+    VADDR_MODE2                 77       V        -       -       -     
+    VGA_CONFIG_WRITE            83       V        -       -       -     
+    VGA_RESET                   1        V        -       -       -     
+    vaddr_mode_field            0        F        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
