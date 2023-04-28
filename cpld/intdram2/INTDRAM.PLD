@@ -71,16 +71,33 @@ Pin[20]  = CPU_HALT;
 Pin[30]  = CLK_16M;
 Pin[12]  = CPU_RESET_INV;
 
-/* Debugging pins */
-Pin[81]  = UARTADSR;
  
  /* Power Control */
 
-Pin[75] = POWERCTL_STATE;
-Pin[76] =  POWERCTL_OE;
+Pin[75] = POWERCTL_STATE; /* EXP_ICPLD_3 -> SBUS Pin 35, J5 */
 
-Pin[60] = ICPLD_1;
-pin[61] = ICPLD_2;
+/* Keyboard */
+
+/* Use ICPLD_1, on SBUS, for Keyboard Interrupt.  This interrupt will override the IDE interrupt which we are not using. */
+Pin[60] = KEYBOARDIRQ;  /* EXP_ICPLD_1 - SBUS Pin 30, J5 */
+
+
+/* EXTRA Shared BUS pin */
+
+Pin[76] = ICPLD_4;  /* SBUS Pin 34, J5 */
+pin[61] = ICPLD_2;  /* SBUS Pin 36, J5 */
+
+Pin[48]  = UNUSED1;
+Pin[77]  = UNUSED2;
+Pin[15]  = UNUSED3;
+Pin[79]  = UNUSED4;
+Pin[80]  = UNUSED5;
+Pin[51]  = UNUSED6;
+Pin[50]  = UNUSED7;
+Pin[49]  = UNUSED8;
+Pin[81]  = UNUSED9;
+
+
 
 CPU_RESET_INV = !CPU_RESET;
 
@@ -99,6 +116,8 @@ NODE POWER_IRQ_MASK;
 
 NODE REFRESH_REQUESTED_PRE;
 NODE REFRESH_REQUESTED_SYNC;
+
+NODE POWERCTL_OE;
 
 /* flip-flop for the system requesting a reset */
 
@@ -381,7 +400,12 @@ UARTB_IRQ_PE = (!UARTB_IRQ # UARTB_IRQ_MASK) # !(!UARTA_IRQ # UARTA_IRQ_MASK);
 
 IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
 
-IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+/* We are going to use the IDE IRQ slot for the Keyboard interrupt 
+   Original - IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+   New - IDE_IRQ_PE = (KEYBOARDIRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+*/
+
+IDE_IRQ_PE = (KEYBOARDIRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
 EXPA_IRQ_PE = (EXPA_IRQ # EXPA_IRQ_MASK) ;
 EXPB_IRQ_PE = (EXPB_IRQ # EXPB_IRQ_MASK) # !(EXPA_IRQ # EXPA_IRQ_MASK);
 POWER_INT_PE = (POWERBUTTON_IRQ # POWER_IRQ_MASK);
@@ -402,18 +426,18 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
       The lower 4 bits are driven by the specific sub interrupt for the level selected above.
       Since we support 4 sub interrupts, the vector uses 1 bit for each.
 
-      IRQ        AVector#    AVIRQL      Vector#              System Use
-      ------     --------    ------      --------             -------------------------------
-      DEBUG_INT  0x1F        7           11110000 (0xF0)      Debugger (Button)
-      IRQL6A     0x1E        6           11100001 (0xE1)      PTC #1 (Programmable Timer)
-      IRQL6B     0x1D        5           11100010 (0xE2)      PTC #2 (Programmable Timer)
-      UARTA_IRQ  0x1C        4           11010001 (0xD1)      UARTA
-      UARTB_IRQ  0x1B        3           11010010 (0xD2)      UARTB
-      IRQL4A     0x1A        2           11000001 (0xC1)      RTC
-      IDE_IRQ    NA          NA          11000010 (0xC2)      IDE
-      EXPA_IRQ   NA          NA          10110001 (0xB1)      Keyboard
-      EXPB_IRQ   NA          NA          10110010 (0xB2)      NIC
-      POWER_INT  --          --          10100000 (0xA0)      Power Controller Interrupt
+      IRQ         AVector#    AVIRQL      Vector#              System Use
+      ------      --------    ------      --------             -------------------------------
+      DEBUG_INT   0x1F        7           11110000 (0xF0)      Debugger (Button)
+      IRQL6A      0x1E        6           11100001 (0xE1)      PTC #1 (Programmable Timer)
+      IRQL6B      0x1D        5           11100010 (0xE2)      PTC #2 (Programmable Timer)
+      UARTA_IRQ   0x1C        4           11010001 (0xD1)      UARTA
+      UARTB_IRQ   0x1B        3           11010010 (0xD2)      UARTB
+      IRQL4A      0x1A        2           11000001 (0xC1)      RTC
+      KEYBOARDIRQ NA          NA          11000010 (0xC2)      Keyboard
+      EXPA_IRQ    NA          NA          10110001 (0xB1)      VGA Vert Refresh
+      EXPB_IRQ    NA          NA          10110010 (0xB2)      NIC
+      POWER_INT   --          --          10100000 (0xA0)      Power Controller Interrupt
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 

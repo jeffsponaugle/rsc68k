@@ -55,20 +55,20 @@ Pin[55]  = PTC_CS;
 Pin[52]  = IDE_BUFFER_EN;
 Pin[68]  = ITC_CS;
 Pin[77]  = IDE_WR;
-Pin[12]  = K8042_CS; /* SBUS Connector:CPLD_CS_A */
-
+Pin[12]  = K8042_CS;    /* SBUS Connector:CPLD_CS_A */
 
 /* Worker CPU Related signals */
 
-Pin[48]  = SPY_SETUP_LATCH_CS;      /* SBUS Connector:CPLD_CS_C */
-Pin[49]  = WORKER_RESET_PRESENCE_LATCH_CS; /* SBUS Connector:CPLD_1 */
-Pin[50]  = WORKER_BARRIER_CS; /* SBUS Connector:CPLD_2 */
-Pin[69]  = WORKER_BUS_REQUEST; /* Unused, called CPLD_6, not routed anywhere */
-Pin[67]  = WORKER_BUS_GRANT; /* SBUS Connector:CPLD_5 */
+Pin[48]  = VGA_CFG_CS;   /* SBUS Connector:CPLD_CS_C */
+Pin[46]  = VGA_VRAM_CS;   /* SBUS Connector:CPLD_CS_B */
 
-Pin[51]  = SBUS_BUFFER_AC_DIR; /* SBUS Connector:CPLD_3 */
-Pin[46]  = SBUS_BUFFER_D_DIR; /* SBUS Connector:CPLD_CS_B */
-Pin[54]  = CPLD_4;   /* SBUS Connector:CPLD_4 */
+Pin[49]  = CPLD_1;      /* SBUS Connector:CPLD_1 */
+Pin[50]  = CPLD_2;      /* SBUS Connector:CPLD_2 */
+Pin[51]  = CPLD_3;      /* SBUS Connector:CPLD_3 */
+Pin[54]  = CPLD_4;      /* SBUS Connector:CPLD_4 */
+Pin[67]  = CPLD_5;      /* SBUS Connector:CPLD_5 */
+
+Pin[69]  = NOTUSED1; /* Unused, called CPLD_6, not routed anywhere */
 
 /* 
    For VGA we need two chip selects, plus a return DTACK signal.
@@ -184,14 +184,24 @@ SRAM0_HIGH_CS = !(
    Flash range is 0xF00000 - 0xF7FFFF 
    IF SRAM_IN_FLASH_AREA==0 we should enable the FLASH memory.  Note FLASH_A18
    is set from the FLASH_CONFIG_STATE, so it should already be set.
+   IF SRAM_IN_FLASH_AREA==1, DRAM is mapped into this area.
    MAP_FLASH_TO_ZERO is set to 0 at reset, which will enable the FLASH at 0x00000 for the reset vector fetch.
+   
 */
-FLASH_LOW_CS  = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !SRAM_IN_FLASH_AREA)
+FLASH_LOW_CS  = !(    (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !SRAM_IN_FLASH_AREA)
                     # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_LDS & !MAP_FLASH_TO_ZERO) );
-FLASH_HIGH_CS = !( (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
+FLASH_HIGH_CS = !(    (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !SRAM_IN_FLASH_AREA)
                     # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU_UDS & !MAP_FLASH_TO_ZERO) );
 
-/* Start DRAM at address 0 (unless flash is mapped in for bootup) and fill in all the way to 0xBFFFFF */
+/* Start DRAM at address 0 (unless flash is mapped in for bootup) and fill in all the way to 0xBFFFFF 
+
+XXXXXXX00000XXXXXXXXXXXXXXXXXXX = 0x000000-0x07FFFF 512K DRAM or FLASH (MAP_FLASH_TO_ZERO)
+XXXXXXX00001XXXXXXXXXXXXXXXXXXX = 0x080000-0x0FFFFF 512K DRAM
+                                = 0x100000-0xBFFFFF 11MB DRAM
+XXXXXXX11110XXXXXXXXXXXXXXXXXXX = 0xF00000=0xF7FFFF 512K DRAM or FLASH (SRAM_IN_FLASH_AREA)
+XXXXXXX1111100XXXXXXXXXXXXXXXXX = 0xF80000-0xF9FFFF 128K DRAM or FLASH (SRAM_IN_FLASH_AREA)
+
+*/
 DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
                         # cpu_address_bus:'b'XXXXXXX00001XXXXXXXXXXXXXXXXXXX
                         # (cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & MAP_FLASH_TO_ZERO)
