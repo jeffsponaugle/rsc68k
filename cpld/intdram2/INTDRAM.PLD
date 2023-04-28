@@ -199,7 +199,7 @@ Write to FF0700 Upper 8 bits:
                   bit 4 - UARTA_IRQ_MASK
                   bit 3 - UARTB_IRQ_MASK
                   bit 2 - IRQL4A_MASK
-                  bit 1 - IDE_IRQ_MASK
+                  bit 1 - KEYBOARD_IRQ_MASK
                   bit 0 - Unused
 
  Write to FF0702 Upper 8 bits:
