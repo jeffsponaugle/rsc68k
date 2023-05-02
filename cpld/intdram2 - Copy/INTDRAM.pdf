@@ -1,0 +1,471 @@
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM2\INTDRAM.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Mon May 01 20:33:48 2023 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P DEBUG_BU {Pt "INPUT"}{Lq 0}{Ploc 100 1020}}
+   {P PTC2_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 980}}
+   {P UARTA_IR {Pt "INPUT"}{Lq 0}{Ploc 100 960}}
+   {P UARTB_IR {Pt "INPUT"}{Lq 0}{Ploc 100 940}}
+   {P RTC_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 920}}
+   {P IDE_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 900}}
+   {P EXPA_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 880}}
+   {P EXPB_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 860}}
+   {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 840}}
+   {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 820}}
+   {P UNUSED3 {Pt "INPUT"}{Lq 0}{Ploc 100 800}}
+   {P CPU_RES {Pt "INPUT"}{Lq 0}{Ploc 100 780}}
+   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 760}}
+   {P CPU_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
+   {P CPU_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
+   {P CPU_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P CPU_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P CPU_RW {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P CPU_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P CPU_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P CPU_AS {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P CPU_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P CPU_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P CPU_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P CPU_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P CPU_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P CPU_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P CPU_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CPU_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P UNUSED1 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P UNUSED8 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P UNUSED7 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P UNUSED6 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P DRAM_CS {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P INTC_CS {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P CPU_IN2 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P CPU_IN1 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P KEYBOARD {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P ICPLD_2 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P DRAM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P DRAM_MEM {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P POWERCTL {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P ICPLD_4 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P UNUSED2 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P UNUSED4 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P UNUSED5 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P UNUSED9 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P PTC1_IRQ {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P CPU_RE {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P CPU_VPA {Pt "I/O"}{Lq 0}{Ploc 360 40}}
+   {P CPU_HALT {Pt "I/O"}{Lq 0}{Ploc 360 60}}
+   {P IPL0 {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P IPL1 {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P IPL2 {Pt "I/O"}{Lq 0}{Ploc 360 120}}
+   {P DTACK_FR {Pt "I/O"}{Lq 0}{Ploc 360 140}}
+   {P DRAM_DAT {Pt "I/O"}{Lq 0}{Ploc 360 160}}
+   {P CAS0 {Pt "I/O"}{Lq 0}{Ploc 360 180}}
+   {P CAS1 {Pt "I/O"}{Lq 0}{Ploc 360 200}}
+   {P CAS2 {Pt "I/O"}{Lq 0}{Ploc 360 220}}
+   {P CAS3 {Pt "I/O"}{Lq 0}{Ploc 360 240}}
+   {P RAS2 {Pt "I/O"}{Lq 0}{Ploc 360 260}}
+   {P RAS0 {Pt "I/O"}{Lq 0}{Ploc 360 280}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 230 1050}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 1030}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 990}
+   {Pnl 120 970}
+   {Pnl 120 950}
+   {Pnl 120 930}
+   {Pnl 120 910}
+   {Pnl 120 890}
+   {Pnl 120 870}
+   {Pnl 120 850}
+   {Pnl 120 830}
+   {Pnl 120 810}
+   {Pnl 120 790}
+   {Pnl 120 770}
+   {Pnl 120 750}
+   {Pnl 120 730}
+   {Pnl 120 710}
+   {Pnl 120 690}
+   {Pnl 120 670}
+   {Pnl 120 650}
+   {Pnl 120 630}
+   {Pnl 120 610}
+   {Pnl 120 590}
+   {Pnl 120 570}
+   {Pnl 120 550}
+   {Pnl 120 530}
+   {Pnl 120 510}
+   {Pnl 120 490}
+   {Pnl 120 470}
+   {Pnl 120 450}
+   {Pnl 120 430}
+   {Pnl 120 410}
+   {Pnl 120 390}
+   {Pnl 120 370}
+   {Pnl 120 350}
+   {Pnl 120 330}
+   {Pnl 120 310}
+   {Pnl 120 290}
+   {Pnl 120 270}
+   {Pnl 120 250}
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 340 30}
+   {Pnl 340 50}
+   {Pnl 340 70}
+   {Pnl 340 90}
+   {Pnl 340 110}
+   {Pnl 340 130}
+   {Pnl 340 150}
+   {Pnl 340 170}
+   {Pnl 340 190}
+   {Pnl 340 210}
+   {Pnl 340 230}
+   {Pnl 340 250}
+   {Pnl 340 270}
+   {Pnl 340 290}
+
+   {Sd A 83 1 2 4 5 6 8 9 10 11 15 17 18 21 22 24 29 30 31 33 34 35 36 37 39 40 41 44 45 46 48 49 50 51 54 55 56 57 58 60 61 63 64 75 76 77 79 80 81 84 12 16 20 25 27 28 52 65 67 68 69 70 73 74}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 1040 330 0}
+   {L 130 1020 100 1020}
+   {L 130 1030 140 1020 130 1010}
+   {L 130 980 100 980}
+   {L 130 960 100 960}
+   {L 130 940 100 940}
+   {L 130 920 100 920}
+   {L 130 900 100 900}
+   {L 130 880 100 880}
+   {L 130 860 100 860}
+   {L 130 840 100 840}
+   {L 130 820 100 820}
+   {L 130 800 100 800}
+   {L 130 780 100 780}
+   {L 130 760 100 760}
+   {L 130 740 100 740}
+   {L 130 720 100 720}
+   {L 130 700 100 700}
+   {L 130 680 100 680}
+   {L 130 660 100 660}
+   {L 130 640 100 640}
+   {L 130 620 100 620}
+   {L 130 600 100 600}
+   {L 130 580 100 580}
+   {L 130 560 100 560}
+   {L 130 540 100 540}
+   {L 130 520 100 520}
+   {L 130 500 100 500}
+   {L 130 480 100 480}
+   {L 130 460 100 460}
+   {L 130 440 100 440}
+   {L 130 420 100 420}
+   {L 130 400 100 400}
+   {L 130 380 100 380}
+   {L 130 360 100 360}
+   {L 130 340 100 340}
+   {L 130 320 100 320}
+   {L 130 300 100 300}
+   {L 130 280 100 280}
+   {L 130 260 100 260}
+   {L 130 240 100 240}
+   {L 130 220 100 220}
+   {L 130 200 100 200}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 330 20 360 20}
+   {L 330 40 360 40}
+   {L 330 60 360 60}
+   {L 330 80 360 80}
+   {L 330 100 360 100}
+   {L 330 120 360 120}
+   {L 330 140 360 140}
+   {L 330 160 360 160}
+   {L 330 180 360 180}
+   {L 330 200 360 200}
+   {L 330 220 360 220}
+   {L 330 240 360 240}
+   {L 330 260 360 260}
+   {L 330 280 360 280}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "DEBUG_BU" 140 1020}
+   {T "PTC2_IRQ" 140 980}
+   {T "UARTA_IR" 140 960}
+   {T "UARTB_IR" 140 940}
+   {T "RTC_IRQ" 140 920}
+   {T "IDE_IRQ" 140 900}
+   {T "EXPA_IRQ" 140 880}
+   {T "EXPB_IRQ" 140 860}
+   {T "CLK_500K" 140 840}
+   {T "CLK_1M" 140 820}
+   {T "UNUSED3" 140 800}
+   {T "CPU_RES" 140 780}
+   {T "CLK_32M" 140 760}
+   {T "CPU_FC0" 140 740}
+   {T "CPU_FC1" 140 720}
+   {T "CPU_FC2" 140 700}
+   {T "CPU_RESE" 140 680}
+   {T "CLK_16M" 140 660}
+   {T "CPU_RW" 140 640}
+   {T "CPU_UDS" 140 620}
+   {T "CPU_LDS" 140 600}
+   {T "CPU_AS" 140 580}
+   {T "CPU_D0" 140 560}
+   {T "CPU_D1" 140 540}
+   {T "CPU_D2" 140 520}
+   {T "CPU_D3" 140 500}
+   {T "CPU_D4" 140 480}
+   {T "CPU_D5" 140 460}
+   {T "CPU_D6" 140 440}
+   {T "CPU_D7" 140 420}
+   {T "UNUSED1" 140 400}
+   {T "UNUSED8" 140 380}
+   {T "UNUSED7" 140 360}
+   {T "UNUSED6" 140 340}
+   {T "DRAM_CS" 140 320}
+   {T "INTC_CS" 140 300}
+   {T "CPU_IN2" 140 280}
+   {T "CPU_IN1" 140 260}
+   {T "CPU_IN0" 140 240}
+   {T "KEYBOARD" 140 220}
+   {T "ICPLD_2" 140 200}
+   {T "DRAM_RW" 140 180}
+   {T "DRAM_MEM" 140 160}
+   {T "POWERCTL" 140 140}
+   {T "ICPLD_4" 140 120}
+   {T "UNUSED2" 140 100}
+   {T "UNUSED4" 140 80}
+   {T "UNUSED5" 140 60}
+   {T "UNUSED9" 140 40}
+   {T "PTC1_IRQ" 140 20}
+   [Tj "RC"]
+   {T "CPU_RE" 320 20}
+   {T "CPU_VPA" 320 40}
+   {T "CPU_HALT" 320 60}
+   {T "IPL0" 320 80}
+   {T "IPL1" 320 100}
+   {T "IPL2" 320 120}
+   {T "DTACK_FR" 320 140}
+   {T "DRAM_DAT" 320 160}
+   {T "CAS0" 320 180}
+   {T "CAS1" 320 200}
+   {T "CAS2" 320 220}
+   {T "CAS3" 320 240}
+   {T "RAS2" 320 260}
+   {T "RAS0" 320 280}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "F1508ISPPLCC84" 230 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\INTDRAM2\INTDRAM 230 1040}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N DEBUG_BU
+   }
+   {N PTC2_IRQ
+   }
+   {N UARTA_IR
+   }
+   {N UARTB_IR
+   }
+   {N RTC_IRQ
+   }
+   {N IDE_IRQ
+   }
+   {N EXPA_IRQ
+   }
+   {N EXPB_IRQ
+   }
+   {N CLK_500K
+   }
+   {N CLK_1M
+   }
+   {N UNUSED3
+   }
+   {N CPU_RES
+   }
+   {N CLK_32M
+   }
+   {N CPU_FC0
+   }
+   {N CPU_FC1
+   }
+   {N CPU_FC2
+   }
+   {N CPU_RESE
+   }
+   {N CLK_16M
+   }
+   {N CPU_RW
+   }
+   {N CPU_UDS
+   }
+   {N CPU_LDS
+   }
+   {N CPU_AS
+   }
+   {N CPU_D0
+   }
+   {N CPU_D1
+   }
+   {N CPU_D2
+   }
+   {N CPU_D3
+   }
+   {N CPU_D4
+   }
+   {N CPU_D5
+   }
+   {N CPU_D6
+   }
+   {N CPU_D7
+   }
+   {N UNUSED1
+   }
+   {N UNUSED8
+   }
+   {N UNUSED7
+   }
+   {N UNUSED6
+   }
+   {N DRAM_CS
+   }
+   {N INTC_CS
+   }
+   {N CPU_IN2
+   }
+   {N CPU_IN1
+   }
+   {N CPU_IN0
+   }
+   {N KEYBOARD
+   }
+   {N ICPLD_2
+   }
+   {N DRAM_RW
+   }
+   {N DRAM_MEM
+   }
+   {N POWERCTL
+   }
+   {N ICPLD_4
+   }
+   {N UNUSED2
+   }
+   {N UNUSED4
+   }
+   {N UNUSED5
+   }
+   {N UNUSED9
+   }
+   {N PTC1_IRQ
+   }
+   {N CPU_RE
+   }
+   {N CPU_VPA
+   }
+   {N CPU_HALT
+   }
+   {N IPL0
+   }
+   {N IPL1
+   }
+   {N IPL2
+   }
+   {N DTACK_FR
+   }
+   {N DRAM_DAT
+   }
+   {N CAS0
+   }
+   {N CAS1
+   }
+   {N CAS2
+   }
+   {N CAS3
+   }
+   {N RAS2
+   }
+   {N RAS0
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}
