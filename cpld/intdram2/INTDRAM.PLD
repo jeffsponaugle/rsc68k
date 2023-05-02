@@ -85,7 +85,7 @@ Pin[60] = KEYBOARDIRQ;  /* EXP_ICPLD_1 - SBUS Pin 30, J5 */
 /* EXTRA Shared BUS pin */
 
 Pin[76] = ICPLD_4;  /* SBUS Pin 34, J5 */
-pin[61] = ICPLD_2;  /* SBUS Pin 36, J5 */
+Pin[61] = ICPLD_2;  /* SBUS Pin 36, J5 */
 
 Pin[48]  = UNUSED1;
 Pin[77]  = UNUSED2;
