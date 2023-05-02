@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:44 2023
+Created Mon May 01 19:49:05 2023
 
   1:Name     VGA4B;
   2:PartNo   VGA4B;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:44 2023
+Created Mon May 01 19:49:05 2023
 
  54:VA7 = (SBUS_TO_VRAM_AD_OE & A7) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A8);
  55:VA8 = (SBUS_TO_VRAM_AD_OE & A8) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A9);
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:44 2023
+Created Mon May 01 19:49:05 2023
 
 108:GRAPH_MODE1.ck = !VGA_CONFIG_WRITE;
 109:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:44 2023
+Created Mon May 01 19:49:05 2023
 
 162:        ) & !vaddr_mode_field:['d'2..'d'7];
 163:A3.ck = CLKIN;
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:44 2023
+Created Mon May 01 19:49:05 2023
 
 216:A8.ck = CLKIN;
 217:
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:44 2023
+Created Mon May 01 19:49:05 2023
 
 270:A13.ck = CLKIN;
 271:

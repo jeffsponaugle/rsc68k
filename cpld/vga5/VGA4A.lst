@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
   1:Name     VGA4A;
   2:PartNo   VGA4A;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
  54:Pin[6] = VGA_VIDEO_ENABLE;          /* Enable Color Video Signal Output to Connector */
  55:Pin[29] = VRAM_LOW_CE;              /* Chip Enable for Vido RAM Low Output */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 108:/*  ________________________________________________________________ */
 109:/* Shift Register Implementation 
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 162:VMEM_SRC_LATCH_HIGH = SREG_LOAD;
 163:
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 216:
 217:      This register to clocked at the end of the write cycle with the deassertion of CS and R/W
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 270:HSYNC_COUNTER5.ar = !VGA_RESET;
 271:
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 324:VSYNC_COUNTER0.ck = VSYNC_CLOCK_B;
 325:VSYNC_COUNTER0.ar = !VGA_RESET;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 378:
 379:/* 
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 432:
 433:/*
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4A.pld                        Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Apr 26 21:14:13 2023
+Created Mon May 01 19:48:27 2023
 
 486:
 487:     [VADDR_MODE0..2] - Address Increment Mode
