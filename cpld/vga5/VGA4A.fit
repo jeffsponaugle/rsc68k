@@ -1,7 +1,7 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Mon May 01 19:48:28 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Wed May 03 14:29:56 2023
 
 
-fit1508 C:\VGA4A.tt2 -CUPL -dev P1508C84 -JTAG ON
+fit1508 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\VGA5\VGA4A.tt2 -CUPL -dev P1508C84 -JTAG ON
 
 
 ****** Initial fitting strategy and property ******
@@ -547,7 +547,7 @@ VMEM_SRC_LATCHED14		(MC20	FB)  : MUX 35		Ref (H127fb)
 VMEM_SRC_LATCHED2		(MC18	FB)  : MUX 37		Ref (G112fb)
 XXL_348			(MC3	FB)  : MUX 39		Ref (C44fb)
 
-Creating JEDEC file C:\VGA4A.jed ...
+Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\VGA5\VGA4A.jed ...
 
 PLCC84 programmed logic:
 -----------------------------------
@@ -666,8 +666,7 @@ VADDR_MODE0 = ((!GRAPH_MODE0 & HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q & HSYNC_COUNT
 
 VADDR_MODE1 = (!GRAPH_MODE0 & HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & !HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER8.Q & HSYNC_COUNTER9.Q);
 
-!VERT_SYNC_INTERRUPT = (VSYNC_COUNTER9.Q
-	# (VSYNC_COUNTER5.Q & VSYNC_COUNTER6.Q & VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q));
+VERT_SYNC_INTERRUPT = 1;
 
 VBLUE_OUT0 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED12.Q & SREG_D7.Q)
 	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED12.Q)
@@ -1311,7 +1310,7 @@ MC7   0         --                         XXL_353                 C----  NA    
 MC8   9    on   CPU_VRAM_DTACK      Dc--p  --                             --           --                3     slow
 MC9   0         --                         --                             NA           -> VSYNC_COUNTER8 5     slow
 MC10  0         --                         VSYNC_COUNTER8          Dc-g-  NA           --                5     slow
-MC11  8    on   VERT_SYNC_INTERRUPT C----  --                             --           --                2     slow
+MC11  8    on   VERT_SYNC_INTERRUPT C----  --                             --           --                0     slow
 MC12  0         --                         VSYNC_COUNTER2          Dc-g-  NA           --                5     slow
 MC13  6    on   VGA_VIDEO_ENABLE    C----  --                             --           --                0     slow
 MC14  5    on   VGA_VSYNC           Dc-g-  --                             FB_335       --                3     slow
@@ -1435,7 +1434,7 @@ MC0   84        --                         --                             --    
 MC0   83        CLK_25M             INPUT  --                             --           --                0     slow
 
 Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
-A: LC1	- LC16		15/16(93%)	8/16(50%)	2/16(12%)	58/80(72%)	(20)	1
+A: LC1	- LC16		15/16(93%)	8/16(50%)	2/16(12%)	56/80(70%)	(20)	1
 B: LC17	- LC32		15/16(93%)	8/16(50%)	0/16(0%)	72/80(90%)	(24)	1
 C: LC33	- LC48		16/16(100%)	7/16(43%)	0/16(0%)	60/80(75%)	(25)	0
 D: LC49	- LC64		12/16(75%)	6/16(37%)	0/16(0%)	23/80(28%)	(25)	0
@@ -1453,8 +1452,8 @@ Total Nodes+FB/MCells 		97/128 	(75%)
 Total cascade used 		2
 Total input pins 		36
 Total output pins 		24
-Total Pts 			299
-Creating pla file C:\VGA4A.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+Total Pts 			297
+Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\VGA5\VGA4A.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
 $Device PLCC84 fits 

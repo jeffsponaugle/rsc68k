@@ -59,14 +59,14 @@ Pin[12]  = K8042_CS;    /* SBUS Connector:CPLD_CS_A */
 
 /* Worker CPU Related signals */
 
-Pin[48]  = VGA_CFG_CS;   /* SBUS Connector:CPLD_CS_C */
-Pin[46]  = VGA_VRAM_CS;   /* SBUS Connector:CPLD_CS_B */
+Pin[46]  = VGA_CFG_CS;   /* SBUS Connector:CPLD_CS_C */
+Pin[48]  = VGA_VRAM_CS;   /* SBUS Connector:CPLD_CS_B */
+Pin[67]  = VGA_VRAM_DTACK;      /* SBUS Connector:CPLD_5 */
 
 Pin[49]  = CPLD_1;      /* SBUS Connector:CPLD_1 */
 Pin[50]  = CPLD_2;      /* SBUS Connector:CPLD_2 */
 Pin[51]  = CPLD_3;      /* SBUS Connector:CPLD_3 */
 Pin[54]  = CPLD_4;      /* SBUS Connector:CPLD_4 */
-Pin[67]  = CPLD_5;      /* SBUS Connector:CPLD_5 */
 
 Pin[69]  = NOTUSED1; /* Unused, called CPLD_6, not routed anywhere */
 
@@ -76,13 +76,6 @@ Pin[69]  = NOTUSED1; /* Unused, called CPLD_6, not routed anywhere */
    CPU_VGA_CFG_CS <- CPLD_CS_B (pin 46 on CPLD)
    CPU_VRAM_DTACK -> CPLD_1 (pin 49 on CPLD)
 */
-
-/* Pins for Testing */
-
-WORKER_BUS_REQUEST = WORKER_BUS_GRANT # CPU_BG;
-SBUS_BUFFER_ACD_EN = 'b'1;
-SBUS_BUFFER_AC_DIR = 'b'1;
-SBUS_BUFFER_D_DIR = 'b'1;
 
 /** Internal Variables and nodes **/
 
@@ -98,20 +91,26 @@ ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
 /* DTACK driven back to the CPU based on what kind of access is happening. */
 /* DTACK_MEMORY_0W is high if an access is happening that is 0W */
 
-DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS
+DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS # !VGA_CFG_CS 
                   # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
-                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS  # !SPY_SETUP_LATCH_CS  # !K8042_CS
-                  # !WORKER_RESET_PRESENCE_LATCH_CS # !WORKER_BARRIER_CS # !FLASH_CONFIG_CLOCK # !ITC_CS;
+                  # !LED_LATCH_CS # !RTS_CS # !PTC_CS  # !K8042_CS
+                  # !FLASH_CONFIG_CLOCK # !ITC_CS;
 
 /* 
    If we are doing a 0W access, assert DTACK when /AS is asserted.
    Merge in DTACK_FROM_INT, which is a DTACK signal from the interrupt controller.  It is used
    during an interrupt acknowledgement cycle to indicate the data bus has the interrupt vector
    present.  It will only be asserted (0) by the interrupt controller during an interrupt acknowledgement 
-   cycle.
+   cycle.  No protection, so if DTACK_FROM_INT is asserted (0) at any other time it will effect
+   other active transactions.
+
+   VGA_VRAM_DTACK is a signal from the VRAM controller to restrict access to video memory during
+   both horizontal and vertical activity.   If it is asserted and we are doing an access to VRAMM,
+   it should be passed thru.
+
 */
 
-CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT;
+CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT & (VGA_VRAM_CS # VGA_VRAM_DTACK);
 
 /*
    MAP_FLASH_TO_ZERO starts out set to 0 (from the CPU_RESET), and switches to 1 as soon as a memory
@@ -232,10 +231,9 @@ RTS_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF85XX );
 PTC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF8AXX );
 NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF9XXX );
 K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
+VGA_VRAM_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXEXXXXX );
+VGA_CFG_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
 
-SPY_SETUP_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
-WORKER_RESET_PRESENCE_LATCH_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF80XX );
-WORKER_BARRIER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF89XX );
 /*SLOT_ID_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF06XX );*/
 
 ITC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );

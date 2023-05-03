@@ -381,7 +381,8 @@ VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:[0..'d'479]);
    VERY_SYNC_INTERRUPT goes to 1 during the active part of the display, and the falling edge indicates 
    entering the refresh interval
  */
-VERT_SYNC_INTERRUPT = VSYNC_DISPLAY_ACTIVE;
+VERT_SYNC_INTERRUPT = 'b'1;
+/* VERT_SYNC_INTERRUPT = VSYNC_DISPLAY_ACTIVE; */
 
 /*  NOT USING
 VGA_DISPLAY_ACTIVE.d = (hsync_counter_field:['d'8..'d'647]) & (VSYNC_DISPLAY_ACTIVE);
