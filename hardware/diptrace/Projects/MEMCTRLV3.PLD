@@ -1,0 +1,72 @@
+ Name	  	Memcontroller;
+PartNo   K27MEMCV4;
+Date     01/10/2021;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1504ispplcc44;
+
+
+/** Inputs **/
+
+Pin [44,1,2,4,5,6,8,9,11,12,14,16,17,18,19,20,21] = [A0..16];           	/* Address Bus   */
+Pin 43 = a_clk; 			/* a_clk */
+Pin 41 = b_clk;			/* b_clk */
+Pin 37 = mem_rw;			/* mem_rw from control bus */
+Pin 39 = ioreq;			/* mem_ioreq from control bus */
+Pin 40 = memreq;			/* mem_memreq from control bus */
+Pin 33 = ms8or16;				/* low for 8 bit addrbus, high for 16 bit */
+
+/** Outputs **/
+Pin 36 = !ram_we;		/* Write Enable to RAM WE line (active low) */
+Pin 34 = ram_ce;
+Pin 24 = !ledlatchen;		/* Enable LED Latch from databus.  Active Low Clock Enable to a 74HC377 */
+Pin 25 = !iocs0;
+Pin 26 = !iocs1;
+Pin 27 = !iocs2;
+Pin 28 = !iocs3;
+Pin 31 = ram_oe;
+
+
+/** Internal Variables and nodes **/
+Pinnode = upperpage;
+
+upperpage = ((A16 & A15 & A14 & A13 & A12 & A11 & A10 & A9 & A8) & ms8or16 )
+		# !ms8or16;
+
+/** Fields for naming **/
+
+/** output to system ram.  ram_we signals write to memory.  sram oe controlled by mem_rw */
+
+ram_we = b_clk & mem_rw;		/* active low output specified in pin declaration */
+					/* ram_we will go active at 1/4 point, inactive at 3/4 */
+					/* point, which latches data at that point */
+
+ledlatchen = (A7 & A6 & A5 & A4 & A3 & A2 & A1 & A0) & !ioreq & mem_rw & upperpage;
+
+iocs0= (A7 & A6 & A5 & A4 & A3 & A2 & A1 & !A0) & !ioreq & upperpage;
+iocs1= (A7 & A6 & A5 & A4 & A3 & A2 & !A1 & A0) & !ioreq & upperpage;
+iocs2= (A7 & A6 & A5 & A4 & A3 & A2 & !A1 & !A0) & !ioreq & upperpage;
+iocs3= (A7 & A6 & A5 & A4 & A3 & !A2 ) & !ioreq & upperpage;
+
+
+
+
+/* LED flipflops */
+/*
+[LED0..7].d = ([D0..7] & writetoled) # ( !writetoled & [LED0..7]);
+[LED0..7].ckmux = a_clk;
+*/
+
+
+ram_ce = memreq;
+ram_oe = mem_rw;
+
+
+
+
+
+
+

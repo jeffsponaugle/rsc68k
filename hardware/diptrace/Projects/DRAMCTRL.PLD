@@ -1,0 +1,65 @@
+Name	 DRAMController;
+PartNo   DRAMCPLD;
+Date     01/10/2021;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1504ispplcc44;
+
+
+/** Inputs **/
+
+Pin  = CPU_AS; 			
+Pin  = CPU_UDS
+Pin  = CPU_LDS;
+Pin  = CPU_A1;
+Pin  = DRAM_CS;
+Pin  = CLK_32M;
+Pin  = CLK_16M;
+Pin  = CLK_8M;
+
+/* temp */
+Pin  = REFRESH_COMPLETE;
+
+
+/** Outputs **/
+Pin  = RAS0;
+Pin  = RAS2;
+Pin  = CAS0;
+Pin  = CAS1;
+Pin  = CAS2;
+Pin  = CAS3;
+Pin  = DRAM-/A-B;
+
+
+
+/** Internal Variables and nodes **/
+Pinnode = REFRESH_TIMER[0..7];
+
+REFRESH_TIMER[0].d = !REFRESH_TIMER[0];
+REFRESH_TIMER[1].d = REFRESH_TIMER[0] $ REFRESH_TIMER[1];
+REFRESH_TIMER[2].d = ( REFRESH_TIMER[2] & !REFRESH_TIMER[0] )
+                    # ( REFRESH_TIMER[2] & !REFRESH_TIMER[1] )
+                    # ( !REFRESH_TIMER[2] & REFRESH_TIMER[1] & REFRESH_TIMER[0] );
+REFRESH_TIMER[3].d = ( REFRESH_TIMER[3] & !REFRESH_TIMER[2] )
+                    # ( REFRESH_TIMER[3] & !REFRESH_TIMER[0] )
+                    # ( REFRESH_TIMER[3] & !REFRESH_TIMER[1] )
+                    # ( !REFRESH_TIMER[3] & REFRESH_TIMER[2] & REFRESH_TIMER[1] & REFRESH_TIMER[0] );
+
+REFRESH_TIMER[4].d = !REFRESH_TIMER[4];
+REFRESH_TIMER[5].d = REFRESH_TIMER[4] $ REFRESH_TIMER[5];
+REFRESH_TIMER[6].d = ( REFRESH_TIMER[6] & !REFRESH_TIMER[4] )
+                    # ( REFRESH_TIMER[6] & !REFRESH_TIMER[7] )
+                    # ( !REFRESH_TIMER[6] & REFRESH_TIMER[5] & REFRESH_TIMER[4] );
+REFRESH_TIMER[7].d = ( REFRESH_TIMER[7] & !REFRESH_TIMER[6] )
+                    # ( REFRESH_TIMER[7] & !REFRESH_TIMER[4] )
+                    # ( REFRESH_TIMER[7] & !REFRESH_TIMER[5] )
+                    # ( !REFRESH_TIMER[7] & REFRESH_TIMER[6] & REFRESH_TIMER[5] & REFRESH_TIMER[4] );
+
+REFRESH_TIMER[0..7].ck = CLK_32M;
+REFRESH_TIMER[0..7].ar = REFRESH_COMPLETE;
+
+
+
