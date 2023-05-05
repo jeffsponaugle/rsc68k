@@ -194,7 +194,7 @@ A7T =   ( vaddr_mode_field:['d'1] & A6T&A6)
 
 A7.d =  (
           ( (vaddr_mode_field:['d'1,'d'3] & ((A7T&!A7) # (!A7T&A7))) 
-            # ((vaddr_mode_field:['d'0] & A7))
+            # ((vaddr_mode_field:['d'0,'d'2] & A7))
           ) & !vaddr_mode_field:['d'4..'d'7]
         ) 
         #
@@ -206,7 +206,7 @@ A7.ck = CLKIN;
 A8T = A7T&A7;
 A8.d =  (
           ( (vaddr_mode_field:['d'1,'d'3] & ((A8T&!A8) # (!A8T&A8))) 
-            # ((vaddr_mode_field:['d'0] & A8))
+            # ((vaddr_mode_field:['d'0,'d'2] & A8))
           ) & !vaddr_mode_field:['d'4..'d'7]
         ) 
         #
@@ -218,7 +218,7 @@ A8.ck = CLKIN;
 A9T = A8T&A8;
 A9.d =  (
           ( (vaddr_mode_field:['d'1,'d'3] & ((A9T&!A9) # (!A9T&A9))) 
-            # ((vaddr_mode_field:['d'0] & A9))
+            # ((vaddr_mode_field:['d'0,'d'2] & A9))
           ) & !vaddr_mode_field:['d'4..'d'7]
         ) 
         #
@@ -230,7 +230,7 @@ A9.ck = CLKIN;
 A10T = A9T&A9;
 A10.d = (
           ( (vaddr_mode_field:['d'1,'d'3] & ((A10T&!A10) # (!A10T&A10))) 
-            # ((vaddr_mode_field:['d'0] & A10)) 
+            # ((vaddr_mode_field:['d'0,'d'2] & A10)) 
           ) & !vaddr_mode_field:['d'4..'d'7]
         ) 
         #
@@ -242,7 +242,7 @@ A10.ck = CLKIN;
 A11T = A10T&A10;
 A11.d = (
           ( (vaddr_mode_field:['d'1,'d'3] & ((A11T&!A11) # (!A11T&A11))) 
-            # ((vaddr_mode_field:['d'0] & A11))
+            # ((vaddr_mode_field:['d'0,'d'2] & A11))
           ) & !vaddr_mode_field:['d'4..'d'7]
         ) 
         #
@@ -254,7 +254,7 @@ A11.ck = CLKIN;
 A12T = A11T&A11;
 A12.d = (
           ( (vaddr_mode_field:['d'1,'d'3] & ((A12T&!A12) # (!A12T&A12))) 
-            # ((vaddr_mode_field:['d'0] & A12))
+            # ((vaddr_mode_field:['d'0,'d'2] & A12))
           ) & !vaddr_mode_field:['d'4..'d'7]
         ) 
         #
@@ -265,37 +265,37 @@ A12.ck = CLKIN;
 
 A13T = A12T&A12;
 A13.d = (  (vaddr_mode_field:['d'1,'d'3] & ((A13T&!A13) # (!A13T&A13))) 
-        # ((vaddr_mode_field:['d'0] & A13))
+        # ((vaddr_mode_field:['d'0,'d'2] & A13))
         ) & !vaddr_mode_field:['d'4..'d'7];
 A13.ck = CLKIN;
 
 A14T = A13T&A13;
 A14.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A14T&!A14) # (!A14T&A14))) 
-        # ((vaddr_mode_field:['d'0] & A14))
+        # ((vaddr_mode_field:['d'0,'d'2] & A14))
         ) & !vaddr_mode_field:['d'4..'d'7];
 A14.ck = CLKIN;
 
 A15T = A14T&A14;
 A15.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A15T&!A15) # (!A15T&A15))) 
-        # ((vaddr_mode_field:['d'0] & A15))
+        # ((vaddr_mode_field:['d'0,'d'2] & A15))
         ) & !vaddr_mode_field:['d'4..'d'7];
 A15.ck = CLKIN;
 
 A16T = A15T&A15;
 A16.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A16T&!A16) # (!A16T&A16))) 
-        # ((vaddr_mode_field:['d'0] & A16))
+        # ((vaddr_mode_field:['d'0,'d'2] & A16))
         ) & !vaddr_mode_field:['d'4..'d'7];
 A16.ck = CLKIN;
 
 A17T = A16T&A16;
 A17.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A17T&!A17) # (!A17T&A17))) 
-        # ((vaddr_mode_field:['d'0] & A17))
+        # ((vaddr_mode_field:['d'0,'d'2] & A17))
         ) & !vaddr_mode_field:['d'4..'d'7];
 A17.ck = CLKIN;
 
 A18T = A17T&A17;
 A18.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A18T&!A18) # (!A18T&A18))) 
-        # ((vaddr_mode_field:['d'0] & A18))
+        # ((vaddr_mode_field:['d'0,'d'2] & A18))
         ) & !vaddr_mode_field:['d'4..'d'7];
 A18.ck = CLKIN;
 
@@ -305,14 +305,14 @@ Current Implementation
 
 Total dedicated input used:	4/4 	(100%)
 Total I/O pins used		59/64 	(92%)
-Total Logic cells used 		82/128 	(64%)
+Total Logic cells used 		86/128 	(67%)
 Total Flip-Flop used 		29/128 	(22%)
 Total Foldback logic used 	0/128 	(0%)
-Total Nodes+FB/MCells 		74/128 	(57%)
-Total cascade used 		8
+Total Nodes+FB/MCells 		81/128 	(63%)
+Total cascade used 		5
 Total input pins 		40
 Total output pins 		23
-Total Pts 			289
+Total Pts 			308
 */
 
 

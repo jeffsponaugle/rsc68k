@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu May 04 17:08:32 2023
+Created Thu May 04 19:46:16 2023
 
   1:Name     VGA4B;
   2:PartNo   VGA4B;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu May 04 17:08:32 2023
+Created Thu May 04 19:46:16 2023
 
  54:VA7 = (SBUS_TO_VRAM_AD_OE & A7) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A8);
  55:VA8 = (SBUS_TO_VRAM_AD_OE & A8) # (!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A9);
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu May 04 17:08:32 2023
+Created Thu May 04 19:46:16 2023
 
 108:GRAPH_MODE1.ck = !VGA_CONFIG_WRITE;
 109:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu May 04 17:08:32 2023
+Created Thu May 04 19:46:16 2023
 
 162:        ) & !vaddr_mode_field:['d'2..'d'7];
 163:A3.ck = CLKIN;
@@ -225,7 +225,7 @@ Created Thu May 04 17:08:32 2023
 194:
 195:A7.d =  (
 196:          ( (vaddr_mode_field:['d'1,'d'3] & ((A7T&!A7) # (!A7T&A7))) 
-197:            # ((vaddr_mode_field:['d'0] & A7))
+197:            # ((vaddr_mode_field:['d'0,'d'2] & A7))
 198:          ) & !vaddr_mode_field:['d'4..'d'7]
 199:        ) 
 200:        #
@@ -237,7 +237,7 @@ Created Thu May 04 17:08:32 2023
 206:A8T = A7T&A7;
 207:A8.d =  (
 208:          ( (vaddr_mode_field:['d'1,'d'3] & ((A8T&!A8) # (!A8T&A8))) 
-209:            # ((vaddr_mode_field:['d'0] & A8))
+209:            # ((vaddr_mode_field:['d'0,'d'2] & A8))
 210:          ) & !vaddr_mode_field:['d'4..'d'7]
 211:        ) 
 212:        #
@@ -250,14 +250,14 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu May 04 17:08:32 2023
+Created Thu May 04 19:46:16 2023
 
 216:A8.ck = CLKIN;
 217:
 218:A9T = A8T&A8;
 219:A9.d =  (
 220:          ( (vaddr_mode_field:['d'1,'d'3] & ((A9T&!A9) # (!A9T&A9))) 
-221:            # ((vaddr_mode_field:['d'0] & A9))
+221:            # ((vaddr_mode_field:['d'0,'d'2] & A9))
 222:          ) & !vaddr_mode_field:['d'4..'d'7]
 223:        ) 
 224:        #
@@ -269,7 +269,7 @@ Created Thu May 04 17:08:32 2023
 230:A10T = A9T&A9;
 231:A10.d = (
 232:          ( (vaddr_mode_field:['d'1,'d'3] & ((A10T&!A10) # (!A10T&A10))) 
-233:            # ((vaddr_mode_field:['d'0] & A10)) 
+233:            # ((vaddr_mode_field:['d'0,'d'2] & A10)) 
 234:          ) & !vaddr_mode_field:['d'4..'d'7]
 235:        ) 
 236:        #
@@ -281,7 +281,7 @@ Created Thu May 04 17:08:32 2023
 242:A11T = A10T&A10;
 243:A11.d = (
 244:          ( (vaddr_mode_field:['d'1,'d'3] & ((A11T&!A11) # (!A11T&A11))) 
-245:            # ((vaddr_mode_field:['d'0] & A11))
+245:            # ((vaddr_mode_field:['d'0,'d'2] & A11))
 246:          ) & !vaddr_mode_field:['d'4..'d'7]
 247:        ) 
 248:        #
@@ -293,7 +293,7 @@ Created Thu May 04 17:08:32 2023
 254:A12T = A11T&A11;
 255:A12.d = (
 256:          ( (vaddr_mode_field:['d'1,'d'3] & ((A12T&!A12) # (!A12T&A12))) 
-257:            # ((vaddr_mode_field:['d'0] & A12))
+257:            # ((vaddr_mode_field:['d'0,'d'2] & A12))
 258:          ) & !vaddr_mode_field:['d'4..'d'7]
 259:        ) 
 260:        #
@@ -304,7 +304,7 @@ Created Thu May 04 17:08:32 2023
 265:
 266:A13T = A12T&A12;
 267:A13.d = (  (vaddr_mode_field:['d'1,'d'3] & ((A13T&!A13) # (!A13T&A13))) 
-268:        # ((vaddr_mode_field:['d'0] & A13))
+268:        # ((vaddr_mode_field:['d'0,'d'2] & A13))
 269:        ) & !vaddr_mode_field:['d'4..'d'7];
 
 LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 6
@@ -312,37 +312,37 @@ LISTING FOR LOGIC DESCRIPTION FILE: VGA4B.pld                        Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu May 04 17:08:32 2023
+Created Thu May 04 19:46:16 2023
 
 270:A13.ck = CLKIN;
 271:
 272:A14T = A13T&A13;
 273:A14.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A14T&!A14) # (!A14T&A14))) 
-274:        # ((vaddr_mode_field:['d'0] & A14))
+274:        # ((vaddr_mode_field:['d'0,'d'2] & A14))
 275:        ) & !vaddr_mode_field:['d'4..'d'7];
 276:A14.ck = CLKIN;
 277:
 278:A15T = A14T&A14;
 279:A15.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A15T&!A15) # (!A15T&A15))) 
-280:        # ((vaddr_mode_field:['d'0] & A15))
+280:        # ((vaddr_mode_field:['d'0,'d'2] & A15))
 281:        ) & !vaddr_mode_field:['d'4..'d'7];
 282:A15.ck = CLKIN;
 283:
 284:A16T = A15T&A15;
 285:A16.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A16T&!A16) # (!A16T&A16))) 
-286:        # ((vaddr_mode_field:['d'0] & A16))
+286:        # ((vaddr_mode_field:['d'0,'d'2] & A16))
 287:        ) & !vaddr_mode_field:['d'4..'d'7];
 288:A16.ck = CLKIN;
 289:
 290:A17T = A16T&A16;
 291:A17.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A17T&!A17) # (!A17T&A17))) 
-292:        # ((vaddr_mode_field:['d'0] & A17))
+292:        # ((vaddr_mode_field:['d'0,'d'2] & A17))
 293:        ) & !vaddr_mode_field:['d'4..'d'7];
 294:A17.ck = CLKIN;
 295:
 296:A18T = A17T&A17;
 297:A18.d = ( (vaddr_mode_field:['d'1,'d'3] & ((A18T&!A18) # (!A18T&A18))) 
-298:        # ((vaddr_mode_field:['d'0] & A18))
+298:        # ((vaddr_mode_field:['d'0,'d'2] & A18))
 299:        ) & !vaddr_mode_field:['d'4..'d'7];
 300:A18.ck = CLKIN;
 301:
