@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Mon May 01 19:49:07 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu May 04 17:08:34 2023
 
 
 fit1508 C:\VGA4B.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -85,111 +85,118 @@ SBUS_TO_VRAM_AD_OE assigned to pin  84
 
 Attempt to place floating signals ...
 ------------------------------------
-XXL_177 is placed at feedback node 601 (MC 1)
+XXL_178 is placed at feedback node 601 (MC 1)
+XXL_165 is placed at feedback node 602 (MC 2)
 CPU_D7 is placed at pin 12 (MC 3)
-A12 is placed at feedback node 604 (MC 4)
+XXL_182 is placed at feedback node 603 (MC 3)
+XXL_193 is placed at feedback node 604 (MC 4)
 CPU_D6 is placed at pin 11 (MC 5)
 CPU_D5 is placed at pin 10 (MC 6)
-A13 is placed at feedback node 607 (MC 7)
+A11 is placed at feedback node 607 (MC 7)
 CPU_D4 is placed at pin 9 (MC 8)
-XXL_165 is placed at feedback node 608 (MC 8)
-XXL_181 is placed at feedback node 609 (MC 9)
-XXL_167 is placed at feedback node 610 (MC 10)
+XXL_191 is placed at feedback node 608 (MC 8)
+XXL_168 is placed at feedback node 609 (MC 9)
+XXL_174 is placed at feedback node 610 (MC 10)
 CPU_D3 is placed at pin 8 (MC 11)
-XXL_170 is placed at feedback node 611 (MC 11)
+XXL_171 is placed at feedback node 611 (MC 11)
 CPU_D2 is placed at pin 6 (MC 13)
 CPU_D1 is placed at pin 5 (MC 14)
-A18 is placed at feedback node 615 (MC 15)
+A17 is placed at feedback node 615 (MC 15)
 CPU_D0 is placed at pin 4 (MC 16)
-XXL_173 is placed at feedback node 616 (MC 16)
+XXL_186 is placed at feedback node 616 (MC 16)
 CPU_SBUS_A5 is placed at pin 22 (MC 17)
-XXL_187 is placed at feedback node 617 (MC 17)
-XXL_183 is placed at feedback node 618 (MC 18)
+XXL_188 is placed at feedback node 617 (MC 17)
+XXL_172 is placed at feedback node 618 (MC 18)
 CPU_SBUS_A4 is placed at pin 21 (MC 19)
-XXL_185 is placed at feedback node 619 (MC 19)
-XXL_172 is placed at feedback node 620 (MC 20)
+XXL_169 is placed at feedback node 619 (MC 19)
+XXL_166 is placed at feedback node 620 (MC 20)
 CPU_SBUS_A3 is placed at pin 20 (MC 21)
-XXL_169 is placed at feedback node 621 (MC 21)
-XXL_166 is placed at feedback node 622 (MC 22)
-XXL_164 is placed at feedback node 623 (MC 23)
+XXL_167 is placed at feedback node 621 (MC 21)
+XXL_164 is placed at feedback node 622 (MC 22)
+XXL_194 is placed at feedback node 623 (MC 23)
 CPU_SBUS_A2 is placed at pin 18 (MC 24)
-XXL_163 is placed at feedback node 624 (MC 24)
+XXL_192 is placed at feedback node 624 (MC 24)
 CPU_SBUS_A1 is placed at pin 17 (MC 25)
-A15 is placed at feedback node 625 (MC 25)
-A10 is placed at feedback node 626 (MC 26)
+XXL_187 is placed at feedback node 625 (MC 25)
+XXL_173 is placed at feedback node 626 (MC 26)
 CPU_D9 is placed at pin 16 (MC 27)
-XXL_184 is placed at feedback node 627 (MC 27)
-XXL_182 is placed at feedback node 628 (MC 28)
+XXL_170 is placed at feedback node 627 (MC 27)
+XXL_195 is placed at feedback node 628 (MC 28)
 CPU_D8 is placed at pin 15 (MC 29)
-XXL_188 is placed at feedback node 629 (MC 29)
-XXL_186 is placed at feedback node 630 (MC 30)
+XXL_163 is placed at feedback node 629 (MC 29)
+XXL_190 is placed at feedback node 630 (MC 30)
+A9 is placed at feedback node 631 (MC 31)
 TDI is placed at pin 14 (MC 32)
-A7 is placed at feedback node 632 (MC 32)
+A14 is placed at feedback node 632 (MC 32)
 CPU_SBUS_A12 is placed at pin 31 (MC 35)
 A0 is placed at feedback node 635 (MC 35)
 A1 is placed at feedback node 636 (MC 36)
 CPU_SBUS_A11 is placed at pin 30 (MC 37)
 A2 is placed at feedback node 637 (MC 37)
 CPU_SBUS_A10 is placed at pin 29 (MC 38)
-A6 is placed at feedback node 638 (MC 38)
-A14 is placed at feedback node 639 (MC 39)
+A3 is placed at feedback node 638 (MC 38)
+XXL_189 is placed at feedback node 639 (MC 39)
 CPU_SBUS_A9 is placed at pin 28 (MC 40)
-A3 is placed at feedback node 640 (MC 40)
-XXL_180 is placed at feedback node 641 (MC 41)
+XXL_184 is placed at feedback node 640 (MC 40)
+XXL_181 is placed at feedback node 641 (MC 41)
 XXL_179 is placed at feedback node 642 (MC 42)
 CPU_SBUS_A8 is placed at pin 27 (MC 43)
-XXL_176 is placed at feedback node 643 (MC 43)
-XXL_178 is placed at feedback node 644 (MC 44)
+XXL_175 is placed at feedback node 643 (MC 43)
+XXL_177 is placed at feedback node 644 (MC 44)
 CPU_SBUS_A7 is placed at pin 25 (MC 45)
-XXL_175 is placed at feedback node 645 (MC 45)
+A18 is placed at feedback node 645 (MC 45)
 CPU_SBUS_A6 is placed at pin 24 (MC 46)
-XXL_174 is placed at feedback node 646 (MC 46)
-XXL_171 is placed at feedback node 647 (MC 47)
+XXL_185 is placed at feedback node 646 (MC 46)
+XXL_180 is placed at feedback node 647 (MC 47)
 TMS is placed at pin 23 (MC 48)
-XXL_168 is placed at feedback node 648 (MC 48)
+XXL_176 is placed at feedback node 648 (MC 48)
 VA0 is placed at pin 41 (MC 49)
 CPU_SBUS_A19 is placed at pin 40 (MC 51)
 CPU_SBUS_A18 is placed at pin 39 (MC 53)
 CPU_SBUS_A17 is placed at pin 37 (MC 56)
 CPU_SBUS_A16 is placed at pin 36 (MC 57)
 CPU_SBUS_A15 is placed at pin 35 (MC 59)
-A4 is placed at feedback node 659 (MC 59)
-A11 is placed at feedback node 660 (MC 60)
+OFFSET0 is placed at feedback node 659 (MC 59)
+A5 is placed at feedback node 660 (MC 60)
 CPU_SBUS_A14 is placed at pin 34 (MC 61)
-A8 is placed at feedback node 661 (MC 61)
-A5 is placed at feedback node 662 (MC 62)
-A16 is placed at feedback node 663 (MC 63)
+A13 is placed at feedback node 661 (MC 61)
+A6 is placed at feedback node 662 (MC 62)
+A12 is placed at feedback node 663 (MC 63)
 CPU_SBUS_A13 is placed at pin 33 (MC 64)
-A9 is placed at feedback node 664 (MC 64)
+XXL_183 is placed at feedback node 664 (MC 64)
 VA1 is placed at pin 44 (MC 65)
 VA2 is placed at pin 45 (MC 67)
 VA3 is placed at pin 46 (MC 69)
-OFFSET3 is placed at feedback node 671 (MC 71)
 VA4 is placed at pin 48 (MC 72)
 VA5 is placed at pin 49 (MC 73)
-OFFSET2 is placed at feedback node 674 (MC 74)
 VA6 is placed at pin 50 (MC 75)
-OFFSET1 is placed at feedback node 676 (MC 76)
 VA7 is placed at pin 51 (MC 77)
-OFFSET0 is placed at feedback node 678 (MC 78)
-A17 is placed at feedback node 679 (MC 79)
+A7 is placed at feedback node 678 (MC 78)
+A8 is placed at feedback node 679 (MC 79)
 VA8 is placed at pin 52 (MC 80)
 VA9 is placed at pin 54 (MC 83)
 VA10 is placed at pin 55 (MC 85)
 VA11 is placed at pin 56 (MC 86)
 VA12 is placed at pin 57 (MC 88)
 VA13 is placed at pin 58 (MC 91)
+OFFSET1 is placed at feedback node 692 (MC 92)
 VA14 is placed at pin 60 (MC 93)
 VA15 is placed at pin 61 (MC 94)
-OFFSET5 is placed at feedback node 695 (MC 95)
+A4 is placed at feedback node 695 (MC 95)
 TCK is placed at pin 62 (MC 96)
-OFFSET4 is placed at feedback node 696 (MC 96)
+A15 is placed at feedback node 696 (MC 96)
 VA16 is placed at pin 63 (MC 97)
 VA17 is placed at pin 64 (MC 99)
 VA18 is placed at pin 65 (MC 101)
+OFFSET5 is placed at feedback node 703 (MC 103)
 FONTLIB0 is placed at pin 68 (MC 105)
+OFFSET4 is placed at feedback node 706 (MC 106)
 FONTLIB1 is placed at pin 69 (MC 107)
+OFFSET3 is placed at feedback node 708 (MC 108)
+OFFSET2 is placed at feedback node 710 (MC 110)
+A10 is placed at feedback node 711 (MC 111)
 TDO is placed at pin 71 (MC 112)
+A16 is placed at feedback node 712 (MC 112)
 VADDR_MODE0 is placed at pin 75 (MC 118)
 VADDR_MODE1 is placed at pin 76 (MC 120)
 VADDR_MODE2 is placed at pin 77 (MC 123)
@@ -261,216 +268,240 @@ NC = Unused I/O pins which must be unconnected on the board
 
 Universal-Interconnect-Multiplexer assignments
 ------------------------------------------------
-FanIn assignment for block A [24]
+FanIn assignment for block A [25]
 {
-A12,A10,A18,A2,A9,A14,A6,A5,A16,A15,A1,A17,A13,A8,A11,A0,A4,A7,A3,
-OFFSET5,OFFSET4,
-VADDR_MODE1,VADDR_MODE0,VADDR_MODE2,
+A1,A18,A9,A17,A14,A3,A16,A7,A8,A6,A2,A4,A11,A15,A10,A0,A12,A13,A5,
+OFFSET5,OFFSET3,OFFSET4,
+VADDR_MODE0,VADDR_MODE2,VADDR_MODE1,
 }
 Multiplexer assignment for block A
-VADDR_MODE1		(MC22	P)   : MUX 1		Ref (H120p)
-A12			(MC1	FB)  : MUX 2		Ref (A4fb)
-A10			(MC5	FB)  : MUX 3		Ref (B26fb)
-A18			(MC3	FB)  : MUX 5		Ref (A15fb)
-VADDR_MODE0		(MC24	P)   : MUX 7		Ref (H118p)
-A2			(MC9	FB)  : MUX 8		Ref (C37fb)
-A9			(MC18	FB)  : MUX 9		Ref (D64fb)
-A14			(MC11	FB)  : MUX 10		Ref (C39fb)
-A6			(MC10	FB)  : MUX 12		Ref (C38fb)
-A5			(MC16	FB)  : MUX 13		Ref (D62fb)
-VADDR_MODE2		(MC23	P)   : MUX 14		Ref (H123p)
-A16			(MC17	FB)  : MUX 15		Ref (D63fb)
-A15			(MC4	FB)  : MUX 17		Ref (B25fb)
-A1			(MC8	FB)  : MUX 18		Ref (C36fb)
-A17			(MC19	FB)  : MUX 19		Ref (E79fb)
-A13			(MC2	FB)  : MUX 20		Ref (A7fb)
-OFFSET5			(MC20	FB)  : MUX 23		Ref (F95fb)
-A8			(MC15	FB)  : MUX 25		Ref (D61fb)
-A11			(MC14	FB)  : MUX 27		Ref (D60fb)
-A0			(MC7	FB)  : MUX 34		Ref (C35fb)
-A4			(MC13	FB)  : MUX 35		Ref (D59fb)
-A7			(MC6	FB)  : MUX 37		Ref (B32fb)
-A3			(MC12	FB)  : MUX 38		Ref (C40fb)
-OFFSET4			(MC21	FB)  : MUX 39		Ref (F96fb)
+A1			(MC6	FB)  : MUX 0		Ref (C36fb)
+A18			(MC9	FB)  : MUX 1		Ref (C45fb)
+A9			(MC3	FB)  : MUX 3		Ref (B31fb)
+A17			(MC2	FB)  : MUX 5		Ref (A15fb)
+VADDR_MODE0		(MC23	P)   : MUX 7		Ref (H118p)
+VADDR_MODE2		(MC24	P)   : MUX 8		Ref (H123p)
+A14			(MC4	FB)  : MUX 11		Ref (B32fb)
+A3			(MC8	FB)  : MUX 12		Ref (C38fb)
+A16			(MC22	FB)  : MUX 13		Ref (G112fb)
+A7			(MC14	FB)  : MUX 15		Ref (E78fb)
+A8			(MC15	FB)  : MUX 17		Ref (E79fb)
+VADDR_MODE1		(MC25	P)   : MUX 19		Ref (H120p)
+OFFSET5			(MC18	FB)  : MUX 20		Ref (G103fb)
+A6			(MC12	FB)  : MUX 21		Ref (D62fb)
+A2			(MC7	FB)  : MUX 22		Ref (C37fb)
+A4			(MC16	FB)  : MUX 23		Ref (F95fb)
+A11			(MC1	FB)  : MUX 24		Ref (A7fb)
+A15			(MC17	FB)  : MUX 25		Ref (F96fb)
+A10			(MC21	FB)  : MUX 29		Ref (G111fb)
+OFFSET3			(MC20	FB)  : MUX 31		Ref (G108fb)
+OFFSET4			(MC19	FB)  : MUX 33		Ref (G106fb)
+A0			(MC5	FB)  : MUX 34		Ref (C35fb)
+A12			(MC13	FB)  : MUX 35		Ref (D63fb)
+A13			(MC11	FB)  : MUX 37		Ref (D61fb)
+A5			(MC10	FB)  : MUX 39		Ref (D60fb)
 
 FanIn assignment for block B [25]
 {
-A0,A8,A9,A5,A15,A3,A4,A2,A10,A6,A11,A7,A14,A1,
-OFFSET0,OFFSET3,OFFSET1,
-VADDR_MODE1,VADDR_MODE2,VADDR_MODE0,
-XXL_172,XXL_167,XXL_171,XXL_166,XXL_173,
+A1,A3,A12,A5,A14,A10,A8,A2,A11,A9,A4,A7,A13,A0,A6,
+OFFSET2,OFFSET0,
+VADDR_MODE1,VADDR_MODE0,VADDR_MODE2,
+XXL_171,XXL_169,XXL_170,XXL_195,XXL_194,
 }
 Multiplexer assignment for block B
-VADDR_MODE1		(MC23	P)   : MUX 1		Ref (H120p)
-A0			(MC8	FB)  : MUX 2		Ref (C35fb)
-A8			(MC17	FB)  : MUX 3		Ref (D61fb)
-XXL_172			(MC3	FB)  : MUX 4		Ref (B20fb)
-OFFSET0			(MC22	FB)  : MUX 5		Ref (E78fb)
-XXL_167			(MC1	FB)  : MUX 7		Ref (A10fb)
+A1			(MC10	FB)  : MUX 0		Ref (C36fb)
+VADDR_MODE1		(MC25	P)   : MUX 1		Ref (H120p)
+A3			(MC12	FB)  : MUX 2		Ref (C38fb)
+XXL_171			(MC2	FB)  : MUX 3		Ref (A11fb)
+A12			(MC17	FB)  : MUX 5		Ref (D63fb)
+VADDR_MODE0		(MC23	P)   : MUX 7		Ref (H118p)
 VADDR_MODE2		(MC24	P)   : MUX 8		Ref (H123p)
-A9			(MC19	FB)  : MUX 9		Ref (D64fb)
-A5			(MC18	FB)  : MUX 13		Ref (D62fb)
-XXL_171			(MC14	FB)  : MUX 15		Ref (C47fb)
-XXL_166			(MC4	FB)  : MUX 16		Ref (B22fb)
-A15			(MC5	FB)  : MUX 17		Ref (B25fb)
-OFFSET3			(MC20	FB)  : MUX 18		Ref (E71fb)
-XXL_173			(MC2	FB)  : MUX 19		Ref (A16fb)
-A3			(MC13	FB)  : MUX 20		Ref (C40fb)
-A4			(MC15	FB)  : MUX 21		Ref (D59fb)
-A2			(MC10	FB)  : MUX 22		Ref (C37fb)
-A10			(MC6	FB)  : MUX 23		Ref (B26fb)
-A6			(MC11	FB)  : MUX 24		Ref (C38fb)
-VADDR_MODE0		(MC25	P)   : MUX 25		Ref (H118p)
-A11			(MC16	FB)  : MUX 27		Ref (D60fb)
-A7			(MC7	FB)  : MUX 29		Ref (B32fb)
-A14			(MC12	FB)  : MUX 34		Ref (C39fb)
-OFFSET1			(MC21	FB)  : MUX 35		Ref (E76fb)
-A1			(MC9	FB)  : MUX 36		Ref (C36fb)
+A5			(MC14	FB)  : MUX 9		Ref (D60fb)
+A14			(MC8	FB)  : MUX 11		Ref (B32fb)
+A10			(MC22	FB)  : MUX 15		Ref (G111fb)
+A8			(MC19	FB)  : MUX 19		Ref (E79fb)
+XXL_169			(MC3	FB)  : MUX 20		Ref (B19fb)
+OFFSET2			(MC21	FB)  : MUX 21		Ref (G110fb)
+A2			(MC11	FB)  : MUX 22		Ref (C37fb)
+XXL_170			(MC5	FB)  : MUX 23		Ref (B27fb)
+A11			(MC1	FB)  : MUX 24		Ref (A7fb)
+A9			(MC7	FB)  : MUX 25		Ref (B31fb)
+XXL_195			(MC6	FB)  : MUX 27		Ref (B28fb)
+A4			(MC20	FB)  : MUX 29		Ref (F95fb)
+A7			(MC18	FB)  : MUX 31		Ref (E78fb)
+A13			(MC15	FB)  : MUX 33		Ref (D61fb)
+A0			(MC9	FB)  : MUX 34		Ref (C35fb)
+OFFSET0			(MC13	FB)  : MUX 37		Ref (D59fb)
+XXL_194			(MC4	FB)  : MUX 38		Ref (B23fb)
+A6			(MC16	FB)  : MUX 39		Ref (D62fb)
 
 FanIn assignment for block C [25]
 {
-A13,A0,A17,A3,A11,A7,A5,A14,A15,A1,A16,A12,A2,A10,A8,A4,A9,A6,
-VADDR_MODE1,VADDR_MODE0,VADDR_MODE2,
-XXL_168,XXL_169,XXL_184,XXL_170,
+A1,A3,A13,A4,A5,A14,A10,A18,A6,A2,A11,A15,A16,A7,A8,A0,A12,A9,
+VADDR_MODE0,VADDR_MODE2,VADDR_MODE1,
+XXL_186,XXL_185,XXL_184,XXL_183,
 }
 Multiplexer assignment for block C
-A13			(MC2	FB)  : MUX 0		Ref (A7fb)
-VADDR_MODE1		(MC23	P)   : MUX 1		Ref (H120p)
-A0			(MC9	FB)  : MUX 2		Ref (C35fb)
-XXL_168			(MC15	FB)  : MUX 3		Ref (C48fb)
-A17			(MC22	FB)  : MUX 5		Ref (E79fb)
-A3			(MC14	FB)  : MUX 6		Ref (C40fb)
-VADDR_MODE0		(MC25	P)   : MUX 7		Ref (H118p)
+A1			(MC6	FB)  : MUX 0		Ref (C36fb)
+XXL_186			(MC2	FB)  : MUX 1		Ref (A16fb)
+A3			(MC8	FB)  : MUX 2		Ref (C38fb)
+A13			(MC13	FB)  : MUX 3		Ref (D61fb)
+A4			(MC19	FB)  : MUX 5		Ref (F95fb)
+VADDR_MODE0		(MC23	P)   : MUX 7		Ref (H118p)
 VADDR_MODE2		(MC24	P)   : MUX 8		Ref (H123p)
-A11			(MC17	FB)  : MUX 9		Ref (D60fb)
-XXL_169			(MC4	FB)  : MUX 10		Ref (B21fb)
-A7			(MC8	FB)  : MUX 11		Ref (B32fb)
-A5			(MC19	FB)  : MUX 13		Ref (D62fb)
-A14			(MC13	FB)  : MUX 14		Ref (C39fb)
-XXL_184			(MC7	FB)  : MUX 15		Ref (B27fb)
-A15			(MC5	FB)  : MUX 17		Ref (B25fb)
-A1			(MC10	FB)  : MUX 18		Ref (C36fb)
-A16			(MC20	FB)  : MUX 19		Ref (D63fb)
-A12			(MC1	FB)  : MUX 20		Ref (A4fb)
-A2			(MC11	FB)  : MUX 22		Ref (C37fb)
-XXL_170			(MC3	FB)  : MUX 23		Ref (A11fb)
-A10			(MC6	FB)  : MUX 29		Ref (B26fb)
-A8			(MC18	FB)  : MUX 33		Ref (D61fb)
-A4			(MC16	FB)  : MUX 35		Ref (D59fb)
-A9			(MC21	FB)  : MUX 37		Ref (D64fb)
-A6			(MC12	FB)  : MUX 38		Ref (C38fb)
+A5			(MC12	FB)  : MUX 9		Ref (D60fb)
+A14			(MC4	FB)  : MUX 11		Ref (B32fb)
+XXL_185			(MC11	FB)  : MUX 13		Ref (C46fb)
+A10			(MC21	FB)  : MUX 15		Ref (G111fb)
+A18			(MC10	FB)  : MUX 17		Ref (C45fb)
+VADDR_MODE1		(MC25	P)   : MUX 19		Ref (H120p)
+XXL_184			(MC9	FB)  : MUX 20		Ref (C40fb)
+A6			(MC14	FB)  : MUX 21		Ref (D62fb)
+A2			(MC7	FB)  : MUX 22		Ref (C37fb)
+A11			(MC1	FB)  : MUX 24		Ref (A7fb)
+A15			(MC20	FB)  : MUX 25		Ref (F96fb)
+A16			(MC22	FB)  : MUX 27		Ref (G112fb)
+XXL_183			(MC16	FB)  : MUX 29		Ref (D64fb)
+A7			(MC17	FB)  : MUX 31		Ref (E78fb)
+A8			(MC18	FB)  : MUX 33		Ref (E79fb)
+A0			(MC5	FB)  : MUX 34		Ref (C35fb)
+A12			(MC15	FB)  : MUX 35		Ref (D63fb)
+A9			(MC3	FB)  : MUX 39		Ref (B31fb)
 
 FanIn assignment for block D [25]
 {
-A0,A5,A4,A9,A1,A8,
-CPU_SBUS_A1,
-OFFSET2,
+A18,A0,A17,A13,A15,A1,A12,A6,A16,A14,A5,
+CPU_D0,CPU_SBUS_A1,
 SBUS_TO_VRAM_AD_OE,
-VADDR_MODE1,VADDR_MODE0,VADDR_MODE2,
-XXL_163,XXL_175,XXL_165,XXL_177,XXL_182,XXL_187,XXL_164,XXL_186,XXL_185,XXL_176,XXL_183,XXL_174,XXL_188,
+VADDR_MODE0,VADDR_MODE1,VADDR_MODE2,
+XXL_191,XXL_167,XXL_174,XXL_187,XXL_166,XXL_173,XXL_172,XXL_168,
 }
 Multiplexer assignment for block D
-VADDR_MODE1		(MC21	P)   : MUX 1		Ref (H120p)
+A18			(MC13	FB)  : MUX 1		Ref (C45fb)
 A0			(MC11	FB)  : MUX 2		Ref (C35fb)
-XXL_163			(MC7	FB)  : MUX 4		Ref (B24fb)
-XXL_175			(MC14	FB)  : MUX 5		Ref (C45fb)
-XXL_165			(MC2	FB)  : MUX 6		Ref (A8fb)
-VADDR_MODE0		(MC23	P)   : MUX 7		Ref (H118p)
-XXL_177			(MC1	FB)  : MUX 8		Ref (A1fb)
-XXL_182			(MC8	FB)  : MUX 9		Ref (B28fb)
-XXL_187			(MC3	FB)  : MUX 10		Ref (B17fb)
-A5			(MC18	FB)  : MUX 13		Ref (D62fb)
-SBUS_TO_VRAM_AD_OE		(MC24	FB)  : MUX 15		Ref (OE1)
-CPU_SBUS_A1		(MC25	P)   : MUX 16		Ref (B25p)
-OFFSET2			(MC20	FB)  : MUX 17		Ref (E74fb)
-XXL_164			(MC6	FB)  : MUX 18		Ref (B23fb)
-XXL_186			(MC10	FB)  : MUX 19		Ref (B30fb)
-A4			(MC16	FB)  : MUX 21		Ref (D59fb)
-XXL_185			(MC5	FB)  : MUX 22		Ref (B19fb)
-A9			(MC19	FB)  : MUX 23		Ref (D64fb)
-XXL_176			(MC13	FB)  : MUX 27		Ref (C43fb)
-XXL_183			(MC4	FB)  : MUX 28		Ref (B18fb)
-XXL_174			(MC15	FB)  : MUX 31		Ref (C46fb)
-VADDR_MODE2		(MC22	P)   : MUX 32		Ref (H123p)
-A1			(MC12	FB)  : MUX 36		Ref (C36fb)
-A8			(MC17	FB)  : MUX 37		Ref (D61fb)
-XXL_188			(MC9	FB)  : MUX 39		Ref (B29fb)
+CPU_D0			(MC25	P)   : MUX 4		Ref (A16p)
+A17			(MC4	FB)  : MUX 5		Ref (A15fb)
+XXL_191			(MC1	FB)  : MUX 6		Ref (A8fb)
+VADDR_MODE0		(MC20	P)   : MUX 7		Ref (H118p)
+VADDR_MODE1		(MC22	P)   : MUX 9		Ref (H120p)
+A13			(MC15	FB)  : MUX 11		Ref (D61fb)
+XXL_167			(MC7	FB)  : MUX 12		Ref (B21fb)
+XXL_174			(MC3	FB)  : MUX 13		Ref (A10fb)
+VADDR_MODE2		(MC21	P)   : MUX 14		Ref (H123p)
+A15			(MC18	FB)  : MUX 15		Ref (F96fb)
+CPU_SBUS_A1		(MC24	P)   : MUX 16		Ref (B25p)
+XXL_187			(MC8	FB)  : MUX 17		Ref (B25fb)
+A1			(MC12	FB)  : MUX 18		Ref (C36fb)
+A12			(MC17	FB)  : MUX 19		Ref (D63fb)
+XXL_166			(MC6	FB)  : MUX 20		Ref (B20fb)
+A6			(MC16	FB)  : MUX 21		Ref (D62fb)
+XXL_173			(MC9	FB)  : MUX 23		Ref (B26fb)
+A16			(MC19	FB)  : MUX 27		Ref (G112fb)
+XXL_172			(MC5	FB)  : MUX 28		Ref (B18fb)
+A14			(MC10	FB)  : MUX 29		Ref (B32fb)
+XXL_168			(MC2	FB)  : MUX 31		Ref (A9fb)
+SBUS_TO_VRAM_AD_OE		(MC23	FB)  : MUX 35		Ref (OE1)
+A5			(MC14	FB)  : MUX 39		Ref (D60fb)
 
 FanIn assignment for block E [25]
 {
-A6,A7,A2,A4,A1,A8,A3,A5,
-CPU_SBUS_A8,CPU_D2,CPU_D1,CPU_SBUS_A3,CPU_SBUS_A5,CPU_SBUS_A7,CPU_D0,CPU_D3,CPU_SBUS_A2,CPU_SBUS_A6,CPU_SBUS_A4,CPU_SBUS_A9,
+A4,A1,A5,A2,A8,A3,A7,A6,
+CPU_SBUS_A8,CPU_SBUS_A2,CPU_SBUS_A7,CPU_SBUS_A5,CPU_SBUS_A3,CPU_SBUS_A6,CPU_SBUS_A9,CPU_SBUS_A4,
+OFFSET1,
 SBUS_TO_VRAM_AD_OE,
-XXL_180,XXL_178,XXL_179,XXL_181,
+VADDR_MODE1,VADDR_MODE0,VADDR_MODE2,
+XXL_193,XXL_190,XXL_192,XXL_189,
 }
 Multiplexer assignment for block E
-CPU_SBUS_A8		(MC20	P)   : MUX 0		Ref (C43p)
-XXL_180			(MC7	FB)  : MUX 1		Ref (C41fb)
-A6			(MC5	FB)  : MUX 2		Ref (C38fb)
-XXL_178			(MC9	FB)  : MUX 5		Ref (C44fb)
-CPU_D2			(MC24	P)   : MUX 6		Ref (A13p)
-A7			(MC2	FB)  : MUX 7		Ref (B32fb)
-CPU_D1			(MC23	P)   : MUX 8		Ref (A14p)
-XXL_179			(MC8	FB)  : MUX 9		Ref (C42fb)
-CPU_SBUS_A3		(MC15	P)   : MUX 11		Ref (B21p)
-CPU_SBUS_A5		(MC17	P)   : MUX 13		Ref (B17p)
-CPU_SBUS_A7		(MC19	P)   : MUX 14		Ref (C45p)
-XXL_181			(MC1	FB)  : MUX 15		Ref (A9fb)
-A2			(MC4	FB)  : MUX 16		Ref (C37fb)
-CPU_D0			(MC22	P)   : MUX 18		Ref (A16p)
-A4			(MC10	FB)  : MUX 21		Ref (D59fb)
-CPU_D3			(MC25	P)   : MUX 24		Ref (A11p)
-CPU_SBUS_A2		(MC14	P)   : MUX 25		Ref (B24p)
-CPU_SBUS_A6		(MC18	P)   : MUX 26		Ref (C46p)
-CPU_SBUS_A4		(MC16	P)   : MUX 27		Ref (B19p)
-CPU_SBUS_A9		(MC21	P)   : MUX 29		Ref (C40p)
-SBUS_TO_VRAM_AD_OE		(MC13	FB)  : MUX 35		Ref (OE1)
-A1			(MC3	FB)  : MUX 36		Ref (C36fb)
-A8			(MC11	FB)  : MUX 37		Ref (D61fb)
-A3			(MC6	FB)  : MUX 38		Ref (C40fb)
-A5			(MC12	FB)  : MUX 39		Ref (D62fb)
+CPU_SBUS_A8		(MC24	P)   : MUX 0		Ref (C43p)
+VADDR_MODE1		(MC16	P)   : MUX 1		Ref (H120p)
+XXL_193			(MC1	FB)  : MUX 2		Ref (A4fb)
+CPU_SBUS_A2		(MC18	P)   : MUX 3		Ref (B24p)
+CPU_SBUS_A7		(MC23	P)   : MUX 4		Ref (C45p)
+A4			(MC13	FB)  : MUX 5		Ref (F95fb)
+VADDR_MODE0		(MC14	P)   : MUX 7		Ref (H118p)
+A1			(MC4	FB)  : MUX 8		Ref (C36fb)
+A5			(MC8	FB)  : MUX 9		Ref (D60fb)
+XXL_190			(MC3	FB)  : MUX 13		Ref (B30fb)
+VADDR_MODE2		(MC15	P)   : MUX 14		Ref (H123p)
+CPU_SBUS_A5		(MC21	P)   : MUX 15		Ref (B17p)
+A2			(MC5	FB)  : MUX 16		Ref (C37fb)
+CPU_SBUS_A3		(MC19	P)   : MUX 17		Ref (B21p)
+A8			(MC11	FB)  : MUX 19		Ref (E79fb)
+CPU_SBUS_A6		(MC22	P)   : MUX 20		Ref (C46p)
+CPU_SBUS_A9		(MC25	P)   : MUX 21		Ref (C40p)
+XXL_192			(MC2	FB)  : MUX 22		Ref (B24fb)
+A3			(MC6	FB)  : MUX 24		Ref (C38fb)
+SBUS_TO_VRAM_AD_OE		(MC17	FB)  : MUX 25		Ref (OE1)
+CPU_SBUS_A4		(MC20	P)   : MUX 27		Ref (B19p)
+XXL_189			(MC7	FB)  : MUX 34		Ref (C39fb)
+A7			(MC10	FB)  : MUX 35		Ref (E78fb)
+OFFSET1			(MC12	FB)  : MUX 37		Ref (F92fb)
+A6			(MC9	FB)  : MUX 39		Ref (D62fb)
 
-FanIn assignment for block F [17]
+FanIn assignment for block F [25]
 {
-A13,A12,A10,A14,A9,A15,A11,
-CPU_SBUS_A11,CPU_SBUS_A16,CPU_D4,CPU_D5,CPU_SBUS_A15,CPU_SBUS_A10,CPU_SBUS_A14,CPU_SBUS_A12,CPU_SBUS_A13,
+A11,A14,A12,A4,A15,A10,A9,A13,
+CPU_SBUS_A11,CPU_SBUS_A16,CPU_SBUS_A12,CPU_SBUS_A13,CPU_SBUS_A10,CPU_SBUS_A14,CPU_D1,CPU_SBUS_A15,
 SBUS_TO_VRAM_AD_OE,
+VADDR_MODE0,VADDR_MODE2,VADDR_MODE1,
+XXL_178,XXL_177,XXL_188,XXL_175,XXL_176,
 }
 Multiplexer assignment for block F
-A13			(MC2	FB)  : MUX 0		Ref (A7fb)
-A12			(MC1	FB)  : MUX 2		Ref (A4fb)
-CPU_SBUS_A11		(MC10	P)   : MUX 3		Ref (C37p)
-CPU_SBUS_A16		(MC15	P)   : MUX 6		Ref (D57p)
-CPU_D4			(MC16	P)   : MUX 7		Ref (A8p)
-CPU_D5			(MC17	P)   : MUX 9		Ref (A6p)
-A10			(MC4	FB)  : MUX 11		Ref (B26fb)
-CPU_SBUS_A15		(MC14	P)   : MUX 12		Ref (D59p)
-A14			(MC5	FB)  : MUX 14		Ref (C39fb)
-SBUS_TO_VRAM_AD_OE		(MC8	FB)  : MUX 15		Ref (OE1)
-CPU_SBUS_A10		(MC9	P)   : MUX 17		Ref (C38p)
-CPU_SBUS_A14		(MC13	P)   : MUX 20		Ref (D61p)
-CPU_SBUS_A12		(MC11	P)   : MUX 23		Ref (C35p)
-A9			(MC7	FB)  : MUX 29		Ref (D64fb)
-A15			(MC3	FB)  : MUX 37		Ref (B25fb)
-CPU_SBUS_A13		(MC12	P)   : MUX 38		Ref (D64p)
-A11			(MC6	FB)  : MUX 39		Ref (D60fb)
+A11			(MC2	FB)  : MUX 0		Ref (A7fb)
+XXL_178			(MC1	FB)  : MUX 2		Ref (A1fb)
+CPU_SBUS_A11		(MC19	P)   : MUX 3		Ref (C37p)
+CPU_SBUS_A16		(MC24	P)   : MUX 4		Ref (D57p)
+XXL_177			(MC7	FB)  : MUX 5		Ref (C44fb)
+VADDR_MODE0		(MC14	P)   : MUX 7		Ref (H118p)
+VADDR_MODE2		(MC15	P)   : MUX 8		Ref (H123p)
+CPU_SBUS_A12		(MC20	P)   : MUX 9		Ref (C35p)
+XXL_188			(MC3	FB)  : MUX 10		Ref (B17fb)
+A14			(MC5	FB)  : MUX 11		Ref (B32fb)
+CPU_SBUS_A13		(MC21	P)   : MUX 12		Ref (D64p)
+XXL_175			(MC6	FB)  : MUX 13		Ref (C43fb)
+A12			(MC10	FB)  : MUX 15		Ref (D63fb)
+CPU_SBUS_A10		(MC18	P)   : MUX 17		Ref (C38p)
+CPU_SBUS_A14		(MC22	P)   : MUX 20		Ref (D61p)
+CPU_D1			(MC25	P)   : MUX 22		Ref (A14p)
+A4			(MC11	FB)  : MUX 23		Ref (F95fb)
+A15			(MC12	FB)  : MUX 25		Ref (F96fb)
+CPU_SBUS_A15		(MC23	P)   : MUX 26		Ref (D59p)
+VADDR_MODE1		(MC16	P)   : MUX 27		Ref (H120p)
+A10			(MC13	FB)  : MUX 29		Ref (G111fb)
+A9			(MC4	FB)  : MUX 31		Ref (B31fb)
+SBUS_TO_VRAM_AD_OE		(MC17	FB)  : MUX 35		Ref (OE1)
+A13			(MC9	FB)  : MUX 37		Ref (D61fb)
+XXL_176			(MC8	FB)  : MUX 39		Ref (C48fb)
 
-FanIn assignment for block G [9]
+FanIn assignment for block G [20]
 {
-A16,A17,A18,
-CPU_D7,CPU_SBUS_A19,CPU_SBUS_A17,CPU_D6,CPU_SBUS_A18,
+A17,A18,A16,
+CPU_SBUS_A17,CPU_D7,CPU_SBUS_A19,CPU_D3,CPU_D6,CPU_D5,CPU_D4,CPU_SBUS_A18,CPU_D2,
 SBUS_TO_VRAM_AD_OE,
+XXL_182,XXL_180,XXL_164,XXL_179,XXL_181,XXL_165,XXL_163,
 }
 Multiplexer assignment for block G
-A16			(MC2	FB)  : MUX 5		Ref (D63fb)
-CPU_D7			(MC9	P)   : MUX 7		Ref (A3p)
-CPU_SBUS_A19		(MC7	P)   : MUX 9		Ref (D51p)
-A17			(MC3	FB)  : MUX 11		Ref (E79fb)
-CPU_SBUS_A17		(MC5	P)   : MUX 15		Ref (D56p)
-CPU_D6			(MC8	P)   : MUX 19		Ref (A5p)
-A18			(MC1	FB)  : MUX 23		Ref (A15fb)
-CPU_SBUS_A18		(MC6	P)   : MUX 25		Ref (D53p)
-SBUS_TO_VRAM_AD_OE		(MC4	FB)  : MUX 37		Ref (OE1)
+XXL_182			(MC2	FB)  : MUX 0		Ref (A3fb)
+CPU_SBUS_A17		(MC12	P)   : MUX 1		Ref (D56p)
+A17			(MC3	FB)  : MUX 5		Ref (A15fb)
+CPU_D7			(MC16	P)   : MUX 7		Ref (A3p)
+CPU_SBUS_A19		(MC14	P)   : MUX 9		Ref (D51p)
+CPU_D3			(MC18	P)   : MUX 10		Ref (A11p)
+XXL_180			(MC9	FB)  : MUX 11		Ref (C47fb)
+CPU_D6			(MC15	P)   : MUX 13		Ref (A5p)
+CPU_D5			(MC20	P)   : MUX 15		Ref (A6p)
+XXL_164			(MC4	FB)  : MUX 16		Ref (B22fb)
+A18			(MC8	FB)  : MUX 19		Ref (C45fb)
+CPU_D4			(MC19	P)   : MUX 21		Ref (A8p)
+XXL_179			(MC7	FB)  : MUX 23		Ref (C42fb)
+CPU_SBUS_A18		(MC13	P)   : MUX 25		Ref (D53p)
+A16			(MC10	FB)  : MUX 27		Ref (G112fb)
+CPU_D2			(MC17	P)   : MUX 28		Ref (A13p)
+XXL_181			(MC6	FB)  : MUX 35		Ref (C41fb)
+SBUS_TO_VRAM_AD_OE		(MC11	FB)  : MUX 37		Ref (OE1)
+XXL_165			(MC1	FB)  : MUX 38		Ref (A2fb)
+XXL_163			(MC5	FB)  : MUX 39		Ref (B29fb)
 
 FanIn assignment for block H [2]
 {
@@ -496,93 +527,82 @@ A2.D = ((!A2.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q)
 	# (A2.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
 	# (A2.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
 
-A11.D = (XXL_163
+A11.D = ((A11.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A11.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A11.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A11.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
+	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A11.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A10.Q & A9.Q & A8.Q & A7.Q)
+	# (!A11.Q & VADDR_MODE0 & !VADDR_MODE2 & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (VADDR_MODE2 & OFFSET4.Q)
+	# (A11.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
+
+A10.D = (XXL_163
 	# XXL_164
 	# XXL_165);
 
-A10.D = ((A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (VADDR_MODE2 & OFFSET3.Q)
-	# (A10.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
+A12.D = ((A12.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
 	# XXL_166
-	# XXL_167);
+	# XXL_167
+	# XXL_168);
 
-A12.D = ((A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A12.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (VADDR_MODE2 & OFFSET5.Q)
-	# (A12.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
-
-A14.D = ((A14.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_168
+A14.D = ((!A14.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q)
+	# (A14.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
 	# XXL_169
-	# XXL_170);
+	# XXL_170
+	# XXL_171);
 
-A13.D = ((A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A12.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A13.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (A13.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
-
-A15.D = ((A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (A15.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_171
+A13.D = ((A13.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
 	# XXL_172
-	# XXL_173);
+	# XXL_173
+	# XXL_174);
 
-A16.D = (XXL_174
-	# XXL_175
+A15.D = (XXL_175
 	# XXL_176
-	# XXL_177);
+	# XXL_177
+	# XXL_178);
 
-A17.D = (XXL_178
-	# XXL_179
+A16.D = (XXL_179
 	# XXL_180
-	# XXL_181);
+	# XXL_181
+	# XXL_182);
 
-A18.D = ((A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A17.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A16.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A15.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A14.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A13.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A12.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A18.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A17.Q & A16.Q & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (A18.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
+A17.D = ((A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A16.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A15.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A14.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A13.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A12.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A17.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
+	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A17.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A16.Q & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q)
+	# (!A17.Q & VADDR_MODE0 & !VADDR_MODE2 & A16.Q & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (A17.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
+
+A18.D = ((A18.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
+	# XXL_183
+	# XXL_184
+	# XXL_185
+	# XXL_186);
 
 A5.D = ((A5.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
 	# (A5.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_182);
+	# XXL_187);
 
 A3.D = ((!A3.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q)
 	# (A3.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
@@ -591,34 +611,29 @@ A3.D = ((!A3.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q)
 	# (A3.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
 
 A4.D = ((A4.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_183);
+	# XXL_188);
 
-A7.D = ((A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
-	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
-	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
-	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
-	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
-	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A7.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (VADDR_MODE2 & OFFSET0.Q)
-	# (A7.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
+A7.D = ((A7.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
+	# XXL_189
+	# XXL_190);
 
 A6.D = ((A6.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
 	# (A6.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
 	# (A6.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_184);
+	# XXL_191);
 
-A8.D = ((A8.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_185
-	# XXL_186);
+A8.D = ((VADDR_MODE2 & OFFSET1.Q)
+	# (A8.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
+	# XXL_192
+	# XXL_193);
 
 FONTLIB0.D = CPU_D6;
 
-A9.D = ((VADDR_MODE2 & OFFSET2.Q)
+A9.D = ((!A9.Q & VADDR_MODE0 & !VADDR_MODE2 & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (VADDR_MODE2 & OFFSET2.Q)
 	# (A9.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2)
-	# XXL_187
-	# XXL_188);
+	# XXL_194
+	# XXL_195);
 
 GRAPH_MODE0.D = CPU_D8;
 
@@ -695,157 +710,199 @@ VA16 = ((!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A17)
 VA17 = ((!SBUS_TO_VRAM_AD_OE & CPU_SBUS_A18)
 	# (A17.Q & SBUS_TO_VRAM_AD_OE));
 
-XXL_163 = ((A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q));
-
-XXL_164 = ((A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q));
-
-XXL_165 = ((!A11.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A11.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (VADDR_MODE2 & OFFSET4.Q)
-	# (A11.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
-
-XXL_166 = ((A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
+XXL_163 = ((A10.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A10.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A10.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
 	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
 	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q));
 
-XXL_167 = ((A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+XXL_164 = ((A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
 	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A10.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q));
+	# (A10.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q));
 
-XXL_168 = ((A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A13.Q)
-	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A12.Q)
-	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q)
-	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q));
+XXL_165 = ((!A10.Q & VADDR_MODE0 & !VADDR_MODE2 & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (!A10.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A9.Q & A8.Q & A7.Q)
+	# (VADDR_MODE2 & OFFSET3.Q)
+	# (A10.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
 
-XXL_169 = ((A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
+XXL_166 = ((A12.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q)
+	# (A12.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A12.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A12.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A12.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q));
+
+XXL_167 = ((A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
+	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
+	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q));
+
+XXL_168 = ((A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
+	# (A12.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A12.Q & VADDR_MODE0 & !VADDR_MODE2 & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (!A12.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q)
+	# (VADDR_MODE2 & OFFSET5.Q));
+
+XXL_169 = ((A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A13.Q)
+	# (A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A12.Q)
+	# (A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q)
+	# (A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q));
+
+XXL_170 = ((A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A14.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
 	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
 	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
 	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q));
 
-XXL_170 = ((A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
+XXL_171 = ((A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A14.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q));
+	# (A14.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A14.Q & VADDR_MODE0 & !VADDR_MODE2 & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q));
 
-XXL_171 = ((A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A14.Q)
-	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A13.Q)
-	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A12.Q)
-	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q)
-	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q));
+XXL_172 = ((A13.Q & VADDR_MODE0 & !VADDR_MODE2 & !A12.Q)
+	# (A13.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q)
+	# (A13.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A13.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A13.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q));
 
-XXL_172 = ((A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
+XXL_173 = ((A13.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
+	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
+	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q));
+
+XXL_174 = ((A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
+	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
+	# (A13.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A13.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q)
+	# (!A13.Q & VADDR_MODE0 & !VADDR_MODE2 & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q));
+
+XXL_175 = ((A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A14.Q)
+	# (A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A13.Q)
+	# (A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A12.Q)
+	# (A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q)
+	# (A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q));
+
+XXL_176 = ((A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A15.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
 	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
 	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q));
 
-XXL_173 = ((A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+XXL_177 = ((A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
 	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A15.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q));
+	# (A15.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q));
 
-XXL_174 = ((A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A15.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A14.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A13.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A12.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q));
+XXL_178 = ((!A15.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q)
+	# (!A15.Q & VADDR_MODE0 & !VADDR_MODE2 & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (A15.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
 
-XXL_175 = ((A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
+XXL_179 = ((A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A15.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A14.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A13.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A12.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q));
+
+XXL_180 = ((A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A16.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
 	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q));
 
-XXL_176 = ((A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+XXL_181 = ((A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
 	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
 	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q));
 
-XXL_177 = ((!A16.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+XXL_182 = ((A16.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A16.Q & VADDR_MODE0 & !VADDR_MODE2 & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (!A16.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q)
 	# (A16.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
 
-XXL_178 = ((A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A16.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A15.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A14.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A13.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A12.Q));
+XXL_183 = ((A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A17.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A16.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A15.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A14.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A13.Q));
 
-XXL_179 = ((A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A11.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A10.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A9.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q));
+XXL_184 = ((A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A12.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A11.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A10.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A9.Q)
+	# (A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q));
 
-XXL_180 = ((A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q));
+XXL_185 = ((A18.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
+	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
+	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q));
 
-XXL_181 = ((A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A17.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A16.Q & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A17.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (A17.Q & !VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2));
+XXL_186 = ((A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
+	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
+	# (A18.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A18.Q & VADDR_MODE0 & !VADDR_MODE2 & A17.Q & A16.Q & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (!A18.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A17.Q & A16.Q & A15.Q & A14.Q & A13.Q & A12.Q & A11.Q & A10.Q & A9.Q & A8.Q & A7.Q));
 
-XXL_182 = ((!A5.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q)
+XXL_187 = ((!A5.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q)
 	# (A5.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
 	# (A5.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A5.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A5.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q));
 
-XXL_183 = ((!A4.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q & A3.Q)
+XXL_188 = ((!A4.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q & A3.Q)
 	# (A4.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A4.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A4.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
 	# (A4.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q));
 
-XXL_184 = ((!A6.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q)
+XXL_189 = ((A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
+	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
+	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
+	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
+	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q));
+
+XXL_190 = ((A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
+	# (A7.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A7.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2)
+	# (!A7.Q & VADDR_MODE0 & !VADDR_MODE2 & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (VADDR_MODE2 & OFFSET0.Q));
+
+XXL_191 = ((!A6.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A0.Q & A1.Q & A2.Q & A3.Q & A4.Q & A5.Q)
 	# (A6.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
 	# (A6.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
 	# (A6.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A6.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q));
 
-XXL_185 = ((A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
+XXL_192 = ((A8.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
 	# (A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
 	# (A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
 	# (A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q)
 	# (A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q));
 
-XXL_186 = ((A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
+XXL_193 = ((A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A8.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
 	# (A8.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
-	# (VADDR_MODE2 & OFFSET1.Q));
+	# (!A8.Q & VADDR_MODE0 & !VADDR_MODE2 & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
+	# (!A8.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A7.Q));
 
-XXL_187 = ((A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A8.Q)
-	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A7.Q)
+XXL_194 = ((A9.Q & VADDR_MODE0 & !VADDR_MODE2 & !A8.Q)
+	# (A9.Q & VADDR_MODE0 & !VADDR_MODE2 & !A7.Q)
 	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A6.Q)
 	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A5.Q)
 	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A4.Q));
 
-XXL_188 = ((A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
+XXL_195 = ((A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A3.Q)
 	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A2.Q)
 	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A0.Q)
-	# (!A9.Q & VADDR_MODE0 & !VADDR_MODE1 & !VADDR_MODE2 & A8.Q & A7.Q & A6.Q & A5.Q & A4.Q & A3.Q & A2.Q & A0.Q & A1.Q)
-	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q));
+	# (A9.Q & !VADDR_MODE1 & !VADDR_MODE2 & !A1.Q)
+	# (!A9.Q & VADDR_MODE0 & VADDR_MODE1 & !VADDR_MODE2 & A8.Q & A7.Q));
 
 A1.C = CLKIN;
 
@@ -991,57 +1048,64 @@ Pin 79 = GRAPH_MODE0; /* MC 125 */
 Pin 80 = GRAPH_MODE1; /* MC 126 */ 
 Pin 83 = VGA_CONFIG_WRITE;
 Pin 84 = SBUS_TO_VRAM_AD_OE;
-PINNODE 601 = XXL_177; /* MC 1 Feedback */
-PINNODE 604 = A12; /* MC 4 Feedback */
-PINNODE 607 = A13; /* MC 7 Feedback */
-PINNODE 608 = XXL_165; /* MC 8 Feedback */
-PINNODE 609 = XXL_181; /* MC 9 Feedback */
-PINNODE 610 = XXL_167; /* MC 10 Feedback */
-PINNODE 611 = XXL_170; /* MC 11 Feedback */
-PINNODE 615 = A18; /* MC 15 Feedback */
-PINNODE 616 = XXL_173; /* MC 16 Feedback */
-PINNODE 617 = XXL_187; /* MC 17 Feedback */
-PINNODE 618 = XXL_183; /* MC 18 Feedback */
-PINNODE 619 = XXL_185; /* MC 19 Feedback */
-PINNODE 620 = XXL_172; /* MC 20 Feedback */
-PINNODE 621 = XXL_169; /* MC 21 Feedback */
-PINNODE 622 = XXL_166; /* MC 22 Feedback */
-PINNODE 623 = XXL_164; /* MC 23 Feedback */
-PINNODE 624 = XXL_163; /* MC 24 Feedback */
-PINNODE 625 = A15; /* MC 25 Feedback */
-PINNODE 626 = A10; /* MC 26 Feedback */
-PINNODE 627 = XXL_184; /* MC 27 Feedback */
-PINNODE 628 = XXL_182; /* MC 28 Feedback */
-PINNODE 629 = XXL_188; /* MC 29 Feedback */
-PINNODE 630 = XXL_186; /* MC 30 Feedback */
-PINNODE 632 = A7; /* MC 32 Feedback */
+PINNODE 601 = XXL_178; /* MC 1 Feedback */
+PINNODE 602 = XXL_165; /* MC 2 Feedback */
+PINNODE 603 = XXL_182; /* MC 3 Feedback */
+PINNODE 604 = XXL_193; /* MC 4 Feedback */
+PINNODE 607 = A11; /* MC 7 Feedback */
+PINNODE 608 = XXL_191; /* MC 8 Feedback */
+PINNODE 609 = XXL_168; /* MC 9 Feedback */
+PINNODE 610 = XXL_174; /* MC 10 Feedback */
+PINNODE 611 = XXL_171; /* MC 11 Feedback */
+PINNODE 615 = A17; /* MC 15 Feedback */
+PINNODE 616 = XXL_186; /* MC 16 Feedback */
+PINNODE 617 = XXL_188; /* MC 17 Feedback */
+PINNODE 618 = XXL_172; /* MC 18 Feedback */
+PINNODE 619 = XXL_169; /* MC 19 Feedback */
+PINNODE 620 = XXL_166; /* MC 20 Feedback */
+PINNODE 621 = XXL_167; /* MC 21 Feedback */
+PINNODE 622 = XXL_164; /* MC 22 Feedback */
+PINNODE 623 = XXL_194; /* MC 23 Feedback */
+PINNODE 624 = XXL_192; /* MC 24 Feedback */
+PINNODE 625 = XXL_187; /* MC 25 Feedback */
+PINNODE 626 = XXL_173; /* MC 26 Feedback */
+PINNODE 627 = XXL_170; /* MC 27 Feedback */
+PINNODE 628 = XXL_195; /* MC 28 Feedback */
+PINNODE 629 = XXL_163; /* MC 29 Feedback */
+PINNODE 630 = XXL_190; /* MC 30 Feedback */
+PINNODE 631 = A9; /* MC 31 Feedback */
+PINNODE 632 = A14; /* MC 32 Feedback */
 PINNODE 635 = A0; /* MC 35 Feedback */
 PINNODE 636 = A1; /* MC 36 Feedback */
 PINNODE 637 = A2; /* MC 37 Feedback */
-PINNODE 638 = A6; /* MC 38 Feedback */
-PINNODE 639 = A14; /* MC 39 Feedback */
-PINNODE 640 = A3; /* MC 40 Feedback */
-PINNODE 641 = XXL_180; /* MC 41 Feedback */
+PINNODE 638 = A3; /* MC 38 Feedback */
+PINNODE 639 = XXL_189; /* MC 39 Feedback */
+PINNODE 640 = XXL_184; /* MC 40 Feedback */
+PINNODE 641 = XXL_181; /* MC 41 Feedback */
 PINNODE 642 = XXL_179; /* MC 42 Feedback */
-PINNODE 643 = XXL_176; /* MC 43 Feedback */
-PINNODE 644 = XXL_178; /* MC 44 Feedback */
-PINNODE 645 = XXL_175; /* MC 45 Feedback */
-PINNODE 646 = XXL_174; /* MC 46 Feedback */
-PINNODE 647 = XXL_171; /* MC 47 Feedback */
-PINNODE 648 = XXL_168; /* MC 48 Feedback */
-PINNODE 659 = A4; /* MC 59 Feedback */
-PINNODE 660 = A11; /* MC 60 Feedback */
-PINNODE 661 = A8; /* MC 61 Feedback */
-PINNODE 662 = A5; /* MC 62 Feedback */
-PINNODE 663 = A16; /* MC 63 Feedback */
-PINNODE 664 = A9; /* MC 64 Feedback */
-PINNODE 671 = OFFSET3; /* MC 71 Feedback */
-PINNODE 674 = OFFSET2; /* MC 74 Feedback */
-PINNODE 676 = OFFSET1; /* MC 76 Feedback */
-PINNODE 678 = OFFSET0; /* MC 78 Feedback */
-PINNODE 679 = A17; /* MC 79 Feedback */
-PINNODE 695 = OFFSET5; /* MC 95 Feedback */
-PINNODE 696 = OFFSET4; /* MC 96 Feedback */
+PINNODE 643 = XXL_175; /* MC 43 Feedback */
+PINNODE 644 = XXL_177; /* MC 44 Feedback */
+PINNODE 645 = A18; /* MC 45 Feedback */
+PINNODE 646 = XXL_185; /* MC 46 Feedback */
+PINNODE 647 = XXL_180; /* MC 47 Feedback */
+PINNODE 648 = XXL_176; /* MC 48 Feedback */
+PINNODE 659 = OFFSET0; /* MC 59 Feedback */
+PINNODE 660 = A5; /* MC 60 Feedback */
+PINNODE 661 = A13; /* MC 61 Feedback */
+PINNODE 662 = A6; /* MC 62 Feedback */
+PINNODE 663 = A12; /* MC 63 Feedback */
+PINNODE 664 = XXL_183; /* MC 64 Feedback */
+PINNODE 678 = A7; /* MC 78 Feedback */
+PINNODE 679 = A8; /* MC 79 Feedback */
+PINNODE 692 = OFFSET1; /* MC 92 Feedback */
+PINNODE 695 = A4; /* MC 95 Feedback */
+PINNODE 696 = A15; /* MC 96 Feedback */
+PINNODE 703 = OFFSET5; /* MC 103 Feedback */
+PINNODE 706 = OFFSET4; /* MC 106 Feedback */
+PINNODE 708 = OFFSET3; /* MC 108 Feedback */
+PINNODE 710 = OFFSET2; /* MC 110 Feedback */
+PINNODE 711 = A10; /* MC 111 Feedback */
+PINNODE 712 = A16; /* MC 112 Feedback */
 
 ** Resource Usage **
 
@@ -1061,54 +1125,54 @@ DCERP Field = Summary of Allocations.
 For input only = INPUT.
 
 MCell Pin# Oe   PinDrive           DCERP  FBDrive  DCERP  Foldback  CascadeOut     TotPT output_slew
-MC1   0         --                        XXL_177  C----  --        --             3     slow
-MC2   0         --                        --              NA        -> A12         5     slow
-MC3   12   --   CPU_D7             INPUT  --              NA        -> A12         5     slow
-MC4   0         --                        A12      Dg---  NA        --             5     slow
-MC5   11   --   CPU_D6             INPUT  --              NA        -> A13         5     slow
-MC6   10   --   CPU_D5             INPUT  --              NA        -> A13         5     slow
-MC7   0         --                        A13      Dg---  NA        --             5     slow
-MC8   9    --   CPU_D4             INPUT  XXL_165  C----  --        --             4     slow
-MC9   0         --                        XXL_181  C----  --        --             4     slow
-MC10  0         --                        XXL_167  C----  NA        --             5     slow
-MC11  8    --   CPU_D3             INPUT  XXL_170  C----  NA        --             5     slow
-MC12  0         --                        --              NA        -> A18         5     slow
-MC13  6    --   CPU_D2             INPUT  --              NA        -> A18         5     slow
-MC14  5    --   CPU_D1             INPUT  --              NA        -> A18         5     slow
-MC15  0         --                        A18      Dg---  NA        --             5     slow
-MC16  4    --   CPU_D0             INPUT  XXL_173  C----  NA        --             5     slow
-MC17  22   --   CPU_SBUS_A5        INPUT  XXL_187  C----  NA        --             5     slow
-MC18  0         --                        XXL_183  C----  NA        --             5     slow
-MC19  21   --   CPU_SBUS_A4        INPUT  XXL_185  C----  NA        --             5     slow
-MC20  0         --                        XXL_172  C----  NA        --             5     slow
-MC21  20   --   CPU_SBUS_A3        INPUT  XXL_169  C----  NA        --             5     slow
-MC22  0         --                        XXL_166  C----  NA        --             5     slow
-MC23  0         --                        XXL_164  C----  NA        --             5     slow
-MC24  18   --   CPU_SBUS_A2        INPUT  XXL_163  C----  NA        --             5     slow
-MC25  17   --   CPU_SBUS_A1        INPUT  A15      Dg---  NA        --             5     slow
-MC26  0         --                        A10      Dg---  NA        --             5     slow
-MC27  16   --   CPU_D9             INPUT  XXL_184  C----  NA        --             5     slow
-MC28  0         --                        XXL_182  C----  NA        --             5     slow
-MC29  15   --   CPU_D8             INPUT  XXL_188  C----  NA        --             5     slow
-MC30  0         --                        XXL_186  C----  NA        --             5     slow
-MC31  0         --                        --              NA        -> A7          5     slow
-MC32  14   --   TDI                INPUT  A7       Dg---  NA        --             5     slow
+MC1   0         --                        XXL_178  C----  --        --             3     slow
+MC2   0         --                        XXL_165  C----  --        --             4     slow
+MC3   12   --   CPU_D7             INPUT  XXL_182  C----  --        --             4     slow
+MC4   0         --                        XXL_193  C----  NA        --             5     slow
+MC5   11   --   CPU_D6             INPUT  --              NA        -> A11         5     slow
+MC6   10   --   CPU_D5             INPUT  --              NA        -> A11         5     slow
+MC7   0         --                        A11      Dg---  NA        --             5     slow
+MC8   9    --   CPU_D4             INPUT  XXL_191  C----  NA        --             5     slow
+MC9   0         --                        XXL_168  C----  NA        --             5     slow
+MC10  0         --                        XXL_174  C----  NA        --             5     slow
+MC11  8    --   CPU_D3             INPUT  XXL_171  C----  NA        --             5     slow
+MC12  0         --                        --              NA        -> A17         5     slow
+MC13  6    --   CPU_D2             INPUT  --              NA        -> A17         5     slow
+MC14  5    --   CPU_D1             INPUT  --              NA        -> A17         5     slow
+MC15  0         --                        A17      Dg---  NA        --             5     slow
+MC16  4    --   CPU_D0             INPUT  XXL_186  C----  NA        --             5     slow
+MC17  22   --   CPU_SBUS_A5        INPUT  XXL_188  C----  NA        --             5     slow
+MC18  0         --                        XXL_172  C----  NA        --             5     slow
+MC19  21   --   CPU_SBUS_A4        INPUT  XXL_169  C----  NA        --             5     slow
+MC20  0         --                        XXL_166  C----  NA        --             5     slow
+MC21  20   --   CPU_SBUS_A3        INPUT  XXL_167  C----  NA        --             5     slow
+MC22  0         --                        XXL_164  C----  NA        --             5     slow
+MC23  0         --                        XXL_194  C----  NA        --             5     slow
+MC24  18   --   CPU_SBUS_A2        INPUT  XXL_192  C----  NA        --             5     slow
+MC25  17   --   CPU_SBUS_A1        INPUT  XXL_187  C----  NA        --             5     slow
+MC26  0         --                        XXL_173  C----  NA        --             5     slow
+MC27  16   --   CPU_D9             INPUT  XXL_170  C----  NA        --             5     slow
+MC28  0         --                        XXL_195  C----  NA        --             5     slow
+MC29  15   --   CPU_D8             INPUT  XXL_163  C----  NA        --             5     slow
+MC30  0         --                        XXL_190  C----  NA        --             5     slow
+MC31  0         --                        A9       Dg---  NA        --             5     slow
+MC32  14   --   TDI                INPUT  A14      Dg---  NA        --             5     slow
 MC33  0         --                        --              --        --             0     slow
 MC34  0         --                        --              --        --             0     slow
 MC35  31   --   CPU_SBUS_A12       INPUT  A0       Dg---  --        --             2     slow
 MC36  0         --                        A1       Dg---  --        --             3     slow
 MC37  30   --   CPU_SBUS_A11       INPUT  A2       Dg---  --        --             4     slow
-MC38  29   --   CPU_SBUS_A10       INPUT  A6       Dg---  --        --             4     slow
-MC39  0         --                        A14      Dg---  --        --             4     slow
-MC40  28   --   CPU_SBUS_A9        INPUT  A3       Dg---  NA        --             5     slow
-MC41  0         --                        XXL_180  C----  NA        --             5     slow
+MC38  29   --   CPU_SBUS_A10       INPUT  A3       Dg---  NA        --             5     slow
+MC39  0         --                        XXL_189  C----  NA        --             5     slow
+MC40  28   --   CPU_SBUS_A9        INPUT  XXL_184  C----  NA        --             5     slow
+MC41  0         --                        XXL_181  C----  NA        --             5     slow
 MC42  0         --                        XXL_179  C----  NA        --             5     slow
-MC43  27   --   CPU_SBUS_A8        INPUT  XXL_176  C----  NA        --             5     slow
-MC44  0         --                        XXL_178  C----  NA        --             5     slow
-MC45  25   --   CPU_SBUS_A7        INPUT  XXL_175  C----  NA        --             5     slow
-MC46  24   --   CPU_SBUS_A6        INPUT  XXL_174  C----  NA        --             5     slow
-MC47  0         --                        XXL_171  C----  NA        --             5     slow
-MC48  23   --   TMS                INPUT  XXL_168  C----  NA        --             5     slow
+MC43  27   --   CPU_SBUS_A8        INPUT  XXL_175  C----  NA        --             5     slow
+MC44  0         --                        XXL_177  C----  NA        --             5     slow
+MC45  25   --   CPU_SBUS_A7        INPUT  A18      Dg---  NA        --             5     slow
+MC46  24   --   CPU_SBUS_A6        INPUT  XXL_185  C----  NA        --             5     slow
+MC47  0         --                        XXL_180  C----  NA        --             5     slow
+MC48  23   --   TMS                INPUT  XXL_176  C----  NA        --             5     slow
 MC49  41   on   VA0                C----  --              --        --             2     slow
 MC50  0         --                        --              --        --             0     slow
 MC51  40   --   CPU_SBUS_A19       INPUT  --              --        --             0     slow
@@ -1119,27 +1183,27 @@ MC55  0         --                        --              --        --          
 MC56  37   --   CPU_SBUS_A17       INPUT  --              --        --             0     slow
 MC57  36   --   CPU_SBUS_A16       INPUT  --              --        --             0     slow
 MC58  0         --                        --              --        --             0     slow
-MC59  35   --   CPU_SBUS_A15       INPUT  A4       Dg---  --        --             2     slow
-MC60  0         --                        A11      Dg---  --        --             3     slow
-MC61  34   --   CPU_SBUS_A14       INPUT  A8       Dg---  --        --             3     slow
-MC62  0         --                        A5       Dg---  --        --             3     slow
-MC63  0         --                        A16      Dg---  --        --             4     slow
-MC64  33   --   CPU_SBUS_A13       INPUT  A9       Dg---  --        --             4     slow
+MC59  35   --   CPU_SBUS_A15       INPUT  OFFSET0  Dg-g-  --        --             1     slow
+MC60  0         --                        A5       Dg---  --        --             3     slow
+MC61  34   --   CPU_SBUS_A14       INPUT  A13      Dg---  --        --             4     slow
+MC62  0         --                        A6       Dg---  --        --             4     slow
+MC63  0         --                        A12      Dg---  --        --             4     slow
+MC64  33   --   CPU_SBUS_A13       INPUT  XXL_183  C----  NA        --             5     slow
 MC65  44   on   VA1                C----  --              --        --             2     slow
 MC66  0         --                        --              --        --             0     slow
 MC67  45   on   VA2                C----  --              --        --             2     slow
 MC68  0         --                        --              --        --             0     slow
 MC69  46   on   VA3                C----  --              --        --             2     slow
 MC70  0         --                        --              --        --             0     slow
-MC71  0         --                        OFFSET3  Dg-g-  --        --             1     slow
+MC71  0         --                        --              --        --             0     slow
 MC72  48   on   VA4                C----  --              --        --             2     slow
 MC73  49   on   VA5                C----  --              --        --             2     slow
-MC74  0         --                        OFFSET2  Dg-g-  --        --             1     slow
+MC74  0         --                        --              --        --             0     slow
 MC75  50   on   VA6                C----  --              --        --             2     slow
-MC76  0         --                        OFFSET1  Dg-g-  --        --             1     slow
+MC76  0         --                        --              --        --             0     slow
 MC77  51   on   VA7                C----  --              --        --             2     slow
-MC78  0         --                        OFFSET0  Dg-g-  --        --             1     slow
-MC79  0         --                        A17      Dg---  --        --             4     slow
+MC78  0         --                        A7       Dg---  --        --             3     slow
+MC79  0         --                        A8       Dg---  --        --             4     slow
 MC80  52   on   VA8                C----  --              --        --             2     slow
 MC81  0         --                        --              --        --             0     slow
 MC82  0         --                        --              --        --             0     slow
@@ -1152,27 +1216,27 @@ MC88  57   on   VA12               C----  --              --        --          
 MC89  0         --                        --              --        --             0     slow
 MC90  0         --                        --              --        --             0     slow
 MC91  58   on   VA13               C----  --              --        --             2     slow
-MC92  0         --                        --              --        --             0     slow
+MC92  0         --                        OFFSET1  Dg-g-  --        --             1     slow
 MC93  60   on   VA14               C----  --              --        --             2     slow
 MC94  61   on   VA15               C----  --              --        --             2     slow
-MC95  0         --                        OFFSET5  Dg-g-  --        --             1     slow
-MC96  62   --   TCK                INPUT  OFFSET4  Dg-g-  --        --             1     slow
+MC95  0         --                        A4       Dg---  --        --             2     slow
+MC96  62   --   TCK                INPUT  A15      Dg---  --        --             4     slow
 MC97  63   on   VA16               C----  --              --        --             2     slow
 MC98  0         --                        --              --        --             0     slow
 MC99  64   on   VA17               C----  --              --        --             2     slow
 MC100 0         --                        --              --        --             0     slow
 MC101 65   on   VA18               C----  --              --        --             2     slow
 MC102 0         --                        --              --        --             0     slow
-MC103 0         --                        --              --        --             0     slow
+MC103 0         --                        OFFSET5  Dg-g-  --        --             1     slow
 MC104 67        --                        --              --        --             0     slow
 MC105 68   on   FONTLIB0           Dg-g-  --              --        --             1     slow
-MC106 0         --                        --              --        --             0     slow
+MC106 0         --                        OFFSET4  Dg-g-  --        --             1     slow
 MC107 69   on   FONTLIB1           Dg-g-  --              --        --             1     slow
-MC108 0         --                        --              --        --             0     slow
+MC108 0         --                        OFFSET3  Dg-g-  --        --             1     slow
 MC109 70        --                        --              --        --             0     slow
-MC110 0         --                        --              --        --             0     slow
-MC111 0         --                        --              --        --             0     slow
-MC112 71   --   TDO                INPUT  --              --        --             0     slow
+MC110 0         --                        OFFSET2  Dg-g-  --        --             1     slow
+MC111 0         --                        A10      Dg---  --        --             3     slow
+MC112 71   --   TDO                INPUT  A16      Dg---  --        --             4     slow
 MC113 0         --                        --              --        --             0     slow
 MC114 0         --                        --              --        --             0     slow
 MC115 73        --                        --              --        --             0     slow
@@ -1195,25 +1259,25 @@ MC0   84        SBUS_TO_VRAM_AD_OE INPUT  --              --        --          
 MC0   83        VGA_CONFIG_WRITE   INPUT  --              --        --             0     slow
 
 Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
-A: LC1	- LC16		9/16(56%)	8/16(50%)	0/16(0%)	76/80(95%)	(24)	7
-B: LC17	- LC32		15/16(93%)	8/16(50%)	0/16(0%)	80/80(100%)	(25)	1
-C: LC33	- LC48		14/16(87%)	8/16(50%)	0/16(0%)	62/80(77%)	(25)	0
-D: LC49	- LC64		7/16(43%)	8/16(50%)	0/16(0%)	21/80(26%)	(25)	0
-E: LC65	- LC80		13/16(81%)	8/16(50%)	0/16(0%)	24/80(30%)	(25)	0
-F: LC81	- LC96		9/16(56%)	8/16(50%)	0/16(0%)	16/80(20%)	(17)	0
-G: LC97	- LC112		5/16(31%)	6/16(37%)	0/16(0%)	8/80(10%)	(9)	0
+A: LC1	- LC16		11/16(68%)	8/16(50%)	0/16(0%)	76/80(95%)	(25)	5
+B: LC17	- LC32		16/16(100%)	8/16(50%)	0/16(0%)	80/80(100%)	(25)	0
+C: LC33	- LC48		14/16(87%)	8/16(50%)	0/16(0%)	64/80(80%)	(25)	0
+D: LC49	- LC64		7/16(43%)	8/16(50%)	0/16(0%)	23/80(28%)	(25)	0
+E: LC65	- LC80		10/16(62%)	8/16(50%)	0/16(0%)	23/80(28%)	(25)	0
+F: LC81	- LC96		10/16(62%)	8/16(50%)	0/16(0%)	21/80(26%)	(25)	0
+G: LC97	- LC112		11/16(68%)	6/16(37%)	0/16(0%)	19/80(23%)	(20)	0
 H: LC113- LC128		2/16(12%)	5/16(31%)	0/16(0%)	2/80(2%)	(2)	0
 
 Total dedicated input used:	4/4 	(100%)
 Total I/O pins used		59/64 	(92%)
-Total Logic cells used 		82/128 	(64%)
+Total Logic cells used 		86/128 	(67%)
 Total Flip-Flop used 		29/128 	(22%)
 Total Foldback logic used 	0/128 	(0%)
-Total Nodes+FB/MCells 		74/128 	(57%)
-Total cascade used 		8
+Total Nodes+FB/MCells 		81/128 	(63%)
+Total cascade used 		5
 Total input pins 		40
 Total output pins 		23
-Total Pts 			289
+Total Pts 			308
 Creating pla file C:\VGA4B.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
