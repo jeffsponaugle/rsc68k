@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu May 04 10:39:39 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu May 11 18:46:16 2023
 
 
 fit1508 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\VGA5\VGA4A.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -668,13 +668,15 @@ VADDR_MODE1 = (!GRAPH_MODE0 & HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTE
 
 VERT_SYNC_INTERRUPT = 1;
 
-VBLUE_OUT0 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED4.Q & SREG_D7.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED12.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED4.Q));
+VBLUE_OUT0 = ((GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED4.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & SREG_D7.Q & VMEM_SRC_LATCHED2.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & !SREG_D7.Q & VMEM_SRC_LATCHED5.Q)
+	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED12.Q));
 
-VBLUE_OUT1 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED5.Q & SREG_D7.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED13.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED5.Q));
+VBLUE_OUT1 = ((GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED5.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & SREG_D7.Q & VMEM_SRC_LATCHED2.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED5.Q & !SREG_D7.Q)
+	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED13.Q));
 
 !VGA_BUSY.D = (XXL_345
 	# XXL_344);
@@ -689,13 +691,15 @@ VGA_CONFIG_WRITE = (!CPU_RW & !CPU_VGA_CFG_CS);
 
 VGA_VIDEO_ENABLE = 1;
 
-VGREEN_OUT0 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED2.Q & SREG_D7.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED10.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED2.Q));
+VGREEN_OUT0 = ((GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED2.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & SREG_D7.Q & VMEM_SRC_LATCHED1.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & !SREG_D7.Q & VMEM_SRC_LATCHED4.Q)
+	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED10.Q));
 
-VGREEN_OUT1 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED3.Q & SREG_D7.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED11.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED3.Q));
+VGREEN_OUT1 = ((GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED3.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & SREG_D7.Q & VMEM_SRC_LATCHED1.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & !SREG_D7.Q & VMEM_SRC_LATCHED4.Q)
+	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED11.Q));
 
 VMEM_SRC_LATCHED0.D = ((SREG_LOAD.Q & VMEM_SRCD0)
 	# (!SREG_LOAD.Q & VMEM_SRC_LATCHED0.Q));
@@ -754,17 +758,19 @@ VRAM_HIGH_CE = ((!CPU_VRAM_ACCESS_ENABLED.Q & CPU_UDS)
 VRAM_LOW_CE = ((!CPU_VRAM_ACCESS_ENABLED.Q & CPU_LDS)
 	# (CPU_VRAM_ACCESS_ENABLED.Q & RAM_OE.Q));
 
-VRED_OUT0 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED0.Q & SREG_D7.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED8.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED0.Q));
+VRED_OUT0 = ((GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED0.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED0.Q & SREG_D7.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & !SREG_D7.Q & VMEM_SRC_LATCHED3.Q)
+	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED8.Q));
 
 !VRAM_WE = (!CPU_RW & !CPU_VRAM_ACCESS_ENABLED.Q);
 
 VSYNC_CLOCK_A.D = (HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & !HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER8.Q & HSYNC_COUNTER9.Q);
 
-VRED_OUT1 = ((!GRAPH_MODE0 & !RAM_OE.Q & VMEM_SRC_LATCHED1.Q & SREG_D7.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED9.Q)
-	# (GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED1.Q));
+VRED_OUT1 = ((GRAPH_MODE0 & !RAM_OE.Q & !HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED1.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & SREG_D7.Q & VMEM_SRC_LATCHED0.Q)
+	# (!GRAPH_MODE0 & !RAM_OE.Q & !SREG_D7.Q & VMEM_SRC_LATCHED3.Q)
+	# (GRAPH_MODE0 & !RAM_OE.Q & HSYNC_COUNTER0.Q & VMEM_SRC_LATCHED9.Q));
 
 VSYNC_CLOCK_B.D = VSYNC_CLOCK_A.Q;
 
@@ -1417,17 +1423,17 @@ MC114 0         --                         --                             --    
 MC115 73   --   VMEM_SRCD1          INPUT  --                             --           --                0     slow
 MC116 0         --                         --                             --           --                0     slow
 MC117 74   --   VMEM_SRCD0          INPUT  --                             --           --                0     slow
-MC118 75   on   VBLUE_OUT1          C----  --                             --           --                3     slow
+MC118 75   on   VBLUE_OUT1          C----  --                             --           --                4     slow
 MC119 0         --                         --                             --           --                0     slow
-MC120 76   on   VBLUE_OUT0          C----  --                             --           --                3     slow
+MC120 76   on   VBLUE_OUT0          C----  --                             --           --                4     slow
 MC121 0         --                         --                             --           --                0     slow
 MC122 0         --                         VSYNC_COUNTER4          Dc-g-  --           --                2     slow
-MC123 77   on   VGREEN_OUT1         C----  --                             --           --                3     slow
+MC123 77   on   VGREEN_OUT1         C----  --                             --           --                4     slow
 MC124 0         --                         VMEM_SRC_LATCHED15      Dg-g-  --           --                2     slow
-MC125 79   on   VGREEN_OUT0         C----  --                             --           --                3     slow
-MC126 80   on   VRED_OUT1           C----  --                             --           --                3     slow
+MC125 79   on   VGREEN_OUT0         C----  --                             --           --                4     slow
+MC126 80   on   VRED_OUT1           C----  --                             --           --                4     slow
 MC127 0         --                         VMEM_SRC_LATCHED14      Dg-g-  --           --                2     slow
-MC128 81   on   VRED_OUT0           C----  --                             --           --                3     slow
+MC128 81   on   VRED_OUT0           C----  --                             --           --                4     slow
 MC0   2         --                         --                             --           --                0     slow
 MC0   1         VGA_RESET           INPUT  --                             --           --                0     slow
 MC0   84        --                         --                             --           --                0     slow
@@ -1441,7 +1447,7 @@ D: LC49	- LC64		12/16(75%)	6/16(37%)	0/16(0%)	23/80(28%)	(25)	0
 E: LC65	- LC80		5/16(31%)	5/16(31%)	0/16(0%)	9/80(11%)	(25)	0
 F: LC81	- LC96		11/16(68%)	8/16(50%)	0/16(0%)	29/80(36%)	(25)	0
 G: LC97	- LC112		12/16(75%)	8/16(50%)	0/16(0%)	24/80(30%)	(25)	0
-H: LC113- LC128		9/16(56%)	8/16(50%)	0/16(0%)	24/80(30%)	(23)	0
+H: LC113- LC128		9/16(56%)	8/16(50%)	0/16(0%)	30/80(37%)	(23)	0
 
 Total dedicated input used:	2/4 	(50%)
 Total I/O pins used		58/64 	(90%)
@@ -1452,7 +1458,7 @@ Total Nodes+FB/MCells 		97/128 	(75%)
 Total cascade used 		2
 Total input pins 		36
 Total output pins 		24
-Total Pts 			297
+Total Pts 			303
 Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\VGA5\VGA4A.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
