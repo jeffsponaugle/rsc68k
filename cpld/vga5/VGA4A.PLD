@@ -100,7 +100,7 @@ NODE [VMEM_SRC_LATCHED0..15];
 NODE [HSYNC_COUNTER0..9];
 NODE [VSYNC_COUNTER0..9];
 NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
-NODE SREG_LOAD,SREG_SHIFT;
+NODE SREG_LOAD,SREG_SHIFT,GRAPHICSMODELATCH;
 NODE VGA_BUSY,VGA_BUSY_CSLOCKED, CPU_VRAM_CS_CLOCKED , CPU_VRAM_ACCESS_ENABLED;
 NODE RAM_OE;
 NODE [SREG_D0..7];
@@ -156,10 +156,14 @@ SREG_D7.ar = !VGA_RESET;
 
 VGA_VIDEO_ENABLE = 'd'1;
 
-/* active high signal to latch new value from SRC */
+/* active high signal to latch new value from SR.
+   In TEXTMODE(GRAPHMODE0 == 0), we want to latch these at the same time as SREG_LOAD.
+   In GRAPHICSMODE(GRAPHMODE0 == 1) we want to latch using GRAPHICSMODELATCH
+ */
 
-VMEM_SRC_LATCH_LOW = SREG_LOAD;
-VMEM_SRC_LATCH_HIGH = SREG_LOAD;
+ 
+VMEM_SRC_LATCH_LOW = (!GRAPH_MODE0&SREG_LOAD) # (GRAPH_MODE0&GRAPHICSMODELATCH);
+VMEM_SRC_LATCH_HIGH = VMEM_SRC_LATCH_LOW;
 
 /* VMEM_SRC_LATCHED0..7 */
 
@@ -423,6 +427,13 @@ SREG_SHIFT.d = (hsync_counter_field:['d'7..'d'647] & vsync_counter_field:['d'0..
 SREG_SHIFT.ck = !CLK_25M;
 SREG_SHIFT.ar = !VGA_RESET;
 
+/* In graphics mode, lets latch a new value every other cycle (using the first Hbit=1), starting at 7 and going all the way to 647 */
+
+GRAPHICSMODELATCH.d = (HSYNC_COUNTER0 & hsync_counter_field:['d'7..'d'647]);
+GRAPHICSMODELATCH.ck = !CLK_25M;
+GRAPHICSMODELATCH.ar = !VGA_RESET;
+
+
 VGA_HSYNC.d = !(hsync_counter_field:['d'664..'d'759]);
 VGA_HSYNC.ck = !CLK_25M;
 VGA_HSYNC.ap = !VGA_RESET;
@@ -509,15 +520,15 @@ VADDR_MODE2 = VADDR_RESET_ALL;
 /*
 
 Total dedicated input used:	2/4 	(50%)
-Total I/O pins used		59/64 	(92%)
-Total Logic cells used 		96/128 	(75%)
-Total Flip-Flop used 		56/128 	(43%)
+Total I/O pins used		58/64 	(90%)
+Total Logic cells used 		99/128 	(77%)
+Total Flip-Flop used 		57/128 	(44%)
 Total Foldback logic used 	2/128 	(1%)
-Total Nodes+FB/MCells 		96/128 	(75%)
+Total Nodes+FB/MCells 		99/128 	(77%)
 Total cascade used 		2
 Total input pins 		36
-Total output pins 		25
-Total Pts 			299
+Total output pins 		24
+Total Pts 			345
 
 */
 
