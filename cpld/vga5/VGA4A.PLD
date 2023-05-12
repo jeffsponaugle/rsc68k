@@ -509,8 +509,10 @@ SBUS_TO_VRAM_AD_OE = CPU_VRAM_ACCESS_ENABLED;
 
 */
 
-VADDR_INCREMENT = (!GRAPH_MODE0&(hsync_counter_3_field:['d'7] & hsync_counter_field:['d'0..'d'647]));
-VADDR_RESET_ALL = (!GRAPH_MODE0&(hsync_counter_field:['d'799] & vsync_counter_field:['d'524]));
+VADDR_INCREMENT = (!GRAPH_MODE0&(hsync_counter_3_field:['d'7] & hsync_counter_field:['d'0..'d'647]))
+                  #
+                  (GRAPH_MODE0&((HSYNC_COUNTER0 & hsync_counter_field:['d'7..'d'647])));
+VADDR_RESET_ALL = ((hsync_counter_field:['d'799] & vsync_counter_field:['d'524]));
 VADDR_RESET_A6 =  (!GRAPH_MODE0&(hsync_counter_field:['d'799] & vsync_counter_4_field:['d'0..'d'14]));
 VADDR_RESET_A6I = (!GRAPH_MODE0&(hsync_counter_field:['d'799] & vsync_counter_4_field:['d'15]));
 VADDR_MODE0 = VADDR_RESET_A6I # VADDR_INCREMENT;
