@@ -1,0 +1,109 @@
+LISTING FOR LOGIC DESCRIPTION FILE: ARBTEST3.pld                     Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed May 17 11:03:45 2023
+
+  1:Name     ARBTEST;
+  2:PartNo   ARBTEST;
+  3:Date     05/10/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1508ispplcc84;
+ 10:
+ 11:
+ 12:/* 
+ 13:   Version 1.0
+ 14:*/
+ 15:
+ 16:
+ 17:
+ 18:PROPERTY ATMEL {TDI_PULLUP = ON};
+ 19:PROPERTY ATMEL {TMS_PULLUP = ON};
+ 20:
+ 21:/** Inputs **/
+ 22:
+ 23:Pin  0  = CLK_IN;                  /* Clock */
+ 24:Pin  0  = RESET_IN;                /* Active Low Reset */
+ 25:
+ 26:Pin [0..0] = [REQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
+ 27:Pin  0  = REFRESH_REQ;
+ 28:
+ 29:Pin [0..0] = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
+ 30:Pin  0  = REFRESH_GRANT;
+ 31:
+ 32:NODE [REQ_CLOCKED0..1];
+ 33:NODE PE_BIAS;
+ 34:
+ 35:REQ_CLOCKED0.d = REQ0;
+ 36:REQ_CLOCKED1.d = REQ1;
+ 37:REFRESH_REQ_CLOCKED.d = REFRESH_REQ;
+ 38:
+ 39:[REQ_CLOCKED0..1].ck = CLK_IN;
+ 40:REFRESH_REQ_CLOCKED.ck = CLK_IN;
+ 41:[REQ_CLOCKED0..1].ap = !RESET_IN;
+ 42:REFRESH_REQ_CLOCKED.ap = !RESET_IN;
+ 43:
+ 44:
+ 45:PE_BIAS.d = !PE_BIAS;
+ 46:PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
+ 47:PE_BIAS.ar = RESET_IN;
+ 48:
+ 49:GRANT_ACTIVE = GRANT0 & GRANT1 & REFRESH_GRANT;   /* Active low signal that either grant is active */
+ 50:
+ 51:REFRESH_OUT = REFRESH_REQ;            /* refresh requests always win */
+ 52:
+ 53:PE_OUT_0 = ( !REFRESH_REQ # PE_BIAS # REQ_CLOCKED0) &                     /* if BIAS is towards input 0, set output0 if input0 is set */
+
+LISTING FOR LOGIC DESCRIPTION FILE: ARBTEST3.pld                     Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed May 17 11:03:45 2023
+
+ 54:           ( !REFRESH_REQ # !PE_BIAS # (REQ_CLOCKED0 # !REQ_CLOCKED1));  /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
+ 55:
+ 56:PE_OUT_1 = ( !REFRESH_REQ # !PE_BIAS # REQ_CLOCKED1) &                    /* if BIAS is towards input 1, set output1 if input1 is set */
+ 57:           ( !REFRESH_REQ # PE_BIAS # (REQ_CLOCKED1 # !REQ_CLOCKED0));   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
+ 58:          
+ 59:REFRESH_GRANT.d = ( !GRANT_ACTIVE & REFRESH_GRANT ) #    /* If a grant is active, don't change output state */
+ 60:          ( GRANT_ACTIVE & REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
+ 61:
+ 62:GRANT0.d = ( !GRANT_ACTIVE & GRANT0 ) #        /* If a grant is active, don't change output state */
+ 63:          ( GRANT_ACTIVE & PE_OUT_0 );         /* If a grant is not active, grab the output from the priority encoder */
+ 64:
+ 65:GRANT1.d = ( !GRANT_ACTIVE & GRANT1 ) #        /* If a grant is active, don't change output state */
+ 66:          ( GRANT_ACTIVE & PE_OUT_1 );         /* If a grant is not active, grab the output from the priority encoder */       
+ 67:
+ 68:GRANT0.ap = REQ0;
+ 69:GRANT1.ap = REQ1;
+ 70:REFRESH_GRANT.ap = REFRESH_REQ;
+ 71:[GRANT0..1].ck = !CLK_IN;
+ 72:REFRESH_GRANT.ck = !CLK_IN;
+ 73:
+ 74:/*
+ 75:Total dedicated input used:     2/4     (50%)
+ 76:Total I/O pins used             8/64    (12%)
+ 77:Total Logic cells used          5/128   (3%)
+ 78:Total Flip-Flop used            5/128   (3%)
+ 79:Total Foldback logic used       1/128   (0%)
+ 80:Total Nodes+FB/MCells           6/128   (4%)
+ 81:Total cascade used              0
+ 82:Total input pins                8
+ 83:Total output pins               2
+ 84:Total Pts                       16
+ 85:
+ 86:*/
+ 87:
+ 88:
+ 89:
+ 90:
+ 91:
+
+
+

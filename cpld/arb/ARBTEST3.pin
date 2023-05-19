@@ -1,0 +1,16 @@
+CHIP "C:\ARBTEST3" ASSIGNED TO AN PLCC84
+REFRESH_REQ					: 12
+REQ0					: 11
+REQ1					: 10
+RESET_IN					: 9
+REQ_CLOCKED1					: 610
+REQ_CLOCKED0					: 612
+REFRESH_GRANT					: 6
+GRANT1					: 5
+PE_BIAS					: 615
+GRANT0					: 4
+TDI					: 14
+TMS					: 23
+TCK					: 62
+TDO					: 71
+CLK_IN					: 83

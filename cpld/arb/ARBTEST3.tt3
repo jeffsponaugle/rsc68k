@@ -1,0 +1,30 @@
+#$ TOOL CUPL Atmel 1508 1.8.7.8
+#$ MODULE ARBTEST3
+#$ JEDECFILE ARBTEST3
+#$ PINS 8 GRANT0:4 GRANT1:5 REFRESH_GRANT:6 CLK_IN:83 REFRESH_REQ:12 REQ0:11 REQ1:10 RESET_IN:9 
+#$ NODES 4 FB_38 PE_BIAS:615 REQ_CLOCKED0:612 REQ_CLOCKED1:610 
+.type fr
+.i 12
+.o 19
+.ilb CLK_IN GRANT0.Q GRANT1.Q REFRESH_GRANT.Q REFRESH_REQ REQ0 REQ1 RESET_IN REQ_CLOCKED1.Q REQ_CLOCKED0.Q PE_BIAS.Q FB_38
+.ob GRANT0.D GRANT0.C GRANT0.AP GRANT1.D GRANT1.C GRANT1.AP REFRESH_GRANT.D REFRESH_GRANT.C REFRESH_GRANT.AP PE_BIAS.D PE_BIAS.C PE_BIAS.AR REQ_CLOCKED0.D REQ_CLOCKED0.C REQ_CLOCKED0.AP REQ_CLOCKED1.D REQ_CLOCKED1.C REQ_CLOCKED1.AP FB_38
+.p 18
+-0----------	0~~~~~~~~~~~~~~~~~~
+--111----00-	0~~~~~~~~~~~~~~~~~~
+--111---10--	0~~~~~~~~~~~~~~~~~~
+--0---------	~~~0~~~~~~~~~~~~~~~
+-1-11---0-1-	~~~0~~~~~~~~~~~~~~~
+-1-11---01--	~~~0~~~~~~~~~~~~~~~
+----------0-	~~~~~~~~~1~~~~~~~~~
+-11-0-------	~~~~~~0~~~~~~~~~~~~
+---0--------	~~~~~~0~~~~~~~~~~~~
+-----1------	~~1~~~~~~~~~1~~~~~~
+------1-----	~~~~~1~~~~~~~~~1~~~
+-111--------	~~~~~~~~~~~~~~~~~~1
+0-----------	~1~~1~~1~~~~~~~~~~~
+-----------0	~~~~~~~~~~1~~~~~~~~
+-------1----	~~~~~~~~~~~1~~~~~~~
+----1-------	~~~~~~~~1~~~~~~~~~~
+1-----------	~~~~~~~~~~~~~1~~1~~
+-------0----	~~~~~~~~~~~~~~1~~1~
+.end
