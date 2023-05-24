@@ -1,0 +1,97 @@
+%SIGNAL
+PIN   6 =  CLK_16M 
+PIN  11 =  CLK_16M_OUTA 
+PIN  12 =  CLK_16M_OUTB 
+PIN  16 =  CLK_16_TEST1 
+PIN  14 =  CLK_16_TEST2 
+PIN   5 =  CLK_1M 
+PIN  47 =  CLK_2M 
+PIN  43 =  CLK_32M_IN 
+PIN   9 =  CLK_32M_OUTA 
+PIN   8 =  CLK_32M_OUTB 
+PIN  46 =  CLK_4M 
+PIN   4 =  CLK_500K 
+PIN  45 =  CLK_8M 
+PIN   1 =  RESET 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CLK_16M.d  =>
+    !CLK_16M
+
+CLK_16M.ck  =>
+    CLK_32M_IN
+
+CLK_16M_OUTA =>
+    CLK_16M
+
+CLK_16M_OUTB =>
+    CLK_16M
+
+CLK_16_TEST1.d  =>
+    !CLK_16_TEST1
+
+CLK_16_TEST1.ck  =>
+    CLK_32M_IN
+
+CLK_16_TEST2.d  =>
+    !CLK_16_TEST2
+
+CLK_16_TEST2.ck  =>
+    CLK_32M_OUTA.io 
+
+CLK_1M.d  =>
+    !CLK_1M
+
+CLK_1M.ar  =>
+    RESET
+
+CLK_1M.ck  =>
+    CLK_2M
+
+CLK_2M.d  =>
+    !CLK_2M
+
+CLK_2M.ar  =>
+    RESET
+
+CLK_2M.ck  =>
+    CLK_4M
+
+CLK_32M_OUTA =>
+    CLK_32M_IN
+
+CLK_32M_OUTB =>
+    CLK_32M_IN
+
+CLK_4M.d  =>
+    !CLK_4M
+
+CLK_4M.ar  =>
+    RESET
+
+CLK_4M.ck  =>
+    CLK_8M
+
+CLK_500K.d  =>
+    !CLK_500K
+
+CLK_500K.ar  =>
+    RESET
+
+CLK_500K.ck  =>
+    CLK_1M
+
+CLK_8M.d  =>
+    !CLK_8M
+
+CLK_8M.ar  =>
+    RESET
+
+CLK_8M.ck  =>
+    CLK_16M
+
+%END

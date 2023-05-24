@@ -1,7 +1,4 @@
 log: erasing device #1.
-log: erasing device #2.
 log: programming device #1.
 log: verifying device #1: ... OK ...
-log: programming device #2.
-log: verifying device #2: ... OK ...
 log: JTAG instructions finished successfully.

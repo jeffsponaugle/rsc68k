@@ -1,0 +1,75 @@
+Name	 TIMETEST;
+PartNo   TIMETEST;
+Date     04/18/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1504ispplcc44;
+
+
+/* 
+   Version 1.4
+   History:  Still needs DH/DL patch fix.
+*/
+
+PROPERTY ATMEL {TDI_PULLUP = ON};
+PROPERTY ATMEL {TMS_PULLUP = ON};
+
+/** Inputs ################################################ **/
+
+/* Interrupt Controller */
+
+/* DRAM Controller */
+Pin[43]  = CLK_32M_IN;
+Pin[9]  = CLK_32M_OUTA;
+Pin[8] = CLK_32M_OUTB;
+Pin[4]  = CLK_500K;
+Pin[5]  = CLK_1M;
+Pin[6]  = CLK_16M;
+Pin[11]  = CLK_16M_OUTA;
+Pin[12]  = CLK_16M_OUTB;
+Pin[1]  = RESET;
+Pin[16] = CLK_16_TEST1;
+Pin[14] = CLK_16_TEST2;
+
+
+NODE  CLK_8M;
+NODE  CLK_4M;
+NODE  CLK_2M;
+
+CLK_16M.d = !CLK_16M;
+CLK_16M.ck = CLK_32M_IN;
+
+CLK_16_TEST1.d = !CLK_16_TEST1;
+CLK_16_TEST1.ck = CLK_32M_IN;
+
+CLK_16_TEST2.d = !CLK_16_TEST2;
+CLK_16_TEST2.ck = CLK_32M_OUTA.io;
+
+
+CLK_8M.d = !CLK_8M;
+CLK_8M.ck = CLK_16M;
+CLK_8M.ar = RESET;
+
+CLK_4M.d = !CLK_4M;
+CLK_4M.ck = CLK_8M;
+CLK_4M.ar = RESET;
+
+CLK_2M.d = !CLK_2M;
+CLK_2M.ck = CLK_4M;
+CLK_2M.ar = RESET;
+
+CLK_1M.d = !CLK_1M;
+CLK_1M.ck = CLK_2M;
+CLK_1M.ar = RESET;
+
+CLK_500K.d = !CLK_500K;
+CLK_500K.ck = CLK_1M;
+CLK_500K.ar = RESET;
+
+CLK_32M_OUTA = CLK_32M_IN;
+CLK_32M_OUTB = CLK_32M_IN;
+CLK_16M_OUTA = CLK_16M;
+CLK_16M_OUTB = CLK_16M;
