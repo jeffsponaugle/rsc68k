@@ -1,0 +1,78 @@
+%SIGNAL
+PIN   0 =  CLK_IN 
+PIN   0 =  GRANT0 
+PIN   0 =  GRANT1 
+PIN  87 =  PE_BIAS 
+PIN   0 =  REQ0 
+PIN   0 =  REQ1 
+PIN  85 =  REQ_CLOCKED0 
+PIN  86 =  REQ_CLOCKED1 
+PIN   0 =  RESET_IN 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+GRANT0.d  =>
+    GRANT0 & !GRANT1
+  # GRANT0 & GRANT1 & PE_BIAS & !REQ_CLOCKED1
+  # GRANT0 & GRANT1 & REQ_CLOCKED0
+
+GRANT0.ap  =>
+    REQ0
+
+GRANT0.ck  =>
+    !CLK_IN
+
+GRANT1.d  =>
+    !GRANT0 & GRANT1
+  # GRANT0 & GRANT1 & !PE_BIAS & !REQ_CLOCKED0
+  # GRANT0 & GRANT1 & REQ_CLOCKED1
+
+GRANT1.ap  =>
+    REQ1
+
+GRANT1.ck  =>
+    !CLK_IN
+
+GRANT_ACTIVE =>
+    GRANT0 & GRANT1
+
+PE_BIAS.d  =>
+    !PE_BIAS
+
+PE_BIAS.ar  =>
+    RESET_IN
+
+PE_BIAS.ck  =>
+    !GRANT0
+  # !GRANT1
+
+PE_OUT_0 =>
+    REQ_CLOCKED0
+  # PE_BIAS & !REQ_CLOCKED1
+
+PE_OUT_1 =>
+    REQ_CLOCKED1
+  # !PE_BIAS & !REQ_CLOCKED0
+
+REQ_CLOCKED0.d  =>
+    REQ0
+
+REQ_CLOCKED0.ar  =>
+    !RESET_IN
+
+REQ_CLOCKED0.ck  =>
+    CLK_IN
+
+REQ_CLOCKED1.d  =>
+    REQ1
+
+REQ_CLOCKED1.ar  =>
+    !RESET_IN
+
+REQ_CLOCKED1.ck  =>
+    CLK_IN
+
+%END

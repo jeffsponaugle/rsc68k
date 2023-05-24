@@ -1,0 +1,79 @@
+Name	 ARBTEST;
+PartNo   ARBTEST;
+Date     05/10/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1508ispplcc84;
+
+
+/* 
+   Version 1.0
+*/
+
+
+
+PROPERTY ATMEL {TDI_PULLUP = ON};
+PROPERTY ATMEL {TMS_PULLUP = ON};
+
+/** Inputs **/
+
+Pin = CLK_IN;                  /* Clock */
+Pin = RESET_IN;                /* Active Low Reset */
+
+Pin = REQ0;                  /* Active Low Request */
+Pin = REQ1;
+
+Pin = GRANT0;                /* Active Low Grant */
+Pin = GRANT1;
+
+NODE REQ_CLOCKED0, REQ_CLOCKED1;
+NODE PE_BIAS;
+
+REQ_CLOCKED0.d = REQ0;
+REQ_CLOCKED1.d = REQ1;
+REQ_CLOCKED0.ck = CLK_IN;
+REQ_CLOCKED1.ck = CLK_IN;
+REQ_CLOCKED0.ar = !RESET_IN;
+REQ_CLOCKED1.ar = !RESET_IN;
+
+PE_BIAS.d = !PE_BIAS;
+PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
+PE_BIAS.ar = RESET_IN;
+
+GRANT_ACTIVE = GRANT0 & GRANT1;   /* Active low signal that either grant is active */
+
+PE_OUT_0 = ( PE_BIAS # REQ_CLOCKED0) &                     /* if BIAS is towards input 0, set output0 if input0 is set */
+           ( !PE_BIAS # (REQ_CLOCKED0 # !REQ_CLOCKED1));  /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
+
+PE_OUT_1 = ( !PE_BIAS # REQ_CLOCKED1) &                    /* if BIAS is towards input 1, set output1 if input1 is set */
+           ( PE_BIAS # (REQ_CLOCKED1 # !REQ_CLOCKED0));   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
+          
+GRANT0.d = ( !GRANT_ACTIVE & GRANT0 ) #     /* If a grant is active, don't change output state */
+          ( GRANT_ACTIVE & PE_OUT_0 );    /* If a grant is not active, grab the output from the priority encoder */
+
+GRANT1.d = ( !GRANT_ACTIVE & GRANT1 ) #     /* If a grant is active, don't change output state */
+          ( GRANT_ACTIVE & PE_OUT_1 );    /* If a grant is not active, grab the output from the priority encoder */          
+GRANT0.ap = REQ0;
+GRANT1.ap = REQ1;
+GRANT0.ck = !CLK_IN;
+GRANT1.ck = !CLK_IN;
+
+/*
+Total dedicated input used:	2/4 	(50%)
+Total I/O pins used		8/64 	(12%)
+Total Logic cells used 		5/128 	(3%)
+Total Flip-Flop used 		5/128 	(3%)
+Total Foldback logic used 	1/128 	(0%)
+Total Nodes+FB/MCells 		6/128 	(4%)
+Total cascade used 		0
+Total input pins 		8
+Total output pins 		2
+Total Pts 			16
+
+*/
+
+
+
