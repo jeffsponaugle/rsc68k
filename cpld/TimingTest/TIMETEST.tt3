@@ -1,27 +1,26 @@
 #$ TOOL CUPL Atmel 1504 1.8.7.8
 #$ MODULE TIMETEST
 #$ JEDECFILE TIMETEST
-#$ PINS 11 CLK_16M_OUTA:11 CLK_16M_OUTB:12 CLK_32M_OUTA:9 CLK_32M_OUTB:8 CLK_16M:6 CLK_16_TEST1:16 CLK_16_TEST2:14 CLK_1M:5 CLK_500K:4 CLK_32M_IN:43 RESET:1 
+#$ PINS 10 CLK_16_LOGIC:17 CLK_32M_OUTA:9 CLK_32M_OUTB:8 CLK_16M_OUTA:11 CLK_16M_OUTB:12 CLK_1M:5 CLK_500K:4 CINPUT:21 CLK_32M_IN:43 RESET:1 
 #$ NODES 3 CLK_2M:613 CLK_4M:612 CLK_8M:615 
 .type fr
-.i 10
-.o 25
-.ilb CLK_16M.Q CLK_16_TEST1.Q CLK_16_TEST2.Q CLK_1M.Q CLK_32M_IN CLK_500K.Q RESET CLK_8M.Q CLK_4M.Q CLK_2M.Q
-.ob CLK_16M_OUTA CLK_16M_OUTB CLK_32M_OUTA CLK_32M_OUTB CLK_16M.D CLK_16M.C CLK_16_TEST1.D CLK_16_TEST1.C CLK_16_TEST2.D CLK_16_TEST2.C CLK_1M.D CLK_1M.C CLK_1M.AR CLK_500K.D CLK_500K.C CLK_500K.AR CLK_2M.D CLK_2M.C CLK_2M.AR CLK_4M.D CLK_4M.C CLK_4M.AR CLK_8M.D CLK_8M.C CLK_8M.AR
-.p 15
-1---------	11~~~~~~~~~~~~~~~~~~~~~1~
-0---------	~~~~1~~~~~~~~~~~~~~~~~~~~
--0--------	~~~~~~1~~~~~~~~~~~~~~~~~~
---0-------	~~~~~~~~1~~~~~~~~~~~~~~~~
----0------	~~~~~~~~~~1~~~~~~~~~~~~~~
----------0	~~~~~~~~~~~~~~~~1~~~~~~~~
-----1-----	~~11~1~1~1~~~~~~~~~~~~~~~
---------0-	~~~~~~~~~~~~~~~~~~~1~~~~~
------0----	~~~~~~~~~~~~~1~~~~~~~~~~~
--------0--	~~~~~~~~~~~~~~~~~~~~~~1~~
----------1	~~~~~~~~~~~1~~~~~~~~~~~~~
-------1---	~~~~~~~~~~~~1~~1~~1~~1~~1
---------1-	~~~~~~~~~~~~~~~~~1~~~~~~~
--------1--	~~~~~~~~~~~~~~~~~~~~1~~~~
----1------	~~~~~~~~~~~~~~1~~~~~~~~~~
+.i 9
+.o 22
+.ilb CINPUT CLK_16M_OUTA.Q CLK_1M.Q CLK_32M_IN CLK_500K.Q RESET CLK_8M.Q CLK_4M.Q CLK_2M.Q
+.ob CLK_16_LOGIC CLK_32M_OUTA CLK_32M_OUTB CLK_16M_OUTA.D CLK_16M_OUTA.C CLK_16M_OUTB.D CLK_16M_OUTB.C CLK_1M.D CLK_1M.C CLK_1M.AR CLK_500K.D CLK_500K.C CLK_500K.AR CLK_2M.D CLK_2M.C CLK_2M.AR CLK_4M.D CLK_4M.C CLK_4M.AR CLK_8M.D CLK_8M.C CLK_8M.AR
+.p 14
+-0-------	~~~1~1~~~~~~~~~~~~~~~~
+11-------	1~~~~~~~~~~~~~~~~~~~~~
+--0------	~~~~~~~1~~~~~~~~~~~~~~
+--------0	~~~~~~~~~~~~~1~~~~~~~~
+---1-----	~11~1~1~~~~~~~~~~~~~~~
+-------0-	~~~~~~~~~~~~~~~~1~~~~~
+----0----	~~~~~~~~~~1~~~~~~~~~~~
+------0--	~~~~~~~~~~~~~~~~~~~1~~
+--------1	~~~~~~~~1~~~~~~~~~~~~~
+-----1---	~~~~~~~~~1~~1~~1~~1~~1
+-------1-	~~~~~~~~~~~~~~1~~~~~~~
+------1--	~~~~~~~~~~~~~~~~~1~~~~
+--1------	~~~~~~~~~~~1~~~~~~~~~~
+-1-------	~~~~~~~~~~~~~~~~~~~~1~
 .end

@@ -4,14 +4,13 @@ CLK_16M_OUTA					: 11
 CLK_32M_OUTA					: 9
 CLK_32M_OUTB					: 8
 TDI					: 7
-CLK_16M					: 6
 CLK_4M					: 612
 CLK_2M					: 613
 CLK_1M					: 5
 CLK_8M					: 615
 CLK_500K					: 4
-CLK_16_TEST1					: 16
-CLK_16_TEST2					: 14
+CINPUT					: 21
+CLK_16_LOGIC					: 17
 TMS					: 13
 TCK					: 32
 TDO					: 38

@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sat May 20 11:09:13 2023 "}
+  {DBtime "Mon May 29 18:42:59 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -37,13 +37,12 @@
    {P RESET {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
    {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
    {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P CLK_162 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P CLK_161 {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P CLK_16M_ {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P CINPUT {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P CLK_32 {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P CLK_32M {Pt "I/O"}{Lq 0}{Ploc 360 40}}
-   {P CLK_16M_ {Pt "I/O"}{Lq 0}{Ploc 360 60}}
-   {P CLK_16 {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P CLK_16_L {Pt "I/O"}{Lq 0}{Ploc 360 60}}
   }
 
   {PKG
@@ -65,9 +64,8 @@
    {Pnl 340 30}
    {Pnl 340 50}
    {Pnl 340 70}
-   {Pnl 340 90}
 
-   {Sd A 43 1 4 5 6 14 16 8 9 11 12}
+   {Sd A 43 1 4 5 11 12 21 8 9 17}
   }
 
   {PIC
@@ -85,21 +83,19 @@
    {L 330 20 360 20}
    {L 330 40 360 40}
    {L 330 60 360 60}
-   {L 330 80 360 80}
    [Ly "PINNAM"]
    [Tj "LC"]
    {T "CLK_32M_" 140 160}
    {T "RESET" 140 120}
    {T "CLK_500K" 140 100}
    {T "CLK_1M" 140 80}
-   {T "CLK_16M" 140 60}
-   {T "CLK_162" 140 40}
-   {T "CLK_161" 140 20}
+   {T "CLK_16M_" 140 60}
+   {T "CLK_16M" 140 40}
+   {T "CINPUT" 140 20}
    [Tj "RC"]
    {T "CLK_32" 320 20}
    {T "CLK_32M" 320 40}
-   {T "CLK_16M_" 320 60}
-   {T "CLK_16" 320 80}
+   {T "CLK_16_L" 320 60}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1504ISPPLCC44" 230 -10}
@@ -131,19 +127,17 @@
    }
    {N CLK_1M
    }
+   {N CLK_16M_
+   }
    {N CLK_16M
    }
-   {N CLK_162
-   }
-   {N CLK_161
+   {N CINPUT
    }
    {N CLK_32
    }
    {N CLK_32M
    }
-   {N CLK_16M_
-   }
-   {N CLK_16
+   {N CLK_16_L
    }
   }
 
