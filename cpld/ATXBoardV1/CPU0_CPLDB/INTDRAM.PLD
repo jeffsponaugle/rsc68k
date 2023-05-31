@@ -1,0 +1,965 @@
+Name	 INTController;
+PartNo   INTCTRLCPLD;
+Date     04/18/2022;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1508ispplcc84;
+
+
+/* 
+   Version 1.4
+   History:  Still needs DH/DL patch fix.
+*/
+
+PROPERTY ATMEL {open_collector=CPU_RESET,CPU_HALT};
+PROPERTY ATMEL {TDI_PULLUP = ON};
+PROPERTY ATMEL {TMS_PULLUP = ON};
+
+
+/** Inputs ################################################ **/
+
+/* Interrupt Controller */
+Pin[24,22,21]   = [CPU_FC2..0];
+Pin[56,57,58]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
+Pin[83]    = DEBUG_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
+Pin[84,1]  = PTC1_IRQ,PTC2_IRQ;
+Pin[2,4]   = UARTA_IRQ,UARTB_IRQ;
+Pin[5,6]   = RTC_IRQ,IDE_IRQ;
+Pin[8,9]   = EXPA_IRQ,EXPB_IRQ;
+Pin[55]    = INTC_CS;     /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
+
+/* DRAM Controller */
+Pin[18]  = CLK_32M;
+Pin[17]  = CPU_RESET_IN;    /* Active Low RESET */
+Pin[33]  = CPU_UDS;
+Pin[34]  = CPU_LDS;
+Pin[54]  = DRAM_CS;     /* Active Low to indicate DRAM Access cycle.  This should be syncronized with /AS */
+CPU_A1 = CPU_INTACK0;
+CPU_A2 = CPU_INTACK1;
+
+/* Shared with both Interrupt and DRAM Controller */
+Pin[35]   = CPU_AS;
+Pin[31]   = CPU_RW;
+
+/** Outputs ################################################ **/
+
+/* Interrupt Controller */
+Pin[28,27,25]  = [IPL2..0];
+Pin[52]        = DTACK_FROM_INT;
+Pin[46,45,44,41,40,39,37,36]  = [CPU_D7..0];
+Pin[16]        = CPU_VPA;
+
+/* DRAM Controller */
+Pin[74]  = RAS0;
+Pin[73]  = RAS2;
+Pin[67]  = CAS0;
+Pin[68]  = CAS1;
+Pin[69]  = CAS2;
+Pin[70]  = CAS3;
+Pin[64]  = DRAM_MEM_AB;    /* Flip flop for MEM_AB signal */
+Pin[10]  = CLK_500K;
+Pin[11]  = CLK_1M;
+Pin[65]  = DRAM_DATA_DIR; 
+Pin[63]  = DRAM_RW;     /* READ/WRITE signal for DRAM - Gated and masked */
+
+/* Shared with both Interrupt and DRAM Controller */
+Pin[29]  = CPU_RESET;    /* Active Low RESET */
+Pin[20]  = CPU_HALT;
+Pin[30]  = CLK_16M;
+Pin[12]  = CPU_RESET_INV;
+
+ 
+ /* Power Control */
+
+Pin[75] = POWERCTL_STATE; /* EXP_ICPLD_3 -> SBUS Pin 35, J5 */
+
+/* Keyboard */
+
+/* Use ICPLD_1, on SBUS, for Keyboard Interrupt.  This interrupt will override the IDE interrupt which we are not using. */
+Pin[60] = KEYBOARDIRQSIGNAL;  /* EXP_ICPLD_1 - SBUS Pin 30, J5 */
+
+
+/* EXTRA Shared BUS pin */
+
+Pin[76] = ICPLD_4;  /* SBUS Pin 34, J5 */
+Pin[61] = ICPLD_2;  /* SBUS Pin 36, J5 */
+
+Pin[48]  = UNUSED1;
+Pin[77]  = UNUSED2;
+Pin[15]  = UNUSED3;
+Pin[79]  = UNUSED4;
+Pin[80]  = UNUSED5;
+Pin[51]  = UNUSED6;
+Pin[50]  = UNUSED7;
+Pin[49]  = UNUSED8;
+Pin[81]  = UNUSED9;
+
+
+
+CPU_RESET_INV = !CPU_RESET;
+
+/* For now, keep VPA at 1.  We will use this to switch to autovectoring interrupts */
+
+NODE AS_GATED;
+NODE INT_ACK,DEBUG_INT;
+
+NODE DTACK_TIMER_0, DTACK_TIMER_1;
+NODE DEBUG_BUTTON_MASK;
+NODE IRQL6A_MASK,IRQL6B_MASK;
+NODE UARTA_IRQ_MASK,UARTB_IRQ_MASK;
+NODE IRQL4A_MASK,IDE_IRQ_MASK;
+NODE EXPA_IRQ_MASK,EXPB_IRQ_MASK;
+NODE POWER_IRQ_MASK;
+
+NODE REFRESH_REQUESTED_PRE;
+NODE REFRESH_REQUESTED_SYNC;
+
+NODE POWERCTL_OE;
+NODE KEYBOARDIRQ;
+
+/* flip-flop for the system requesting a reset */
+
+NODE RESET_REQ;
+NODE RESET_REQ_OUT;
+
+/* create a gated version of the AS signal that sets on the falling clk_16, but resets to 1 as soon as AS resets */
+
+AS_GATED.d = CPU_AS;
+AS_GATED.ck = !CLK_16M;
+AS_GATED.AP = CPU_AS;
+
+/* 
+   We will create an internal synthetic IRQ7L request that is triggered
+   by a falling edge of the DEBUG_INT_BUTTON, and is reset by either system 
+   reset, or by the DEBUG_INT_ACK signal which happens when the interrupt is
+   acknowleged.
+*/
+
+/* NODE DEBUG_INT; REMOVED FOR DEBUGGING PIN */
+
+DEBUG_INT.d = 'b'0;       /* Clock trigger will lock in a 0, and reset will force 1 */
+DEBUG_INT.ap = !CPU_RESET # IRQL7_ACK;
+DEBUG_INT.ck = !DEBUG_BUTTON;
+
+/* 
+   IRQ4A (RTC) needs to be edge triggered, so lets rename the input to RTC_IRQ, and use that 
+   edge to clock in a flipflop.  It is reset by RESET, or the ACK of IRQ4A.
+*/
+
+NODE IRQL4A;
+IRQL4A.d = 'b'0;
+IRQL4A.ap = !CPU_RESET # IRQL4A_ACK;
+IRQL4A.ck = !RTC_IRQ;
+
+NODE IRQL6A,IRQL6B,POWERBUTTON_IRQ;
+
+IRQL6A.d = 'b'0;
+IRQL6A.ap = !CPU_RESET # IRQL6A_ACK;
+IRQL6A.ck = !PTC1_IRQ;
+
+IRQL6B.d = 'b'0;
+IRQL6B.ap = !CPU_RESET # IRQL6B_ACK;
+IRQL6B.ck = !PTC2_IRQ;
+
+POWERBUTTON_IRQ.d = 'b'0;
+POWERBUTTON_IRQ.ck = POWERCTL_STATE.io;
+POWERBUTTON_IRQ.ap = !CPU_RESET # IRQL2_ACK;
+
+KEYBOARDIRQ.d='b'1;
+KEYBOARDIRQ.ck = KEYBOARDIRQSIGNAL;
+KEYBOARDIRQ.ar= !CPU_RESET # IRQL4B_ACK;
+
+
+/* 
+   This signal goes to 1 when the DTACK_TIMER_1 is asserted and the interrupt 
+   being acknowleged is 7.  The rising edge of this signal will clear the 
+   DEBUG_INT node above, which clears the interrupt request for IRQ7.
+
+   IRQL4A_ACK is the same, but for interrupt level 4 acks.
+   NOTE since any level 4 interrupt ack will show up with the INTACK bits, we are also
+   adding the presence of IRQL4A_PE, which is set to 0 if we are servicing the particular
+   4A variant of the level 4 interrupts.  This should prevent IDE interrupts from clearing this.
+*/
+
+IRQL7_ACK = CPU_INTACK2 & CPU_INTACK1 & CPU_INTACK0 & DTACK_TIMER_1;
+IRQL4A_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL4A_PE;
+IRQL4B_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IDE_IRQ_PE;
+IRQL6A_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6A_PE;
+IRQL6B_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6B_PE;
+IRQL2_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1;
+
+
+/* Pins for Testing */
+
+/** Internal Variables and nodes **/
+
+/* Interupt Mask Registers -  0 = allow interrupt, 1 = block interrupt */
+/*
+
+Write to FF0700 Upper 8 bits: 
+                  bit 7 - DEBUG_BUTTON_MASK
+                  bit 6 - IRQL6A_MASK
+                  bit 5 - IRQL6B_MASK
+                  bit 4 - UARTA_IRQ_MASK
+                  bit 3 - UARTB_IRQ_MASK
+                  bit 2 - IRQL4A_MASK
+                  bit 1 - KEYBOARD_IRQ_MASK
+                  bit 0 - Unused
+
+ Write to FF0702 Upper 8 bits:
+                  bit 7 - EXPA_IRQ_MASK
+                  bit 6 - EXPB_IRQ_MASK
+                  bit 5 - POWER_IRQ_MASK
+
+ Write to FF0706 Upper 8 bits:
+                  bit 7 - REQUEST_RESET (Set to 1 to force CPU_RESET)
+                  bit 0 - POWERCTRL pin state value
+                  bit 1 - POWERCTRL pin output enable
+
+*/
+
+LATCHCLOCK =  INTC_CS # CPU_A1 # CPU_A2 # CPU_RW;
+
+DEBUG_BUTTON_MASK.d = CPU_D7.io;
+DEBUG_BUTTON_MASK.ck = LATCHCLOCK;
+DEBUG_BUTTON_MASK.ap = !CPU_RESET;  /* Special - On RESET this is still enabled (NMI) */
+/* changed to preset */
+
+IRQL6A_MASK.d = CPU_D6.io;
+IRQL6A_MASK.ck = LATCHCLOCK;
+IRQL6A_MASK.ap = !CPU_RESET;
+
+IRQL6B_MASK.d = CPU_D5.io;
+IRQL6B_MASK.ck = LATCHCLOCK;
+IRQL6B_MASK.ap = !CPU_RESET;
+
+UARTA_IRQ_MASK.d = CPU_D4.io;
+UARTA_IRQ_MASK.ck = LATCHCLOCK;
+UARTA_IRQ_MASK.ap = !CPU_RESET;
+
+UARTB_IRQ_MASK.d = CPU_D3.io;
+UARTB_IRQ_MASK.ck = LATCHCLOCK;
+UARTB_IRQ_MASK.ap = !CPU_RESET;
+
+IRQL4A_MASK.d = CPU_D2.io;
+IRQL4A_MASK.ck = LATCHCLOCK;
+IRQL4A_MASK.ap = !CPU_RESET;
+
+IDE_IRQ_MASK.d = CPU_D1.io;
+IDE_IRQ_MASK.ck = LATCHCLOCK;
+IDE_IRQ_MASK.ap = !CPU_RESET;
+
+EXPA_IRQ_MASK.d = CPU_D7.io;
+EXPA_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+EXPA_IRQ_MASK.ap = !CPU_RESET;
+
+EXPB_IRQ_MASK.d = CPU_D6.io;
+EXPB_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+EXPB_IRQ_MASK.ap = !CPU_RESET;
+
+POWER_IRQ_MASK.d = CPU_D5.io;
+POWER_IRQ_MASK.ck = INTC_CS # !CPU_A1 # CPU_A2 # CPU_RW;
+POWER_IRQ_MASK.ap = !CPU_RESET;
+
+/* Power Control Logic */
+
+/* 
+   Latch the POWERCTL_STATE register if a write to 0xFF0706 happens, and use bit 0 for the STATE.  
+   On RESET this will be set to 0.
+   Latch the POWERCTL_OE register if a write to 0xFF0706 happens, and use bit 1 for the OE.
+   On RESET this will be set to 0.   A value of 0 indicated output is not enabled.
+*/
+
+POWERCTL_OE.d = CPU_D1.io;
+POWERCTL_OE.ck = INTC_CS # !CPU_A1 # !CPU_A2 # CPU_RW;
+POWERCTL_OE.ar = !CPU_RESET;
+
+POWERCTL_STATE.d = CPU_D0.io;
+POWERCTL_STATE.ck = INTC_CS # !CPU_A1 # !CPU_A2 # CPU_RW;
+POWERCTL_STATE.ar = !CPU_RESET;
+POWERCTL_STATE.oe = POWERCTL_OE;
+
+/* 
+   RESET Request flip flip.  0 at reset.  If you write 1 to it
+   the RESET_REQUEST_OUT will go low on the next CLK_500K rising edge.  That 
+   output (0) will trigger the CPU_RESET node to be reset into low, 
+   resetting the system.  That change in CPU_RESET will clear the RESET_REQ,
+   and on the next CLK_500K rising edge RESET_REQ_OUT will go high, when then 
+   releases the CPU_RESET node at the next CLK_16M.
+
+   The Reset will only be low for 1 CLK_500K cycle.
+
+   CPU_RESET (output) is held low if either CPU_RESET_IN is low *OR* 
+   RESET_REQ_OUT is low.
+
+*/
+
+RESET_REQ.d = CPU_D7.io;
+/* flip flop will clock in from databus on rising edge of INTC_CS if A1=1, A2=1, RW=0 */
+RESET_REQ.ck = INTC_CS # !CPU_A1 # !CPU_A2 # CPU_RW;
+RESET_REQ.ar = !CPU_RESET;
+
+RESET_REQ_OUT.d = !RESET_REQ;
+RESET_REQ_OUT.ck = CLK_500K;
+RESET_REQ_OUT.ap = !CPU_RESET;
+
+CPU_RESET.d = 'b'1;
+CPU_RESET.ar = (!CPU_RESET_IN # !RESET_REQ_OUT);
+CPU_RESET.ck = CLK_16M;
+
+CPU_HALT = CPU_RESET;
+
+/* 
+   INT_ACK goes high when the CPU indicates an interrupt ack cycle is in progress.
+   Since this signal combines with AS it will go low at the end of that cycle. 
+*/
+INT_ACK = CPU_FC2 & CPU_FC1 & CPU_FC0 & !CPU_AS;
+
+/* 
+   DTACK_TIMER_0 and 1 make up a small counter that starts when INT_ACK is asserted (because the
+   inverse of INT_ACK holds the FFs in reset).  DTACK_TIMER_0 will increment to 1 on the following 
+   falling edge of CLK_16M, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
+   both outputs stay at 1 until the flipflops are reset by INT_ACK going low.
+
+   The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
+   back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
+   present on the databus.
+
+   DTACK_TIMER_1 is also used to assert the VPA pin if the interrupt system is switched
+   to autovector mode.  In that mode there is no need to drive the databus with a vector.
+*/
+
+DTACK_TIMER_0.d = 'b'1;
+DTACK_TIMER_0.ar = !INT_ACK;
+DTACK_TIMER_0.ck = !CLK_16M;
+
+DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
+DTACK_TIMER_1.ar = !INT_ACK;
+DTACK_TIMER_1.ck = !CLK_16M;
+
+/* 
+   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
+   is zero it will get asserted on the CPU.   It is tied to the inverse of DTACK_TIMER_1 which is set to 0 
+   on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
+*/
+
+/*    
+   To switch to AUTOVECTORING set DTACK_FROM_INT high all the time, and make VPA active durig INT_ACK. 
+   Autovector:
+   DTACK_FROM_INT = 'b'1;
+   CPU_VPA = !DTACK_TIMER_1;
+   Regular Vector:
+   DTACK_FROM_INT = !DTACK_TIMER_1;
+   CPU_VPA = 'b'1;
+
+*/
+
+DTACK_FROM_INT = !DTACK_TIMER_1;
+CPU_VPA = 'b'1;
+
+/* 
+   Active low grouping of external active low interrupts.  If any of these inputs are low,
+   the group is low.  That group is used to select the interrupt level that goes to the CPU.
+*/
+
+IRQL7_INT = DEBUG_INT_PE;
+IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
+IRQL5_INT = (UARTA_IRQ_PE & UARTB_IRQ_PE) # !IRQL6_INT # !IRQL7_INT;
+IRQL4_INT = (IRQL4A_PE & IDE_IRQ_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IRQL3_INT = (EXPA_IRQ_PE & EXPB_IRQ_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+IRQL2_INT = (POWER_INT_PE) # !IRQL3_INT #!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+
+/* 
+   IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
+   This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
+   to any value other than 111 by doing an interrupt ack cycle.
+*/   
+
+IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
+IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
+IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
+
+/* 
+   active low interupt lines post 8:8 priority encoder 
+   These groups of lines form a priority selector for each group.  Within 
+   a group there are up to 4 interrupt sources (A-D), with A being the highest
+   priority.  Within each group only one of the signals will be asserted(ow) at any time.
+   These are active low sigals coming in, and going out.
+
+   NOTE UARTA_IRQ and UARTB_IRQ, coming from the UART, are active high signals.   It is critical to note
+   that the 16C2550 on init has MCR bit3=0, which disables the INT output, which results in the CPLD pullup 
+   pulling that signal high.  You MUST change the MCR bit3 to 1 before enabling interrupts.  This will allow the
+   UART to correctly signal and interrupt.
+
+   Since UARTA_IRQ and B are active high, they are inverted in the assignments below.
+*/
+
+DEBUG_INT_PE = (DEBUG_INT # DEBUG_BUTTON_MASK);
+
+IRQL6A_PE = (IRQL6A # IRQL6A_MASK);
+IRQL6B_PE = (IRQL6B # IRQL6B_MASK) # !(IRQL6A # IRQL6A_MASK);
+
+UARTA_IRQ_PE = (!UARTA_IRQ # UARTA_IRQ_MASK);
+UARTB_IRQ_PE = (!UARTB_IRQ # UARTB_IRQ_MASK) # !(!UARTA_IRQ # UARTA_IRQ_MASK);
+
+IRQL4A_PE = (IRQL4A # IRQL4A_MASK);
+
+/* We are going to use the IDE IRQ slot for the Keyboard interrupt 
+   Original - IDE_IRQ_PE = (IDE_IRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+   New - IDE_IRQ_PE = (!KEYBOARDIRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+*/
+
+IDE_IRQ_PE = (!KEYBOARDIRQ # IDE_IRQ_MASK) # !(IRQL4A # IRQL4A_MASK);
+EXPA_IRQ_PE = (EXPA_IRQ # EXPA_IRQ_MASK) ;
+EXPB_IRQ_PE = (EXPB_IRQ # EXPB_IRQ_MASK) # !(EXPA_IRQ # EXPA_IRQ_MASK);
+POWER_INT_PE = (POWERBUTTON_IRQ # POWER_IRQ_MASK);
+
+/* This field is created so we can select on it using the :[number] method below */
+
+FIELD interrupt_ack_num=[CPU_INTACK2..0];
+
+/* 
+   These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
+   acknowlegement process.  These are driven on the databus during the int ack cycle.
+   The vector number is formed by doing the followig:
+      The highest bit is set to 1 due to the available vectors starting at 64. 
+      The next three highest bits are set to the IPL value that has been acknowleged.  This
+      will be between 'b'001 and 'b;111.  It could be '000' if an interrupt line dissapears
+      before the ack cycle is incomplete.   The CPU should be programmed to catch this vector 
+      as a spurious interrupt.
+      The lower 4 bits are driven by the specific sub interrupt for the level selected above.
+      Since we support 4 sub interrupts, the vector uses 1 bit for each.
+
+      IRQ         AVector#    AVIRQL      Vector#              System Use
+      ------      --------    ------      --------             -------------------------------
+      DEBUG_INT   0x1F        7           11110000 (0xF0)      Debugger (Button)
+      IRQL6A      0x1E        6           11100001 (0xE1)      PTC #1 (Programmable Timer)
+      IRQL6B      0x1D        5           11100010 (0xE2)      PTC #2 (Programmable Timer)
+      UARTA_IRQ   0x1C        4           11010001 (0xD1)      UARTA
+      UARTB_IRQ   0x1B        3           11010010 (0xD2)      UARTB
+      IRQL4A      0x1A        2           11000001 (0xC1)      RTC
+      KEYBOARDIRQ NA          NA          11000010 (0xC2)      Keyboard
+      EXPA_IRQ    NA          NA          10110001 (0xB1)      VGA Vert Refresh
+      EXPB_IRQ    NA          NA          10110010 (0xB2)      NIC
+      POWER_INT   --          --          10100000 (0xA0)      Power Controller Interrupt
+
+      Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
+
+*/
+VECTORD7 = 'h'1;
+VECTORD6 = CPU_INTACK2;
+VECTORD5 = CPU_INTACK1;
+VECTORD4 = CPU_INTACK0;
+VECTORD3 = 'h'0;
+VECTORD2 = 'h'0;
+VECTORD1 = (interrupt_ack_num:[6]&!IRQL6B_PE) 
+            # (interrupt_ack_num:[5]&!UARTB_IRQ_PE)   
+            # (interrupt_ack_num:[4]&!IDE_IRQ_PE)
+            # (interrupt_ack_num:[3]&!EXPB_IRQ_PE);
+
+VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE) 
+            # (interrupt_ack_num:[5]&!UARTA_IRQ_PE) 
+            # (interrupt_ack_num:[4]&!IRQL4A_PE)
+            # (interrupt_ack_num:[3]&!EXPA_IRQ_PE);
+
+/*
+   Registers for driving the data bus to tell the CPU the vector number.  We latch into these flipflops
+   1 cycle after the INT_ACK assertion happens via the DTACK_TIMER_0 signal.  The output enable is driven by 
+   the same INT_ACK signal, so this output enable should happen before the latch change.   The databus will
+   be undriven once INT_ACK unasserts, which happens as soon as /AS goes high.
+*/
+
+CPU_D7.d = VECTORD7;
+CPU_D6.d = VECTORD6;
+CPU_D5.d = VECTORD5;
+CPU_D4.d = VECTORD4;
+CPU_D3.d = VECTORD3;
+CPU_D2.d = VECTORD2;
+CPU_D1.d = VECTORD1;
+CPU_D0.d = VECTORD0;
+
+[CPU_D7..0].ck = DTACK_TIMER_0;
+[CPU_D7..0].ar = !CPU_RESET;
+
+/* 
+   The two lines below should be changed if you switch to autovectoring.
+   The .oe should be disabled, and the INT_DWAP should be set to 'b'1;
+   This will turn off the vector drive on the databus, and the bus swapping
+   bug fix.
+   Autovector:
+
+   [CPU_D7..0].oe = 'b'0;
+   INT_DSWAP = 'b'1';
+
+   Regular Vector:
+   
+   [CPU_D7..0].oe = INT_ACK;
+   INT_DSWAP = !INT_ACK;
+
+*/
+
+[CPU_D7..0].oe = INT_ACK;
+
+/* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
+   these clock sources will probably get generated elsewhere. */
+
+NODE  CLK_8M;
+NODE  CLK_4M;
+NODE  CLK_2M;
+
+CLK_16M.d = !CLK_16M;
+CLK_16M.ck = CLK_32M;
+
+CLK_8M.d = !CLK_8M;
+CLK_8M.ck = CLK_16M;
+CLK_8M.ar = !CPU_RESET;
+
+CLK_4M.d = !CLK_4M;
+CLK_4M.ck = CLK_8M;
+CLK_4M.ar = !CPU_RESET;
+
+CLK_2M.d = !CLK_2M;
+CLK_2M.ck = CLK_4M;
+CLK_2M.ar = !CPU_RESET;
+
+CLK_1M.d = !CLK_1M;
+CLK_1M.ck = CLK_2M;
+CLK_1M.ar = !CPU_RESET;
+
+CLK_500K.d = !CLK_500K;
+CLK_500K.ck = CLK_1M;
+CLK_500K.ar = !CPU_RESET;
+
+/* ############################################################################################ */
+
+
+/* 
+   Using two flip flops for these two signals delays their output by 1/2 clock cycle
+   because the second flip flip is clocked on the opposite edge 
+*/
+
+/* 
+   REFRESH_TIMER is a time used to trigger refreshes.  It is clocked at 8MHz, and at triggers after
+   a count to 120 (~15us).  That trigger is set in REFRESH_REQUESTED, and then that signal is synced to 
+   /AS in REFRESH_REQUESTED_SYNC.  That sync guarentees the 'refresh cycle' starts at the same time, 
+   so the work can be hidden from normal operation.   The REFRESH_REQUESTED flags are reset by a 
+   REFRESH_COMPLETED flag, which is triggered by the completion of the refresh. 
+*/
+NODE  [REFRESH_TIMER0..7];
+
+/* 
+   As mentioned above the REFRESH_REQUESTED_* flags are set (==1) when it is time for a refresh cycle.
+*/
+
+/* TEMP for TESTING (added as pin 76,77)
+NODE REFRESH_REQUESTED_PRE;
+NODE REFRESH_REQUESTED_SYNC;
+*/
+NODE REFRESH_COMPLETED;
+
+/* 
+   The DRAM_MEM_CAS and RAS flip flops are used to triggering the RAS and CAS lines during normal
+   memory access.  There are two flipflops in series (with opposite clocks) so we can have 1/2 clock
+   cycle delays.  That is needed to get the memory access to fit within the tight constraints of memory 
+      access AND sneaky refresh.
+*/
+       
+NODE  DRAM_MEM_RAS; 
+NODE  DRAM_MEM_CAS;
+NODE  DRAM_MEM_CAS_PRE; 
+
+
+/*
+   The REFRESH_COUNTER_RESET_* flip flips are used to trigger a reset of the refresh state machine.  This reset occurs during
+   a normal DRAM memory access cycle, and gives the state machine a known starting point in that cycle.  With that starting point
+   the timing of the sneaky refresh can be done such that it does not interfere with normal DRAM access.
+*/
+
+NODE REFRESH_COUNTER_RESET;
+
+/* 
+   The DRAM_REFRESH_CAS and RAS flip flops are used for triggering the RAS and CAS lines during the 
+   sneaky refresh.  As with the DRAM_MEM above, the two stages (for CAS in this case) are used to give us
+   1/2 clock cycle timing accuracy.
+*/
+
+NODE DRAM_REFRESH_CAS_PRE;
+NODE DRAM_REFRESH_RAS;
+NODE DRAM_REFRESH_CAS;
+
+/* 
+   The REFESH_TMER_RESET flag is used to reset the timer used to trigger when a refresh is needed (every 15us)
+*/
+NODE REFRESH_TIMER_RESET;
+
+/* 
+   DRAM_ACCESS_TIMER is the state machine used for normal DRAM memory access.  It starts when the /AS and DRAM_CS are asserted
+   and counts until the end of the /AS cycle.  The states from this machine drive the flip flops that evetually drive 
+   the RAS, CAS, AB, and DIR lines.  This state machine runs for EVERY /AS cycle, regardless of the access type.  Even if 
+   the memory access is only SRAM or ROM, this state machine will run.  The actual DRAM outputs are masked if the DRAM_CS is 
+   not asserted, but this state machine is used to trigger the refresh state machine, so it has to operate all of the time.
+*/
+
+NODE [DRAM_ACCESS_TIMER2..0];
+
+/*
+   The REFRESH_STATE_TIMER is the state machine used for the refresh cycle.  It is reset during the normal memory /AS cycle
+   as a way to have a fixed starting point, and then provides the states need to drive CAS and RAS during the dead part 
+   of the 68k bus cycle
+*/
+
+NODE [REFRESH_STATE_TIMER2..0];
+
+
+/* 
+   The field makes it easier to build logic based on the combined value
+   of the counter values.  
+*/
+
+FIELD dram_access_timer_field = [DRAM_ACCESS_TIMER2..0];
+
+/* ################## DRAM ACCESS SECTION ######################### */
+
+/* 
+   mid flip flop for dram /RAS line.  Active for counter values 2,3 
+   Latched by rising edge of CLK_32M. Held in preset(==1) when DRAM_CS is high 
+   ( no dram access in progress )
+
+   output flip flop for DRAM /RAS line. fed from _PRE output Latches on 
+   falling edge of CLK_32M. Held in preset(==1) when AS is high .  Adds 1/2 delay.
+*/
+
+DRAM_MEM_RAS.ck = !CLK_32M;
+DRAM_MEM_RAS.ap = DRAM_CS # CPU_AS # !CPU_RESET;
+DRAM_MEM_RAS.d = !(dram_access_timer_field:[1,2]);
+
+/* 
+   mid flip flop for dram /RAS line.  Active for counter values 3,4,5
+   Latched by rising edge of CLK_32M. Held in preset(==1) when DRAM_CS is high 
+   ( no dram access in progress )
+
+   output flip flop for DRAM /RAS line. fed from _PRE output Latches on 
+   falling edge of CLK_32M. Held in preset(==1) when AS is high  Adds 1/2 delay.
+*/
+/* - Working at 12Mhz
+      DRAM_MEM_CAS.d = !(dram_access_timer_field:[2,3,4]);
+      DRAM_MEM_CAS.ck = !CLK_32M;
+      DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
+*/
+
+/* Move CAS back 1/2 cycle by using 1, plus 1/2 delay */
+DRAM_MEM_CAS_PRE.d = !(dram_access_timer_field:[2,3,4]);
+DRAM_MEM_CAS_PRE.ck = !CLK_32M;
+DRAM_MEM_CAS_PRE.ap = CPU_AS # !CPU_RESET # DRAM_CS;
+
+DRAM_MEM_CAS.d = DRAM_MEM_CAS_PRE;
+DRAM_MEM_CAS.ck = CLK_32M;
+DRAM_MEM_CAS.ap = CPU_AS # !CPU_RESET # DRAM_CS;
+
+/*  
+   DRAM_MEM_AB selects which address lines are fed to the DRAM chip.  This toggels after /RAS but before /CAS.
+   This signal is only active is we are doing a bus cycle (/AS).  
+*/
+/* - Working at 12Mhz
+      DRAM_MEM_AB_PRE.d = !(dram_access_timer_field:[1,2,3]);         
+      DRAM_MEM_AB_PRE.ck = !CLK_32M;
+      DRAM_MEM_AB_PRE.ap = DRAM_CS;
+      DRAM_MEM_AB.d = DRAM_MEM_AB_PRE;         
+      DRAM_MEM_AB.ck = CLK_32M;
+      DRAM_MEM_AB.ap = CPU_AS # !CPU_RESET;
+*/
+
+/* Lets do AB at the same time as RAS asserts, but slightly delayed. */
+DRAM_MEM_AB.d = 'b'0;         
+DRAM_MEM_AB.ck = !DRAM_MEM_RAS;
+DRAM_MEM_AB.ap = DRAM_CS # CPU_AS # !CPU_RESET;
+
+/*
+   DRAM_RW is the R/W line to the DRAM memory, and it is a buffered version of the CPU R/W line.  It is held 
+   in preset by CPU_AS (high means we are not in a bus cycle), CPU_RESET,  and DRAM_REFRESH_RAS.  
+   The DRAM_REFRESH_RAS makes sure the DRAM_RW line is high (read) during the refresh cycle.  Since it is gated
+   the DRAM_RW will stay high for about 1/2 clocks after the DRAM_REFRESH_RAS goes high.  That meets the datasheet
+   requirements that DRAM_RW be high 10ns before and 10ns after DRAM_REFRESH_RAS goes high.
+*/
+DRAM_RW.d = CPU_RW;
+DRAM_RW.ck = CLK_32M;
+DRAM_RW.ap = CPU_AS # !DRAM_REFRESH_RAS  # !DRAM_REFRESH_CAS # !CPU_RESET;
+
+
+/*
+   This is the DRAM access state machine - a 3 bit counter.  Reset is held by /AS, so this will start to count
+   once /AS falls and the next inverted 32MHz clock edge.  It is used to time the driving of the RAS and CAS lines
+   for normal DRAM access, as well as a 'reset' to the refresh timing state machine used to time the RAS and CAS signals
+   for refresh.  This state machine is running for all /AS bus cycles, memory or int ack.
+*/
+DRAM_ACCESS_TIMER0.d = !DRAM_ACCESS_TIMER0;
+DRAM_ACCESS_TIMER1.d = DRAM_ACCESS_TIMER0 $ DRAM_ACCESS_TIMER1;
+DRAM_ACCESS_TIMER2.d = ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER0 )
+                    # ( DRAM_ACCESS_TIMER2 & !DRAM_ACCESS_TIMER1 )
+                    # ( !DRAM_ACCESS_TIMER2 & DRAM_ACCESS_TIMER1 & DRAM_ACCESS_TIMER0 );
+
+[DRAM_ACCESS_TIMER2..0].ck = CLK_32M;
+[DRAM_ACCESS_TIMER2..0].ar = AS_GATED # !CPU_RESET;
+
+
+/*
+   REFRESH_COUNTER_RESET* is used to reset the refresh signal timing state machine.  This occurs during the middle of 
+   the /AS cycle.   The reason the refresh signal timing state machine can't just be tied to the opposite of /AS is because
+   the refresh cycle actually sneaks a bit into the next /AS cycle.  That is part of the reason the inital /RAS assertion
+   during normal DRAM access is so late.  It could be started earlier, but if it was it would interfere with the minimum 
+   precharge (delay) between RAS asseertions.   This reset needs to be offset by 1/2 clock cycle so it has two flip flops
+   offset by a inverted clock.
+*/
+
+REFRESH_COUNTER_RESET.d = !(dram_access_timer_field:[1,2]);
+REFRESH_COUNTER_RESET.ck = !CLK_32M;
+REFRESH_COUNTER_RESET.ar = !CPU_RESET;
+
+/*
+REFRESH_COUNTER_RESET.d = REFRESH_COUNTER_RESET_PRE;
+REFRESH_COUNTER_RESET.ck = !CLK_32M;
+REFRESH_COUNTER_RESET.ar = !CPU_RESET;
+*/
+
+/* 
+   Data Direction Flag for data buffers.  0 = into DRAM (CPU WRITE), 1 = out from DRAM (CPU READ).
+   NOTE - The DRAM data buffer is always enabled, so it is critical to keep the direction going
+   into the DRAM unless there is an active DRAM read in process. 
+   
+   We turn on output only if we are in a DRAM cycle, and it is a CPU read (CPU_RW == 1).
+   NOTE that DRAM_CS is alreay gated by /AS in the decode CPLS, so this can't accidently drive
+   the data bus unless we are in an actual DRAM memory cycle, and it is a read operation.
+   The bus drivers for the DRAM have the OE signals always asserted, so flipping direction is 
+   what prevents driving of the data bus as the wrong time.  This was done to speed up the data
+   signal.
+*/
+
+DRAM_DATA_DIR = !DRAM_CS & CPU_RW;
+
+/* ################## REFRESH SECTION ######################### */
+
+
+FIELD refresh_state_timer_field = [REFRESH_STATE_TIMER2..0];
+
+/* 
+   This is the state machine used for the refresh signals.  It is held in reset by two things - 
+   First is the REFRESH_REQUESTED_SYNC which is only asserted (1) when the REFRESH_TIMER has triggered
+   indicating we need to do a refresh cycle.  Second it is help in reset by the output of the 
+   DRAM_ACCESS_TIMER state machine, which guarentees this state machine starts incremented at a fixed
+   location relative to a normal memory access cycle (DRAM or not).  When both conditions are met 
+   this state machine will start counting and at specified times trigger the CAS and RAS lines for
+   a refresh cycle.
+
+   REFRESH_COUNTER_RESET is active low, so when it is low we want to assert(high) the reset of the state time flip flops 
+   REFRESH_REQUESTED_SYNC is high when a refresh cycle is needed, so we invert it for the reset flag 
+*/
+
+REFRESH_STATE_TIMER0.d = !REFRESH_STATE_TIMER0;
+REFRESH_STATE_TIMER1.d = REFRESH_STATE_TIMER0 $ REFRESH_STATE_TIMER1;
+REFRESH_STATE_TIMER2.d = ( REFRESH_STATE_TIMER2 & !REFRESH_STATE_TIMER0 )
+                    # ( REFRESH_STATE_TIMER2 & !REFRESH_STATE_TIMER1 )
+                    # ( !REFRESH_STATE_TIMER2 & REFRESH_STATE_TIMER1 & REFRESH_STATE_TIMER0 );
+
+[REFRESH_STATE_TIMER2..0].ck = CLK_32M;
+[REFRESH_STATE_TIMER2..0].ar = !REFRESH_REQUESTED_SYNC # !REFRESH_COUNTER_RESET;
+
+
+/*
+   The CAS signal for the refresh cycle is based on the above state machine, and uses two flip flops to give it a 1/2 cycle
+   delay.
+*/
+
+DRAM_REFRESH_CAS_PRE.d = !(refresh_state_timer_field:[1,2]);
+DRAM_REFRESH_CAS_PRE.ck = !CLK_32M;
+DRAM_REFRESH_CAS_PRE.ap = !CPU_RESET # !REFRESH_COUNTER_RESET;
+
+DRAM_REFRESH_CAS.d = DRAM_REFRESH_CAS_PRE;
+DRAM_REFRESH_CAS.ck = CLK_32M;
+DRAM_REFRESH_CAS.ap = !CPU_RESET # !REFRESH_COUNTER_RESET;
+
+/*
+   The RAS signal for the refresh cycle is based on the above state machine, and uses one flip flop.  You will notice the
+   CAS state above is triggered for states 2 and 3, and the RAS for states 3 and 4.  Due to the 1/2 extra offset from the 
+   CAS flip flops, the actual CAS signal fires at 2.5 to 3.5, and the RAS from 3.0 to 4.0.   This gives the CAS before RAS
+   a 1/2 clock cycle delay as required by the DRAM
+*/
+
+DRAM_REFRESH_RAS.d = !(refresh_state_timer_field:[2,3]);
+DRAM_REFRESH_RAS.ck = !CLK_32M;
+DRAM_REFRESH_RAS.ap = !CPU_RESET # !REFRESH_COUNTER_RESET;
+
+/* 
+   REFRESH_COMPLETED is an active low signal that indicates the refresh cycle has completed.
+   This signal resets the REFRESH_REQUESTED_* flip flops.  This is triggered by state 6 of the
+   refresh signal state machine, which occurs for only a 1/2 cycle period before the state 
+   machine itself is reset.   I believe this would also work in state 5.
+*/
+
+REFRESH_COMPLETED.d = !(refresh_state_timer_field:[5]);
+REFRESH_COMPLETED.ck = !CLK_32M;
+REFRESH_COMPLETED.ap = !CPU_RESET;
+
+
+/*  
+   These are the combined RAS and CAS signals.  The REFRESH signals are put on all RAS and CAS lines
+   while the DRAM access ones are only driven based on address bit A1 and the LDS/UDS signals indicating if 
+   we are reading the upper or lower 8 bits.  
+*/
+RAS0 = (DRAM_MEM_RAS # CPU_A1) & DRAM_REFRESH_RAS;
+CAS0 = (DRAM_MEM_CAS # CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
+CAS1 = (DRAM_MEM_CAS # CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
+
+RAS2 = (DRAM_MEM_RAS # !CPU_A1) & DRAM_REFRESH_RAS;
+CAS2 = (DRAM_MEM_CAS # !CPU_A1 # CPU_LDS) & DRAM_REFRESH_CAS;
+CAS3 = (DRAM_MEM_CAS # !CPU_A1 # CPU_UDS) & DRAM_REFRESH_CAS;
+
+
+/* Refresh Timer - should fire every 15us */
+
+/* 
+   Because the reset in the CPLD is async, we buffer it with 
+   a flip flop so it is active for just one cycle.  after one cycle
+   the output of this flip flop will reset the refresh timer, and that reset
+   value will be clocked into this flip flop one cycle later.
+   This means the counter will go 1 tick past the highest bit turning on before 
+   starting again at 0.
+*/
+
+REFRESH_REQUESTED_PRE.d = 'b'1;
+REFRESH_REQUESTED_PRE.ck = REFRESH_TIMER7;
+REFRESH_REQUESTED_PRE.ar = !REFRESH_COMPLETED # !CPU_RESET;
+
+REFRESH_REQUESTED_SYNC.d = REFRESH_REQUESTED_PRE;
+REFRESH_REQUESTED_SYNC.ck = !AS_GATED;
+REFRESH_REQUESTED_SYNC.ar = !REFRESH_COMPLETED # !CPU_RESET;
+
+/* 
+   8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
+   together.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
+   up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
+   0x08.  The produces an event every 15us with an 8MHz clock.   
+
+   If the clock rate is not 32MHz for the core input, this will need to be adjusted.
+
+   The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
+   counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
+   0x08.
+*/
+
+REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
+REFRESH_TIMER_RESET.ck = CLK_32M;
+REFRESH_TIMER_RESET.ar = !CPU_RESET;
+
+REFRESH_TIMER0.d = !REFRESH_TIMER0;
+REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
+REFRESH_TIMER2.d = ( REFRESH_TIMER2 & !REFRESH_TIMER0 )
+                    # ( REFRESH_TIMER2 & !REFRESH_TIMER1 )
+                    # ( !REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+REFRESH_TIMER3.d = ( REFRESH_TIMER3 & !REFRESH_TIMER2 )
+                    # ( REFRESH_TIMER3 & !REFRESH_TIMER0 )
+                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
+                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+
+REFRESH_TIMER4.d = !REFRESH_TIMER4;
+REFRESH_TIMER5.d = REFRESH_TIMER4 $ REFRESH_TIMER5;
+REFRESH_TIMER6.d = ( REFRESH_TIMER6 & !REFRESH_TIMER4 )
+                    # ( REFRESH_TIMER6 & !REFRESH_TIMER5 )
+                    # ( !REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
+                    # ( REFRESH_TIMER7 & !REFRESH_TIMER4 )
+                    # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
+                    # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+
+/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
+8MHz CPU Clock, this CLK_16M is actually Mhz */
+/*[REFRESH_TIMER0..3].ck = CLK_8M;*/
+[REFRESH_TIMER0..3].ck = CLK_16M;
+
+[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
+
+/* 	
+	At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
+	From 0x08 to 0x80 will give is the correct time period of 15us.
+*/
+
+[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
+
+
+/* ############################################################################################ */
+
+/*
+
+
+                                                                                            
+                                             I                                      
+                                  I       II R                                      
+                                  R       RR Q                                      
+                                  Q       QQ L             I                        
+                       C          L       LL 7             N                        
+                       L          4       66 _           I T                        
+                     C K  I I   I A I   I BA B           N _                        
+                     L _  R R   R _ R   R __ U       I   T D                        
+                     K 5  Q Q   Q E Q   Q EE T       R   _ S                        
+                     _ 0  L L G L D L V L DD T G     Q V A W                        
+                     1 0  3 3 N 4 G 5 C 5 GG O N     L C C A                        
+                     M K  B A D B E B C A EE N D     7 C K P                        
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+                 | 12                    (*)                   74 | RAS0            
+             VCC | 13                                          73 | RAS2            
+             TDI | 14                                          72 | GND             
+                 | 15                                          71 | TDO             
+                 | 16                                          70 | CAS3            
+    CPU_RESET_IN | 17                                          69 | CAS2            
+         CLK_32M | 18                                          68 | CAS1            
+             GND | 19                                          67 | CAS0            
+        CPU_HALT | 20                                          66 | VCC             
+         CPU_FC0 | 21                                          65 | DRAM_DATA_DIR   
+         CPU_FC1 | 22                 ATF1508                  64 | DRAM_MEM_AB     
+             TMS | 23               84-Lead PLCC               63 | DRAM_RW         
+         CPU_FC2 | 24                                          62 | TCK             
+            IPL0 | 25                                          61 |                 
+             VCC | 26                                          60 | CPU_VPA         
+            IPL1 | 27                                          59 | GND             
+            IPL2 | 28                                          58 | CPU_INTACK0     
+       CPU_RESET | 29                                          57 | CPU_INTACK1     
+         CLK_16M | 30                                          56 | CPU_INTACK2     
+          CPU_RW | 31                                          55 | INTC_CS         
+             GND | 32                                          54 | DRAM_CS         
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                      C C C C C V C C C G V C C C G         D V                     
+                      P P P P P C P P P N C P P P N         T C                     
+                      U U U U U C U U U D C U U U D         A C                     
+                      _ _ _ _ _   _ _ _     _ _ _           C                       
+                      U L A D D   D D D     D D D           K                       
+                      D D S 0 1   2 3 4     5 6 7           _                       
+                      S S                                   F                       
+                                                            R                       
+                                                            O                       
+                                                            M                       
+                                                            _                       
+                                                            I                       
+                                                            N                       
+
+Total dedicated input used:	4/4 	(100%)
+Total I/O pins used		54/64 	(84%)
+Total Logic cells used 		103/128 	(80%)
+Total Flip-Flop used 		60/128 	(46%)
+Total Foldback logic used 	16/128 	(12%)
+Total Nodes+FB/MCells 		119/128 	(92%)
+Total cascade used 		0
+Total input pins 		27
+Total output pins 		31
+Total Pts 			347
+
+*/
+
+
