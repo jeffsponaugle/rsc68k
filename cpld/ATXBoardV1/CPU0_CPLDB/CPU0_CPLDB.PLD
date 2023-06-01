@@ -164,7 +164,7 @@ IRQL4B_IN_LATCHED.ck = IRQL4B_IN;  /* Not inverted, so active on positive edge *
 
 NODE IRQL2A_IN_LATCHED;
 IRQL2A_IN_LATCHED.d = 'b'0;
-IRQL2A_IN_LATCHED.ck = POWERCTL_STATE.io;
+IRQL2A_IN_LATCHED.ck = (POWERCTL_STATE.io & POWERCTL_OE);   /* Only incur an interrupt on the POWERCTL pin if the output is disabled. */
 IRQL2A_IN_LATCHED.ap = !SYS_RESET # IRQL2A_ACK;
 
 
@@ -445,21 +445,23 @@ FIELD interrupt_ack_num=[CPU_INTACK2..0];
     The lower 4 bits are driven by the specific sub interrupt for the level selected above.
     Since we support 4 sub interrupts, the vector uses 1 bit for each.
 
-    IRQ                 AVIRQL      Vector#              System Use
-    ------              --------    ------   --------    -------------------------------
-    DEBUG_IN_LATCHED    7           11110000 (0xF0)      Debugger (Button)
-    IRQL6A_IN_LATCHED   6           11100001 (0xE1)      PTC #1 (Programmable Timer)
-    IRQL6B_IN_LATCHED   6           11100010 (0xE2)      PTC #2 (Programmable Timer)
-    IRQL5A_IN           5           11010001 (0xD1)      UARTA
-    IRQL5B_IN           5           11010010 (0xD2)      UARTB
-    IRQL4A_IN_LATCHED   4           11000001 (0xC1)      RTC
-    IRQL4B_IN_LATCHED   4           11000010 (0xC2)      Keyboard/Mouse
-    IRQL3A_IN           3           10110001 (0xB1)      VGA Vert Refresh, Expansion Port
-    IRQL3B_IN           3           10110010 (0xB2)      NIC
-    IRQL2A_IN           2           10100001 (0xA1)      Power Controller Interrupt
-    IRQL2B_IN           2           10100010 (0xA2)      
-    IRQL1A_IN           1           10010001 (0x91)
-    IRQL1B_IN           1           10010010 (0x92)
+    TYPE field - EN - Edge Negative, EP=Edge Positive, LN= Level Negative, LP= Level Positive
+
+    IRQ                 Type     AVIRQL      Vector#              System Use
+    ------              ----     --------    ------   --------    -------------------------------
+    DEBUG_IN_LATCHED    EN       7           11110000 (0xF0)      Debugger (Button)
+    IRQL6A_IN_LATCHED   EN       6           11100001 (0xE1)      PTC #1 (Programmable Timer)
+    IRQL6B_IN_LATCHED   EN       6           11100010 (0xE2)      PTC #2 (Programmable Timer)
+    IRQL5A_IN           LP       5           11010001 (0xD1)      UARTA
+    IRQL5B_IN           LP       5           11010010 (0xD2)      UARTB
+    IRQL4A_IN_LATCHED   EN       4           11000001 (0xC1)      RTC
+    IRQL4B_IN_LATCHED   EP       4           11000010 (0xC2)      Keyboard/Mouse
+    IRQL3A_IN           LN       3           10110001 (0xB1)      VGA Vert Refresh, Expansion Port IRQA
+    IRQL3B_IN           LN       3           10110010 (0xB2)      NIC
+    IRQL2A_IN_LATCHED   EN       2           10100001 (0xA1)      Power Controller Interrupt
+    IRQL2B_IN           LN       2           10100010 (0xA2)      Expansion Port IRQB
+    IRQL1A_IN           LN       1           10010001 (0x91)      Expansion Port IRQC
+    IRQL1B_IN           LN       1           10010010 (0x92)      IDE
 
       Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
 
