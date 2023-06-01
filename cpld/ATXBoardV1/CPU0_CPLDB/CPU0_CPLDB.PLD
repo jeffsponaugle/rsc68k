@@ -30,7 +30,7 @@ Pin[2,4]   = IRQL5A_IN,IRQL5B_IN;
 Pin[5,6]   = IRQL4A_IN,IRQL4B_IN;
 Pin[8,9]   = IRQL3A_IN,IRQL3B_IN;
 Pin[63]    = IRQL2B_IN;             /* IRQL2A is taken by the POWERCTL_STATE input, which is a bi-directional pin */
-Pin        = IRQL1A_IN,IRQL1B_IN;
+Pin[61,60]  = IRQL1A_IN,IRQL1B_IN;
 Pin[55]    = INTC_CS;               /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
 
 /* DRAM Controller */
@@ -406,6 +406,7 @@ CPU0_VPA = 'b'1;
    Active low grouping of external active low interrupts.  If any of these inputs are low,
    the group is low.  That group is used to select the interrupt level that goes to the CPU.
 */
+NODE IRQL7_INT,IRQL6_INT,IRQL5_INT,IRQL4_INT,IRQL3_INT,IRQL2_INT,IRQL1_INT;
 
 IRQL7_INT = DEBUG_IN_LATCHED_PE;
 IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
