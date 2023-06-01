@@ -22,16 +22,14 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 /* Interrupt Controller */
 
 /* DRAM Controller */
-Pin[43]  = CLK_32M_IN;
-Pin[9]  = CLK_32M_OUTA;
-Pin[8] = CLK_32M_OUTB;
-Pin[4]  = CLK_500K;
-Pin[5]  = CLK_1M;
-Pin[11]  = CLK_16M_OUTA;
-Pin[12]  = CLK_16M_OUTB;
-Pin[1]  = RESET_IN;
-Pin[17] = CLK_16_LOGIC;
-Pin[21] = CINPUT;
+Pin  = CLK_32M_IN;
+Pin  = CLK_32M_OUTA;
+Pin  = CLK_32M_OUTB;
+Pin  = CLK_500K;
+Pin  = CLK_1M;
+Pin  = CLK_16M_OUTA;
+Pin  = CLK_16M_OUTB;
+
 
 NODE  CLK_8M;
 NODE  CLK_4M;
@@ -42,7 +40,6 @@ CLK_16M_OUTA.ck = CLK_32M_IN;
 
 CLK_16M_OUTB.d = !CLK_16M_OUTA;
 CLK_16M_OUTB.ck =  CLK_32M_IN;
-
 
 CLK_8M.d = !CLK_8M;
 CLK_8M.ck = CLK_16M_OUTA;
@@ -67,5 +64,4 @@ CLK_500K.ar = RESET;
 CLK_32M_OUTA = CLK_32M_IN;
 CLK_32M_OUTB = CLK_32M_IN;
 
-CLK_16_LOGIC = CLK_16M_OUTA & CINPUT;
 

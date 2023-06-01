@@ -18,12 +18,12 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 
 /** Inputs **/
 
-Pin[83]  = CLK_16M;
-Pin[84]  = CPU_RESET;
-Pin[6]   = CPU_AS;
+Pin[83]  = CLK_16M;      /* INPUT ONLY PIN 83 */ 
+Pin[84]  = CPU_RESET;    /* INPUT ONLY PIN 84 */ 
+Pin[2]   = CPU_AS;       /* INPUT ONLY PIN 2 */ 
 Pin[5]   = CPU_UDS;
 Pin[4]   = CPU_LDS;
-Pin[2]   = CPU_RW;       /* 1 = read, 0 = write */ 
+Pin[1]   = CPU_RW;       /* INPUT ONLY PIN 1 = read, 0 = write */ 
 Pin[17,18,20,21,22,24,25,27,28,29,30,31,33,34,35,36]  = [CPU_A23..8];    /* 16 */
 Pin[37,39,40]  = [CPU_FC2..0];    /* 3 */
 Pin[11,10,9,8]  = [CPU_D3..0];     /* 4 */
@@ -53,30 +53,35 @@ Pin[68]  = ITC_CS;
 Pin[77]  = IDE_WR;
 Pin[12]  = K8042_CS;    /* SBUS Connector:CPLD_CS_A */
 
-/* Worker CPU Related signals */
+/* Expansion BUS Signals */
 
-Pin[46]  = VGA_CFG_CS;   /* SBUS Connector:CPLD_CS_C */
-Pin[48]  = VGA_VRAM_CS;   /* SBUS Connector:CPLD_CS_B */
-Pin[67]  = VGA_VRAM_DTACK;      /* SBUS Connector:CPLD_5 */
+Pin[46]  = EXP_CS_C;   /* Used for VGA_CFG_CS, can be in any slot */
+Pin[48]  = EXP_CS_D;   /* Used for VGA_VRAM_CS, can be in any slot */
+Pin[67]  = EXP_DTACK_D;      /* SBUS Connector:CPLD_5 */
 
-Pin[49]  = CPLD_1;      /* SBUS Connector:CPLD_1 */
-Pin[50]  = CPLD_2;      /* SBUS Connector:CPLD_2 */
-Pin[51]  = CPLD_3;      /* SBUS Connector:CPLD_3 */
-Pin[54]  = CPLD_4;      /* SBUS Connector:CPLD_4 */
+Pin[49]  = EXP_CS_A;      /* SBUS Connector:CPLD_1 */
+Pin[50]  = EXP_CS_B;      /* SBUS Connector:CPLD_2 */
+Pin[51]  = EXP_DTACK_A;      /* SBUS Connector:CPLD_3 */
+Pin[54]  = EXP_DTACK_B;      /* SBUS Connector:CPLD_4 */
+Pin[44]  = EXP_DTACK_C;
 
 Pin[69]  = NOTUSED1_IO; /* Unused, called CPLD_6, not routed anywhere */
-Pin[44]  = NOTUSED2_IO;
-Pin[1]   = NOTUSED3_I;
+Pin[6]   = NOTUSED3_IO;
 Pin[16]  = NOTUSED4_IO;
 Pin[79]  = NOTUSED5_IO;
 Pin[81]  = NOTUSED6_IO;
 
 /* 
    For VGA we need two chip selects, plus a return DTACK signal.
-   CPU_VGA_VRAM_CS <- CPLD_CS_C (pin 48 on CPLD) ERROR!! REASSIGN and CHECK HARDWARE
-   CPU_VGA_CFG_CS <- CPLD_CS_B (pin 46 on CPLD)
+   CPU_EXP_CS_D <- CPLD_CS_C (pin 48 on CPLD) ERROR!! REASSIGN and CHECK HARDWARE
+   CPU_EXP_CS_C <- CPLD_CS_B (pin 46 on CPLD)
    CPU_VRAM_DTACK -> CPLD_1 (pin 49 on CPLD)
 */
+
+/* Statements to force these pins to exist just as a holding for those pin assignments. */
+
+EXP_CS_A = EXP_DTACK_A;
+EXP_CS_B = EXP_DTACK_B # EXP_DTACK_C;
 
 /** Internal Variables and nodes **/
 
@@ -92,7 +97,7 @@ ISMEMORYACCESS = !(CPU_FC2 & CPU_FC1 & CPU_FC0) & !CPU_AS;
 /* DTACK driven back to the CPU based on what kind of access is happening. */
 /* DTACK_MEMORY_0W is high if an access is happening that is 0W */
 
-DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS # !VGA_CFG_CS 
+DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS # !EXP_CS_C 
                   # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
                   # !LED_LATCH_CS # !RTS_CS # !PTC_CS  # !K8042_CS
                   # !FLASH_CONFIG_CLOCK # !ITC_CS;
@@ -105,13 +110,13 @@ DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS # !VGA_CFG
    cycle.  No protection, so if DTACK_FROM_INT is asserted (0) at any other time it will effect
    other active transactions.
 
-   VGA_VRAM_DTACK is a signal from the VRAM controller to restrict access to video memory during
+   EXP_DTACK_D is a signal from the VRAM controller to restrict access to video memory during
    both horizontal and vertical activity.   If it is asserted and we are doing an access to VRAMM,
    it should be passed thru.
 
 */
 
-CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT & (VGA_VRAM_CS # VGA_VRAM_DTACK);
+CPU_DTACK = !(DTACK_MEMORY_0W & !CPU_AS) & DTACK_FROM_INT & (EXP_CS_D # EXP_DTACK_D);
 
 /*
    MAP_FLASH_TO_ZERO starts out set to 0 (from the CPU_RESET), and switches to 1 as soon as a memory
@@ -232,8 +237,8 @@ RTS_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF85XX );
 PTC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF8AXX );
 NIC_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF9XXX );
 K8042_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF84XX );
-VGA_VRAM_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXEXXXXX );
-VGA_CFG_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
+EXP_CS_D = !(ISMEMORYACCESS & cpu_address_bus:'h'XXEXXXXX );
+EXP_CS_C = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF82XX );
 
 /*SLOT_ID_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF06XX );*/
 
@@ -303,8 +308,9 @@ CLK_16M assigned to pin  83
 
 Performing input pin pre-assignments ...
 ------------------------------------
-CPU_RW assigned to pin  2
+CPU_AS assigned to pin  2
 CLK_16M assigned to pin  83
+CPU_RW assigned to pin  1
 CPU_RESET assigned to pin  84
 
 Attempt to place floating signals ...
@@ -314,24 +320,23 @@ CPU_D3 is placed at pin 11 (MC 5)
 CPU_D2 is placed at pin 10 (MC 6)
 CPU_D1 is placed at pin 9 (MC 8)
 CPU_D0 is placed at pin 8 (MC 11)
-FLASH_CONFIG_STATE0 is placed at feedback node 612 (MC 12)
-CPU_AS is placed at pin 6 (MC 13)
-MAP_FLASH_TO_ZERO is placed at feedback node 613 (MC 13)
+FLASH_CONFIG_STATE0 is placed at feedback node 611 (MC 11)
+MAP_FLASH_TO_ZERO is placed at feedback node 612 (MC 12)
 CPU_UDS is placed at pin 5 (MC 14)
-Com_Ctrl_103 is placed at feedback node 614 (MC 14)
+Com_Ctrl_108 is placed at feedback node 614 (MC 14)
 IDE_WR_DELAY2 is placed at feedback node 615 (MC 15)
 CPU_LDS is placed at pin 4 (MC 16)
 IDE_WR_DELAY1 is placed at feedback node 616 (MC 16)
-Com_Ctrl_104 is placed at foldback expander node 316 (MC 16)
+Com_Ctrl_109 is placed at foldback expander node 316 (MC 16)
 CPU_A19 is placed at pin 22 (MC 17)
 CPU_A20 is placed at pin 21 (MC 19)
 CPU_A21 is placed at pin 20 (MC 21)
 CPU_A22 is placed at pin 18 (MC 24)
 CPU_A23 is placed at pin 17 (MC 25)
 MEM_OE is placed at pin 15 (MC 29)
-XXL_105 is placed at feedback node 631 (MC 31)
+XXL_110 is placed at feedback node 631 (MC 31)
 TDI is placed at pin 14 (MC 32)
-XXL_111 is placed at feedback node 632 (MC 32)
+XXL_116 is placed at feedback node 632 (MC 32)
 CPU_A12 is placed at pin 31 (MC 35)
 CPU_A13 is placed at pin 30 (MC 37)
 CPU_A14 is placed at pin 29 (MC 38)
@@ -340,7 +345,7 @@ CPU_A16 is placed at pin 27 (MC 43)
 CPU_A17 is placed at pin 25 (MC 45)
 CPU_A18 is placed at pin 24 (MC 46)
 TMS is placed at pin 23 (MC 48)
-XXL_110 is placed at feedback node 648 (MC 48)
+XXL_115 is placed at feedback node 648 (MC 48)
 DTACK_FROM_INT is placed at pin 41 (MC 49)
 CPU_FC0 is placed at pin 40 (MC 51)
 CPU_FC1 is placed at pin 39 (MC 53)
@@ -348,32 +353,37 @@ CPU_FC2 is placed at pin 37 (MC 56)
 CPU_A8 is placed at pin 36 (MC 57)
 CPU_A9 is placed at pin 35 (MC 59)
 CPU_A10 is placed at pin 34 (MC 61)
-XXL_109 is placed at feedback node 661 (MC 61)
-XXL_108 is placed at feedback node 662 (MC 62)
-XXL_107 is placed at feedback node 663 (MC 63)
+XXL_114 is placed at feedback node 661 (MC 61)
+XXL_113 is placed at feedback node 662 (MC 62)
+XXL_112 is placed at feedback node 663 (MC 63)
 CPU_A11 is placed at pin 33 (MC 64)
-XXL_106 is placed at feedback node 664 (MC 64)
+XXL_111 is placed at feedback node 664 (MC 64)
+EXP_DTACK_C is placed at pin 44 (MC 65)
 CPU_DTACK is placed at pin 45 (MC 67)
-VGA_CFG_CS is placed at pin 46 (MC 69)
-VGA_VRAM_CS is placed at pin 48 (MC 72)
+EXP_CS_C is placed at pin 46 (MC 69)
+EXP_CS_D is placed at pin 48 (MC 72)
+EXP_CS_A is placed at pin 49 (MC 73)
+EXP_CS_B is placed at pin 50 (MC 75)
+EXP_DTACK_A is placed at pin 51 (MC 77)
 IDE_BUFFER_EN is placed at pin 52 (MC 80)
+EXP_DTACK_B is placed at pin 54 (MC 83)
 PTC_CS is placed at pin 55 (MC 85)
 RTS_A_SEL is placed at pin 56 (MC 86)
 RTS_CS is placed at pin 57 (MC 88)
 RTS_D_SEL is placed at pin 58 (MC 91)
 SEVENSEG_LATCH_CS is placed at pin 60 (MC 93)
 UART_CSB is placed at pin 61 (MC 94)
-FLASH_CONFIG_STATE3 is placed at feedback node 695 (MC 95)
+FLASH_CONFIG_STATE2 is placed at feedback node 695 (MC 95)
 TCK is placed at pin 62 (MC 96)
 FLASH_CONFIG_STATE1 is placed at feedback node 696 (MC 96)
 UART_CSA is placed at pin 63 (MC 97)
 IDE_CSB is placed at pin 64 (MC 99)
 IDE_CSA is placed at pin 65 (MC 101)
-VGA_VRAM_DTACK is placed at pin 67 (MC 104)
+EXP_DTACK_D is placed at pin 67 (MC 104)
 ITC_CS is placed at pin 68 (MC 105)
 DRAM_CS is placed at pin 70 (MC 109)
 TDO is placed at pin 71 (MC 112)
-FLASH_CONFIG_STATE2 is placed at feedback node 712 (MC 112)
+FLASH_CONFIG_STATE3 is placed at feedback node 712 (MC 112)
 NIC_CS is placed at pin 73 (MC 115)
 FLASH_A18 is placed at pin 74 (MC 117)
 FLASH_HIGH_CS is placed at pin 75 (MC 118)
@@ -388,12 +398,12 @@ LED_LATCH_CS is placed at pin 80 (MC 126)
                                            C       _       S                        
                                            P       L       H                        
                                   C C      U C     A       _                        
-                     C C  C C   C P P   C  _ L     T     I L                        
-                     P P  P P   P U U   P  R K     C     D O                        
-                     U U  U U   U _ _   U  E _     H     E W                        
-                     _ _  _ _ G _ U L V _  S 1 G   _   V _ _                        
-                     D D  D D N A D D C R  E 6 N   C   C W C                        
-                     3 2  1 0 D S S S C W  T M D   S   C R S                        
+                     C C  C C     P P   C C_ L     T     I L                        
+                     P P  P P     U U   P PR K     C     D O                        
+                     U U  U U     _ _   U UE _     H     E W                        
+                     _ _  _ _ G   U L V _ _S 1 G   _   V _ _                        
+                     D D  D D N   D D C A RE 6 N   C   C W C                        
+                     3 2  1 0 D   S S C S WT M D   S   C R S                        
                     -------------------------------------------                     
                    / 11   9   7   5   3   1  83  81  79  77  75 \                  
                   /    10   8   6   4   2  84  82  80  78  76    \                 
@@ -404,7 +414,7 @@ LED_LATCH_CS is placed at pin 80 (MC 126)
                  | 16                                          70 | DRAM_CS         
          CPU_A23 | 17                                          69 |                 
          CPU_A22 | 18                                          68 | ITC_CS          
-             GND | 19                                          67 | VGA_VRAM_DTACK  
+             GND | 19                                          67 | EXP_DTACK_D     
          CPU_A21 | 20                                          66 | VCC             
          CPU_A20 | 21                                          65 | IDE_CSA         
          CPU_A19 | 22                 ATF1508                  64 | IDE_CSB         
@@ -417,21 +427,23 @@ LED_LATCH_CS is placed at pin 80 (MC 126)
          CPU_A14 | 29                                          57 | RTS_CS          
          CPU_A13 | 30                                          56 | RTS_A_SEL       
          CPU_A12 | 31                                          55 | PTC_CS          
-             GND | 32                                          54 |                 
+             GND | 32                                          54 | EXP_DTACK_B     
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
-                      C C C C C V C C D G V   C V G V       I V                     
-                      P P P P P C P P T N C   P G N G       D C                     
-                      U U U U U C U U A D C   U A D A       E C                     
-                      _ _ _ _ _   _ _ C       _ _   _       _                       
-                      A A A A F   F F K       D C   V       B                       
-                      1 1 9 8 C   C C _       T F   R       U                       
-                      1 0     2   1 0 F       A G   A       F                       
-                                      R       C _   M       F                       
-                                      O       K C   _       E                       
-                                      M         S   C       R                       
-                                      _             S       _                       
+                      C C C C C V C C D G V E C E G E E E E I V                     
+                      P P P P P C P P T N C X P X N X X X X D C                     
+                      U U U U U C U U A D C P U P D P P P P E C                     
+                      _ _ _ _ _   _ _ C     _ _ _   _ _ _ _ _                       
+                      A A A A F   F F K     D D C   C C C D B                       
+                      1 1 9 8 C   C C _     T T S   S S S T U                       
+                      1 0     2   1 0 F     A A _   _ _ _ A F                       
+                                      R     C C C   D A B C F                       
+                                      O     K K           K E                       
+                                      M     _             _ R                       
+                                      _     C             A _                       
                                       I                     E                       
-                                      N                     N     
+                                      N                     N                       
+
+
 */
