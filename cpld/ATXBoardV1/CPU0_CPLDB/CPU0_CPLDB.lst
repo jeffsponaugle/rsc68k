@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
   1:Name     CPU0_CPLDB;
   2:PartNo   CPU0_CPLDB;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
  54:
  55:Pin[29]  = SYS_RESET;    /* Active Low RESET OUTPUT*/
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
 108:   RESET_REQ_OUT is low.
 109:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
 162:
 163:NODE IRQL2A_IN_LATCHED;
@@ -212,642 +212,651 @@ Created Thu Jun 01 09:41:01 2023
 181:IRQL6A_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6A_PE;
 182:IRQL6B_ACK = CPU_INTACK2 & CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL6B_PE;
 183:IRQL2A_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL2A_PE;
-184:
-185:/* 
-186:   INT_ACK goes high when the CPU indicates an interrupt ack cycle is in progress.
-187:   Since this signal combines with AS it will go low at the end of that cycle. 
-188:*/
-189:INT_ACK = CPU_FC2 & CPU_FC1 & CPU_FC0 & !CPU0_AS;
-190:
+184:IRQL2B_ACK = CPU_INTACK2 & !CPU_INTACK1 & !CPU_INTACK0 & DTACK_TIMER_1 & !IRQL2B_PE;
+185:
+186:/* 
+187:   INT_ACK goes high when the CPU indicates an interrupt ack cycle is in progress.
+188:   Since this signal combines with AS it will go low at the end of that cycle. 
+189:*/
+190:INT_ACK = CPU_FC2 & CPU_FC1 & CPU_FC0 & !CPU0_AS;
 191:
-192:/* 
-193:   active low interupt lines post 8:8 priority encoder 
-194:   These groups of lines form a priority selector for each group.  Within 
-195:   a group there are up to 2 interrupt sources (A-B), with A being the highest
-196:   priority.  Within each group only one of the signals will be asserted(ow) at any time.
-197:   These are active low sigals coming in, and going out.
-198:
-199:   NOTE IRQL5A_IN and IRQL5B_IN, coming from the UART, are active high signals.   It is critical to note
-200:   that the 16C2550 on init has MCR bit3=0, which disables the INT output, which results in the CPLD pullup 
-201:   pulling that signal high.  You MUST change the MCR bit3 to 1 before enabling interrupts.  This will allow the
-202:   UART to correctly signal and interrupt.
-203:
-204:   Since IRQL5A_IN and B are active high, they are inverted in the assignments below.
-205:*/
-206:
-207:DEBUG_IN_LATCHED_PE = (DEBUG_IN_LATCHED # DEBUG_IN_MASK);
-208:IRQL6A_PE = (IRQL6A_IN_LATCHED # IRQL6A_MASK);
-209:IRQL6B_PE = (IRQL6B_IN_LATCHED # IRQL6B_MASK) # !(IRQL6A_IN_LATCHED # IRQL6A_MASK);
-210:IRQL5A_PE = (!IRQL5A_IN # IRQL5A_MASK);
-211:IRQL5B_PE = (!IRQL5B_IN # IRQL5B_MASK) # !(!IRQL5A_IN # IRQL5A_MASK);
-212:IRQL4A_PE = (IRQL4A_IN_LATCHED # IRQL4A_MASK);
-213:IRQL4B_PE = (IRQL4B_IN_LATCHED # IRQL4B_IN_MASK) # !(IRQL4A_IN_LATCHED # IRQL4A_MASK);
-214:IRQL3A_PE = (IRQL3A_IN # IRQL3A_MASK) ;
-215:IRQL3B_PE = (IRQL3B_IN # IRQL3B_MASK) # !(IRQL3A_IN # IRQL3A_MASK);
+192:
+193:/* 
+194:   active low interupt lines post 8:8 priority encoder 
+195:   These groups of lines form a priority selector for each group.  Within 
+196:   a group there are up to 2 interrupt sources (A-B), with A being the highest
+197:   priority.  Within each group only one of the signals will be asserted(ow) at any time.
+198:   These are active low sigals coming in, and going out.
+199:
+200:   NOTE IRQL5A_IN and IRQL5B_IN, coming from the UART, are active high signals.   It is critical to note
+201:   that the 16C2550 on init has MCR bit3=0, which disables the INT output, which results in the CPLD pullup 
+202:   pulling that signal high.  You MUST change the MCR bit3 to 1 before enabling interrupts.  This will allow the
+203:   UART to correctly signal and interrupt.
+204:
+205:   Since IRQL5A_IN and B are active high, they are inverted in the assignments below.
+206:*/
+207:
+208:DEBUG_IN_LATCHED_PE = (DEBUG_IN_LATCHED # DEBUG_IN_MASK);
+209:IRQL6A_PE = (IRQL6A_IN_LATCHED # IRQL6A_MASK);
+210:IRQL6B_PE = (IRQL6B_IN_LATCHED # IRQL6B_MASK) # !(IRQL6A_IN_LATCHED # IRQL6A_MASK);
+211:IRQL5A_PE = (!IRQL5A_IN # IRQL5A_MASK);
+212:IRQL5B_PE = (!IRQL5B_IN # IRQL5B_MASK) # !(!IRQL5A_IN # IRQL5A_MASK);
+213:IRQL4A_PE = (IRQL4A_IN_LATCHED # IRQL4A_MASK);
+214:IRQL4B_PE = (IRQL4B_IN_LATCHED # IRQL4B_IN_MASK) # !(IRQL4A_IN_LATCHED # IRQL4A_MASK);
+215:IRQL3A_PE = (IRQL3A_IN # IRQL3A_MASK) ;
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 5
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-216:IRQL2A_PE = (IRQL2A_IN_LATCHED # IRQL2A_MASK);
-217:
-218:/* Interupt Mask Registers -  
-219:   ---------------------------------------------------------------------------------------------------
-220:    
-221:    0 = allow interrupt, 1 = block interrupt */
-222:/*
-223:
-224:Write to FF0700 Upper 8 bits: 
-225:                  bit 7 - DEBUG_IN_MASK
-226:                  bit 6 - IRQL6A_MASK
-227:                  bit 5 - IRQL6B_MASK
-228:                  bit 4 - IRQL5A_MASK
-229:                  bit 3 - IRQL5B_MASK
-230:                  bit 2 - IRQL4A_MASK
-231:                  bit 1 - KEYBOARD_IRQ_MASK
-232:                  bit 0 - Unused
-233:
-234: Write to FF0702 Upper 8 bits:
-235:                  bit 7 - IRQL3A_MASK
-236:                  bit 6 - IRQL3B_MASK
-237:                  bit 5 - IRQL2A_MASK
-238:                  bit 4 - IRQL2B_MASK
-239:
-240: WRITE to FF0704 Upper 8 bits:
-241:                  bit 7 - CPU_1_RESET        ( defaults to 0, 0 holds CPU1 in reset/halt )
-242:                  bit 6 - CPU_1_HALT         (defaults to 0, 0 hold CPU1 in reset/halt)
-243:                  bit 5 - CPU_1 Interrupt 1  (defaults to 0, 1 triggers interrupt)
-244:                  bit 4 - CPU_1 Interrupt 2  (defaults to 0, 1 triggers interrupt)
-245:                  bit 3 - CPU_1 Barrier Flag (defaults to 0)
-246:                  bit 2
-247:                  bit 1
-248:                  bit 0
-249:
-250: READ from FF0704 Upper 8 bits:  (This will read as all 0's for the CPU0)
-251:                  bit 3 - CPU_ID bit 3
-252:                  bit 2 - CPU_ID bit 2
-253:                  bit 1 - CPU_ID bit 1 
-254:                  bit 0 - CPU_ID bit 0
-255:
-256: Write to FF0706 Upper 8 bits:
-257:                  bit 7 - REQUEST_RESET (Set to 1 to force SYS_RESET)
-258:                  bit 0 - POWERCTRL pin state value
-259:                  bit 1 - POWERCTRL pin output enable
-260:
-261:*/
+216:IRQL3B_PE = (IRQL3B_IN # IRQL3B_MASK) # !(IRQL3A_IN # IRQL3A_MASK);
+217:IRQL2A_PE = (IRQL2A_IN_LATCHED # IRQL2A_MASK);
+218:IRQL2B_PE = (IRQL2B_IN # IRQL2B_MASK) # !(IRQL2A_IN_LATCHED # IRQL2A_MASK);
+219:
+220:/* Interupt Mask Registers -  
+221:   ---------------------------------------------------------------------------------------------------
+222:    
+223:    0 = allow interrupt, 1 = block interrupt */
+224:/*
+225:
+226:Write to FF0700 Upper 8 bits: 
+227:                  bit 7 - DEBUG_IN_MASK
+228:                  bit 6 - IRQL6A_MASK
+229:                  bit 5 - IRQL6B_MASK
+230:                  bit 4 - IRQL5A_MASK
+231:                  bit 3 - IRQL5B_MASK
+232:                  bit 2 - IRQL4A_MASK
+233:                  bit 1 - KEYBOARD_IRQ_MASK
+234:                  bit 0 - Unused
+235:
+236: Write to FF0702 Upper 8 bits:
+237:                  bit 7 - IRQL3A_MASK
+238:                  bit 6 - IRQL3B_MASK
+239:                  bit 5 - IRQL2A_MASK
+240:                  bit 4 - IRQL2B_MASK
+241:
+242: WRITE to FF0704 Upper 8 bits:
+243:                  bit 7 - CPU_1_RESET        ( defaults to 0, 0 holds CPU1 in reset/halt )
+244:                  bit 6 - CPU_1_HALT         (defaults to 0, 0 hold CPU1 in reset/halt)
+245:                  bit 5 - CPU_1 Interrupt 1  (defaults to 0, 1 triggers interrupt)
+246:                  bit 4 - CPU_1 Interrupt 2  (defaults to 0, 1 triggers interrupt)
+247:                  bit 3 - CPU_1 Barrier Flag (defaults to 0)
+248:                  bit 2
+249:                  bit 1
+250:                  bit 0
+251:
+252: READ from FF0704 Upper 8 bits:  (This will read as all 0's for the CPU0)
+253:                  bit 3 - CPU_ID bit 3
+254:                  bit 2 - CPU_ID bit 2
+255:                  bit 1 - CPU_ID bit 1 
+256:                  bit 0 - CPU_ID bit 0
+257:
+258: Write to FF0706 Upper 8 bits:
+259:                  bit 7 - REQUEST_RESET (Set to 1 to force SYS_RESET)
+260:                  bit 0 - POWERCTRL pin state value
+261:                  bit 1 - POWERCTRL pin output enable
 262:
-263:REG_WRITE_ITC0 =  INTC_CS # CPU_A1 # CPU_A2 # CPU0_RW;   /* WRITE Address 0xFF0700 */
-264:REG_WRITE_ITC1 =  INTC_CS # !CPU_A1 # CPU_A2 # CPU0_RW;  /* WRITE Address 0xFF0702 */
-265:REG_WRITE_ITC2 =  INTC_CS # CPU_A1 # !CPU_A2 # CPU0_RW;   /* WRITE Address 0xFF0704 */
-266:REG_WRITE_ITC3 =  INTC_CS # !CPU_A1 # !CPU_A2 # CPU0_RW; /* WRITE Address 0xFF0706 */
-267:REG_READ_ITC2  =  INTC_CS # CPU_A1 # !CPU_A2 # !CPU0_RW;  /* READ  Address 0xff0704 */
-268:
-269:DEBUG_IN_MASK.d = CPU0_D7.io;
+263:*/
+264:
+265:REG_WRITE_ITC0 =  INTC_CS # CPU_A1 # CPU_A2 # CPU0_RW;   /* WRITE Address 0xFF0700 */
+266:REG_WRITE_ITC1 =  INTC_CS # !CPU_A1 # CPU_A2 # CPU0_RW;  /* WRITE Address 0xFF0702 */
+267:REG_WRITE_ITC2 =  INTC_CS # CPU_A1 # !CPU_A2 # CPU0_RW;   /* WRITE Address 0xFF0704 */
+268:REG_WRITE_ITC3 =  INTC_CS # !CPU_A1 # !CPU_A2 # CPU0_RW; /* WRITE Address 0xFF0706 */
+269:REG_READ_ITC2  =  INTC_CS # CPU_A1 # !CPU_A2 # !CPU0_RW;  /* READ  Address 0xff0704 */
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 6
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-270:DEBUG_IN_MASK.ck = REG_WRITE_ITC0;
-271:DEBUG_IN_MASK.ap = !SYS_RESET;  /* Special - On RESET this is still enabled (NMI) */
-272:/* changed to preset */
-273:
-274:IRQL6A_MASK.d = CPU0_D6.io;
-275:IRQL6A_MASK.ck = REG_WRITE_ITC0;
-276:IRQL6A_MASK.ap = !SYS_RESET;
-277:
-278:IRQL6B_MASK.d = CPU0_D5.io;
-279:IRQL6B_MASK.ck = REG_WRITE_ITC0;
-280:IRQL6B_MASK.ap = !SYS_RESET;
-281:
-282:IRQL5A_MASK.d = CPU0_D4.io;
-283:IRQL5A_MASK.ck = REG_WRITE_ITC0;
-284:IRQL5A_MASK.ap = !SYS_RESET;
-285:
-286:IRQL5B_MASK.d = CPU0_D3.io;
-287:IRQL5B_MASK.ck = REG_WRITE_ITC0;
-288:IRQL5B_MASK.ap = !SYS_RESET;
-289:
-290:IRQL4A_MASK.d = CPU0_D2.io;
-291:IRQL4A_MASK.ck = REG_WRITE_ITC0;
-292:IRQL4A_MASK.ap = !SYS_RESET;
-293:
-294:IRQL4B_IN_MASK.d = CPU0_D1.io;
-295:IRQL4B_IN_MASK.ck = REG_WRITE_ITC0;
-296:IRQL4B_IN_MASK.ap = !SYS_RESET;
-297:
-298:IRQL3A_MASK.d = CPU0_D7.io;
-299:IRQL3A_MASK.ck = REG_WRITE_ITC1;
-300:IRQL3A_MASK.ap = !SYS_RESET;
-301:
-302:IRQL3B_MASK.d = CPU0_D6.io;
-303:IRQL3B_MASK.ck =  REG_WRITE_ITC1;
-304:IRQL3B_MASK.ap = !SYS_RESET;
-305:
-306:IRQL2A_MASK.d = CPU0_D5.io;
-307:IRQL2A_MASK.ck = REG_WRITE_ITC1;
-308:IRQL2A_MASK.ap = !SYS_RESET;
-309:
-310:IRQL2B_MASK.d = CPU0_D4.io;
-311:IRQL2B_MASK.ck = REG_WRITE_ITC1;
-312:IRQL2B_MASK.ap = !SYS_RESET;
-313:
-314:CPU1_RESET.d = CPU0_D7.io;
-315:CPU1_RESET.ck = REG_WRITE_ITC2;
-316:CPU1_RESET.ar = !SYS_RESET;
-317:
-318:CPU1_HALT.d = CPU0_D6.io;
-319:CPU1_HALT.ck = REG_WRITE_ITC2;
-320:CPU1_HALT.ar = !SYS_RESET;
-321:
-322:CPU1_INT1.d = CPU0_D5.io;
-323:CPU1_INT1.ck = REG_WRITE_ITC2;
+270:
+271:DEBUG_IN_MASK.d = CPU0_D7.io;
+272:DEBUG_IN_MASK.ck = REG_WRITE_ITC0;
+273:DEBUG_IN_MASK.ap = !SYS_RESET;  /* Special - On RESET this is still enabled (NMI) */
+274:/* changed to preset */
+275:
+276:IRQL6A_MASK.d = CPU0_D6.io;
+277:IRQL6A_MASK.ck = REG_WRITE_ITC0;
+278:IRQL6A_MASK.ap = !SYS_RESET;
+279:
+280:IRQL6B_MASK.d = CPU0_D5.io;
+281:IRQL6B_MASK.ck = REG_WRITE_ITC0;
+282:IRQL6B_MASK.ap = !SYS_RESET;
+283:
+284:IRQL5A_MASK.d = CPU0_D4.io;
+285:IRQL5A_MASK.ck = REG_WRITE_ITC0;
+286:IRQL5A_MASK.ap = !SYS_RESET;
+287:
+288:IRQL5B_MASK.d = CPU0_D3.io;
+289:IRQL5B_MASK.ck = REG_WRITE_ITC0;
+290:IRQL5B_MASK.ap = !SYS_RESET;
+291:
+292:IRQL4A_MASK.d = CPU0_D2.io;
+293:IRQL4A_MASK.ck = REG_WRITE_ITC0;
+294:IRQL4A_MASK.ap = !SYS_RESET;
+295:
+296:IRQL4B_IN_MASK.d = CPU0_D1.io;
+297:IRQL4B_IN_MASK.ck = REG_WRITE_ITC0;
+298:IRQL4B_IN_MASK.ap = !SYS_RESET;
+299:
+300:IRQL3A_MASK.d = CPU0_D7.io;
+301:IRQL3A_MASK.ck = REG_WRITE_ITC1;
+302:IRQL3A_MASK.ap = !SYS_RESET;
+303:
+304:IRQL3B_MASK.d = CPU0_D6.io;
+305:IRQL3B_MASK.ck =  REG_WRITE_ITC1;
+306:IRQL3B_MASK.ap = !SYS_RESET;
+307:
+308:IRQL2A_MASK.d = CPU0_D5.io;
+309:IRQL2A_MASK.ck = REG_WRITE_ITC1;
+310:IRQL2A_MASK.ap = !SYS_RESET;
+311:
+312:IRQL2B_MASK.d = CPU0_D4.io;
+313:IRQL2B_MASK.ck = REG_WRITE_ITC1;
+314:IRQL2B_MASK.ap = !SYS_RESET;
+315:
+316:CPU1_RESET.d = CPU0_D7.io;
+317:CPU1_RESET.ck = REG_WRITE_ITC2;
+318:CPU1_RESET.ar = !SYS_RESET;
+319:
+320:CPU1_HALT.d = CPU0_D6.io;
+321:CPU1_HALT.ck = REG_WRITE_ITC2;
+322:CPU1_HALT.ar = !SYS_RESET;
+323:
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 7
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-324:CPU1_INT1.ar = !SYS_RESET;
-325:
-326:CPU1_INT2.d = CPU0_D4.io;
-327:CPU1_INT2.ck = REG_WRITE_ITC2;
-328:CPU1_INT2.ar = !SYS_RESET;
-329:
-330:CPU1_BARRIER1.d = CPU0_D3.io;
-331:CPU1_BARRIER1.ck = REG_WRITE_ITC2;
-332:CPU1_BARRIER1.ar = !SYS_RESET;
-333:
-334:
-335:/* Power Control Logic */
+324:CPU1_INT1.d = CPU0_D5.io;
+325:CPU1_INT1.ck = REG_WRITE_ITC2;
+326:CPU1_INT1.ar = !SYS_RESET;
+327:
+328:CPU1_INT2.d = CPU0_D4.io;
+329:CPU1_INT2.ck = REG_WRITE_ITC2;
+330:CPU1_INT2.ar = !SYS_RESET;
+331:
+332:CPU1_BARRIER1.d = CPU0_D3.io;
+333:CPU1_BARRIER1.ck = REG_WRITE_ITC2;
+334:CPU1_BARRIER1.ar = !SYS_RESET;
+335:
 336:
-337:/* 
-338:   Latch the POWERCTL_STATE register if a write to 0xFF0706 happens, and use bit 0 for the STATE.  
-339:   On RESET this will be set to 0.
-340:   Latch the POWERCTL_OE register if a write to 0xFF0706 happens, and use bit 1 for the OE.
-341:   On RESET this will be set to 0.   A value of 0 indicated output is not enabled.
-342:*/
-343:
-344:RESET_REQ.d = CPU0_D7.io;
-345:/* flip flop will clock in from databus on rising edge of INTC_CS if A1=1, A2=1, RW=0 */
-346:RESET_REQ.ck = REG_WRITE_ITC3;
-347:RESET_REQ.ar = !SYS_RESET;
-348:
-349:POWERCTL_OE.d = CPU0_D1.io;
-350:POWERCTL_OE.ck = REG_WRITE_ITC3;
-351:POWERCTL_OE.ar = !SYS_RESET;
-352:
-353:POWERCTL_STATE.d = CPU0_D0.io;
-354:POWERCTL_STATE.ck = REG_WRITE_ITC3;
-355:POWERCTL_STATE.ar = !SYS_RESET;
-356:POWERCTL_STATE.oe = POWERCTL_OE;
-357:
-358:/* 
-359:   DTACK_TIMER_0 and 1 make up a small counter that starts when INT_ACK is asserted[0->1] (because the
-360:   inverse of INT_ACK holds the FFs in reset).  DTACK_TIMER_0 will increment to 1 on the following 
-361:   falling edge of CLK_16M, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
-362:   both outputs stay at 1 until the flipflops are reset by INT_ACK going low.
-363:
-364:   The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
-365:   back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
-366:   present on the databus.
-367:
-368:   DTACK_TIMER_1 is also used to assert the VPA pin if the interrupt system is switched
-369:   to autovector mode.  In that mode there is no need to drive the databus with a vector.
-370:*/
-371:
-372:DTACK_TIMER_0.d = 'b'1;
-373:DTACK_TIMER_0.ar = !INT_ACK;
-374:DTACK_TIMER_0.ck = !CLK_16M;
-375:
-376:DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
-377:DTACK_TIMER_1.ar = !INT_ACK;
+337:/* Power Control Logic */
+338:
+339:/* 
+340:   Latch the POWERCTL_STATE register if a write to 0xFF0706 happens, and use bit 0 for the STATE.  
+341:   On RESET this will be set to 0.
+342:   Latch the POWERCTL_OE register if a write to 0xFF0706 happens, and use bit 1 for the OE.
+343:   On RESET this will be set to 0.   A value of 0 indicated output is not enabled.
+344:*/
+345:
+346:RESET_REQ.d = CPU0_D7.io;
+347:/* flip flop will clock in from databus on rising edge of INTC_CS if A1=1, A2=1, RW=0 */
+348:RESET_REQ.ck = REG_WRITE_ITC3;
+349:RESET_REQ.ar = !SYS_RESET;
+350:
+351:POWERCTL_OE.d = CPU0_D1.io;
+352:POWERCTL_OE.ck = REG_WRITE_ITC3;
+353:POWERCTL_OE.ar = !SYS_RESET;
+354:
+355:POWERCTL_STATE.d = CPU0_D0.io;
+356:POWERCTL_STATE.ck = REG_WRITE_ITC3;
+357:POWERCTL_STATE.ar = !SYS_RESET;
+358:POWERCTL_STATE.oe = POWERCTL_OE;
+359:
+360:/* 
+361:   DTACK_TIMER_0 and 1 make up a small counter that starts when INT_ACK is asserted[0->1] (because the
+362:   inverse of INT_ACK holds the FFs in reset).  DTACK_TIMER_0 will increment to 1 on the following 
+363:   falling edge of CLK_16M, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
+364:   both outputs stay at 1 until the flipflops are reset by INT_ACK going low.
+365:
+366:   The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
+367:   back on the data bus, and the second event (DTACK_TIMER_1) is used to signal the DTACK line that the vector is 
+368:   present on the databus.
+369:
+370:   DTACK_TIMER_1 is also used to assert the VPA pin if the interrupt system is switched
+371:   to autovector mode.  In that mode there is no need to drive the databus with a vector.
+372:*/
+373:
+374:DTACK_TIMER_0.d = 'b'1;
+375:DTACK_TIMER_0.ar = !INT_ACK;
+376:DTACK_TIMER_0.ck = !CLK_16M;
+377:
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 8
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-378:DTACK_TIMER_1.ck = !CLK_16M;
-379:
-380:/* 
-381:   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
-382:   is zero it will get asserted on the CPU.   It is tied to the inverse of DTACK_TIMER_1 which is set to 0 
-383:   on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
-384:*/
-385:
-386:DTACK_FROM_INT = !DTACK_TIMER_1;
-387:CPU0_VPA = 'b'1;
-388:
-389:/* 
-390:   Active low grouping of external active low interrupts.  If any of these inputs are low,
-391:   the group is low.  That group is used to select the interrupt level that goes to the CPU.
-392:*/
-393:
-394:IRQL7_INT = DEBUG_IN_LATCHED_PE;
-395:IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
-396:IRQL5_INT = (IRQL5A_PE & IRQL5B_PE) # !IRQL6_INT # !IRQL7_INT;
-397:IRQL4_INT = (IRQL4A_PE & IRQL4B_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
-398:IRQL3_INT = (IRQL3A_PE & IRQL3B_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
-399:IRQL2_INT = (IRQL2A_PE) # !IRQL3_INT #!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
-400:
-401:/* 
-402:   CPU0_IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
-403:   This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
-404:   to any value other than 111 by doing an interrupt ack cycle.
-405:*/   
-406:
-407:CPU0_IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
-408:CPU0_IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
-409:CPU0_IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
-410:
-411:
+378:DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
+379:DTACK_TIMER_1.ar = !INT_ACK;
+380:DTACK_TIMER_1.ck = !CLK_16M;
+381:
+382:/* 
+383:   DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
+384:   is zero it will get asserted on the CPU.   It is tied to the inverse of DTACK_TIMER_1 which is set to 0 
+385:   on reset.  It will only be asserted when we are in an interrupt acknowlegement cycle.
+386:*/
+387:
+388:DTACK_FROM_INT = !DTACK_TIMER_1;
+389:CPU0_VPA = 'b'1;
+390:
+391:/* 
+392:   Active low grouping of external active low interrupts.  If any of these inputs are low,
+393:   the group is low.  That group is used to select the interrupt level that goes to the CPU.
+394:*/
+395:
+396:IRQL7_INT = DEBUG_IN_LATCHED_PE;
+397:IRQL6_INT = (IRQL6A_PE & IRQL6B_PE) # !IRQL7_INT;
+398:IRQL5_INT = (IRQL5A_PE & IRQL5B_PE) # !IRQL6_INT # !IRQL7_INT;
+399:IRQL4_INT = (IRQL4A_PE & IRQL4B_PE) # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+400:IRQL3_INT = (IRQL3A_PE & IRQL3B_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+401:IRQL2_INT = (IRQL2A_PE & IRQL2B_PE) # !IRQL3_INT #!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+402:
+403:/* 
+404:   CPU0_IPL Drive using 8:3 priority encoder but only for 4 sources.   This output is driven from the above grouped signals.  
+405:   This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
+406:   to any value other than 111 by doing an interrupt ack cycle.
+407:*/   
+408:
+409:CPU0_IPL0 = !(!IRQL3_INT # !IRQL5_INT # !IRQL7_INT);
+410:CPU0_IPL1 = !(!IRQL3_INT # !IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
+411:CPU0_IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
 412:
-413:/* This field is created so we can select on it using the :[number] method below */
+413:
 414:
-415:FIELD interrupt_ack_num=[CPU_INTACK2..0];
+415:/* This field is created so we can select on it using the :[number] method below */
 416:
-417:/* 
-418:   These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
-419:   acknowlegement process.  These are driven on the databus during the int ack cycle.
-420:   The vector number is formed by doing the followig:
-421:
-422:    The highest bit is set to 1 due to the available vectors starting at 64. 
-423:    The next three highest bits are set to the CPU0_IPL value that has been acknowleged.  This
-424:    will be between 'b'001 and 'b;111.  It could be '000' if an interrupt line dissapears
-425:    before the ack cycle is incomplete.   The CPU should be programmed to catch this vector 
-426:    as a spurious interrupt.
-427:    The lower 4 bits are driven by the specific sub interrupt for the level selected above.
-428:    Since we support 4 sub interrupts, the vector uses 1 bit for each.
-429:
-430:    IRQ                 AVIRQL      Vector#              System Use
-431:    ------              --------    ------   --------    -------------------------------
+417:FIELD interrupt_ack_num=[CPU_INTACK2..0];
+418:
+419:/* 
+420:   These 8 bits define the interrupt vector that will be sent to the CPU as part of the 
+421:   acknowlegement process.  These are driven on the databus during the int ack cycle.
+422:   The vector number is formed by doing the followig:
+423:
+424:    The highest bit is set to 1 due to the available vectors starting at 64. 
+425:    The next three highest bits are set to the CPU0_IPL value that has been acknowleged.  This
+426:    will be between 'b'001 and 'b;111.  It could be '000' if an interrupt line dissapears
+427:    before the ack cycle is incomplete.   The CPU should be programmed to catch this vector 
+428:    as a spurious interrupt.
+429:    The lower 4 bits are driven by the specific sub interrupt for the level selected above.
+430:    Since we support 4 sub interrupts, the vector uses 1 bit for each.
+431:
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 9
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-432:    DEBUG_IN_LATCHED    7           11110000 (0xF0)      Debugger (Button)
-433:    IRQL6A_IN_LATCHED   6           11100001 (0xE1)      PTC #1 (Programmable Timer)
-434:    IRQL6B_IN_LATCHED   6           11100010 (0xE2)      PTC #2 (Programmable Timer)
-435:    IRQL5A_IN           5           11010001 (0xD1)      UARTA
-436:    IRQL5B_IN           5           11010010 (0xD2)      UARTB
-437:    IRQL4A_IN_LATCHED   4           11000001 (0xC1)      RTC
-438:    IRQL4B_IN_LATCHED   4           11000010 (0xC2)      Keyboard/Mouse
-439:    IRQL3A_IN           3           10110001 (0xB1)      VGA Vert Refresh, Expansion Port
-440:    IRQL3B_IN           3           10110010 (0xB2)      NIC
-441:    IRQL2A_IN           2           10100000 (0xA0)      Power Controller Interrupt
-442:
-443:      Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
-444:
-445:*/
-446:
-447:VECTORD7 = 'h'1;
-448:VECTORD6 = CPU_INTACK2;
-449:VECTORD5 = CPU_INTACK1;
-450:VECTORD4 = CPU_INTACK0;
-451:VECTORD3 = 'h'0;
-452:VECTORD2 = 'h'0;
-453:VECTORD1 = (interrupt_ack_num:[6]&!IRQL6B_PE) 
-454:            # (interrupt_ack_num:[5]&!IRQL5B_PE)   
-455:            # (interrupt_ack_num:[4]&!IRQL4B_PE)
-456:            # (interrupt_ack_num:[3]&!IRQL3B_PE);
-457:
-458:VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE) 
-459:            # (interrupt_ack_num:[5]&!IRQL5A_PE) 
-460:            # (interrupt_ack_num:[4]&!IRQL4A_PE)
-461:            # (interrupt_ack_num:[3]&!IRQL3A_PE);
-462:
-463:/* 
-464:   We want to latch into the data bus output registers in two cases:
-465:
-466:   (1) Based on DTACK_TIMER_0, which is triggered by the Interrupt Acknolegment process.  This will latch into these
-467:       registers the VECTOR for the current interrupt.  That has to be placed on the address bus during the ACK cycle.  
-468:       DTACK_TIMER_0 is a signal that is goes from 0->1 on the CLK_16 edge after the start of and INT ACK cycle.  This allows
-469:       the register to grab the new value and put it on the data bus.   
-470:       
-471:       It is guarenteed that the INT_ACK is high *before* DTACK_TIME_0 does a 0->1 transition, so that can be used to select what 
-472:       is put into the .D register inputs.
-473:
-474:       The DTACK_TIMER_1 counter triggers from 0->1 on the next CLK_16M edge, and that tells the CPU to read the vector off 
-475:       the data bus. The databus will be undriven once INT_ACK unasserts, which happens as soon as /AS goes high.
-476:
-477:   (2) If the CPU is doing a read of the internal register (ITC2 at 0xFF0704), we need to put something into the data bus registers,
-478:       then put that on the data bus.   The REG_READ_ITC2 signal goes 1->0 at the start of that CPU cycle, and we can use that 1->0 
-479:       transition to 'latch' something into the CPU0_Dx latches.   We can also use that same signal to turn on the output enable
-480:       on the databus pins.  This will turn off the outputs as soon as REG_READ_ITC2 goes high at the end of the CPU read cycle.
-481:*/
-482:
-483:CPU0_D7.d = (VECTORD7 & INT_ACK);   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
-484:CPU0_D6.d = (VECTORD6 & INT_ACK);
-485:CPU0_D5.d = (VECTORD5 & INT_ACK);
+432:    IRQ                 AVIRQL      Vector#              System Use
+433:    ------              --------    ------   --------    -------------------------------
+434:    DEBUG_IN_LATCHED    7           11110000 (0xF0)      Debugger (Button)
+435:    IRQL6A_IN_LATCHED   6           11100001 (0xE1)      PTC #1 (Programmable Timer)
+436:    IRQL6B_IN_LATCHED   6           11100010 (0xE2)      PTC #2 (Programmable Timer)
+437:    IRQL5A_IN           5           11010001 (0xD1)      UARTA
+438:    IRQL5B_IN           5           11010010 (0xD2)      UARTB
+439:    IRQL4A_IN_LATCHED   4           11000001 (0xC1)      RTC
+440:    IRQL4B_IN_LATCHED   4           11000010 (0xC2)      Keyboard/Mouse
+441:    IRQL3A_IN           3           10110001 (0xB1)      VGA Vert Refresh, Expansion Port
+442:    IRQL3B_IN           3           10110010 (0xB2)      NIC
+443:    IRQL2A_IN           2           10100000 (0xA1)      Power Controller Interrupt
+444:    IRQL2B_IN           2           10100000 (0xA2)      Power Controller Interrupt
+445:
+446:      Note that all of the other vectors starting with 1XXXXXXX should be vectored to a spurious interrupt handler.
+447:
+448:*/
+449:
+450:VECTORD7 = 'h'1;
+451:VECTORD6 = CPU_INTACK2;
+452:VECTORD5 = CPU_INTACK1;
+453:VECTORD4 = CPU_INTACK0;
+454:VECTORD3 = 'h'0;
+455:VECTORD2 = 'h'0;
+456:VECTORD1 = (interrupt_ack_num:[6]&!IRQL6B_PE) 
+457:            # (interrupt_ack_num:[5]&!IRQL5B_PE)   
+458:            # (interrupt_ack_num:[4]&!IRQL4B_PE)
+459:            # (interrupt_ack_num:[3]&!IRQL3B_PE)
+460:            # (interrupt_ack_num:[2]&!IRQL2B_PE);
+461:
+462:VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE) 
+463:            # (interrupt_ack_num:[5]&!IRQL5A_PE) 
+464:            # (interrupt_ack_num:[4]&!IRQL4A_PE)
+465:            # (interrupt_ack_num:[3]&!IRQL3A_PE)
+466:            # (interrupt_ack_num:[2]&!IRQL2A_PE);
+467:
+468:/* 
+469:   We want to latch into the data bus output registers in two cases:
+470:
+471:   (1) Based on DTACK_TIMER_0, which is triggered by the Interrupt Acknolegment process.  This will latch into these
+472:       registers the VECTOR for the current interrupt.  That has to be placed on the address bus during the ACK cycle.  
+473:       DTACK_TIMER_0 is a signal that is goes from 0->1 on the CLK_16 edge after the start of and INT ACK cycle.  This allows
+474:       the register to grab the new value and put it on the data bus.   
+475:       
+476:       It is guarenteed that the INT_ACK is high *before* DTACK_TIME_0 does a 0->1 transition, so that can be used to select what 
+477:       is put into the .D register inputs.
+478:
+479:       The DTACK_TIMER_1 counter triggers from 0->1 on the next CLK_16M edge, and that tells the CPU to read the vector off 
+480:       the data bus. The databus will be undriven once INT_ACK unasserts, which happens as soon as /AS goes high.
+481:
+482:   (2) If the CPU is doing a read of the internal register (ITC2 at 0xFF0704), we need to put something into the data bus registers,
+483:       then put that on the data bus.   The REG_READ_ITC2 signal goes 1->0 at the start of that CPU cycle, and we can use that 1->0 
+484:       transition to 'latch' something into the CPU0_Dx latches.   We can also use that same signal to turn on the output enable
+485:       on the databus pins.  This will turn off the outputs as soon as REG_READ_ITC2 goes high at the end of the CPU read cycle.
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 10
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-486:CPU0_D4.d = (VECTORD4 & INT_ACK);
-487:CPU0_D3.d = (VECTORD3 & INT_ACK);
-488:CPU0_D2.d = (VECTORD2 & INT_ACK);
-489:CPU0_D1.d = (VECTORD1 & INT_ACK);
-490:CPU0_D0.d = (VECTORD0 & INT_ACK);
-491:
-492:[CPU0_D7..0].ck = (DTACK_TIMER_0 # !REG_READ_ITC2);
-493:[CPU0_D7..0].ar = !SYS_RESET;
-494:[CPU0_D7..0].oe = (INT_ACK # !REG_READ_ITC2);      /* Turn on the databus outputs for INTACK or a REG_READ of ITC2 */
-495:
-496:/* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
-497:   these clock sources will probably get generated elsewhere. */
-498:
-499:
+486:*/
+487:
+488:CPU0_D7.d = (VECTORD7 & INT_ACK);   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
+489:CPU0_D6.d = (VECTORD6 & INT_ACK);
+490:CPU0_D5.d = (VECTORD5 & INT_ACK);
+491:CPU0_D4.d = (VECTORD4 & INT_ACK);
+492:CPU0_D3.d = (VECTORD3 & INT_ACK);
+493:CPU0_D2.d = (VECTORD2 & INT_ACK);
+494:CPU0_D1.d = (VECTORD1 & INT_ACK);
+495:CPU0_D0.d = (VECTORD0 & INT_ACK);
+496:
+497:[CPU0_D7..0].ck = (DTACK_TIMER_0 # !REG_READ_ITC2);
+498:[CPU0_D7..0].ar = !SYS_RESET;
+499:[CPU0_D7..0].oe = (INT_ACK # !REG_READ_ITC2);      /* Turn on the databus outputs for INTACK or a REG_READ of ITC2 */
 500:
-501:
-502:CLK_16M_OUTA.d = !CLK_16M_OUTA;
-503:CLK_16M_OUTA.ck = CLK_32M;
+501:/* Clock Generation  - Generate the 8MHz clock from the 16MHz clock.   In final version
+502:   these clock sources will probably get generated elsewhere. */
+503:
 504:
-505:CLK_16M_OUTB.d = !CLK_16M_OUTA;
-506:CLK_16M_OUTB.ck =  CLK_32M;
-507:
-508:CLK_8M.d = !CLK_8M;
-509:CLK_8M.ck = CLK_16M_OUTA;
-510:CLK_8M.ar = !SYS_RESET;
-511:
-512:CLK_4M.d = !CLK_4M;
-513:CLK_4M.ck = CLK_8M;
-514:CLK_4M.ar = !SYS_RESET;
-515:
-516:CLK_2M.d = !CLK_2M;
-517:CLK_2M.ck = CLK_4M;
-518:CLK_2M.ar = !SYS_RESET;
-519:
-520:CLK_1M.d = !CLK_1M;
-521:CLK_1M.ck = CLK_2M;
-522:CLK_1M.ar = !SYS_RESET;
-523:
-524:CLK_500K.d = !CLK_500K;
-525:CLK_500K.ck = CLK_1M;
-526:CLK_500K.ar = !SYS_RESET;
-527:
-528:/*
-529:
-530:
-531:Total dedicated input used:     4/4     (100%)
-532:Total I/O pins used             47/64   (73%)
-533:Total Logic cells used          81/128  (63%)
-534:Total Flip-Flop used            44/128  (34%)
-535:Total Foldback logic used       11/128  (8%)
-536:Total Nodes+FB/MCells           92/128  (71%)
-537:Total cascade used              0
-538:Total input pins                25
-539:Total output pins               26
+505:
+506:
+507:CLK_16M_OUTA.d = !CLK_16M_OUTA;
+508:CLK_16M_OUTA.ck = CLK_32M;
+509:
+510:CLK_16M_OUTB.d = !CLK_16M_OUTA;
+511:CLK_16M_OUTB.ck =  CLK_32M;
+512:
+513:CLK_8M.d = !CLK_8M;
+514:CLK_8M.ck = CLK_16M_OUTA;
+515:CLK_8M.ar = !SYS_RESET;
+516:
+517:CLK_4M.d = !CLK_4M;
+518:CLK_4M.ck = CLK_8M;
+519:CLK_4M.ar = !SYS_RESET;
+520:
+521:CLK_2M.d = !CLK_2M;
+522:CLK_2M.ck = CLK_4M;
+523:CLK_2M.ar = !SYS_RESET;
+524:
+525:CLK_1M.d = !CLK_1M;
+526:CLK_1M.ck = CLK_2M;
+527:CLK_1M.ar = !SYS_RESET;
+528:
+529:CLK_500K.d = !CLK_500K;
+530:CLK_500K.ck = CLK_1M;
+531:CLK_500K.ar = !SYS_RESET;
+532:
+533:/*
+534:
+535:
+536:Total dedicated input used:     4/4     (100%)
+537:Total I/O pins used             47/64   (73%)
+538:Total Logic cells used          81/128  (63%)
+539:Total Flip-Flop used            44/128  (34%)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 11
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-540:Total Pts                       284
-541:
-542:
-543:Final global control pins assignment (if applicable)...
-544:-------------------------------------------------------
-545:DEBUG_BUTTON assigned to pin  83
+540:Total Foldback logic used       11/128  (8%)
+541:Total Nodes+FB/MCells           92/128  (71%)
+542:Total cascade used              0
+543:Total input pins                25
+544:Total output pins               26
+545:Total Pts                       284
 546:
 547:
-548:
-549:Performing input pin pre-assignments ...
-550:------------------------------------
-551:IRQL5A_IN assigned to pin  2
-552:DEBUG_BUTTON assigned to pin  83
-553:IRQL6B_IN assigned to pin  1
-554:IRQL6A_IN assigned to pin  84
-555:DEBUG_IN_LATCHED.AP equation needs patching.
-556:IRQL6A_IN_LATCHED.AP equation needs patching.
-557:IRQL2A_IN_LATCHED.AP equation needs patching.
-558:IRQL4A_IN_LATCHED.AP equation needs patching.
-559:IRQL4B_IN_LATCHED.AP equation needs patching.
-560:IRQL6B_IN_LATCHED.AP equation needs patching.
-561:6 control equtions need patching
-562:
-563:Attempt to place floating signals ...
-564:------------------------------------
-565:POWERCTL_OE is placed at feedback node 601 (MC 1)
-566:IRQL6A_MASK is placed at feedback node 602 (MC 2)
-567:SYS_RESET_INV is placed at pin 12 (MC 3)
-568:RESET_REQ is placed at feedback node 604 (MC 4)
-569:CLK_1M is placed at pin 11 (MC 5)
-570:CLK_500K is placed at pin 10 (MC 6)
-571:IRQL5B_MASK is placed at feedback node 607 (MC 7)
-572:IRQL3B_IN is placed at pin 9 (MC 8)
-573:IRQL4B_IN_MASK is placed at feedback node 608 (MC 8)
-574:IRQL6B_MASK is placed at feedback node 609 (MC 9)
-575:IRQL4A_MASK is placed at feedback node 610 (MC 10)
-576:IRQL3A_IN is placed at pin 8 (MC 11)
-577:IRQL3A_MASK is placed at feedback node 611 (MC 11)
-578:IRQL5A_MASK is placed at feedback node 612 (MC 12)
-579:IRQL4B_IN is placed at pin 6 (MC 13)
-580:IRQL3B_MASK is placed at feedback node 613 (MC 13)
-581:IRQL4A_IN is placed at pin 5 (MC 14)
-582:IRQL2B_MASK is placed at feedback node 614 (MC 14)
-583:Com_Ctrl_264 is placed at foldback expander node 314 (MC 14)
-584:IRQL2A_MASK is placed at feedback node 615 (MC 15)
-585:Com_Ctrl_263 is placed at foldback expander node 315 (MC 15)
-586:IRQL5B_IN is placed at pin 4 (MC 16)
-587:DEBUG_IN_MASK is placed at feedback node 616 (MC 16)
-588:Com_Ctrl_262 is placed at foldback expander node 316 (MC 16)
-589:CPU_FC1 is placed at pin 22 (MC 17)
-590:CPU_FC0 is placed at pin 21 (MC 19)
-591:CPU0_HALT is placed at pin 20 (MC 21)
-592:DEBUG_IN_LATCHED is placed at feedback node 622 (MC 22)
-593:DEBUG_IN_LATCHED.AP is placed at feedback node 623 (MC 23)
+548:Final global control pins assignment (if applicable)...
+549:-------------------------------------------------------
+550:DEBUG_BUTTON assigned to pin  83
+551:
+552:
+553:
+554:Performing input pin pre-assignments ...
+555:------------------------------------
+556:IRQL5A_IN assigned to pin  2
+557:DEBUG_BUTTON assigned to pin  83
+558:IRQL6B_IN assigned to pin  1
+559:IRQL6A_IN assigned to pin  84
+560:DEBUG_IN_LATCHED.AP equation needs patching.
+561:IRQL2A_IN_LATCHED.AP equation needs patching.
+562:IRQL6A_IN_LATCHED.AP equation needs patching.
+563:IRQL6B_IN_LATCHED.AP equation needs patching.
+564:IRQL4A_IN_LATCHED.AP equation needs patching.
+565:IRQL4B_IN_LATCHED.AP equation needs patching.
+566:6 control equtions need patching
+567:
+568:Attempt to place floating signals ...
+569:------------------------------------
+570:POWERCTL_OE is placed at feedback node 601 (MC 1)
+571:IRQL6A_MASK is placed at feedback node 602 (MC 2)
+572:SYS_RESET_INV is placed at pin 12 (MC 3)
+573:RESET_REQ is placed at feedback node 604 (MC 4)
+574:CLK_1M is placed at pin 11 (MC 5)
+575:CLK_500K is placed at pin 10 (MC 6)
+576:IRQL5B_MASK is placed at feedback node 607 (MC 7)
+577:IRQL3B_IN is placed at pin 9 (MC 8)
+578:IRQL5A_MASK is placed at feedback node 608 (MC 8)
+579:IRQL6B_MASK is placed at feedback node 609 (MC 9)
+580:IRQL4A_MASK is placed at feedback node 610 (MC 10)
+581:IRQL3A_IN is placed at pin 8 (MC 11)
+582:IRQL3A_MASK is placed at feedback node 611 (MC 11)
+583:IRQL4B_IN_MASK is placed at feedback node 612 (MC 12)
+584:IRQL4B_IN is placed at pin 6 (MC 13)
+585:IRQL3B_MASK is placed at feedback node 613 (MC 13)
+586:FB_271 is placed at foldback expander node 313 (MC 13)
+587:IRQL4A_IN is placed at pin 5 (MC 14)
+588:IRQL2B_MASK is placed at feedback node 614 (MC 14)
+589:Com_Ctrl_264 is placed at foldback expander node 314 (MC 14)
+590:IRQL2A_MASK is placed at feedback node 615 (MC 15)
+591:Com_Ctrl_263 is placed at foldback expander node 315 (MC 15)
+592:IRQL5B_IN is placed at pin 4 (MC 16)
+593:DEBUG_IN_MASK is placed at feedback node 616 (MC 16)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 12
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-594:CLK_32M is placed at pin 18 (MC 24)
-595:IRQL6A_IN_LATCHED.AP is placed at feedback node 624 (MC 24)
-596:SYS_RESET_IN is placed at pin 17 (MC 25)
-597:IRQL2A_IN_LATCHED.AP is placed at feedback node 625 (MC 25)
-598:IRQL4A_IN_LATCHED.AP is placed at feedback node 626 (MC 26)
-599:CPU0_VPA is placed at pin 16 (MC 27)
-600:IRQL4B_IN_LATCHED.AP is placed at feedback node 628 (MC 28)
-601:CPU1_HALT is placed at pin 15 (MC 29)
-602:IRQL6B_IN_LATCHED.AP is placed at feedback node 630 (MC 30)
-603:FB_267 is placed at foldback expander node 330 (MC 30)
-604:DTACK_TIMER_1 is placed at feedback node 631 (MC 31)
-605:FB_266 is placed at foldback expander node 331 (MC 31)
-606:TDI is placed at pin 14 (MC 32)
-607:DTACK_TIMER_0 is placed at feedback node 632 (MC 32)
-608:Com_Ctrl_263 is placed at foldback expander node 332 (MC 32)
-609:CPU0_RW is placed at pin 31 (MC 35)
-610:CLK_16M is placed at pin 30 (MC 37)
-611:SYS_RESET is placed at pin 29 (MC 38)
-612:CPU0_IPL2 is placed at pin 28 (MC 40)
-613:CPU0_IPL1 is placed at pin 27 (MC 43)
-614:CPU0_IPL0 is placed at pin 25 (MC 45)
-615:CPU_FC2 is placed at pin 24 (MC 46)
-616:XXL_291 is placed at foldback expander node 346 (MC 46)
-617:FB_265 is placed at foldback expander node 347 (MC 47)
-618:TMS is placed at pin 23 (MC 48)
-619:XXL_290 is placed at feedback node 648 (MC 48)
-620:CPU0_D4 is placed at pin 41 (MC 49)
-621:CPU0_D3 is placed at pin 40 (MC 51)
-622:CPU0_D2 is placed at pin 39 (MC 53)
-623:CPU0_D1 is placed at pin 37 (MC 56)
-624:CPU0_D0 is placed at pin 36 (MC 57)
-625:CPU0_AS is placed at pin 35 (MC 59)
-626:CPU1_INT1 is placed at pin 34 (MC 61)
-627:XXL_268 is placed at feedback node 663 (MC 63)
-628:CPU1_BARRIER1 is placed at pin 33 (MC 64)
-629:Com_Ctrl_263 is placed at foldback expander node 364 (MC 64)
-630:CPU0_D5 is placed at pin 44 (MC 65)
-631:CPU0_D6 is placed at pin 45 (MC 67)
-632:CPU0_D7 is placed at pin 46 (MC 69)
-633:CLK_16M_OUTB is placed at pin 48 (MC 72)
-634:CLK_16M_OUTA is placed at pin 49 (MC 73)
-635:CPU1_RESET is placed at pin 50 (MC 75)
-636:CLK_4M is placed at feedback node 676 (MC 76)
-637:CPU1_INT2 is placed at pin 51 (MC 77)
-638:XXL_270 is placed at feedback node 678 (MC 78)
-639:CLK_8M is placed at feedback node 679 (MC 79)
-640:DTACK_FROM_INT is placed at pin 52 (MC 80)
-641:Com_Ctrl_263 is placed at foldback expander node 380 (MC 80)
-642:XXL_278 is placed at feedback node 681 (MC 81)
-643:XXL_277 is placed at feedback node 682 (MC 82)
-644:XXL_273 is placed at feedback node 683 (MC 83)
-645:XXL_283 is placed at feedback node 684 (MC 84)
-646:INTC_CS is placed at pin 55 (MC 85)
-647:XXL_288 is placed at feedback node 685 (MC 85)
+594:Com_Ctrl_262 is placed at foldback expander node 316 (MC 16)
+595:CPU_FC1 is placed at pin 22 (MC 17)
+596:CPU_FC0 is placed at pin 21 (MC 19)
+597:CPU0_HALT is placed at pin 20 (MC 21)
+598:CLK_32M is placed at pin 18 (MC 24)
+599:SYS_RESET_IN is placed at pin 17 (MC 25)
+600:Com_Ctrl_266 is placed at feedback node 625 (MC 25)
+601:Com_Ctrl_267 is placed at feedback node 626 (MC 26)
+602:CPU0_VPA is placed at pin 16 (MC 27)
+603:XXL_296 is placed at feedback node 628 (MC 28)
+604:CPU1_HALT is placed at pin 15 (MC 29)
+605:DTACK_TIMER_1 is placed at feedback node 630 (MC 30)
+606:FB_270 is placed at foldback expander node 330 (MC 30)
+607:DTACK_TIMER_0 is placed at feedback node 631 (MC 31)
+608:FB_269 is placed at foldback expander node 331 (MC 31)
+609:TDI is placed at pin 14 (MC 32)
+610:XXL_294 is placed at feedback node 632 (MC 32)
+611:Com_Ctrl_265 is placed at foldback expander node 332 (MC 32)
+612:CPU0_RW is placed at pin 31 (MC 35)
+613:CLK_16M is placed at pin 30 (MC 37)
+614:SYS_RESET is placed at pin 29 (MC 38)
+615:CPU0_IPL2 is placed at pin 28 (MC 40)
+616:CPU0_IPL1 is placed at pin 27 (MC 43)
+617:FB_268 is placed at foldback expander node 344 (MC 44)
+618:CPU0_IPL0 is placed at pin 25 (MC 45)
+619:CPU_FC2 is placed at pin 24 (MC 46)
+620:XXL_289 is placed at feedback node 646 (MC 46)
+621:XXL_291 is placed at feedback node 647 (MC 47)
+622:TMS is placed at pin 23 (MC 48)
+623:XXL_290 is placed at feedback node 648 (MC 48)
+624:CPU0_D4 is placed at pin 41 (MC 49)
+625:CPU0_D3 is placed at pin 40 (MC 51)
+626:CPU0_D2 is placed at pin 39 (MC 53)
+627:CPU0_D1 is placed at pin 37 (MC 56)
+628:CPU0_D0 is placed at pin 36 (MC 57)
+629:DEBUG_IN_LATCHED is placed at feedback node 658 (MC 58)
+630:CPU0_AS is placed at pin 35 (MC 59)
+631:DEBUG_IN_LATCHED.AP is placed at feedback node 659 (MC 59)
+632:IRQL2A_IN_LATCHED.AP is placed at feedback node 660 (MC 60)
+633:CPU1_INT1 is placed at pin 34 (MC 61)
+634:IRQL6A_IN_LATCHED.AP is placed at feedback node 662 (MC 62)
+635:IRQL6B_IN_LATCHED.AP is placed at feedback node 663 (MC 63)
+636:CPU1_BARRIER1 is placed at pin 33 (MC 64)
+637:Com_Ctrl_265 is placed at foldback expander node 364 (MC 64)
+638:CPU0_D5 is placed at pin 44 (MC 65)
+639:CPU0_D6 is placed at pin 45 (MC 67)
+640:CPU0_D7 is placed at pin 46 (MC 69)
+641:IRQL4A_IN_LATCHED.AP is placed at feedback node 671 (MC 71)
+642:CLK_16M_OUTB is placed at pin 48 (MC 72)
+643:CLK_16M_OUTA is placed at pin 49 (MC 73)
+644:CLK_4M is placed at feedback node 674 (MC 74)
+645:CPU1_RESET is placed at pin 50 (MC 75)
+646:CLK_2M is placed at feedback node 676 (MC 76)
+647:CPU1_INT2 is placed at pin 51 (MC 77)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 13
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-648:CPU_INTACK2 is placed at pin 56 (MC 86)
-649:XXL_286 is placed at feedback node 686 (MC 86)
-650:XXL_281 is placed at feedback node 687 (MC 87)
-651:CPU_INTACK1 is placed at pin 57 (MC 88)
-652:XXL_275 is placed at feedback node 688 (MC 88)
-653:XXL_282 is placed at feedback node 689 (MC 89)
-654:XXL_287 is placed at feedback node 690 (MC 90)
-655:CPU_INTACK0 is placed at pin 58 (MC 91)
-656:XXL_289 is placed at feedback node 691 (MC 91)
-657:XXL_280 is placed at feedback node 692 (MC 92)
-658:XXL_284 is placed at feedback node 693 (MC 93)
-659:XXL_285 is placed at feedback node 694 (MC 94)
-660:XXL_269 is placed at feedback node 695 (MC 95)
-661:TCK is placed at pin 62 (MC 96)
-662:XXL_272 is placed at feedback node 696 (MC 96)
-663:IRQL2A_IN_LATCHED is placed at feedback node 702 (MC 102)
-664:CLK_2M is placed at feedback node 703 (MC 103)
-665:XXL_271 is placed at feedback node 706 (MC 106)
-666:XXL_279 is placed at feedback node 708 (MC 108)
-667:XXL_292 is placed at feedback node 710 (MC 110)
-668:XXL_274 is placed at feedback node 711 (MC 111)
-669:TDO is placed at pin 71 (MC 112)
-670:XXL_276 is placed at feedback node 712 (MC 112)
-671:POWERCTL_STATE is placed at pin 75 (MC 118)
-672:IRQL6B_IN_LATCHED is placed at feedback node 719 (MC 119)
-673:IRQL6A_IN_LATCHED is placed at feedback node 721 (MC 121)
-674:IRQL4B_IN_LATCHED is placed at feedback node 722 (MC 122)
-675:RESET_REQ_OUT is placed at feedback node 724 (MC 124)
-676:IRQL4A_IN_LATCHED is placed at feedback node 727 (MC 127)
-677:Com_Ctrl_262 is placed at foldback expander node 428 (MC 128)
-678:
-679:                                                                                    
-680:                                             D                                      
-681:                                             E                                      
-682:                                             B                                      
-683:                          I I   I I I   I II U                                      
-684:                       C  R R   R R R   R RR G                                      
-685:                       L  Q Q   Q Q Q   Q QQ _                                      
-686:                     C K  L L   L L L   L LL B                                      
-687:                     L _  3 3   4 4 5   5 66 U                                      
-688:                     K 5  B A   B A B   A BA T                                      
-689:                     _ 0  _ _ G _ _ _ V _ __ T G       V                            
-690:                     1 0  I I N I I I C I II O N       C                            
-691:                     M K  N N D N N N C N NN N D       C                            
-692:                    -------------------------------------------                     
-693:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
-694:                  /    10   8   6   4   2  84  82  80  78  76    \                 
-695:   SYS_RESET_INV | 12                    (*)                   74 |                 
-696:             VCC | 13                                          73 |                 
-697:             TDI | 14                                          72 | GND             
-698:       CPU1_HALT | 15                                          71 | TDO             
-699:        CPU0_VPA | 16                                          70 |                 
-700:    SYS_RESET_IN | 17                                          69 |                 
-701:         CLK_32M | 18                                          68 |                 
+648:IRQL4B_IN_LATCHED.AP is placed at feedback node 678 (MC 78)
+649:CLK_8M is placed at feedback node 679 (MC 79)
+650:DTACK_FROM_INT is placed at pin 52 (MC 80)
+651:Com_Ctrl_265 is placed at foldback expander node 380 (MC 80)
+652:XXL_287 is placed at feedback node 681 (MC 81)
+653:XXL_277 is placed at feedback node 682 (MC 82)
+654:XXL_284 is placed at feedback node 683 (MC 83)
+655:XXL_278 is placed at feedback node 684 (MC 84)
+656:INTC_CS is placed at pin 55 (MC 85)
+657:XXL_276 is placed at feedback node 685 (MC 85)
+658:CPU_INTACK2 is placed at pin 56 (MC 86)
+659:XXL_280 is placed at feedback node 686 (MC 86)
+660:XXL_288 is placed at feedback node 687 (MC 87)
+661:CPU_INTACK1 is placed at pin 57 (MC 88)
+662:XXL_275 is placed at feedback node 688 (MC 88)
+663:XXL_273 is placed at feedback node 689 (MC 89)
+664:XXL_272 is placed at feedback node 690 (MC 90)
+665:CPU_INTACK0 is placed at pin 58 (MC 91)
+666:XXL_274 is placed at feedback node 691 (MC 91)
+667:XXL_279 is placed at feedback node 692 (MC 92)
+668:XXL_293 is placed at feedback node 693 (MC 93)
+669:XXL_286 is placed at feedback node 694 (MC 94)
+670:XXL_285 is placed at feedback node 695 (MC 95)
+671:TCK is placed at pin 62 (MC 96)
+672:XXL_295 is placed at feedback node 696 (MC 96)
+673:XXL_282 is placed at feedback node 710 (MC 110)
+674:XXL_292 is placed at feedback node 711 (MC 111)
+675:TDO is placed at pin 71 (MC 112)
+676:XXL_281 is placed at feedback node 712 (MC 112)
+677:IRQL6B_IN_LATCHED is placed at feedback node 714 (MC 114)
+678:IRQL4B_IN_LATCHED is placed at feedback node 716 (MC 116)
+679:POWERCTL_STATE is placed at pin 75 (MC 118)
+680:IRQL6A_IN_LATCHED is placed at feedback node 719 (MC 119)
+681:IRQL2A_IN_LATCHED is placed at feedback node 721 (MC 121)
+682:IRQL4A_IN_LATCHED is placed at feedback node 722 (MC 122)
+683:RESET_REQ_OUT is placed at feedback node 724 (MC 124)
+684:XXL_283 is placed at feedback node 727 (MC 127)
+685:Com_Ctrl_262 is placed at foldback expander node 428 (MC 128)
+686:
+687:                                                                                    
+688:                                             D                                      
+689:                                             E                                      
+690:                                             B                                      
+691:                          I I   I I I   I II U                                      
+692:                       C  R R   R R R   R RR G                                      
+693:                       L  Q Q   Q Q Q   Q QQ _                                      
+694:                     C K  L L   L L L   L LL B                                      
+695:                     L _  3 3   4 4 5   5 66 U                                      
+696:                     K 5  B A   B A B   A BA T                                      
+697:                     _ 0  _ _ G _ _ _ V _ __ T G       V                            
+698:                     1 0  I I N I I I C I II O N       C                            
+699:                     M K  N N D N N N C N NN N D       C                            
+700:                    -------------------------------------------                     
+701:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 14
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 09:41:01 2023
+Created Thu Jun 01 10:12:14 2023
 
-702:             GND | 19                                          67 |                 
-703:       CPU0_HALT | 20                                          66 | VCC             
-704:         CPU_FC0 | 21                                          65 |                 
-705:         CPU_FC1 | 22                 ATF1508                  64 |                 
-706:             TMS | 23               84-Lead PLCC               63 |                 
-707:         CPU_FC2 | 24                                          62 | TCK             
-708:       CPU0_IPL0 | 25                                          61 |                 
-709:             VCC | 26                                          60 |                 
-710:       CPU0_IPL1 | 27                                          59 | GND             
-711:       CPU0_IPL2 | 28                                          58 | CPU_INTACK0     
-712:       SYS_RESET | 29                                          57 | CPU_INTACK1     
-713:         CLK_16M | 30                                          56 | CPU_INTACK2     
-714:         CPU0_RW | 31                                          55 | INTC_CS         
-715:             GND | 32                                          54 |                 
-716:                  \     34  36  38  40  42  44  46  48  50  52   /                 
-717:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
-718:                    --------------------------------------------                     
-719:                      C C C C C V C C C G V C C C G C C C C D V                     
-720:                      P P P P P C P P P N C P P P N L L P P T C                     
-721:                      U U U U U C U U U D C U U U D K K U U A C                     
-722:                      1 1 0 0 0   0 0 0     0 0 0   _ _ 1 1 C                       
-723:                      _ _ _ _ _   _ _ _     _ _ _   1 1 _ _ K                       
-724:                      B I A D D   D D D     D D D   6 6 R I _                       
-725:                      A N S 0 1   2 3 4     5 6 7   M M E N F                       
-726:                      R T                           _ _ S T R                       
-727:                      R 1                           O O E 2 O                       
-728:                      I                             U U T   M                       
-729:                      E                             T T     _                       
-730:                      R                             B A     I                       
-731:                      1                                     N                       
-732:
-733:
-734:
-735:*/
-736:
-737:
-738:
-739:
+702:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+703:   SYS_RESET_INV | 12                    (*)                   74 |                 
+704:             VCC | 13                                          73 |                 
+705:             TDI | 14                                          72 | GND             
+706:       CPU1_HALT | 15                                          71 | TDO             
+707:        CPU0_VPA | 16                                          70 |                 
+708:    SYS_RESET_IN | 17                                          69 |                 
+709:         CLK_32M | 18                                          68 |                 
+710:             GND | 19                                          67 |                 
+711:       CPU0_HALT | 20                                          66 | VCC             
+712:         CPU_FC0 | 21                                          65 |                 
+713:         CPU_FC1 | 22                 ATF1508                  64 |                 
+714:             TMS | 23               84-Lead PLCC               63 |                 
+715:         CPU_FC2 | 24                                          62 | TCK             
+716:       CPU0_IPL0 | 25                                          61 |                 
+717:             VCC | 26                                          60 |                 
+718:       CPU0_IPL1 | 27                                          59 | GND             
+719:       CPU0_IPL2 | 28                                          58 | CPU_INTACK0     
+720:       SYS_RESET | 29                                          57 | CPU_INTACK1     
+721:         CLK_16M | 30                                          56 | CPU_INTACK2     
+722:         CPU0_RW | 31                                          55 | INTC_CS         
+723:             GND | 32                                          54 |                 
+724:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+725:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+726:                    --------------------------------------------                     
+727:                      C C C C C V C C C G V C C C G C C C C D V                     
+728:                      P P P P P C P P P N C P P P N L L P P T C                     
+729:                      U U U U U C U U U D C U U U D K K U U A C                     
+730:                      1 1 0 0 0   0 0 0     0 0 0   _ _ 1 1 C                       
+731:                      _ _ _ _ _   _ _ _     _ _ _   1 1 _ _ K                       
+732:                      B I A D D   D D D     D D D   6 6 R I _                       
+733:                      A N S 0 1   2 3 4     5 6 7   M M E N F                       
+734:                      R T                           _ _ S T R                       
+735:                      R 1                           O O E 2 O                       
+736:                      I                             U U T   M                       
+737:                      E                             T T     _                       
+738:                      R                             B A     I                       
+739:                      1                                     N                       
+740:
+741:
+742:
+743:
+744:*/
+745:
+746:
+747:
+748:
 
 
 
