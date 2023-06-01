@@ -1,0 +1,147 @@
+Name	   DRAMARB;
+PartNo   DRAMARB;
+Date     05/28/2023;
+Revision 01;
+Designer Sponaugle;
+Company  Ratiometric;
+Assembly None;
+Location None;
+Device   f1508ispplcc84;
+
+
+/* 
+   Version 1.1 - 3 node, with 1 node always at high priority.  Use case is for DRAM Refresh, since that should
+*/
+
+
+
+PROPERTY ATMEL {TDI_PULLUP = ON};
+PROPERTY ATMEL {TMS_PULLUP = ON};
+
+/** Inputs **/
+
+Pin = CLK_32M;                  /* Clock */
+Pin = SYS_RESET;                /* Active Low Reset */
+Pin = [REQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
+Pin = REFRESH_REQ;
+Pin = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
+Pin = REFRESH_GRANT;
+
+NODE [REQ_CLOCKED0..1];
+NODE PE_BIAS;
+
+REQ_CLOCKED0.d = REQ0;
+REQ_CLOCKED1.d = REQ1;
+REFRESH_REQ_CLOCKED.d = REFRESH_REQ;
+
+[REQ_CLOCKED0..1].ck = !CLK_32M;
+REFRESH_REQ_CLOCKED.ck = !CLK_32M;
+[REQ_CLOCKED0..1].ap = !SYS_RESET;
+REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
+
+
+PE_BIAS.d = !PE_BIAS;
+PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
+PE_BIAS.ar = RESET_IN;
+
+GRANT_ACTIVE = GRANT0 & GRANT1 & REFRESH_GRANT;   /* Active low signal that either grant is active */
+
+REFRESH_OUT = REFRESH_REQ;            /* refresh requests always win */
+
+PE_OUT_0 = ( !REFRESH_REQ # PE_BIAS # REQ_CLOCKED0) &                     /* if BIAS is towards input 0, set output0 if input0 is set */
+           ( !REFRESH_REQ # !PE_BIAS # (REQ_CLOCKED0 # !REQ_CLOCKED1));  /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
+
+PE_OUT_1 = ( !REFRESH_REQ # !PE_BIAS # REQ_CLOCKED1) &                    /* if BIAS is towards input 1, set output1 if input1 is set */
+           ( !REFRESH_REQ # PE_BIAS # (REQ_CLOCKED1 # !REQ_CLOCKED0));   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
+          
+REFRESH_GRANT.d = ( !GRANT_ACTIVE & REFRESH_GRANT ) #    /* If a grant is active, don't change output state */
+          ( GRANT_ACTIVE & REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
+
+GRANT0.d = ( !GRANT_ACTIVE & GRANT0 ) #        /* If a grant is active, don't change output state */
+          ( GRANT_ACTIVE & PE_OUT_0 );         /* If a grant is not active, grab the output from the priority encoder */
+
+GRANT1.d = ( !GRANT_ACTIVE & GRANT1 ) #        /* If a grant is active, don't change output state */
+          ( GRANT_ACTIVE & PE_OUT_1 );         /* If a grant is not active, grab the output from the priority encoder */       
+
+GRANT0.ap = REQ0;
+GRANT1.ap = REQ1;
+REFRESH_GRANT.ap = REFRESH_REQ;
+[GRANT0..1].ck = CLK_IN;
+REFRESH_GRANT.ck = CLK_IN;
+
+
+
+/* REFRESH TIMER for generating REFRESH REQUESTS */
+
+/* 
+   8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
+   together.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
+   up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
+   0x08.  The produces an event every 15us with an 8MHz clock.   
+
+   If the clock rate is not 32MHz for the core input, this will need to be adjusted.
+
+   The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
+   counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
+   0x08.
+*/
+
+REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
+REFRESH_TIMER_RESET.ck = CLK_32M;
+REFRESH_TIMER_RESET.ar = !CPU_RESET;
+
+REFRESH_TIMER0.d = !REFRESH_TIMER0;
+REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
+REFRESH_TIMER2.d = ( REFRESH_TIMER2 & !REFRESH_TIMER0 )
+                    # ( REFRESH_TIMER2 & !REFRESH_TIMER1 )
+                    # ( !REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+REFRESH_TIMER3.d = ( REFRESH_TIMER3 & !REFRESH_TIMER2 )
+                    # ( REFRESH_TIMER3 & !REFRESH_TIMER0 )
+                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
+                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+
+REFRESH_TIMER4.d = !REFRESH_TIMER4;
+REFRESH_TIMER5.d = REFRESH_TIMER4 $ REFRESH_TIMER5;
+REFRESH_TIMER6.d = ( REFRESH_TIMER6 & !REFRESH_TIMER4 )
+                    # ( REFRESH_TIMER6 & !REFRESH_TIMER5 )
+                    # ( !REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
+                    # ( REFRESH_TIMER7 & !REFRESH_TIMER4 )
+                    # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
+                    # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+
+/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
+8MHz CPU Clock, this CLK_16M is actually Mhz */
+/*[REFRESH_TIMER0..3].ck = CLK_8M;*/
+[REFRESH_TIMER0..3].ck = CLK_16M;
+
+[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
+
+/* 	
+	At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
+	From 0x08 to 0x80 will give is the correct time period of 15us.
+*/
+
+[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
+REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
+
+
+
+
+/*
+Total dedicated input used:	1/4 	(25%)
+Total I/O pins used		11/64 	(17%)
+Total Logic cells used 		6/128 	(4%)
+Total Flip-Flop used 		6/128 	(4%)
+Total Foldback logic used 	1/128 	(0%)
+Total Nodes+FB/MCells 		7/128 	(5%)
+Total cascade used 		0
+Total input pins 		9
+Total output pins 		3
+Total Pts 			22
+
+*/
+
+
+

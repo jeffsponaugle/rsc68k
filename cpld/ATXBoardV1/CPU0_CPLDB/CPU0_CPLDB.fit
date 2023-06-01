@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu Jun 01 10:28:45 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Thu Jun 01 11:05:32 2023
 
 
 fit1508 C:\CPU0_CPLDB.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -91,22 +91,22 @@ IRQL4B_IN_LATCHED.AP equation needs patching.
 
 Attempt to place floating signals ...
 ------------------------------------
-IRQL6B_MASK is placed at feedback node 601 (MC 1)
-IRQL6A_MASK is placed at feedback node 602 (MC 2)
+RESET_REQ is placed at feedback node 601 (MC 1)
+POWERCTL_OE is placed at feedback node 602 (MC 2)
 SYS_RESET_INV is placed at pin 12 (MC 3)
-RESET_REQ is placed at feedback node 604 (MC 4)
+IRQL6B_MASK is placed at feedback node 604 (MC 4)
 CLK_1M is placed at pin 11 (MC 5)
 CLK_500K is placed at pin 10 (MC 6)
-IRQL5B_MASK is placed at feedback node 607 (MC 7)
+IRQL6A_MASK is placed at feedback node 607 (MC 7)
 IRQL3B_IN is placed at pin 9 (MC 8)
-IRQL4B_IN_MASK is placed at feedback node 608 (MC 8)
-POWERCTL_OE is placed at feedback node 609 (MC 9)
-IRQL4A_MASK is placed at feedback node 610 (MC 10)
+IRQL5A_MASK is placed at feedback node 608 (MC 8)
+IRQL5B_MASK is placed at feedback node 609 (MC 9)
+IRQL4B_IN_MASK is placed at feedback node 610 (MC 10)
 IRQL3A_IN is placed at pin 8 (MC 11)
-IRQL3A_MASK is placed at feedback node 611 (MC 11)
-IRQL5A_MASK is placed at feedback node 612 (MC 12)
+IRQL3B_MASK is placed at feedback node 611 (MC 11)
+IRQL4A_MASK is placed at feedback node 612 (MC 12)
 IRQL4B_IN is placed at pin 6 (MC 13)
-IRQL3B_MASK is placed at feedback node 613 (MC 13)
+IRQL3A_MASK is placed at feedback node 613 (MC 13)
 FB_272 is placed at foldback expander node 313 (MC 13)
 IRQL4A_IN is placed at pin 5 (MC 14)
 IRQL2A_MASK is placed at feedback node 614 (MC 14)
@@ -304,121 +304,121 @@ CPU0_D5			(MC9	P)   : MUX 39		Ref (E65p)
 
 FanIn assignment for block B [26]
 {
-CPU0_D4,CPU_INTACK2,CPU0_RW,CPU0_AS,CPU_INTACK1,CLK_16M,CPU_FC2,CPU_FC0,CPU_FC1,CPU_INTACK0,
-DTACK_TIMER_0,DTACK_TIMER_1,
-IRQL6B_IN_LATCHED,IRQL6B_MASK,IRQL5B_IN,IRQL5B_MASK,IRQL2B_IN,IRQL6A_MASK,INTC_CS,IRQL5A_IN,IRQL2B_MASK,IRQL6A_IN_LATCHED,IRQL2A_IN_LATCHED,IRQL5A_MASK,IRQL2A_MASK,
+CPU0_D4,CPU_FC0,CPU0_RW,CPU0_AS,CPU_INTACK1,CPU_INTACK2,CPU_FC2,CLK_16M,CPU_INTACK0,CPU_FC1,
+DTACK_TIMER_1,DTACK_TIMER_0,
+IRQL6B_MASK,IRQL5A_MASK,IRQL6A_MASK,IRQL2B_IN,INTC_CS,IRQL2B_MASK,IRQL6B_IN_LATCHED,IRQL2A_MASK,IRQL5B_IN,IRQL5B_MASK,IRQL2A_IN_LATCHED,IRQL5A_IN,IRQL6A_IN_LATCHED,
 SYS_RESET,
 }
 Multiplexer assignment for block B
-IRQL6B_IN_LATCHED		(MC12	FB)  : MUX 1		Ref (H122fb)
-IRQL6B_MASK		(MC1	FB)  : MUX 2		Ref (A1fb)
-IRQL5B_IN		(MC25	P)   : MUX 4		Ref (A16p)
+IRQL6B_MASK		(MC1	FB)  : MUX 2		Ref (A4fb)
+IRQL5A_MASK		(MC3	FB)  : MUX 4		Ref (A8fb)
 CPU0_D4			(MC10	P)   : MUX 5		Ref (D49p)
 SYS_RESET		(MC9	P)   : MUX 7		Ref (C38p)
-IRQL5B_MASK		(MC3	FB)  : MUX 8		Ref (A7fb)
+IRQL6A_MASK		(MC2	FB)  : MUX 8		Ref (A7fb)
 IRQL2B_IN		(MC24	P)   : MUX 9		Ref (G97p)
-IRQL6A_MASK		(MC2	FB)  : MUX 10		Ref (A2fb)
-CPU_INTACK2		(MC18	P)   : MUX 11		Ref (F86p)
+CPU_FC0			(MC20	P)   : MUX 11		Ref (B19p)
 INTC_CS			(MC17	P)   : MUX 13		Ref (F85p)
 CPU0_RW			(MC16	P)   : MUX 15		Ref (C35p)
 CPU0_AS			(MC19	P)   : MUX 16		Ref (D59p)
 CPU_INTACK1		(MC14	P)   : MUX 17		Ref (F88p)
-DTACK_TIMER_0		(MC8	FB)  : MUX 19		Ref (B30fb)
+CPU_INTACK2		(MC18	P)   : MUX 19		Ref (F86p)
+CPU_FC2			(MC22	P)   : MUX 20		Ref (C46p)
 CLK_16M			(MC26	P)   : MUX 21		Ref (C37p)
-IRQL5A_IN		(MC23	FB)  : MUX 22		Ref (OE2)
 IRQL2B_MASK		(MC6	FB)  : MUX 23		Ref (A15fb)
-IRQL6A_IN_LATCHED		(MC13	FB)  : MUX 25		Ref (H124fb)
-CPU_FC2			(MC22	P)   : MUX 26		Ref (C46p)
-CPU_FC0			(MC20	P)   : MUX 27		Ref (B19p)
-DTACK_TIMER_1		(MC7	FB)  : MUX 31		Ref (B28fb)
-CPU_FC1			(MC21	P)   : MUX 33		Ref (B17p)
-CPU_INTACK0		(MC15	P)   : MUX 34		Ref (F91p)
+CPU_INTACK0		(MC15	P)   : MUX 24		Ref (F91p)
+IRQL6B_IN_LATCHED		(MC12	FB)  : MUX 25		Ref (H122fb)
+DTACK_TIMER_1		(MC7	FB)  : MUX 27		Ref (B28fb)
+IRQL2A_MASK		(MC5	FB)  : MUX 29		Ref (A14fb)
+CPU_FC1			(MC21	P)   : MUX 31		Ref (B17p)
+IRQL5B_IN		(MC25	P)   : MUX 32		Ref (A16p)
+IRQL5B_MASK		(MC4	FB)  : MUX 33		Ref (A9fb)
 IRQL2A_IN_LATCHED		(MC11	FB)  : MUX 35		Ref (E76fb)
-IRQL5A_MASK		(MC4	FB)  : MUX 37		Ref (A12fb)
-IRQL2A_MASK		(MC5	FB)  : MUX 39		Ref (A14fb)
+DTACK_TIMER_0		(MC8	FB)  : MUX 37		Ref (B30fb)
+IRQL5A_IN		(MC23	FB)  : MUX 38		Ref (OE2)
+IRQL6A_IN_LATCHED		(MC13	FB)  : MUX 39		Ref (H124fb)
 
 FanIn assignment for block C [26]
 {
 CLK_16M,
 DEBUG_IN_MASK,DEBUG_IN_LATCHED,
-IRQL5A_IN,IRQL5A_MASK,IRQL6A_MASK,IRQL6B_IN_LATCHED,IRQL6A_IN_LATCHED,
+IRQL6A_MASK,IRQL5A_MASK,IRQL5A_IN,IRQL6B_IN_LATCHED,IRQL6A_IN_LATCHED,
 RESET_REQ_OUT,
 SYS_RESET_IN,
-XXL_294,XXL_290,XXL_292,XXL_288,XXL_275,XXL_273,XXL_298,XXL_289,XXL_274,XXL_293,XXL_286,XXL_297,XXL_296,XXL_291,XXL_287,XXL_295,
+XXL_274,XXL_286,XXL_288,XXL_275,XXL_296,XXL_290,XXL_289,XXL_295,XXL_292,XXL_293,XXL_298,XXL_294,XXL_273,XXL_291,XXL_297,XXL_287,
 }
 Multiplexer assignment for block C
+IRQL6A_MASK		(MC1	FB)  : MUX 0		Ref (A7fb)
 CLK_16M			(MC25	P)   : MUX 1		Ref (C37p)
 DEBUG_IN_MASK		(MC3	FB)  : MUX 3		Ref (A16fb)
-IRQL5A_IN		(MC24	FB)  : MUX 4		Ref (OE2)
-IRQL5A_MASK		(MC2	FB)  : MUX 5		Ref (A12fb)
-XXL_294			(MC9	FB)  : MUX 6		Ref (F83fb)
-XXL_290			(MC18	FB)  : MUX 7		Ref (G111fb)
-XXL_292			(MC14	FB)  : MUX 10		Ref (G103fb)
+DEBUG_IN_LATCHED		(MC20	FB)  : MUX 5		Ref (H121fb)
+IRQL5A_MASK		(MC2	FB)  : MUX 6		Ref (A8fb)
+XXL_274			(MC11	FB)  : MUX 7		Ref (F89fb)
+XXL_286			(MC6	FB)  : MUX 9		Ref (C48fb)
 XXL_288			(MC8	FB)  : MUX 11		Ref (E79fb)
 XXL_275			(MC10	FB)  : MUX 12		Ref (F86fb)
-XXL_273			(MC19	FB)  : MUX 13		Ref (G112fb)
-XXL_298			(MC13	FB)  : MUX 14		Ref (G102fb)
-RESET_REQ_OUT		(MC7	FB)  : MUX 15		Ref (E78fb)
-IRQL6A_MASK		(MC1	FB)  : MUX 16		Ref (A2fb)
+XXL_296			(MC16	FB)  : MUX 13		Ref (G108fb)
+XXL_290			(MC18	FB)  : MUX 15		Ref (G111fb)
+IRQL5A_IN		(MC24	FB)  : MUX 16		Ref (OE2)
 XXL_289			(MC4	FB)  : MUX 17		Ref (B31fb)
-DEBUG_IN_LATCHED		(MC20	FB)  : MUX 19		Ref (H121fb)
-XXL_274			(MC11	FB)  : MUX 21		Ref (F89fb)
-XXL_293			(MC17	FB)  : MUX 23		Ref (G110fb)
-IRQL6B_IN_LATCHED		(MC21	FB)  : MUX 25		Ref (H122fb)
-XXL_286			(MC6	FB)  : MUX 27		Ref (C48fb)
-XXL_297			(MC5	FB)  : MUX 29		Ref (C47fb)
+XXL_295			(MC12	FB)  : MUX 19		Ref (F93fb)
+XXL_292			(MC14	FB)  : MUX 20		Ref (G103fb)
+XXL_293			(MC17	FB)  : MUX 21		Ref (G110fb)
+XXL_298			(MC13	FB)  : MUX 22		Ref (G102fb)
+IRQL6B_IN_LATCHED		(MC21	FB)  : MUX 23		Ref (H122fb)
+XXL_294			(MC9	FB)  : MUX 24		Ref (F83fb)
+IRQL6A_IN_LATCHED		(MC22	FB)  : MUX 25		Ref (H124fb)
+XXL_273			(MC19	FB)  : MUX 27		Ref (G112fb)
 SYS_RESET_IN		(MC26	P)   : MUX 30		Ref (B25p)
-XXL_296			(MC16	FB)  : MUX 31		Ref (G108fb)
+RESET_REQ_OUT		(MC7	FB)  : MUX 31		Ref (E78fb)
 XXL_291			(MC15	FB)  : MUX 33		Ref (G106fb)
-XXL_287			(MC23	FB)  : MUX 35		Ref (H127fb)
-XXL_295			(MC12	FB)  : MUX 37		Ref (F93fb)
-IRQL6A_IN_LATCHED		(MC22	FB)  : MUX 39		Ref (H124fb)
+XXL_297			(MC5	FB)  : MUX 37		Ref (C47fb)
+XXL_287			(MC23	FB)  : MUX 39		Ref (H127fb)
 
 FanIn assignment for block D [26]
 {
-CPU_INTACK2,CPU_INTACK1,Com_Ctrl_267,CPU_INTACK0,CPU0_D3,CPU_FC0,CPU_FC2,CPU0_D6,CPU0_AS,Com_Ctrl_268,CLK_2M,CLK_16M_OUTA,CLK_4M,CPU_FC1,CPU0_RW,CLK_8M,
+CPU_INTACK2,Com_Ctrl_267,CPU0_D3,CPU_FC0,CPU0_AS,CLK_16M_OUTA,CPU0_D6,Com_Ctrl_268,CLK_2M,CPU_FC2,CPU0_RW,CLK_4M,CPU_FC1,CPU_INTACK0,CPU_INTACK1,CLK_8M,
 DTACK_TIMER_1,
-IRQL4B_IN_LATCHED,IRQL4A_MASK,IRQL4B_IN_MASK,IRQL4A_IN_LATCHED,INTC_CS,
+IRQL4B_IN_LATCHED,IRQL4B_IN_MASK,IRQL4A_MASK,IRQL4A_IN_LATCHED,INTC_CS,
 SYS_RESET,
 XXL_299,XXL_301,XXL_300,
 }
 Multiplexer assignment for block D
 CPU_INTACK2		(MC22	P)   : MUX 1		Ref (F86p)
 IRQL4B_IN_LATCHED		(MC16	FB)  : MUX 2		Ref (G98fb)
-CPU_INTACK1		(MC18	P)   : MUX 3		Ref (F88p)
 Com_Ctrl_267		(MC3	FB)  : MUX 4		Ref (B24fb)
 XXL_299			(MC14	FB)  : MUX 5		Ref (F95fb)
-CPU_INTACK0		(MC19	P)   : MUX 6		Ref (F91p)
 SYS_RESET		(MC7	P)   : MUX 7		Ref (C38p)
 CPU0_D3			(MC8	P)   : MUX 9		Ref (D51p)
 CPU_FC0			(MC24	P)   : MUX 11		Ref (B19p)
-CPU_FC2			(MC26	P)   : MUX 12		Ref (C46p)
-IRQL4A_MASK		(MC2	FB)  : MUX 13		Ref (A10fb)
+CPU0_AS			(MC23	P)   : MUX 12		Ref (D59p)
+IRQL4B_IN_MASK		(MC1	FB)  : MUX 13		Ref (A10fb)
+CLK_16M_OUTA		(MC13	P)   : MUX 14		Ref (E73p)
 CPU0_D6			(MC12	P)   : MUX 15		Ref (E67p)
-CPU0_AS			(MC23	P)   : MUX 16		Ref (D59p)
 Com_Ctrl_268		(MC4	FB)  : MUX 17		Ref (B25fb)
-IRQL4B_IN_MASK		(MC1	FB)  : MUX 18		Ref (A8fb)
 CLK_2M			(MC11	FB)  : MUX 19		Ref (D63fb)
-CLK_16M_OUTA		(MC13	P)   : MUX 20		Ref (E73p)
+CPU_FC2			(MC26	P)   : MUX 20		Ref (C46p)
+IRQL4A_MASK		(MC2	FB)  : MUX 21		Ref (A12fb)
 IRQL4A_IN_LATCHED		(MC17	FB)  : MUX 22		Ref (G100fb)
+CPU0_RW			(MC20	P)   : MUX 23		Ref (C35p)
 CLK_4M			(MC10	FB)  : MUX 25		Ref (D60fb)
 DTACK_TIMER_1		(MC5	FB)  : MUX 27		Ref (B28fb)
 XXL_301			(MC6	FB)  : MUX 29		Ref (B32fb)
 INTC_CS			(MC21	P)   : MUX 31		Ref (F85p)
 CPU_FC1			(MC25	P)   : MUX 33		Ref (B17p)
-CPU0_RW			(MC20	P)   : MUX 35		Ref (C35p)
+CPU_INTACK0		(MC19	P)   : MUX 34		Ref (F91p)
+CPU_INTACK1		(MC18	P)   : MUX 35		Ref (F88p)
 CLK_8M			(MC9	FB)  : MUX 37		Ref (D59fb)
 XXL_300			(MC15	FB)  : MUX 39		Ref (F96fb)
 
 FanIn assignment for block E [26]
 {
-CLK_16M_OUTA,CPU_INTACK2,Com_Ctrl_267,CPU_INTACK0,CPU0_D5,CLK_500K,CPU0_D7,CPU_FC2,CPU0_RW,CPU0_AS,CPU_INTACK1,CLK_32M,CPU_FC0,CPU_FC1,Com_Ctrl_268,
+CLK_16M_OUTA,CPU_INTACK2,Com_Ctrl_267,CPU_INTACK0,CPU0_D5,CLK_500K,CPU0_D7,CPU0_RW,CPU0_AS,CPU_INTACK1,CLK_32M,CPU_FC2,CPU_FC0,CPU_FC1,Com_Ctrl_268,
 DTACK_TIMER_1,
 INTC_CS,IRQL2A_IN_LATCHED.AP,
 POWERCTL_STATE,
 RESET_REQ,
 SYS_RESET,
-XXL_281,XXL_284,XXL_282,XXL_283,XXL_285,
+XXL_281,XXL_282,XXL_285,XXL_283,XXL_284,
 }
 Multiplexer assignment for block E
 CLK_16M_OUTA		(MC10	P)   : MUX 0		Ref (E73p)
@@ -427,9 +427,9 @@ Com_Ctrl_267		(MC4	FB)  : MUX 2		Ref (B24fb)
 INTC_CS			(MC20	P)   : MUX 5		Ref (F85p)
 CPU_INTACK0		(MC18	P)   : MUX 6		Ref (F91p)
 CPU0_D5			(MC8	P)   : MUX 7		Ref (E65p)
+RESET_REQ		(MC1	FB)  : MUX 8		Ref (A1fb)
 CLK_500K		(MC2	P)   : MUX 9		Ref (A6p)
 CPU0_D7			(MC9	P)   : MUX 11		Ref (E69p)
-CPU_FC2			(MC25	P)   : MUX 12		Ref (C46p)
 DTACK_TIMER_1		(MC6	FB)  : MUX 13		Ref (B28fb)
 XXL_281			(MC13	FB)  : MUX 14		Ref (F88fb)
 CPU0_RW			(MC19	P)   : MUX 15		Ref (C35p)
@@ -437,108 +437,108 @@ CPU0_AS			(MC22	P)   : MUX 16		Ref (D59p)
 SYS_RESET		(MC7	P)   : MUX 17		Ref (C38p)
 IRQL2A_IN_LATCHED.AP		(MC3	FB)  : MUX 18		Ref (B23fb)
 CPU_INTACK1		(MC17	P)   : MUX 21		Ref (F88p)
-XXL_284			(MC12	FB)  : MUX 22		Ref (F87fb)
 CLK_32M			(MC26	P)   : MUX 23		Ref (B24p)
 XXL_282			(MC14	FB)  : MUX 25		Ref (F91fb)
+CPU_FC2			(MC25	P)   : MUX 26		Ref (C46p)
 CPU_FC0			(MC23	P)   : MUX 27		Ref (B19p)
+XXL_285			(MC11	FB)  : MUX 28		Ref (F82fb)
 POWERCTL_STATE		(MC16	P)   : MUX 29		Ref (H118p)
 XXL_283			(MC15	FB)  : MUX 31		Ref (F94fb)
-XXL_285			(MC11	FB)  : MUX 32		Ref (F82fb)
+XXL_284			(MC12	FB)  : MUX 32		Ref (F87fb)
 CPU_FC1			(MC24	P)   : MUX 33		Ref (B17p)
 Com_Ctrl_268		(MC5	FB)  : MUX 37		Ref (B25fb)
-RESET_REQ		(MC1	FB)  : MUX 38		Ref (A4fb)
 
 FanIn assignment for block F [26]
 {
-CPU_INTACK2,CPU_INTACK0,CPU_FC1,CPU0_AS,CPU_INTACK1,CPU_FC2,CPU_FC0,
-IRQL4B_IN_LATCHED,IRQL6A_IN_LATCHED,IRQL6B_MASK,IRQL2B_MASK,IRQL4A_MASK,IRQL5B_MASK,IRQL3A_IN,IRQL4A_IN_LATCHED,IRQL4B_IN_MASK,IRQL5A_MASK,IRQL3B_IN,IRQL3A_MASK,IRQL2B_IN,IRQL6A_MASK,IRQL5B_IN,IRQL5A_IN,IRQL2A_IN_LATCHED,IRQL3B_MASK,IRQL2A_MASK,
+CPU_INTACK2,CPU_INTACK1,CPU_FC0,CPU_FC1,CPU0_AS,CPU_FC2,CPU_INTACK0,
+IRQL4B_IN_LATCHED,IRQL5A_MASK,IRQL2B_MASK,IRQL3B_IN,IRQL6A_MASK,IRQL5B_IN,IRQL4B_IN_MASK,IRQL4A_IN_LATCHED,IRQL5B_MASK,IRQL4A_MASK,IRQL3B_MASK,IRQL6A_IN_LATCHED,IRQL2B_IN,IRQL3A_IN,IRQL6B_MASK,IRQL2A_IN_LATCHED,IRQL3A_MASK,IRQL5A_IN,IRQL2A_MASK,
 }
 Multiplexer assignment for block F
 CPU_INTACK2		(MC17	P)   : MUX 1		Ref (F86p)
 IRQL4B_IN_LATCHED		(MC12	FB)  : MUX 2		Ref (G98fb)
-IRQL6A_IN_LATCHED		(MC14	FB)  : MUX 3		Ref (H124fb)
-IRQL6B_MASK		(MC1	FB)  : MUX 4		Ref (A1fb)
+CPU_INTACK1		(MC15	P)   : MUX 3		Ref (F88p)
+IRQL5A_MASK		(MC3	FB)  : MUX 4		Ref (A8fb)
 IRQL2B_MASK		(MC10	FB)  : MUX 5		Ref (A15fb)
-CPU_INTACK0		(MC16	P)   : MUX 6		Ref (F91p)
-IRQL4A_MASK		(MC5	FB)  : MUX 7		Ref (A10fb)
-IRQL5B_MASK		(MC3	FB)  : MUX 8		Ref (A7fb)
-IRQL3A_IN		(MC26	P)   : MUX 10		Ref (A11p)
-CPU_FC1			(MC20	P)   : MUX 13		Ref (B17p)
+IRQL3B_IN		(MC25	P)   : MUX 7		Ref (A8p)
+IRQL6A_MASK		(MC2	FB)  : MUX 8		Ref (A7fb)
+IRQL5B_IN		(MC24	P)   : MUX 10		Ref (A16p)
+CPU_FC0			(MC19	P)   : MUX 11		Ref (B19p)
+IRQL4B_IN_MASK		(MC5	FB)  : MUX 13		Ref (A10fb)
 IRQL4A_IN_LATCHED		(MC13	FB)  : MUX 14		Ref (G100fb)
+CPU_FC1			(MC20	P)   : MUX 15		Ref (B17p)
 CPU0_AS			(MC18	P)   : MUX 16		Ref (D59p)
-CPU_INTACK1		(MC15	P)   : MUX 17		Ref (F88p)
-IRQL4B_IN_MASK		(MC4	FB)  : MUX 18		Ref (A8fb)
-IRQL5A_MASK		(MC7	FB)  : MUX 19		Ref (A12fb)
-IRQL3B_IN		(MC25	P)   : MUX 21		Ref (A8p)
-IRQL3A_MASK		(MC6	FB)  : MUX 23		Ref (A11fb)
-IRQL2B_IN		(MC23	P)   : MUX 25		Ref (G97p)
-CPU_FC2			(MC21	P)   : MUX 26		Ref (C46p)
-CPU_FC0			(MC19	P)   : MUX 27		Ref (B19p)
-IRQL6A_MASK		(MC2	FB)  : MUX 28		Ref (A2fb)
-IRQL5B_IN		(MC24	P)   : MUX 32		Ref (A16p)
-IRQL5A_IN		(MC22	FB)  : MUX 34		Ref (OE2)
+IRQL5B_MASK		(MC4	FB)  : MUX 17		Ref (A9fb)
+CPU_FC2			(MC21	P)   : MUX 20		Ref (C46p)
+IRQL4A_MASK		(MC7	FB)  : MUX 21		Ref (A12fb)
+IRQL3B_MASK		(MC6	FB)  : MUX 23		Ref (A11fb)
+CPU_INTACK0		(MC16	P)   : MUX 24		Ref (F91p)
+IRQL6A_IN_LATCHED		(MC14	FB)  : MUX 25		Ref (H124fb)
+IRQL2B_IN		(MC23	P)   : MUX 27		Ref (G97p)
+IRQL3A_IN		(MC26	P)   : MUX 28		Ref (A11p)
+IRQL6B_MASK		(MC1	FB)  : MUX 32		Ref (A4fb)
 IRQL2A_IN_LATCHED		(MC11	FB)  : MUX 35		Ref (E76fb)
-IRQL3B_MASK		(MC8	FB)  : MUX 37		Ref (A13fb)
+IRQL3A_MASK		(MC8	FB)  : MUX 37		Ref (A13fb)
+IRQL5A_IN		(MC22	FB)  : MUX 38		Ref (OE2)
 IRQL2A_MASK		(MC9	FB)  : MUX 39		Ref (A14fb)
 
 FanIn assignment for block G [26]
 {
 DEBUG_IN_MASK,DEBUG_IN_LATCHED,
-IRQL6B_MASK,IRQL3B_IN,IRQL5A_IN,IRQL2B_MASK,IRQL2B_IN,IRQL5B_MASK,IRQL3A_MASK,IRQL3A_IN,IRQL2A_MASK,IRQL4A_MASK,IRQL4A_IN_LATCHED,IRQL3B_MASK,IRQL6A_MASK,IRQL4B_IN_MASK,IRQL6B_IN_LATCHED,IRQL6A_IN_LATCHED,IRQL4A_IN,IRQL4A_IN_LATCHED.AP,IRQL4B_IN,IRQL4A_IN_LATCHED.AP,IRQL4B_IN_LATCHED,IRQL5B_IN,IRQL2A_IN_LATCHED,IRQL5A_MASK,
+IRQL4B_IN_LATCHED,IRQL3B_IN,IRQL5B_IN,IRQL2B_MASK,IRQL5A_MASK,IRQL2B_IN,IRQL6A_MASK,IRQL3B_MASK,IRQL5B_MASK,IRQL4A_IN,IRQL4B_IN_MASK,IRQL4A_IN_LATCHED,IRQL3A_MASK,IRQL4B_IN,IRQL6B_IN_LATCHED,IRQL3A_IN,IRQL6A_IN_LATCHED,IRQL2A_MASK,IRQL4B_IN_LATCHED.AP,IRQL6B_MASK,IRQL2A_IN_LATCHED,IRQL4A_MASK,IRQL5A_IN,IRQL4B_IN_LATCHED.AP,
 }
 Multiplexer assignment for block G
 DEBUG_IN_MASK		(MC11	FB)  : MUX 1		Ref (A16fb)
-IRQL6B_MASK		(MC1	FB)  : MUX 2		Ref (A1fb)
+IRQL4B_IN_LATCHED		(MC15	FB)  : MUX 2		Ref (G98fb)
 IRQL3B_IN		(MC23	P)   : MUX 3		Ref (A8p)
-IRQL5A_IN		(MC20	FB)  : MUX 4		Ref (OE2)
+IRQL5B_IN		(MC22	P)   : MUX 4		Ref (A16p)
 IRQL2B_MASK		(MC10	FB)  : MUX 5		Ref (A15fb)
+IRQL5A_MASK		(MC3	FB)  : MUX 6		Ref (A8fb)
 IRQL2B_IN		(MC21	P)   : MUX 7		Ref (G97p)
-IRQL5B_MASK		(MC3	FB)  : MUX 8		Ref (A7fb)
-IRQL3A_MASK		(MC6	FB)  : MUX 9		Ref (A11fb)
-IRQL3A_IN		(MC24	P)   : MUX 10		Ref (A11p)
-IRQL2A_MASK		(MC9	FB)  : MUX 11		Ref (A14fb)
-IRQL4A_MASK		(MC5	FB)  : MUX 13		Ref (A10fb)
+IRQL6A_MASK		(MC2	FB)  : MUX 8		Ref (A7fb)
+IRQL3B_MASK		(MC6	FB)  : MUX 9		Ref (A11fb)
+IRQL5B_MASK		(MC4	FB)  : MUX 11		Ref (A9fb)
+IRQL4A_IN		(MC25	P)   : MUX 12		Ref (A14p)
+IRQL4B_IN_MASK		(MC5	FB)  : MUX 13		Ref (A10fb)
 IRQL4A_IN_LATCHED		(MC16	FB)  : MUX 14		Ref (G100fb)
-IRQL3B_MASK		(MC8	FB)  : MUX 15		Ref (A13fb)
-IRQL6A_MASK		(MC2	FB)  : MUX 16		Ref (A2fb)
-IRQL4B_IN_MASK		(MC4	FB)  : MUX 18		Ref (A8fb)
+IRQL3A_MASK		(MC8	FB)  : MUX 15		Ref (A13fb)
+DEBUG_IN_LATCHED		(MC17	FB)  : MUX 17		Ref (H121fb)
+IRQL4B_IN		(MC26	P)   : MUX 20		Ref (A13p)
 IRQL6B_IN_LATCHED		(MC18	FB)  : MUX 23		Ref (H122fb)
+IRQL3A_IN		(MC24	P)   : MUX 24		Ref (A11p)
 IRQL6A_IN_LATCHED		(MC19	FB)  : MUX 25		Ref (H124fb)
-IRQL4A_IN		(MC25	P)   : MUX 26		Ref (A14p)
-IRQL4B_IN_LATCHED.AP		(MC13	FB)  : MUX 27		Ref (D62fb)
-IRQL4B_IN		(MC26	P)   : MUX 28		Ref (A13p)
+IRQL2A_MASK		(MC9	FB)  : MUX 27		Ref (A14fb)
 IRQL4A_IN_LATCHED.AP		(MC12	FB)  : MUX 29		Ref (D58fb)
-IRQL4B_IN_LATCHED		(MC15	FB)  : MUX 30		Ref (G98fb)
-DEBUG_IN_LATCHED		(MC17	FB)  : MUX 31		Ref (H121fb)
-IRQL5B_IN		(MC22	P)   : MUX 32		Ref (A16p)
+IRQL6B_MASK		(MC1	FB)  : MUX 32		Ref (A4fb)
 IRQL2A_IN_LATCHED		(MC14	FB)  : MUX 35		Ref (E76fb)
-IRQL5A_MASK		(MC7	FB)  : MUX 37		Ref (A12fb)
+IRQL4A_MASK		(MC7	FB)  : MUX 37		Ref (A12fb)
+IRQL5A_IN		(MC20	FB)  : MUX 38		Ref (OE2)
+IRQL4B_IN_LATCHED.AP		(MC13	FB)  : MUX 39		Ref (D62fb)
 
 FanIn assignment for block H [17]
 {
-CPU0_D0,CPU0_RW,CPU_INTACK1,CPU_INTACK0,
-IRQL6B_IN,IRQL6A_IN,INTC_CS,IRQL6A_IN_LATCHED.AP,IRQL6A_IN_LATCHED.AP,IRQL6A_IN_LATCHED.AP,
+CPU_INTACK0,CPU_INTACK1,CPU0_D0,CPU0_RW,
+IRQL6B_IN,IRQL6A_IN,IRQL6A_IN_LATCHED.AP,INTC_CS,IRQL6A_IN_LATCHED.AP,IRQL6A_IN_LATCHED.AP,
 POWERCTL_OE,
 SYS_RESET,
-XXL_280,XXL_276,XXL_278,XXL_279,XXL_277,
+XXL_278,XXL_280,XXL_276,XXL_279,XXL_277,
 }
 Multiplexer assignment for block H
 IRQL6B_IN		(MC17	FB)  : MUX 2		Ref (GCLR)
 IRQL6A_IN		(MC16	FB)  : MUX 3		Ref (OE1)
-CPU0_D0			(MC6	P)   : MUX 4		Ref (D57p)
-INTC_CS			(MC15	P)   : MUX 5		Ref (F85p)
+XXL_278			(MC8	FB)  : MUX 4		Ref (F84fb)
 SYS_RESET		(MC5	P)   : MUX 7		Ref (C38p)
 XXL_280			(MC7	FB)  : MUX 8		Ref (F81fb)
-CPU0_RW			(MC14	P)   : MUX 9		Ref (C35p)
+POWERCTL_OE		(MC1	FB)  : MUX 10		Ref (A2fb)
 XXL_276			(MC10	FB)  : MUX 11		Ref (F90fb)
-XXL_278			(MC8	FB)  : MUX 16		Ref (F84fb)
-POWERCTL_OE		(MC1	FB)  : MUX 17		Ref (A9fb)
+CPU_INTACK0		(MC13	P)   : MUX 16		Ref (F91p)
+XXL_279			(MC11	FB)  : MUX 17		Ref (F92fb)
 DEBUG_IN_LATCHED.AP		(MC2	FB)  : MUX 20		Ref (B20fb)
 CPU_INTACK1		(MC12	P)   : MUX 21		Ref (F88p)
-XXL_279			(MC11	FB)  : MUX 23		Ref (F92fb)
-CPU_INTACK0		(MC13	P)   : MUX 24		Ref (F91p)
+INTC_CS			(MC15	P)   : MUX 23		Ref (F85p)
+CPU0_D0			(MC6	P)   : MUX 28		Ref (D57p)
 IRQL6B_IN_LATCHED.AP		(MC4	FB)  : MUX 29		Ref (B26fb)
 IRQL6A_IN_LATCHED.AP		(MC3	FB)  : MUX 30		Ref (B22fb)
+CPU0_RW			(MC14	P)   : MUX 35		Ref (C35p)
 XXL_277			(MC9	FB)  : MUX 38		Ref (F85fb)
 
 Creating JEDEC file C:\CPU0_CPLDB.jed ...
@@ -1116,16 +1116,16 @@ PINNODE 346 = FB_269; /* MC 46 Foldback */
 PINNODE 364 = Com_Ctrl_266; /* MC 64 Foldback */
 PINNODE 380 = Com_Ctrl_266; /* MC 80 Foldback */
 PINNODE 428 = Com_Ctrl_263; /* MC 128 Foldback */
-PINNODE 601 = IRQL6B_MASK; /* MC 1 Feedback */
-PINNODE 602 = IRQL6A_MASK; /* MC 2 Feedback */
-PINNODE 604 = RESET_REQ; /* MC 4 Feedback */
-PINNODE 607 = IRQL5B_MASK; /* MC 7 Feedback */
-PINNODE 608 = IRQL4B_IN_MASK; /* MC 8 Feedback */
-PINNODE 609 = POWERCTL_OE; /* MC 9 Feedback */
-PINNODE 610 = IRQL4A_MASK; /* MC 10 Feedback */
-PINNODE 611 = IRQL3A_MASK; /* MC 11 Feedback */
-PINNODE 612 = IRQL5A_MASK; /* MC 12 Feedback */
-PINNODE 613 = IRQL3B_MASK; /* MC 13 Feedback */
+PINNODE 601 = RESET_REQ; /* MC 1 Feedback */
+PINNODE 602 = POWERCTL_OE; /* MC 2 Feedback */
+PINNODE 604 = IRQL6B_MASK; /* MC 4 Feedback */
+PINNODE 607 = IRQL6A_MASK; /* MC 7 Feedback */
+PINNODE 608 = IRQL5A_MASK; /* MC 8 Feedback */
+PINNODE 609 = IRQL5B_MASK; /* MC 9 Feedback */
+PINNODE 610 = IRQL4B_IN_MASK; /* MC 10 Feedback */
+PINNODE 611 = IRQL3B_MASK; /* MC 11 Feedback */
+PINNODE 612 = IRQL4A_MASK; /* MC 12 Feedback */
+PINNODE 613 = IRQL3A_MASK; /* MC 13 Feedback */
 PINNODE 614 = IRQL2A_MASK; /* MC 14 Feedback */
 PINNODE 615 = IRQL2B_MASK; /* MC 15 Feedback */
 PINNODE 616 = DEBUG_IN_MASK; /* MC 16 Feedback */
@@ -1197,19 +1197,19 @@ DCERP Field = Summary of Allocations.
 For input only = INPUT.
 
 MCell Pin# Oe   PinDrive       DCERP  FBDrive              DCERP  Foldback     CascadeOut     TotPT output_slew
-MC1   0         --                    IRQL6B_MASK          Dc--p  --           --             3     slow
-MC2   0         --                    IRQL6A_MASK          Dc--p  --           --             3     slow
+MC1   0         --                    RESET_REQ            Dc-r-  --           --             3     slow
+MC2   0         --                    POWERCTL_OE          Dc-r-  --           --             3     slow
 MC3   12   on   SYS_RESET_INV  C----  --                          --           --             1     slow
-MC4   0         --                    RESET_REQ            Dc-r-  --           --             3     slow
+MC4   0         --                    IRQL6B_MASK          Dc--p  --           --             3     slow
 MC5   11   on   CLK_1M         Dc-r-  --                          --           --             3     slow
 MC6   10   on   CLK_500K       Dc-r-  --                          --           --             3     slow
-MC7   0         --                    IRQL5B_MASK          Dc--p  --           --             3     slow
-MC8   9    --   IRQL3B_IN      INPUT  IRQL4B_IN_MASK       Dc--p  --           --             3     slow
-MC9   0         --                    POWERCTL_OE          Dc-r-  --           --             3     slow
-MC10  0         --                    IRQL4A_MASK          Dc--p  --           --             3     slow
-MC11  8    --   IRQL3A_IN      INPUT  IRQL3A_MASK          Dc--p  --           --             3     slow
-MC12  0         --                    IRQL5A_MASK          Dc--p  --           --             3     slow
-MC13  6    --   IRQL4B_IN      INPUT  IRQL3B_MASK          Dc--p  FB_272       --             4     slow
+MC7   0         --                    IRQL6A_MASK          Dc--p  --           --             3     slow
+MC8   9    --   IRQL3B_IN      INPUT  IRQL5A_MASK          Dc--p  --           --             3     slow
+MC9   0         --                    IRQL5B_MASK          Dc--p  --           --             3     slow
+MC10  0         --                    IRQL4B_IN_MASK       Dc--p  --           --             3     slow
+MC11  8    --   IRQL3A_IN      INPUT  IRQL3B_MASK          Dc--p  --           --             3     slow
+MC12  0         --                    IRQL4A_MASK          Dc--p  --           --             3     slow
+MC13  6    --   IRQL4B_IN      INPUT  IRQL3A_MASK          Dc--p  FB_272       --             4     slow
 MC14  5    --   IRQL4A_IN      INPUT  IRQL2A_MASK          Dc--p  Com_Ctrl_265 --             4     slow
 MC15  0         --                    IRQL2B_MASK          Dc--p  Com_Ctrl_264 --             4     slow
 MC16  4    --   IRQL5B_IN      INPUT  DEBUG_IN_MASK        Dc--p  Com_Ctrl_263 --             4     slow

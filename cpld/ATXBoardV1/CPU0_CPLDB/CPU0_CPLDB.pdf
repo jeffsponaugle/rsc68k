@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Thu Jun 01 10:28:44 2023 "}
+  {DBtime "Thu Jun 01 11:05:31 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -43,29 +43,37 @@
    {P IRQL3B_I {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
    {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
    {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
-   {P SYS_RES {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
-   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
-   {P CPU_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
-   {P CPU_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
-   {P CPU_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
-   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
-   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
-   {P CPU0_RW {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
-   {P CPU0_AS {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
-   {P CPU0_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P CPU0_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P CPU0_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P CPU0_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P CPU0_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P CPU0_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P CPU0_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P CPU0_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P INTC_CS {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P CPU_IN2 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P CPU_IN1 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P POWERCTL {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P IRQL6A_I {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P CPU1_I2 {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P SYS_RES {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P CPU_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P CPU_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P CPU_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P CPU0_RW {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P CPU1_B1 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CPU1_HAL {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P CPU0_AS {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P CPU0_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P CPU0_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P CPU0_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P CPU0_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P CPU0_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P CPU0_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P CPU0_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU0_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P CLK_16 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P CLK_16M_ {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P CPU1_RES {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P CPU1_I1 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P INTC_CS {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P CPU_IN2 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P CPU_IN1 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P IRQL2B_I {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P POWERCTL {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P IRQL6A_I {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P SYS_RE {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P CPU0_VPA {Pt "I/O"}{Lq 0}{Ploc 360 40}}
    {P CPU0_HAL {Pt "I/O"}{Lq 0}{Ploc 360 60}}
@@ -116,6 +124,14 @@
    {Pnl 120 230}
    {Pnl 120 210}
    {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
    [Ts 15][Tj "LC"]
    {Pnl 340 30}
    {Pnl 340 50}
@@ -125,7 +141,7 @@
    {Pnl 340 130}
    {Pnl 340 150}
 
-   {Sd A 83 1 2 4 5 6 8 9 10 11 17 18 21 22 24 29 30 31 35 36 37 39 40 41 44 45 46 55 56 57 58 75 84 12 16 20 25 27 28 52}
+   {Sd A 83 1 2 4 5 6 8 9 10 11 15 17 18 21 22 24 29 30 31 33 34 35 36 37 39 40 41 44 45 46 48 49 50 51 55 56 57 58 63 75 84 12 16 20 25 27 28 52}
   }
 
   {PIC
@@ -166,6 +182,14 @@
    {L 130 220 100 220}
    {L 130 200 100 200}
    {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
    {L 330 20 360 20}
    {L 330 40 360 40}
    {L 330 60 360 60}
@@ -185,29 +209,37 @@
    {T "IRQL3B_I" 140 680}
    {T "CLK_500K" 140 660}
    {T "CLK_1M" 140 640}
-   {T "SYS_RES" 140 620}
-   {T "CLK_32M" 140 600}
-   {T "CPU_FC0" 140 580}
-   {T "CPU_FC1" 140 560}
-   {T "CPU_FC2" 140 540}
-   {T "SYS_RESE" 140 520}
-   {T "CLK_16M" 140 500}
-   {T "CPU0_RW" 140 480}
-   {T "CPU0_AS" 140 460}
-   {T "CPU0_D0" 140 440}
-   {T "CPU0_D1" 140 420}
-   {T "CPU0_D2" 140 400}
-   {T "CPU0_D3" 140 380}
-   {T "CPU0_D4" 140 360}
-   {T "CPU0_D5" 140 340}
-   {T "CPU0_D6" 140 320}
-   {T "CPU0_D7" 140 300}
-   {T "INTC_CS" 140 280}
-   {T "CPU_IN2" 140 260}
-   {T "CPU_IN1" 140 240}
-   {T "CPU_IN0" 140 220}
-   {T "POWERCTL" 140 200}
-   {T "IRQL6A_I" 140 180}
+   {T "CPU1_I2" 140 620}
+   {T "SYS_RES" 140 600}
+   {T "CLK_32M" 140 580}
+   {T "CPU_FC0" 140 560}
+   {T "CPU_FC1" 140 540}
+   {T "CPU_FC2" 140 520}
+   {T "SYS_RESE" 140 500}
+   {T "CLK_16M" 140 480}
+   {T "CPU0_RW" 140 460}
+   {T "CPU1_B1" 140 440}
+   {T "CPU1_HAL" 140 420}
+   {T "CPU0_AS" 140 400}
+   {T "CPU0_D0" 140 380}
+   {T "CPU0_D1" 140 360}
+   {T "CPU0_D2" 140 340}
+   {T "CPU0_D3" 140 320}
+   {T "CPU0_D4" 140 300}
+   {T "CPU0_D5" 140 280}
+   {T "CPU0_D6" 140 260}
+   {T "CPU0_D7" 140 240}
+   {T "CLK_16" 140 220}
+   {T "CLK_16M_" 140 200}
+   {T "CPU1_RES" 140 180}
+   {T "CPU1_I1" 140 160}
+   {T "INTC_CS" 140 140}
+   {T "CPU_IN2" 140 120}
+   {T "CPU_IN1" 140 100}
+   {T "CPU_IN0" 140 80}
+   {T "IRQL2B_I" 140 60}
+   {T "POWERCTL" 140 40}
+   {T "IRQL6A_I" 140 20}
    [Tj "RC"]
    {T "SYS_RE" 320 20}
    {T "CPU0_VPA" 320 40}
@@ -223,7 +255,7 @@
 
   {ATR
    {IN
-    {Org 100 180}
+    {Org 100 20}
     {Ty 255}
    }
    {EX
@@ -259,6 +291,8 @@
    }
    {N CLK_1M
    }
+   {N CPU1_I2
+   }
    {N SYS_RES
    }
    {N CLK_32M
@@ -274,6 +308,10 @@
    {N CLK_16M
    }
    {N CPU0_RW
+   }
+   {N CPU1_B1
+   }
+   {N CPU1_HAL
    }
    {N CPU0_AS
    }
@@ -293,6 +331,14 @@
    }
    {N CPU0_D7
    }
+   {N CLK_16
+   }
+   {N CLK_16M_
+   }
+   {N CPU1_RES
+   }
+   {N CPU1_I1
+   }
    {N INTC_CS
    }
    {N CPU_IN2
@@ -300,6 +346,8 @@
    {N CPU_IN1
    }
    {N CPU_IN0
+   }
+   {N IRQL2B_I
    }
    {N POWERCTL
    }

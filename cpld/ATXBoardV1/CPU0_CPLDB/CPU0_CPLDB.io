@@ -2,22 +2,22 @@ CHIP "C:\CPU0_CPLDB"
 BEGIN
 
     DEVICE = "PLCC84";
-    "IRQL6B_MASK"                             : NODE_NUM = 601 ;
-    "IRQL6A_MASK"                             : NODE_NUM = 602 ;
+    "RESET_REQ"                               : NODE_NUM = 601 ;
+    "POWERCTL_OE"                             : NODE_NUM = 602 ;
     "SYS_RESET_INV"                           : OUTPUT_PIN = 12 ;
-    "RESET_REQ"                               : NODE_NUM = 604 ;
+    "IRQL6B_MASK"                             : NODE_NUM = 604 ;
     "CLK_1M"                                  : OUTPUT_PIN = 11 ;
     "CLK_500K"                                : OUTPUT_PIN = 10 ;
-    "IRQL5B_MASK"                             : NODE_NUM = 607 ;
+    "IRQL6A_MASK"                             : NODE_NUM = 607 ;
     "IRQL3B_IN"                               : INPUT_PIN = 9 ;
-    "IRQL4B_IN_MASK"                          : NODE_NUM = 608 ;
-    "POWERCTL_OE"                             : NODE_NUM = 609 ;
-    "IRQL4A_MASK"                             : NODE_NUM = 610 ;
+    "IRQL5A_MASK"                             : NODE_NUM = 608 ;
+    "IRQL5B_MASK"                             : NODE_NUM = 609 ;
+    "IRQL4B_IN_MASK"                          : NODE_NUM = 610 ;
     "IRQL3A_IN"                               : INPUT_PIN = 8 ;
-    "IRQL3A_MASK"                             : NODE_NUM = 611 ;
-    "IRQL5A_MASK"                             : NODE_NUM = 612 ;
+    "IRQL3B_MASK"                             : NODE_NUM = 611 ;
+    "IRQL4A_MASK"                             : NODE_NUM = 612 ;
     "IRQL4B_IN"                               : INPUT_PIN = 6 ;
-    "IRQL3B_MASK"                             : NODE_NUM = 613 ;
+    "IRQL3A_MASK"                             : NODE_NUM = 613 ;
     "IRQL4A_IN"                               : INPUT_PIN = 5 ;
     "IRQL2A_MASK"                             : NODE_NUM = 614 ;
     "IRQL2B_MASK"                             : NODE_NUM = 615 ;

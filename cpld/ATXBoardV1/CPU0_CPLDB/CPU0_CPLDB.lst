@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
   1:Name     CPU0_CPLDB;
   2:PartNo   CPU0_CPLDB;
@@ -36,13 +36,13 @@ Created Thu Jun 01 10:12:14 2023
  29:Pin[2,4]   = IRQL5A_IN,IRQL5B_IN;
  30:Pin[5,6]   = IRQL4A_IN,IRQL4B_IN;
  31:Pin[8,9]   = IRQL3A_IN,IRQL3B_IN;
- 32:Pin  0  = IRQL2B_IN;             /* IRQL2A is taken by the POWERCTL_STATE input, which is a bi-directional pin */
+ 32:Pin[63]    = IRQL2B_IN;             /* IRQL2A is taken by the POWERCTL_STATE input, which is a bi-directional pin */
  33:Pin[55]    = INTC_CS;     /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
  34:
  35:/* DRAM Controller */
  36:Pin[18]  = CLK_32M;
- 37:Pin  0  = CLK_16M_OUTA;
- 38:Pin  0  = CLK_16M_OUTB;
+ 37:Pin[49]  = CLK_16M_OUTA;
+ 38:Pin[48]  = CLK_16M_OUTB;
  39:
  40:Pin[17]  = SYS_RESET_IN;    /* Active Low RESET input from button */
  41:Pin[35]   = CPU0_AS;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
  54:
  55:Pin[29]  = SYS_RESET;    /* Active Low RESET OUTPUT*/
@@ -79,11 +79,11 @@ Created Thu Jun 01 10:12:14 2023
  64:
  65:/* signals going to CPU1, controlled by internal register in this CPLD */
  66:
- 67:Pin  0  = CPU1_RESET;
- 68:Pin  0  = CPU1_HALT;
- 69:Pin  0  = CPU1_INT1;
- 70:Pin  0  = CPU1_INT2;
- 71:Pin  0  = CPU1_BARRIER1;
+ 67:Pin[50] = CPU1_RESET;
+ 68:Pin[34] = CPU1_HALT;
+ 69:Pin[51] = CPU1_INT1;
+ 70:Pin[15] = CPU1_INT2;
+ 71:Pin[33] = CPU1_BARRIER1;
  72:
  73:
  74:CPU_A1 = CPU_INTACK0;
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 108:   RESET_REQ_OUT is low.
 109:
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 162:
 163:NODE IRQL2A_IN_LATCHED;
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 216:IRQL3B_PE = (IRQL3B_IN # IRQL3B_MASK) # !(IRQL3A_IN # IRQL3A_MASK);
 217:IRQL2A_PE = (IRQL2A_IN_LATCHED # IRQL2A_MASK);
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 270:
 271:DEBUG_IN_MASK.d = CPU0_D7.io;
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 324:CPU1_INT1.d = CPU0_D5.io;
 325:CPU1_INT1.ck = REG_WRITE_ITC2;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 378:DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
 379:DTACK_TIMER_1.ar = !INT_ACK;
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 432:    IRQ                 AVIRQL      Vector#              System Use
 433:    ------              --------    ------   --------    -------------------------------
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
 486:*/
 487:
@@ -611,244 +611,244 @@ Created Thu Jun 01 10:12:14 2023
 532:
 533:/*
 534:
-535:
-536:Total dedicated input used:     4/4     (100%)
-537:Total I/O pins used             47/64   (73%)
-538:Total Logic cells used          81/128  (63%)
-539:Total Flip-Flop used            44/128  (34%)
+535:Total dedicated input used:     4/4     (100%)
+536:Total I/O pins used             48/64   (75%)
+537:Total Logic cells used          88/128  (68%)
+538:Total Flip-Flop used            44/128  (34%)
+539:Total Foldback logic used       11/128  (8%)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 11
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
-540:Total Foldback logic used       11/128  (8%)
-541:Total Nodes+FB/MCells           92/128  (71%)
-542:Total cascade used              0
-543:Total input pins                25
-544:Total output pins               26
-545:Total Pts                       284
-546:
-547:
-548:Final global control pins assignment (if applicable)...
-549:-------------------------------------------------------
-550:DEBUG_BUTTON assigned to pin  83
-551:
-552:
-553:
-554:Performing input pin pre-assignments ...
-555:------------------------------------
-556:IRQL5A_IN assigned to pin  2
-557:DEBUG_BUTTON assigned to pin  83
-558:IRQL6B_IN assigned to pin  1
-559:IRQL6A_IN assigned to pin  84
-560:DEBUG_IN_LATCHED.AP equation needs patching.
-561:IRQL2A_IN_LATCHED.AP equation needs patching.
-562:IRQL6A_IN_LATCHED.AP equation needs patching.
-563:IRQL6B_IN_LATCHED.AP equation needs patching.
-564:IRQL4A_IN_LATCHED.AP equation needs patching.
-565:IRQL4B_IN_LATCHED.AP equation needs patching.
-566:6 control equtions need patching
-567:
-568:Attempt to place floating signals ...
-569:------------------------------------
-570:POWERCTL_OE is placed at feedback node 601 (MC 1)
-571:IRQL6A_MASK is placed at feedback node 602 (MC 2)
-572:SYS_RESET_INV is placed at pin 12 (MC 3)
-573:RESET_REQ is placed at feedback node 604 (MC 4)
-574:CLK_1M is placed at pin 11 (MC 5)
-575:CLK_500K is placed at pin 10 (MC 6)
-576:IRQL5B_MASK is placed at feedback node 607 (MC 7)
-577:IRQL3B_IN is placed at pin 9 (MC 8)
-578:IRQL5A_MASK is placed at feedback node 608 (MC 8)
-579:IRQL6B_MASK is placed at feedback node 609 (MC 9)
-580:IRQL4A_MASK is placed at feedback node 610 (MC 10)
-581:IRQL3A_IN is placed at pin 8 (MC 11)
-582:IRQL3A_MASK is placed at feedback node 611 (MC 11)
-583:IRQL4B_IN_MASK is placed at feedback node 612 (MC 12)
-584:IRQL4B_IN is placed at pin 6 (MC 13)
-585:IRQL3B_MASK is placed at feedback node 613 (MC 13)
-586:FB_271 is placed at foldback expander node 313 (MC 13)
-587:IRQL4A_IN is placed at pin 5 (MC 14)
-588:IRQL2B_MASK is placed at feedback node 614 (MC 14)
-589:Com_Ctrl_264 is placed at foldback expander node 314 (MC 14)
-590:IRQL2A_MASK is placed at feedback node 615 (MC 15)
-591:Com_Ctrl_263 is placed at foldback expander node 315 (MC 15)
-592:IRQL5B_IN is placed at pin 4 (MC 16)
-593:DEBUG_IN_MASK is placed at feedback node 616 (MC 16)
+540:Total Nodes+FB/MCells           99/128  (77%)
+541:Total cascade used              0
+542:Total input pins                26
+543:Total output pins               26
+544:Total Pts                       317
+545:
+546:Final global control pins assignment (if applicable)...
+547:-------------------------------------------------------
+548:DEBUG_BUTTON assigned to pin  83
+549:
+550:Performing input pin pre-assignments ...
+551:------------------------------------
+552:IRQL5A_IN assigned to pin  2
+553:DEBUG_BUTTON assigned to pin  83
+554:IRQL6B_IN assigned to pin  1
+555:IRQL6A_IN assigned to pin  84
+556:DEBUG_IN_LATCHED.AP equation needs patching.
+557:IRQL6A_IN_LATCHED.AP equation needs patching.
+558:IRQL2A_IN_LATCHED.AP equation needs patching.
+559:IRQL6B_IN_LATCHED.AP equation needs patching.
+560:IRQL4A_IN_LATCHED.AP equation needs patching.
+561:IRQL4B_IN_LATCHED.AP equation needs patching.
+562:6 control equtions need patching
+563:
+564:Attempt to place floating signals ...
+565:------------------------------------
+566:IRQL6B_MASK is placed at feedback node 601 (MC 1)
+567:IRQL6A_MASK is placed at feedback node 602 (MC 2)
+568:SYS_RESET_INV is placed at pin 12 (MC 3)
+569:RESET_REQ is placed at feedback node 604 (MC 4)
+570:CLK_1M is placed at pin 11 (MC 5)
+571:CLK_500K is placed at pin 10 (MC 6)
+572:IRQL5B_MASK is placed at feedback node 607 (MC 7)
+573:IRQL3B_IN is placed at pin 9 (MC 8)
+574:IRQL4B_IN_MASK is placed at feedback node 608 (MC 8)
+575:POWERCTL_OE is placed at feedback node 609 (MC 9)
+576:IRQL4A_MASK is placed at feedback node 610 (MC 10)
+577:IRQL3A_IN is placed at pin 8 (MC 11)
+578:IRQL3A_MASK is placed at feedback node 611 (MC 11)
+579:IRQL5A_MASK is placed at feedback node 612 (MC 12)
+580:IRQL4B_IN is placed at pin 6 (MC 13)
+581:IRQL3B_MASK is placed at feedback node 613 (MC 13)
+582:FB_272 is placed at foldback expander node 313 (MC 13)
+583:IRQL4A_IN is placed at pin 5 (MC 14)
+584:IRQL2A_MASK is placed at feedback node 614 (MC 14)
+585:Com_Ctrl_265 is placed at foldback expander node 314 (MC 14)
+586:IRQL2B_MASK is placed at feedback node 615 (MC 15)
+587:Com_Ctrl_264 is placed at foldback expander node 315 (MC 15)
+588:IRQL5B_IN is placed at pin 4 (MC 16)
+589:DEBUG_IN_MASK is placed at feedback node 616 (MC 16)
+590:Com_Ctrl_263 is placed at foldback expander node 316 (MC 16)
+591:CPU_FC1 is placed at pin 22 (MC 17)
+592:CPU_FC0 is placed at pin 21 (MC 19)
+593:DEBUG_IN_LATCHED.AP is placed at feedback node 620 (MC 20)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 12
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
-594:Com_Ctrl_262 is placed at foldback expander node 316 (MC 16)
-595:CPU_FC1 is placed at pin 22 (MC 17)
-596:CPU_FC0 is placed at pin 21 (MC 19)
-597:CPU0_HALT is placed at pin 20 (MC 21)
-598:CLK_32M is placed at pin 18 (MC 24)
+594:CPU0_HALT is placed at pin 20 (MC 21)
+595:IRQL6A_IN_LATCHED.AP is placed at feedback node 622 (MC 22)
+596:IRQL2A_IN_LATCHED.AP is placed at feedback node 623 (MC 23)
+597:CLK_32M is placed at pin 18 (MC 24)
+598:Com_Ctrl_267 is placed at feedback node 624 (MC 24)
 599:SYS_RESET_IN is placed at pin 17 (MC 25)
-600:Com_Ctrl_266 is placed at feedback node 625 (MC 25)
-601:Com_Ctrl_267 is placed at feedback node 626 (MC 26)
+600:Com_Ctrl_268 is placed at feedback node 625 (MC 25)
+601:IRQL6B_IN_LATCHED.AP is placed at feedback node 626 (MC 26)
 602:CPU0_VPA is placed at pin 16 (MC 27)
-603:XXL_296 is placed at feedback node 628 (MC 28)
-604:CPU1_HALT is placed at pin 15 (MC 29)
-605:DTACK_TIMER_1 is placed at feedback node 630 (MC 30)
-606:FB_270 is placed at foldback expander node 330 (MC 30)
-607:DTACK_TIMER_0 is placed at feedback node 631 (MC 31)
-608:FB_269 is placed at foldback expander node 331 (MC 31)
-609:TDI is placed at pin 14 (MC 32)
-610:XXL_294 is placed at feedback node 632 (MC 32)
-611:Com_Ctrl_265 is placed at foldback expander node 332 (MC 32)
+603:DTACK_TIMER_1 is placed at feedback node 628 (MC 28)
+604:FB_271 is placed at foldback expander node 328 (MC 28)
+605:CPU1_INT2 is placed at pin 15 (MC 29)
+606:FB_270 is placed at foldback expander node 329 (MC 29)
+607:DTACK_TIMER_0 is placed at feedback node 630 (MC 30)
+608:Com_Ctrl_266 is placed at foldback expander node 330 (MC 30)
+609:XXL_289 is placed at feedback node 631 (MC 31)
+610:TDI is placed at pin 14 (MC 32)
+611:XXL_301 is placed at feedback node 632 (MC 32)
 612:CPU0_RW is placed at pin 31 (MC 35)
 613:CLK_16M is placed at pin 30 (MC 37)
 614:SYS_RESET is placed at pin 29 (MC 38)
 615:CPU0_IPL2 is placed at pin 28 (MC 40)
 616:CPU0_IPL1 is placed at pin 27 (MC 43)
-617:FB_268 is placed at foldback expander node 344 (MC 44)
-618:CPU0_IPL0 is placed at pin 25 (MC 45)
-619:CPU_FC2 is placed at pin 24 (MC 46)
-620:XXL_289 is placed at feedback node 646 (MC 46)
-621:XXL_291 is placed at feedback node 647 (MC 47)
-622:TMS is placed at pin 23 (MC 48)
-623:XXL_290 is placed at feedback node 648 (MC 48)
-624:CPU0_D4 is placed at pin 41 (MC 49)
-625:CPU0_D3 is placed at pin 40 (MC 51)
-626:CPU0_D2 is placed at pin 39 (MC 53)
-627:CPU0_D1 is placed at pin 37 (MC 56)
-628:CPU0_D0 is placed at pin 36 (MC 57)
-629:DEBUG_IN_LATCHED is placed at feedback node 658 (MC 58)
-630:CPU0_AS is placed at pin 35 (MC 59)
-631:DEBUG_IN_LATCHED.AP is placed at feedback node 659 (MC 59)
-632:IRQL2A_IN_LATCHED.AP is placed at feedback node 660 (MC 60)
-633:CPU1_INT1 is placed at pin 34 (MC 61)
-634:IRQL6A_IN_LATCHED.AP is placed at feedback node 662 (MC 62)
-635:IRQL6B_IN_LATCHED.AP is placed at feedback node 663 (MC 63)
-636:CPU1_BARRIER1 is placed at pin 33 (MC 64)
-637:Com_Ctrl_265 is placed at foldback expander node 364 (MC 64)
-638:CPU0_D5 is placed at pin 44 (MC 65)
-639:CPU0_D6 is placed at pin 45 (MC 67)
-640:CPU0_D7 is placed at pin 46 (MC 69)
-641:IRQL4A_IN_LATCHED.AP is placed at feedback node 671 (MC 71)
-642:CLK_16M_OUTB is placed at pin 48 (MC 72)
-643:CLK_16M_OUTA is placed at pin 49 (MC 73)
-644:CLK_4M is placed at feedback node 674 (MC 74)
-645:CPU1_RESET is placed at pin 50 (MC 75)
-646:CLK_2M is placed at feedback node 676 (MC 76)
-647:CPU1_INT2 is placed at pin 51 (MC 77)
+617:CPU0_IPL0 is placed at pin 25 (MC 45)
+618:CPU_FC2 is placed at pin 24 (MC 46)
+619:FB_269 is placed at foldback expander node 346 (MC 46)
+620:XXL_297 is placed at feedback node 647 (MC 47)
+621:TMS is placed at pin 23 (MC 48)
+622:XXL_286 is placed at feedback node 648 (MC 48)
+623:CPU0_D4 is placed at pin 41 (MC 49)
+624:CPU0_D3 is placed at pin 40 (MC 51)
+625:CPU0_D2 is placed at pin 39 (MC 53)
+626:CPU0_D1 is placed at pin 37 (MC 56)
+627:CPU0_D0 is placed at pin 36 (MC 57)
+628:IRQL4A_IN_LATCHED.AP is placed at feedback node 658 (MC 58)
+629:CPU0_AS is placed at pin 35 (MC 59)
+630:CLK_8M is placed at feedback node 659 (MC 59)
+631:CLK_4M is placed at feedback node 660 (MC 60)
+632:CPU1_HALT is placed at pin 34 (MC 61)
+633:IRQL4B_IN_LATCHED.AP is placed at feedback node 662 (MC 62)
+634:CLK_2M is placed at feedback node 663 (MC 63)
+635:CPU1_BARRIER1 is placed at pin 33 (MC 64)
+636:Com_Ctrl_266 is placed at foldback expander node 364 (MC 64)
+637:CPU0_D5 is placed at pin 44 (MC 65)
+638:CPU0_D6 is placed at pin 45 (MC 67)
+639:CPU0_D7 is placed at pin 46 (MC 69)
+640:CLK_16M_OUTB is placed at pin 48 (MC 72)
+641:CLK_16M_OUTA is placed at pin 49 (MC 73)
+642:CPU1_RESET is placed at pin 50 (MC 75)
+643:IRQL2A_IN_LATCHED is placed at feedback node 676 (MC 76)
+644:CPU1_INT1 is placed at pin 51 (MC 77)
+645:RESET_REQ_OUT is placed at feedback node 678 (MC 78)
+646:XXL_288 is placed at feedback node 679 (MC 79)
+647:DTACK_FROM_INT is placed at pin 52 (MC 80)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 13
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
-648:IRQL4B_IN_LATCHED.AP is placed at feedback node 678 (MC 78)
-649:CLK_8M is placed at feedback node 679 (MC 79)
-650:DTACK_FROM_INT is placed at pin 52 (MC 80)
-651:Com_Ctrl_265 is placed at foldback expander node 380 (MC 80)
-652:XXL_287 is placed at feedback node 681 (MC 81)
-653:XXL_277 is placed at feedback node 682 (MC 82)
-654:XXL_284 is placed at feedback node 683 (MC 83)
-655:XXL_278 is placed at feedback node 684 (MC 84)
-656:INTC_CS is placed at pin 55 (MC 85)
-657:XXL_276 is placed at feedback node 685 (MC 85)
-658:CPU_INTACK2 is placed at pin 56 (MC 86)
-659:XXL_280 is placed at feedback node 686 (MC 86)
-660:XXL_288 is placed at feedback node 687 (MC 87)
-661:CPU_INTACK1 is placed at pin 57 (MC 88)
-662:XXL_275 is placed at feedback node 688 (MC 88)
-663:XXL_273 is placed at feedback node 689 (MC 89)
-664:XXL_272 is placed at feedback node 690 (MC 90)
-665:CPU_INTACK0 is placed at pin 58 (MC 91)
-666:XXL_274 is placed at feedback node 691 (MC 91)
-667:XXL_279 is placed at feedback node 692 (MC 92)
-668:XXL_293 is placed at feedback node 693 (MC 93)
-669:XXL_286 is placed at feedback node 694 (MC 94)
-670:XXL_285 is placed at feedback node 695 (MC 95)
-671:TCK is placed at pin 62 (MC 96)
-672:XXL_295 is placed at feedback node 696 (MC 96)
-673:XXL_282 is placed at feedback node 710 (MC 110)
-674:XXL_292 is placed at feedback node 711 (MC 111)
-675:TDO is placed at pin 71 (MC 112)
-676:XXL_281 is placed at feedback node 712 (MC 112)
-677:IRQL6B_IN_LATCHED is placed at feedback node 714 (MC 114)
-678:IRQL4B_IN_LATCHED is placed at feedback node 716 (MC 116)
-679:POWERCTL_STATE is placed at pin 75 (MC 118)
-680:IRQL6A_IN_LATCHED is placed at feedback node 719 (MC 119)
-681:IRQL2A_IN_LATCHED is placed at feedback node 721 (MC 121)
-682:IRQL4A_IN_LATCHED is placed at feedback node 722 (MC 122)
-683:RESET_REQ_OUT is placed at feedback node 724 (MC 124)
-684:XXL_283 is placed at feedback node 727 (MC 127)
-685:Com_Ctrl_262 is placed at foldback expander node 428 (MC 128)
-686:
-687:                                                                                    
-688:                                             D                                      
-689:                                             E                                      
-690:                                             B                                      
-691:                          I I   I I I   I II U                                      
-692:                       C  R R   R R R   R RR G                                      
-693:                       L  Q Q   Q Q Q   Q QQ _                                      
-694:                     C K  L L   L L L   L LL B                                      
-695:                     L _  3 3   4 4 5   5 66 U                                      
-696:                     K 5  B A   B A B   A BA T                                      
-697:                     _ 0  _ _ G _ _ _ V _ __ T G       V                            
-698:                     1 0  I I N I I I C I II O N       C                            
-699:                     M K  N N D N N N C N NN N D       C                            
-700:                    -------------------------------------------                     
-701:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+648:Com_Ctrl_266 is placed at foldback expander node 380 (MC 80)
+649:XXL_280 is placed at feedback node 681 (MC 81)
+650:XXL_285 is placed at feedback node 682 (MC 82)
+651:XXL_294 is placed at feedback node 683 (MC 83)
+652:XXL_278 is placed at feedback node 684 (MC 84)
+653:INTC_CS is placed at pin 55 (MC 85)
+654:XXL_277 is placed at feedback node 685 (MC 85)
+655:CPU_INTACK2 is placed at pin 56 (MC 86)
+656:XXL_275 is placed at feedback node 686 (MC 86)
+657:XXL_284 is placed at feedback node 687 (MC 87)
+658:CPU_INTACK1 is placed at pin 57 (MC 88)
+659:XXL_281 is placed at feedback node 688 (MC 88)
+660:XXL_274 is placed at feedback node 689 (MC 89)
+661:XXL_276 is placed at feedback node 690 (MC 90)
+662:CPU_INTACK0 is placed at pin 58 (MC 91)
+663:XXL_282 is placed at feedback node 691 (MC 91)
+664:XXL_279 is placed at feedback node 692 (MC 92)
+665:XXL_295 is placed at feedback node 693 (MC 93)
+666:XXL_283 is placed at feedback node 694 (MC 94)
+667:XXL_299 is placed at feedback node 695 (MC 95)
+668:TCK is placed at pin 62 (MC 96)
+669:XXL_300 is placed at feedback node 696 (MC 96)
+670:IRQL2B_IN is placed at pin 63 (MC 97)
+671:IRQL4B_IN_LATCHED is placed at feedback node 698 (MC 98)
+672:IRQL4A_IN_LATCHED is placed at feedback node 700 (MC 100)
+673:XXL_298 is placed at feedback node 702 (MC 102)
+674:XXL_292 is placed at feedback node 703 (MC 103)
+675:XXL_291 is placed at feedback node 706 (MC 106)
+676:XXL_296 is placed at feedback node 708 (MC 108)
+677:XXL_293 is placed at feedback node 710 (MC 110)
+678:XXL_290 is placed at feedback node 711 (MC 111)
+679:TDO is placed at pin 71 (MC 112)
+680:XXL_273 is placed at feedback node 712 (MC 112)
+681:POWERCTL_STATE is placed at pin 75 (MC 118)
+682:DEBUG_IN_LATCHED is placed at feedback node 721 (MC 121)
+683:IRQL6B_IN_LATCHED is placed at feedback node 722 (MC 122)
+684:IRQL6A_IN_LATCHED is placed at feedback node 724 (MC 124)
+685:XXL_287 is placed at feedback node 727 (MC 127)
+686:Com_Ctrl_263 is placed at foldback expander node 428 (MC 128)
+687:
+688:                                                                                    
+689:                                             D                                      
+690:                                             E                                      
+691:                                             B                                      
+692:                          I I   I I I   I II U                                      
+693:                       C  R R   R R R   R RR G                                      
+694:                       L  Q Q   Q Q Q   Q QQ _                                      
+695:                     C K  L L   L L L   L LL B                                      
+696:                     L _  3 3   4 4 5   5 66 U                                      
+697:                     K 5  B A   B A B   A BA T                                      
+698:                     _ 0  _ _ G _ _ _ V _ __ T G       V                            
+699:                     1 0  I I N I I I C I II O N       C                            
+700:                     M K  N N D N N N C N NN N D       C                            
+701:                    -------------------------------------------                     
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDB.pld                   Page 14
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Thu Jun 01 10:12:14 2023
+Created Thu Jun 01 10:49:00 2023
 
-702:                  /    10   8   6   4   2  84  82  80  78  76    \                 
-703:   SYS_RESET_INV | 12                    (*)                   74 |                 
-704:             VCC | 13                                          73 |                 
-705:             TDI | 14                                          72 | GND             
-706:       CPU1_HALT | 15                                          71 | TDO             
-707:        CPU0_VPA | 16                                          70 |                 
-708:    SYS_RESET_IN | 17                                          69 |                 
-709:         CLK_32M | 18                                          68 |                 
-710:             GND | 19                                          67 |                 
-711:       CPU0_HALT | 20                                          66 | VCC             
-712:         CPU_FC0 | 21                                          65 |                 
-713:         CPU_FC1 | 22                 ATF1508                  64 |                 
-714:             TMS | 23               84-Lead PLCC               63 |                 
-715:         CPU_FC2 | 24                                          62 | TCK             
-716:       CPU0_IPL0 | 25                                          61 |                 
-717:             VCC | 26                                          60 |                 
-718:       CPU0_IPL1 | 27                                          59 | GND             
-719:       CPU0_IPL2 | 28                                          58 | CPU_INTACK0     
-720:       SYS_RESET | 29                                          57 | CPU_INTACK1     
-721:         CLK_16M | 30                                          56 | CPU_INTACK2     
-722:         CPU0_RW | 31                                          55 | INTC_CS         
-723:             GND | 32                                          54 |                 
-724:                  \     34  36  38  40  42  44  46  48  50  52   /                 
-725:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
-726:                    --------------------------------------------                     
-727:                      C C C C C V C C C G V C C C G C C C C D V                     
-728:                      P P P P P C P P P N C P P P N L L P P T C                     
-729:                      U U U U U C U U U D C U U U D K K U U A C                     
-730:                      1 1 0 0 0   0 0 0     0 0 0   _ _ 1 1 C                       
-731:                      _ _ _ _ _   _ _ _     _ _ _   1 1 _ _ K                       
-732:                      B I A D D   D D D     D D D   6 6 R I _                       
-733:                      A N S 0 1   2 3 4     5 6 7   M M E N F                       
-734:                      R T                           _ _ S T R                       
-735:                      R 1                           O O E 2 O                       
-736:                      I                             U U T   M                       
-737:                      E                             T T     _                       
-738:                      R                             B A     I                       
-739:                      1                                     N                       
-740:
+702:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+703:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+704:   SYS_RESET_INV | 12                    (*)                   74 |                 
+705:             VCC | 13                                          73 |                 
+706:             TDI | 14                                          72 | GND             
+707:       CPU1_INT2 | 15                                          71 | TDO             
+708:        CPU0_VPA | 16                                          70 |                 
+709:    SYS_RESET_IN | 17                                          69 |                 
+710:         CLK_32M | 18                                          68 |                 
+711:             GND | 19                                          67 |                 
+712:       CPU0_HALT | 20                                          66 | VCC             
+713:         CPU_FC0 | 21                                          65 |                 
+714:         CPU_FC1 | 22                 ATF1508                  64 |                 
+715:             TMS | 23               84-Lead PLCC               63 | IRQL2B_IN       
+716:         CPU_FC2 | 24                                          62 | TCK             
+717:       CPU0_IPL0 | 25                                          61 |                 
+718:             VCC | 26                                          60 |                 
+719:       CPU0_IPL1 | 27                                          59 | GND             
+720:       CPU0_IPL2 | 28                                          58 | CPU_INTACK0     
+721:       SYS_RESET | 29                                          57 | CPU_INTACK1     
+722:         CLK_16M | 30                                          56 | CPU_INTACK2     
+723:         CPU0_RW | 31                                          55 | INTC_CS         
+724:             GND | 32                                          54 |                 
+725:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+726:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+727:                    --------------------------------------------                     
+728:                      C C C C C V C C C G V C C C G C C C C D V                     
+729:                      P P P P P C P P P N C P P P N L L P P T C                     
+730:                      U U U U U C U U U D C U U U D K K U U A C                     
+731:                      1 1 0 0 0   0 0 0     0 0 0   _ _ 1 1 C                       
+732:                      _ _ _ _ _   _ _ _     _ _ _   1 1 _ _ K                       
+733:                      B H A D D   D D D     D D D   6 6 R I _                       
+734:                      A A S 0 1   2 3 4     5 6 7   M M E N F                       
+735:                      R L                           _ _ S T R                       
+736:                      R T                           O O E 1 O                       
+737:                      I                             U U T   M                       
+738:                      E                             T T     _                       
+739:                      R                             B A     I                       
+740:                      1                                     N                       
 741:
 742:
 743:
