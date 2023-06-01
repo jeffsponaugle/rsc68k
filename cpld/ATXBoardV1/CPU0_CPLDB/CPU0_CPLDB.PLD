@@ -405,6 +405,8 @@ CPU0_VPA = 'b'1;
 /* 
    Active low grouping of external active low interrupts.  If any of these inputs are low,
    the group is low.  That group is used to select the interrupt level that goes to the CPU.
+   These are noted as NODES to reduce the overall equation complexity.  If you don't do this
+   WinCUPL will hang.
 */
 NODE IRQL7_INT,IRQL6_INT,IRQL5_INT,IRQL4_INT,IRQL3_INT,IRQL2_INT,IRQL1_INT;
 
@@ -562,6 +564,8 @@ Final global control pins assignment (if applicable)...
 -------------------------------------------------------
 DEBUG_BUTTON assigned to pin  83
 
+
+
 Performing input pin pre-assignments ...
 ------------------------------------
 IRQL5A_IN assigned to pin  2
@@ -569,8 +573,8 @@ DEBUG_BUTTON assigned to pin  83
 IRQL6B_IN assigned to pin  1
 IRQL6A_IN assigned to pin  84
 DEBUG_IN_LATCHED.AP equation needs patching.
-IRQL6A_IN_LATCHED.AP equation needs patching.
 IRQL2A_IN_LATCHED.AP equation needs patching.
+IRQL6A_IN_LATCHED.AP equation needs patching.
 IRQL6B_IN_LATCHED.AP equation needs patching.
 IRQL4A_IN_LATCHED.AP equation needs patching.
 IRQL4B_IN_LATCHED.AP equation needs patching.
@@ -579,126 +583,111 @@ IRQL4B_IN_LATCHED.AP equation needs patching.
 Attempt to place floating signals ...
 ------------------------------------
 IRQL6B_MASK is placed at feedback node 601 (MC 1)
-IRQL6A_MASK is placed at feedback node 602 (MC 2)
+IRQL5B_MASK is placed at feedback node 602 (MC 2)
 SYS_RESET_INV is placed at pin 12 (MC 3)
-RESET_REQ is placed at feedback node 604 (MC 4)
+IRQL6A_MASK is placed at feedback node 604 (MC 4)
 CLK_1M is placed at pin 11 (MC 5)
 CLK_500K is placed at pin 10 (MC 6)
-IRQL5B_MASK is placed at feedback node 607 (MC 7)
+IRQL5A_MASK is placed at feedback node 607 (MC 7)
 IRQL3B_IN is placed at pin 9 (MC 8)
-IRQL4B_IN_MASK is placed at feedback node 608 (MC 8)
-POWERCTL_OE is placed at feedback node 609 (MC 9)
-IRQL4A_MASK is placed at feedback node 610 (MC 10)
+IRQL4A_MASK is placed at feedback node 608 (MC 8)
+IRQL4B_IN_MASK is placed at feedback node 609 (MC 9)
+IRQL3B_MASK is placed at feedback node 610 (MC 10)
 IRQL3A_IN is placed at pin 8 (MC 11)
-IRQL3A_MASK is placed at feedback node 611 (MC 11)
-IRQL5A_MASK is placed at feedback node 612 (MC 12)
+IRQL2B_MASK is placed at feedback node 611 (MC 11)
+IRQL3A_MASK is placed at feedback node 612 (MC 12)
 IRQL4B_IN is placed at pin 6 (MC 13)
-IRQL3B_MASK is placed at feedback node 613 (MC 13)
-FB_272 is placed at foldback expander node 313 (MC 13)
+IRQL2A_MASK is placed at feedback node 613 (MC 13)
 IRQL4A_IN is placed at pin 5 (MC 14)
-IRQL2A_MASK is placed at feedback node 614 (MC 14)
-Com_Ctrl_265 is placed at foldback expander node 314 (MC 14)
-IRQL2B_MASK is placed at feedback node 615 (MC 15)
-Com_Ctrl_264 is placed at foldback expander node 315 (MC 15)
+IRQL1A_MASK is placed at feedback node 614 (MC 14)
+FB_298 is placed at foldback expander node 314 (MC 14)
+IRQL1B_MASK is placed at feedback node 615 (MC 15)
+Com_Ctrl_291 is placed at foldback expander node 315 (MC 15)
 IRQL5B_IN is placed at pin 4 (MC 16)
 DEBUG_IN_MASK is placed at feedback node 616 (MC 16)
-Com_Ctrl_263 is placed at foldback expander node 316 (MC 16)
+Com_Ctrl_290 is placed at foldback expander node 316 (MC 16)
 CPU_FC1 is placed at pin 22 (MC 17)
 CPU_FC0 is placed at pin 21 (MC 19)
-DEBUG_IN_LATCHED.AP is placed at feedback node 620 (MC 20)
 CPU0_HALT is placed at pin 20 (MC 21)
-IRQL6A_IN_LATCHED.AP is placed at feedback node 622 (MC 22)
-IRQL2A_IN_LATCHED.AP is placed at feedback node 623 (MC 23)
 CLK_32M is placed at pin 18 (MC 24)
-Com_Ctrl_267 is placed at feedback node 624 (MC 24)
 SYS_RESET_IN is placed at pin 17 (MC 25)
-Com_Ctrl_268 is placed at feedback node 625 (MC 25)
-IRQL6B_IN_LATCHED.AP is placed at feedback node 626 (MC 26)
+DEBUG_IN_LATCHED.AP is placed at feedback node 625 (MC 25)
+IRQL1_INT is placed at feedback node 626 (MC 26)
 CPU0_VPA is placed at pin 16 (MC 27)
-DTACK_TIMER_1 is placed at feedback node 628 (MC 28)
-FB_271 is placed at foldback expander node 328 (MC 28)
+IRQL2A_IN_LATCHED.AP is placed at feedback node 628 (MC 28)
 CPU1_INT2 is placed at pin 15 (MC 29)
-FB_270 is placed at foldback expander node 329 (MC 29)
-DTACK_TIMER_0 is placed at feedback node 630 (MC 30)
-Com_Ctrl_266 is placed at foldback expander node 330 (MC 30)
-XXL_289 is placed at feedback node 631 (MC 31)
+IRQL2_INT is placed at feedback node 630 (MC 30)
+Com_Ctrl_292 is placed at foldback expander node 330 (MC 30)
+POWERCTL_OE is placed at feedback node 631 (MC 31)
+Com_Ctrl_289 is placed at foldback expander node 331 (MC 31)
 TDI is placed at pin 14 (MC 32)
-XXL_301 is placed at feedback node 632 (MC 32)
+RESET_REQ is placed at feedback node 632 (MC 32)
+IRQL7_INT is placed at foldback expander node 332 (MC 32)
 CPU0_RW is placed at pin 31 (MC 35)
 CLK_16M is placed at pin 30 (MC 37)
 SYS_RESET is placed at pin 29 (MC 38)
+IRQL2A_IN_LATCHED is placed at feedback node 639 (MC 39)
+IRQL7_INT is placed at foldback expander node 339 (MC 39)
 CPU0_IPL2 is placed at pin 28 (MC 40)
 CPU0_IPL1 is placed at pin 27 (MC 43)
+IRQL5_INT is placed at feedback node 644 (MC 44)
 CPU0_IPL0 is placed at pin 25 (MC 45)
 CPU_FC2 is placed at pin 24 (MC 46)
-FB_269 is placed at foldback expander node 346 (MC 46)
-XXL_297 is placed at feedback node 647 (MC 47)
+IRQL4_INT is placed at feedback node 646 (MC 46)
+IRQL3_INT is placed at feedback node 647 (MC 47)
+FB_295 is placed at foldback expander node 347 (MC 47)
 TMS is placed at pin 23 (MC 48)
-XXL_286 is placed at feedback node 648 (MC 48)
 CPU0_D4 is placed at pin 41 (MC 49)
 CPU0_D3 is placed at pin 40 (MC 51)
 CPU0_D2 is placed at pin 39 (MC 53)
 CPU0_D1 is placed at pin 37 (MC 56)
 CPU0_D0 is placed at pin 36 (MC 57)
-IRQL4A_IN_LATCHED.AP is placed at feedback node 658 (MC 58)
 CPU0_AS is placed at pin 35 (MC 59)
-CLK_8M is placed at feedback node 659 (MC 59)
-CLK_4M is placed at feedback node 660 (MC 60)
 CPU1_HALT is placed at pin 34 (MC 61)
-IRQL4B_IN_LATCHED.AP is placed at feedback node 662 (MC 62)
-CLK_2M is placed at feedback node 663 (MC 63)
 CPU1_BARRIER1 is placed at pin 33 (MC 64)
-Com_Ctrl_266 is placed at foldback expander node 364 (MC 64)
+Com_Ctrl_292 is placed at foldback expander node 364 (MC 64)
 CPU0_D5 is placed at pin 44 (MC 65)
+DTACK_TIMER_1 is placed at feedback node 666 (MC 66)
+FB_296 is placed at foldback expander node 366 (MC 66)
 CPU0_D6 is placed at pin 45 (MC 67)
+Com_Ctrl_293 is placed at feedback node 668 (MC 68)
 CPU0_D7 is placed at pin 46 (MC 69)
+Com_Ctrl_294 is placed at feedback node 670 (MC 70)
+IRQL6A_IN_LATCHED.AP is placed at feedback node 671 (MC 71)
 CLK_16M_OUTB is placed at pin 48 (MC 72)
 CLK_16M_OUTA is placed at pin 49 (MC 73)
+IRQL6_INT is placed at feedback node 674 (MC 74)
 CPU1_RESET is placed at pin 50 (MC 75)
-IRQL2A_IN_LATCHED is placed at feedback node 676 (MC 76)
+IRQL6B_IN_LATCHED.AP is placed at feedback node 676 (MC 76)
 CPU1_INT1 is placed at pin 51 (MC 77)
-RESET_REQ_OUT is placed at feedback node 678 (MC 78)
-XXL_288 is placed at feedback node 679 (MC 79)
+FB_297 is placed at foldback expander node 377 (MC 77)
+DTACK_TIMER_0 is placed at feedback node 679 (MC 79)
+Com_Ctrl_292 is placed at foldback expander node 379 (MC 79)
 DTACK_FROM_INT is placed at pin 52 (MC 80)
-Com_Ctrl_266 is placed at foldback expander node 380 (MC 80)
-XXL_280 is placed at feedback node 681 (MC 81)
-XXL_285 is placed at feedback node 682 (MC 82)
-XXL_294 is placed at feedback node 683 (MC 83)
-XXL_278 is placed at feedback node 684 (MC 84)
+IRQL7_INT is placed at foldback expander node 380 (MC 80)
 INTC_CS is placed at pin 55 (MC 85)
-XXL_277 is placed at feedback node 685 (MC 85)
 CPU_INTACK2 is placed at pin 56 (MC 86)
-XXL_275 is placed at feedback node 686 (MC 86)
-XXL_284 is placed at feedback node 687 (MC 87)
 CPU_INTACK1 is placed at pin 57 (MC 88)
-XXL_281 is placed at feedback node 688 (MC 88)
-XXL_274 is placed at feedback node 689 (MC 89)
-XXL_276 is placed at feedback node 690 (MC 90)
+XXL_299 is placed at feedback node 688 (MC 88)
 CPU_INTACK0 is placed at pin 58 (MC 91)
-XXL_282 is placed at feedback node 691 (MC 91)
-XXL_279 is placed at feedback node 692 (MC 92)
-XXL_295 is placed at feedback node 693 (MC 93)
-XXL_283 is placed at feedback node 694 (MC 94)
-XXL_299 is placed at feedback node 695 (MC 95)
+IRQL4A_IN_LATCHED.AP is placed at feedback node 691 (MC 91)
+CLK_4M is placed at feedback node 692 (MC 92)
+IRQL1B_IN is placed at pin 60 (MC 93)
+CLK_8M is placed at feedback node 693 (MC 93)
+IRQL1A_IN is placed at pin 61 (MC 94)
+CLK_2M is placed at feedback node 694 (MC 94)
+IRQL4B_IN_LATCHED.AP is placed at feedback node 695 (MC 95)
 TCK is placed at pin 62 (MC 96)
-XXL_300 is placed at feedback node 696 (MC 96)
 IRQL2B_IN is placed at pin 63 (MC 97)
-IRQL4B_IN_LATCHED is placed at feedback node 698 (MC 98)
-IRQL4A_IN_LATCHED is placed at feedback node 700 (MC 100)
-XXL_298 is placed at feedback node 702 (MC 102)
-XXL_292 is placed at feedback node 703 (MC 103)
-XXL_291 is placed at feedback node 706 (MC 106)
-XXL_296 is placed at feedback node 708 (MC 108)
-XXL_293 is placed at feedback node 710 (MC 110)
-XXL_290 is placed at feedback node 711 (MC 111)
+IRQL6B_IN_LATCHED is placed at feedback node 697 (MC 97)
+IRQL6A_IN_LATCHED is placed at feedback node 700 (MC 100)
+DEBUG_IN_LATCHED is placed at feedback node 703 (MC 103)
+IRQL4B_IN_LATCHED is placed at feedback node 710 (MC 110)
+IRQL4A_IN_LATCHED is placed at feedback node 711 (MC 111)
 TDO is placed at pin 71 (MC 112)
-XXL_273 is placed at feedback node 712 (MC 112)
+RESET_REQ_OUT is placed at feedback node 712 (MC 112)
 POWERCTL_STATE is placed at pin 75 (MC 118)
-DEBUG_IN_LATCHED is placed at feedback node 721 (MC 121)
-IRQL6B_IN_LATCHED is placed at feedback node 722 (MC 122)
-IRQL6A_IN_LATCHED is placed at feedback node 724 (MC 124)
-XXL_287 is placed at feedback node 727 (MC 127)
-Com_Ctrl_263 is placed at foldback expander node 428 (MC 128)
+Com_Ctrl_289 is placed at foldback expander node 428 (MC 128)
 
                                                                                     
                                              D                                      
@@ -729,8 +718,8 @@ Com_Ctrl_263 is placed at foldback expander node 428 (MC 128)
          CPU_FC1 | 22                 ATF1508                  64 |                 
              TMS | 23               84-Lead PLCC               63 | IRQL2B_IN       
          CPU_FC2 | 24                                          62 | TCK             
-       CPU0_IPL0 | 25                                          61 |                 
-             VCC | 26                                          60 |                 
+       CPU0_IPL0 | 25                                          61 | IRQL1A_IN       
+             VCC | 26                                          60 | IRQL1B_IN       
        CPU0_IPL1 | 27                                          59 | GND             
        CPU0_IPL2 | 28                                          58 | CPU_INTACK0     
        SYS_RESET | 29                                          57 | CPU_INTACK1     

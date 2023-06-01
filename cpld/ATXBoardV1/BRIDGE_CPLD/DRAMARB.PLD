@@ -29,6 +29,15 @@ Pin = REFRESH_GRANT;
 
 NODE [REQ_CLOCKED0..1];
 NODE PE_BIAS;
+NODE REFRESH_TIMER_RESET;
+NODE [REFRESH_TIMER0..7];
+NODE CLK_16M_INTERNAL;
+
+/* Internally generated 16Mhz clock used for the refresh timer */
+
+CLK_16M_INTERNAL.d = !CLK_16M_INTERNAL;
+CLK_16M_INTERNAL.ck = CLK_32M;
+CLK_16M_INTERNAL.ar = !SYS_RESET;
 
 REQ_CLOCKED0.d = REQ0;
 REQ_CLOCKED1.d = REQ1;
@@ -38,7 +47,6 @@ REFRESH_REQ_CLOCKED.d = REFRESH_REQ;
 REFRESH_REQ_CLOCKED.ck = !CLK_32M;
 [REQ_CLOCKED0..1].ap = !SYS_RESET;
 REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
-
 
 PE_BIAS.d = !PE_BIAS;
 PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
@@ -70,6 +78,18 @@ REFRESH_GRANT.ap = REFRESH_REQ;
 REFRESH_GRANT.ck = CLK_IN;
 
 
+/* REFRESH REQUESTED is a latch that is set to 0 when a refresh is needed, and cleared back to 1 once the refresh has
+   occured.   REFRESH_COMPLETED should be set to 1 when the refresh is completed.
+   */
+
+REFRESH_REQUESTED.d = 'b'0;
+REFRESH_REQUESTED.ck = REFRESH_TIMER7;
+REFRESH_REQUESTED.ap = !REFRESH_COMPLETED # !SYS_RESET;
+
+
+REFRESH_COMPLETED.d = ;
+REFRESH_COMPLETED.ck = !CLK_32M;
+REFRESH_COMPLETED.ap = REFRESH_REQUESTED # !SYS_RESET;
 
 /* REFRESH TIMER for generating REFRESH REQUESTS */
 
@@ -113,8 +133,7 @@ REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
 /* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
 8MHz CPU Clock, this CLK_16M is actually Mhz */
 /*[REFRESH_TIMER0..3].ck = CLK_8M;*/
-[REFRESH_TIMER0..3].ck = CLK_16M;
-
+[REFRESH_TIMER0..3].ck = CLK_16M_INTERNAL;
 [REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
 
 /* 	
@@ -122,9 +141,9 @@ REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
 	From 0x08 to 0x80 will give is the correct time period of 15us.
 */
 
-[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !CPU_RESET;
-[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !CPU_RESET;
-REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !CPU_RESET;
+[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !SYS_RESET;
+[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !SYS_RESET;
+REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !SYS_RESET;
 
 
 
