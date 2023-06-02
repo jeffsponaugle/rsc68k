@@ -23,40 +23,39 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 
 /* Interrupt Controller */
 Pin[24,22,21]   = [CPU_FC2..0];
-Pin[56,57,58]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
+Pin[48,49,50]   = [CPU_INTACK2..0];       /* These connect to the CPU_A3-A1 lines */
 Pin[83]    = DEBUG_BUTTON;      /* SHOULD BE BUTTON INPUT, NOT DIRECT IRQ */
-Pin[84,1]  = IRQL6A_IN,IRQL6B_IN;
-Pin[2,4]   = IRQL5A_IN,IRQL5B_IN;
+Pin[76,77]  = IRQL6A_IN,IRQL6B_IN;
+Pin[81,4]   = IRQL5A_IN,IRQL5B_IN;
 Pin[5,6]   = IRQL4A_IN,IRQL4B_IN;
-Pin[8,9]   = IRQL3A_IN,IRQL3B_IN;
-Pin[63]    = IRQL2B_IN;             /* IRQL2A is taken by the POWERCTL_STATE input, which is a bi-directional pin */
-Pin[61,60]  = IRQL1A_IN,IRQL1B_IN;
-Pin[55]    = INTC_CS;               /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
+Pin[79,80]   = IRQL3A_IN,IRQL3B_IN;
+Pin[8]    = IRQL2B_IN;             /* IRQL2A is taken by the POWERCTL_STATE input, which is a bi-directional pin */
+Pin[9,10]  = IRQL1A_IN,IRQL1B_IN;
+Pin[63]    = INTC_CS;               /* Active low chip select.  Goes low with /AS.  Used to write to MASK reg */
 
 /* DRAM Controller */
-Pin[18]  = CLK_32M;
-Pin[49]  = CLK_16M_OUTA;
-Pin[48]  = CLK_16M_OUTB;
+Pin[2]  = CLK_32M;
+Pin[31]  = CLK_16M_OUTA;
+Pin[12]  = CLK_16M_OUTB;
 
 Pin[17]  = SYS_RESET_IN;    /* Active Low RESET input from button */
 Pin[35]   = CPU0_AS;
-Pin[31]   = CPU0_RW;
+Pin[34]   = CPU0_RW;
 
 /** Outputs ################################################ **/
 
 /* Interrupt Controller */
 Pin[28,27,25]  = [CPU0_IPL2..0];
-Pin[52]        = DTACK_FROM_INT;
+Pin[64]        = DTACK_FROM_INT;
 Pin[46,45,44,41,40,39,37,36]  = [CPU0_D7..0];
-Pin[16]   = CPU0_VPA;
-Pin[10]   = CLK_500K;
-Pin[11]   = CLK_1M;
+Pin[60]   = CPU0_VPA;
+Pin[74]   = CLK_500K;
+Pin[73]   = CLK_1M;
 
 
-Pin[29]  = SYS_RESET;    /* Active Low RESET OUTPUT*/
-Pin[20]  = CPU0_HALT;
-Pin[30]  = CLK_16M;
-Pin[12]  = SYS_RESET_INV;
+Pin[33]  = SYS_RESET;    /* Active Low RESET OUTPUT*/
+Pin[30]  = CPU0_HALT;
+Pin[70]  = SYS_RESET_INV;
 
  
  /* Power Control */
@@ -65,11 +64,11 @@ Pin[75] = POWERCTL_STATE; /* Used IRQL2A for interrupt trigger */
 
 /* signals going to CPU1, controlled by internal register in this CPLD */
 
-Pin[50] = CPU1_RESET;
-Pin[34] = CPU1_HALT;
-Pin[51] = CPU1_INT1;
+Pin[20] = CPU1_RESET;
+Pin[18] = CPU1_HALT;
+Pin[16] = CPU1_INT1;
 Pin[15] = CPU1_INT2;
-Pin[33] = CPU1_BARRIER1;
+Pin[29] = CPU1_BARRIER1;
 
 
 CPU_A1 = CPU_INTACK0;
@@ -102,7 +101,7 @@ NODE RESET_REQ_OUT;
    output (0) will trigger the SYS_RESET node to be reset into low, 
    resetting the system.  That change in SYS_RESET will clear the RESET_REQ,
    and on the next CLK_500K rising edge RESET_REQ_OUT will go high, when then 
-   releases the SYS_RESET node at the next CLK_16M.
+   releases the SYS_RESET node at the next CLK_16M_OUTA.
 
    The Reset will only be low for 1 CLK_500K cycle.
 
@@ -117,7 +116,7 @@ RESET_REQ_OUT.ap = !SYS_RESET;
 
 SYS_RESET.d = 'b'1;
 SYS_RESET.ar = (!SYS_RESET_IN # !RESET_REQ_OUT);
-SYS_RESET.ck = CLK_16M;
+SYS_RESET.ck = CLK_16M_OUTA;
 
 CPU0_HALT = SYS_RESET;
 
@@ -374,7 +373,7 @@ POWERCTL_STATE.oe = POWERCTL_OE;
 /* 
    DTACK_TIMER_0 and 1 make up a small counter that starts when INT_ACK is asserted[0->1] (because the
    inverse of INT_ACK holds the FFs in reset).  DTACK_TIMER_0 will increment to 1 on the following 
-   falling edge of CLK_16M, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
+   falling edge of CLK_16M_OUTA, and DTACK_TIMER_1 will increment to 1 on the next falling edge.  At this point 
    both outputs stay at 1 until the flipflops are reset by INT_ACK going low.
 
    The first event(DTACK_TIMER_0) is used to trigger the latching of the data bus latches that drive the vector 
@@ -387,11 +386,11 @@ POWERCTL_STATE.oe = POWERCTL_OE;
 
 DTACK_TIMER_0.d = 'b'1;
 DTACK_TIMER_0.ar = !INT_ACK;
-DTACK_TIMER_0.ck = !CLK_16M;
+DTACK_TIMER_0.ck = !CLK_16M_OUTA;
 
 DTACK_TIMER_1.d = DTACK_TIMER_0; /* this will go to 1 the next cycle after DTACK_TIMER_0 goes to 1. */
 DTACK_TIMER_1.ar = !INT_ACK;
-DTACK_TIMER_1.ck = !CLK_16M;
+DTACK_TIMER_1.ck = !CLK_16M_OUTA;
 
 /* 
    DTACK_FROM_INT goes to the address decode CPLD which merges it with other DTACK signals.  If this signal
@@ -498,7 +497,7 @@ VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE)
        It is guarenteed that the INT_ACK is high *before* DTACK_TIME_0 does a 0->1 transition, so that can be used to select what 
        is put into the .D register inputs.
 
-       The DTACK_TIMER_1 counter triggers from 0->1 on the next CLK_16M edge, and that tells the CPU to read the vector off 
+       The DTACK_TIMER_1 counter triggers from 0->1 on the next CLK_16M_OUTA edge, and that tells the CPU to read the vector off 
        the data bus. The databus will be undriven once INT_ACK unasserts, which happens as soon as /AS goes high.
 
    (2) If the CPU is doing a read of the internal register (ITC2 at 0xFF0704), we need to put something into the data bus registers,
@@ -551,201 +550,197 @@ CLK_500K.ar = !SYS_RESET;
 
 /*
 
-Total dedicated input used:	4/4 	(100%)
-Total I/O pins used		48/64 	(75%)
-Total Logic cells used 		88/128 	(68%)
-Total Flip-Flop used 		44/128 	(34%)
-Total Foldback logic used 	11/128 	(8%)
-Total Nodes+FB/MCells 		99/128 	(77%)
-Total cascade used 		0
-Total input pins 		26
+Total dedicated input used:	2/4 	(50%)
+Total I/O pins used		51/64 	(79%)
+Total Logic cells used 		70/128 	(54%)
+Total Flip-Flop used 		46/128 	(35%)
+Total Foldback logic used 	15/128 	(11%)
+Total Nodes+FB/MCells 		83/128 	(64%)
+Total cascade used 		2
+Total input pins 		27
 Total output pins 		26
-Total Pts 			317
+Total Pts 			200
+
 
 Final global control pins assignment (if applicable)...
 -------------------------------------------------------
+CLK_32M assigned to pin  2
 DEBUG_BUTTON assigned to pin  83
-
-
 
 Performing input pin pre-assignments ...
 ------------------------------------
-IRQL5A_IN assigned to pin  2
+CLK_32M assigned to pin  2
 DEBUG_BUTTON assigned to pin  83
-IRQL6B_IN assigned to pin  1
-IRQL6A_IN assigned to pin  84
 DEBUG_IN_LATCHED.AP equation needs patching.
+IRQL4A_IN_LATCHED.AP equation needs patching.
 IRQL2A_IN_LATCHED.AP equation needs patching.
 IRQL6A_IN_LATCHED.AP equation needs patching.
 IRQL6B_IN_LATCHED.AP equation needs patching.
-IRQL4A_IN_LATCHED.AP equation needs patching.
 IRQL4B_IN_LATCHED.AP equation needs patching.
 6 control equtions need patching
 
 Attempt to place floating signals ...
 ------------------------------------
-IRQL6B_MASK is placed at feedback node 601 (MC 1)
-IRQL5B_MASK is placed at feedback node 602 (MC 2)
-SYS_RESET_INV is placed at pin 12 (MC 3)
-IRQL6A_MASK is placed at feedback node 604 (MC 4)
-CLK_1M is placed at pin 11 (MC 5)
-CLK_500K is placed at pin 10 (MC 6)
-IRQL5A_MASK is placed at feedback node 607 (MC 7)
-IRQL3B_IN is placed at pin 9 (MC 8)
-IRQL4A_MASK is placed at feedback node 608 (MC 8)
-IRQL4B_IN_MASK is placed at feedback node 609 (MC 9)
-IRQL3B_MASK is placed at feedback node 610 (MC 10)
-IRQL3A_IN is placed at pin 8 (MC 11)
-IRQL2B_MASK is placed at feedback node 611 (MC 11)
-IRQL3A_MASK is placed at feedback node 612 (MC 12)
+CLK_16M_OUTB is placed at pin 12 (MC 3)
+IRQL1B_IN is placed at pin 10 (MC 6)
+IRQL1A_IN is placed at pin 9 (MC 8)
+IRQL2B_IN is placed at pin 8 (MC 11)
+IRQL3_INT is placed at feedback node 612 (MC 12)
 IRQL4B_IN is placed at pin 6 (MC 13)
-IRQL2A_MASK is placed at feedback node 613 (MC 13)
+IRQL1_INT is placed at feedback node 613 (MC 13)
 IRQL4A_IN is placed at pin 5 (MC 14)
-IRQL1A_MASK is placed at feedback node 614 (MC 14)
-FB_298 is placed at foldback expander node 314 (MC 14)
-IRQL1B_MASK is placed at feedback node 615 (MC 15)
-Com_Ctrl_291 is placed at foldback expander node 315 (MC 15)
+IRQL2_INT is placed at feedback node 614 (MC 14)
+FB_292 is placed at foldback expander node 314 (MC 14)
+DTACK_TIMER_1 is placed at feedback node 615 (MC 15)
+FB_291 is placed at foldback expander node 315 (MC 15)
 IRQL5B_IN is placed at pin 4 (MC 16)
-DEBUG_IN_MASK is placed at feedback node 616 (MC 16)
-Com_Ctrl_290 is placed at foldback expander node 316 (MC 16)
+DTACK_TIMER_0 is placed at feedback node 616 (MC 16)
+IRQL7_INT is placed at foldback expander node 316 (MC 16)
 CPU_FC1 is placed at pin 22 (MC 17)
+IRQL4A_MASK is placed at feedback node 617 (MC 17)
+IRQL1A_MASK is placed at feedback node 618 (MC 18)
 CPU_FC0 is placed at pin 21 (MC 19)
-CPU0_HALT is placed at pin 20 (MC 21)
-CLK_32M is placed at pin 18 (MC 24)
+IRQL1B_MASK is placed at feedback node 619 (MC 19)
+RESET_REQ is placed at feedback node 620 (MC 20)
+CPU1_RESET is placed at pin 20 (MC 21)
+IRQL6A_MASK is placed at feedback node 622 (MC 22)
+IRQL6B_MASK is placed at feedback node 623 (MC 23)
+CPU1_HALT is placed at pin 18 (MC 24)
 SYS_RESET_IN is placed at pin 17 (MC 25)
-DEBUG_IN_LATCHED.AP is placed at feedback node 625 (MC 25)
-IRQL1_INT is placed at feedback node 626 (MC 26)
-CPU0_VPA is placed at pin 16 (MC 27)
-IRQL2A_IN_LATCHED.AP is placed at feedback node 628 (MC 28)
+IRQL5A_MASK is placed at feedback node 625 (MC 25)
+IRQL3A_MASK is placed at feedback node 626 (MC 26)
+CPU1_INT1 is placed at pin 16 (MC 27)
+IRQL3B_MASK is placed at feedback node 628 (MC 28)
+FB_293 is placed at foldback expander node 328 (MC 28)
 CPU1_INT2 is placed at pin 15 (MC 29)
-IRQL2_INT is placed at feedback node 630 (MC 30)
-Com_Ctrl_292 is placed at foldback expander node 330 (MC 30)
-POWERCTL_OE is placed at feedback node 631 (MC 31)
-Com_Ctrl_289 is placed at foldback expander node 331 (MC 31)
+Com_Ctrl_287 is placed at foldback expander node 329 (MC 29)
+IRQL2B_MASK is placed at feedback node 630 (MC 30)
+Com_Ctrl_286 is placed at foldback expander node 330 (MC 30)
+DEBUG_IN_MASK is placed at feedback node 631 (MC 31)
+Com_Ctrl_285 is placed at foldback expander node 331 (MC 31)
 TDI is placed at pin 14 (MC 32)
-RESET_REQ is placed at feedback node 632 (MC 32)
-IRQL7_INT is placed at foldback expander node 332 (MC 32)
-CPU0_RW is placed at pin 31 (MC 35)
-CLK_16M is placed at pin 30 (MC 37)
-SYS_RESET is placed at pin 29 (MC 38)
-IRQL2A_IN_LATCHED is placed at feedback node 639 (MC 39)
-IRQL7_INT is placed at foldback expander node 339 (MC 39)
+IRQL2A_MASK is placed at feedback node 632 (MC 32)
+Com_Ctrl_284 is placed at foldback expander node 332 (MC 32)
+CLK_16M_OUTA is placed at pin 31 (MC 35)
+CPU0_HALT is placed at pin 30 (MC 37)
+CPU1_BARRIER1 is placed at pin 29 (MC 38)
 CPU0_IPL2 is placed at pin 28 (MC 40)
+Com_Ctrl_288 is placed at feedback node 641 (MC 41)
+IRQL4_INT is placed at feedback node 642 (MC 42)
 CPU0_IPL1 is placed at pin 27 (MC 43)
 IRQL5_INT is placed at feedback node 644 (MC 44)
 CPU0_IPL0 is placed at pin 25 (MC 45)
+Com_Ctrl_287 is placed at foldback expander node 345 (MC 45)
 CPU_FC2 is placed at pin 24 (MC 46)
-IRQL4_INT is placed at feedback node 646 (MC 46)
-IRQL3_INT is placed at feedback node 647 (MC 47)
-FB_295 is placed at foldback expander node 347 (MC 47)
+IRQL4B_IN_MASK is placed at feedback node 646 (MC 46)
+Com_Ctrl_285 is placed at foldback expander node 346 (MC 46)
+IRQL5B_MASK is placed at feedback node 647 (MC 47)
+Com_Ctrl_284 is placed at foldback expander node 347 (MC 47)
 TMS is placed at pin 23 (MC 48)
+POWERCTL_OE is placed at feedback node 648 (MC 48)
+IRQL7_INT is placed at foldback expander node 348 (MC 48)
 CPU0_D4 is placed at pin 41 (MC 49)
 CPU0_D3 is placed at pin 40 (MC 51)
 CPU0_D2 is placed at pin 39 (MC 53)
 CPU0_D1 is placed at pin 37 (MC 56)
 CPU0_D0 is placed at pin 36 (MC 57)
 CPU0_AS is placed at pin 35 (MC 59)
-CPU1_HALT is placed at pin 34 (MC 61)
-CPU1_BARRIER1 is placed at pin 33 (MC 64)
-Com_Ctrl_292 is placed at foldback expander node 364 (MC 64)
+CPU0_RW is placed at pin 34 (MC 61)
+SYS_RESET is placed at pin 33 (MC 64)
+FB_290 is placed at foldback expander node 364 (MC 64)
 CPU0_D5 is placed at pin 44 (MC 65)
-DTACK_TIMER_1 is placed at feedback node 666 (MC 66)
-FB_296 is placed at foldback expander node 366 (MC 66)
 CPU0_D6 is placed at pin 45 (MC 67)
-Com_Ctrl_293 is placed at feedback node 668 (MC 68)
 CPU0_D7 is placed at pin 46 (MC 69)
-Com_Ctrl_294 is placed at feedback node 670 (MC 70)
-IRQL6A_IN_LATCHED.AP is placed at feedback node 671 (MC 71)
-CLK_16M_OUTB is placed at pin 48 (MC 72)
-CLK_16M_OUTA is placed at pin 49 (MC 73)
-IRQL6_INT is placed at feedback node 674 (MC 74)
-CPU1_RESET is placed at pin 50 (MC 75)
-IRQL6B_IN_LATCHED.AP is placed at feedback node 676 (MC 76)
-CPU1_INT1 is placed at pin 51 (MC 77)
-FB_297 is placed at foldback expander node 377 (MC 77)
-DTACK_TIMER_0 is placed at feedback node 679 (MC 79)
-Com_Ctrl_292 is placed at foldback expander node 379 (MC 79)
-DTACK_FROM_INT is placed at pin 52 (MC 80)
+CPU_INTACK2 is placed at pin 48 (MC 72)
+DEBUG_IN_LATCHED.AP is placed at feedback node 672 (MC 72)
+CPU_INTACK1 is placed at pin 49 (MC 73)
+IRQL4A_IN_LATCHED.AP is placed at feedback node 673 (MC 73)
+IRQL2A_IN_LATCHED.AP is placed at feedback node 674 (MC 74)
+CPU_INTACK0 is placed at pin 50 (MC 75)
+IRQL6A_IN_LATCHED.AP is placed at feedback node 675 (MC 75)
+IRQL6_INT is placed at feedback node 676 (MC 76)
+IRQL6B_IN_LATCHED.AP is placed at feedback node 678 (MC 78)
+XXL_294 is placed at feedback node 679 (MC 79)
 IRQL7_INT is placed at foldback expander node 380 (MC 80)
-INTC_CS is placed at pin 55 (MC 85)
-CPU_INTACK2 is placed at pin 56 (MC 86)
-CPU_INTACK1 is placed at pin 57 (MC 88)
-XXL_299 is placed at feedback node 688 (MC 88)
-CPU_INTACK0 is placed at pin 58 (MC 91)
-IRQL4A_IN_LATCHED.AP is placed at feedback node 691 (MC 91)
-CLK_4M is placed at feedback node 692 (MC 92)
-IRQL1B_IN is placed at pin 60 (MC 93)
-CLK_8M is placed at feedback node 693 (MC 93)
-IRQL1A_IN is placed at pin 61 (MC 94)
-CLK_2M is placed at feedback node 694 (MC 94)
-IRQL4B_IN_LATCHED.AP is placed at feedback node 695 (MC 95)
+Com_Ctrl_289 is placed at feedback node 682 (MC 82)
+IRQL4B_IN_LATCHED is placed at feedback node 684 (MC 84)
+IRQL4A_IN_LATCHED is placed at feedback node 687 (MC 87)
+RESET_REQ_OUT is placed at feedback node 689 (MC 89)
+CLK_4M is placed at feedback node 690 (MC 90)
+CLK_2M is placed at feedback node 692 (MC 92)
+CPU0_VPA is placed at pin 60 (MC 93)
+CLK_8M is placed at feedback node 695 (MC 95)
 TCK is placed at pin 62 (MC 96)
-IRQL2B_IN is placed at pin 63 (MC 97)
-IRQL6B_IN_LATCHED is placed at feedback node 697 (MC 97)
-IRQL6A_IN_LATCHED is placed at feedback node 700 (MC 100)
-DEBUG_IN_LATCHED is placed at feedback node 703 (MC 103)
-IRQL4B_IN_LATCHED is placed at feedback node 710 (MC 110)
-IRQL4A_IN_LATCHED is placed at feedback node 711 (MC 111)
+IRQL4B_IN_LATCHED.AP is placed at feedback node 696 (MC 96)
+INTC_CS is placed at pin 63 (MC 97)
+DTACK_FROM_INT is placed at pin 64 (MC 99)
+DEBUG_IN_LATCHED is placed at feedback node 708 (MC 108)
+SYS_RESET_INV is placed at pin 70 (MC 109)
+IRQL6B_IN_LATCHED is placed at feedback node 710 (MC 110)
+IRQL6A_IN_LATCHED is placed at feedback node 711 (MC 111)
 TDO is placed at pin 71 (MC 112)
-RESET_REQ_OUT is placed at feedback node 712 (MC 112)
+IRQL2A_IN_LATCHED is placed at feedback node 712 (MC 112)
+CLK_1M is placed at pin 73 (MC 115)
+CLK_500K is placed at pin 74 (MC 117)
 POWERCTL_STATE is placed at pin 75 (MC 118)
-Com_Ctrl_289 is placed at foldback expander node 428 (MC 128)
+IRQL6A_IN is placed at pin 76 (MC 120)
+IRQL6B_IN is placed at pin 77 (MC 123)
+IRQL3A_IN is placed at pin 79 (MC 125)
+IRQL3B_IN is placed at pin 80 (MC 126)
+IRQL5A_IN is placed at pin 81 (MC 128)
+Com_Ctrl_284 is placed at foldback expander node 428 (MC 128)
 
                                                                                     
                                              D                                      
                                              E                                      
                                              B                                      
-                          I I   I I I   I II U                                      
-                       C  R R   R R R   R RR G                                      
-                       L  Q Q   Q Q Q   Q QQ _                                      
-                     C K  L L   L L L   L LL B                                      
-                     L _  3 3   4 4 5   5 66 U                                      
-                     K 5  B A   B A B   A BA T                                      
-                     _ 0  _ _ G _ _ _ V _ __ T G       V                            
-                     1 0  I I N I I I C I II O N       C                            
-                     M K  N N D N N N C N NN N D       C                            
+                       I  I I   I I I        U   I I I   I I                        
+                       R  R R   R R R        G   R R R   R R                        
+                       Q  Q Q   Q Q Q   C    _   Q Q Q   Q Q                        
+                       L  L L   L L L   L    B   L L L   L L                        
+                       1  1 2   4 4 5   K    U   5 3 3   6 6                        
+                       B  A B   B A B   _    T   A B A   B A                        
+                       _  _ _ G _ _ _ V 3    T G _ _ _ V _ _                        
+                       I  I I N I I I C 2    O N I I I C I I                        
+                       N  N N D N N N C M    N D N N N C N N                        
                     -------------------------------------------                     
                    / 11   9   7   5   3   1  83  81  79  77  75 \                  
                   /    10   8   6   4   2  84  82  80  78  76    \                 
-   SYS_RESET_INV | 12                    (*)                   74 |                 
-             VCC | 13                                          73 |                 
+    CLK_16M_OUTB | 12                    (*)                   74 | CLK_500K        
+             VCC | 13                                          73 | CLK_1M          
              TDI | 14                                          72 | GND             
        CPU1_INT2 | 15                                          71 | TDO             
-        CPU0_VPA | 16                                          70 |                 
+       CPU1_INT1 | 16                                          70 | SYS_RESET_INV   
     SYS_RESET_IN | 17                                          69 |                 
-         CLK_32M | 18                                          68 |                 
+       CPU1_HALT | 18                                          68 |                 
              GND | 19                                          67 |                 
-       CPU0_HALT | 20                                          66 | VCC             
+      CPU1_RESET | 20                                          66 | VCC             
          CPU_FC0 | 21                                          65 |                 
-         CPU_FC1 | 22                 ATF1508                  64 |                 
-             TMS | 23               84-Lead PLCC               63 | IRQL2B_IN       
+         CPU_FC1 | 22                 ATF1508                  64 | DTACK_FROM_INT  
+             TMS | 23               84-Lead PLCC               63 | INTC_CS         
          CPU_FC2 | 24                                          62 | TCK             
-       CPU0_IPL0 | 25                                          61 | IRQL1A_IN       
-             VCC | 26                                          60 | IRQL1B_IN       
+       CPU0_IPL0 | 25                                          61 |                 
+             VCC | 26                                          60 | CPU0_VPA        
        CPU0_IPL1 | 27                                          59 | GND             
-       CPU0_IPL2 | 28                                          58 | CPU_INTACK0     
-       SYS_RESET | 29                                          57 | CPU_INTACK1     
-         CLK_16M | 30                                          56 | CPU_INTACK2     
-         CPU0_RW | 31                                          55 | INTC_CS         
+       CPU0_IPL2 | 28                                          58 |                 
+   CPU1_BARRIER1 | 29                                          57 |                 
+       CPU0_HALT | 30                                          56 |                 
+    CLK_16M_OUTA | 31                                          55 |                 
              GND | 32                                          54 |                 
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
-                      C C C C C V C C C G V C C C G C C C C D V                     
-                      P P P P P C P P P N C P P P N L L P P T C                     
-                      U U U U U C U U U D C U U U D K K U U A C                     
-                      1 1 0 0 0   0 0 0     0 0 0   _ _ 1 1 C                       
-                      _ _ _ _ _   _ _ _     _ _ _   1 1 _ _ K                       
-                      B H A D D   D D D     D D D   6 6 R I _                       
-                      A A S 0 1   2 3 4     5 6 7   M M E N F                       
-                      R L                           _ _ S T R                       
-                      R T                           O O E 1 O                       
-                      I                             U U T   M                       
-                      E                             T T     _                       
-                      R                             B A     I                       
-                      1                                     N                       
-
-
+                      S C C C C V C C C G V C C C G C C C     V                     
+                      Y P P P P C P P P N C P P P N P P P     C                     
+                      S U U U U C U U U D C U U U D U U U     C                     
+                      _ 0 0 0 0   0 0 0     0 0 0   _ _ _                           
+                      R _ _ _ _   _ _ _     _ _ _   I I I                           
+                      E R A D D   D D D     D D D   N N N                           
+                      S W S 0 1   2 3 4     5 6 7   T T T                           
+                      E                             A A A                           
+                      T                             C C C                           
+                                                    K K K                           
+                                                    2 1 0                           
 
 */
 
