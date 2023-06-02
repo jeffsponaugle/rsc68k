@@ -4,8 +4,8 @@
 *******************************************************************************
 
 CUPL(WM)        5.0a Serial# 60008009
-Device          f1508ispplcc84  Library DLIB-h-40-2
-Created         Thu Jun 01 19:33:18 2023
+Device          f1504ispplcc44  Library DLIB-h-40-1
+Created         Fri Jun 02 14:15:55 2023
 Name            DRAMARB
 Partno          DRAMARB
 Revision        01
@@ -19,6 +19,90 @@ Location        None
                             Expanded Product Terms
 ===============================================================================
 
+CAS0.d  =>
+    CAS_PRE & REFRESH_GRANT
+  # GRANT0 & GRANT1 & REFRESH_GRANT
+  # CPU0_A1 & GRANT1 & REFRESH_GRANT
+  # CPU0_LDS & REFRESH_GRANT
+  # CPU1_A1 & GRANT0 & REFRESH_GRANT
+  # CPU0_A1 & CPU1_A1 & REFRESH_GRANT
+
+CAS0.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+CAS0.ck  =>
+    !CLK_32M
+
+CAS1.d  =>
+    CAS_PRE & REFRESH_GRANT
+  # GRANT0 & GRANT1 & REFRESH_GRANT
+  # CPU0_A1 & GRANT1 & REFRESH_GRANT
+  # CPU0_UDS & GRANT1 & REFRESH_GRANT
+  # CPU0_LDS & GRANT0 & REFRESH_GRANT
+  # CPU0_A1 & CPU0_LDS & REFRESH_GRANT
+  # CPU0_LDS & CPU0_UDS & REFRESH_GRANT
+  # CPU1_A1 & GRANT0 & REFRESH_GRANT
+  # CPU0_A1 & CPU1_A1 & REFRESH_GRANT
+  # CPU0_UDS & CPU1_A1 & REFRESH_GRANT
+
+CAS1.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+CAS1.ck  =>
+    !CLK_32M
+
+CAS2.d  =>
+    CAS_PRE & REFRESH_GRANT
+  # GRANT0 & GRANT1 & REFRESH_GRANT
+  # !CPU0_A1 & GRANT1 & REFRESH_GRANT
+  # CPU0_LDS & REFRESH_GRANT
+  # !CPU1_A1 & GRANT0 & REFRESH_GRANT
+  # !CPU0_A1 & !CPU1_A1 & REFRESH_GRANT
+
+CAS2.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+CAS2.ck  =>
+    !CLK_32M
+
+CAS3.d  =>
+    CAS_PRE & REFRESH_GRANT
+  # GRANT0 & GRANT1 & REFRESH_GRANT
+  # !CPU0_A1 & GRANT1 & REFRESH_GRANT
+  # CPU0_UDS & REFRESH_GRANT
+  # !CPU1_A1 & GRANT0 & REFRESH_GRANT
+  # !CPU0_A1 & !CPU1_A1 & REFRESH_GRANT
+
+CAS3.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+CAS3.ck  =>
+    !CLK_32M
+
+CAS_PRE.d  =>
+    GRANT0 & GRANT1
+
+CAS_PRE.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+CAS_PRE.ck  =>
+    !CLK_32M
+
 CLK_16M_INTERNAL.d  =>
     !CLK_16M_INTERNAL
 
@@ -31,12 +115,13 @@ CLK_16M_INTERNAL.ck  =>
 GRANT0.d  =>
     GRANT0 & !GRANT1
   # GRANT0 & !REFRESH_GRANT
-  # GRANT0 & GRANT1 & REFRESH_GRANT & !REFRESH_REQ
+  # GRANT0 & GRANT1 & REFRESH_GRANT & !REFRESH_REQ_CLOCKED
   # GRANT0 & GRANT1 & PE_BIAS & REFRESH_GRANT & !REQ_CLOCKED1
   # GRANT0 & GRANT1 & REFRESH_GRANT & REQ_CLOCKED0
 
 GRANT0.ap  =>
     REQ0
+  # !SYS_RESET
 
 GRANT0.ck  =>
     CLK_32M
@@ -44,18 +129,22 @@ GRANT0.ck  =>
 GRANT1.d  =>
     !GRANT0 & GRANT1
   # GRANT1 & !REFRESH_GRANT
-  # GRANT0 & GRANT1 & REFRESH_GRANT & !REFRESH_REQ
+  # GRANT0 & GRANT1 & REFRESH_GRANT & !REFRESH_REQ_CLOCKED
   # GRANT0 & GRANT1 & !PE_BIAS & REFRESH_GRANT & !REQ_CLOCKED0
   # GRANT0 & GRANT1 & REFRESH_GRANT & REQ_CLOCKED1
 
 GRANT1.ap  =>
     REQ1
+  # !SYS_RESET
 
 GRANT1.ck  =>
     CLK_32M
 
 GRANT_ACTIVE =>
     GRANT0 & GRANT1 & REFRESH_GRANT
+
+MEMORY_ACCESS_GRANT_ACTIVE =>
+    GRANT0 & GRANT1
 
 PE_BIAS.d  =>
     !PE_BIAS
@@ -69,17 +158,50 @@ PE_BIAS.ck  =>
   # !REFRESH_GRANT
 
 PE_OUT_0 =>
-    !REFRESH_REQ
+    !REFRESH_REQ_CLOCKED
   # REQ_CLOCKED0
   # PE_BIAS & !REQ_CLOCKED1
 
 PE_OUT_1 =>
-    !REFRESH_REQ
+    !REFRESH_REQ_CLOCKED
   # REQ_CLOCKED1
   # !PE_BIAS & !REQ_CLOCKED0
 
+RAS0.d  =>
+    GRANT0 & GRANT1
+  # CPU0_A1 & GRANT1
+  # CPU1_A1 & GRANT0
+  # CPU0_A1 & CPU1_A1
+
+RAS0.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+RAS0.ck  =>
+    !CLK_32M
+
+RAS1.d  =>
+    GRANT0 & GRANT1
+  # !CPU0_A1 & GRANT1
+  # !CPU1_A1 & GRANT0
+  # !CPU0_A1 & !CPU1_A1
+
+RAS1.ap  =>
+    !GRANT0 & REQ0
+  # !GRANT1 & REQ1
+  # !REFRESH_COMPLETED & !REFRESH_GRANT
+  # !SYS_RESET
+
+RAS1.ck  =>
+    !CLK_32M
+
+REFRESH_ACCESS_GRANT_ACTIVE =>
+    REFRESH_GRANT
+
 REFRESH_COMPLETED.d  =>
-    0 
+    REFRESH_COMPLETED_PRE2
 
 REFRESH_COMPLETED.ap  =>
     REFRESH_REQUESTED
@@ -88,19 +210,51 @@ REFRESH_COMPLETED.ap  =>
 REFRESH_COMPLETED.ck  =>
     !CLK_32M
 
+REFRESH_COMPLETED_PRE0.d  =>
+    REFRESH_GRANT
+
+REFRESH_COMPLETED_PRE0.ap  =>
+    REFRESH_REQUESTED
+  # !SYS_RESET
+
+REFRESH_COMPLETED_PRE0.ck  =>
+    !CLK_32M
+
+REFRESH_COMPLETED_PRE1.d  =>
+    REFRESH_COMPLETED_PRE0
+
+REFRESH_COMPLETED_PRE1.ap  =>
+    REFRESH_REQUESTED
+  # !SYS_RESET
+
+REFRESH_COMPLETED_PRE1.ck  =>
+    !CLK_32M
+
+REFRESH_COMPLETED_PRE2.d  =>
+    REFRESH_COMPLETED_PRE1
+
+REFRESH_COMPLETED_PRE2.ap  =>
+    REFRESH_REQUESTED
+  # !SYS_RESET
+
+REFRESH_COMPLETED_PRE2.ck  =>
+    !CLK_32M
+
 REFRESH_GRANT.d  =>
     !GRANT0 & REFRESH_GRANT
   # !GRANT1 & REFRESH_GRANT
-  # GRANT0 & GRANT1 & REFRESH_GRANT & REFRESH_REQ
+  # GRANT0 & GRANT1 & REFRESH_GRANT & REFRESH_REQ_CLOCKED
 
 REFRESH_GRANT.ap  =>
-    REFRESH_REQ
+    REFRESH_REQUESTED
+  # !REFRESH_COMPLETED
+  # !SYS_RESET
 
 REFRESH_GRANT.ck  =>
     CLK_32M
 
 REFRESH_OUT =>
-    REFRESH_REQ
+    REFRESH_REQ_CLOCKED
 
 REFRESH_REQUESTED.d  =>
     0 
@@ -112,13 +266,13 @@ REFRESH_REQUESTED.ap  =>
 REFRESH_REQUESTED.ck  =>
     REFRESH_TIMER7
 
-REFRESH_REQ_CLOCKED =>
-    REFRESH_REQ
+REFRESH_REQ_CLOCKED.d  =>
+    REFRESH_REQUESTED
 
-REFRESH_REQ_CLOCKED =>
+REFRESH_REQ_CLOCKED.ap  =>
     !SYS_RESET
 
-REFRESH_REQ_CLOCKED =>
+REFRESH_REQ_CLOCKED.ck  =>
     !CLK_32M
 
 REFRESH_TIMER0.d  =>
@@ -261,89 +415,137 @@ Pin Variable                                    Pterms   Max     Min
 Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
 --- --------            ---     ---     ----    ------  ------  -----   
 
-    CLK_16M_INTERNAL            97       N        -       -       -     
-    CLK_16M_INTERNAL    d       97       M        1       0       1     
-    CLK_16M_INTERNAL    ar      97       M        1       0       1     
-    CLK_16M_INTERNAL    ck      97       M        1       0       1     
+    CAS0                        0        V        -       -       -     
+    CAS0                d       0        X        6       0       1     
+    CAS0                ap      0        X        4       0       1     
+    CAS0                ck      0        X        1       0       1     
+    CAS1                        0        V        -       -       -     
+    CAS1                d       0        X        10      0       1     
+    CAS1                ap      0        X        4       0       1     
+    CAS1                ck      0        X        1       0       1     
+    CAS2                        0        V        -       -       -     
+    CAS2                d       0        X        6       0       1     
+    CAS2                ap      0        X        4       0       1     
+    CAS2                ck      0        X        1       0       1     
+    CAS3                        0        V        -       -       -     
+    CAS3                d       0        X        6       0       1     
+    CAS3                ap      0        X        4       0       1     
+    CAS3                ck      0        X        1       0       1     
+    CAS_PRE                     61       N        -       -       -     
+    CAS_PRE             d       61       M        1       0       1     
+    CAS_PRE             ap      61       M        4       0       1     
+    CAS_PRE             ck      61       M        1       0       1     
+    CLK_16M_INTERNAL            57       N        -       -       -     
+    CLK_16M_INTERNAL    d       57       M        1       0       1     
+    CLK_16M_INTERNAL    ar      57       M        1       0       1     
+    CLK_16M_INTERNAL    ck      57       M        1       0       1     
     CLK_32M                     0        V        -       -       -     
+    CPU0_A1                     0        V        -       -       -     
+    CPU0_LDS                    0        V        -       -       -     
+    CPU0_UDS                    0        V        -       -       -     
+    CPU1_A1                     0        V        -       -       -     
+    CPU1_LDS                    0        V        -       -       -     
+    CPU1_UDS                    0        V        -       -       -     
     GRANT0                      0        V        -       -       -     
     GRANT0              d       0        X        5       0       1     
-    GRANT0              ap      0        X        1       0       1     
+    GRANT0              ap      0        X        2       0       1     
     GRANT0              ck      0        X        1       0       1     
     GRANT1                      0        V        -       -       -     
     GRANT1              d       0        X        5       0       1     
-    GRANT1              ap      0        X        1       0       1     
+    GRANT1              ap      0        X        2       0       1     
     GRANT1              ck      0        X        1       0       1     
     GRANT_ACTIVE                0        I        1       -       -     
-    PE_BIAS                     87       N        -       -       -     
-    PE_BIAS             d       87       M        1       0       1     
-    PE_BIAS             ar      87       M        1       0       1     
-    PE_BIAS             ck      87       M        3       0       1     
+    MEMORY_ACCESS_GRANT_ACTIVE        0        I        1       -       -     
+    PE_BIAS                     47       N        -       -       -     
+    PE_BIAS             d       47       M        1       0       1     
+    PE_BIAS             ar      47       M        1       0       1     
+    PE_BIAS             ck      47       M        3       0       1     
     PE_OUT_0                    0        I        3       -       -     
     PE_OUT_1                    0        I        3       -       -     
-    REFRESH_COMPLETED           99       N        -       -       -     
-    REFRESH_COMPLETED   d       99       M        1       0       1     
-    REFRESH_COMPLETED   ap      99       M        2       0       1     
-    REFRESH_COMPLETED   ck      99       M        1       0       1     
+    RAS0                        0        V        -       -       -     
+    RAS0                d       0        X        4       0       1     
+    RAS0                ap      0        X        4       0       1     
+    RAS0                ck      0        X        1       0       1     
+    RAS1                        0        V        -       -       -     
+    RAS1                d       0        X        4       0       1     
+    RAS1                ap      0        X        4       0       1     
+    RAS1                ck      0        X        1       0       1     
+    REFRESH_ACCESS_GRANT_ACTIVE        0        I        1       -       -     
+    REFRESH_COMPLETED           59       N        -       -       -     
+    REFRESH_COMPLETED   d       59       M        1       0       1     
+    REFRESH_COMPLETED   ap      59       M        2       0       1     
+    REFRESH_COMPLETED   ck      59       M        1       0       1     
+    REFRESH_COMPLETED_PRE0        62       N        -       -       -     
+    REFRESH_COMPLETED_PRE0d       62       M        1       0       1     
+    REFRESH_COMPLETED_PRE0ap      62       M        2       0       1     
+    REFRESH_COMPLETED_PRE0ck      62       M        1       0       1     
+    REFRESH_COMPLETED_PRE1        63       N        -       -       -     
+    REFRESH_COMPLETED_PRE1d       63       M        1       0       1     
+    REFRESH_COMPLETED_PRE1ap      63       M        2       0       1     
+    REFRESH_COMPLETED_PRE1ck      63       M        1       0       1     
+    REFRESH_COMPLETED_PRE2        64       N        -       -       -     
+    REFRESH_COMPLETED_PRE2d       64       M        1       0       1     
+    REFRESH_COMPLETED_PRE2ap      64       M        2       0       1     
+    REFRESH_COMPLETED_PRE2ck      64       M        1       0       1     
     REFRESH_GRANT               0        V        -       -       -     
     REFRESH_GRANT       d       0        X        3       0       1     
-    REFRESH_GRANT       ap      0        X        1       0       1     
+    REFRESH_GRANT       ap      0        X        3       0       1     
     REFRESH_GRANT       ck      0        X        1       0       1     
     REFRESH_OUT                 0        I        1       -       -     
-    REFRESH_REQ                 0        V        -       -       -     
-    REFRESH_REQUESTED           98       N        -       -       -     
-    REFRESH_REQUESTED   d       98       M        1       0       1     
-    REFRESH_REQUESTED   ap      98       M        2       0       1     
-    REFRESH_REQUESTED   ck      98       M        1       0       1     
-    REFRESH_REQ_CLOCKED d       0        I        1       -       -     
-    REFRESH_REQ_CLOCKED ap      0        I        1       -       -     
-    REFRESH_REQ_CLOCKED ck      0        I        1       -       -     
-    REFRESH_TIMER0              89       N        -       -       -     
-    REFRESH_TIMER0      d       89       M        1       0       1     
-    REFRESH_TIMER0      ar      89       M        2       0       1     
-    REFRESH_TIMER0      ck      89       M        1       0       1     
-    REFRESH_TIMER1              90       N        -       -       -     
-    REFRESH_TIMER1      d       90       M        2       0       1     
-    REFRESH_TIMER1      ar      90       M        2       0       1     
-    REFRESH_TIMER1      ck      90       M        1       0       1     
-    REFRESH_TIMER2              91       N        -       -       -     
-    REFRESH_TIMER2      d       91       M        3       0       1     
-    REFRESH_TIMER2      ar      91       M        2       0       1     
-    REFRESH_TIMER2      ck      91       M        1       0       1     
-    REFRESH_TIMER3              92       N        -       -       -     
-    REFRESH_TIMER3      d       92       M        4       0       1     
-    REFRESH_TIMER3      ap      92       M        2       0       1     
-    REFRESH_TIMER3      ck      92       M        1       0       1     
-    REFRESH_TIMER4              93       N        -       -       -     
-    REFRESH_TIMER4      d       93       M        1       0       1     
-    REFRESH_TIMER4      ar      93       M        2       0       1     
-    REFRESH_TIMER4      ck      93       M        4       0       1     
-    REFRESH_TIMER5              94       N        -       -       -     
-    REFRESH_TIMER5      d       94       M        2       0       1     
-    REFRESH_TIMER5      ar      94       M        2       0       1     
-    REFRESH_TIMER5      ck      94       M        4       0       1     
-    REFRESH_TIMER6              95       N        -       -       -     
-    REFRESH_TIMER6      d       95       M        3       0       1     
-    REFRESH_TIMER6      ar      95       M        2       0       1     
-    REFRESH_TIMER6      ck      95       M        4       0       1     
-    REFRESH_TIMER7              96       N        -       -       -     
-    REFRESH_TIMER7      d       96       M        4       0       1     
-    REFRESH_TIMER7      ar      96       M        2       0       1     
-    REFRESH_TIMER7      ck      96       M        4       0       1     
-    REFRESH_TIMER_RESET         88       N        -       -       -     
-    REFRESH_TIMER_RESET d       88       M        1       0       1     
-    REFRESH_TIMER_RESET ar      88       M        1       0       1     
-    REFRESH_TIMER_RESET ck      88       M        1       0       1     
+    REFRESH_REQUESTED           58       N        -       -       -     
+    REFRESH_REQUESTED   d       58       M        1       0       1     
+    REFRESH_REQUESTED   ap      58       M        2       0       1     
+    REFRESH_REQUESTED   ck      58       M        1       0       1     
+    REFRESH_REQ_CLOCKED         60       N        -       -       -     
+    REFRESH_REQ_CLOCKED d       60       M        1       0       1     
+    REFRESH_REQ_CLOCKED ap      60       M        1       0       1     
+    REFRESH_REQ_CLOCKED ck      60       M        1       0       1     
+    REFRESH_TIMER0              49       N        -       -       -     
+    REFRESH_TIMER0      d       49       M        1       0       1     
+    REFRESH_TIMER0      ar      49       M        2       0       1     
+    REFRESH_TIMER0      ck      49       M        1       0       1     
+    REFRESH_TIMER1              50       N        -       -       -     
+    REFRESH_TIMER1      d       50       M        2       0       1     
+    REFRESH_TIMER1      ar      50       M        2       0       1     
+    REFRESH_TIMER1      ck      50       M        1       0       1     
+    REFRESH_TIMER2              51       N        -       -       -     
+    REFRESH_TIMER2      d       51       M        3       0       1     
+    REFRESH_TIMER2      ar      51       M        2       0       1     
+    REFRESH_TIMER2      ck      51       M        1       0       1     
+    REFRESH_TIMER3              52       N        -       -       -     
+    REFRESH_TIMER3      d       52       M        4       0       1     
+    REFRESH_TIMER3      ap      52       M        2       0       1     
+    REFRESH_TIMER3      ck      52       M        1       0       1     
+    REFRESH_TIMER4              53       N        -       -       -     
+    REFRESH_TIMER4      d       53       M        1       0       1     
+    REFRESH_TIMER4      ar      53       M        2       0       1     
+    REFRESH_TIMER4      ck      53       M        4       0       1     
+    REFRESH_TIMER5              54       N        -       -       -     
+    REFRESH_TIMER5      d       54       M        2       0       1     
+    REFRESH_TIMER5      ar      54       M        2       0       1     
+    REFRESH_TIMER5      ck      54       M        4       0       1     
+    REFRESH_TIMER6              55       N        -       -       -     
+    REFRESH_TIMER6      d       55       M        3       0       1     
+    REFRESH_TIMER6      ar      55       M        2       0       1     
+    REFRESH_TIMER6      ck      55       M        4       0       1     
+    REFRESH_TIMER7              56       N        -       -       -     
+    REFRESH_TIMER7      d       56       M        4       0       1     
+    REFRESH_TIMER7      ar      56       M        2       0       1     
+    REFRESH_TIMER7      ck      56       M        4       0       1     
+    REFRESH_TIMER_RESET         48       N        -       -       -     
+    REFRESH_TIMER_RESET d       48       M        1       0       1     
+    REFRESH_TIMER_RESET ar      48       M        1       0       1     
+    REFRESH_TIMER_RESET ck      48       M        1       0       1     
     REQ0                        0        V        -       -       -     
     REQ1                        0        V        -       -       -     
-    REQ_CLOCKED0                85       N        -       -       -     
-    REQ_CLOCKED0        d       85       M        1       0       1     
-    REQ_CLOCKED0        ap      85       M        1       0       1     
-    REQ_CLOCKED0        ck      85       M        1       0       1     
-    REQ_CLOCKED1                86       N        -       -       -     
-    REQ_CLOCKED1        d       86       M        1       0       1     
-    REQ_CLOCKED1        ap      86       M        1       0       1     
-    REQ_CLOCKED1        ck      86       M        1       0       1     
+    REQ_CLOCKED0                45       N        -       -       -     
+    REQ_CLOCKED0        d       45       M        1       0       1     
+    REQ_CLOCKED0        ap      45       M        1       0       1     
+    REQ_CLOCKED0        ck      45       M        1       0       1     
+    REQ_CLOCKED1                46       N        -       -       -     
+    REQ_CLOCKED1        d       46       M        1       0       1     
+    REQ_CLOCKED1        ap      46       M        1       0       1     
+    REQ_CLOCKED1        ck      46       M        1       0       1     
     SYS_RESET                   0        V        -       -       -     
 
 
