@@ -1,0 +1,202 @@
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMARB.pld                      Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jun 01 19:33:18 2023
+
+  1:Name       DRAMARB;
+  2:PartNo   DRAMARB;
+  3:Date     05/28/2023;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1508ispplcc84;
+ 10:
+ 11:
+ 12:/* 
+ 13:   Version 1.1 - 3 node, with 1 node always at high priority.  Use case is for DRAM Refresh, since that should
+ 14:*/
+ 15:
+ 16:
+ 17:
+ 18:PROPERTY ATMEL {TDI_PULLUP = ON};
+ 19:PROPERTY ATMEL {TMS_PULLUP = ON};
+ 20:
+ 21:/** Inputs **/
+ 22:
+ 23:Pin  0  = CLK_32M;                  /* Clock */
+ 24:Pin  0  = SYS_RESET;                /* Active Low Reset */
+ 25:Pin [0..0] = [REQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
+ 26:Pin  0  = REFRESH_REQ;
+ 27:Pin [0..0] = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
+ 28:Pin  0  = REFRESH_GRANT;
+ 29:
+ 30:NODE [REQ_CLOCKED0..1];
+ 31:NODE PE_BIAS;
+ 32:NODE REFRESH_TIMER_RESET;
+ 33:NODE [REFRESH_TIMER0..7];
+ 34:NODE CLK_16M_INTERNAL;
+ 35:NODE REFRESH_REQUESTED, REFRESH_COMPLETED;
+ 36:/* Internally generated 16Mhz clock used for the refresh timer */
+ 37:
+ 38:CLK_16M_INTERNAL.d = !CLK_16M_INTERNAL;
+ 39:CLK_16M_INTERNAL.ck = CLK_32M;
+ 40:CLK_16M_INTERNAL.ar = !SYS_RESET;
+ 41:
+ 42:REQ_CLOCKED0.d = REQ0;
+ 43:REQ_CLOCKED1.d = REQ1;
+ 44:REFRESH_REQ_CLOCKED.d = REFRESH_REQ;
+ 45:
+ 46:[REQ_CLOCKED0..1].ck = !CLK_32M;
+ 47:REFRESH_REQ_CLOCKED.ck = !CLK_32M;
+ 48:[REQ_CLOCKED0..1].ap = !SYS_RESET;
+ 49:REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
+ 50:
+ 51:PE_BIAS.d = !PE_BIAS;
+ 52:PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
+ 53:PE_BIAS.ar = !SYS_RESET;
+
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMARB.pld                      Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jun 01 19:33:18 2023
+
+ 54:
+ 55:GRANT_ACTIVE = GRANT0 & GRANT1 & REFRESH_GRANT;   /* Active low signal that either grant is active */
+ 56:
+ 57:REFRESH_OUT = REFRESH_REQ;            /* refresh requests always win */
+ 58:
+ 59:PE_OUT_0 = ( !REFRESH_REQ # PE_BIAS # REQ_CLOCKED0) &                     /* if BIAS is towards input 0, set output0 if input0 is set */
+ 60:           ( !REFRESH_REQ # !PE_BIAS # (REQ_CLOCKED0 # !REQ_CLOCKED1));  /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
+ 61:
+ 62:PE_OUT_1 = ( !REFRESH_REQ # !PE_BIAS # REQ_CLOCKED1) &                    /* if BIAS is towards input 1, set output1 if input1 is set */
+ 63:           ( !REFRESH_REQ # PE_BIAS # (REQ_CLOCKED1 # !REQ_CLOCKED0));   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
+ 64:          
+ 65:REFRESH_GRANT.d = ( !GRANT_ACTIVE & REFRESH_GRANT ) #    /* If a grant is active, don't change output state */
+ 66:          ( GRANT_ACTIVE & REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
+ 67:
+ 68:GRANT0.d = ( !GRANT_ACTIVE & GRANT0 ) #        /* If a grant is active, don't change output state */
+ 69:          ( GRANT_ACTIVE & PE_OUT_0 );         /* If a grant is not active, grab the output from the priority encoder */
+ 70:
+ 71:GRANT1.d = ( !GRANT_ACTIVE & GRANT1 ) #        /* If a grant is active, don't change output state */
+ 72:          ( GRANT_ACTIVE & PE_OUT_1 );         /* If a grant is not active, grab the output from the priority encoder */       
+ 73:
+ 74:GRANT0.ap = REQ0;
+ 75:GRANT1.ap = REQ1;
+ 76:REFRESH_GRANT.ap = REFRESH_REQ;
+ 77:[GRANT0..1].ck = CLK_32M;
+ 78:REFRESH_GRANT.ck = CLK_32M;
+ 79:
+ 80:
+ 81:/* REFRESH REQUESTED is a latch that is set to 0 when a refresh is needed, and cleared back to 1 once the refresh has
+ 82:   occured.   REFRESH_COMPLETED should be set to 1 when the refresh is completed.
+ 83:   */
+ 84:
+ 85:REFRESH_REQUESTED.d = 'b'0;
+ 86:REFRESH_REQUESTED.ck = REFRESH_TIMER7;
+ 87:REFRESH_REQUESTED.ap = !REFRESH_COMPLETED # !SYS_RESET;
+ 88:
+ 89:
+ 90:REFRESH_COMPLETED.d = 'b'0;
+ 91:REFRESH_COMPLETED.ck = !CLK_32M;
+ 92:REFRESH_COMPLETED.ap = REFRESH_REQUESTED # !SYS_RESET;
+ 93:
+ 94:/* REFRESH TIMER for generating REFRESH REQUESTS */
+ 95:
+ 96:/* 
+ 97:   8 bit counter for refresh time.  This is built with 2x 4 bit counters that are chained 
+ 98:   together.  In order to get a 15us cycle, this counter is preset to 0x08 on 'reset', and counts
+ 99:   up to 128.  At 128 the REFRESH_REQUESTED event is triggered and the counter is 'reset' back to
+100:   0x08.  The produces an event every 15us with an 8MHz clock.   
+101:
+102:   If the clock rate is not 32MHz for the core input, this will need to be adjusted.
+103:
+104:   The REFESH_TMER_RESET flip flop is used to produce a 1 clock cycle long reset signal once the 
+105:   counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
+106:   0x08.
+107:*/
+
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMARB.pld                      Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jun 01 19:33:18 2023
+
+108:
+109:REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
+110:REFRESH_TIMER_RESET.ck = CLK_32M;
+111:REFRESH_TIMER_RESET.ar = !SYS_RESET;
+112:
+113:REFRESH_TIMER0.d = !REFRESH_TIMER0;
+114:REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
+115:REFRESH_TIMER2.d = ( REFRESH_TIMER2 & !REFRESH_TIMER0 )
+116:                    # ( REFRESH_TIMER2 & !REFRESH_TIMER1 )
+117:                    # ( !REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+118:REFRESH_TIMER3.d = ( REFRESH_TIMER3 & !REFRESH_TIMER2 )
+119:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER0 )
+120:                    # ( REFRESH_TIMER3 & !REFRESH_TIMER1 )
+121:                    # ( !REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0 );
+122:
+123:REFRESH_TIMER4.d = !REFRESH_TIMER4;
+124:REFRESH_TIMER5.d = REFRESH_TIMER4 $ REFRESH_TIMER5;
+125:REFRESH_TIMER6.d = ( REFRESH_TIMER6 & !REFRESH_TIMER4 )
+126:                    # ( REFRESH_TIMER6 & !REFRESH_TIMER5 )
+127:                    # ( !REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+128:REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
+129:                    # ( REFRESH_TIMER7 & !REFRESH_TIMER4 )
+130:                    # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
+131:                    # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
+132:
+133:/* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
+134:8MHz CPU Clock, this CLK_16M is actually Mhz */
+135:/*[REFRESH_TIMER0..3].ck = CLK_8M;*/
+136:[REFRESH_TIMER0..3].ck = CLK_16M_INTERNAL;
+137:[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
+138:
+139:/*      
+140:        At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
+141:        From 0x08 to 0x80 will give is the correct time period of 15us.
+142:*/
+143:
+144:[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !SYS_RESET;
+145:[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !SYS_RESET;
+146:REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !SYS_RESET;
+147:
+148:
+149:
+150:
+151:/*
+152:Total dedicated input used:     1/4     (25%)
+153:Total I/O pins used             11/64   (17%)
+154:Total Logic cells used          6/128   (4%)
+155:Total Flip-Flop used            6/128   (4%)
+156:Total Foldback logic used       1/128   (0%)
+157:Total Nodes+FB/MCells           7/128   (5%)
+158:Total cascade used              0
+159:Total input pins                9
+160:Total output pins               3
+161:Total Pts                       22
+
+LISTING FOR LOGIC DESCRIPTION FILE: DRAMARB.pld                      Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jun 01 19:33:18 2023
+
+162:
+163:*/
+164:
+165:
+166:
+167:
+168:
+
+
+

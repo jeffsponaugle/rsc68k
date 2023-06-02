@@ -32,7 +32,7 @@ NODE PE_BIAS;
 NODE REFRESH_TIMER_RESET;
 NODE [REFRESH_TIMER0..7];
 NODE CLK_16M_INTERNAL;
-
+NODE REFRESH_REQUESTED, REFRESH_COMPLETED;
 /* Internally generated 16Mhz clock used for the refresh timer */
 
 CLK_16M_INTERNAL.d = !CLK_16M_INTERNAL;
@@ -50,7 +50,7 @@ REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
 
 PE_BIAS.d = !PE_BIAS;
 PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
-PE_BIAS.ar = RESET_IN;
+PE_BIAS.ar = !SYS_RESET;
 
 GRANT_ACTIVE = GRANT0 & GRANT1 & REFRESH_GRANT;   /* Active low signal that either grant is active */
 
@@ -74,8 +74,8 @@ GRANT1.d = ( !GRANT_ACTIVE & GRANT1 ) #        /* If a grant is active, don't ch
 GRANT0.ap = REQ0;
 GRANT1.ap = REQ1;
 REFRESH_GRANT.ap = REFRESH_REQ;
-[GRANT0..1].ck = CLK_IN;
-REFRESH_GRANT.ck = CLK_IN;
+[GRANT0..1].ck = CLK_32M;
+REFRESH_GRANT.ck = CLK_32M;
 
 
 /* REFRESH REQUESTED is a latch that is set to 0 when a refresh is needed, and cleared back to 1 once the refresh has
@@ -87,7 +87,7 @@ REFRESH_REQUESTED.ck = REFRESH_TIMER7;
 REFRESH_REQUESTED.ap = !REFRESH_COMPLETED # !SYS_RESET;
 
 
-REFRESH_COMPLETED.d = ;
+REFRESH_COMPLETED.d = 'b'0;
 REFRESH_COMPLETED.ck = !CLK_32M;
 REFRESH_COMPLETED.ap = REFRESH_REQUESTED # !SYS_RESET;
 
@@ -108,7 +108,7 @@ REFRESH_COMPLETED.ap = REFRESH_REQUESTED # !SYS_RESET;
 
 REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
 REFRESH_TIMER_RESET.ck = CLK_32M;
-REFRESH_TIMER_RESET.ar = !CPU_RESET;
+REFRESH_TIMER_RESET.ar = !SYS_RESET;
 
 REFRESH_TIMER0.d = !REFRESH_TIMER0;
 REFRESH_TIMER1.d = REFRESH_TIMER0 $ REFRESH_TIMER1;
@@ -149,16 +149,110 @@ REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !SYS_RESET;
 
 
 /*
-Total dedicated input used:	1/4 	(25%)
-Total I/O pins used		11/64 	(17%)
-Total Logic cells used 		6/128 	(4%)
-Total Flip-Flop used 		6/128 	(4%)
-Total Foldback logic used 	1/128 	(0%)
-Total Nodes+FB/MCells 		7/128 	(5%)
-Total cascade used 		0
+
+Total dedicated input used:	2/4 	(50%)
+Total I/O pins used		10/64 	(15%)
+Total Logic cells used 		20/128 	(15%)
+Total Flip-Flop used 		18/128 	(14%)
+Total Foldback logic used 	6/128 	(4%)
+Total Nodes+FB/MCells 		24/128 	(18%)
+Total cascade used 		2
 Total input pins 		9
 Total output pins 		3
-Total Pts 			22
+Total Pts 			69
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+CLK_32M assigned to pin  83
+SYS_RESET assigned to pin  1
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+CLK_32M assigned to pin  83
+SYS_RESET assigned to pin  1
+
+Attempt to place floating signals ...
+------------------------------------
+REFRESH_TIMER4 is placed at feedback node 601 (MC 1)
+REFRESH_TIMER1 is placed at feedback node 602 (MC 2)
+REFRESH_COMPLETED is placed at feedback node 603 (MC 3)
+REFRESH_TIMER5 is placed at feedback node 604 (MC 4)
+PE_BIAS is placed at feedback node 605 (MC 5)
+REFRESH_TIMER0 is placed at feedback node 606 (MC 6)
+REFRESH_TIMER2 is placed at feedback node 607 (MC 7)
+REFRESH_REQUESTED is placed at feedback node 608 (MC 8)
+FB_100 is placed at foldback expander node 308 (MC 8)
+FB_99 is placed at foldback expander node 309 (MC 9)
+REFRESH_TIMER3 is placed at feedback node 610 (MC 10)
+FB_98 is placed at foldback expander node 310 (MC 10)
+REQ1 is placed at pin 8 (MC 11)
+FB_97 is placed at foldback expander node 311 (MC 11)
+REFRESH_TIMER7 is placed at feedback node 612 (MC 12)
+Com_Ctrl_96 is placed at foldback expander node 312 (MC 12)
+REFRESH_GRANT is placed at pin 6 (MC 13)
+Com_Ctrl_95 is placed at foldback expander node 313 (MC 13)
+GRANT0 is placed at pin 5 (MC 14)
+REFRESH_TIMER6 is placed at feedback node 615 (MC 15)
+GRANT1 is placed at pin 4 (MC 16)
+REQ0 is placed at pin 22 (MC 17)
+REFRESH_REQ is placed at pin 21 (MC 19)
+REQ_CLOCKED1 is placed at feedback node 628 (MC 28)
+REQ_CLOCKED0 is placed at feedback node 630 (MC 30)
+REFRESH_TIMER_RESET is placed at feedback node 631 (MC 31)
+TDI is placed at pin 14 (MC 32)
+CLK_16M_INTERNAL is placed at feedback node 632 (MC 32)
+TMS is placed at pin 23 (MC 48)
+TCK is placed at pin 62 (MC 96)
+TDO is placed at pin 71 (MC 112)
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                          S                                         
+                                          Y                                         
+                                          S  C                                      
+                                  G G     _  L                                      
+                                  R R     R  K                                      
+                            R     A A     E  _                                      
+                            E G   N N V   S  3 G       V                            
+                            Q N   T T C   E  2 N       C                            
+                            1 D   0 1 C   T  M D       C                            
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+                 | 12                    (*)                   74 |                 
+             VCC | 13                                          73 |                 
+             TDI | 14                                          72 | GND             
+                 | 15                                          71 | TDO             
+                 | 16                                          70 |                 
+                 | 17                                          69 |                 
+                 | 18                                          68 |                 
+             GND | 19                                          67 |                 
+                 | 20                                          66 | VCC             
+     REFRESH_REQ | 21                                          65 |                 
+            REQ0 | 22                 ATF1508                  64 |                 
+             TMS | 23               84-Lead PLCC               63 |                 
+                 | 24                                          62 | TCK             
+                 | 25                                          61 |                 
+             VCC | 26                                          60 |                 
+                 | 27                                          59 | GND             
+                 | 28                                          58 |                 
+                 | 29                                          57 |                 
+                 | 30                                          56 |                 
+                 | 31                                          55 |                 
+             GND | 32                                          54 |                 
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                                V       G V       G           V                     
+                                C       N C       N           C                     
+                                C       D C       D           C                     
+
+
 
 */
 
