@@ -1,0 +1,179 @@
+Name     BusArbName ;
+PartNo   00 ;
+Date     11/18/2020 ;
+Revision 01 ;
+Designer Engineer ;
+Company  Atmel ;
+Assembly None ;
+Location  ;
+Device f1504ispplcc44;
+
+/* *************** INPUT PINS *********************/
+PIN =  CPU0_SBUS_REQUEST;           /* Shared Memory Request from CPU0 */ 
+PIN =  CPU1_SBUS_REQUEST;           /* Shared Memory Request from CPU1 */ 
+PIN =  CPU2_SBUS_REQUEST;           /* Shared Memory Request from CPU2 */ 
+PIN =  CPU3_SBUS_REQUEST;           /* Shared Memory Request from CPU3 */ 
+PIN =  ExClock;                     /* Clock Signal                    */
+PIN =  ExReset;                     /* Reset Signal                    */
+
+PIN = SUPERVISOR_BUS_REQUEST;           /* Assertion from Supervisor CPU of a SharedMemory or DirectWorkerCPU request */
+PIN = SUPERVISOR_BUS_TYPE;              /* Type of request, 0=SharedMemory, 1=DirectWorkerCPU (ID) */
+PIN = SUPERVISOR_WORKER_RESET;          /* Reset cpu ID selected */
+PIN = SUPERVISOR_BUS_ID0;               /* ID (bit0) of CPU to access */
+PIN = SUPERVISOR_BUS_ID1;               /* ID (bit1) of CPU to access */
+PIN = SUPERVISOR_BUS_ID2;               /* ID (bit2) of CPU to access */
+
+PIN = CPU0_SUPBUSGRANT;                 /* Grant for Bus Control from CPU 0 */
+PIN = CPU1_SUPBUSGRANT;                 /* Grant for Bus Control from CPU 1 */
+PIN = CPU2_SUPBUSGRANT;                 /* Grant for Bus Control from CPU 2 */
+PIN = CPU3_SUPBUSGRANT;                 /* Grant for Bus Control from CPU 3 */
+
+
+/* *************** OUTPUT PINS *********************/
+PIN = CPU0_SBUS_GRANT;                  /*                                 */ 
+PIN = CPU1_SBUS_GRANT;                  /*                                 */ 
+PIN = CPU2_SBUS_GRANT;                  /*                                 */ 
+PIN = CPU3_SBUS_GRANT;                  /*                                 */ 
+
+PIN = SUPERVISOR_BUS_GRANT;             /* Assertion to Supervisor CPU that SharedMemory or DirectCPU is available */
+PIN = CPU0_SUPBUSREQ;                   /* Request to CPU0 for Bus Control */
+PIN = CPU1_SUPBUSREQ;                   /* Request to CPU1 for Bus Control */
+PIN = CPU2_SUPBUSREQ;                   /* Request to CPU2 for Bus Control */
+PIN = CPU3_SUPBUSREQ;                   /* Request to CPU3 for Bus Control */
+
+PIN = SHARED_MEMORY_CE;                 /* Chip select for shared memory */
+
+
+NODE R0_0,R0_1,R0_2,R0_3;
+NODE R1_0,R1_1,R1_2,R1_3;
+NODE R2_0,R2_1,R2_2,R2_3;
+NODE R3_0,R3_1,R3_2,R3_3;
+
+
+/* Flip flops for Request 0 filtering.  This records the state of the other requests when this request is granted.  */
+
+Rx0A = CPU0_SBUS_REQUEST & !(R0_1 # R0_2 # R0_3);
+Rx0B = R0_0 & !(CPU1_SBUS_GRANT # CPU2_SBUS_GRANT # CPU3_SBUS_GRANT );
+
+R0_0.ck = Rx0A;
+R0_0.ar = CPU0_SBUS_REQUEST;
+R0_0.d = 'b'1;
+
+R0_1.d = CPU1_SBUS_REQUEST;
+R0_1.ck = Rx0A;
+R0_1.ar = CPU1_SBUS_REQUEST;
+
+R0_2.d = CPU2_SBUS_REQUEST;
+R0_2.ck = Rx0A;
+R0_2.ar = CPU2_SBUS_REQUEST;
+
+R0_3.d = CPU3_SBUS_REQUEST;
+R0_3.ck = Rx0A;
+R0_3.ar = CPU3_SBUS_REQUEST;
+
+/* Flip flops for Request 1 filtering.  This records the state of the other requests when this request is granted.  */
+
+Rx1A = CPU1_SBUS_REQUEST & !(R1_0 # R1_2 # R0_3);
+Rx1B = R1_1 & !(CPU0_SBUS_GRANT # CPU2_SBUS_GRANT # CPU3_SBUS_GRANT );
+
+R1_1.d = 'b'1;
+R1_1.ck = Rx1A;
+R1_1.ar = CPU1_SBUS_REQUEST;
+
+R1_0.d = CPU0_SBUS_REQUEST;
+R1_0.ck = Rx1A;
+R1_0.ar = CPU0_SBUS_REQUEST;
+
+R1_2.d = CPU2_SBUS_REQUEST;
+R1_2.ck = Rx1A;
+R1_2.ar = CPU2_SBUS_REQUEST;
+
+R1_3.d = CPU3_SBUS_REQUEST;
+R1_3.ck = Rx1A;
+R1_3.ar = CPU3_SBUS_REQUEST;
+
+
+/* Flip flops for Request 2 filtering.  This records the state of the other requests when this request is granted.  */
+
+Rx2A = CPU2_SBUS_REQUEST & !(R2_0 # R2_1 # R2_3);
+Rx2B = R2_2 & !(CPU0_SBUS_GRANT # CPU1_SBUS_GRANT # CPU3_SBUS_GRANT );
+
+R2_2.d = 'b'1;
+R2_2.ck = Rx2A;
+R2_2.ar = CPU2_SBUS_REQUEST;
+
+R2_0.d = CPU0_SBUS_REQUEST;
+R2_0.ck = Rx2A;
+R2_0.ar = CPU0_SBUS_REQUEST;
+
+R2_1.d = CPU1_SBUS_REQUEST;
+R2_1.ck = Rx2A;
+R2_1.ar = CPU1_SBUS_REQUEST;
+
+R2_3.d = CPU3_SBUS_REQUEST;
+R2_3.ck = Rx2A;
+R2_3.ar = CPU3_SBUS_REQUEST;
+
+/* Flip flops for Request 3 filtering.  This records the state of the other requests when this request is granted.  */
+
+Rx3A = CPU3_SBUS_REQUEST & !(R3_0 # R3_1 # R3_2);
+Rx3B = R3_3 & !(CPU0_SBUS_GRANT # CPU2_SBUS_GRANT # CPU3_SBUS_GRANT );
+
+R3_3.d = 'b'1;
+R3_3.ck = Rx3A;
+R3_3.ar = CPU3_SBUS_REQUEST;
+
+R3_0.d = CPU0_SBUS_REQUEST;
+R3_0.ck = Rx3A;
+R3_0.ar = CPU0_SBUS_REQUEST;
+
+R3_1.d = CPU1_SBUS_REQUEST;
+R3_1.ck = Rx3A;
+R3_1.ar = CPU1_SBUS_REQUEST;
+
+R3_2.d = CPU2_SBUS_REQUEST;
+R3_2.ck = Rx3A;
+R3_2.ar = CPU2_SBUS_REQUEST;
+
+
+/* Output flip flops get input from 'priority encoder' */
+/* 
+    Grant 0 occurs if filtered request 0 is active. 
+    Grant 1 occurs if filtered request 1 is active, and filtered request 0 is not.
+    Grant 2 occurs if filtered request 2 is active, and filtered request 0 and 1 are not.
+    Grant 4 occurs if filtered request 3 is active, and filtered request 0,1, and 2 are not.
+*/
+
+
+CPU0_SBUS_GRANT.d = Rx0B;
+CPU0_SBUS_GRANT.ck = ExClock;
+CPU0_SBUS_GRANT.ar = ExReset;
+
+CPU1_SBUS_GRANT.d = !Rx0B & Rx1B;
+CPU1_SBUS_GRANT.ck = ExClock;
+CPU1_SBUS_GRANT.ar = ExReset;
+
+CPU2_SBUS_GRANT.d = !Rx0B & !Rx1B & Rx2B;
+CPU2_SBUS_GRANT.ck = ExClock;
+CPU2_SBUS_GRANT.ar = ExReset;
+
+CPU3_SBUS_GRANT.d = !Rx0B & !Rx1B & !Rx2B & Rx3B;
+CPU3_SBUS_GRANT.ck = ExClock;
+CPU3_SBUS_GRANT.ar = ExReset;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
