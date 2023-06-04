@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          f1504ispplcc44  Library DLIB-h-40-1
-Created         Sat Jun 03 22:31:16 2023
+Created         Sun Jun 04 09:16:18 2023
 Name            DRAMARB
 Partno          DRAMARB
 Revision        01
@@ -112,11 +112,22 @@ CLK_16M_INTERNAL.ar  =>
 CLK_16M_INTERNAL.ck  =>
     CLK_32M
 
-DRAM_AB =>
-    CPU0_RW
+DRAM_AB.d  =>
+    0 
+
+DRAM_AB.ap  =>
+    !GRANT0
+  # !GRANT1
+  # !SYS_RESET
+
+DRAM_AB.ck  =>
+    !RAS0
+  # !RAS1
 
 DRAM_RW =>
-    CPU0_RW
+    !GRANT0
+  # CPU0_RW
+  # !REFRESH_GRANT
 
 GRANT0.d  =>
     GRANT0 & !GRANT1
@@ -530,24 +541,28 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CAS3                d       8        X        6       0       1     
     CAS3                ap      8        X        4       0       1     
     CAS3                ck      8        X        1       0       1     
-    CAS_PRE                     59       N        -       -       -     
-    CAS_PRE             d       59       M        1       0       1     
-    CAS_PRE             ap      59       M        4       0       1     
-    CAS_PRE             ck      59       M        1       0       1     
-    CLK_16M_INTERNAL            55       N        -       -       -     
-    CLK_16M_INTERNAL    d       55       M        1       0       1     
-    CLK_16M_INTERNAL    ar      55       M        1       0       1     
-    CLK_16M_INTERNAL    ck      55       M        1       0       1     
+    CAS_PRE                     61       N        -       -       -     
+    CAS_PRE             d       61       M        1       0       1     
+    CAS_PRE             ap      61       M        4       0       1     
+    CAS_PRE             ck      61       M        1       0       1     
+    CLK_16M_INTERNAL            57       N        -       -       -     
+    CLK_16M_INTERNAL    d       57       M        1       0       1     
+    CLK_16M_INTERNAL    ar      57       M        1       0       1     
+    CLK_16M_INTERNAL    ck      57       M        1       0       1     
     CLK_32M                     2        V        -       -       -     
     CPU0_A1                     25       V        -       -       -     
+    CPU0_DRAM_DTACK             0        V        -       -       -     
     CPU0_LDS                    29       V        -       -       -     
-    CPU0_RW                     0        V        -       -       -     
+    CPU0_RW                     28       V        -       -       -     
     CPU0_UDS                    27       V        -       -       -     
     CPU1_A1                     26       V        -       -       -     
     CPU1_LDS                    31       V        -       -       -     
     CPU1_UDS                    28       V        -       -       -     
-    DRAM_AB                     0        V        1       0       1     
-    DRAM_RW                     0        V        1       0       1     
+    DRAM_AB                     20       V        -       -       -     
+    DRAM_AB             d       20       X        1       0       1     
+    DRAM_AB             ap      20       X        3       0       1     
+    DRAM_AB             ck      20       X        2       0       1     
+    DRAM_RW                     21       V        3       0       1     
     GRANT0                      16       V        -       -       -     
     GRANT0              d       16       X        3       0       1     
     GRANT0              ap      16       X        2       0       1     
@@ -558,10 +573,10 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     GRANT1              ck      17       X        1       0       1     
     GRANT_ACTIVE                0        I        1       -       -     
     MEMORY_ACCESS_GRANT_ACTIVE        0        I        1       -       -     
-    PE_BIAS                     45       N        -       -       -     
-    PE_BIAS             d       45       M        1       0       1     
-    PE_BIAS             ar      45       M        1       0       1     
-    PE_BIAS             ck      45       M        2       0       1     
+    PE_BIAS                     47       N        -       -       -     
+    PE_BIAS             d       47       M        1       0       1     
+    PE_BIAS             ar      47       M        1       0       1     
+    PE_BIAS             ck      47       M        2       0       1     
     PE_OUT_0                    0        I        2       -       -     
     PE_OUT_1                    0        I        3       -       -     
     RAS0                        9        V        -       -       -     
@@ -573,122 +588,122 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     RAS1                ap      11       X        4       0       1     
     RAS1                ck      11       X        1       0       1     
     REFRESH_ACCESS_GRANT_ACTIVE        0        I        1       -       -     
-    REFRESH_COMPLETED           57       N        -       -       -     
-    REFRESH_COMPLETED   d       57       M        1       0       1     
-    REFRESH_COMPLETED   ap      57       M        2       0       1     
-    REFRESH_COMPLETED   ck      57       M        1       0       1     
-    REFRESH_COMPLETED_PRE0        60       N        -       -       -     
-    REFRESH_COMPLETED_PRE0d       60       M        1       0       1     
-    REFRESH_COMPLETED_PRE0ap      60       M        2       0       1     
-    REFRESH_COMPLETED_PRE0ck      60       M        1       0       1     
-    REFRESH_COMPLETED_PRE1        61       N        -       -       -     
-    REFRESH_COMPLETED_PRE1d       61       M        1       0       1     
-    REFRESH_COMPLETED_PRE1ap      61       M        2       0       1     
-    REFRESH_COMPLETED_PRE1ck      61       M        1       0       1     
-    REFRESH_COMPLETED_PRE2        62       N        -       -       -     
-    REFRESH_COMPLETED_PRE2d       62       M        1       0       1     
-    REFRESH_COMPLETED_PRE2ap      62       M        2       0       1     
-    REFRESH_COMPLETED_PRE2ck      62       M        1       0       1     
+    REFRESH_COMPLETED           59       N        -       -       -     
+    REFRESH_COMPLETED   d       59       M        1       0       1     
+    REFRESH_COMPLETED   ap      59       M        2       0       1     
+    REFRESH_COMPLETED   ck      59       M        1       0       1     
+    REFRESH_COMPLETED_PRE0        62       N        -       -       -     
+    REFRESH_COMPLETED_PRE0d       62       M        1       0       1     
+    REFRESH_COMPLETED_PRE0ap      62       M        2       0       1     
+    REFRESH_COMPLETED_PRE0ck      62       M        1       0       1     
+    REFRESH_COMPLETED_PRE1        63       N        -       -       -     
+    REFRESH_COMPLETED_PRE1d       63       M        1       0       1     
+    REFRESH_COMPLETED_PRE1ap      63       M        2       0       1     
+    REFRESH_COMPLETED_PRE1ck      63       M        1       0       1     
+    REFRESH_COMPLETED_PRE2        64       N        -       -       -     
+    REFRESH_COMPLETED_PRE2d       64       M        1       0       1     
+    REFRESH_COMPLETED_PRE2ap      64       M        2       0       1     
+    REFRESH_COMPLETED_PRE2ck      64       M        1       0       1     
     REFRESH_GRANT               24       V        -       -       -     
     REFRESH_GRANT       d       24       X        3       0       1     
     REFRESH_GRANT       ap      24       X        3       0       1     
     REFRESH_GRANT       ck      24       X        1       0       1     
     REFRESH_OUT                 0        I        1       -       -     
-    REFRESH_REQUESTED           56       N        -       -       -     
-    REFRESH_REQUESTED   d       56       M        1       0       1     
-    REFRESH_REQUESTED   ap      56       M        2       0       1     
-    REFRESH_REQUESTED   ck      56       M        1       0       1     
-    REFRESH_REQ_CLOCKED         58       N        -       -       -     
-    REFRESH_REQ_CLOCKED d       58       M        1       0       1     
-    REFRESH_REQ_CLOCKED ap      58       M        1       0       1     
-    REFRESH_REQ_CLOCKED ck      58       M        1       0       1     
-    REFRESH_TIMER0              47       N        -       -       -     
-    REFRESH_TIMER0      d       47       M        1       0       1     
-    REFRESH_TIMER0      ar      47       M        2       0       1     
-    REFRESH_TIMER0      ck      47       M        1       0       1     
-    REFRESH_TIMER1              48       N        -       -       -     
-    REFRESH_TIMER1      d       48       M        2       0       1     
-    REFRESH_TIMER1      ar      48       M        2       0       1     
-    REFRESH_TIMER1      ck      48       M        1       0       1     
-    REFRESH_TIMER2              49       N        -       -       -     
-    REFRESH_TIMER2      d       49       M        3       0       1     
-    REFRESH_TIMER2      ar      49       M        2       0       1     
-    REFRESH_TIMER2      ck      49       M        1       0       1     
-    REFRESH_TIMER3              50       N        -       -       -     
-    REFRESH_TIMER3      d       50       M        4       0       1     
-    REFRESH_TIMER3      ap      50       M        2       0       1     
-    REFRESH_TIMER3      ck      50       M        1       0       1     
-    REFRESH_TIMER4              51       N        -       -       -     
-    REFRESH_TIMER4      d       51       M        1       0       1     
-    REFRESH_TIMER4      ar      51       M        2       0       1     
-    REFRESH_TIMER4      ck      51       M        4       0       1     
-    REFRESH_TIMER5              52       N        -       -       -     
-    REFRESH_TIMER5      d       52       M        2       0       1     
-    REFRESH_TIMER5      ar      52       M        2       0       1     
-    REFRESH_TIMER5      ck      52       M        4       0       1     
-    REFRESH_TIMER6              53       N        -       -       -     
-    REFRESH_TIMER6      d       53       M        3       0       1     
-    REFRESH_TIMER6      ar      53       M        2       0       1     
-    REFRESH_TIMER6      ck      53       M        4       0       1     
-    REFRESH_TIMER7              54       N        -       -       -     
-    REFRESH_TIMER7      d       54       M        4       0       1     
-    REFRESH_TIMER7      ar      54       M        2       0       1     
-    REFRESH_TIMER7      ck      54       M        4       0       1     
-    REFRESH_TIMER_RESET         46       N        -       -       -     
-    REFRESH_TIMER_RESET d       46       M        1       0       1     
-    REFRESH_TIMER_RESET ar      46       M        1       0       1     
-    REFRESH_TIMER_RESET ck      46       M        1       0       1     
-    REQ_CLOCKED0                18       V        -       -       -     
-    REQ_CLOCKED0        d       18       X        1       0       1     
-    REQ_CLOCKED0        ap      18       X        1       0       1     
-    REQ_CLOCKED0        ck      18       X        1       0       1     
-    REQ_CLOCKED1                19       V        -       -       -     
-    REQ_CLOCKED1        d       19       X        1       0       1     
-    REQ_CLOCKED1        ap      19       X        1       0       1     
-    REQ_CLOCKED1        ck      19       X        1       0       1     
+    REFRESH_REQUESTED           58       N        -       -       -     
+    REFRESH_REQUESTED   d       58       M        1       0       1     
+    REFRESH_REQUESTED   ap      58       M        2       0       1     
+    REFRESH_REQUESTED   ck      58       M        1       0       1     
+    REFRESH_REQ_CLOCKED         60       N        -       -       -     
+    REFRESH_REQ_CLOCKED d       60       M        1       0       1     
+    REFRESH_REQ_CLOCKED ap      60       M        1       0       1     
+    REFRESH_REQ_CLOCKED ck      60       M        1       0       1     
+    REFRESH_TIMER0              49       N        -       -       -     
+    REFRESH_TIMER0      d       49       M        1       0       1     
+    REFRESH_TIMER0      ar      49       M        2       0       1     
+    REFRESH_TIMER0      ck      49       M        1       0       1     
+    REFRESH_TIMER1              50       N        -       -       -     
+    REFRESH_TIMER1      d       50       M        2       0       1     
+    REFRESH_TIMER1      ar      50       M        2       0       1     
+    REFRESH_TIMER1      ck      50       M        1       0       1     
+    REFRESH_TIMER2              51       N        -       -       -     
+    REFRESH_TIMER2      d       51       M        3       0       1     
+    REFRESH_TIMER2      ar      51       M        2       0       1     
+    REFRESH_TIMER2      ck      51       M        1       0       1     
+    REFRESH_TIMER3              52       N        -       -       -     
+    REFRESH_TIMER3      d       52       M        4       0       1     
+    REFRESH_TIMER3      ap      52       M        2       0       1     
+    REFRESH_TIMER3      ck      52       M        1       0       1     
+    REFRESH_TIMER4              53       N        -       -       -     
+    REFRESH_TIMER4      d       53       M        1       0       1     
+    REFRESH_TIMER4      ar      53       M        2       0       1     
+    REFRESH_TIMER4      ck      53       M        4       0       1     
+    REFRESH_TIMER5              54       N        -       -       -     
+    REFRESH_TIMER5      d       54       M        2       0       1     
+    REFRESH_TIMER5      ar      54       M        2       0       1     
+    REFRESH_TIMER5      ck      54       M        4       0       1     
+    REFRESH_TIMER6              55       N        -       -       -     
+    REFRESH_TIMER6      d       55       M        3       0       1     
+    REFRESH_TIMER6      ar      55       M        2       0       1     
+    REFRESH_TIMER6      ck      55       M        4       0       1     
+    REFRESH_TIMER7              56       N        -       -       -     
+    REFRESH_TIMER7      d       56       M        4       0       1     
+    REFRESH_TIMER7      ar      56       M        2       0       1     
+    REFRESH_TIMER7      ck      56       M        4       0       1     
+    REFRESH_TIMER_RESET         48       N        -       -       -     
+    REFRESH_TIMER_RESET d       48       M        1       0       1     
+    REFRESH_TIMER_RESET ar      48       M        1       0       1     
+    REFRESH_TIMER_RESET ck      48       M        1       0       1     
+    REQ_CLOCKED0                45       N        -       -       -     
+    REQ_CLOCKED0        d       45       M        1       0       1     
+    REQ_CLOCKED0        ap      45       M        1       0       1     
+    REQ_CLOCKED0        ck      45       M        1       0       1     
+    REQ_CLOCKED1                46       N        -       -       -     
+    REQ_CLOCKED1        d       46       M        1       0       1     
+    REQ_CLOCKED1        ap      46       M        1       0       1     
+    REQ_CLOCKED1        ck      46       M        1       0       1     
     SIM_AS                      33       V        2       0       1     
     SIM_AS_IN                   44       V        -       -       -     
     SIM_AS_OUT                  41       V        2       0       1     
-    SIM_AS_PRE                  72       N        -       -       -     
+    SIM_AS_PRE                  74       N        -       -       -     
     SIM_DRAM_CS                 34       V        3       0       1     
     SIM_RW                      36       V        -       -       -     
-    SIM_S0                      63       N        -       -       -     
-    SIM_S0              d       63       M        1       0       1     
-    SIM_S0              ap      63       M        1       0       1     
-    SIM_S0              ck      63       M        1       0       1     
-    SIM_S1                      64       N        -       -       -     
-    SIM_S1              d       64       M        1       0       1     
-    SIM_S1              ap      64       M        1       0       1     
-    SIM_S1              ck      64       M        1       0       1     
-    SIM_S2                      65       N        -       -       -     
-    SIM_S2              d       65       M        1       0       1     
-    SIM_S2              ap      65       M        2       0       1     
-    SIM_S2              ck      65       M        1       0       1     
-    SIM_S3                      66       N        -       -       -     
-    SIM_S3              d       66       M        1       0       1     
-    SIM_S3              ap      66       M        1       0       1     
-    SIM_S3              ck      66       M        1       0       1     
-    SIM_S4                      67       N        -       -       -     
-    SIM_S4              d       67       M        1       0       1     
-    SIM_S4              ap      67       M        1       0       1     
-    SIM_S4              ck      67       M        1       0       1     
-    SIM_S5                      68       N        -       -       -     
-    SIM_S5              d       68       M        1       0       1     
-    SIM_S5              ap      68       M        1       0       1     
-    SIM_S5              ck      68       M        1       0       1     
-    SIM_S6                      69       N        -       -       -     
-    SIM_S6              d       69       M        1       0       1     
-    SIM_S6              ap      69       M        1       0       1     
-    SIM_S6              ck      69       M        1       0       1     
-    SIM_S7                      70       N        -       -       -     
-    SIM_S7              d       70       M        1       0       1     
-    SIM_S7              ap      70       M        1       0       1     
-    SIM_S7              ck      70       M        1       0       1     
+    SIM_S0                      65       N        -       -       -     
+    SIM_S0              d       65       M        1       0       1     
+    SIM_S0              ap      65       M        1       0       1     
+    SIM_S0              ck      65       M        1       0       1     
+    SIM_S1                      66       N        -       -       -     
+    SIM_S1              d       66       M        1       0       1     
+    SIM_S1              ap      66       M        1       0       1     
+    SIM_S1              ck      66       M        1       0       1     
+    SIM_S2                      67       N        -       -       -     
+    SIM_S2              d       67       M        1       0       1     
+    SIM_S2              ap      67       M        2       0       1     
+    SIM_S2              ck      67       M        1       0       1     
+    SIM_S3                      68       N        -       -       -     
+    SIM_S3              d       68       M        1       0       1     
+    SIM_S3              ap      68       M        1       0       1     
+    SIM_S3              ck      68       M        1       0       1     
+    SIM_S4                      69       N        -       -       -     
+    SIM_S4              d       69       M        1       0       1     
+    SIM_S4              ap      69       M        1       0       1     
+    SIM_S4              ck      69       M        1       0       1     
+    SIM_S5                      70       N        -       -       -     
+    SIM_S5              d       70       M        1       0       1     
+    SIM_S5              ap      70       M        1       0       1     
+    SIM_S5              ck      70       M        1       0       1     
+    SIM_S6                      71       N        -       -       -     
+    SIM_S6              d       71       M        1       0       1     
+    SIM_S6              ap      71       M        1       0       1     
+    SIM_S6              ck      71       M        1       0       1     
+    SIM_S7                      72       N        -       -       -     
+    SIM_S7              d       72       M        1       0       1     
+    SIM_S7              ap      72       M        1       0       1     
+    SIM_S7              ck      72       M        1       0       1     
     SIM_START_BUTTON            37       V        -       -       -     
-    SIM_START_LATCH             71       N        -       -       -     
-    SIM_START_LATCH     d       71       M        1       0       1     
-    SIM_START_LATCH     ap      71       M        2       0       1     
-    SIM_START_LATCH     ck      71       M        1       0       1     
+    SIM_START_LATCH             73       N        -       -       -     
+    SIM_START_LATCH     d       73       M        1       0       1     
+    SIM_START_LATCH     ap      73       M        2       0       1     
+    SIM_START_LATCH     ck      73       M        1       0       1     
     SYS_RESET                   1        V        -       -       -     
 
 

@@ -32,8 +32,10 @@ Pin[27,28] = CPU0_UDS, CPU1_UDS;
 Pin[29,31] = CPU0_LDS, CPU1_LDS;
 Pin[28] = CPU0_RW;
 Pin[21,20] = DRAM_RW, DRAM_AB;
-Pin[18,19] = [REQ_CLOCKED0..1];
 
+Pin = CPU0_DRAM_DTACK;
+
+NODE [REQ_CLOCKED0..1];
 NODE PE_BIAS;
 NODE REFRESH_TIMER_RESET;
 NODE [REFRESH_TIMER0..7];
@@ -203,8 +205,20 @@ CAS1.d = (( CAS_PRE # GRANT0 # CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # CPU1_
 CAS2.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_LDS ) & ( CAS_PRE # GRANT1 # !CPU1_A1 # CPU0_LDS) & (REFRESH_GRANT ));
 CAS3.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # !CPU1_A1 # CPU0_UDS) & (REFRESH_GRANT ));
 
-DRAM_RW = CPU0_RW; 
-DRAM_AB = CPU0_RW;
+/* The DRAM R/W signal will mirror the CPU_RW signal if we are doing a memory access.  If we are doing a refresh 
+   cycle, it will be fixed at 1 */
+
+DRAM_RW = (!GRANT0 # CPU0_RW) # (!REFRESH_GRANT); 
+
+/* 
+   DRAM AB selects either the row address or the col address going to the memory.  1=ROW, 1=COL.  It is 1 at reset and held at one if
+   MEMORY_ACCESS_GRANT_ACTIVE is 1.  As soon as a memory access cycle starts, it is unlocked and will toggle to 0 once one of the two RAS 
+   signals goes to zero.  That puts the AB signal about 7ns behind the RAS signal, and the actual 2:1 mux delay will add another 10-12ns of
+   delay.  That is just enough to get the COL address to the memory before the CAS signals goes to zero.
+*/
+DRAM_AB.d = 'b'0;
+DRAM_AB.ck = !RAS0 # ! RAS1;
+DRAM_AB.ap = !MEMORY_ACCESS_GRANT_ACTIVE # !SYS_RESET;
 
 
 
