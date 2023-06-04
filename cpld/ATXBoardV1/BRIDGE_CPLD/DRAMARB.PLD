@@ -56,26 +56,27 @@ Pin[37] = SIM_START_BUTTON;
 
 Pin[44] = SIM_AS_IN;
 Pin[41] = SIM_AS_OUT;
-NODE [SIM_S0..7];
+NODE [SIM_S0..8];
 NODE SIM_START_LATCH;
 
 SIM_START_LATCH.d = 'b'0;
 SIM_START_LATCH.ck = !SIM_START_BUTTON;
-SIM_START_LATCH.ap = !SYS_RESET # !SIM_S7;
+SIM_START_LATCH.ap = !SYS_RESET;
 
 
-[SIM_S0..7].ck = !CLK_32M;
+[SIM_S0..8].ck = !CLK_32M;
 
 /* S2 starts the /AS signal, and S2 is reset when S7 starts, which will stop the /AS signal. */
 
-SIM_S0.ap = !SYS_RESET;
-SIM_S1.ap = !SYS_RESET;
-SIM_S2.ap = !SYS_RESET # !SIM_S7;
-SIM_S3.ap = !SYS_RESET;
-SIM_S4.ap = !SYS_RESET;
-SIM_S5.ap = !SYS_RESET;
-SIM_S6.ap = !SYS_RESET;
-SIM_S7.ap = !SYS_RESET;
+SIM_S0.ap = !SYS_RESET # !SIM_S8;
+SIM_S1.ap = !SYS_RESET # !SIM_S8;
+SIM_S2.ap = !SYS_RESET # !SIM_S7 # !SIM_S8;
+SIM_S3.ap = !SYS_RESET # !SIM_S8;
+SIM_S4.ap = !SYS_RESET # !SIM_S8;
+SIM_S5.ap = !SYS_RESET # !SIM_S8;
+SIM_S6.ap = !SYS_RESET # !SIM_S8;
+SIM_S7.ap = !SYS_RESET # !SIM_S8;
+SIM_S8.ap = !SYS_RESET # SIM_S0;
 
 SIM_S0.d = SIM_START_LATCH;
 SIM_S1.d = SIM_S0;
@@ -85,6 +86,7 @@ SIM_S4.d = SIM_S3;
 SIM_S5.d = SIM_S4;
 SIM_S6.d = SIM_S5;
 SIM_S7.d = SIM_S6;
+SIM_S8.d = SIM_S7;
 
 NODE SIM_AS_PRE;
 
@@ -208,7 +210,7 @@ CAS3.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # !CPU
 /* The DRAM R/W signal will mirror the CPU_RW signal if we are doing a memory access.  If we are doing a refresh 
    cycle, it will be fixed at 1 */
 
-DRAM_RW = (!GRANT0 # CPU0_RW) # (!REFRESH_GRANT); 
+DRAM_RW = (!GRANT0 & CPU0_RW) # MEMORY_ACCESS_GRANT_ACTIVE; 
 
 /* 
    DRAM AB selects either the row address or the col address going to the memory.  1=ROW, 1=COL.  It is 1 at reset and held at one if
@@ -217,8 +219,8 @@ DRAM_RW = (!GRANT0 # CPU0_RW) # (!REFRESH_GRANT);
    delay.  That is just enough to get the COL address to the memory before the CAS signals goes to zero.
 */
 DRAM_AB.d = 'b'0;
-DRAM_AB.ck = !RAS0 # ! RAS1;
-DRAM_AB.ap = !MEMORY_ACCESS_GRANT_ACTIVE # !SYS_RESET;
+DRAM_AB.ck = !RAS0 # !RAS1;
+DRAM_AB.ap = MEMORY_ACCESS_GRANT_ACTIVE # !SYS_RESET;
 
 
 
