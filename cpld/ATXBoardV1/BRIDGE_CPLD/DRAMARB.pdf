@@ -1,11 +1,11 @@
-{COMPONENT C:\DRAMARB.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Fri Jun 02 21:01:41 2023 "}
+  {DBtime "Sat Jun 03 16:42:29 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,48 +33,30 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P CAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P CAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P CAS2 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P CAS3 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P RAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P RAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P REQ0 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P REQ1 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P GRANT0 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P GRANT1 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P CPU0_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P CPU1_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P CPU0_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P CPU0_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P CPU1_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P SIM_DRAM {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P SIM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P SIM_STAR {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
-   {P SIM_AS {Pt "I/O"}{Lq 0}{Ploc 340 20}}
+   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P AREQ0 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P AREQ1 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P GRANT0 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P GRANT1 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P REQ_CL0 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P REQ_CL1 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P SIM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P SIM_STAR {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P SIM_AS_I {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P SIM_AS {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P SIM_DRAM {Pt "I/O"}{Lq 0}{Ploc 360 40}}
+   {P SIM_AS_O {Pt "I/O"}{Lq 0}{Ploc 360 60}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 220 470}
+   {Rdl 230 270}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 450}
-   {Pnl 120 430}
-   {Pnl 120 410}
-   {Pnl 120 390}
-   {Pnl 120 370}
-   {Pnl 120 350}
-   {Pnl 120 330}
-   {Pnl 120 310}
-   {Pnl 120 290}
-   {Pnl 120 270}
    {Pnl 120 250}
    {Pnl 120 230}
    {Pnl 120 210}
@@ -88,25 +70,17 @@
    {Pnl 120 50}
    {Pnl 120 30}
    [Ts 15][Tj "LC"]
-   {Pnl 320 30}
+   {Pnl 340 30}
+   {Pnl 340 50}
+   {Pnl 340 70}
 
-   {Sd A 1 2 4 5 6 8 9 11 12 14 16 17 24 25 26 27 28 29 31 34 36 37 33}
+   {Sd A 1 2 12 14 16 17 18 19 24 36 37 44 33 34 41}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 460 310 0}
-   {L 130 440 100 440}
-   {L 130 420 100 420}
-   {L 130 400 100 400}
-   {L 130 380 100 380}
-   {L 130 360 100 360}
-   {L 130 340 100 340}
-   {L 130 320 100 320}
-   {L 130 300 100 300}
-   {L 130 280 100 280}
-   {L 130 260 100 260}
+   {R 130 260 330 0}
    {L 130 240 100 240}
    {L 130 220 100 220}
    {L 130 200 100 200}
@@ -119,36 +93,30 @@
    {L 130 60 100 60}
    {L 130 40 100 40}
    {L 130 20 100 20}
-   {L 310 20 340 20}
+   {L 330 20 360 20}
+   {L 330 40 360 40}
+   {L 330 60 360 60}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "SYS_RESE" 140 440}
-   {T "CLK_32M" 140 420}
-   {T "CAS0" 140 400}
-   {T "CAS1" 140 380}
-   {T "CAS2" 140 360}
-   {T "CAS3" 140 340}
-   {T "RAS0" 140 320}
-   {T "RAS1" 140 300}
-   {T "REQ0" 140 280}
-   {T "REQ1" 140 260}
-   {T "GRANT0" 140 240}
-   {T "GRANT1" 140 220}
-   {T "REFRESH_" 140 200}
-   {T "CPU0_A1" 140 180}
-   {T "CPU1_A1" 140 160}
-   {T "CPU0_UDS" 140 140}
-   {T "CPU1_UDS" 140 120}
-   {T "CPU0_LDS" 140 100}
-   {T "CPU1_LDS" 140 80}
-   {T "SIM_DRAM" 140 60}
-   {T "SIM_RW" 140 40}
-   {T "SIM_STAR" 140 20}
+   {T "SYS_RESE" 140 240}
+   {T "CLK_32M" 140 220}
+   {T "AREQ0" 140 200}
+   {T "AREQ1" 140 180}
+   {T "GRANT0" 140 160}
+   {T "GRANT1" 140 140}
+   {T "REQ_CL0" 140 120}
+   {T "REQ_CL1" 140 100}
+   {T "REFRESH_" 140 80}
+   {T "SIM_RW" 140 60}
+   {T "SIM_STAR" 140 40}
+   {T "SIM_AS_I" 140 20}
    [Tj "RC"]
-   {T "SIM_AS" 300 20}
+   {T "SIM_AS" 320 20}
+   {T "SIM_DRAM" 320 40}
+   {T "SIM_AS_O" 320 60}
    [Ly "DEVICE"]
    [Tj "CT"]
-   {T "F1504ISPPLCC44" 220 -10}
+   {T "F1504ISPPLCC44" 230 -10}
   }
 
   {ATR
@@ -159,7 +127,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\DRAMARB 220 460}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB 230 260}
    }
   }
  }
@@ -173,47 +141,31 @@
    }
    {N CLK_32M
    }
-   {N CAS0
+   {N AREQ0
    }
-   {N CAS1
-   }
-   {N CAS2
-   }
-   {N CAS3
-   }
-   {N RAS0
-   }
-   {N RAS1
-   }
-   {N REQ0
-   }
-   {N REQ1
+   {N AREQ1
    }
    {N GRANT0
    }
    {N GRANT1
    }
+   {N REQ_CL0
+   }
+   {N REQ_CL1
+   }
    {N REFRESH_
-   }
-   {N CPU0_A1
-   }
-   {N CPU1_A1
-   }
-   {N CPU0_UDS
-   }
-   {N CPU1_UDS
-   }
-   {N CPU0_LDS
-   }
-   {N CPU1_LDS
-   }
-   {N SIM_DRAM
    }
    {N SIM_RW
    }
    {N SIM_STAR
    }
+   {N SIM_AS_I
+   }
    {N SIM_AS
+   }
+   {N SIM_DRAM
+   }
+   {N SIM_AS_O
    }
   }
 

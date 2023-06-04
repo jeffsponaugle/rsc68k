@@ -22,32 +22,37 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 
 Pin[2] = CLK_32M;                  /* Clock */
 Pin[1] = SYS_RESET;                /* Active Low Reset */
-Pin[12,14] = [REQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
+Pin[12,14] = [AREQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
 Pin[16,17] = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
 Pin[24] = REFRESH_GRANT;
-Pin[9,11] = [RAS0..1];
-Pin[4,5,6,8] = [CAS0..3];
-Pin[25,26] = CPU0_A1, CPU1_A1;
-Pin[27,28] = CPU0_UDS, CPU1_UDS;
-Pin[29,31] = CPU0_LDS, CPU1_LDS;
+//Pin[9,11] = [RAS0..1];
+//Pin[4,5,6,8] = [CAS0..3];
+//Pin[25,26] = CPU0_A1, CPU1_A1;
+//Pin[27,28] = CPU0_UDS, CPU1_UDS;
+//Pin[29,31] = CPU0_LDS, CPU1_LDS;
 
 
-NODE [REQ_CLOCKED0..1];
-NODE PE_BIAS;
-NODE REFRESH_TIMER_RESET;
-NODE [REFRESH_TIMER0..7];
-NODE CLK_16M_INTERNAL;
-NODE REFRESH_REQUESTED, REFRESH_COMPLETED, REFRESH_REQ_CLOCKED;
-NODE CAS_PRE;
-NODE REFRESH_COMPLETED_PRE0, REFRESH_COMPLETED_PRE1, REFRESH_COMPLETED_PRE2;
+Pin[18,19] = [REQ_CLOCKED0..1];
+//NODE PE_BIAS;
+//NODE REFRESH_TIMER_RESET;
+//NODE [REFRESH_TIMER0..7];
+//NODE CLK_16M_INTERNAL;
+//NODE REFRESH_REQUESTED, REFRESH_COMPLETED, REFRESH_REQ_CLOCKED;
+//NODE CAS_PRE;
+//NODE REFRESH_COMPLETED_PRE0, REFRESH_COMPLETED_PRE1, REFRESH_COMPLETED_PRE2;
 /* Internally generated 16Mhz clock used for the refresh timer */
 
 
-/* SIMULATOR OUTPUTS */
+/* SIMULATOR LOGIC */
 
 Pin[33,34,36] = SIM_AS, SIM_DRAM_CS, SIM_RW;
 Pin[37] = SIM_START_BUTTON;
 
+// These next two pins must be connected together.  They add a 7ns delay to the AS signal so it replicates
+// what happens in a 68K system at 16Mhz.
+
+Pin[44] = SIM_AS_IN;
+Pin[41] = SIM_AS_OUT;
 NODE [SIM_S0..7];
 NODE SIM_START_LATCH;
 
@@ -56,7 +61,7 @@ SIM_START_LATCH.ck = !SIM_START_BUTTON;
 SIM_START_LATCH.ap = !SYS_RESET # !SIM_S7;
 
 
-[SIM_S0..7].ck = CLK_32M;
+[SIM_S0..7].ck = !CLK_32M;
 
 /* S2 starts the /AS signal, and S2 is reset when S7 starts, which will stop the /AS signal. */
 
@@ -78,29 +83,32 @@ SIM_S5.d = SIM_S4;
 SIM_S6.d = SIM_S5;
 SIM_S7.d = SIM_S6;
 
-SIM_AS = SIM_S2;
-SIM_DS = SIM_AS # !SYS_RESET;    /* The addition of the SYS_RESET should force SIM_DS to be about 7ns behind SIM_AS */
+NODE SIM_AS_PRE;
+
+SIM_AS_OUT = SIM_S2 # !SYS_RESET;
+SIM_AS = SIM_AS_IN # !SIM_S7;
+SIM_DRAM_CS = SIM_AS # SIM_S1 # SIM_S0;    /* The addition of the SYS_RESET should force SIM_DS to be about 7ns behind SIM_AS */
 
 /* END OF SIMULATOR LOGIC */
 
 
-CLK_16M_INTERNAL.d = !CLK_16M_INTERNAL;
-CLK_16M_INTERNAL.ck = CLK_32M;
-CLK_16M_INTERNAL.ar = !SYS_RESET;
+//CLK_16M_INTERNAL.d = !CLK_16M_INTERNAL;
+//CLK_16M_INTERNAL.ck = CLK_32M;
+//CLK_16M_INTERNAL.ar = !SYS_RESET;
 
 /* 
     Clocking the incoming access request for each CPU, as well as the request from the REFRESH generator.
     All three of these are clocked on the falling of CLK32M.   These go into the priority encoder and the 
     output of the priority encoder (the GRANT signals) are clocked on the rising edge of CLK32M.
  */
-REQ_CLOCKED0.d = REQ0;
-REQ_CLOCKED1.d = REQ1;
+REQ_CLOCKED0.d = AREQ0;
+REQ_CLOCKED1.d = AREQ1;
 [REQ_CLOCKED0..1].ck = !CLK_32M;
 [REQ_CLOCKED0..1].ap = !SYS_RESET;
 
-REFRESH_REQ_CLOCKED.ck = !CLK_32M;
-REFRESH_REQ_CLOCKED.d = REFRESH_REQUESTED;
-REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
+//REFRESH_REQ_CLOCKED.ck = !CLK_32M;
+//REFRESH_REQ_CLOCKED.d = REFRESH_REQUESTED;
+//REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
 
 
 /* 
@@ -109,32 +117,34 @@ REFRESH_REQ_CLOCKED.ap = !SYS_RESET;
     that BIAS applied to pick the winner.  The BIAS flag changes with the falling edge of a signal called 'GRANT_ACTIVE', 
     and that signal is a combination all of the GRANT flags, thus is set to 0 whenever any access grant happens. 
 */
+//
+//PE_BIAS.d = 'b'0;
+//PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
+//PE_BIAS.ar = !SYS_RESET;
 
-PE_BIAS.d = !PE_BIAS;
-PE_BIAS.ck = !GRANT_ACTIVE;        /* Flip the PE_BIAS each time we start a new grant cycle */
-PE_BIAS.ar = !SYS_RESET;
+//GRANT_ACTIVE = GRANT0; //& GRANT1 & REFRESH_GRANT;   /* Active low signal that there is a active grant of access from 1 of 3 sources */
 
-GRANT_ACTIVE = GRANT0 & GRANT1 & REFRESH_GRANT;   /* Active low signal that there is a active grant of access from 1 of 3 sources */
-
-REFRESH_OUT = REFRESH_REQ_CLOCKED;            /* refresh requests always win */
-PE_OUT_0 = ( !REFRESH_REQ_CLOCKED # PE_BIAS # REQ_CLOCKED0) &                     /* if BIAS is towards input 0, set output0 if input0 is set */
-           ( !REFRESH_REQ_CLOCKED # !PE_BIAS # (REQ_CLOCKED0 # !REQ_CLOCKED1));  /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
-PE_OUT_1 = ( !REFRESH_REQ_CLOCKED # !PE_BIAS # REQ_CLOCKED1) &                    /* if BIAS is towards input 1, set output1 if input1 is set */
-           ( !REFRESH_REQ_CLOCKED # PE_BIAS # (REQ_CLOCKED1 # !REQ_CLOCKED0));   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
+//REFRESH_OUT = REFRESH_REQ_CLOCKED;            /* refresh requests always win */
+PE_OUT_0 = ( REQ_CLOCKED0);                             /* if BIAS is towards input 0, set output0 if input0 is set */
+                                /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
+PE_OUT_1 = ( REQ_CLOCKED1);   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
           
-REFRESH_GRANT.d = ( !GRANT_ACTIVE & REFRESH_GRANT ) #    /* If a grant is active, don't change output state */
-          ( GRANT_ACTIVE & REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
-REFRESH_GRANT.ap = REFRESH_REQUESTED # !REFRESH_COMPLETED # !SYS_RESET;
-REFRESH_GRANT.ck = CLK_32M;
+//REFRESH_GRANT.d = ( !GRANT_ACTIVE & REFRESH_GRANT ) #    /* If a grant is active, don't change output state */
+//          ( GRANT_ACTIVE & REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
+//REFRESH_GRANT.ap = REFRESH_REQUESTED # !REFRESH_COMPLETED # !SYS_RESET;
+//REFRESH_GRANT.ck = CLK_32M;
 
-GRANT0.d = ( !GRANT_ACTIVE & GRANT0 ) #        /* If a grant is active, don't change output state */
-          ( GRANT_ACTIVE & PE_OUT_0 );         /* If a grant is not active, grab the output from the priority encoder */
-GRANT0.ap = REQ0 # !SYS_RESET;
+//GRANT0.d = ( !GRANT_ACTIVE & GRANT0 ) #        /* If a grant is active, don't change output state */
+//          ( GRANT_ACTIVE & PE_OUT_0 );         /* If a grant is not active, grab the output from the priority encoder */
 
-GRANT1.d = ( !GRANT_ACTIVE & GRANT1 ) #        /* If a grant is active, don't change output state */
-          ( GRANT_ACTIVE & PE_OUT_1 );         /* If a grant is not active, grab the output from the priority encoder */       
-GRANT1.ap = REQ1 # !SYS_RESET;
-[GRANT0..1].ck = CLK_32M;
+
+GRANT0.D =  REQ_CLOCKED0;
+GRANT0.AP = AREQ0 # !SYS_RESET;
+GRANT0.CK = CLK_32M;
+
+GRANT1.d =  REQ_CLOCKED0;         /* If a grant is not active, grab the output from the priority encoder */       
+GRANT1.ap = AREQ0 # !SYS_RESET;
+GRANT1.ck = CLK_32M;
 
 
 /* 
@@ -142,19 +152,19 @@ GRANT1.ap = REQ1 # !SYS_RESET;
    occured.   REFRESH_COMPLETED should be set to 1 when the refresh is completed.
 */
 
-REFRESH_REQUESTED.d = 'b'1;  // disabled REFRESH  THIS SHOULD BE 0 TO ENABLE REFRESH TO HAPPEN.
-REFRESH_REQUESTED.ck = REFRESH_TIMER7;
-REFRESH_REQUESTED.ap = !REFRESH_COMPLETED # !SYS_RESET;
+//REFRESH_REQUESTED.d = 'b'1;  // disabled REFRESH  THIS SHOULD BE 0 TO ENABLE REFRESH TO HAPPEN.
+//REFRESH_REQUESTED.ck = REFRESH_TIMER7;
+//REFRESH_REQUESTED.ap = !REFRESH_COMPLETED # !SYS_RESET;
 
 /* 
    REFRESH_COMPLETED is a tree of gates that create a delay from the start to the end of the refresh cycle.
 
 */
 
-REFRESH_COMPLETED_PRE0.d = REFRESH_GRANT;
-REFRESH_COMPLETED_PRE0.ck = !CLK_32M;
-REFRESH_COMPLETED_PRE0.ap = REFRESH_REQUESTED # !SYS_RESET;
-
+//REFRESH_COMPLETED_PRE0.d = REFRESH_GRANT;
+//REFRESH_COMPLETED_PRE0.ck = !CLK_32M;
+//REFRESH_COMPLETED_PRE0.ap = REFRESH_REQUESTED # !SYS_RESET;
+/*
 REFRESH_COMPLETED_PRE1.d = REFRESH_COMPLETED_PRE0;
 REFRESH_COMPLETED_PRE1.ck = !CLK_32M;
 REFRESH_COMPLETED_PRE1.ap = REFRESH_REQUESTED # !SYS_RESET;
@@ -167,29 +177,33 @@ REFRESH_COMPLETED.d = REFRESH_COMPLETED_PRE2;
 REFRESH_COMPLETED.ck = !CLK_32M;
 REFRESH_COMPLETED.ap = REFRESH_REQUESTED # !SYS_RESET;
 
+*/
 
 /* RAS, CAS, RW, and AB for DRAM access */
 
 // MEMORY_ACCESS_ACTIVE is zero if there is an active memory DRAM access cycle in progress.
+/*
+
 MEMORY_ACCESS_GRANT_ACTIVE = (GRANT0 & GRANT1);
 REFRESH_ACCESS_GRANT_ACTIVE = REFRESH_GRANT;
 
 [RAS0..1].ck = !CLK_32M;
-[RAS0..1].ap = ((!GRANT0) & REQ0) # ((!GRANT1) & REQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET;     // If the memory access granted ends, reset the RAS lines
+[RAS0..1].ap = ((!GRANT0) & AREQ0) # ((!GRANT1) & AREQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET;     // If the memory access granted ends, reset the RAS lines
 RAS0.d = ( GRANT0 # CPU0_A1 ) & ( GRANT1 # CPU1_A1);
 RAS1.d = ( GRANT0 # !CPU0_A1 ) & ( GRANT1 # !CPU1_A1);
 
 CAS_PRE.d = MEMORY_ACCESS_GRANT_ACTIVE;
 CAS_PRE.ck = !CLK_32M;
-CAS_PRE.ap = ((!GRANT0) & REQ0) # ((!GRANT1) & REQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET; 
+CAS_PRE.ap = ((!GRANT0) & AREQ0) # ((!GRANT1) & AREQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET; 
 
 [CAS0..3].ck = !CLK_32M;
-[CAS0..3].ap = ((!GRANT0) & REQ0) # ((!GRANT1) & REQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET; 
+[CAS0..3].ap = ((!GRANT0) & AREQ0) # ((!GRANT1) & AREQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET; 
 
 CAS0.d = (( CAS_PRE # GRANT0 # CPU0_A1 # CPU0_LDS ) & ( CAS_PRE # GRANT1 # CPU1_A1 # CPU0_LDS) & (REFRESH_GRANT ));
 CAS1.d = (( CAS_PRE # GRANT0 # CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # CPU1_A1 # CPU0_LDS) & (REFRESH_GRANT ));
 CAS2.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_LDS ) & ( CAS_PRE # GRANT1 # !CPU1_A1 # CPU0_LDS) & (REFRESH_GRANT ));
 CAS3.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # !CPU1_A1 # CPU0_UDS) & (REFRESH_GRANT ));
+*/
 
 
 /* REFRESH TIMER for generating REFRESH REQUESTS */
@@ -206,7 +220,7 @@ CAS3.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # !CPU
    counter reaches 128 (highest bit set).  The output of that flipflop resets the counter value to 
    0x08.
 */
-
+/*
 REFRESH_TIMER_RESET.d = REFRESH_TIMER7;
 REFRESH_TIMER_RESET.ck = CLK_32M;
 REFRESH_TIMER_RESET.ar = !SYS_RESET;
@@ -231,20 +245,22 @@ REFRESH_TIMER7.d = ( REFRESH_TIMER7 & !REFRESH_TIMER6 )
                     # ( REFRESH_TIMER7 & !REFRESH_TIMER5 )
                     # ( !REFRESH_TIMER7 & REFRESH_TIMER6 & REFRESH_TIMER5 & REFRESH_TIMER4 );
 
+*/
 /* This should normally be CLK_8M, but on the proto board we are starting with a 16MHz OSC and an
 8MHz CPU Clock, this CLK_16M is actually Mhz */
 /*[REFRESH_TIMER0..3].ck = CLK_8M;*/
-[REFRESH_TIMER0..3].ck = CLK_16M_INTERNAL;
-[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
+
+//[REFRESH_TIMER0..3].ck = CLK_16M_INTERNAL;
+//[REFRESH_TIMER4..7].ck = !(REFRESH_TIMER3 & REFRESH_TIMER2 & REFRESH_TIMER1 & REFRESH_TIMER0);
 
 /* 	
 	At reset we want to set all bits to 0 except bit 3, which is the same as loading 0x08 into the counter.
 	From 0x08 to 0x80 will give is the correct time period of 15us.
 */
 
-[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !SYS_RESET;
-[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !SYS_RESET;
-REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !SYS_RESET;
+//[REFRESH_TIMER0..2].ar = REFRESH_TIMER_RESET # !SYS_RESET;
+//[REFRESH_TIMER4..7].ar = REFRESH_TIMER_RESET # !SYS_RESET;
+//REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !SYS_RESET;
 
 
 
@@ -297,7 +313,7 @@ Com_Ctrl_154 is placed at foldback expander node 313 (MC 13)
 GRANT0 is placed at pin 5 (MC 14)
 REFRESH_TIMER6 is placed at feedback node 615 (MC 15)
 GRANT1 is placed at pin 4 (MC 16)
-REQ1 is placed at pin 21 (MC 17)
+AREQ1 is placed at pin 21 (MC 17)
 REFRESH_COMPLETED_PRE2 is placed at feedback node 618 (MC 18)
 REFRESH_REQ_CLOCKED is placed at feedback node 619 (MC 19)
 CLK_16M_INTERNAL is placed at feedback node 620 (MC 20)
@@ -318,7 +334,7 @@ Com_Ctrl_156 is placed at foldback expander node 331 (MC 31)
 TMS is placed at pin 13 (MC 32)
 REFRESH_TIMER3 is placed at feedback node 632 (MC 32)
 Com_Ctrl_155 is placed at foldback expander node 332 (MC 32)
-REQ0 is placed at pin 24 (MC 33)
+AREQ0 is placed at pin 24 (MC 33)
 CPU0_LDS is placed at pin 25 (MC 35)
 CPU0_A1 is placed at pin 26 (MC 36)
 CPU1_A1 is placed at pin 27 (MC 37)
