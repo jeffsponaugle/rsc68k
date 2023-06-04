@@ -1,4 +1,4 @@
-Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Sat Jun 03 16:42:29 2023
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Sat Jun 03 21:41:44 2023
 
 
 fit1504 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.tt2 -CUPL -dev P1504C44 -JTAG ON
@@ -51,7 +51,7 @@ fit1504 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.tt
 ---------------------------------------------------------
  Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
  ... 
-## ERROR : Bad user pin assignement : 45
+## ERROR : Bad user pin assignement : 59
  ## ERROR : Bad user pin assignement 
 ---------------------------------------------------------
  Fitter_Pass 2, Preassign = KEEP, NODE ASSIGN : OFF 
@@ -67,6 +67,7 @@ Performing global pin assignments ...
 Final global control pins assignment (if applicable)...
 -------------------------------------------------------
 CLK_32M assigned to pin  2
+SYS_RESET assigned to pin  1
 
 
 
@@ -79,25 +80,65 @@ SIM_AS_IN assigned to pin  44
 Attempt to place floating signals ...
 ------------------------------------
 AREQ0 is placed at pin 12 (MC 1)
-SIM_S7 is placed at feedback node 602 (MC 2)
-SIM_S6 is placed at feedback node 606 (MC 6)
-SIM_S5 is placed at feedback node 607 (MC 7)
+REFRESH_COMPLETED_PRE0 is placed at feedback node 601 (MC 1)
+PE_BIAS is placed at feedback node 602 (MC 2)
+RAS1 is placed at pin 11 (MC 3)
+RAS0 is placed at pin 9 (MC 4)
+CAS3 is placed at pin 8 (MC 5)
+REFRESH_TIMER4 is placed at feedback node 606 (MC 6)
+REFRESH_TIMER5 is placed at feedback node 607 (MC 7)
 TDI is placed at pin 7 (MC 8)
-SIM_S4 is placed at feedback node 608 (MC 8)
-SIM_S3 is placed at feedback node 609 (MC 9)
-SIM_S1 is placed at feedback node 610 (MC 10)
-SIM_S0 is placed at feedback node 612 (MC 12)
-SIM_S2 is placed at feedback node 613 (MC 13)
-SIM_START_LATCH is placed at feedback node 615 (MC 15)
-Com_Ctrl_76 is placed at foldback expander node 316 (MC 16)
+REFRESH_TIMER2 is placed at feedback node 608 (MC 8)
+REFRESH_TIMER7 is placed at feedback node 610 (MC 10)
+CAS2 is placed at pin 6 (MC 11)
+FB_213 is placed at foldback expander node 311 (MC 11)
+FB_210 is placed at foldback expander node 312 (MC 12)
+REFRESH_TIMER3 is placed at feedback node 613 (MC 13)
+Com_Ctrl_208 is placed at foldback expander node 313 (MC 13)
+CAS1 is placed at pin 5 (MC 14)
+Com_Ctrl_206 is placed at foldback expander node 314 (MC 14)
+REFRESH_TIMER6 is placed at feedback node 615 (MC 15)
+CAS0 is placed at pin 4 (MC 16)
+Com_Ctrl_205 is placed at foldback expander node 316 (MC 16)
+REFRESH_TIMER_RESET is placed at feedback node 617 (MC 17)
+CLK_16M_INTERNAL is placed at feedback node 618 (MC 18)
+REFRESH_REQ_CLOCKED is placed at feedback node 619 (MC 19)
 REQ_CLOCKED1 is placed at pin 19 (MC 20)
 REQ_CLOCKED0 is placed at pin 18 (MC 21)
+SIM_S2 is placed at feedback node 622 (MC 22)
+REFRESH_COMPLETED_PRE1 is placed at feedback node 623 (MC 23)
 GRANT1 is placed at pin 17 (MC 24)
 GRANT0 is placed at pin 16 (MC 25)
+REFRESH_COMPLETED_PRE2 is placed at feedback node 626 (MC 26)
+REFRESH_COMPLETED is placed at feedback node 627 (MC 27)
+FB_215 is placed at foldback expander node 327 (MC 27)
+SIM_START_LATCH is placed at feedback node 628 (MC 28)
+FB_214 is placed at foldback expander node 328 (MC 28)
+REFRESH_REQUESTED is placed at feedback node 629 (MC 29)
+FB_211 is placed at foldback expander node 329 (MC 29)
 AREQ1 is placed at pin 14 (MC 30)
+REFRESH_TIMER0 is placed at feedback node 630 (MC 30)
+Com_Ctrl_208 is placed at foldback expander node 330 (MC 30)
+Com_Ctrl_209 is placed at feedback node 631 (MC 31)
+Com_Ctrl_207 is placed at foldback expander node 331 (MC 31)
 TMS is placed at pin 13 (MC 32)
-Com_Ctrl_77 is placed at foldback expander node 332 (MC 32)
+REFRESH_TIMER1 is placed at feedback node 632 (MC 32)
+Com_Ctrl_206 is placed at foldback expander node 332 (MC 32)
+REFRESH_GRANT is placed at pin 24 (MC 33)
+CPU0_A1 is placed at pin 25 (MC 35)
+CPU1_A1 is placed at pin 26 (MC 36)
+CPU0_UDS is placed at pin 27 (MC 37)
+SIM_S7 is placed at feedback node 639 (MC 39)
+CPU0_LDS is placed at pin 29 (MC 41)
+SIM_S5 is placed at feedback node 641 (MC 41)
+SIM_S6 is placed at feedback node 642 (MC 42)
+SIM_S4 is placed at feedback node 643 (MC 43)
+SIM_S3 is placed at feedback node 644 (MC 44)
+SIM_S0 is placed at feedback node 645 (MC 45)
+SIM_S1 is placed at feedback node 647 (MC 47)
 TCK is placed at pin 32 (MC 48)
+CAS_PRE is placed at feedback node 648 (MC 48)
+FB_212 is placed at foldback expander node 348 (MC 48)
 SIM_AS is placed at pin 33 (MC 49)
 SIM_DRAM_CS is placed at pin 34 (MC 51)
 SIM_START_BUTTON is placed at pin 37 (MC 53)
@@ -112,37 +153,37 @@ SIM_AS_OUT is placed at pin 41 (MC 64)
                               C  S M        _                    
                               L  _ _        A                    
                               K  R A        S                    
-                              _  E S        _                    
-                           V  3  S _     G  O                    
-                           C  2  E I     N  U                    
-                           C  M  T N     D  T                    
+                  C  C  C     _  E S        _                    
+                  A  A  A  V  3  S _     G  O                    
+                  S  S  S  C  2  E I     N  U                    
+                  2  1  0  C  M  T N     D  T                    
                ____________________________________              
               /   6  5  4  3  2  1 44 43 42 41 40  \             
          TDI |  7                                39 |            
-             |  8                                38 | TDO        
-             |  9                                37 | SIM_START_BUTTON
+        CAS3 |  8                                38 | TDO        
+        RAS0 |  9                                37 | SIM_START_BUTTON
          GND | 10                                36 |            
-             | 11                                35 | VCC        
+        RAS1 | 11                                35 | VCC        
        AREQ0 | 12            ATF1504             34 | SIM_DRAM_CS
          TMS | 13          44-Lead PLCC          33 | SIM_AS     
        AREQ1 | 14                                32 | TCK        
          VCC | 15                                31 |            
       GRANT0 | 16                                30 | GND        
-      GRANT1 | 17                                29 |            
+      GRANT1 | 17                                29 | CPU0_LDS   
              |   18 19 20 21 22 23 24 25 26 27 28   |            
               \____________________________________/             
-                 R  R        G  V                                
-                 E  E        N  C                                
-                 Q  Q        D  C                                
-                 _  _                                            
-                 C  C                                            
-                 L  L                                            
-                 O  O                                            
-                 C  C                                            
-                 K  K                                            
-                 E  E                                            
-                 D  D                                            
-                 0  1                                            
+                 R  R        G  V  R  C  C  C                    
+                 E  E        N  C  E  P  P  P                    
+                 Q  Q        D  C  F  U  U  U                    
+                 _  _              R  0  1  0                    
+                 C  C              E  _  _  _                    
+                 L  L              S  A  A  U                    
+                 O  O              H  1  1  D                    
+                 C  C              _        S                    
+                 K  K              G                             
+                 E  E              R                             
+                 D  D              A                             
+                 0  1              N                             
 
 
 
@@ -156,75 +197,208 @@ NC = Unused I/O pins which must be unconnected on the board
 
 Universal-Interconnect-Multiplexer assignments
 ------------------------------------------------
-FanIn assignment for block A [11]
+FanIn assignment for block A [22]
 {
-SIM_S7,SIM_S1,SIM_S3,SIM_S0,SIM_S6,SIM_S5,SIM_S2,SIM_START_BUTTON,SIM_START_LATCH,SYS_RESET,SIM_S4,
-}
-Multiplexer assignment for block A
-SIM_S7			(MC1	FB)  : MUX 0		Ref (A2fb)
-SIM_S1			(MC6	FB)  : MUX 1		Ref (A10fb)
-SIM_S3			(MC5	FB)  : MUX 3		Ref (A9fb)
-SIM_S0			(MC7	FB)  : MUX 15		Ref (A12fb)
-SIM_S6			(MC2	FB)  : MUX 20		Ref (A6fb)
-SIM_S5			(MC3	FB)  : MUX 22		Ref (A7fb)
-SIM_S2			(MC8	FB)  : MUX 23		Ref (A13fb)
-SIM_START_BUTTON		(MC11	P)   : MUX 31		Ref (D53p)
-SIM_START_LATCH		(MC9	FB)  : MUX 33		Ref (A15fb)
-SYS_RESET		(MC10	FB)  : MUX 36		Ref (GCLR)
-SIM_S4			(MC4	FB)  : MUX 38		Ref (A8fb)
-
-FanIn assignment for block B [5]
-{
-AREQ0,AREQ1,
-CLK_32M,
-REQ_CLOCKED0,
+Com_Ctrl_209,CAS_PRE,CPU0_UDS,CPU1_A1,CPU0_A1,CPU0_LDS,CLK_16M_INTERNAL,
+GRANT1,GRANT0,
+PE_BIAS,
+REFRESH_TIMER7,REFRESH_TIMER0,REFRESH_TIMER1,REFRESH_REQUESTED,REFRESH_TIMER4,REFRESH_TIMER2,REFRESH_TIMER3,REFRESH_TIMER5,REFRESH_TIMER_RESET,REFRESH_TIMER6,REFRESH_GRANT,
 SYS_RESET,
 }
+Multiplexer assignment for block A
+PE_BIAS			(MC1	FB)  : MUX 0		Ref (A2fb)
+REFRESH_TIMER7		(MC5	FB)  : MUX 1		Ref (A10fb)
+Com_Ctrl_209		(MC14	FB)  : MUX 3		Ref (B31fb)
+REFRESH_TIMER0		(MC13	FB)  : MUX 7		Ref (B30fb)
+REFRESH_TIMER1		(MC15	FB)  : MUX 9		Ref (B32fb)
+GRANT1			(MC10	P)   : MUX 13		Ref (B24p)
+CAS_PRE			(MC17	FB)  : MUX 15		Ref (C48fb)
+CPU0_UDS		(MC22	P)   : MUX 17		Ref (C37p)
+REFRESH_REQUESTED		(MC12	FB)  : MUX 19		Ref (B29fb)
+REFRESH_TIMER4		(MC2	FB)  : MUX 20		Ref (A6fb)
+GRANT0			(MC11	P)   : MUX 22		Ref (B25p)
+CPU1_A1			(MC21	P)   : MUX 23		Ref (C36p)
+REFRESH_TIMER2		(MC4	FB)  : MUX 24		Ref (A8fb)
+REFRESH_TIMER3		(MC6	FB)  : MUX 25		Ref (A13fb)
+REFRESH_TIMER5		(MC3	FB)  : MUX 26		Ref (A7fb)
+CPU0_A1			(MC20	P)   : MUX 27		Ref (C35p)
+REFRESH_TIMER_RESET		(MC8	FB)  : MUX 28		Ref (B17fb)
+REFRESH_TIMER6		(MC7	FB)  : MUX 31		Ref (A15fb)
+SYS_RESET		(MC18	FB)  : MUX 32		Ref (GCLR)
+CPU0_LDS		(MC19	P)   : MUX 34		Ref (C41p)
+REFRESH_GRANT		(MC16	P)   : MUX 37		Ref (C33p)
+CLK_16M_INTERNAL		(MC9	FB)  : MUX 38		Ref (B18fb)
+
+FanIn assignment for block B [23]
+{
+AREQ0,AREQ1,
+CLK_32M,CLK_16M_INTERNAL,
+GRANT1,GRANT0,
+REQ_CLOCKED0,REFRESH_TIMER7,REFRESH_COMPLETED_PRE0,REFRESH_TIMER1,REFRESH_COMPLETED_PRE1,REFRESH_REQUESTED,REFRESH_TIMER0,REFRESH_GRANT,REFRESH_REQ_CLOCKED,REFRESH_COMPLETED_PRE2,REFRESH_TIMER_RESET,REFRESH_COMPLETED,REQ_CLOCKED1,
+SIM_S7,SIM_S1,SIM_START_BUTTON,SYS_RESET,
+}
 Multiplexer assignment for block B
-AREQ0			(MC4	P)   : MUX 1		Ref (A1p)
-AREQ1			(MC5	P)   : MUX 4		Ref (B30p)
-REQ_CLOCKED0		(MC1	P)   : MUX 5		Ref (B21p)
-CLK_32M			(MC3	FB)  : MUX 12		Ref (OE2)
-SYS_RESET		(MC2	FB)  : MUX 32		Ref (GCLR)
+AREQ0			(MC21	P)   : MUX 1		Ref (A1p)
+REQ_CLOCKED0		(MC7	P)   : MUX 5		Ref (B21p)
+AREQ1			(MC22	P)   : MUX 6		Ref (B30p)
+REFRESH_TIMER7		(MC2	FB)  : MUX 7		Ref (A10fb)
+REFRESH_COMPLETED_PRE0		(MC1	FB)  : MUX 8		Ref (A1fb)
+REFRESH_TIMER1		(MC15	FB)  : MUX 9		Ref (B32fb)
+REFRESH_COMPLETED_PRE1		(MC8	FB)  : MUX 10		Ref (B23fb)
+REFRESH_REQUESTED		(MC13	FB)  : MUX 11		Ref (B29fb)
+CLK_32M			(MC20	FB)  : MUX 12		Ref (OE2)
+GRANT1			(MC9	P)   : MUX 13		Ref (B24p)
+SIM_S7			(MC17	FB)  : MUX 14		Ref (C39fb)
+REFRESH_TIMER0		(MC14	FB)  : MUX 15		Ref (B30fb)
+SIM_S1			(MC18	FB)  : MUX 19		Ref (C47fb)
+CLK_16M_INTERNAL		(MC4	FB)  : MUX 22		Ref (B18fb)
+REFRESH_GRANT		(MC16	P)   : MUX 23		Ref (C33p)
+REFRESH_REQ_CLOCKED		(MC5	FB)  : MUX 24		Ref (B19fb)
+REFRESH_COMPLETED_PRE2		(MC11	FB)  : MUX 27		Ref (B26fb)
+REFRESH_TIMER_RESET		(MC3	FB)  : MUX 28		Ref (B17fb)
+SIM_START_BUTTON		(MC23	P)   : MUX 31		Ref (D53p)
+REFRESH_COMPLETED		(MC12	FB)  : MUX 33		Ref (B27fb)
+GRANT0			(MC10	P)   : MUX 34		Ref (B25p)
+REQ_CLOCKED1		(MC6	P)   : MUX 35		Ref (B20p)
+SYS_RESET		(MC19	FB)  : MUX 38		Ref (GCLR)
+
+FanIn assignment for block C [16]
+{
+Com_Ctrl_209,CLK_32M,
+GRANT1,GRANT0,
+REFRESH_REQUESTED,REFRESH_GRANT,REFRESH_REQ_CLOCKED,REFRESH_COMPLETED,
+SIM_S0,SIM_S2,SIM_S5,SIM_S3,SIM_S6,SYS_RESET,SIM_START_LATCH,SIM_S4,
+}
+Multiplexer assignment for block C
+SIM_S0			(MC14	FB)  : MUX 1		Ref (C45fb)
+SIM_S2			(MC2	FB)  : MUX 2		Ref (B22fb)
+REFRESH_REQUESTED		(MC7	FB)  : MUX 11		Ref (B29fb)
+Com_Ctrl_209		(MC8	FB)  : MUX 13		Ref (B31fb)
+GRANT1			(MC3	P)   : MUX 15		Ref (B24p)
+CLK_32M			(MC16	FB)  : MUX 18		Ref (OE2)
+SIM_S5			(MC10	FB)  : MUX 21		Ref (C41fb)
+GRANT0			(MC4	P)   : MUX 22		Ref (B25p)
+REFRESH_GRANT		(MC9	P)   : MUX 23		Ref (C33p)
+REFRESH_REQ_CLOCKED		(MC1	FB)  : MUX 24		Ref (B19fb)
+SIM_S3			(MC13	FB)  : MUX 25		Ref (C44fb)
+SIM_S6			(MC11	FB)  : MUX 31		Ref (C42fb)
+SYS_RESET		(MC15	FB)  : MUX 32		Ref (GCLR)
+REFRESH_COMPLETED		(MC5	FB)  : MUX 33		Ref (B27fb)
+SIM_START_LATCH		(MC6	FB)  : MUX 37		Ref (B28fb)
+SIM_S4			(MC12	FB)  : MUX 39		Ref (C43fb)
 
 FanIn assignment for block D [7]
 {
-SIM_S7,SIM_S1,SIM_S0,SIM_AS,SIM_AS_IN,SIM_S2,SYS_RESET,
+SIM_S0,SIM_S2,SIM_S1,SIM_S7,SIM_AS,SIM_AS_IN,SYS_RESET,
 }
 Multiplexer assignment for block D
-SIM_S7			(MC1	FB)  : MUX 0		Ref (A2fb)
-SIM_S1			(MC2	FB)  : MUX 1		Ref (A10fb)
-SIM_S0			(MC3	FB)  : MUX 9		Ref (A12fb)
-SIM_AS			(MC5	P)   : MUX 11		Ref (D49p)
-SIM_AS_IN		(MC7	FB)  : MUX 17		Ref (OE1)
-SIM_S2			(MC4	FB)  : MUX 23		Ref (A13fb)
+SIM_S0			(MC3	FB)  : MUX 1		Ref (C45fb)
+SIM_S2			(MC1	FB)  : MUX 2		Ref (B22fb)
+SIM_S1			(MC4	FB)  : MUX 3		Ref (C47fb)
+SIM_S7			(MC2	FB)  : MUX 6		Ref (C39fb)
+SIM_AS			(MC5	P)   : MUX 17		Ref (D49p)
+SIM_AS_IN		(MC7	FB)  : MUX 19		Ref (OE1)
 SYS_RESET		(MC6	FB)  : MUX 32		Ref (GCLR)
 
 Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.jed ...
 
 PLCC44 programmed logic:
 -----------------------------------
-GRANT0.D = REQ_CLOCKED0.Q;
+!CAS0.D = (!REFRESH_GRANT.Q
+	# (!CAS_PRE.Q & !CPU0_LDS & !CPU0_A1 & !GRANT0.Q)
+	# (!CAS_PRE.Q & !CPU0_LDS & !CPU1_A1 & !GRANT1.Q));
 
-GRANT1.D = REQ_CLOCKED0.Q;
+!CAS1.D = ((!CAS_PRE.Q & !CPU0_A1 & !CPU0_UDS & !GRANT0.Q)
+	# (!CAS_PRE.Q & !CPU0_LDS & !CPU1_A1 & !GRANT1.Q)
+	# !REFRESH_GRANT.Q);
+
+!CAS2.D = ((!CAS_PRE.Q & !CPU0_LDS & CPU1_A1 & !GRANT1.Q)
+	# !REFRESH_GRANT.Q
+	# (!CAS_PRE.Q & CPU0_A1 & !CPU0_LDS & !GRANT0.Q));
+
+!CAS3.D = ((!CAS_PRE.Q & !CPU0_UDS & CPU1_A1 & !GRANT1.Q)
+	# !REFRESH_GRANT.Q
+	# (!CAS_PRE.Q & CPU0_A1 & !CPU0_UDS & !GRANT0.Q));
+
+CAS_PRE.D = (GRANT0.Q & GRANT1.Q);
+
+CLK_16M_INTERNAL.D = !CLK_16M_INTERNAL.Q;
+
+!GRANT0.D = (REFRESH_REQ_CLOCKED.Q & !REQ_CLOCKED0.Q);
+
+!GRANT1.D = (REFRESH_REQ_CLOCKED.Q & REQ_CLOCKED0.Q & !REQ_CLOCKED1.Q);
+
+PE_BIAS.D = !PE_BIAS.Q;
+
+!RAS0.D = ((!CPU0_A1 & !GRANT0.Q)
+	# (!CPU1_A1 & !GRANT1.Q));
+
+!RAS1.D = ((CPU0_A1 & !GRANT0.Q)
+	# (CPU1_A1 & !GRANT1.Q));
+
+REFRESH_COMPLETED.D = REFRESH_COMPLETED_PRE2.Q;
+
+REFRESH_COMPLETED_PRE0.D = REFRESH_GRANT.Q;
+
+REFRESH_COMPLETED_PRE1.D = REFRESH_COMPLETED_PRE0.Q;
+
+REFRESH_COMPLETED_PRE2.D = REFRESH_COMPLETED_PRE1.Q;
+
+REFRESH_GRANT.D = ((GRANT1.Q & GRANT0.Q & REFRESH_REQ_CLOCKED.Q)
+	# (REFRESH_GRANT.Q & !GRANT0.Q)
+	# (REFRESH_GRANT.Q & !GRANT1.Q));
+
+REFRESH_REQUESTED.D = 1;
+
+REFRESH_REQ_CLOCKED.D = REFRESH_REQUESTED.Q;
+
+REFRESH_TIMER0.D = !REFRESH_TIMER0.Q;
+
+REFRESH_TIMER1.D = ((REFRESH_TIMER0.Q & !REFRESH_TIMER1.Q)
+	# (!REFRESH_TIMER0.Q & REFRESH_TIMER1.Q));
+
+REFRESH_TIMER2.D = ((!REFRESH_TIMER2.Q & REFRESH_TIMER1.Q & REFRESH_TIMER0.Q)
+	# (REFRESH_TIMER2.Q & !REFRESH_TIMER0.Q)
+	# (REFRESH_TIMER2.Q & !REFRESH_TIMER1.Q));
+
+REFRESH_TIMER3.D = ((REFRESH_TIMER3.Q & !REFRESH_TIMER1.Q)
+	# (!REFRESH_TIMER3.Q & REFRESH_TIMER0.Q & REFRESH_TIMER1.Q & REFRESH_TIMER2.Q)
+	# (REFRESH_TIMER3.Q & !REFRESH_TIMER2.Q)
+	# (REFRESH_TIMER3.Q & !REFRESH_TIMER0.Q));
+
+REFRESH_TIMER4.D = !REFRESH_TIMER4.Q;
+
+REFRESH_TIMER5.D = ((REFRESH_TIMER4.Q & !REFRESH_TIMER5.Q)
+	# (!REFRESH_TIMER4.Q & REFRESH_TIMER5.Q));
+
+REFRESH_TIMER6.D = ((!REFRESH_TIMER6.Q & REFRESH_TIMER5.Q & REFRESH_TIMER4.Q)
+	# (REFRESH_TIMER6.Q & !REFRESH_TIMER4.Q)
+	# (REFRESH_TIMER6.Q & !REFRESH_TIMER5.Q));
+
+REFRESH_TIMER7.D = ((REFRESH_TIMER7.Q & !REFRESH_TIMER5.Q)
+	# (!REFRESH_TIMER7.Q & REFRESH_TIMER4.Q & REFRESH_TIMER5.Q & REFRESH_TIMER6.Q)
+	# (REFRESH_TIMER7.Q & !REFRESH_TIMER6.Q)
+	# (REFRESH_TIMER7.Q & !REFRESH_TIMER4.Q));
+
+REFRESH_TIMER_RESET.D = REFRESH_TIMER7.Q;
 
 REQ_CLOCKED0.D = AREQ0;
 
 REQ_CLOCKED1.D = AREQ1;
 
-!SIM_AS_OUT = (!SIM_S2.Q & SYS_RESET);
-
 !SIM_AS = (!SIM_AS_IN & SIM_S7.Q);
 
 SIM_S0.D = SIM_START_LATCH.Q;
+
+!SIM_AS_OUT = (!SIM_S2.Q & SYS_RESET);
 
 SIM_S1.D = SIM_S0.Q;
 
 SIM_S2.D = SIM_S1.Q;
 
-SIM_S4.D = SIM_S3.Q;
-
 SIM_S3.D = SIM_S2.Q;
+
+SIM_S4.D = SIM_S3.Q;
 
 SIM_S5.D = SIM_S4.Q;
 
@@ -236,17 +410,138 @@ SIM_START_LATCH.D = 0;
 
 !SIM_DRAM_CS = (!SIM_AS & !SIM_S0.Q & !SIM_S1.Q);
 
-!Com_Ctrl_76 = (SIM_S7.Q & SYS_RESET);
+!Com_Ctrl_205 = (REFRESH_TIMER0.Q & REFRESH_TIMER1.Q & REFRESH_TIMER2.Q & REFRESH_TIMER3.Q);
 
-!Com_Ctrl_77 = (!AREQ0 & SYS_RESET);
+!Com_Ctrl_206 = (!REFRESH_TIMER_RESET.Q & SYS_RESET);
+
+!Com_Ctrl_207 = (SIM_S7.Q & SYS_RESET);
+
+!Com_Ctrl_208 = (!REFRESH_REQUESTED.Q & SYS_RESET);
+
+Com_Ctrl_209 = ((!REFRESH_COMPLETED.Q & !REFRESH_GRANT.Q)
+	# !SYS_RESET
+	# (AREQ0 & !GRANT0.Q)
+	# (AREQ1 & !GRANT1.Q));
+
+!FB_210 = (SYS_RESET & !REFRESH_TIMER_RESET.Q);
+
+!FB_211 = (SYS_RESET & REFRESH_COMPLETED.Q);
+
+!FB_212 = (REFRESH_COMPLETED.Q & SYS_RESET & !REFRESH_REQUESTED.Q);
+
+!FB_213 = (GRANT0.Q & GRANT1.Q);
+
+!FB_214 = (SYS_RESET & !AREQ1);
+
+!FB_215 = (SYS_RESET & !AREQ0);
+
+CAS0.C = !CLK_32M;
+
+CAS0.AP = Com_Ctrl_209;
+
+CAS1.C = !CLK_32M;
+
+CAS1.AP = Com_Ctrl_209;
+
+CAS2.C = !CLK_32M;
+
+CAS2.AP = Com_Ctrl_209;
+
+CAS3.C = !CLK_32M;
+
+CAS3.AP = Com_Ctrl_209;
+
+CAS_PRE.C = !CLK_32M;
+
+CAS_PRE.AP = Com_Ctrl_209;
+
+CLK_16M_INTERNAL.C = CLK_32M;
+
+CLK_16M_INTERNAL.AR = !SYS_RESET;
 
 GRANT0.C = CLK_32M;
 
-GRANT0.AP = Com_Ctrl_77;
+GRANT0.AP = FB_215;
 
 GRANT1.C = CLK_32M;
 
-GRANT1.AP = Com_Ctrl_77;
+GRANT1.AP = FB_214;
+
+PE_BIAS.C = FB_213;
+
+PE_BIAS.AR = !SYS_RESET;
+
+RAS0.C = !CLK_32M;
+
+RAS0.AP = Com_Ctrl_209;
+
+RAS1.C = !CLK_32M;
+
+RAS1.AP = Com_Ctrl_209;
+
+REFRESH_COMPLETED.C = !CLK_32M;
+
+REFRESH_COMPLETED.AP = Com_Ctrl_208;
+
+REFRESH_COMPLETED_PRE0.C = !CLK_32M;
+
+REFRESH_COMPLETED_PRE0.AP = Com_Ctrl_208;
+
+REFRESH_COMPLETED_PRE1.C = !CLK_32M;
+
+REFRESH_COMPLETED_PRE1.AP = Com_Ctrl_208;
+
+REFRESH_COMPLETED_PRE2.C = !CLK_32M;
+
+REFRESH_COMPLETED_PRE2.AP = Com_Ctrl_208;
+
+REFRESH_GRANT.C = CLK_32M;
+
+REFRESH_GRANT.AP = FB_212;
+
+REFRESH_REQUESTED.C = REFRESH_TIMER7.Q;
+
+REFRESH_REQUESTED.AP = FB_211;
+
+REFRESH_REQ_CLOCKED.C = !CLK_32M;
+
+REFRESH_REQ_CLOCKED.AP = !SYS_RESET;
+
+REFRESH_TIMER0.C = CLK_16M_INTERNAL.Q;
+
+REFRESH_TIMER0.AR = Com_Ctrl_206;
+
+REFRESH_TIMER1.C = CLK_16M_INTERNAL.Q;
+
+REFRESH_TIMER1.AR = Com_Ctrl_206;
+
+REFRESH_TIMER2.C = CLK_16M_INTERNAL.Q;
+
+REFRESH_TIMER2.AR = Com_Ctrl_206;
+
+REFRESH_TIMER3.C = CLK_16M_INTERNAL.Q;
+
+REFRESH_TIMER3.AP = FB_210;
+
+REFRESH_TIMER4.C = Com_Ctrl_205;
+
+REFRESH_TIMER4.AR = Com_Ctrl_206;
+
+REFRESH_TIMER5.C = Com_Ctrl_205;
+
+REFRESH_TIMER5.AR = Com_Ctrl_206;
+
+REFRESH_TIMER6.C = Com_Ctrl_205;
+
+REFRESH_TIMER6.AR = Com_Ctrl_206;
+
+REFRESH_TIMER7.C = Com_Ctrl_205;
+
+REFRESH_TIMER7.AR = Com_Ctrl_206;
+
+REFRESH_TIMER_RESET.C = CLK_32M;
+
+REFRESH_TIMER_RESET.AR = !SYS_RESET;
 
 REQ_CLOCKED0.C = !CLK_32M;
 
@@ -266,15 +561,15 @@ SIM_S1.AP = !SYS_RESET;
 
 SIM_S2.C = !CLK_32M;
 
-SIM_S2.AP = Com_Ctrl_76;
-
-SIM_S4.C = !CLK_32M;
-
-SIM_S4.AP = !SYS_RESET;
+SIM_S2.AP = Com_Ctrl_207;
 
 SIM_S3.C = !CLK_32M;
 
 SIM_S3.AP = !SYS_RESET;
+
+SIM_S4.C = !CLK_32M;
+
+SIM_S4.AP = !SYS_RESET;
 
 SIM_S5.C = !CLK_32M;
 
@@ -290,14 +585,20 @@ SIM_S7.AP = !SYS_RESET;
 
 SIM_START_LATCH.C = !SIM_START_BUTTON;
 
-SIM_START_LATCH.AP = Com_Ctrl_76;
+SIM_START_LATCH.AP = Com_Ctrl_207;
 
 
 PLCC44 Pin/Node Placement:
 ------------------------------------
 Pin 1  = SYS_RESET;
 Pin 2  = CLK_32M;
+Pin 4  = CAS0; /* MC 16 */
+Pin 5  = CAS1; /* MC 14 */
+Pin 6  = CAS2; /* MC 11 */
 Pin 7  = TDI; /* MC 8 */
+Pin 8  = CAS3; /* MC 5 */
+Pin 9  = RAS0; /* MC 4 */
+Pin 11 = RAS1; /* MC  3 */
 Pin 12 = AREQ0; /* MC  1 */
 Pin 13 = TMS; /* MC 32 */ 
 Pin 14 = AREQ1; /* MC 30 */ 
@@ -305,6 +606,11 @@ Pin 16 = GRANT0; /* MC 25 */
 Pin 17 = GRANT1; /* MC 24 */ 
 Pin 18 = REQ_CLOCKED0; /* MC 21 */ 
 Pin 19 = REQ_CLOCKED1; /* MC 20 */ 
+Pin 24 = REFRESH_GRANT; /* MC 33 */ 
+Pin 25 = CPU0_A1; /* MC 35 */ 
+Pin 26 = CPU1_A1; /* MC 36 */ 
+Pin 27 = CPU0_UDS; /* MC 37 */ 
+Pin 29 = CPU0_LDS; /* MC 41 */ 
 Pin 32 = TCK; /* MC 48 */ 
 Pin 33 = SIM_AS; /* MC 49 */ 
 Pin 34 = SIM_DRAM_CS; /* MC 51 */ 
@@ -312,17 +618,46 @@ Pin 37 = SIM_START_BUTTON; /* MC 53 */
 Pin 38 = TDO; /* MC 56 */ 
 Pin 41 = SIM_AS_OUT; /* MC 64 */ 
 Pin 44 = SIM_AS_IN;
-PINNODE 316 = Com_Ctrl_76; /* MC 16 Foldback */
-PINNODE 332 = Com_Ctrl_77; /* MC 32 Foldback */
-PINNODE 602 = SIM_S7; /* MC 2 Feedback */
-PINNODE 606 = SIM_S6; /* MC 6 Feedback */
-PINNODE 607 = SIM_S5; /* MC 7 Feedback */
-PINNODE 608 = SIM_S4; /* MC 8 Feedback */
-PINNODE 609 = SIM_S3; /* MC 9 Feedback */
-PINNODE 610 = SIM_S1; /* MC 10 Feedback */
-PINNODE 612 = SIM_S0; /* MC 12 Feedback */
-PINNODE 613 = SIM_S2; /* MC 13 Feedback */
-PINNODE 615 = SIM_START_LATCH; /* MC 15 Feedback */
+PINNODE 311 = FB_213; /* MC 11 Foldback */
+PINNODE 312 = FB_210; /* MC 12 Foldback */
+PINNODE 313 = Com_Ctrl_208; /* MC 13 Foldback */
+PINNODE 314 = Com_Ctrl_206; /* MC 14 Foldback */
+PINNODE 316 = Com_Ctrl_205; /* MC 16 Foldback */
+PINNODE 327 = FB_215; /* MC 27 Foldback */
+PINNODE 328 = FB_214; /* MC 28 Foldback */
+PINNODE 329 = FB_211; /* MC 29 Foldback */
+PINNODE 330 = Com_Ctrl_208; /* MC 30 Foldback */
+PINNODE 331 = Com_Ctrl_207; /* MC 31 Foldback */
+PINNODE 332 = Com_Ctrl_206; /* MC 32 Foldback */
+PINNODE 348 = FB_212; /* MC 48 Foldback */
+PINNODE 601 = REFRESH_COMPLETED_PRE0; /* MC 1 Feedback */
+PINNODE 602 = PE_BIAS; /* MC 2 Feedback */
+PINNODE 606 = REFRESH_TIMER4; /* MC 6 Feedback */
+PINNODE 607 = REFRESH_TIMER5; /* MC 7 Feedback */
+PINNODE 608 = REFRESH_TIMER2; /* MC 8 Feedback */
+PINNODE 610 = REFRESH_TIMER7; /* MC 10 Feedback */
+PINNODE 613 = REFRESH_TIMER3; /* MC 13 Feedback */
+PINNODE 615 = REFRESH_TIMER6; /* MC 15 Feedback */
+PINNODE 617 = REFRESH_TIMER_RESET; /* MC 17 Feedback */
+PINNODE 618 = CLK_16M_INTERNAL; /* MC 18 Feedback */
+PINNODE 619 = REFRESH_REQ_CLOCKED; /* MC 19 Feedback */
+PINNODE 622 = SIM_S2; /* MC 22 Feedback */
+PINNODE 623 = REFRESH_COMPLETED_PRE1; /* MC 23 Feedback */
+PINNODE 626 = REFRESH_COMPLETED_PRE2; /* MC 26 Feedback */
+PINNODE 627 = REFRESH_COMPLETED; /* MC 27 Feedback */
+PINNODE 628 = SIM_START_LATCH; /* MC 28 Feedback */
+PINNODE 629 = REFRESH_REQUESTED; /* MC 29 Feedback */
+PINNODE 630 = REFRESH_TIMER0; /* MC 30 Feedback */
+PINNODE 631 = Com_Ctrl_209; /* MC 31 Feedback */
+PINNODE 632 = REFRESH_TIMER1; /* MC 32 Feedback */
+PINNODE 639 = SIM_S7; /* MC 39 Feedback */
+PINNODE 641 = SIM_S5; /* MC 41 Feedback */
+PINNODE 642 = SIM_S6; /* MC 42 Feedback */
+PINNODE 643 = SIM_S4; /* MC 43 Feedback */
+PINNODE 644 = SIM_S3; /* MC 44 Feedback */
+PINNODE 645 = SIM_S0; /* MC 45 Feedback */
+PINNODE 647 = SIM_S1; /* MC 47 Feedback */
+PINNODE 648 = CAS_PRE; /* MC 48 Feedback */
 
 ** Resource Usage **
 
@@ -341,92 +676,92 @@ DCERP Field = Summary of Allocations.
 
 For input only = INPUT.
 
-MCell Pin# Oe   PinDrive         DCERP  FBDrive         DCERP  Foldback    CascadeOut     TotPT output_slew
-MC1   12   --   AREQ0            INPUT  --                     --          --             0     slow
-MC2   0         --                      SIM_S7          Dg--p  --          --             2     slow
-MC3   11        --                      --                     --          --             0     slow
-MC4   9         --                      --                     --          --             0     slow
-MC5   8         --                      --                     --          --             0     slow
-MC6   0         --                      SIM_S6          Dg--p  --          --             2     slow
-MC7   0         --                      SIM_S5          Dg--p  --          --             2     slow
-MC8   7    --   TDI              INPUT  SIM_S4          Dg--p  --          --             2     slow
-MC9   0         --                      SIM_S3          Dg--p  --          --             2     slow
-MC10  0         --                      SIM_S1          Dg--p  --          --             2     slow
-MC11  6         --                      --                     --          --             0     slow
-MC12  0         --                      SIM_S0          Dg--p  --          --             2     slow
-MC13  0         --                      SIM_S2          Dg--p  --          --             2     slow
-MC14  5         --                      --                     --          --             0     slow
-MC15  0         --                      SIM_START_LATCH Dc--p  --          --             2     slow
-MC16  4         --                      --                     Com_Ctrl_76 --             1     slow
-MC17  21        --                      --                     --          --             0     slow
-MC18  0         --                      --                     --          --             0     slow
-MC19  20        --                      --                     --          --             0     slow
-MC20  19   on   REQ_CLOCKED1     Dg--p  --                     --          --             2     slow
-MC21  18   on   REQ_CLOCKED0     Dg--p  --                     --          --             2     slow
-MC22  0         --                      --                     --          --             0     slow
-MC23  0         --                      --                     --          --             0     slow
-MC24  17   on   GRANT1           Dc--p  --                     --          --             3     slow
-MC25  16   on   GRANT0           Dc--p  --                     --          --             3     slow
-MC26  0         --                      --                     --          --             0     slow
-MC27  0         --                      --                     --          --             0     slow
-MC28  0         --                      --                     --          --             0     slow
-MC29  0         --                      --                     --          --             0     slow
-MC30  14   --   AREQ1            INPUT  --                     --          --             0     slow
-MC31  0         --                      --                     --          --             0     slow
-MC32  13   --   TMS              INPUT  --                     Com_Ctrl_77 --             1     slow
-MC33  24        --                      --                     --          --             0     slow
-MC34  0         --                      --                     --          --             0     slow
-MC35  25        --                      --                     --          --             0     slow
-MC36  26        --                      --                     --          --             0     slow
-MC37  27        --                      --                     --          --             0     slow
-MC38  0         --                      --                     --          --             0     slow
-MC39  0         --                      --                     --          --             0     slow
-MC40  28        --                      --                     --          --             0     slow
-MC41  29        --                      --                     --          --             0     slow
-MC42  0         --                      --                     --          --             0     slow
-MC43  0         --                      --                     --          --             0     slow
-MC44  0         --                      --                     --          --             0     slow
-MC45  0         --                      --                     --          --             0     slow
-MC46  31        --                      --                     --          --             0     slow
-MC47  0         --                      --                     --          --             0     slow
-MC48  32   --   TCK              INPUT  --                     --          --             0     slow
-MC49  33   on   SIM_AS           C----  --                     --          --             1     slow
-MC50  0         --                      --                     --          --             0     slow
-MC51  34   on   SIM_DRAM_CS      C----  --                     --          --             1     slow
-MC52  36        --                      --                     --          --             0     slow
-MC53  37   --   SIM_START_BUTTON INPUT  --                     --          --             0     slow
-MC54  0         --                      --                     --          --             0     slow
-MC55  0         --                      --                     --          --             0     slow
-MC56  38   --   TDO              INPUT  --                     --          --             0     slow
-MC57  39        --                      --                     --          --             0     slow
-MC58  0         --                      --                     --          --             0     slow
-MC59  0         --                      --                     --          --             0     slow
-MC60  0         --                      --                     --          --             0     slow
-MC61  0         --                      --                     --          --             0     slow
-MC62  40        --                      --                     --          --             0     slow
-MC63  0         --                      --                     --          --             0     slow
-MC64  41   on   SIM_AS_OUT       C----  --                     --          --             1     slow
-MC0   2         CLK_32M          INPUT  --                     --          --             0     slow
-MC0   1         SYS_RESET        INPUT  --                     --          --             0     slow
-MC0   44        SIM_AS_IN        INPUT  --                     --          --             0     slow
-MC0   43        --                      --                     --          --             0     slow
+MCell Pin# Oe   PinDrive         DCERP  FBDrive                DCERP  Foldback     CascadeOut        TotPT output_slew
+MC1   12   --   AREQ0            INPUT  REFRESH_COMPLETED_PRE0 Dg--p  --           --                2     slow
+MC2   0         --                      PE_BIAS                Dc-g-  --           --                2     slow
+MC3   11   on   RAS1             Dg--p  --                            --           --                3     slow
+MC4   9    on   RAS0             Dg--p  --                            --           --                3     slow
+MC5   8    on   CAS3             Dg--p  --                            --           --                4     slow
+MC6   0         --                      REFRESH_TIMER4         Dc-r-  --           --                3     slow
+MC7   0         --                      REFRESH_TIMER5         Dc-r-  --           --                4     slow
+MC8   7    --   TDI              INPUT  REFRESH_TIMER2         Dc-r-  NA           --                5     slow
+MC9   0         --                      --                            --           -> REFRESH_TIMER7 4     slow
+MC10  0         --                      REFRESH_TIMER7         Dc-r-  --           --                2     slow
+MC11  6    on   CAS2             Dg--p  --                            FB_213       --                5     slow
+MC12  0         --                      --                            FB_210       -> REFRESH_TIMER3 5     slow
+MC13  0         --                      REFRESH_TIMER3         Dc--p  Com_Ctrl_208 --                3     slow
+MC14  5    on   CAS1             Dg--p  --                            Com_Ctrl_206 --                5     slow
+MC15  0         --                      REFRESH_TIMER6         Dc-r-  NA           --                5     slow
+MC16  4    on   CAS0             Dg--p  --                            Com_Ctrl_205 --                5     slow
+MC17  21        --                      REFRESH_TIMER_RESET    Dc-g-  --           --                2     slow
+MC18  0         --                      CLK_16M_INTERNAL       Dc-g-  --           --                2     slow
+MC19  20        --                      REFRESH_REQ_CLOCKED    Dg--p  --           --                2     slow
+MC20  19   on   REQ_CLOCKED1     Dg--p  --                            --           --                2     slow
+MC21  18   on   REQ_CLOCKED0     Dg--p  --                            --           --                2     slow
+MC22  0         --                      SIM_S2                 Dg--p  --           --                2     slow
+MC23  0         --                      REFRESH_COMPLETED_PRE1 Dg--p  --           --                2     slow
+MC24  17   on   GRANT1           Dc--p  --                            --           --                3     slow
+MC25  16   on   GRANT0           Dc--p  --                            --           --                3     slow
+MC26  0         --                      REFRESH_COMPLETED_PRE2 Dg--p  --           --                2     slow
+MC27  0         --                      REFRESH_COMPLETED      Dg--p  FB_215       --                3     slow
+MC28  0         --                      SIM_START_LATCH        Dc--p  FB_214       --                3     slow
+MC29  0         --                      REFRESH_REQUESTED      Dc--p  FB_211       --                3     slow
+MC30  14   --   AREQ1            INPUT  REFRESH_TIMER0         Dc-r-  Com_Ctrl_208 --                4     slow
+MC31  0         --                      Com_Ctrl_209           C----  Com_Ctrl_207 --                5     slow
+MC32  13   --   TMS              INPUT  REFRESH_TIMER1         Dc-r-  Com_Ctrl_206 --                5     slow
+MC33  24   on   REFRESH_GRANT    Dc--p  --                            NA           --                5     slow
+MC34  0         --                      --                            --           --                0     slow
+MC35  25   --   CPU0_A1          INPUT  --                            --           --                0     slow
+MC36  26   --   CPU1_A1          INPUT  --                            --           --                0     slow
+MC37  27   --   CPU0_UDS         INPUT  --                            --           --                0     slow
+MC38  0         --                      --                            --           --                0     slow
+MC39  0         --                      SIM_S7                 Dg--p  --           --                2     slow
+MC40  28        --                      --                            --           --                0     slow
+MC41  29   --   CPU0_LDS         INPUT  SIM_S5                 Dg--p  --           --                2     slow
+MC42  0         --                      SIM_S6                 Dg--p  --           --                2     slow
+MC43  0         --                      SIM_S4                 Dg--p  --           --                2     slow
+MC44  0         --                      SIM_S3                 Dg--p  --           --                2     slow
+MC45  0         --                      SIM_S0                 Dg--p  --           --                2     slow
+MC46  31        --                      --                            --           --                0     slow
+MC47  0         --                      SIM_S1                 Dg--p  --           --                2     slow
+MC48  32   --   TCK              INPUT  CAS_PRE                Dg--p  FB_212       --                3     slow
+MC49  33   on   SIM_AS           C----  --                            --           --                1     slow
+MC50  0         --                      --                            --           --                0     slow
+MC51  34   on   SIM_DRAM_CS      C----  --                            --           --                1     slow
+MC52  36        --                      --                            --           --                0     slow
+MC53  37   --   SIM_START_BUTTON INPUT  --                            --           --                0     slow
+MC54  0         --                      --                            --           --                0     slow
+MC55  0         --                      --                            --           --                0     slow
+MC56  38   --   TDO              INPUT  --                            --           --                0     slow
+MC57  39        --                      --                            --           --                0     slow
+MC58  0         --                      --                            --           --                0     slow
+MC59  0         --                      --                            --           --                0     slow
+MC60  0         --                      --                            --           --                0     slow
+MC61  0         --                      --                            --           --                0     slow
+MC62  40        --                      --                            --           --                0     slow
+MC63  0         --                      --                            --           --                0     slow
+MC64  41   on   SIM_AS_OUT       C----  --                            --           --                1     slow
+MC0   2         CLK_32M          INPUT  --                            --           --                0     slow
+MC0   1         SYS_RESET        INPUT  --                            --           --                0     slow
+MC0   44        SIM_AS_IN        INPUT  --                            --           --                0     slow
+MC0   43        --                      --                            --           --                0     slow
 
 Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
-A: LC1	- LC16		9/16(56%)	2/16(12%)	1/16(6%)	19/80(23%)	(11)	0
-B: LC17	- LC32		4/16(25%)	6/16(37%)	1/16(6%)	11/80(13%)	(5)	0
-C: LC33	- LC48		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	(7)	0
+A: LC1	- LC16		14/16(87%)	8/16(50%)	5/16(31%)	60/80(75%)	(22)	2
+B: LC17	- LC32		16/16(100%)	6/16(37%)	6/16(37%)	45/80(56%)	(23)	0
+C: LC33	- LC48		9/16(56%)	6/16(37%)	1/16(6%)	22/80(27%)	(16)	0
 D: LC49	- LC64		3/16(18%)	5/16(31%)	0/16(0%)	3/80(3%)	(7)	0
 
 Total dedicated input used:	3/4 	(75%)
-Total I/O pins used		14/32 	(43%)
-Total Logic cells used 		16/64 	(25%)
-Total Flip-Flop used 		13/64 	(20%)
-Total Foldback logic used 	2/64 	(3%)
-Total Nodes+FB/MCells 		18/64 	(28%)
-Total cascade used 		0
-Total input pins 		10
-Total output pins 		7
-Total Pts 			33
+Total I/O pins used		25/32 	(78%)
+Total Logic cells used 		44/64 	(68%)
+Total Flip-Flop used 		38/64 	(59%)
+Total Foldback logic used 	12/64 	(18%)
+Total Nodes+FB/MCells 		54/64 	(84%)
+Total cascade used 		2
+Total input pins 		14
+Total output pins 		14
+Total Pts 			130
 Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
