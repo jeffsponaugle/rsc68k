@@ -30,9 +30,12 @@ Pin[4,5,6,8] = [CAS0..3];
 Pin[25,26] = CPU0_A1, CPU1_A1;
 Pin[27,28] = CPU0_UDS, CPU1_UDS;
 Pin[29,31] = CPU0_LDS, CPU1_LDS;
+Pin[28] = CPU0_RW;
+Pin[21,20] = DRAM_RW, DRAM_AB;
 
+Pin = CPU0_DRAM_DTACK;
 
-Pin[18,19] = [REQ_CLOCKED0..1];
+NODE [REQ_CLOCKED0..1];
 NODE PE_BIAS;
 NODE REFRESH_TIMER_RESET;
 NODE [REFRESH_TIMER0..7];
@@ -138,14 +141,15 @@ REFRESH_GRANT.ck = CLK_32M;
 //          ( GRANT_ACTIVE & PE_OUT_0 );         /* If a grant is not active, grab the output from the priority encoder */
 
 
-GRANT0.D =  PE_OUT_0;
+GRANT0.D =  ( !GRANT_ACTIVE & GRANT0 ) #  
+            ( GRANT_ACTIVE & PE_OUT_0 );
 GRANT0.AP = AREQ0 # !SYS_RESET;
 GRANT0.CK = CLK_32M;
 
-GRANT1.d =  PE_OUT_1;         /* If a grant is not active, grab the output from the priority encoder */       
+GRANT1.d =  ( !GRANT_ACTIVE & GRANT1 ) #  
+            ( GRANT_ACTIVE & PE_OUT_1 );         /* If a grant is not active, grab the output from the priority encoder */       
 GRANT1.ap = AREQ1 # !SYS_RESET;
 GRANT1.ck = CLK_32M;
-
 
 /* 
    REFRESH REQUESTED is a latch that is set to 0 when a refresh is needed, and cleared back to 1 once the refresh has
@@ -179,9 +183,7 @@ REFRESH_COMPLETED.ap = REFRESH_REQUESTED # !SYS_RESET;
 
 
 /* RAS, CAS, RW, and AB for DRAM access */
-
 // MEMORY_ACCESS_ACTIVE is zero if there is an active memory DRAM access cycle in progress.
-
 
 MEMORY_ACCESS_GRANT_ACTIVE = (GRANT0 & GRANT1);
 REFRESH_ACCESS_GRANT_ACTIVE = REFRESH_GRANT;
@@ -202,6 +204,22 @@ CAS0.d = (( CAS_PRE # GRANT0 # CPU0_A1 # CPU0_LDS ) & ( CAS_PRE # GRANT1 # CPU1_
 CAS1.d = (( CAS_PRE # GRANT0 # CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # CPU1_A1 # CPU0_LDS) & (REFRESH_GRANT ));
 CAS2.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_LDS ) & ( CAS_PRE # GRANT1 # !CPU1_A1 # CPU0_LDS) & (REFRESH_GRANT ));
 CAS3.d = (( CAS_PRE # GRANT0 # !CPU0_A1 # CPU0_UDS ) & ( CAS_PRE # GRANT1 # !CPU1_A1 # CPU0_UDS) & (REFRESH_GRANT ));
+
+/* The DRAM R/W signal will mirror the CPU_RW signal if we are doing a memory access.  If we are doing a refresh 
+   cycle, it will be fixed at 1 */
+
+DRAM_RW = (!GRANT0 # CPU0_RW) # (!REFRESH_GRANT); 
+
+/* 
+   DRAM AB selects either the row address or the col address going to the memory.  1=ROW, 1=COL.  It is 1 at reset and held at one if
+   MEMORY_ACCESS_GRANT_ACTIVE is 1.  As soon as a memory access cycle starts, it is unlocked and will toggle to 0 once one of the two RAS 
+   signals goes to zero.  That puts the AB signal about 7ns behind the RAS signal, and the actual 2:1 mux delay will add another 10-12ns of
+   delay.  That is just enough to get the COL address to the memory before the CAS signals goes to zero.
+*/
+DRAM_AB.d = 'b'0;
+DRAM_AB.ck = !RAS0 # ! RAS1;
+DRAM_AB.ap = !MEMORY_ACCESS_GRANT_ACTIVE # !SYS_RESET;
+
 
 
 /* REFRESH TIMER for generating REFRESH REQUESTS */
