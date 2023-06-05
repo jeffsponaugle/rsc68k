@@ -92,7 +92,7 @@ NODE SIM_AS_PRE;
 
 SIM_AS_OUT = SIM_S2 # !SYS_RESET;
 SIM_AS = SIM_AS_IN # !SIM_S7;
-SIM_DRAM_CS = SIM_AS # SIM_S1 # SIM_S0;    /* The addition of the SYS_RESET should force SIM_DS to be about 7ns behind SIM_AS */
+SIM_DRAM_CS = SIM_AS_OUT # SIM_S1 # SIM_S0;    /* The addition of the SYS_RESET should force SIM_DS to be about 7ns behind SIM_AS */
 
 /* END OF SIMULATOR LOGIC */
 

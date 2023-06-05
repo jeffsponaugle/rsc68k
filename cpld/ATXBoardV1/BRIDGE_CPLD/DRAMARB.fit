@@ -1,4 +1,4 @@
-Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Sun Jun 04 16:30:13 2023
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Sun Jun 04 19:47:59 2023
 
 
 fit1504 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.tt2 -CUPL -dev P1504C44 -JTAG ON
@@ -308,14 +308,14 @@ SIM_S3			(MC10	FB)  : MUX 37		Ref (C41fb)
 
 FanIn assignment for block D [7]
 {
-SIM_S1,SIM_S2,SIM_S7,SIM_AS,SIM_AS_IN,SIM_S0,SYS_RESET,
+SIM_S1,SIM_S2,SIM_S7,SIM_AS_IN,SIM_AS_OUT,SIM_S0,SYS_RESET,
 }
 Multiplexer assignment for block D
 SIM_S1			(MC1	FB)  : MUX 4		Ref (B23fb)
 SIM_S2			(MC2	FB)  : MUX 7		Ref (B30fb)
 SIM_S7			(MC3	FB)  : MUX 10		Ref (C40fb)
-SIM_AS			(MC5	P)   : MUX 11		Ref (D49p)
-SIM_AS_IN		(MC7	FB)  : MUX 17		Ref (OE1)
+SIM_AS_IN		(MC7	FB)  : MUX 13		Ref (OE1)
+SIM_AS_OUT		(MC5	P)   : MUX 20		Ref (D64p)
 SIM_S0			(MC4	FB)  : MUX 25		Ref (C44fb)
 SYS_RESET		(MC6	FB)  : MUX 32		Ref (GCLR)
 
@@ -436,7 +436,7 @@ SIM_S8.D = SIM_S7.Q;
 
 SIM_START_LATCH.D = 0;
 
-!SIM_DRAM_CS = (!SIM_AS & !SIM_S0.Q & !SIM_S1.Q);
+!SIM_DRAM_CS = (!SIM_AS_OUT & !SIM_S0.Q & !SIM_S1.Q);
 
 !Com_Ctrl_217 = (REFRESH_TIMER0.Q & REFRESH_TIMER1.Q & REFRESH_TIMER2.Q & REFRESH_TIMER3.Q);
 

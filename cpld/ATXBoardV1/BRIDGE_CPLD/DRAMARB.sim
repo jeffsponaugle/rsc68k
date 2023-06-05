@@ -471,7 +471,7 @@ SIM_AS_OUT =>
   # !SYS_RESET
 
 SIM_DRAM_CS =>
-    SIM_AS
+    SIM_AS_OUT
   # SIM_S1
   # SIM_S0
 
