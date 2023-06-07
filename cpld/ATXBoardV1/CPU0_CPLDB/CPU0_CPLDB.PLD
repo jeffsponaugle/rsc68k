@@ -70,6 +70,23 @@ Pin[16] = CPU1_INT1;
 Pin[15] = CPU1_INT2;
 Pin[29] = CPU1_BARRIER1;
 
+Pin[1] =  UNUSED1;
+Pin[51] = UNUSED2;
+Pin[52] = UNUSED3;
+Pin[54] = UNUSED4;
+Pin[55] = UNUSED5;
+Pin[56] = UNUSED6;
+Pin[57] = UNUSED7;
+Pin[58] = UNUSED8;
+Pin[61] = UNUSED9;
+Pin[65] = UNUSED10;
+Pin[67] = UNUSED11;
+Pin[68] = UNUSED12;
+Pin[69] = UNUSED13;
+Pin[84] = UNUSED14;
+
+
+
 
 CPU_A1 = CPU_INTACK0;
 CPU_A2 = CPU_INTACK1;
@@ -561,11 +578,12 @@ Total input pins 		27
 Total output pins 		26
 Total Pts 			200
 
-
 Final global control pins assignment (if applicable)...
 -------------------------------------------------------
 CLK_32M assigned to pin  2
 DEBUG_BUTTON assigned to pin  83
+
+
 
 Performing input pin pre-assignments ...
 ------------------------------------
@@ -741,6 +759,8 @@ Com_Ctrl_284 is placed at foldback expander node 428 (MC 128)
                       T                             C C C                           
                                                     K K K                           
                                                     2 1 0                           
+
+
 
 */
 
