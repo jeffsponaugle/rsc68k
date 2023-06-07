@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sun Jun 04 19:47:58 2023 "}
+  {DBtime "Tue Jun 06 16:59:43 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,42 +33,46 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
-   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
-   {P CAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P CAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P CAS2 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P CAS3 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P RAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P RAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P AREQ0 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P AREQ1 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P GRANT0 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P GRANT1 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P DRAM_AB {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P CPU0_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P CPU1_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P CPU0_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P CPU0_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P CPU1_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P SIM_RW {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P SIM_STAR {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P SIM_AS_I {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P DRAM_RW {Pt "I/O"}{Lq 0}{Ploc 360 20}}
-   {P SIM_AS {Pt "I/O"}{Lq 0}{Ploc 360 40}}
-   {P SIM_DRAM {Pt "I/O"}{Lq 0}{Ploc 360 60}}
-   {P SIM_AS_O {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P CAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P CAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P CAS2 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CAS3 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P RAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P RAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P AREQ0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P AREQ1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P GRANT0 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P GRANT1 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P DRAM_AB {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU0_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P CPU1_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P CPU0_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P CPU0_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P SIM_DTAC {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P CLK_16M_ {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P SIM_STAR {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P SIM_AS_I {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P CPU0_DRA {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P CPU1_DRA {Pt "I/O"}{Lq 0}{Ploc 360 40}}
+   {P DRAM_RW {Pt "I/O"}{Lq 0}{Ploc 360 60}}
+   {P SIM_AS {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P SIM_DRAM {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P SIM_AS_O {Pt "I/O"}{Lq 0}{Ploc 360 120}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 230 510}
+   {Rdl 230 550}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
+   {Pnl 120 530}
+   {Pnl 120 510}
    {Pnl 120 490}
    {Pnl 120 470}
    {Pnl 120 450}
@@ -90,21 +94,23 @@
    {Pnl 120 130}
    {Pnl 120 110}
    {Pnl 120 90}
-   {Pnl 120 70}
-   {Pnl 120 50}
    [Ts 15][Tj "LC"]
    {Pnl 340 30}
    {Pnl 340 50}
    {Pnl 340 70}
    {Pnl 340 90}
+   {Pnl 340 110}
+   {Pnl 340 130}
 
-   {Sd A 1 2 4 5 6 8 9 11 12 14 16 17 20 24 25 26 27 28 29 31 36 37 44 21 33 34 41}
+   {Sd A 1 2 4 5 6 8 9 11 12 14 16 17 20 24 25 26 27 28 29 31 36 37 44 18 19 21 33 34 41}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 500 330 0}
+   {R 130 540 330 0}
+   {L 130 520 100 520}
+   {L 130 500 100 500}
    {L 130 480 100 480}
    {L 130 460 100 460}
    {L 130 440 100 440}
@@ -126,42 +132,44 @@
    {L 130 120 100 120}
    {L 130 100 100 100}
    {L 130 80 100 80}
-   {L 130 60 100 60}
-   {L 130 40 100 40}
    {L 330 20 360 20}
    {L 330 40 360 40}
    {L 330 60 360 60}
    {L 330 80 360 80}
+   {L 330 100 360 100}
+   {L 330 120 360 120}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "SYS_RESE" 140 480}
-   {T "CLK_32M" 140 460}
-   {T "CAS0" 140 440}
-   {T "CAS1" 140 420}
-   {T "CAS2" 140 400}
-   {T "CAS3" 140 380}
-   {T "RAS0" 140 360}
-   {T "RAS1" 140 340}
-   {T "AREQ0" 140 320}
-   {T "AREQ1" 140 300}
-   {T "GRANT0" 140 280}
-   {T "GRANT1" 140 260}
-   {T "DRAM_AB" 140 240}
-   {T "REFRESH_" 140 220}
-   {T "CPU0_A1" 140 200}
-   {T "CPU1_A1" 140 180}
-   {T "CPU0_UDS" 140 160}
-   {T "CPU1_UDS" 140 140}
-   {T "CPU0_LDS" 140 120}
-   {T "CPU1_LDS" 140 100}
-   {T "SIM_RW" 140 80}
-   {T "SIM_STAR" 140 60}
-   {T "SIM_AS_I" 140 40}
+   {T "SYS_RESE" 140 520}
+   {T "CLK_32M" 140 500}
+   {T "CAS0" 140 480}
+   {T "CAS1" 140 460}
+   {T "CAS2" 140 440}
+   {T "CAS3" 140 420}
+   {T "RAS0" 140 400}
+   {T "RAS1" 140 380}
+   {T "AREQ0" 140 360}
+   {T "AREQ1" 140 340}
+   {T "GRANT0" 140 320}
+   {T "GRANT1" 140 300}
+   {T "DRAM_AB" 140 280}
+   {T "REFRESH_" 140 260}
+   {T "CPU0_A1" 140 240}
+   {T "CPU1_A1" 140 220}
+   {T "CPU0_UDS" 140 200}
+   {T "CPU1_UDS" 140 180}
+   {T "CPU0_LDS" 140 160}
+   {T "SIM_DTAC" 140 140}
+   {T "CLK_16M_" 140 120}
+   {T "SIM_STAR" 140 100}
+   {T "SIM_AS_I" 140 80}
    [Tj "RC"]
-   {T "DRAM_RW" 320 20}
-   {T "SIM_AS" 320 40}
-   {T "SIM_DRAM" 320 60}
-   {T "SIM_AS_O" 320 80}
+   {T "CPU0_DRA" 320 20}
+   {T "CPU1_DRA" 320 40}
+   {T "DRAM_RW" 320 60}
+   {T "SIM_AS" 320 80}
+   {T "SIM_DRAM" 320 100}
+   {T "SIM_AS_O" 320 120}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1504ISPPLCC44" 230 -10}
@@ -169,13 +177,13 @@
 
   {ATR
    {IN
-    {Org 100 40}
+    {Org 100 80}
     {Ty 255}
    }
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB 230 500}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB 230 540}
    }
   }
  }
@@ -223,13 +231,17 @@
    }
    {N CPU0_LDS
    }
-   {N CPU1_LDS
+   {N SIM_DTAC
    }
-   {N SIM_RW
+   {N CLK_16M_
    }
    {N SIM_STAR
    }
    {N SIM_AS_I
+   }
+   {N CPU0_DRA
+   }
+   {N CPU1_DRA
    }
    {N DRAM_RW
    }
