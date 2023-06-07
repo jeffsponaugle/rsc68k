@@ -18,23 +18,28 @@ Device   f1504ispplcc44;
 PROPERTY ATMEL {TDI_PULLUP = ON};
 PROPERTY ATMEL {TMS_PULLUP = ON};
 
-/** Inputs **/
+/** Pins that will be exposed in the final design  **/
 
+// INPUTS
 Pin[2] = CLK_32M;                  /* Clock */
 Pin[1] = SYS_RESET;                /* Active Low Reset */
 Pin[12,14] = [AREQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
-Pin[16,17] = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
-Pin[24] = REFRESH_GRANT;
-Pin[9,11] = [RAS0..1];
-Pin[4,5,6,8] = [CAS0..3];
 Pin[25,26] = CPU0_A1, CPU1_A1;
 Pin[27,28] = CPU0_UDS, CPU1_UDS;
 Pin[29,31] = CPU0_LDS, CPU1_LDS;
 Pin[28] = CPU0_RW;
-Pin[21,20] = DRAM_RW, DRAM_AB;
-Pin[36] = CLK_16M_INTERNAL;
 
+// OUTPUTS
+Pin[9,11] = [RAS0..1];
+Pin[4,5,6,8] = [CAS0..3];
+Pin[21,20] = DRAM_RW, DRAM_AB;
 Pin[18,19] = CPU0_DRAM_DTACK, CPU1_DRAM_DTACK;
+
+/* Pins that are being exposed to enable debugging */
+
+Pin[16,17] = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
+Pin[24] = REFRESH_GRANT;
+Pin[36] = CLK_16M_INTERNAL;
 
 NODE [REQ_CLOCKED0..1];
 NODE PE_BIAS;
@@ -56,7 +61,7 @@ Pin[37] = SIM_START_BUTTON;
 // These next two pins must be connected together.  They add a 7ns delay to the AS signal so it replicates
 // what happens in a 68K system at 16Mhz.
 
-Pin[44] = SIM_AS_IN;
+Pin[44] = SIM_AS_IN;    /* Used to create a delay for the DRAM_CS */
 Pin[41] = SIM_AS_OUT;
 NODE [SIM_S0..7];
 NODE SIM_START_LATCH;
@@ -135,13 +140,16 @@ PE_BIAS.ar = !SYS_RESET;
 
 GRANT_ACTIVE = GRANT0 & GRANT1 & REFRESH_GRANT;   /* Active low signal that there is a active grant of access from 1 of 3 sources */
 
-REFRESH_OUT = REFRESH_REQ_CLOCKED;            /* refresh requests always win */
-PE_OUT_0 = ( REQ_CLOCKED0 # !REFRESH_REQ_CLOCKED );                             /* if BIAS is towards input 0, set output0 if input0 is set */
+PE_REFRESH_OUT = REFRESH_REQ_CLOCKED;            /* refresh requests always win */
+PE_OUT_0 = ( REQ_CLOCKED0 # !REFRESH_REQ_CLOCKED # PE_BIAS ) & 
+           ( REQ_CLOCKED0 # !REFRESH_REQ_CLOCKED # !REQ_CLOCKED1 # !PE_BIAS );                             /* if BIAS is towards input 0, set output0 if input0 is set */
                                 /* if BIAS is towards input 1, set output0 if input0 is set AND input 1 is not */
-PE_OUT_1 = ( REQ_CLOCKED1 # !REQ_CLOCKED0 # !REFRESH_REQ_CLOCKED );   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
+PE_OUT_1 = ( REQ_CLOCKED1 # !REQ_CLOCKED0 # !REFRESH_REQ_CLOCKED # PE_BIAS ) &
+           ( REQ_CLOCKED1 # !REFRESH_REQ_CLOCKED # !PE_BIAS ) ;   /* if BIAS is towards input 0, set output1 if input1 is set AND input 0 is not */
           
+         
 REFRESH_GRANT.d = ( !GRANT_ACTIVE & REFRESH_GRANT ) #    /* If a grant is active, don't change output state */
-          ( GRANT_ACTIVE & REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
+          ( GRANT_ACTIVE & PE_REFRESH_OUT );           /* If a grant is not active, grab the output from the priority encoder */
 REFRESH_GRANT.ap = REFRESH_REQUESTED # !REFRESH_COMPLETED # !SYS_RESET;
 REFRESH_GRANT.ck = CLK_32M;
 
@@ -201,8 +209,8 @@ REFRESH_ACCESS_GRANT_ACTIVE = REFRESH_GRANT;
 
 [RAS0..1].ck = !CLK_32M;
 [RAS0..1].ap = ((!GRANT0) & AREQ0) # ((!GRANT1) & AREQ1) # ((!REFRESH_GRANT) & !REFRESH_COMPLETED) # !SYS_RESET;     // If the memory access granted ends, reset the RAS lines
-RAS0.d = ( GRANT0 # CPU0_A1 ) & ( GRANT1 # CPU1_A1);
-RAS1.d = ( GRANT0 # !CPU0_A1 ) & ( GRANT1 # !CPU1_A1);
+RAS0.d = ( GRANT0 # CPU0_A1 ) & ( GRANT1 # CPU1_A1) & ( REFRESH_GRANT # CAS0 );
+RAS1.d = ( GRANT0 # !CPU0_A1 ) & ( GRANT1 # !CPU1_A1)  & ( REFRESH_GRANT # CAS0 );
 
 CAS_PRE.d = MEMORY_ACCESS_GRANT_ACTIVE;
 CAS_PRE.ck = !CLK_32M;
@@ -293,118 +301,155 @@ REFRESH_TIMER3.ap = REFRESH_TIMER_RESET # !SYS_RESET;
 
 
 /*
-Total dedicated input used:	2/4 	(50%)
-Total I/O pins used		19/32 	(59%)
-Total Logic cells used 		32/64 	(50%)
-Total Flip-Flop used 		29/64 	(45%)
-Total Foldback logic used 	10/64 	(15%)
-Total Nodes+FB/MCells 		40/64 	(62%)
+
+Current load, with simulator built in....
+
+Total dedicated input used:	3/4 	(75%)
+Total I/O pins used		30/32 	(93%)
+Total Logic cells used 		49/64 	(76%)
+Total Flip-Flop used 		39/64 	(60%)
+Total Foldback logic used 	15/64 	(23%)
+Total Nodes+FB/MCells 		62/64 	(96%)
 Total cascade used 		2
-Total input pins 		12
-Total output pins 		9
-Total Pts 			110
+Total input pins 		16
+Total output pins 		17
+Total Pts 			155
 
 
 Final global control pins assignment (if applicable)...
 -------------------------------------------------------
-CLK_32M assigned to pin  43
+CLK_32M assigned to pin  2
 SYS_RESET assigned to pin  1
 
 
 
 Performing input pin pre-assignments ...
 ------------------------------------
-CLK_32M assigned to pin  43
+CLK_32M assigned to pin  2
 SYS_RESET assigned to pin  1
+SIM_AS_IN assigned to pin  44
+DRAM_AB.AP equation needs patching.
+1 control eqution need patching
 
 Attempt to place floating signals ...
 ------------------------------------
-REQ_CLOCKED0 is placed at feedback node 601 (MC 1)
-REQ_CLOCKED1 is placed at feedback node 602 (MC 2)
+AREQ0 is placed at pin 12 (MC 1)
+REFRESH_COMPLETED_PRE0 is placed at feedback node 601 (MC 1)
+PE_BIAS is placed at feedback node 602 (MC 2)
 RAS1 is placed at pin 11 (MC 3)
 RAS0 is placed at pin 9 (MC 4)
-CAS2 is placed at pin 8 (MC 5)
-REFRESH_TIMER_RESET is placed at feedback node 606 (MC 6)
-CAS_PRE is placed at feedback node 607 (MC 7)
+CAS3 is placed at pin 8 (MC 5)
+REFRESH_TIMER4 is placed at feedback node 606 (MC 6)
+REFRESH_TIMER5 is placed at feedback node 607 (MC 7)
 TDI is placed at pin 7 (MC 8)
-PE_BIAS is placed at feedback node 608 (MC 8)
-REFRESH_TIMER4 is placed at feedback node 609 (MC 9)
-FB_163 is placed at foldback expander node 309 (MC 9)
-REFRESH_TIMER5 is placed at feedback node 610 (MC 10)
-FB_162 is placed at foldback expander node 310 (MC 10)
-CAS0 is placed at pin 6 (MC 11)
-FB_161 is placed at foldback expander node 311 (MC 11)
-Com_Ctrl_155 is placed at foldback expander node 312 (MC 12)
-REFRESH_TIMER7 is placed at feedback node 613 (MC 13)
-Com_Ctrl_154 is placed at foldback expander node 313 (MC 13)
-GRANT0 is placed at pin 5 (MC 14)
+REFRESH_TIMER2 is placed at feedback node 608 (MC 8)
+REFRESH_TIMER7 is placed at feedback node 610 (MC 10)
+CAS2 is placed at pin 6 (MC 11)
+FB_224 is placed at foldback expander node 311 (MC 11)
+FB_221 is placed at foldback expander node 312 (MC 12)
+REFRESH_TIMER3 is placed at feedback node 613 (MC 13)
+Com_Ctrl_218 is placed at foldback expander node 313 (MC 13)
+CAS1 is placed at pin 5 (MC 14)
+Com_Ctrl_216 is placed at foldback expander node 314 (MC 14)
 REFRESH_TIMER6 is placed at feedback node 615 (MC 15)
-GRANT1 is placed at pin 4 (MC 16)
-AREQ1 is placed at pin 21 (MC 17)
-REFRESH_COMPLETED_PRE2 is placed at feedback node 618 (MC 18)
-REFRESH_REQ_CLOCKED is placed at feedback node 619 (MC 19)
-CLK_16M_INTERNAL is placed at feedback node 620 (MC 20)
-REFRESH_COMPLETED_PRE0 is placed at feedback node 621 (MC 21)
-REFRESH_COMPLETED_PRE1 is placed at feedback node 622 (MC 22)
-REFRESH_COMPLETED is placed at feedback node 623 (MC 23)
-REFRESH_GRANT is placed at pin 17 (MC 24)
-CAS3 is placed at pin 16 (MC 25)
-REFRESH_REQUESTED is placed at feedback node 626 (MC 26)
-REFRESH_TIMER0 is placed at feedback node 627 (MC 27)
-FB_160 is placed at foldback expander node 327 (MC 27)
-REFRESH_TIMER1 is placed at feedback node 628 (MC 28)
-FB_159 is placed at foldback expander node 328 (MC 28)
-REFRESH_TIMER2 is placed at feedback node 629 (MC 29)
-CAS1 is placed at pin 14 (MC 30)
-FB_158 is placed at foldback expander node 330 (MC 30)
-Com_Ctrl_156 is placed at foldback expander node 331 (MC 31)
+CAS0 is placed at pin 4 (MC 16)
+Com_Ctrl_215 is placed at foldback expander node 316 (MC 16)
+DRAM_RW is placed at pin 21 (MC 17)
+DRAM_AB is placed at pin 20 (MC 19)
+CPU1_DRAM_DTACK is placed at pin 19 (MC 20)
+CPU0_DRAM_DTACK is placed at pin 18 (MC 21)
+REQ_CLOCKED1 is placed at feedback node 622 (MC 22)
+REQ_CLOCKED0 is placed at feedback node 623 (MC 23)
+GRANT1 is placed at pin 17 (MC 24)
+GRANT0 is placed at pin 16 (MC 25)
+DRAM_AB.AP is placed at feedback node 626 (MC 26)
+SIM_S3 is placed at feedback node 627 (MC 27)
+SIM_S1 is placed at feedback node 628 (MC 28)
+FB_227 is placed at foldback expander node 328 (MC 28)
+SIM_S0 is placed at feedback node 629 (MC 29)
+FB_226 is placed at foldback expander node 329 (MC 29)
+AREQ1 is placed at pin 14 (MC 30)
+REFRESH_TIMER0 is placed at feedback node 630 (MC 30)
+FB_225 is placed at foldback expander node 330 (MC 30)
+SIM_S5 is placed at feedback node 631 (MC 31)
+Com_Ctrl_217 is placed at foldback expander node 331 (MC 31)
 TMS is placed at pin 13 (MC 32)
-REFRESH_TIMER3 is placed at feedback node 632 (MC 32)
-Com_Ctrl_155 is placed at foldback expander node 332 (MC 32)
-AREQ0 is placed at pin 24 (MC 33)
-CPU0_LDS is placed at pin 25 (MC 35)
-CPU0_A1 is placed at pin 26 (MC 36)
-CPU1_A1 is placed at pin 27 (MC 37)
-CPU0_UDS is placed at pin 28 (MC 40)
+REFRESH_TIMER1 is placed at feedback node 632 (MC 32)
+Com_Ctrl_216 is placed at foldback expander node 332 (MC 32)
+REFRESH_GRANT is placed at pin 24 (MC 33)
+CPU0_A1 is placed at pin 25 (MC 35)
+SIM_S2 is placed at feedback node 635 (MC 35)
+FB_222 is placed at foldback expander node 335 (MC 35)
+CPU1_A1 is placed at pin 26 (MC 36)
+REFRESH_REQ_CLOCKED is placed at feedback node 636 (MC 36)
+CPU0_UDS is placed at pin 27 (MC 37)
+REFRESH_TIMER_RESET is placed at feedback node 637 (MC 37)
+CAS_PRE is placed at feedback node 638 (MC 38)
+REFRESH_COMPLETED_PRE1 is placed at feedback node 639 (MC 39)
+CPU0_RW is placed at pin 28 (MC 40)
+REFRESH_COMPLETED_PRE2 is placed at feedback node 640 (MC 40)
+CPU0_LDS is placed at pin 29 (MC 41)
+REFRESH_COMPLETED is placed at feedback node 641 (MC 41)
+SIM_START_LATCH is placed at feedback node 642 (MC 42)
+SIM_S7 is placed at feedback node 643 (MC 43)
+SIM_S6 is placed at feedback node 644 (MC 44)
+FB_223 is placed at foldback expander node 344 (MC 44)
+SIM_DTACK_IN is placed at pin 31 (MC 46)
+SIM_S4 is placed at feedback node 646 (MC 46)
+FB_220 is placed at foldback expander node 346 (MC 46)
+REFRESH_REQUESTED is placed at feedback node 647 (MC 47)
+Com_Ctrl_218 is placed at foldback expander node 347 (MC 47)
 TCK is placed at pin 32 (MC 48)
-Com_Ctrl_157 is placed at feedback node 648 (MC 48)
+Com_Ctrl_219 is placed at feedback node 648 (MC 48)
+Com_Ctrl_217 is placed at foldback expander node 348 (MC 48)
+SIM_AS is placed at pin 33 (MC 49)
+SIM_DRAM_CS is placed at pin 34 (MC 51)
+CLK_16M_INTERNAL is placed at pin 36 (MC 52)
+SIM_START_BUTTON is placed at pin 37 (MC 53)
 TDO is placed at pin 38 (MC 56)
+SIM_AS_OUT is placed at pin 41 (MC 64)
 
                                                                  
                                                                  
-                                                                 
-                                 S                               
-                                 Y                               
-                                 S    C                          
-                     G  G        _    L                          
-                     R  R        R    K                          
-                  C  A  A        E    _                          
-                  A  N  N  V     S    3  G                       
-                  S  T  T  C     E    2  N                       
-                  0  0  1  C     T    M  D                       
+                                            S                    
+                                 S S        I                    
+                                 Y I        M                    
+                              C  S M        _                    
+                              L  _ _        A                    
+                              K  R A        S                    
+                  C  C  C     _  E S        _                    
+                  A  A  A  V  3  S _     G  O                    
+                  S  S  S  C  2  E I     N  U                    
+                  2  1  0  C  M  T N     D  T                    
                ____________________________________              
               /   6  5  4  3  2  1 44 43 42 41 40  \             
          TDI |  7                                39 |            
-        CAS2 |  8                                38 | TDO        
-        RAS0 |  9                                37 |            
-         GND | 10                                36 |            
+        CAS3 |  8                                38 | TDO        
+        RAS0 |  9                                37 | SIM_START_BUTTON
+         GND | 10                                36 | CLK_16M_INTERNAL
         RAS1 | 11                                35 | VCC        
-             | 12            ATF1504             34 |            
-         TMS | 13          44-Lead PLCC          33 |            
-        CAS1 | 14                                32 | TCK        
-         VCC | 15                                31 |            
-        CAS3 | 16                                30 | GND        
-EFRESH_GRANT | 17                                29 |            
+       AREQ0 | 12            ATF1504             34 | SIM_DRAM_CS
+         TMS | 13          44-Lead PLCC          33 | SIM_AS     
+       AREQ1 | 14                                32 | TCK        
+         VCC | 15                                31 | SIM_DTACK_IN
+      GRANT0 | 16                                30 | GND        
+      GRANT1 | 17                                29 | CPU0_LDS   
              |   18 19 20 21 22 23 24 25 26 27 28   |            
               \____________________________________/             
-                          R  G  V  R  C  C  C  C                 
-                          E  N  C  E  P  P  P  P                 
-                          Q  D  C  Q  U  U  U  U                 
-                          1        0  0  0  1  0                 
-                                      _  _  _  _                 
-                                      L  A  A  U                 
-                                      D  1  1  D                 
-                                      S        S    
+                 C  C  D  D  G  V  R  C  C  C  C                 
+                 P  P  R  R  N  C  E  P  P  P  P                 
+                 U  U  A  A  D  C  F  U  U  U  U                 
+                 0  1  M  M        R  0  1  0  0                 
+                 _  _  _  _        E  _  _  _  _                 
+                 D  D  A  R        S  A  A  U  R                 
+                 R  R  B  W        H  1  1  D  W                 
+                 A  A              _        S                    
+                 M  M              G                             
+                 _  _              R                             
+                 D  D              A                             
+                 T  T              N                             
+
+
 
 */
 

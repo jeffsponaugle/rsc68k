@@ -1,4 +1,4 @@
-Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Tue Jun 06 16:59:43 2023
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Wed Jun 07 11:36:28 2023
 
 
 fit1504 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.tt2 -CUPL -dev P1504C44 -JTAG ON
@@ -103,20 +103,19 @@ REFRESH_TIMER6 is placed at feedback node 615 (MC 15)
 CAS0 is placed at pin 4 (MC 16)
 Com_Ctrl_215 is placed at foldback expander node 316 (MC 16)
 DRAM_RW is placed at pin 21 (MC 17)
-REQ_CLOCKED1 is placed at feedback node 618 (MC 18)
 DRAM_AB is placed at pin 20 (MC 19)
 CPU1_DRAM_DTACK is placed at pin 19 (MC 20)
 CPU0_DRAM_DTACK is placed at pin 18 (MC 21)
-REQ_CLOCKED0 is placed at feedback node 622 (MC 22)
-DRAM_AB.AP is placed at feedback node 623 (MC 23)
+REQ_CLOCKED1 is placed at feedback node 622 (MC 22)
+REQ_CLOCKED0 is placed at feedback node 623 (MC 23)
 GRANT1 is placed at pin 17 (MC 24)
 GRANT0 is placed at pin 16 (MC 25)
-SIM_S0 is placed at feedback node 626 (MC 26)
-FB_226 is placed at foldback expander node 326 (MC 26)
-SIM_S2 is placed at feedback node 627 (MC 27)
+DRAM_AB.AP is placed at feedback node 626 (MC 26)
+SIM_S3 is placed at feedback node 627 (MC 27)
 SIM_S1 is placed at feedback node 628 (MC 28)
 FB_227 is placed at foldback expander node 328 (MC 28)
-SIM_S3 is placed at feedback node 629 (MC 29)
+SIM_S0 is placed at feedback node 629 (MC 29)
+FB_226 is placed at foldback expander node 329 (MC 29)
 AREQ1 is placed at pin 14 (MC 30)
 REFRESH_TIMER0 is placed at feedback node 630 (MC 30)
 FB_225 is placed at foldback expander node 330 (MC 30)
@@ -127,25 +126,26 @@ REFRESH_TIMER1 is placed at feedback node 632 (MC 32)
 Com_Ctrl_216 is placed at foldback expander node 332 (MC 32)
 REFRESH_GRANT is placed at pin 24 (MC 33)
 CPU0_A1 is placed at pin 25 (MC 35)
+SIM_S2 is placed at feedback node 635 (MC 35)
+FB_222 is placed at foldback expander node 335 (MC 35)
 CPU1_A1 is placed at pin 26 (MC 36)
+REFRESH_REQ_CLOCKED is placed at feedback node 636 (MC 36)
 CPU0_UDS is placed at pin 27 (MC 37)
-REFRESH_REQ_CLOCKED is placed at feedback node 637 (MC 37)
-REFRESH_TIMER_RESET is placed at feedback node 638 (MC 38)
-CAS_PRE is placed at feedback node 639 (MC 39)
+REFRESH_TIMER_RESET is placed at feedback node 637 (MC 37)
+CAS_PRE is placed at feedback node 638 (MC 38)
+REFRESH_COMPLETED_PRE1 is placed at feedback node 639 (MC 39)
 CPU0_RW is placed at pin 28 (MC 40)
-REFRESH_COMPLETED_PRE1 is placed at feedback node 640 (MC 40)
+REFRESH_COMPLETED_PRE2 is placed at feedback node 640 (MC 40)
 CPU0_LDS is placed at pin 29 (MC 41)
 REFRESH_COMPLETED is placed at feedback node 641 (MC 41)
-REFRESH_COMPLETED_PRE2 is placed at feedback node 642 (MC 42)
-SIM_START_LATCH is placed at feedback node 643 (MC 43)
-SIM_S7 is placed at feedback node 644 (MC 44)
+SIM_START_LATCH is placed at feedback node 642 (MC 42)
+SIM_S7 is placed at feedback node 643 (MC 43)
+SIM_S6 is placed at feedback node 644 (MC 44)
 FB_223 is placed at foldback expander node 344 (MC 44)
-SIM_S6 is placed at feedback node 645 (MC 45)
-FB_222 is placed at foldback expander node 345 (MC 45)
 SIM_DTACK_IN is placed at pin 31 (MC 46)
-REFRESH_REQUESTED is placed at feedback node 646 (MC 46)
+SIM_S4 is placed at feedback node 646 (MC 46)
 FB_220 is placed at foldback expander node 346 (MC 46)
-SIM_S4 is placed at feedback node 647 (MC 47)
+REFRESH_REQUESTED is placed at feedback node 647 (MC 47)
 Com_Ctrl_218 is placed at foldback expander node 347 (MC 47)
 TCK is placed at pin 32 (MC 48)
 Com_Ctrl_219 is placed at feedback node 648 (MC 48)
@@ -209,37 +209,38 @@ NC = Unused I/O pins which must be unconnected on the board
 
 Universal-Interconnect-Multiplexer assignments
 ------------------------------------------------
-FanIn assignment for block A [22]
+FanIn assignment for block A [23]
 {
-CLK_16M_INTERNAL,CPU0_UDS,Com_Ctrl_219,CAS_PRE,CPU1_A1,CPU0_A1,CPU0_LDS,
+CLK_16M_INTERNAL,Com_Ctrl_219,CPU0_UDS,CAS_PRE,CPU1_A1,CPU0_A1,CPU0_LDS,CAS0,
 GRANT1,GRANT0,
 PE_BIAS,
-REFRESH_TIMER7,REFRESH_REQUESTED,REFRESH_TIMER0,REFRESH_TIMER1,REFRESH_TIMER_RESET,REFRESH_TIMER4,REFRESH_TIMER3,REFRESH_TIMER5,REFRESH_TIMER6,REFRESH_GRANT,REFRESH_TIMER2,
+REFRESH_TIMER_RESET,REFRESH_TIMER7,REFRESH_TIMER1,REFRESH_TIMER0,REFRESH_REQUESTED,REFRESH_TIMER4,REFRESH_TIMER2,REFRESH_TIMER3,REFRESH_TIMER5,REFRESH_TIMER6,REFRESH_GRANT,
 SYS_RESET,
 }
 Multiplexer assignment for block A
 PE_BIAS			(MC1	FB)  : MUX 0		Ref (A2fb)
-CLK_16M_INTERNAL		(MC17	P)   : MUX 1		Ref (D52p)
-CPU0_UDS		(MC20	P)   : MUX 3		Ref (C37p)
+CLK_16M_INTERNAL		(MC18	P)   : MUX 1		Ref (D52p)
+REFRESH_TIMER_RESET		(MC14	FB)  : MUX 4		Ref (C37fb)
 REFRESH_TIMER7		(MC5	FB)  : MUX 7		Ref (A10fb)
-Com_Ctrl_219		(MC16	FB)  : MUX 9		Ref (C48fb)
-REFRESH_REQUESTED		(MC15	FB)  : MUX 11		Ref (C46fb)
-GRANT1			(MC8	P)   : MUX 13		Ref (B24p)
-CAS_PRE			(MC14	FB)  : MUX 14		Ref (C39fb)
-REFRESH_TIMER0		(MC10	FB)  : MUX 15		Ref (B30fb)
-REFRESH_TIMER1		(MC11	FB)  : MUX 17		Ref (B32fb)
-REFRESH_TIMER_RESET		(MC13	FB)  : MUX 18		Ref (C38fb)
+REFRESH_TIMER1		(MC12	FB)  : MUX 9		Ref (B32fb)
+REFRESH_TIMER0		(MC11	FB)  : MUX 11		Ref (B30fb)
+GRANT1			(MC9	P)   : MUX 13		Ref (B24p)
+Com_Ctrl_219		(MC17	FB)  : MUX 15		Ref (C48fb)
+CPU0_UDS		(MC21	P)   : MUX 17		Ref (C37p)
+CAS_PRE			(MC15	FB)  : MUX 18		Ref (C38fb)
+REFRESH_REQUESTED		(MC16	FB)  : MUX 19		Ref (C47fb)
 REFRESH_TIMER4		(MC2	FB)  : MUX 20		Ref (A6fb)
-GRANT0			(MC9	P)   : MUX 22		Ref (B25p)
-CPU1_A1			(MC19	P)   : MUX 23		Ref (C36p)
+GRANT0			(MC10	P)   : MUX 22		Ref (B25p)
+CPU1_A1			(MC20	P)   : MUX 23		Ref (C36p)
+REFRESH_TIMER2		(MC4	FB)  : MUX 24		Ref (A8fb)
 REFRESH_TIMER3		(MC6	FB)  : MUX 25		Ref (A13fb)
 REFRESH_TIMER5		(MC3	FB)  : MUX 26		Ref (A7fb)
-CPU0_A1			(MC18	P)   : MUX 27		Ref (C35p)
+CPU0_A1			(MC19	P)   : MUX 27		Ref (C35p)
 REFRESH_TIMER6		(MC7	FB)  : MUX 31		Ref (A15fb)
-CPU0_LDS		(MC21	P)   : MUX 34		Ref (C41p)
-SYS_RESET		(MC22	FB)  : MUX 36		Ref (GCLR)
-REFRESH_GRANT		(MC12	P)   : MUX 37		Ref (C33p)
-REFRESH_TIMER2		(MC4	FB)  : MUX 38		Ref (A8fb)
+CPU0_LDS		(MC22	P)   : MUX 34		Ref (C41p)
+CAS0			(MC8	P)   : MUX 36		Ref (A16p)
+REFRESH_GRANT		(MC13	P)   : MUX 37		Ref (C33p)
+SYS_RESET		(MC23	FB)  : MUX 38		Ref (GCLR)
 
 FanIn assignment for block B [25]
 {
@@ -247,83 +248,85 @@ AREQ0,AREQ1,
 CLK_16M_INTERNAL,CPU0_RW,CLK_32M,
 DRAM_AB.AP,
 GRANT1,GRANT0,
-REFRESH_TIMER1,REQ_CLOCKED0,RAS1,REFRESH_REQ_CLOCKED,RAS0,REFRESH_TIMER0,REFRESH_TIMER_RESET,REFRESH_GRANT,REQ_CLOCKED1,
-SIM_DTACK_IN,SIM_S4,SIM_S1,SIM_START_LATCH,SIM_S0,SIM_S2,SIM_S7,SYS_RESET,
+PE_BIAS,
+REQ_CLOCKED0,RAS1,REFRESH_TIMER_RESET,RAS0,REFRESH_TIMER0,REFRESH_TIMER1,REQ_CLOCKED1,REFRESH_GRANT,REFRESH_REQ_CLOCKED,
+SIM_DTACK_IN,SIM_S4,SIM_S0,SIM_S7,SIM_START_LATCH,SIM_S2,SYS_RESET,
 }
 Multiplexer assignment for block B
+PE_BIAS			(MC1	FB)  : MUX 0		Ref (A2fb)
 CLK_16M_INTERNAL		(MC19	P)   : MUX 1		Ref (D52p)
 SIM_DTACK_IN		(MC23	P)   : MUX 2		Ref (C46p)
 AREQ0			(MC20	P)   : MUX 3		Ref (A1p)
-AREQ1			(MC21	P)   : MUX 4		Ref (B30p)
-REFRESH_TIMER1		(MC12	FB)  : MUX 5		Ref (B32fb)
-REQ_CLOCKED0		(MC4	FB)  : MUX 6		Ref (B22fb)
-RAS1			(MC1	P)   : MUX 7		Ref (A3p)
-REFRESH_REQ_CLOCKED		(MC14	FB)  : MUX 8		Ref (C37fb)
-RAS0			(MC2	P)   : MUX 9		Ref (A4p)
-DRAM_AB.AP		(MC5	FB)  : MUX 10		Ref (B23fb)
-REFRESH_TIMER0		(MC11	FB)  : MUX 11		Ref (B30fb)
+REQ_CLOCKED0		(MC5	FB)  : MUX 4		Ref (B23fb)
+SIM_S4			(MC18	FB)  : MUX 5		Ref (C46fb)
+AREQ1			(MC21	P)   : MUX 6		Ref (B30p)
+RAS1			(MC2	P)   : MUX 7		Ref (A3p)
+REFRESH_TIMER_RESET		(MC15	FB)  : MUX 8		Ref (C37fb)
+RAS0			(MC3	P)   : MUX 9		Ref (A4p)
+REFRESH_TIMER0		(MC10	FB)  : MUX 11		Ref (B30fb)
 GRANT1			(MC6	P)   : MUX 13		Ref (B24p)
 CPU0_RW			(MC22	P)   : MUX 15		Ref (C40p)
 CLK_32M			(MC24	FB)  : MUX 16		Ref (OE2)
-REFRESH_TIMER_RESET		(MC15	FB)  : MUX 18		Ref (C38fb)
-SIM_S4			(MC18	FB)  : MUX 19		Ref (C47fb)
+REFRESH_TIMER1		(MC11	FB)  : MUX 17		Ref (B32fb)
+REQ_CLOCKED1		(MC4	FB)  : MUX 18		Ref (B22fb)
+SIM_S0			(MC9	FB)  : MUX 19		Ref (B29fb)
 GRANT0			(MC7	P)   : MUX 22		Ref (B25p)
-REFRESH_GRANT		(MC13	P)   : MUX 23		Ref (C33p)
-SIM_S1			(MC10	FB)  : MUX 25		Ref (B28fb)
-REQ_CLOCKED1		(MC3	FB)  : MUX 26		Ref (B18fb)
-SIM_START_LATCH		(MC16	FB)  : MUX 27		Ref (C43fb)
-SIM_S0			(MC8	FB)  : MUX 31		Ref (B26fb)
-SIM_S2			(MC9	FB)  : MUX 33		Ref (B27fb)
-SIM_S7			(MC17	FB)  : MUX 35		Ref (C44fb)
+REFRESH_GRANT		(MC12	P)   : MUX 23		Ref (C33p)
+SIM_S7			(MC17	FB)  : MUX 27		Ref (C43fb)
+REFRESH_REQ_CLOCKED		(MC14	FB)  : MUX 30		Ref (C36fb)
+SIM_START_LATCH		(MC16	FB)  : MUX 31		Ref (C42fb)
+SIM_S2			(MC13	FB)  : MUX 34		Ref (C35fb)
+DRAM_AB.AP		(MC8	FB)  : MUX 35		Ref (B26fb)
 SYS_RESET		(MC25	FB)  : MUX 38		Ref (GCLR)
 
-FanIn assignment for block C [22]
+FanIn assignment for block C [23]
 {
 AREQ0,AREQ1,
 Com_Ctrl_219,CLK_16M_INTERNAL,CLK_32M,
 GRANT1,GRANT0,
-REFRESH_COMPLETED_PRE1,REFRESH_REQUESTED,REFRESH_TIMER7,REFRESH_REQ_CLOCKED,REFRESH_COMPLETED_PRE0,REFRESH_COMPLETED,REFRESH_GRANT,REFRESH_COMPLETED_PRE2,
-SIM_S3,SIM_S6,SIM_S5,SIM_S0,SYS_RESET,SIM_S7,SIM_START_BUTTON,
+REFRESH_REQUESTED,REFRESH_COMPLETED_PRE0,REFRESH_TIMER7,REFRESH_COMPLETED_PRE2,REFRESH_COMPLETED_PRE1,REFRESH_REQ_CLOCKED,REFRESH_COMPLETED,REFRESH_GRANT,
+SIM_S0,SIM_S5,SIM_S1,SIM_S3,SIM_S6,SIM_START_BUTTON,SYS_RESET,SIM_S7,
 }
 Multiplexer assignment for block C
-REFRESH_COMPLETED_PRE1		(MC10	FB)  : MUX 0		Ref (C40fb)
-AREQ0			(MC18	P)   : MUX 1		Ref (A1p)
-REFRESH_REQUESTED		(MC15	FB)  : MUX 5		Ref (C46fb)
-AREQ1			(MC19	P)   : MUX 6		Ref (B30p)
-REFRESH_TIMER7		(MC2	FB)  : MUX 7		Ref (A10fb)
-REFRESH_REQ_CLOCKED		(MC9	FB)  : MUX 8		Ref (C37fb)
-Com_Ctrl_219		(MC16	FB)  : MUX 9		Ref (C48fb)
-REFRESH_COMPLETED_PRE0		(MC1	FB)  : MUX 10		Ref (A1fb)
-SIM_S3			(MC6	FB)  : MUX 11		Ref (B29fb)
-CLK_16M_INTERNAL		(MC17	P)   : MUX 13		Ref (D52p)
+AREQ0			(MC19	P)   : MUX 1		Ref (A1p)
+Com_Ctrl_219		(MC17	FB)  : MUX 5		Ref (C48fb)
+AREQ1			(MC20	P)   : MUX 6		Ref (B30p)
+REFRESH_REQUESTED		(MC16	FB)  : MUX 7		Ref (C47fb)
+REFRESH_COMPLETED_PRE0		(MC1	FB)  : MUX 8		Ref (A1fb)
+REFRESH_TIMER7		(MC2	FB)  : MUX 9		Ref (A10fb)
+REFRESH_COMPLETED_PRE2		(MC12	FB)  : MUX 10		Ref (C40fb)
+SIM_S0			(MC7	FB)  : MUX 11		Ref (B29fb)
+CLK_16M_INTERNAL		(MC18	P)   : MUX 13		Ref (D52p)
+REFRESH_COMPLETED_PRE1		(MC11	FB)  : MUX 14		Ref (C39fb)
 GRANT1			(MC3	P)   : MUX 15		Ref (B24p)
-CLK_32M			(MC21	FB)  : MUX 16		Ref (OE2)
-SIM_S6			(MC14	FB)  : MUX 17		Ref (C45fb)
-SIM_S5			(MC7	FB)  : MUX 19		Ref (B31fb)
-REFRESH_COMPLETED		(MC11	FB)  : MUX 21		Ref (C41fb)
+CLK_32M			(MC22	FB)  : MUX 18		Ref (OE2)
+SIM_S5			(MC8	FB)  : MUX 19		Ref (B31fb)
+REFRESH_REQ_CLOCKED		(MC10	FB)  : MUX 20		Ref (C36fb)
+REFRESH_COMPLETED		(MC13	FB)  : MUX 21		Ref (C41fb)
 GRANT0			(MC4	P)   : MUX 22		Ref (B25p)
-REFRESH_GRANT		(MC8	P)   : MUX 23		Ref (C33p)
-SIM_S0			(MC5	FB)  : MUX 27		Ref (B26fb)
-REFRESH_COMPLETED_PRE2		(MC12	FB)  : MUX 31		Ref (C42fb)
-SYS_RESET		(MC22	FB)  : MUX 32		Ref (GCLR)
-SIM_S7			(MC13	FB)  : MUX 35		Ref (C44fb)
-SIM_START_BUTTON		(MC20	P)   : MUX 37		Ref (D53p)
+REFRESH_GRANT		(MC9	P)   : MUX 23		Ref (C33p)
+SIM_S1			(MC6	FB)  : MUX 25		Ref (B28fb)
+SIM_S3			(MC5	FB)  : MUX 33		Ref (B27fb)
+SIM_S6			(MC15	FB)  : MUX 35		Ref (C44fb)
+SIM_START_BUTTON		(MC21	P)   : MUX 37		Ref (D53p)
+SYS_RESET		(MC23	FB)  : MUX 38		Ref (GCLR)
+SIM_S7			(MC14	FB)  : MUX 39		Ref (C43fb)
 
 FanIn assignment for block D [9]
 {
 CLK_16M_INTERNAL,CLK_32M,
-SIM_AS,SIM_AS_IN,SIM_S2,SIM_S1,SIM_S0,SYS_RESET,SIM_S7,
+SIM_AS,SIM_AS_IN,SIM_S0,SIM_S7,SIM_S1,SIM_S2,SYS_RESET,
 }
 Multiplexer assignment for block D
 CLK_16M_INTERNAL		(MC6	P)   : MUX 1		Ref (D52p)
 SIM_AS			(MC5	P)   : MUX 11		Ref (D49p)
 CLK_32M			(MC7	FB)  : MUX 12		Ref (OE2)
 SIM_AS_IN		(MC9	FB)  : MUX 17		Ref (OE1)
-SIM_S2			(MC2	FB)  : MUX 23		Ref (B27fb)
-SIM_S1			(MC3	FB)  : MUX 25		Ref (B28fb)
-SIM_S0			(MC1	FB)  : MUX 27		Ref (B26fb)
+SIM_S0			(MC2	FB)  : MUX 19		Ref (B29fb)
+SIM_S7			(MC4	FB)  : MUX 23		Ref (C43fb)
+SIM_S1			(MC1	FB)  : MUX 25		Ref (B28fb)
+SIM_S2			(MC3	FB)  : MUX 26		Ref (C35fb)
 SYS_RESET		(MC8	FB)  : MUX 32		Ref (GCLR)
-SIM_S7			(MC4	FB)  : MUX 35		Ref (C44fb)
 
 Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.jed ...
 
@@ -358,19 +361,23 @@ CPU1_DRAM_DTACK = GRANT1.Q;
 DRAM_RW = ((GRANT0.Q & GRANT1.Q)
 	# (!GRANT0.Q & CPU0_RW));
 
-!GRANT0.D = (!GRANT0.Q
-	# (GRANT1.Q & REFRESH_GRANT.Q & REFRESH_REQ_CLOCKED.Q & !REQ_CLOCKED0.Q));
+!GRANT0.D = ((GRANT1.Q & REFRESH_GRANT.Q & REFRESH_REQ_CLOCKED.Q & !REQ_CLOCKED0.Q & REQ_CLOCKED1.Q)
+	# !GRANT0.Q
+	# (GRANT1.Q & !PE_BIAS.Q & REFRESH_GRANT.Q & REFRESH_REQ_CLOCKED.Q & !REQ_CLOCKED0.Q));
 
-!GRANT1.D = (!GRANT1.Q
-	# (GRANT0.Q & REFRESH_GRANT.Q & REFRESH_REQ_CLOCKED.Q & REQ_CLOCKED0.Q & !REQ_CLOCKED1.Q));
+!GRANT1.D = ((GRANT0.Q & REFRESH_GRANT.Q & REFRESH_REQ_CLOCKED.Q & !REQ_CLOCKED1.Q & REQ_CLOCKED0.Q)
+	# !GRANT1.Q
+	# (GRANT0.Q & PE_BIAS.Q & REFRESH_GRANT.Q & REFRESH_REQ_CLOCKED.Q & !REQ_CLOCKED1.Q));
 
 PE_BIAS.D = !PE_BIAS.Q;
 
-!RAS0.D = ((!CPU0_A1 & !GRANT0.Q)
+!RAS0.D = ((!CAS0.Q & !REFRESH_GRANT.Q)
+	# (!CPU0_A1 & !GRANT0.Q)
 	# (!CPU1_A1 & !GRANT1.Q));
 
-!RAS1.D = ((CPU0_A1 & !GRANT0.Q)
-	# (CPU1_A1 & !GRANT1.Q));
+!RAS1.D = ((CPU1_A1 & !GRANT1.Q)
+	# (!CAS0.Q & !REFRESH_GRANT.Q)
+	# (CPU0_A1 & !GRANT0.Q));
 
 REFRESH_COMPLETED.D = REFRESH_COMPLETED_PRE2.Q;
 
@@ -672,13 +679,13 @@ PINNODE 312 = FB_221; /* MC 12 Foldback */
 PINNODE 313 = Com_Ctrl_218; /* MC 13 Foldback */
 PINNODE 314 = Com_Ctrl_216; /* MC 14 Foldback */
 PINNODE 316 = Com_Ctrl_215; /* MC 16 Foldback */
-PINNODE 326 = FB_226; /* MC 26 Foldback */
 PINNODE 328 = FB_227; /* MC 28 Foldback */
+PINNODE 329 = FB_226; /* MC 29 Foldback */
 PINNODE 330 = FB_225; /* MC 30 Foldback */
 PINNODE 331 = Com_Ctrl_217; /* MC 31 Foldback */
 PINNODE 332 = Com_Ctrl_216; /* MC 32 Foldback */
+PINNODE 335 = FB_222; /* MC 35 Foldback */
 PINNODE 344 = FB_223; /* MC 44 Foldback */
-PINNODE 345 = FB_222; /* MC 45 Foldback */
 PINNODE 346 = FB_220; /* MC 46 Foldback */
 PINNODE 347 = Com_Ctrl_218; /* MC 47 Foldback */
 PINNODE 348 = Com_Ctrl_217; /* MC 48 Foldback */
@@ -690,27 +697,27 @@ PINNODE 608 = REFRESH_TIMER2; /* MC 8 Feedback */
 PINNODE 610 = REFRESH_TIMER7; /* MC 10 Feedback */
 PINNODE 613 = REFRESH_TIMER3; /* MC 13 Feedback */
 PINNODE 615 = REFRESH_TIMER6; /* MC 15 Feedback */
-PINNODE 618 = REQ_CLOCKED1; /* MC 18 Feedback */
-PINNODE 622 = REQ_CLOCKED0; /* MC 22 Feedback */
-PINNODE 623 = DRAM_AB.AP; /* MC 23 Feedback */
-PINNODE 626 = SIM_S0; /* MC 26 Feedback */
-PINNODE 627 = SIM_S2; /* MC 27 Feedback */
+PINNODE 622 = REQ_CLOCKED1; /* MC 22 Feedback */
+PINNODE 623 = REQ_CLOCKED0; /* MC 23 Feedback */
+PINNODE 626 = DRAM_AB.AP; /* MC 26 Feedback */
+PINNODE 627 = SIM_S3; /* MC 27 Feedback */
 PINNODE 628 = SIM_S1; /* MC 28 Feedback */
-PINNODE 629 = SIM_S3; /* MC 29 Feedback */
+PINNODE 629 = SIM_S0; /* MC 29 Feedback */
 PINNODE 630 = REFRESH_TIMER0; /* MC 30 Feedback */
 PINNODE 631 = SIM_S5; /* MC 31 Feedback */
 PINNODE 632 = REFRESH_TIMER1; /* MC 32 Feedback */
-PINNODE 637 = REFRESH_REQ_CLOCKED; /* MC 37 Feedback */
-PINNODE 638 = REFRESH_TIMER_RESET; /* MC 38 Feedback */
-PINNODE 639 = CAS_PRE; /* MC 39 Feedback */
-PINNODE 640 = REFRESH_COMPLETED_PRE1; /* MC 40 Feedback */
+PINNODE 635 = SIM_S2; /* MC 35 Feedback */
+PINNODE 636 = REFRESH_REQ_CLOCKED; /* MC 36 Feedback */
+PINNODE 637 = REFRESH_TIMER_RESET; /* MC 37 Feedback */
+PINNODE 638 = CAS_PRE; /* MC 38 Feedback */
+PINNODE 639 = REFRESH_COMPLETED_PRE1; /* MC 39 Feedback */
+PINNODE 640 = REFRESH_COMPLETED_PRE2; /* MC 40 Feedback */
 PINNODE 641 = REFRESH_COMPLETED; /* MC 41 Feedback */
-PINNODE 642 = REFRESH_COMPLETED_PRE2; /* MC 42 Feedback */
-PINNODE 643 = SIM_START_LATCH; /* MC 43 Feedback */
-PINNODE 644 = SIM_S7; /* MC 44 Feedback */
-PINNODE 645 = SIM_S6; /* MC 45 Feedback */
-PINNODE 646 = REFRESH_REQUESTED; /* MC 46 Feedback */
-PINNODE 647 = SIM_S4; /* MC 47 Feedback */
+PINNODE 642 = SIM_START_LATCH; /* MC 42 Feedback */
+PINNODE 643 = SIM_S7; /* MC 43 Feedback */
+PINNODE 644 = SIM_S6; /* MC 44 Feedback */
+PINNODE 646 = SIM_S4; /* MC 46 Feedback */
+PINNODE 647 = REFRESH_REQUESTED; /* MC 47 Feedback */
 PINNODE 648 = Com_Ctrl_219; /* MC 48 Feedback */
 
 ** Resource Usage **
@@ -733,8 +740,8 @@ For input only = INPUT.
 MCell Pin# Oe   PinDrive         DCERP  FBDrive                DCERP  Foldback     CascadeOut        TotPT output_slew
 MC1   12   --   AREQ0            INPUT  REFRESH_COMPLETED_PRE0 Dg--p  --           --                2     slow
 MC2   0         --                      PE_BIAS                Dc-g-  --           --                2     slow
-MC3   11   on   RAS1             Dg--p  --                            --           --                3     slow
-MC4   9    on   RAS0             Dg--p  --                            --           --                3     slow
+MC3   11   on   RAS1             Dg--p  --                            --           --                4     slow
+MC4   9    on   RAS0             Dg--p  --                            --           --                4     slow
 MC5   8    on   CAS3             Dg--p  --                            --           --                4     slow
 MC6   0         --                      REFRESH_TIMER4         Dc-r-  --           --                3     slow
 MC7   0         --                      REFRESH_TIMER5         Dc-r-  --           --                4     slow
@@ -748,36 +755,36 @@ MC14  5    on   CAS1             Dg--p  --                            Com_Ctrl_2
 MC15  0         --                      REFRESH_TIMER6         Dc-r-  NA           --                5     slow
 MC16  4    on   CAS0             Dg--p  --                            Com_Ctrl_215 --                5     slow
 MC17  21   on   DRAM_RW          C----  --                            --           --                2     slow
-MC18  0         --                      REQ_CLOCKED1           Dg--p  --           --                2     slow
+MC18  0         --                      --                            --           --                0     slow
 MC19  20   on   DRAM_AB          Dc--p  --                            --           --                2     slow
 MC20  19   on   CPU1_DRAM_DTACK  C----  --                            --           --                1     slow
 MC21  18   on   CPU0_DRAM_DTACK  C----  --                            --           --                1     slow
-MC22  0         --                      REQ_CLOCKED0           Dg--p  --           --                2     slow
-MC23  0         --                      DRAM_AB.AP             C----  --           --                2     slow
-MC24  17   on   GRANT1           Dc--p  --                            --           --                4     slow
-MC25  16   on   GRANT0           Dc--p  --                            --           --                4     slow
-MC26  0         --                      SIM_S0                 Dc--p  FB_226       --                4     slow
-MC27  0         --                      SIM_S2                 Dc--p  --           --                3     slow
+MC22  0         --                      REQ_CLOCKED1           Dg--p  --           --                2     slow
+MC23  0         --                      REQ_CLOCKED0           Dg--p  --           --                2     slow
+MC24  17   on   GRANT1           Dc--p  --                            NA           --                5     slow
+MC25  16   on   GRANT0           Dc--p  --                            NA           --                5     slow
+MC26  0         --                      DRAM_AB.AP             C----  --           --                2     slow
+MC27  0         --                      SIM_S3                 Dc--p  --           --                3     slow
 MC28  0         --                      SIM_S1                 Dc--p  FB_227       --                4     slow
-MC29  0         --                      SIM_S3                 Dc--p  --           --                3     slow
+MC29  0         --                      SIM_S0                 Dc--p  FB_226       --                4     slow
 MC30  14   --   AREQ1            INPUT  REFRESH_TIMER0         Dc-r-  FB_225       --                4     slow
 MC31  0         --                      SIM_S5                 Dc--p  Com_Ctrl_217 --                4     slow
 MC32  13   --   TMS              INPUT  REFRESH_TIMER1         Dc-r-  Com_Ctrl_216 --                5     slow
 MC33  24   on   REFRESH_GRANT    Dc--p  --                            --           --                4     slow
 MC34  0         --                      --                            --           --                0     slow
-MC35  25   --   CPU0_A1          INPUT  --                            --           --                0     slow
-MC36  26   --   CPU1_A1          INPUT  --                            --           --                0     slow
-MC37  27   --   CPU0_UDS         INPUT  REFRESH_REQ_CLOCKED    Dg--p  --           --                2     slow
-MC38  0         --                      REFRESH_TIMER_RESET    Dc-g-  --           --                2     slow
-MC39  0         --                      CAS_PRE                Dg--p  --           --                2     slow
-MC40  28   --   CPU0_RW          INPUT  REFRESH_COMPLETED_PRE1 Dg--p  --           --                2     slow
+MC35  25   --   CPU0_A1          INPUT  SIM_S2                 Dc--p  FB_222       --                4     slow
+MC36  26   --   CPU1_A1          INPUT  REFRESH_REQ_CLOCKED    Dg--p  --           --                2     slow
+MC37  27   --   CPU0_UDS         INPUT  REFRESH_TIMER_RESET    Dc-g-  --           --                2     slow
+MC38  0         --                      CAS_PRE                Dg--p  --           --                2     slow
+MC39  0         --                      REFRESH_COMPLETED_PRE1 Dg--p  --           --                2     slow
+MC40  28   --   CPU0_RW          INPUT  REFRESH_COMPLETED_PRE2 Dg--p  --           --                2     slow
 MC41  29   --   CPU0_LDS         INPUT  REFRESH_COMPLETED      Dg--p  --           --                2     slow
-MC42  0         --                      REFRESH_COMPLETED_PRE2 Dg--p  --           --                2     slow
-MC43  0         --                      SIM_START_LATCH        Dc--p  --           --                3     slow
-MC44  0         --                      SIM_S7                 Dc--p  FB_223       --                4     slow
-MC45  0         --                      SIM_S6                 Dc--p  FB_222       --                4     slow
-MC46  31   --   SIM_DTACK_IN     INPUT  REFRESH_REQUESTED      Dc--p  FB_220       --                3     slow
-MC47  0         --                      SIM_S4                 Dc--p  Com_Ctrl_218 --                4     slow
+MC42  0         --                      SIM_START_LATCH        Dc--p  --           --                3     slow
+MC43  0         --                      SIM_S7                 Dc--p  --           --                3     slow
+MC44  0         --                      SIM_S6                 Dc--p  FB_223       --                4     slow
+MC45  0         --                      --                            --           --                0     slow
+MC46  31   --   SIM_DTACK_IN     INPUT  SIM_S4                 Dc--p  FB_220       --                4     slow
+MC47  0         --                      REFRESH_REQUESTED      Dc--p  Com_Ctrl_218 --                3     slow
 MC48  32   --   TCK              INPUT  Com_Ctrl_219           C----  Com_Ctrl_217 --                5     slow
 MC49  33   on   SIM_AS           C----  --                            --           --                1     slow
 MC50  0         --                      --                            --           --                0     slow
@@ -801,9 +808,9 @@ MC0   44        SIM_AS_IN        INPUT  --                            --        
 MC0   43        --                      --                            --           --                0     slow
 
 Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
-A: LC1	- LC16		14/16(87%)	8/16(50%)	5/16(31%)	60/80(75%)	(22)	2
-B: LC17	- LC32		16/16(100%)	8/16(50%)	5/16(31%)	47/80(58%)	(25)	0
-C: LC33	- LC48		13/16(81%)	8/16(50%)	5/16(31%)	39/80(48%)	(22)	0
+A: LC1	- LC16		14/16(87%)	8/16(50%)	5/16(31%)	62/80(77%)	(23)	2
+B: LC17	- LC32		15/16(93%)	8/16(50%)	5/16(31%)	46/80(57%)	(25)	0
+C: LC33	- LC48		14/16(87%)	8/16(50%)	5/16(31%)	42/80(52%)	(23)	0
 D: LC49	- LC64		4/16(25%)	6/16(37%)	0/16(0%)	5/80(6%)	(9)	0
 
 Total dedicated input used:	3/4 	(75%)
@@ -815,7 +822,7 @@ Total Nodes+FB/MCells 		62/64 	(96%)
 Total cascade used 		2
 Total input pins 		16
 Total output pins 		17
-Total Pts 			151
+Total Pts 			155
 Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\ATXBOARDV1\BRIDGE_CPLD\DRAMARB.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
