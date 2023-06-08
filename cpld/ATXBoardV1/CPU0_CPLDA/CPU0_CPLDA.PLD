@@ -32,7 +32,7 @@ Pin[41]  = DTACK_FROM_INT;  /* DTACK signal from Interrupt Controller */
 
 /** Outputs **/
 
-Pin[15]  = MEM_OE;   
+Pin[15]  = MEM_OE;                  /* Invert CPU0_RW */
 Pin[45]  = CPU0_DTACK;
 Pin[70]  = DRAM_CS;
 Pin[76]  = FLASH_LOW_CS;
@@ -48,30 +48,30 @@ Pin[60]  = SEVENSEG_LATCH_CS;
 Pin[58]  = RTS_D_SEL;
 Pin[57]  = RTS_CS;
 Pin[56]  = RTS_A_SEL;
-Pin[55]  = PTC_CS;
+Pin[77]  = PTC_CS;
 Pin[52]  = IDE_BUFFER_EN;
+Pin[55]  = IDE_WR;
 Pin[68]  = ITC_CS;
-Pin[77]  = IDE_WR;
 Pin[12]  = K8042_CS;    
 Pin[79]  = SRAM0_LOW_CS;
 Pin[81]  = SRAM0_HIGH_CS;
 
 /* Expansion BUS Signals */
 
+Pin[49]  = EXP_CS_A;   /* Expansion BUS Chip Select  */
+Pin[50]  = EXP_CS_B;   /* Expansion BUS Chip Select  */
 Pin[46]  = EXP_CS_C;   /* Used for VGA_CFG_CS, can be in any slot */
 Pin[48]  = EXP_CS_D;   /* Used for VGA_VRAM_CS, can be in any slot */
-Pin[67]  = EXP_DTACK_D;      /* SBUS Connector:CPLD_5 */
+Pin[67]  = EXP_DTACK_IN;      /* DTACK for Exp CS - Open Collector Input PULLUP NEEDED */
 
-Pin[49]  = EXP_CS_A;      /* SBUS Connector:CPLD_1 */
-Pin[50]  = EXP_CS_B;      /* SBUS Connector:CPLD_2 */
-Pin[51]  = EXP_DTACK_A;      /* SBUS Connector:CPLD_3 */
-Pin[69]  = EXP_DTACK_B;      /* SBUS Connector:CPLD_4 */
-Pin[44]  = EXP_DTACK_C;
-Pin[16]  = EXP_BUS_DRIVERS_EN;
 
+Pin[51]  = EXP_BUS_DRIVERS_ADDR;      /* Enable for Signal + Address bus EXP BUS drivers */
+Pin[69]  = EXP_BUS_DRIVERS_DATA;      /* Enable for Data bus EXP BUS drivers */
+Pin[44]  = EXP_BUS_DRIVERS_RW;        /* R/-W direction signal for data bus EXP BUS drivers */
 
 Pin[54]  = NOTUSED1_IO; 
 Pin[6]   = NOTUSED2_IO;
+Pin[16]  = NOTUSED3_IO;
 
 
 
@@ -84,9 +84,11 @@ Pin[6]   = NOTUSED2_IO;
 
 /* Statements to force these pins to exist just as a holding for those pin assignments. */
 
-EXP_CS_A = EXP_DTACK_A;
-EXP_CS_B = EXP_DTACK_B;
-EXP_BUS_DRIVERS_EN = EXP_DTACK_C # EXP_DTACK_D;
+EXP_CS_A = EXP_DTACK_IN;
+EXP_CS_B = EXP_DTACK_IN;
+EXP_BUS_DRIVERS_ADDR = EXP_DTACK_IN;
+EXP_BUS_DRIVERS_DATA = EXP_DTACK_IN;
+EXP_BUS_DRIVERS_RW = CPU0_RW;
 
 /** Internal Variables and nodes **/
 
@@ -115,13 +117,13 @@ DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS # !EXP_CS_
    cycle.  No protection, so if DTACK_FROM_INT is asserted (0) at any other time it will effect
    other active transactions.
 
-   EXP_DTACK_D is a signal from the VRAM controller to restrict access to video memory during
+   EXP_DTACK_IN is an open-collector signal from the VRAM controller to restrict access to video memory during
    both horizontal and vertical activity.   If it is asserted and we are doing an access to VRAMM,
    it should be passed thru.
 
 */
 
-CPU0_DTACK = !(DTACK_MEMORY_0W & !CPU0_AS) & DTACK_FROM_INT & (EXP_CS_D # EXP_DTACK_D);
+CPU0_DTACK = !(DTACK_MEMORY_0W & !CPU0_AS) & DTACK_FROM_INT & (EXP_CS_D # EXP_DTACK_IN);
 
 /*
    MAP_FLASH_TO_ZERO starts out set to 0 (from the SYS_RESET), and switches to 1 as soon as a memory

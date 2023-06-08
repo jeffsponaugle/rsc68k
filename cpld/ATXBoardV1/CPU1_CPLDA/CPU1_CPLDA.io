@@ -1,0 +1,47 @@
+CHIP "C:\CPU1_CPLDA"
+BEGIN
+
+    DEVICE = "PLCC84";
+    "CPU1_D5"                                 : INPUT_PIN = 12 ;
+    "CPU1_D4"                                 : INPUT_PIN = 11 ;
+    "CPU1_D3"                                 : INPUT_PIN = 10 ;
+    "CPU1_DTACK"                              : OUTPUT_PIN = 9 ;
+    "CPU0_F1_INT_REQ2"                        : OUTPUT_PIN = 8 ;
+    "CPU0_F1_BARR1"                           : OUTPUT_PIN = 6 ;
+    "DRAM_CS"                                 : OUTPUT_PIN = 5 ;
+    "CPU0_F1_INT_REQ1"                        : OUTPUT_PIN = 4 ;
+    "CPU1_A19"                                : INPUT_PIN = 22 ;
+    "CPU1_A20"                                : INPUT_PIN = 21 ;
+    "CPU1_A21"                                : INPUT_PIN = 20 ;
+    "CPU1_A22"                                : INPUT_PIN = 18 ;
+    "CPU1_A23"                                : INPUT_PIN = 17 ;
+    "MEM_OE"                                  : OUTPUT_PIN = 16 ;
+    "CPU1_HALT_OUT"                           : OUTPUT_PIN = 15 ;
+    "TDI"                                     : INPUT_PIN = 14 ;
+    "Com_Ctrl_51"                             : NODE_NUM = 632 ;
+    "CPU1_A12"                                : INPUT_PIN = 31 ;
+    "CPU1_A13"                                : INPUT_PIN = 30 ;
+    "CPU1_A14"                                : INPUT_PIN = 29 ;
+    "CPU1_A15"                                : INPUT_PIN = 28 ;
+    "CPU1_A16"                                : INPUT_PIN = 27 ;
+    "CPU1_A17"                                : INPUT_PIN = 25 ;
+    "CPU1_A18"                                : INPUT_PIN = 24 ;
+    "TMS"                                     : INPUT_PIN = 23 ;
+    "CPU0_1_HALT_REQ"                         : INPUT_PIN = 41 ;
+    "CPU1_INTACK0"                            : INPUT_PIN = 40 ;
+    "CPU1_INTACK1"                            : INPUT_PIN = 39 ;
+    "CPU1_RESET_OUT"                          : OUTPUT_PIN = 37 ;
+    "CPU1_A8"                                 : INPUT_PIN = 36 ;
+    "CPU1_A9"                                 : INPUT_PIN = 35 ;
+    "CPU1_A10"                                : INPUT_PIN = 34 ;
+    "CPU1_A11"                                : INPUT_PIN = 33 ;
+    "CPU0_1_RESET_REQ"                        : INPUT_PIN = 44 ;
+    "CPU1_FC2"                                : INPUT_PIN = 45 ;
+    "CPU1_FC1"                                : INPUT_PIN = 46 ;
+    "CPU1_FC0"                                : INPUT_PIN = 48 ;
+    "TCK"                                     : INPUT_PIN = 62 ;
+    "TDO"                                     : INPUT_PIN = 71 ;
+    "CPU1_AS"                                 : INPUT_PIN = 2 ;
+    "CPU1_RW"                                 : INPUT_PIN = 1 ;
+    "SYS_RESET"                               : INPUT_PIN = 84 ;
+END;

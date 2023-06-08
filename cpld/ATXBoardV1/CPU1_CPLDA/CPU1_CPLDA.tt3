@@ -1,0 +1,27 @@
+#$ TOOL CUPL Atmel 1508 1.8.7.8
+#$ MODULE CPU1_CPLDA
+#$ JEDECFILE CPU1_CPLDA
+#$ PINS 37 CPU1_DTACK:9 CPU1_HALT_OUT:15 CPU1_RESET_OUT:37 DRAM_CS:5 MEM_OE:16 CPU0_F1_BARR1:6 CPU0_F1_INT_REQ1:4 CPU0_F1_INT_REQ2:8 CPU0_1_HALT_REQ:41 CPU0_1_RESET_REQ:44 CPU1_A8:36 CPU1_A9:35 CPU1_A10:34 CPU1_A11:33 CPU1_A12:31 CPU1_A13:30 CPU1_A14:29 CPU1_A15:28 CPU1_A16:27 CPU1_A17:25 CPU1_A18:24 CPU1_A19:22 CPU1_A20:21 CPU1_A21:20 CPU1_A22:18 CPU1_A23:17 CPU1_AS:2 CPU1_D3:10 CPU1_D4:11 CPU1_D5:12 CPU1_FC0:48 CPU1_FC1:46 CPU1_FC2:45 CPU1_INTACK0:40 CPU1_INTACK1:39 CPU1_RW:1 SYS_RESET:84 
+#$ NODES 1 Com_Ctrl_51:632 
+.type fr
+.i 31
+.o 15
+.ilb CPU0_1_HALT_REQ CPU0_1_RESET_REQ CPU1_A8 CPU1_A9 CPU1_A10 CPU1_A11 CPU1_A12 CPU1_A13 CPU1_A14 CPU1_A15 CPU1_A16 CPU1_A17 CPU1_A18 CPU1_A19 CPU1_A20 CPU1_A21 CPU1_A22 CPU1_A23 CPU1_AS CPU1_D3 CPU1_D4 CPU1_D5 CPU1_FC0 CPU1_FC1 CPU1_FC2 CPU1_INTACK0 CPU1_INTACK1 CPU1_RW SYS_RESET Com_Ctrl_51 DRAM_CS
+.ob CPU1_DTACK CPU1_HALT_OUT CPU1_RESET_OUT DRAM_CS MEM_OE CPU0_F1_BARR1.D CPU0_F1_BARR1.C CPU0_F1_BARR1.AR CPU0_F1_INT_REQ1.D CPU0_F1_INT_REQ1.C CPU0_F1_INT_REQ1.AR CPU0_F1_INT_REQ2.D CPU0_F1_INT_REQ2.C CPU0_F1_INT_REQ2.AR Com_Ctrl_51
+.p 15
+-------------------1-----------	~~~~~1~~~~~~~~~
+---------------------1---------	~~~~~~~~1~~~~~~
+--------------------1----------	~~~~~~~~~~~1~~~
+-------------11111-------------	~~~1~~~~~~~~~~~
+----------------------111------	~~~1~~~~~~~~~~~
+------------------1------------	~~~1~~~~~~~~~~~
+1------------------------------	~1~~~~~~~~~~~~~
+-1-----------------------------	~~1~~~~~~~~~~~~
+------------------0--------1---	~~~~0~~~~~~~~~~
+------------------0-----------0	0~~~~~~~~~~~~~~
+--11100000111111110-----0010---	~~~~~~~~~~~~~~1
+--11100000111111110---0--010---	~~~~~~~~~~~~~~1
+--11100000111111110----0-010---	~~~~~~~~~~~~~~1
+-----------------------------0-	~~~~~~1~~1~~1~~
+----------------------------0--	~~~~~~~1~~1~~1~
+.end
