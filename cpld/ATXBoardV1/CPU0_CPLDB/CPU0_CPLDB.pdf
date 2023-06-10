@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Wed Jun 07 12:54:41 2023 "}
+  {DBtime "Fri Jun 09 19:48:20 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -67,10 +67,10 @@
    {P CPU_IN2 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
    {P CPU_IN1 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
    {P CPU_IN0 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
-   {P UNUSED2 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P UNUSED3 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P UNUSED4 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P UNUSED5 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P FROM_C1 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P FROM_C2 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P FROM_CPU {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P CPU1_B2 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
    {P UNUSED6 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
    {P UNUSED7 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
    {P UNUSED8 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
@@ -278,10 +278,10 @@
    {T "CPU_IN2" 140 500}
    {T "CPU_IN1" 140 480}
    {T "CPU_IN0" 140 460}
-   {T "UNUSED2" 140 440}
-   {T "UNUSED3" 140 420}
-   {T "UNUSED4" 140 400}
-   {T "UNUSED5" 140 380}
+   {T "FROM_C1" 140 440}
+   {T "FROM_C2" 140 420}
+   {T "FROM_CPU" 140 400}
+   {T "CPU1_B2" 140 380}
    {T "UNUSED6" 140 360}
    {T "UNUSED7" 140 340}
    {T "UNUSED8" 140 320}
@@ -399,13 +399,13 @@
    }
    {N CPU_IN0
    }
-   {N UNUSED2
+   {N FROM_C1
    }
-   {N UNUSED3
+   {N FROM_C2
    }
-   {N UNUSED4
+   {N FROM_CPU
    }
-   {N UNUSED5
+   {N CPU1_B2
    }
    {N UNUSED6
    }

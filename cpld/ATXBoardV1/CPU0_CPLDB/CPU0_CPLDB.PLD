@@ -68,17 +68,17 @@ Pin[20] = CPU1_RESET;
 Pin[18] = CPU1_HALT;
 Pin[16] = CPU1_INT1;
 Pin[15] = CPU1_INT2;
-Pin[29] = CPU1_BARRIER1;
+Pin[29] = CPU1_BARR1;
+Pin[55] = CPU1_BARR2;
 
 /* signals from CPU1, controlled by CPLD for CPU1 */
 
-Pin[51] = FROM_CPU1_BARRIER1;
+Pin[51] = FROM_CPU1_BARR1;
+Pin[52] = FROM_CPU1_BARR2;
+Pin[54] = FROM_CPU1_HALTREQ;
 
 Pin[1] =  UNUSED1;
 
-Pin[52] = UNUSED3;
-Pin[54] = UNUSED4;
-Pin[55] = UNUSED5;
 Pin[56] = UNUSED6;
 Pin[57] = UNUSED7;
 Pin[58] = UNUSED8;
@@ -268,19 +268,20 @@ Write to FF0700 Upper 8 bits:
  WRITE to FF0704 Upper 8 bits:
                   bit 7 - CPU_1_RESET        (defaults to 0, 0 holds CPU1 in reset/halt )
                   bit 6 - CPU_1_HALT         (defaults to 0, 0 hold CPU1 in reset/halt)
-                  bit 5 - TO CPU_1 Interrupt 1  (defaults to 0, 1 triggers interrupt on CPU1 level 1)
-                  bit 4 - TO CPU_1 Interrupt 2  (defaults to 0, 1 triggers interrupt on CPU1 levle 7 NMI)
-                  bit 3 - TO CPU_1 Barrier Flag (defaults to 0) (from CPU_0 back to CPU_1)
-                  bit 2
-                  bit 1
-                  bit 0
+                  bit 5 - TO CPU_1 Barrier Flag 2 (defaults to 0) (from CPU_0 back to CPU_1)
+                  bit 4 - TO CPU_1 Barrier Flag 1 (defaults to 0) (from CPU_0 back to CPU_1)
+                  bit 3 - TO CPU_1 Interrupt 2  (defaults to 0, 1 triggers interrupt on CPU1 level 1)
+                  bit 2 - TO CPU_1 Interrupt 1  (defaults to 0, 1 triggers interrupt on CPU1 levle 7 NMI)
+                  bit 1 - NA
+                  bit 0 - NA
 
  READ from FF0704 Upper 8 bits:  (This will read as all 0's for the CPU0)
-                  bit 4 - FROM CPU_1 Barrier Flag (from CPU_1 back to CPU0)
+                  bit 5 - FROM CPU_1 Barrier Flag 2 (from CPU_1 back to CPU0)
+                  bit 4 - FROM CPU_1 Barrier Flag 1 (from CPU_1 back to CPU0)
                   bit 3 - CPU_ID bit 3
                   bit 2 - CPU_ID bit 2
                   bit 1 - CPU_ID bit 1 
-                  bit 0 - CPU_ID bit 0
+                  bit 0 - CPU_ID bit 0 (reads as all zeros on CPU0)
 
  Write to FF0706 Upper 8 bits:
                   bit 7 - REQUEST_RESET (Set to 1 to force SYS_RESET)
@@ -348,6 +349,8 @@ IRQL1B_MASK.d = CPU0_D2.io;
 IRQL1B_MASK.ck = REG_WRITE_ITC1;
 IRQL1B_MASK.ap = !SYS_RESET;
 
+/* WRITE to 0xFF0704 */
+
 CPU1_RESET.d = CPU0_D7.io;
 CPU1_RESET.ck = REG_WRITE_ITC2;
 CPU1_RESET.ar = !SYS_RESET;
@@ -356,17 +359,21 @@ CPU1_HALT.d = CPU0_D6.io;
 CPU1_HALT.ck = REG_WRITE_ITC2;
 CPU1_HALT.ar = !SYS_RESET;
 
-CPU1_INT1.d = CPU0_D5.io;
+CPU1_INT1.d = CPU0_D2.io;
 CPU1_INT1.ck = REG_WRITE_ITC2;
 CPU1_INT1.ar = !SYS_RESET;
 
-CPU1_INT2.d = CPU0_D4.io;
+CPU1_INT2.d = CPU0_D3.io;
 CPU1_INT2.ck = REG_WRITE_ITC2;
 CPU1_INT2.ar = !SYS_RESET;
 
-CPU1_BARRIER1.d = CPU0_D3.io;
-CPU1_BARRIER1.ck = REG_WRITE_ITC2;
-CPU1_BARRIER1.ar = !SYS_RESET;
+CPU1_BARR1.d = CPU0_D4.io;
+CPU1_BARR1.ck = REG_WRITE_ITC2;
+CPU1_BARR1.ar = !SYS_RESET;
+
+CPU1_BARR2.d = CPU0_D5.io;
+CPU1_BARR2.ck = REG_WRITE_ITC2;
+CPU1_BARR2.ar = !SYS_RESET;
 
 
 /* Power Control Logic */
@@ -531,8 +538,8 @@ VECTORD0 = (interrupt_ack_num:[6]&!IRQL6A_PE)
 CPU0_D7.d = (VECTORD7 & INT_ACK);   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
 CPU0_D6.d = (VECTORD6 & INT_ACK);
 CPU0_D5.d = (VECTORD5 & INT_ACK);
-CPU0_D4.d = (VECTORD4 & INT_ACK) # (!INT_ACK & FROM_CPU1_BARRIER1);
-CPU0_D3.d = (VECTORD3 & INT_ACK);
+CPU0_D4.d = (VECTORD4 & INT_ACK) # (!INT_ACK & FROM_CPU1_BARR2);
+CPU0_D3.d = (VECTORD3 & INT_ACK) # (!INT_ACK & FROM_CPU1_BARR1);
 CPU0_D2.d = (VECTORD2 & INT_ACK);
 CPU0_D1.d = (VECTORD1 & INT_ACK);
 CPU0_D0.d = (VECTORD0 & INT_ACK);

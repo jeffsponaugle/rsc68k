@@ -14,7 +14,7 @@ Device   f1508ispplcc84;
    FOR CPU1
 */
 
-PROPERTY ATMEL {open_collector=CPU1_RESET_OUT,CPU1_HALT_OUT};
+
 PROPERTY ATMEL {TDI_PULLUP = ON};
 PROPERTY ATMEL {TMS_PULLUP = ON};
 
@@ -31,16 +31,20 @@ Pin[45,46,48]  = [CPU1_FC2..0];    /* 3 */
 Pin[16,15,12,11,10,9,8,6]  = [CPU1_D7..0];     /*  */
 Pin[37,39,40]   = [CPU1_INTACK2..0];       /* Connect to A1, A2, and A3 - For interrupt ack */
 Pin[60,61,63,64] = CPU1_IRQL7,CPU1_IRQL4,CPU1_IRQL2,CPU1_IRQL1;
+Pin      = DRAM_DTACK;
 
 
 /** Outputs **/
 
 Pin  = MEM_OE;                  /* Invert CPU1_RW */
-Pin = CPU1_DTACK;
+Pin  = CPU1_DTACK;
 Pin  = DRAM_CS;
-Pin  = CPU1_VPA;
-Pin = CPU1_RESET_OUT;
-Pin = CPU1_HALT_OUT;    
+Pin  = CPU1_VPA; 
+
+
+
+CPU1_A1 = CPU1_INTACK0;
+CPU1_A2 = CPU1_INTACK1;
 
 
 /** Connection to CPU 0 CPLD:
@@ -50,17 +54,14 @@ Pin = CPU1_HALT_OUT;
  **/
 
 
-Pin = CPU0_F1_INT_REQ1;          // Output, to CPU0_CPLD
-Pin = CPU0_F1_INT_REQ2;          // Output, to CPU0_CPLD
-Pin = CPU0_F1_BARR1;             // Output, to CPU0_CPLD
-Pin = CPU0_1_RESET_REQ, CPU0_1_HALT_REQ, CPU0_1_BARR1;   // Input, from CPU0_CPLD
+Pin = CPU0_INT_REQ1;          // Output, to CPU0_CPLD to request interrupt on CPU0
+Pin = CPU0_INT_REQ2;          // Output, to CPU0_CPLD to request interrupt on CPU0
+Pin = CPU0_BARR1;             // Output, to CPU0_CPLD to send flag to CPU0
+Pin = CPU0_BARR2;             // Output, to CPU0_CPLD to send flag to CPU0
+Pin = CPU0_C1HALTREQ;         // Output, to CPU0_CPLD to request for CPU1 to be HALTed.
+Pin = F_CPU0_BARR1;        // Input, from CPU0_CPLD
+Pin = F_CPU0_BARR2;        // Input, from CPU0_CPLD
 
-CPU1_RESET_OUT = CPU0_1_RESET_REQ;
-CPU1_HALT_OUT = CPU0_1_HALT_REQ;
-
-
-CPU1_A1 = CPU1_INTACK0;
-CPU1_A2 = CPU1_INTACK1;
 
 /* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
     and /AS is low.   FC is allowed to be any state except 111.
@@ -72,20 +73,20 @@ ISMEMORYACCESS = !(CPU1_FC2 & CPU1_FC1 & CPU1_FC0) & !CPU1_AS;
 /*
 
  WRITE to FF0704 Upper 8 bits:
-                  bit 7 - NA        ( defaults to 0, 0 holds CPU1 in reset/halt )
-                  bit 6 - NA        (defaults to 0, 0 hold CPU1 in reset/halt)
-                  bit 5 - TO CPU_0 Interrupt 1  (defaults to 0, 1 triggers interrupt)
-                  bit 4 - TO CPU_0 Interrupt 2  (defaults to 0, 1 triggers interrupt)
-                  bit 3 - TO CPU_0 Barrier Flag (defaults to 0)  FROM CPU_1 to CPU_0
-                  bit 2 - NA
+                  bit 7 - NA        (defaults to 0)
+                  bit 6 - NA        (defaults to 0)
+                  bit 5 - TO CPU_0 Barrier Flag 2 (defaults to 0)  FROM CPU_1 to CPU_0
+                  bit 4 - TO CPU_0 Barrier Flag 1 (defaults to 0)  FROM CPU_1 to CPU_0
+                  bit 3 - TO CPU_0 Interrupt 2  (defaults to 0, 1 triggers interrupt)
+                  bit 2 - TO CPU_0 Interrupt 1  (defaults to 0, 1 triggers interrupt)
                   bit 1 - NA
-                  bit 0 - NA
+                  bit 0 - TO CPU_0 Request CPU1 be HALTed (0=no ask, 1 edge is ask)
 
  READ from FF0704 Upper 8 bits:  (This will read as all 00001 for the CPU1)
                   bit 7 - READ AS 1
                   bit 6 - READ AS 1
-                  bit 5 - READ AS 1
-                  bit 4 - FROM CPU_0 Barrier Flag 
+                  bit 5 - FROM CPU_0 Barrier Flag 2
+                  bit 4 - FROM CPU_0 Barrier Flag 1
                   bit 3 - CPU_ID bit 3
                   bit 2 - CPU_ID bit 2
                   bit 1 - CPU_ID bit 1 
@@ -94,61 +95,62 @@ ISMEMORYACCESS = !(CPU1_FC2 & CPU1_FC1 & CPU1_FC0) & !CPU1_AS;
 
 */
 
-REG_WRITE_ITC2 =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # CPU1_RW;   /* WRITE Address 0xFF0704 */
+REG_WRITE_ITC2 =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # CPU1_RW;   /* WRITE Address 0xff0704 */
 REG_READ_ITC2  =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # !CPU1_RW;  /* READ  Address 0xff0704 */
 
-/* Internal Registers for flags that go back to CPU0 */
+/* Internal Register (WRITE 0xFF0704) for flags that go back to CPU0 */
 
-CPU0_F1_BARR1.d = CPU1_D3.io;
-CPU0_F1_BARR1.ck = REG_WRITE_ITC2;
-CPU0_F1_BARR1.ar = !SYS_RESET;
 
-CPU0_F1_INT_REQ2.d = CPU1_D4.io;
-CPU0_F1_INT_REQ2.ck = REG_WRITE_ITC2;
-CPU0_F1_INT_REQ2.ar = !SYS_RESET;
+CPU0_C1HALTREQ.d = CPU1_D0.io;
+CPU0_C1HALTREQ.ck = REG_WRITE_ITC2;
+CPU0_C1HALTREQ.ar = !SYS_RESET;
 
-CPU0_F1_INT_REQ1.d = CPU1_D5.io;
-CPU0_F1_INT_REQ1.ck = REG_WRITE_ITC2;
-CPU0_F1_INT_REQ1.ar = !SYS_RESET;
+CPU0_BARR1.d = CPU1_D4.io;
+CPU0_BARR1.ck = REG_WRITE_ITC2;
+CPU0_BARR1.ar = !SYS_RESET;
+
+CPU0_BARR2.d = CPU1_D5.io;
+CPU0_BARR2.ck = REG_WRITE_ITC2;
+CPU0_BARR2.ar = !SYS_RESET;
+
+CPU0_INT_REQ1.d = CPU1_D2.io;
+CPU0_INT_REQ1.ck = REG_WRITE_ITC2;
+CPU0_INT_REQ1.ar = !SYS_RESET;
+
+CPU0_INT_REQ2.d = CPU1_D3.io;
+CPU0_INT_REQ2.ck = REG_WRITE_ITC2;
+CPU0_INT_REQ2.ar = !SYS_RESET;
+
+
 
 /* Writes out of the CPU data lines if the CPU does a READ of 0xFF0704 */
 
-CPU1_D7.d = 'b'0;   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
-CPU1_D6.d = 'b'0;
-CPU1_D5.d = 'b'0;
-CPU1_D4.d = 'b'1;
-CPU1_D3.d = CPU0_1_BARR1;
-CPU1_D2.d = 'b'1;
-CPU1_D1.d = 'b'1;
-CPU1_D0.d = 'b'1;
+CPU1_D7.d = 'd'0;   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
+CPU1_D6.d = 'd'0;
+CPU1_D5.d = F_CPU0_BARR2;
+CPU1_D4.d = F_CPU0_BARR1;
+CPU1_D3.d = 'd'0;
+CPU1_D2.d = 'd'0;
+CPU1_D1.d = 'd'0;
+CPU1_D0.d = 'd'1;
 
-[CPU0_D7..0].ck = (DTACK_TIMER_0 # !REG_READ_ITC2);
-[CPU0_D7..0].ar = !SYS_RESET;
-[CPU0_D7..0].oe = (INT_ACK # !REG_READ_ITC2);      /* Turn on the databus outputs for INTACK or a REG_READ of ITC2 */
-
-
+[CPU1_D7..0].ck = (!REG_READ_ITC2);
+[CPU1_D7..0].ar = !SYS_RESET;
+[CPU1_D7..0].oe = (!REG_READ_ITC2);      /* Turn on the databus outputs for INTACK or a REG_READ of ITC2 */
 
 
-/* DTACK driven back to the CPU based on what kind of access is happening. */
-/* DTACK_MEMORY_0W is high if an access is happening that is 0W */
 
-DTACK_MEMORY_0W = !DRAM_CS ;
 
 /* 
-   If we are doing a 0W access, assert DTACK when /AS is asserted.
-   Merge in DTACK_FROM_INT, which is a DTACK signal from the interrupt controller.  It is used
-   during an interrupt acknowledgement cycle to indicate the data bus has the interrupt vector
-   present.  It will only be asserted (0) by the interrupt controller during an interrupt acknowledgement 
-   cycle.  No protection, so if DTACK_FROM_INT is asserted (0) at any other time it will effect
-   other active transactions.
+  
+  For DTACK, if we are doing DRAM access pass thru the DRAM_DTACK pin which comes from the arbitrator 
+  if we are doing access to the ITC2 Register, do a 0W is the CS for that is selected.
 
-   EXP_DTACK_IN is an open-collector signal from the VRAM controller to restrict access to video memory during
-   both horizontal and vertical activity.   If it is asserted and we are doing an access to VRAMM,
-   it should be passed thru.
+  When DTACK=0, the cpu will continue the cycle.  If ==1 it will add waitstates.
 
 */
 
-CPU1_DTACK = !(DTACK_MEMORY_0W & !CPU1_AS);
+CPU1_DTACK = CPU1_AS # ((DRAM_CS # DRAM_DTACK) & (INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2));
 
 FIELD cpu_address_bus = [CPU1_A23..8];  /* upper 16 bit of address bus */
 
@@ -177,19 +179,18 @@ INTERNAL_REGISTER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
 /* Memory OE is low for a read operation, so invert of RW line from CPU */
 MEM_OE = !CPU1_RW # CPU1_AS;
 
-
 /*
 
 Total dedicated input used:	3/4 	(75%)
-Total I/O pins used		38/64 	(59%)
-Total Logic cells used 		9/128 	(7%)
-Total Flip-Flop used 		3/128 	(2%)
+Total I/O pins used		44/64 	(68%)
+Total Logic cells used 		19/128 	(14%)
+Total Flip-Flop used 		13/128 	(10%)
 Total Foldback logic used 	0/128 	(0%)
-Total Nodes+FB/MCells 		9/128 	(7%)
+Total Nodes+FB/MCells 		19/128 	(14%)
 Total cascade used 		0
-Total input pins 		33
-Total output pins 		8
-Total Pts 			19
+Total input pins 		31
+Total output pins 		16
+Total Pts 			58
 
 
 Performing input pin pre-assignments ...
@@ -203,20 +204,19 @@ Attempt to place floating signals ...
 CPU1_D5 is placed at pin 12 (MC 3)
 CPU1_D4 is placed at pin 11 (MC 5)
 CPU1_D3 is placed at pin 10 (MC 6)
-CPU1_DTACK is placed at pin 9 (MC 8)
-CPU0_F1_INT_REQ2 is placed at pin 8 (MC 11)
-CPU0_F1_BARR1 is placed at pin 6 (MC 13)
-DRAM_CS is placed at pin 5 (MC 14)
-CPU0_F1_INT_REQ1 is placed at pin 4 (MC 16)
+CPU1_D2 is placed at pin 9 (MC 8)
+CPU1_D1 is placed at pin 8 (MC 11)
+CPU1_D0 is placed at pin 6 (MC 13)
+CPU0_BARR1 is placed at pin 5 (MC 14)
+CPU0_BARR2 is placed at pin 4 (MC 16)
 CPU1_A19 is placed at pin 22 (MC 17)
 CPU1_A20 is placed at pin 21 (MC 19)
 CPU1_A21 is placed at pin 20 (MC 21)
 CPU1_A22 is placed at pin 18 (MC 24)
 CPU1_A23 is placed at pin 17 (MC 25)
-MEM_OE is placed at pin 16 (MC 27)
-CPU1_HALT_OUT is placed at pin 15 (MC 29)
+CPU1_D7 is placed at pin 16 (MC 27)
+CPU1_D6 is placed at pin 15 (MC 29)
 TDI is placed at pin 14 (MC 32)
-Com_Ctrl_51 is placed at feedback node 632 (MC 32)
 CPU1_A12 is placed at pin 31 (MC 35)
 CPU1_A13 is placed at pin 30 (MC 37)
 CPU1_A14 is placed at pin 29 (MC 38)
@@ -224,43 +224,52 @@ CPU1_A15 is placed at pin 28 (MC 40)
 CPU1_A16 is placed at pin 27 (MC 43)
 CPU1_A17 is placed at pin 25 (MC 45)
 CPU1_A18 is placed at pin 24 (MC 46)
+Com_Ctrl_107 is placed at feedback node 646 (MC 46)
+Com_Ctrl_105 is placed at feedback node 647 (MC 47)
 TMS is placed at pin 23 (MC 48)
-CPU0_1_HALT_REQ is placed at pin 41 (MC 49)
+Com_Ctrl_106 is placed at feedback node 648 (MC 48)
+DRAM_CS is placed at pin 41 (MC 49)
 CPU1_INTACK0 is placed at pin 40 (MC 51)
 CPU1_INTACK1 is placed at pin 39 (MC 53)
-CPU1_RESET_OUT is placed at pin 37 (MC 56)
+CPU1_DTACK is placed at pin 37 (MC 56)
 CPU1_A8 is placed at pin 36 (MC 57)
 CPU1_A9 is placed at pin 35 (MC 59)
 CPU1_A10 is placed at pin 34 (MC 61)
 CPU1_A11 is placed at pin 33 (MC 64)
-CPU0_1_RESET_REQ is placed at pin 44 (MC 65)
+F_CPU0_BARR1 is placed at pin 44 (MC 65)
 CPU1_FC2 is placed at pin 45 (MC 67)
 CPU1_FC1 is placed at pin 46 (MC 69)
 CPU1_FC0 is placed at pin 48 (MC 72)
+MEM_OE is placed at pin 49 (MC 73)
+CPU0_INT_REQ1 is placed at pin 50 (MC 75)
+CPU0_C1HALTREQ is placed at pin 51 (MC 77)
+CPU0_INT_REQ2 is placed at pin 52 (MC 80)
+F_CPU0_BARR2 is placed at pin 54 (MC 83)
+DRAM_DTACK is placed at pin 55 (MC 85)
 TCK is placed at pin 62 (MC 96)
 TDO is placed at pin 71 (MC 112)
 
                                                                                     
                                                                                     
                                                                                     
-                          C                                                         
-                          P                S                                        
-                          U                Y                                        
-                     C C  1       D     C CS                                        
-                     P P  _       R     P P_                                        
-                     U U  D       A     U UR                                        
-                     1 1  T       M     1 1E                                        
-                     _ _  A   G   _   V _ _S   G       V                            
-                     D D  C   N   C   C A RE   N       C                            
-                     4 3  K   D   S   C S WT   D       C                            
+                                  C C                                               
+                                  P P      S                                        
+                                  U U      Y                                        
+                     C C  C C   C 0 0   C CS                                        
+                     P P  P P   P _ _   P P_                                        
+                     U U  U U   U B B   U UR                                        
+                     1 1  1 1   1 A A   1 1E                                        
+                     _ _  _ _ G _ R R V _ _S   G       V                            
+                     D D  D D N D R R C A RE   N       C                            
+                     4 3  2 1 D 0 1 2 C S WT   D       C                            
                     -------------------------------------------                     
                    / 11   9   7   5   3   1  83  81  79  77  75 \                  
                   /    10   8   6   4   2  84  82  80  78  76    \                 
          CPU1_D5 | 12                    (*)                   74 |                 
              VCC | 13                                          73 |                 
              TDI | 14                                          72 | GND             
-   CPU1_HALT_OUT | 15                                          71 | TDO             
-          MEM_OE | 16                                          70 |                 
+         CPU1_D6 | 15                                          71 | TDO             
+         CPU1_D7 | 16                                          70 |                 
         CPU1_A23 | 17                                          69 |                 
         CPU1_A22 | 18                                          68 |                 
              GND | 19                                          67 |                 
@@ -275,24 +284,24 @@ TDO is placed at pin 71 (MC 112)
         CPU1_A15 | 28                                          58 |                 
         CPU1_A14 | 29                                          57 |                 
         CPU1_A13 | 30                                          56 |                 
-        CPU1_A12 | 31                                          55 |                 
-             GND | 32                                          54 |                 
+        CPU1_A12 | 31                                          55 | DRAM_DTACK      
+             GND | 32                                          54 | F_CPU0_BARR2    
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
-                      C C C C C V C C C G V C C C G C         V                     
-                      P P P P P C P P P N C P P P N P         C                     
-                      U U U U U C U U U D C U U U D U         C                     
-                      1 1 1 1 1   1 1 0     0 1 1   1                               
-                      _ _ _ _ _   _ _ _     _ _ _   _                               
-                      A A A A R   I I 1     1 F F   F                               
-                      1 1 9 8 E   N N _     _ C C   C                               
-                      1 0     S   T T H     R 2 1   0                               
-                              E   A A A     E                                       
-                              T   C C L     S                                       
-                              _   K K T     E                                       
-                              O   1 0 _     T                                       
-                              U       R     _                                       
+                      C C C C C V C C D G V F C C G C M C C C V                     
+                      P P P P P C P P R N C _ P P N P E P P P C                     
+                      U U U U U C U U A D C C U U D U M U U U C                     
+                      1 1 1 1 1   1 1 M     P 1 1   1 _ 0 0 0                       
+                      _ _ _ _ _   _ _ _     U _ _   _ O _ _ _                       
+                      A A A A D   I I C     0 F F   F E I C I                       
+                      1 1 9 8 T   N N S     _ C C   C   N 1 N                       
+                      1 0     A   T T       B 2 1   0   T H T                       
+                              C   A A       A           _ A _                       
+                              K   C C       R           R L R                       
+                                  K K       R           E T E                       
+                                  1 0       1           Q R Q                       
+                                                        1 E 2                       
 
 */
 

@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          f1508ispplcc84  Library DLIB-h-40-2
-Created         Wed Jun 07 17:26:30 2023
+Created         Fri Jun 09 21:32:16 2023
 Name            CPU0_CPLDA
 Partno          CPU0_CPLDA
 Revision        01
@@ -20,156 +20,13 @@ Location        None
 ===============================================================================
 
 CPU0_DTACK =>
-    CPU0_AS & DTACK_FROM_INT & EXP_DTACK_IN
-  # CPU0_UDS & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_RW & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A23 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A22 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A21 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A20 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A19 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A18 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A17 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A16 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A15 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_A14 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_A13 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_A12 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_A11 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A10 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A9 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A8 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_DTACK_IN & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_FC0 & CPU0_FC1 & CPU0_FC2 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & 
-      EXP_DTACK_IN & FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & 
-      ITC_CS & K8042_CS & LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & 
-      SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
+    DTACK_FROM_INT & !DTACK_MEMORY_0W & EXP_DTACK_IN
+  # CPU0_AS & DTACK_FROM_INT & EXP_DTACK_IN
+  # DTACK_FROM_INT & !DTACK_MEMORY_0W & EXP_CS_D
   # CPU0_AS & DTACK_FROM_INT & EXP_CS_D
-  # CPU0_UDS & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # CPU0_RW & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # !CPU0_A23 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A22 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A21 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A20 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A19 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A18 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A17 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A16 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A15 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # CPU0_A14 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # CPU0_A13 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # CPU0_A12 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # CPU0_A11 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # !CPU0_A10 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & 
-      FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & 
-      LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & 
-      UART_CSB
-  # !CPU0_A9 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # !CPU0_A8 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & EXP_CS_D & FLASH_HIGH_CS & 
-      FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & K8042_CS & LED_LATCH_CS & 
-      NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & UART_CSA & UART_CSB
-  # CPU0_FC0 & CPU0_FC1 & CPU0_FC2 & DRAM_CS & DTACK_FROM_INT & EXP_CS_C & 
-      EXP_CS_D & FLASH_HIGH_CS & FLASH_LOW_CS & IDE_CSA & IDE_CSB & ITC_CS & 
-      K8042_CS & LED_LATCH_CS & NIC_CS & PTC_CS & RTS_CS & SEVENSEG_LATCH_CS & 
-      UART_CSA & UART_CSB
 
 DRAM_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # CPU0_A22 & CPU0_A23
   # !CPU0_A19 & !CPU0_A20 & !CPU0_A21 & !CPU0_A22 & !CPU0_A23
 
@@ -190,16 +47,8 @@ DTACK_MEMORY_0W =>
   # !K8042_CS
   # CPU0_A8 & CPU0_A9 & CPU0_A10 & !CPU0_A11 & !CPU0_A12 & !CPU0_A13 & 
       !CPU0_A14 & CPU0_A15 & CPU0_A16 & CPU0_A17 & CPU0_A18 & CPU0_A19 & 
-      CPU0_A20 & CPU0_A21 & CPU0_A22 & CPU0_A23 & !CPU0_AS & !CPU0_FC2 & 
-      !CPU0_RW & !CPU0_UDS
-  # CPU0_A8 & CPU0_A9 & CPU0_A10 & !CPU0_A11 & !CPU0_A12 & !CPU0_A13 & 
-      !CPU0_A14 & CPU0_A15 & CPU0_A16 & CPU0_A17 & CPU0_A18 & CPU0_A19 & 
-      CPU0_A20 & CPU0_A21 & CPU0_A22 & CPU0_A23 & !CPU0_AS & !CPU0_FC0 & 
-      !CPU0_RW & !CPU0_UDS
-  # CPU0_A8 & CPU0_A9 & CPU0_A10 & !CPU0_A11 & !CPU0_A12 & !CPU0_A13 & 
-      !CPU0_A14 & CPU0_A15 & CPU0_A16 & CPU0_A17 & CPU0_A18 & CPU0_A19 & 
-      CPU0_A20 & CPU0_A21 & CPU0_A22 & CPU0_A23 & !CPU0_AS & !CPU0_FC1 & 
-      !CPU0_RW & !CPU0_UDS
+      CPU0_A20 & CPU0_A21 & CPU0_A22 & CPU0_A23 & !CPU0_RW & !CPU0_UDS & 
+      ISMEMORYACCESS
   # !ITC_CS
 
 EXP_BUS_DRIVERS_ADDR =>
@@ -218,8 +67,7 @@ EXP_CS_B =>
     EXP_DTACK_IN
 
 EXP_CS_C =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -238,8 +86,7 @@ EXP_CS_C =>
   # CPU0_A8
 
 EXP_CS_D =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -250,8 +97,7 @@ FLASH_A18 =>
   # !CPU0_RW & FLASH_CONFIG_STATE2
 
 FLASH_CONFIG_CLOCK =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -278,8 +124,7 @@ FLASH_CONFIG_STATE0.ar  =>
     !SYS_RESET
 
 FLASH_CONFIG_STATE0.ck  =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -306,8 +151,7 @@ FLASH_CONFIG_STATE1.ar  =>
     !SYS_RESET
 
 FLASH_CONFIG_STATE1.ck  =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -334,8 +178,7 @@ FLASH_CONFIG_STATE2.ar  =>
     !SYS_RESET
 
 FLASH_CONFIG_STATE2.ck  =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -362,8 +205,7 @@ FLASH_CONFIG_STATE3.ar  =>
     !SYS_RESET
 
 FLASH_CONFIG_STATE3.ck  =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -384,75 +226,62 @@ FLASH_CONFIG_STATE3.ck  =>
   # CPU0_RW
 
 FLASH_HIGH_CS =>
-    CPU0_UDS
-  # !CPU0_RW & !FLASH_CONFIG_STATE3 & MAP_FLASH_TO_ZERO
-  # CPU0_RW & FLASH_CONFIG_STATE1 & MAP_FLASH_TO_ZERO
+    !ISMEMORYACCESS
+  # CPU0_UDS
+  # MAP_FLASH_TO_ZERO & SRAM_IN_FLASH_AREA
   # !CPU0_A23 & MAP_FLASH_TO_ZERO
   # !CPU0_A22 & MAP_FLASH_TO_ZERO
   # !CPU0_A21 & MAP_FLASH_TO_ZERO
   # !CPU0_A20 & MAP_FLASH_TO_ZERO
-  # CPU0_A23 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A23 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A23 & SRAM_IN_FLASH_AREA
   # !CPU0_A22 & CPU0_A23
   # !CPU0_A21 & CPU0_A23
   # !CPU0_A20 & CPU0_A23
-  # CPU0_A22 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A22 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A22 & SRAM_IN_FLASH_AREA
   # CPU0_A22 & !CPU0_A23
   # !CPU0_A21 & CPU0_A22
   # !CPU0_A20 & CPU0_A22
-  # CPU0_A21 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A21 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A21 & SRAM_IN_FLASH_AREA
   # CPU0_A21 & !CPU0_A23
   # CPU0_A21 & !CPU0_A22
   # !CPU0_A20 & CPU0_A21
-  # CPU0_A20 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A20 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A20 & SRAM_IN_FLASH_AREA
   # CPU0_A20 & !CPU0_A23
   # CPU0_A20 & !CPU0_A22
   # CPU0_A20 & !CPU0_A21
   # CPU0_A19
-  # CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
 
 FLASH_LOW_CS =>
-    CPU0_LDS
-  # !CPU0_RW & !FLASH_CONFIG_STATE3 & MAP_FLASH_TO_ZERO
-  # CPU0_RW & FLASH_CONFIG_STATE1 & MAP_FLASH_TO_ZERO
+    !ISMEMORYACCESS
+  # CPU0_LDS
+  # MAP_FLASH_TO_ZERO & SRAM_IN_FLASH_AREA
   # !CPU0_A23 & MAP_FLASH_TO_ZERO
   # !CPU0_A22 & MAP_FLASH_TO_ZERO
   # !CPU0_A21 & MAP_FLASH_TO_ZERO
   # !CPU0_A20 & MAP_FLASH_TO_ZERO
-  # CPU0_A23 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A23 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A23 & SRAM_IN_FLASH_AREA
   # !CPU0_A22 & CPU0_A23
   # !CPU0_A21 & CPU0_A23
   # !CPU0_A20 & CPU0_A23
-  # CPU0_A22 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A22 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A22 & SRAM_IN_FLASH_AREA
   # CPU0_A22 & !CPU0_A23
   # !CPU0_A21 & CPU0_A22
   # !CPU0_A20 & CPU0_A22
-  # CPU0_A21 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A21 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A21 & SRAM_IN_FLASH_AREA
   # CPU0_A21 & !CPU0_A23
   # CPU0_A21 & !CPU0_A22
   # !CPU0_A20 & CPU0_A21
-  # CPU0_A20 & !CPU0_RW & !FLASH_CONFIG_STATE3
-  # CPU0_A20 & CPU0_RW & FLASH_CONFIG_STATE1
+  # CPU0_A20 & SRAM_IN_FLASH_AREA
   # CPU0_A20 & !CPU0_A23
   # CPU0_A20 & !CPU0_A22
   # CPU0_A20 & !CPU0_A21
   # CPU0_A19
-  # CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
 
 IDE_BUFFER_EN =>
     IDE_CSA & IDE_CSB
 
 IDE_CSA =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -471,8 +300,7 @@ IDE_CSA =>
   # !CPU0_A8
 
 IDE_CSB =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -520,8 +348,7 @@ ISMEMORYACCESS =>
   # !CPU0_AS & !CPU0_FC0
 
 ITC_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -540,8 +367,7 @@ ITC_CS =>
   # !CPU0_A8
 
 K8042_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -560,8 +386,7 @@ K8042_CS =>
   # CPU0_A8
 
 LED_LATCH_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -593,8 +418,7 @@ MEM_OE =>
   # CPU0_AS
 
 NIC_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -609,8 +433,7 @@ NIC_CS =>
   # !CPU0_A12
 
 PTC_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -638,8 +461,7 @@ RTS_A_SEL.ck  =>
     !CLK_16M
 
 RTS_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -661,8 +483,7 @@ RTS_D_SEL =>
     !RTS_A_SEL
 
 SEVENSEG_LATCH_CS =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -681,22 +502,13 @@ SEVENSEG_LATCH_CS =>
   # CPU0_A8
 
 SRAM0_HIGH_CS =>
-    CPU0_UDS
-  # CPU0_RW & !FLASH_CONFIG_STATE1 & !MAP_FLASH_TO_ZERO
-  # CPU0_A23 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # CPU0_A22 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # CPU0_A21 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # CPU0_A20 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3 & !MAP_FLASH_TO_ZERO
-  # CPU0_A23 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # CPU0_A22 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # CPU0_A21 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # CPU0_A20 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # !CPU0_RW & FLASH_CONFIG_STATE3 & !MAP_FLASH_TO_ZERO
-  # CPU0_A23 & !CPU0_RW & FLASH_CONFIG_STATE3
-  # CPU0_A22 & !CPU0_RW & FLASH_CONFIG_STATE3
-  # CPU0_A21 & !CPU0_RW & FLASH_CONFIG_STATE3
-  # CPU0_A20 & !CPU0_RW & FLASH_CONFIG_STATE3
+    !ISMEMORYACCESS
+  # CPU0_UDS
+  # !MAP_FLASH_TO_ZERO & !SRAM_IN_FLASH_AREA
+  # CPU0_A23 & !SRAM_IN_FLASH_AREA
+  # CPU0_A22 & !SRAM_IN_FLASH_AREA
+  # CPU0_A21 & !SRAM_IN_FLASH_AREA
+  # CPU0_A20 & !SRAM_IN_FLASH_AREA
   # !CPU0_A23 & !MAP_FLASH_TO_ZERO
   # CPU0_A22 & !CPU0_A23
   # CPU0_A21 & !CPU0_A23
@@ -714,26 +526,15 @@ SRAM0_HIGH_CS =>
   # !CPU0_A20 & CPU0_A22
   # !CPU0_A20 & CPU0_A21
   # CPU0_A19
-  # CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
 
 SRAM0_LOW_CS =>
-    CPU0_LDS
-  # CPU0_RW & !FLASH_CONFIG_STATE1 & !MAP_FLASH_TO_ZERO
-  # CPU0_A23 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # CPU0_A22 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # CPU0_A21 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # CPU0_A20 & CPU0_RW & !FLASH_CONFIG_STATE1
-  # !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3 & !MAP_FLASH_TO_ZERO
-  # CPU0_A23 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # CPU0_A22 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # CPU0_A21 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # CPU0_A20 & !FLASH_CONFIG_STATE1 & FLASH_CONFIG_STATE3
-  # !CPU0_RW & FLASH_CONFIG_STATE3 & !MAP_FLASH_TO_ZERO
-  # CPU0_A23 & !CPU0_RW & FLASH_CONFIG_STATE3
-  # CPU0_A22 & !CPU0_RW & FLASH_CONFIG_STATE3
-  # CPU0_A21 & !CPU0_RW & FLASH_CONFIG_STATE3
-  # CPU0_A20 & !CPU0_RW & FLASH_CONFIG_STATE3
+    !ISMEMORYACCESS
+  # CPU0_LDS
+  # !MAP_FLASH_TO_ZERO & !SRAM_IN_FLASH_AREA
+  # CPU0_A23 & !SRAM_IN_FLASH_AREA
+  # CPU0_A22 & !SRAM_IN_FLASH_AREA
+  # CPU0_A21 & !SRAM_IN_FLASH_AREA
+  # CPU0_A20 & !SRAM_IN_FLASH_AREA
   # !CPU0_A23 & !MAP_FLASH_TO_ZERO
   # CPU0_A22 & !CPU0_A23
   # CPU0_A21 & !CPU0_A23
@@ -751,16 +552,13 @@ SRAM0_LOW_CS =>
   # !CPU0_A20 & CPU0_A22
   # !CPU0_A20 & CPU0_A21
   # CPU0_A19
-  # CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
 
 SRAM_IN_FLASH_AREA =>
     CPU0_RW & FLASH_CONFIG_STATE1
   # !CPU0_RW & !FLASH_CONFIG_STATE3
 
 UART_CSA =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -780,8 +578,7 @@ UART_CSA =>
   # CPU0_UDS
 
 UART_CSB =>
-    CPU0_FC0 & CPU0_FC1 & CPU0_FC2
-  # CPU0_AS
+    !ISMEMORYACCESS
   # !CPU0_A23
   # !CPU0_A22
   # !CPU0_A21
@@ -836,48 +633,48 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CPU0_D1                     9        V        -       -       -     
     CPU0_D2                     10       V        -       -       -     
     CPU0_D3                     11       V        -       -       -     
-    CPU0_DTACK                  45       V        40      0       1     
+    CPU0_DTACK                  12       V        4       0       1     
     CPU0_FC0                    40       V        -       -       -     
     CPU0_FC1                    39       V        -       -       -     
     CPU0_FC2                    37       V        -       -       -     
     CPU0_LDS                    4        V        -       -       -     
     CPU0_RW                     1        V        -       -       -     
     CPU0_UDS                    5        V        -       -       -     
-    DRAM_CS                     70       V        4       0       1     
-    DTACK_FROM_INT              41       V        -       -       -     
-    DTACK_MEMORY_0W             0        I        18      -       -     
+    DRAM_CS                     16       V        3       0       1     
+    DTACK_FROM_INT              15       V        -       -       -     
+    DTACK_MEMORY_0W             88       N        16      0       1     
     EXP_BUS_DRIVERS_ADDR        51       V        1       0       1     
-    EXP_BUS_DRIVERS_DATA        69       V        1       0       1     
-    EXP_BUS_DRIVERS_RW          44       V        1       0       1     
-    EXP_CS_A                    49       V        1       0       1     
-    EXP_CS_B                    50       V        1       0       1     
-    EXP_CS_C                    46       V        18      0       1     
-    EXP_CS_D                    48       V        6       0       1     
-    EXP_DTACK_IN                67       V        -       -       -     
+    EXP_BUS_DRIVERS_DATA        52       V        1       0       1     
+    EXP_BUS_DRIVERS_RW          54       V        1       0       1     
+    EXP_CS_A                    48       V        1       0       1     
+    EXP_CS_B                    49       V        1       0       1     
+    EXP_CS_C                    45       V        17      0       1     
+    EXP_CS_D                    46       V        5       0       1     
+    EXP_DTACK_IN                50       V        -       -       -     
     FLASH_A18                   74       V        2       0       1     
-    FLASH_CONFIG_CLOCK          0        I        20      -       -     
-    FLASH_CONFIG_STATE0         91       N        -       -       -     
-    FLASH_CONFIG_STATE0 d       91       M        1       0       1     
-    FLASH_CONFIG_STATE0 ar      91       M        1       0       1     
-    FLASH_CONFIG_STATE0 ck      91       M        20      0       1     
-    FLASH_CONFIG_STATE1         90       N        -       -       -     
-    FLASH_CONFIG_STATE1 d       90       M        1       0       1     
-    FLASH_CONFIG_STATE1 ar      90       M        1       0       1     
-    FLASH_CONFIG_STATE1 ck      90       M        20      0       1     
-    FLASH_CONFIG_STATE2         89       N        -       -       -     
-    FLASH_CONFIG_STATE2 d       89       M        1       0       1     
-    FLASH_CONFIG_STATE2 ar      89       M        1       0       1     
-    FLASH_CONFIG_STATE2 ck      89       M        20      0       1     
-    FLASH_CONFIG_STATE3         88       N        -       -       -     
-    FLASH_CONFIG_STATE3 d       88       M        1       0       1     
-    FLASH_CONFIG_STATE3 ar      88       M        1       0       1     
-    FLASH_CONFIG_STATE3 ck      88       M        20      0       1     
-    FLASH_HIGH_CS               75       V        30      0       1     
-    FLASH_LOW_CS                76       V        30      0       1     
-    IDE_BUFFER_EN               52       V        1       0       1     
-    IDE_CSA                     65       V        18      0       1     
-    IDE_CSB                     64       V        18      0       1     
-    IDE_WR                      55       V        2       0       1     
+    FLASH_CONFIG_CLOCK          0        I        19      -       -     
+    FLASH_CONFIG_STATE0         93       N        -       -       -     
+    FLASH_CONFIG_STATE0 d       93       M        1       0       1     
+    FLASH_CONFIG_STATE0 ar      93       M        1       0       1     
+    FLASH_CONFIG_STATE0 ck      93       M        19      0       1     
+    FLASH_CONFIG_STATE1         92       N        -       -       -     
+    FLASH_CONFIG_STATE1 d       92       M        1       0       1     
+    FLASH_CONFIG_STATE1 ar      92       M        1       0       1     
+    FLASH_CONFIG_STATE1 ck      92       M        19      0       1     
+    FLASH_CONFIG_STATE2         91       N        -       -       -     
+    FLASH_CONFIG_STATE2 d       91       M        1       0       1     
+    FLASH_CONFIG_STATE2 ar      91       M        1       0       1     
+    FLASH_CONFIG_STATE2 ck      91       M        19      0       1     
+    FLASH_CONFIG_STATE3         90       N        -       -       -     
+    FLASH_CONFIG_STATE3 d       90       M        1       0       1     
+    FLASH_CONFIG_STATE3 ar      90       M        1       0       1     
+    FLASH_CONFIG_STATE3 ck      90       M        19      0       1     
+    FLASH_HIGH_CS               75       V        24      0       1     
+    FLASH_LOW_CS                76       V        24      0       1     
+    IDE_BUFFER_EN               67       V        1       0       1     
+    IDE_CSA                     65       V        17      0       1     
+    IDE_CSB                     64       V        17      0       1     
+    IDE_WR                      69       V        2       0       1     
     IDE_WR_DELAY1               85       N        -       -       -     
     IDE_WR_DELAY1       d       85       M        1       0       1     
     IDE_WR_DELAY1       ar      85       M        2       0       1     
@@ -886,33 +683,33 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     IDE_WR_DELAY2       d       86       M        1       0       1     
     IDE_WR_DELAY2       ar      86       M        2       0       1     
     IDE_WR_DELAY2       ck      86       M        1       0       1     
-    ISMEMORYACCESS              0        I        3       -       -     
-    ITC_CS                      68       V        18      0       1     
-    K8042_CS                    12       V        18      0       1     
-    LED_LATCH_CS                80       V        18      0       1     
-    MAP_FLASH_TO_ZERO           87       N        -       -       -     
-    MAP_FLASH_TO_ZERO   d       87       M        1       0       1     
-    MAP_FLASH_TO_ZERO   ar      87       M        1       0       1     
-    MAP_FLASH_TO_ZERO   ck      87       M        1       0       1     
-    MEM_OE                      15       V        2       0       1     
-    NIC_CS                      73       V        14      0       1     
-    NOTUSED1_IO                 54       V        -       -       -     
-    NOTUSED2_IO                 6        V        -       -       -     
-    NOTUSED3_IO                 16       V        -       -       -     
-    PTC_CS                      77       V        18      0       1     
-    RTS_A_SEL                   56       V        -       -       -     
-    RTS_A_SEL           d       56       X        1       0       1     
-    RTS_A_SEL           ar      56       X        1       0       1     
-    RTS_A_SEL           ck      56       X        1       0       1     
-    RTS_CS                      57       V        18      0       1     
+    ISMEMORYACCESS              87       N        3       0       1     
+    ITC_CS                      68       V        17      0       1     
+    K8042_CS                    56       V        17      0       1     
+    LED_LATCH_CS                81       V        17      0       1     
+    MAP_FLASH_TO_ZERO           89       N        -       -       -     
+    MAP_FLASH_TO_ZERO   d       89       M        1       0       1     
+    MAP_FLASH_TO_ZERO   ar      89       M        1       0       1     
+    MAP_FLASH_TO_ZERO   ck      89       M        1       0       1     
+    MEM_OE                      55       V        2       0       1     
+    NIC_CS                      73       V        13      0       1     
+    PTC_CS                      77       V        17      0       1     
+    RTS_A_SEL                   70       V        -       -       -     
+    RTS_A_SEL           d       70       X        1       0       1     
+    RTS_A_SEL           ar      70       X        1       0       1     
+    RTS_A_SEL           ck      70       X        1       0       1     
+    RTS_CS                      57       V        17      0       1     
     RTS_D_SEL                   58       V        1       0       1     
-    SEVENSEG_LATCH_CS           60       V        18      0       1     
-    SRAM0_HIGH_CS               81       V        35      0       1     
-    SRAM0_LOW_CS                79       V        35      0       1     
-    SRAM_IN_FLASH_AREA          0        I        2       -       -     
+    SEVENSEG_LATCH_CS           60       V        17      0       1     
+    SRAM0_HIGH_CS               80       V        24      0       1     
+    SRAM0_LOW_CS                79       V        24      0       1     
+    SRAM_IN_FLASH_AREA          94       N        2       0       1     
     SYS_RESET                   84       V        -       -       -     
-    UART_CSA                    63       V        19      0       1     
-    UART_CSB                    61       V        19      0       1     
+    UART_CSA                    63       V        18      0       1     
+    UART_CSB                    61       V        18      0       1     
+    UNUSED1_IO                  6        V        -       -       -     
+    UNUSED2_IO                  41       V        -       -       -     
+    UNUSED3_IO                  44       V        -       -       -     
     cpu_address_bus             0        F        -       -       -     
 
 
