@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
   1:Name     CPU0_CPLDA;
   2:PartNo   CPU0_CPLDA;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
  54:Pin[75]  = FLASH_HIGH_CS;
  55:Pin[76]  = FLASH_LOW_CS;
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 108:DTACK_MEMORY_0W = !DRAM_CS # !FLASH_LOW_CS # !FLASH_HIGH_CS # !NIC_CS # !EXP_CS_C 
 109:                  # !SEVENSEG_LATCH_CS # !UART_CSA # !UART_CSB # !IDE_CSA # !IDE_CSB
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 162:/*  SRAM_IN_FLASH_AREA is high if we are doing a read or write and SRAM should respond in the flash area */ 
 163:NODE SRAM_IN_FLASH_AREA;
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 216:FLASH_LOW_CS  = !(    (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU0_LDS & !SRAM_IN_FLASH_AREA)
 217:                    # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU0_LDS & !MAP_FLASH_TO_ZERO) );
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 270:      the CPU_RW signal goes low, which normally happens write at the start of an /AS cycle.  The IDE_WR_DELAY1 and DELAY2 
 271:      flip flops are configured such that they both start at 0 when an AS cycle starts.  After 2 CLK_16M cycles the 
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 324:Performing input pin pre-assignments ...
 325:------------------------------------
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 378:CPU0_A11 is placed at pin 33 (MC 64)
 379:XXL_117 is placed at feedback node 664 (MC 64)
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU0_CPLDA.pld                   Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 21:32:15 2023
+Created Thu Jun 15 20:50:06 2023
 
 432:         DRAM_CS | 16                                          70 | RTS_A_SEL       
 433:        CPU0_A23 | 17                                          69 | IDE_WR          

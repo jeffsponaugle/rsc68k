@@ -72,16 +72,6 @@ Pin[52]  = EXP_BUS_DRIVERS_DATA;      /* Enable for Data bus EXP BUS drivers */
 Pin[54]  = EXP_BUS_DRIVERS_RW;        /* R/-W direction signal for data bus EXP BUS drivers */
 
 
-
-
-
-/* 
-   For VGA we need two chip selects, plus a return DTACK signal.
-   CPU0_EXP_CS_D <- CPLD_CS_C (pin 48 on CPLD) ERROR!! REASSIGN and CHECK HARDWARE
-   CPU0_EXP_CS_C <- CPLD_CS_B (pin 46 on CPLD)
-   CPU0_VRAM_DTACK -> CPLD_1 (pin 49 on CPLD)
-*/
-
 /* Statements to force these pins to exist just as a holding for those pin assignments. */
 
 EXP_CS_A = EXP_DTACK_IN;
@@ -195,6 +185,11 @@ SRAM0_HIGH_CS = !(
 
 */
 
+/* 
+   SRAM is mapped to 0x000000-0x007FFFF (first 512KB) once code in flash starts executing.  SRAM can also be mapped into 
+   0xF00000-0xF7FFFF (512K) to serve as a Shadow RAM of the FLASH area.
+*/
+
 SRAM0_LOW_CS = !(
                   (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX00000XXXXXXXXXXXXXXXXXXX & !CPU0_LDS & MAP_FLASH_TO_ZERO)
                 # (ISMEMORYACCESS & cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX & !CPU0_LDS & SRAM_IN_FLASH_AREA)
@@ -234,18 +229,18 @@ REMOVED these lines to re-enable SRAM:
 
 */
 DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX1XXXXX
-                        # cpu_address_bus:'b'XXXXXXX00001XXXXXXXXXXXXXXXXXXX                        
-                        # cpu_address_bus:'h'XX2XXXXX
-                        # cpu_address_bus:'h'XX3XXXXX
-                        # cpu_address_bus:'h'XX4XXXXX
-                        # cpu_address_bus:'h'XX5XXXXX
-                        # cpu_address_bus:'h'XX6XXXXX
-                        # cpu_address_bus:'h'XX7XXXXX
-                        # cpu_address_bus:'h'XX8XXXXX
-                        # cpu_address_bus:'h'XX9XXXXX
-                        # cpu_address_bus:'h'XXAXXXXX
-                        # cpu_address_bus:'h'XXBXXXXX
-                        ));
+                            # cpu_address_bus:'b'XXXXXXX00001XXXXXXXXXXXXXXXXXXX                        
+                            # cpu_address_bus:'h'XX2XXXXX
+                            # cpu_address_bus:'h'XX3XXXXX
+                            # cpu_address_bus:'h'XX4XXXXX
+                            # cpu_address_bus:'h'XX5XXXXX
+                            # cpu_address_bus:'h'XX6XXXXX
+                            # cpu_address_bus:'h'XX7XXXXX
+                            # cpu_address_bus:'h'XX8XXXXX
+                            # cpu_address_bus:'h'XX9XXXXX
+                            # cpu_address_bus:'h'XXAXXXXX
+                            # cpu_address_bus:'h'XXBXXXXX
+                            ));
 
 /* Memory OE is low for a read operation, so invert of RW line from CPU */
 MEM_OE = !CPU0_RW # CPU0_AS;
@@ -308,18 +303,20 @@ RTS_D_SEL = !RTS_A_SEL;   /* Since RTA_A_SEL is held at zero when no access, thi
 
 Total dedicated input used:	4/4 	(100%)
 Total I/O pins used		61/64 	(95%)
-Total Logic cells used 		46/128 	(35%)
+Total Logic cells used 		43/128 	(33%)
 Total Flip-Flop used 		8/128 	(6%)
-Total Foldback logic used 	1/128 	(0%)
-Total Nodes+FB/MCells 		47/128 	(36%)
-Total cascade used 		0
+Total Foldback logic used 	2/128 	(1%)
+Total Nodes+FB/MCells 		42/128 	(32%)
+Total cascade used 		3
 Total input pins 		35
 Total output pins 		30
-Total Pts 			142
+Total Pts 			80
 
 Final global control pins assignment (if applicable)...
 -------------------------------------------------------
 CLK_16M assigned to pin  83
+
+
 
 Performing input pin pre-assignments ...
 ------------------------------------
@@ -333,21 +330,16 @@ Attempt to place floating signals ...
 CPU0_DTACK is placed at pin 12 (MC 3)
 CPU0_D3 is placed at pin 11 (MC 5)
 CPU0_D2 is placed at pin 10 (MC 6)
-FLASH_CONFIG_STATE3 is placed at feedback node 606 (MC 6)
-FLASH_CONFIG_STATE1 is placed at feedback node 607 (MC 7)
 CPU0_D1 is placed at pin 9 (MC 8)
-FLASH_CONFIG_STATE0 is placed at feedback node 608 (MC 8)
-MAP_FLASH_TO_ZERO is placed at feedback node 609 (MC 9)
-IDE_WR_DELAY2 is placed at feedback node 610 (MC 10)
 CPU0_D0 is placed at pin 8 (MC 11)
-IDE_WR_DELAY1 is placed at feedback node 611 (MC 11)
-XXL_114 is placed at feedback node 612 (MC 12)
-Com_Ctrl_111 is placed at foldback expander node 313 (MC 13)
+SRAM_IN_FLASH_AREA is placed at feedback node 611 (MC 11)
+ISMEMORYACCESS is placed at feedback node 612 (MC 12)
 CPU0_UDS is placed at pin 5 (MC 14)
-XXL_115 is placed at feedback node 614 (MC 14)
-XXL_112 is placed at feedback node 615 (MC 15)
+MAP_FLASH_TO_ZERO is placed at feedback node 614 (MC 14)
+IDE_WR_DELAY2 is placed at feedback node 615 (MC 15)
 CPU0_LDS is placed at pin 4 (MC 16)
-XXL_113 is placed at feedback node 616 (MC 16)
+IDE_WR_DELAY1 is placed at feedback node 616 (MC 16)
+Com_Ctrl_117 is placed at foldback expander node 316 (MC 16)
 CPU0_A19 is placed at pin 22 (MC 17)
 CPU0_A20 is placed at pin 21 (MC 19)
 CPU0_A21 is placed at pin 20 (MC 21)
@@ -355,9 +347,12 @@ CPU0_A22 is placed at pin 18 (MC 24)
 CPU0_A23 is placed at pin 17 (MC 25)
 DRAM_CS is placed at pin 16 (MC 27)
 DTACK_FROM_INT is placed at pin 15 (MC 29)
-Com_Ctrl_110 is placed at feedback node 631 (MC 31)
+FLASH_CONFIG_STATE3 is placed at feedback node 629 (MC 29)
+FLASH_CONFIG_STATE2 is placed at feedback node 630 (MC 30)
+FLASH_CONFIG_STATE0 is placed at feedback node 631 (MC 31)
 TDI is placed at pin 14 (MC 32)
-XXL_118 is placed at feedback node 632 (MC 32)
+FLASH_CONFIG_STATE1 is placed at feedback node 632 (MC 32)
+Com_Ctrl_116 is placed at foldback expander node 332 (MC 32)
 CPU0_A12 is placed at pin 31 (MC 35)
 CPU0_A13 is placed at pin 30 (MC 37)
 CPU0_A14 is placed at pin 29 (MC 38)
@@ -366,17 +361,14 @@ CPU0_A16 is placed at pin 27 (MC 43)
 CPU0_A17 is placed at pin 25 (MC 45)
 CPU0_A18 is placed at pin 24 (MC 46)
 TMS is placed at pin 23 (MC 48)
-XXL_119 is placed at feedback node 648 (MC 48)
+DTACK_MEMORY_0W is placed at feedback node 648 (MC 48)
 CPU0_FC0 is placed at pin 40 (MC 51)
 CPU0_FC1 is placed at pin 39 (MC 53)
 CPU0_FC2 is placed at pin 37 (MC 56)
 CPU0_A8 is placed at pin 36 (MC 57)
 CPU0_A9 is placed at pin 35 (MC 59)
 CPU0_A10 is placed at pin 34 (MC 61)
-FLASH_CONFIG_STATE2 is placed at feedback node 662 (MC 62)
-XXL_116 is placed at feedback node 663 (MC 63)
 CPU0_A11 is placed at pin 33 (MC 64)
-XXL_117 is placed at feedback node 664 (MC 64)
 EXP_CS_C is placed at pin 45 (MC 67)
 EXP_CS_D is placed at pin 46 (MC 69)
 EXP_CS_A is placed at pin 48 (MC 72)
@@ -410,22 +402,22 @@ SRAM0_HIGH_CS is placed at pin 80 (MC 126)
 LED_LATCH_CS is placed at pin 81 (MC 128)
 
                                                                                     
-                                                 L   S     F                        
-                                                 E   R     L                        
-                                                 D   A     A                        
-                                           S     _   M     S                        
-                                  C C      Y     L   0     H                        
-                     C C  C C     P P   C CS C   A   _     _                        
-                     P P  P P     U U   P P_ L   T   L   P L                        
-                     U U  U U     0 0   U UR K   C   O   T O                        
-                     0 0  0 0     _ _   0 0E _   H   W   C W                        
-                     _ _  _ _ G   U L V _ _S 1 G _   _ V _ _                        
-                     D D  D D N   D D C A RE 6 N C   C C C C                        
-                     3 2  1 0 D   S S C S WT M D S   S C S S                        
+                                                 L S S     F  F                      
+                                                 E R R     L  L                     
+                                                 D A A     A  A                     
+                                           S     _ M M     S  S                     
+                                  C C      Y     L 0 0     H  H                     
+                     C C  C C     P P   C CS C   A   _     _  _                     
+                     P P  P P     U U   P P_ L   T   L   P L  H                     
+                     U U  U U     0 0   U UR K   C   O   T O  I                     
+                     0 0  0 0     _ _   0 0E _   H   W   C W  G                     
+                     _ _  _ _ G   U L V _ _S 1 G _   _ V _ _  H                     
+                     D D  D D N   D D C A RE 6 N C   C C C C  C                     
+                     3 2  1 0 D   S S C S WT M D S   S C S S  S                     
                     -------------------------------------------                     
                    / 11   9   7   5   3   1  83  81  79  77  75 \                  
                   /    10   8   6   4   2  84  82  80  78  76    \                 
-      CPU0_DTACK | 12                    (*)                   74 | FLASH_A18       
+      CPU0_DTACK | 12           X        (*)                   74 | FLASH_A18       
              VCC | 13                                          73 | NIC_CS          
              TDI | 14                                          72 | GND             
   DTACK_FROM_INT | 15                                          71 | TDO             
@@ -445,7 +437,7 @@ LED_LATCH_CS is placed at pin 81 (MC 128)
         CPU0_A14 | 29                                          57 | RTS_CS          
         CPU0_A13 | 30                                          56 | K8042_CS        
         CPU0_A12 | 31                                          55 | MEM_OE          
-             GND | 32                                          54 | EXP_BUS_DRIVERS_RW
+             GND | 32                  X     X                 54 | EXP_BUS_DRIVERS_RW
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
@@ -462,6 +454,7 @@ LED_LATCH_CS is placed at pin 81 (MC 128)
                                                         I I I                       
                                                         N V V                       
                                                           E E                       
+
 
 
 

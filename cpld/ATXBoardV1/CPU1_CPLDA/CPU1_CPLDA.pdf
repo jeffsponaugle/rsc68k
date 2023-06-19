@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Fri Jun 09 19:38:06 2023 "}
+  {DBtime "Sun Jun 18 21:25:39 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,59 +33,74 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 1060}}
-   {P CPU1_RW {Pt "INPUT"}{Lq 0}{Ploc 100 1020}}
-   {P CPU1_AS {Pt "INPUT"}{Lq 0}{Ploc 100 1000}}
-   {P CPU1_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 980}}
-   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 960}}
-   {P CPU1_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 940}}
-   {P CPU1_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 920}}
-   {P CPU1_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 900}}
-   {P CPU1_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 880}}
-   {P CPU1_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 860}}
-   {P CPU1_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 840}}
-   {P CPU1_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 820}}
-   {P CPU1_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 800}}
-   {P CPU1_A23 {Pt "INPUT"}{Lq 0}{Ploc 100 780}}
-   {P CPU1_A22 {Pt "INPUT"}{Lq 0}{Ploc 100 760}}
-   {P CPU1_A21 {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
-   {P CPU1_A20 {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
-   {P CPU1_A19 {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
-   {P CPU1_A18 {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
-   {P CPU1_A17 {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
-   {P CPU1_A16 {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
-   {P CPU1_A15 {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
-   {P CPU1_A14 {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
-   {P CPU1_A13 {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
-   {P CPU1_A12 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
-   {P CPU1_A11 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
-   {P CPU1_A10 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
-   {P CPU1_A9 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
-   {P CPU1_A8 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
-   {P CPU1_I2 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
-   {P CPU1_I1 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P CPU1_I0 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P CPU1_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P CPU1_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P CPU1_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P CPU1_I7 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P CPU1_I4 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P CPU1_2 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P CPU1_1 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CLK_16M {Pt "INPUT"}{Lq 0}{Ploc 100 1020}}
+   {P CPU1_RW {Pt "INPUT"}{Lq 0}{Ploc 100 980}}
+   {P CPU1_AS {Pt "INPUT"}{Lq 0}{Ploc 100 960}}
+   {P CPU1_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 940}}
+   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 920}}
+   {P CPU1_D0 {Pt "INPUT"}{Lq 0}{Ploc 100 900}}
+   {P CPU1_D1 {Pt "INPUT"}{Lq 0}{Ploc 100 880}}
+   {P CPU1_D2 {Pt "INPUT"}{Lq 0}{Ploc 100 860}}
+   {P CPU1_D3 {Pt "INPUT"}{Lq 0}{Ploc 100 840}}
+   {P CPU1_D4 {Pt "INPUT"}{Lq 0}{Ploc 100 820}}
+   {P CPU1_D5 {Pt "INPUT"}{Lq 0}{Ploc 100 800}}
+   {P CPU1_D6 {Pt "INPUT"}{Lq 0}{Ploc 100 780}}
+   {P CPU1_D7 {Pt "INPUT"}{Lq 0}{Ploc 100 760}}
+   {P CPU1_A23 {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
+   {P CPU1_A22 {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
+   {P CPU1_A21 {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P CPU1_A20 {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P CPU1_A19 {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P CPU1_A18 {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P CPU1_A17 {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P CPU1_A16 {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P CPU1_A15 {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P CPU1_A14 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P CPU1_A13 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P CPU1_A12 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P CPU1_A11 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P CPU1_A10 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P CPU1_A9 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P CPU1_A8 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CPU1_I2 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P CPU1_I1 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P CPU1_I0 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P CPU1_FC2 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P CPU1_FC1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P CPU1_FC0 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P CPU0_I1 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P CPU0_I2 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P CPU1_I7 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU1_I6 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P CPU1_I5 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P CPU1_I4 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P F_CPU02 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P F_CPU1 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P F_CPU2 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P CPU0_B1 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P CPU0_B2 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P CPU0_C1H {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P F_CPU01 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P DRAM_DTA {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P DRAM_CS {Pt "I/O"}{Lq 0}{Ploc 360 20}}
+   {P CPU1_2 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
+   {P CPU1_1 {Pt "I/O"}{Lq 0}{Ploc 360 60}}
+   {P CPU1_0 {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P CPU1_VPA {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P CPU1_DTA {Pt "I/O"}{Lq 0}{Ploc 360 120}}
+   {P MEM_OE {Pt "I/O"}{Lq 0}{Ploc 360 140}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 190 1090}
+   {Rdl 230 1050}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 1070}
-   [Ts 15][Tj "RC"]
    {Pnl 120 1030}
-   {Pnl 120 1010}
+   [Ts 15][Tj "RC"]
    {Pnl 120 990}
    {Pnl 120 970}
    {Pnl 120 950}
@@ -123,19 +138,36 @@
    {Pnl 120 310}
    {Pnl 120 290}
    {Pnl 120 270}
+   {Pnl 120 250}
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
    [Ts 15][Tj "LC"]
+   {Pnl 340 30}
+   {Pnl 340 50}
+   {Pnl 340 70}
+   {Pnl 340 90}
+   {Pnl 340 110}
+   {Pnl 340 130}
+   {Pnl 340 150}
 
-   {Sd A 83 1 2 4 5 6 8 9 10 11 12 15 16 17 18 20 21 22 24 25 27 28 29 30 31 33 34 35 36 37 39 40 45 46 48 60 61 63 64 84}
+   {Sd A 83 1 2 4 5 6 8 9 10 11 12 15 16 17 18 20 21 22 24 25 27 28 29 30 31 33 34 35 36 37 39 40 45 46 48 57 58 60 61 63 64 65 67 68 69 70 73 74 80 84 41 49 50 51 52 54 56}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 1080 250 0}
-   {L 130 1060 100 1060}
-   {L 130 1070 140 1060 130 1050}
+   {R 130 1040 330 0}
    {L 130 1020 100 1020}
-   {L 130 1000 100 1000}
+   {L 130 1030 140 1020 130 1010}
    {L 130 980 100 980}
    {L 130 960 100 960}
    {L 130 940 100 940}
@@ -173,63 +205,99 @@
    {L 130 300 100 300}
    {L 130 280 100 280}
    {L 130 260 100 260}
+   {L 130 240 100 240}
+   {L 130 220 100 220}
+   {L 130 200 100 200}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 330 20 360 20}
+   {L 330 40 360 40}
+   {L 330 60 360 60}
+   {L 330 80 360 80}
+   {L 330 100 360 100}
+   {L 330 120 360 120}
+   {L 330 140 360 140}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "CLK_16M" 140 1060}
-   {T "CPU1_RW" 140 1020}
-   {T "CPU1_AS" 140 1000}
-   {T "CPU1_LDS" 140 980}
-   {T "CPU1_UDS" 140 960}
-   {T "CPU1_D0" 140 940}
-   {T "CPU1_D1" 140 920}
-   {T "CPU1_D2" 140 900}
-   {T "CPU1_D3" 140 880}
-   {T "CPU1_D4" 140 860}
-   {T "CPU1_D5" 140 840}
-   {T "CPU1_D6" 140 820}
-   {T "CPU1_D7" 140 800}
-   {T "CPU1_A23" 140 780}
-   {T "CPU1_A22" 140 760}
-   {T "CPU1_A21" 140 740}
-   {T "CPU1_A20" 140 720}
-   {T "CPU1_A19" 140 700}
-   {T "CPU1_A18" 140 680}
-   {T "CPU1_A17" 140 660}
-   {T "CPU1_A16" 140 640}
-   {T "CPU1_A15" 140 620}
-   {T "CPU1_A14" 140 600}
-   {T "CPU1_A13" 140 580}
-   {T "CPU1_A12" 140 560}
-   {T "CPU1_A11" 140 540}
-   {T "CPU1_A10" 140 520}
-   {T "CPU1_A9" 140 500}
-   {T "CPU1_A8" 140 480}
-   {T "CPU1_I2" 140 460}
-   {T "CPU1_I1" 140 440}
-   {T "CPU1_I0" 140 420}
-   {T "CPU1_FC2" 140 400}
-   {T "CPU1_FC1" 140 380}
-   {T "CPU1_FC0" 140 360}
-   {T "CPU1_I7" 140 340}
-   {T "CPU1_I4" 140 320}
-   {T "CPU1_2" 140 300}
-   {T "CPU1_1" 140 280}
-   {T "SYS_RESE" 140 260}
+   {T "CLK_16M" 140 1020}
+   {T "CPU1_RW" 140 980}
+   {T "CPU1_AS" 140 960}
+   {T "CPU1_LDS" 140 940}
+   {T "CPU1_UDS" 140 920}
+   {T "CPU1_D0" 140 900}
+   {T "CPU1_D1" 140 880}
+   {T "CPU1_D2" 140 860}
+   {T "CPU1_D3" 140 840}
+   {T "CPU1_D4" 140 820}
+   {T "CPU1_D5" 140 800}
+   {T "CPU1_D6" 140 780}
+   {T "CPU1_D7" 140 760}
+   {T "CPU1_A23" 140 740}
+   {T "CPU1_A22" 140 720}
+   {T "CPU1_A21" 140 700}
+   {T "CPU1_A20" 140 680}
+   {T "CPU1_A19" 140 660}
+   {T "CPU1_A18" 140 640}
+   {T "CPU1_A17" 140 620}
+   {T "CPU1_A16" 140 600}
+   {T "CPU1_A15" 140 580}
+   {T "CPU1_A14" 140 560}
+   {T "CPU1_A13" 140 540}
+   {T "CPU1_A12" 140 520}
+   {T "CPU1_A11" 140 500}
+   {T "CPU1_A10" 140 480}
+   {T "CPU1_A9" 140 460}
+   {T "CPU1_A8" 140 440}
+   {T "CPU1_I2" 140 420}
+   {T "CPU1_I1" 140 400}
+   {T "CPU1_I0" 140 380}
+   {T "CPU1_FC2" 140 360}
+   {T "CPU1_FC1" 140 340}
+   {T "CPU1_FC0" 140 320}
+   {T "CPU0_I1" 140 300}
+   {T "CPU0_I2" 140 280}
+   {T "CPU1_I7" 140 260}
+   {T "CPU1_I6" 140 240}
+   {T "CPU1_I5" 140 220}
+   {T "CPU1_I4" 140 200}
+   {T "F_CPU02" 140 180}
+   {T "F_CPU1" 140 160}
+   {T "F_CPU2" 140 140}
+   {T "CPU0_B1" 140 120}
+   {T "CPU0_B2" 140 100}
+   {T "CPU0_C1H" 140 80}
+   {T "F_CPU01" 140 60}
+   {T "DRAM_DTA" 140 40}
+   {T "SYS_RESE" 140 20}
    [Tj "RC"]
+   {T "DRAM_CS" 320 20}
+   {T "CPU1_2" 320 40}
+   {T "CPU1_1" 320 60}
+   {T "CPU1_0" 320 80}
+   {T "CPU1_VPA" 320 100}
+   {T "CPU1_DTA" 320 120}
+   {T "MEM_OE" 320 140}
    [Ly "DEVICE"]
    [Tj "CT"]
-   {T "F1508ISPPLCC84" 190 -10}
+   {T "F1508ISPPLCC84" 230 -10}
   }
 
   {ATR
    {IN
-    {Org 100 260}
+    {Org 100 20}
     {Ty 255}
    }
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\CPU1_CPLDA 190 1080}
+    {At PLD C:\CPU1_CPLDA 230 1040}
    }
   }
  }
@@ -309,15 +377,49 @@
    }
    {N CPU1_FC0
    }
+   {N CPU0_I1
+   }
+   {N CPU0_I2
+   }
    {N CPU1_I7
    }
+   {N CPU1_I6
+   }
+   {N CPU1_I5
+   }
    {N CPU1_I4
+   }
+   {N F_CPU02
+   }
+   {N F_CPU1
+   }
+   {N F_CPU2
+   }
+   {N CPU0_B1
+   }
+   {N CPU0_B2
+   }
+   {N CPU0_C1H
+   }
+   {N F_CPU01
+   }
+   {N DRAM_DTA
+   }
+   {N SYS_RESE
+   }
+   {N DRAM_CS
    }
    {N CPU1_2
    }
    {N CPU1_1
    }
-   {N SYS_RESE
+   {N CPU1_0
+   }
+   {N CPU1_VPA
+   }
+   {N CPU1_DTA
+   }
+   {N MEM_OE
    }
   }
 

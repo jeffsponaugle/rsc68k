@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Fri Jun 09 19:48:20 2023 "}
+  {DBtime "Thu Jun 15 22:09:09 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -71,15 +71,15 @@
    {P FROM_C2 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
    {P FROM_CPU {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
    {P CPU1_B2 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P UNUSED6 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P UNUSED7 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P UNUSED8 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P UNUSED9 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P EXP_EX0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P EXP_EX1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P EXP_EX2 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P EXP_EX3 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
    {P INTC_CS {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P UNUSED10 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P UNUSED11 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P UNUSED12 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P UNUSED13 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P EXP_EX4 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P EXP_EX5 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P EXP_EX6 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P EXP_EX7 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
    {P CLK_1M {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
    {P CLK_500K {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
    {P POWERCTL {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
@@ -282,15 +282,15 @@
    {T "FROM_C2" 140 420}
    {T "FROM_CPU" 140 400}
    {T "CPU1_B2" 140 380}
-   {T "UNUSED6" 140 360}
-   {T "UNUSED7" 140 340}
-   {T "UNUSED8" 140 320}
-   {T "UNUSED9" 140 300}
+   {T "EXP_EX0" 140 360}
+   {T "EXP_EX1" 140 340}
+   {T "EXP_EX2" 140 320}
+   {T "EXP_EX3" 140 300}
    {T "INTC_CS" 140 280}
-   {T "UNUSED10" 140 260}
-   {T "UNUSED11" 140 240}
-   {T "UNUSED12" 140 220}
-   {T "UNUSED13" 140 200}
+   {T "EXP_EX4" 140 260}
+   {T "EXP_EX5" 140 240}
+   {T "EXP_EX6" 140 220}
+   {T "EXP_EX7" 140 200}
    {T "CLK_1M" 140 180}
    {T "CLK_500K" 140 160}
    {T "POWERCTL" 140 140}
@@ -407,23 +407,23 @@
    }
    {N CPU1_B2
    }
-   {N UNUSED6
+   {N EXP_EX0
    }
-   {N UNUSED7
+   {N EXP_EX1
    }
-   {N UNUSED8
+   {N EXP_EX2
    }
-   {N UNUSED9
+   {N EXP_EX3
    }
    {N INTC_CS
    }
-   {N UNUSED10
+   {N EXP_EX4
    }
-   {N UNUSED11
+   {N EXP_EX5
    }
-   {N UNUSED12
+   {N EXP_EX6
    }
-   {N UNUSED13
+   {N EXP_EX7
    }
    {N CLK_1M
    }

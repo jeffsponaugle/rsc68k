@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 19:38:06 2023
+Created Sun Jun 18 21:25:38 2023
 
   1:Name     CPU1_CPLDA;
   2:PartNo   CPU1_CPLDA;
@@ -37,322 +37,422 @@ Created Fri Jun 09 19:38:06 2023
  30:Pin[45,46,48]  = [CPU1_FC2..0];    /* 3 */
  31:Pin[16,15,12,11,10,9,8,6]  = [CPU1_D7..0];     /*  */
  32:Pin[37,39,40]   = [CPU1_INTACK2..0];       /* Connect to A1, A2, and A3 - For interrupt ack */
- 33:Pin[60,61,63,64] = CPU1_IRQL7,CPU1_IRQL4,CPU1_IRQL2,CPU1_IRQL1;
- 34:Pin  0  = DRAM_DTACK;
+ 33:Pin[60,61,63,64] = CPU1_IRQL7,CPU1_IRQL6,CPU1_IRQL5,CPU1_IRQL4;
+ 34:Pin[80]     = DRAM_DTACK;             /* DTACK feedback from DRAM controller */
  35:
- 36:
- 37:/** Outputs **/
- 38:
- 39:Pin  0  = MEM_OE;                  /* Invert CPU1_RW */
- 40:Pin  0  = CPU1_DTACK;
- 41:Pin  0  = DRAM_CS;
- 42:Pin  0  = CPU1_VPA; 
+ 36:/** Outputs **/
+ 37:
+ 38:Pin[56]  = MEM_OE;                  /* Invert CPU1_RW */
+ 39:Pin[54]  = CPU1_DTACK;
+ 40:Pin[41]  = DRAM_CS;
+ 41:Pin[52]  = CPU1_VPA; 
+ 42:Pin[49,50,51]  = [CPU1_IPL2..0];
  43:
- 44:
- 45:
- 46:CPU1_A1 = CPU1_INTACK0;
- 47:CPU1_A2 = CPU1_INTACK1;
+ 44:CPU1_A1 = CPU1_INTACK0;
+ 45:CPU1_A2 = CPU1_INTACK1;
+ 46:CPU1_A3 = CPU1_INTACK2;
+ 47:
  48:
- 49:
- 50:/** Connection to CPU 0 CPLD:
- 51:
- 52:   These pins connect to the CPU0_CPLD.  Also 2 pins from the CPU0_CPLD connect to CPU1_IRQL1 and CPU_IRQL7.
- 53:
+ 49:/** Connection to CPU 0 CPLD:
+ 50:
+ 51:   These pins connect to the CPU0_CPLD.  Also 2 pins from the CPU0_CPLD connect to CPU1_IRQL1 and CPU_IRQL7.
+ 52:
+ 53: **/
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 19:38:06 2023
+Created Sun Jun 18 21:25:38 2023
 
- 54: **/
- 55:
- 56:
- 57:Pin  0  = CPU0_INT_REQ1;          // Output, to CPU0_CPLD to request interrupt on CPU0
+ 54:
+ 55:Pin[57] = CPU0_INT_REQ1;          // Output, to CPU0_CPLD to request interrupt on CPU0
 
- 58:Pin  0  = CPU0_INT_REQ2;          // Output, to CPU0_CPLD to request interrupt on CPU0
+ 56:Pin[58] = CPU0_INT_REQ2;          // Output, to CPU0_CPLD to request interrupt on CPU0
 
- 59:Pin  0  = CPU0_BARR1;             // Output, to CPU0_CPLD to send flag to CPU0
+ 57:Pin[69] = CPU0_BARR1;             // Output, to CPU0_CPLD to send flag to CPU0
 
- 60:Pin  0  = CPU0_BARR2;             // Output, to CPU0_CPLD to send flag to CPU0
+ 58:Pin[70] = CPU0_BARR2;             // Output, to CPU0_CPLD to send flag to CPU0
 
- 61:Pin  0  = CPU0_C1HALTREQ;         // Output, to CPU0_CPLD to request for CPU1 to be HALTed.
+ 59:Pin[73]= CPU0_C1HALTREQ;         // Output, to CPU0_CPLD to request for CPU1 to be HALTed.
 
- 62:Pin  0  = F_CPU0_BARR1;        // Input, from CPU0_CPLD
+ 60:Pin[74] = F_CPU0_BARR1;           // Input, from CPU0_CPLD
 
- 63:Pin  0  = F_CPU0_BARR2;        // Input, from CPU0_CPLD
+ 61:Pin[65]= F_CPU0_BARR2;           // Input, from CPU0_CPLD
+
+ 62:Pin[67] = F_CPU0_INT1;            // Input, from CPU0_CPLD, to interrupt on CPU1 level 1
+
+ 63:Pin[68] = F_CPU0_INT2;            // Input, from CPU0_CPLD, to interrupt on CPU1 level 2
 
  64:
- 65:
- 66:/* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
- 67:    and /AS is low.   FC is allowed to be any state except 111.
- 68:*/
- 69:
+ 65:/* ISMEMORYACCESS is high if the FC bits indicate this is a memory access operation
+ 66:    and /AS is low.   FC is allowed to be any state except 111.
+ 67:*/
+ 68:
+ 69:ISMEMORYACCESS = !(CPU1_FC2 & CPU1_FC1 & CPU1_FC0) & !CPU1_AS;
  70:
- 71:ISMEMORYACCESS = !(CPU1_FC2 & CPU1_FC1 & CPU1_FC0) & !CPU1_AS;
+ 71:/*
  72:
- 73:/*
- 74:
- 75: WRITE to FF0704 Upper 8 bits:
- 76:                  bit 7 - NA        (defaults to 0)
- 77:                  bit 6 - NA        (defaults to 0)
- 78:                  bit 5 - TO CPU_0 Interrupt 1  (defaults to 0, 1 triggers interrupt)
- 79:                  bit 4 - TO CPU_0 Interrupt 2  (defaults to 0, 1 triggers interrupt)
- 80:                  bit 3 - TO CPU_0 Barrier Flag 2 (defaults to 0)  FROM CPU_1 to CPU_0
- 81:                  bit 2 - TO CPU_0 Barrier Flag 1 (defaults to 0)  FROM CPU_1 to CPU_0
- 82:                  bit 1 - NA
- 83:                  bit 0 - TO CPU_0 Request CPU1 be HALTed (0=no ask, 1 edge is ask)
- 84:
- 85: READ from FF0704 Upper 8 bits:  (This will read as all 00001 for the CPU1)
- 86:                  bit 7 - READ AS 1
- 87:                  bit 6 - READ AS 1
- 88:                  bit 5 - FROM CPU_0 Barrier Flag 2
- 89:                  bit 4 - FROM CPU_0 Barrier Flag 1
- 90:                  bit 3 - CPU_ID bit 3
- 91:                  bit 2 - CPU_ID bit 2
- 92:                  bit 1 - CPU_ID bit 1 
- 93:                  bit 0 - CPU_ID bit 0 (will read as 1)
- 94:
+ 73: WRITE to FF0704 Upper 8 bits:
+ 74:                  bit 7 - NA        (defaults to 0)
+ 75:                  bit 6 - NA        (defaults to 0)
+ 76:                  bit 5 - TO CPU_0 Barrier Flag 2 (defaults to 0)  FROM CPU_1 to CPU_0
+ 77:                  bit 4 - TO CPU_0 Barrier Flag 1 (defaults to 0)  FROM CPU_1 to CPU_0
+ 78:                  bit 3 - TO CPU_0 Interrupt 2  (defaults to 0, 1 triggers interrupt)
+ 79:                  bit 2 - TO CPU_0 Interrupt 1  (defaults to 0, 1 triggers interrupt)
+ 80:                  bit 1 - NA
+ 81:                  bit 0 - TO CPU_0 Request CPU1 be HALTed (0=no ask, 1 edge is ask)
+ 82:
+ 83: READ from FF0704 Upper 8 bits:  (This will read as all 00001 for the CPU1)
+ 84:                  bit 7 - READ AS 1
+ 85:                  bit 6 - READ AS 1
+ 86:                  bit 5 - FROM CPU_0 Barrier Flag 2
+ 87:                  bit 4 - FROM CPU_0 Barrier Flag 1
+ 88:                  bit 3 - CPU_ID bit 3
+ 89:                  bit 2 - CPU_ID bit 2
+ 90:                  bit 1 - CPU_ID bit 1 
+ 91:                  bit 0 - CPU_ID bit 0 (will read as 1)
+ 92:
+ 93:
+ 94:*/
  95:
- 96:*/
- 97:
- 98:REG_WRITE_ITC2 =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # CPU1_RW;   /* WRITE Address 0xff0704 */
- 99:REG_READ_ITC2  =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # !CPU1_RW;  /* READ  Address 0xff0704 */
+ 96:REG_WRITE_ITC2 =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # CPU1_A3 # CPU1_RW;   /* WRITE Address 0xff0704 */
+ 97:REG_READ_ITC2  =  INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2 # CPU1_A3 # !CPU1_RW;  /* READ  Address 0xff0704 */
+ 98:
+ 99:/* Internal Register (WRITE 0xFF0704) for flags that go back to CPU0 */
 100:
-101:/* Internal Register (WRITE 0xFF0704) for flags that go back to CPU0 */
-102:
-103:
-104:CPU0_C1HALTREQ.d = CPU1_D0.io;
-105:CPU0_C1HALTREQ.ck = REG_WRITE_ITC2;
-106:CPU0_C1HALTREQ.ar = !SYS_RESET;
-107:
+101:
+102:CPU0_C1HALTREQ.d = CPU1_D0.io;
+103:CPU0_C1HALTREQ.ck = REG_WRITE_ITC2;
+104:CPU0_C1HALTREQ.ar = !SYS_RESET;
+105:
+106:CPU0_BARR1.d = CPU1_D4.io;
+107:CPU0_BARR1.ck = REG_WRITE_ITC2;
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 3
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 19:38:06 2023
+Created Sun Jun 18 21:25:38 2023
 
-108:CPU0_BARR1.d = CPU1_D2.io;
-109:CPU0_BARR1.ck = REG_WRITE_ITC2;
-110:CPU0_BARR1.ar = !SYS_RESET;
-111:
-112:CPU0_BARR2.d = CPU1_D3.io;
-113:CPU0_BARR2.ck = REG_WRITE_ITC2;
-114:CPU0_BARR2.ar = !SYS_RESET;
-115:
-116:CPU0_INT_REQ2.d = CPU1_D4.io;
-117:CPU0_INT_REQ2.ck = REG_WRITE_ITC2;
-118:CPU0_INT_REQ2.ar = !SYS_RESET;
-119:
-120:CPU0_INT_REQ1.d = CPU1_D5.io;
-121:CPU0_INT_REQ1.ck = REG_WRITE_ITC2;
-122:CPU0_INT_REQ1.ar = !SYS_RESET;
+108:CPU0_BARR1.ar = !SYS_RESET;
+109:
+110:CPU0_BARR2.d = CPU1_D5.io;
+111:CPU0_BARR2.ck = REG_WRITE_ITC2;
+112:CPU0_BARR2.ar = !SYS_RESET;
+113:
+114:CPU0_INT_REQ1.d = CPU1_D2.io;
+115:CPU0_INT_REQ1.ck = REG_WRITE_ITC2;
+116:CPU0_INT_REQ1.ar = !SYS_RESET;
+117:
+118:CPU0_INT_REQ2.d = CPU1_D3.io;
+119:CPU0_INT_REQ2.ck = REG_WRITE_ITC2;
+120:CPU0_INT_REQ2.ar = !SYS_RESET;
+121:
+122:
 123:
-124:
+124:/* Writes out of the CPU data lines if the CPU does a READ of 0xFF0704 */
 125:
-126:/* Writes out of the CPU data lines if the CPU does a READ of 0xFF0704 */
-127:
-128:CPU1_D7.d = 'd'0;   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
-129:CPU1_D6.d = 'd'0;
-130:CPU1_D5.d = F_CPU0_BARR2;
-131:CPU1_D4.d = F_CPU0_BARR1;
-132:CPU1_D3.d = 'd'0;
-133:CPU1_D2.d = 'd'0;
-134:CPU1_D1.d = 'd'0;
-135:CPU1_D0.d = 'd'1;
-136:
-137:[CPU1_D7..0].ck = (!REG_READ_ITC2);
-138:[CPU1_D7..0].ar = !SYS_RESET;
-139:[CPU1_D7..0].oe = (!REG_READ_ITC2);      /* Turn on the databus outputs for INTACK or a REG_READ of ITC2 */
-140:
-141:
-142:
+126:CPU1_D7.d = 'd'0;   /* All 8 bits will be read at '0' during the REG_READ_ITC2 action, which indicates CPU0 */
+127:CPU1_D6.d = 'd'0;
+128:CPU1_D5.d = F_CPU0_BARR2;
+129:CPU1_D4.d = F_CPU0_BARR1;
+130:CPU1_D3.d = 'd'0;
+131:CPU1_D2.d = 'd'0;
+132:CPU1_D1.d = 'd'0;
+133:CPU1_D0.d = 'd'1;
+134:
+135:[CPU1_D7..0].ck = (!REG_READ_ITC2);
+136:[CPU1_D7..0].ar = !SYS_RESET;
+137:[CPU1_D7..0].oe = (!REG_READ_ITC2);      /* Turn on the databus outputs for INTACK or a REG_READ of ITC2 */
+138:
+139:/* 
+140:  
+141:  For DTACK, if we are doing DRAM access pass thru the DRAM_DTACK pin which comes from the arbitrator 
+142:  if we are doing access to the ITC2 Register, do a 0W is the CS for that is selected.
 143:
-144:/* 
-145:  
-146:  For DTACK, if we are doing DRAM access pass thru the DRAM_DTACK pin which comes from the arbitrator 
-147:  if we are doing access to the ITC2 Register, do a 0W is the CS for that is selected.
-148:
-149:  When DTACK=0, the cpu will continue the cycle.  If ==1 it will add waitstates.
-150:
-151:*/
-152:
-153:CPU1_DTACK = CPU1_AS # ((DRAM_CS # DRAM_DTACK) & (INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2));
-154:
-155:FIELD cpu_address_bus = [CPU1_A23..8];  /* upper 16 bit of address bus */
-156:
-157:/* DRAM for CPU1 is mapped starting 0 all the way to 0xEFFFFF, plus 0xF00000-0xF7FFFF */
-158:
-159:DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX0XXXXX
-160:                        # cpu_address_bus:'h'XX1XXXXX                       
-161:                        # cpu_address_bus:'h'XX2XXXXX
+144:  When DTACK=0, the cpu will continue the cycle.  If ==1 it will add waitstates.
+145:
+146:*/
+147:
+148:CPU1_DTACK = CPU1_AS # ((DRAM_CS # DRAM_DTACK) & (INTERNAL_REGISTER_CS # CPU1_A1 # !CPU1_A2));
+149:
+150:FIELD cpu_address_bus = [CPU1_A23..8];  /* upper 16 bit of address bus */
+151:
+152:/* DRAM for CPU1 is mapped starting 0 all the way to 0xEFFFFF, plus 0xF00000-0xF7FFFF */
+153:
+154:DRAM_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'XX0XXXXX
+155:                        # cpu_address_bus:'h'XX1XXXXX                       
+156:                        # cpu_address_bus:'h'XX2XXXXX
+157:                        # cpu_address_bus:'h'XX3XXXXX
+158:                        # cpu_address_bus:'h'XX4XXXXX
+159:                        # cpu_address_bus:'h'XX5XXXXX
+160:                        # cpu_address_bus:'h'XX6XXXXX
+161:                        # cpu_address_bus:'h'XX7XXXXX
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 4
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 19:38:06 2023
+Created Sun Jun 18 21:25:38 2023
 
-162:                        # cpu_address_bus:'h'XX3XXXXX
-163:                        # cpu_address_bus:'h'XX4XXXXX
-164:                        # cpu_address_bus:'h'XX5XXXXX
-165:                        # cpu_address_bus:'h'XX6XXXXX
-166:                        # cpu_address_bus:'h'XX7XXXXX
-167:                        # cpu_address_bus:'h'XX8XXXXX
-168:                        # cpu_address_bus:'h'XX9XXXXX
-169:                        # cpu_address_bus:'h'XXAXXXXX
-170:                        # cpu_address_bus:'h'XXBXXXXX
-171:                        # cpu_address_bus:'h'XXCXXXXX
-172:                        # cpu_address_bus:'h'XXDXXXXX
-173:                        # cpu_address_bus:'h'XXEXXXXX
-174:                        # (cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX)
-175:                        ));
+162:                        # cpu_address_bus:'h'XX8XXXXX
+163:                        # cpu_address_bus:'h'XX9XXXXX
+164:                        # cpu_address_bus:'h'XXAXXXXX
+165:                        # cpu_address_bus:'h'XXBXXXXX
+166:                        # cpu_address_bus:'h'XXCXXXXX
+167:                        # cpu_address_bus:'h'XXDXXXXX
+168:                        # cpu_address_bus:'h'XXEXXXXX
+169:                        # (cpu_address_bus:'b'XXXXXXX11110XXXXXXXXXXXXXXXXXXX)
+170:                        ));
+171:
+172:INTERNAL_REGISTER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
+173:
+174:/* Memory OE is low for a read operation, so invert of RW line from CPU */
+175:MEM_OE = !CPU1_RW # CPU1_AS;
 176:
-177:INTERNAL_REGISTER_CS = !(ISMEMORYACCESS & cpu_address_bus:'h'XXFF07XX );
+177:/* INT_ACK is high during an interrupt acknowledgement */
 178:
-179:/* Memory OE is low for a read operation, so invert of RW line from CPU */
-180:MEM_OE = !CPU1_RW # CPU1_AS;
+179:INT_ACK = CPU1_FC2 & CPU1_FC1 & CPU1_FC0 & !CPU1_AS;
+180:CPU1_VPA = !INT_ACK;
 181:
 182:/*
-183:
-184:Total dedicated input used:     3/4     (75%)
-185:Total I/O pins used             38/64   (59%)
-186:Total Logic cells used          9/128   (7%)
-187:Total Flip-Flop used            3/128   (2%)
-188:Total Foldback logic used       0/128   (0%)
-189:Total Nodes+FB/MCells           9/128   (7%)
-190:Total cascade used              0
-191:Total input pins                33
-192:Total output pins               8
-193:Total Pts                       19
-194:
+183:   For the two incoming signals from CPU0 to interrupt CPU1, we edge trigger latch
+184:   on the rising edge to record the request.   This flip flop must be reset during the
+185:   interrupt ack cycle if the ack is for this level.
+186:   These latches are active low signals. 
+187:   The other interrupt inputs (7,6,5,4) are not edge trigger latched yet.  
+188:*/
+189:
+190:NODE F_CPU0_INT1_LATCHED, F_CPU0_INT2_LATCHED;
+191:
+192:F_CPU0_INT1_LATCHED.d = 'd'0;
+193:F_CPU0_INT1_LATCHED.ck = F_CPU0_INT1;
+194:F_CPU0_INT1_LATCHED.ap = !SYS_RESET # IRQL1_ACK;
 195:
-196:Performing input pin pre-assignments ...
-197:------------------------------------
-198:CPU1_AS assigned to pin  2
-199:CPU1_RW assigned to pin  1
-200:SYS_RESET assigned to pin  84
-201:
-202:Attempt to place floating signals ...
-203:------------------------------------
-204:CPU1_D5 is placed at pin 12 (MC 3)
-205:CPU1_D4 is placed at pin 11 (MC 5)
-206:CPU1_D3 is placed at pin 10 (MC 6)
-207:CPU1_DTACK is placed at pin 9 (MC 8)
-208:CPU0_F1_INT_REQ2 is placed at pin 8 (MC 11)
-209:CPU0_F1_BARR1 is placed at pin 6 (MC 13)
-210:DRAM_CS is placed at pin 5 (MC 14)
-211:CPU0_F1_INT_REQ1 is placed at pin 4 (MC 16)
-212:CPU1_A19 is placed at pin 22 (MC 17)
-213:CPU1_A20 is placed at pin 21 (MC 19)
-214:CPU1_A21 is placed at pin 20 (MC 21)
-215:CPU1_A22 is placed at pin 18 (MC 24)
+196:F_CPU0_INT2_LATCHED.d = 'd'0;
+197:F_CPU0_INT2_LATCHED.ck = F_CPU0_INT2;
+198:F_CPU0_INT2_LATCHED.ap = !SYS_RESET # IRQL2_ACK;
+199:
+200:IRQL2_ACK = !CPU1_INTACK2 & CPU1_INTACK1 & !CPU1_INTACK0 & INT_ACK;
+201:IRQL1_ACK = !CPU1_INTACK2 & !CPU1_INTACK1 & CPU1_INTACK0 & INT_ACK;
+202:
+203:/* active low priorty encoder for interrupts */
+204:
+205:IRQL7_INT = CPU1_IRQL7;
+206:IRQL6_INT = (CPU1_IRQL6) # !CPU1_IRQL7;
+207:IRQL5_INT = (CPU1_IRQL5) # !CPU1_IRQL6 # !CPU1_IRQL7;
+208:IRQL4_INT = (CPU1_IRQL4) # !CPU1_IRQL5 # !CPU1_IRQL6 # !CPU1_IRQL7;
+209://IRQL3_INT = (IRQL3A_PE & IRQL3B_PE) # !IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT;
+
+210:IRQL2_INT = (F_CPU0_INT2_LATCHED) # !CPU1_IRQL4 # !CPU1_IRQL5 # !CPU1_IRQL6 # !CPU1_IRQL7;
+211:IRQL1_INT = (F_CPU0_INT1_LATCHED) # !F_CPU0_INT2_LATCHED # !CPU1_IRQL4 # !CPU1_IRQL5 # !CPU1_IRQL6 # !CPU1_IRQL7;
+212:
+213:/* 
+214:   CPU0_IPL Drive using 8:3 priority encoder but only for 6 sources.   This output is driven from the above grouped signals.  
+215:   This picks the highest priority interrupt level and encodes that to the CPU.  The CPU will respond
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 5
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 19:38:06 2023
+Created Sun Jun 18 21:25:38 2023
 
-216:CPU1_A23 is placed at pin 17 (MC 25)
-217:MEM_OE is placed at pin 16 (MC 27)
-218:CPU1_HALT_OUT is placed at pin 15 (MC 29)
-219:TDI is placed at pin 14 (MC 32)
-220:Com_Ctrl_51 is placed at feedback node 632 (MC 32)
-221:CPU1_A12 is placed at pin 31 (MC 35)
-222:CPU1_A13 is placed at pin 30 (MC 37)
-223:CPU1_A14 is placed at pin 29 (MC 38)
-224:CPU1_A15 is placed at pin 28 (MC 40)
-225:CPU1_A16 is placed at pin 27 (MC 43)
-226:CPU1_A17 is placed at pin 25 (MC 45)
-227:CPU1_A18 is placed at pin 24 (MC 46)
-228:TMS is placed at pin 23 (MC 48)
-229:CPU0_1_HALT_REQ is placed at pin 41 (MC 49)
-230:CPU1_INTACK0 is placed at pin 40 (MC 51)
-231:CPU1_INTACK1 is placed at pin 39 (MC 53)
-232:CPU1_RESET_OUT is placed at pin 37 (MC 56)
-233:CPU1_A8 is placed at pin 36 (MC 57)
-234:CPU1_A9 is placed at pin 35 (MC 59)
-235:CPU1_A10 is placed at pin 34 (MC 61)
-236:CPU1_A11 is placed at pin 33 (MC 64)
-237:CPU0_1_RESET_REQ is placed at pin 44 (MC 65)
-238:CPU1_FC2 is placed at pin 45 (MC 67)
-239:CPU1_FC1 is placed at pin 46 (MC 69)
-240:CPU1_FC0 is placed at pin 48 (MC 72)
-241:TCK is placed at pin 62 (MC 96)
-242:TDO is placed at pin 71 (MC 112)
+216:   to any value other than 111 by doing an interrupt ack cycle.
+217:
+218:   NOTE - IPL signals are active low, so 000 = int 7, and 111 = no interrupt.
+219:   The corresponding int ack cycle drives the lowest three address lines (A3-A1) to 
+220:   indicate WHICH interrupt is being acknowledged, BUT those bits are active high.
+221:
+222:   So an IPL of 111 tells the CPU to do interrupt 7, and the cpu responds in the ack cycle 
+223:   by putting 000 on the address bits.  
+224:
+225:*/   
+226:
+227:CPU1_IPL0 = !(!IRQL1_INT #  !IRQL5_INT # !IRQL7_INT);
+228:CPU1_IPL1 = !(!IRQL6_INT # !IRQL7_INT # !IRQL2_INT);
+229:CPU1_IPL2 = !(!IRQL4_INT # !IRQL5_INT # !IRQL6_INT # !IRQL7_INT);
+230:
+231:/*
+232:
+233:Total dedicated input used:     4/4     (100%)
+234:Total I/O pins used             54/64   (84%)
+235:Total Logic cells used          27/128  (21%)
+236:Total Flip-Flop used            15/128  (11%)
+237:Total Foldback logic used       0/128   (0%)
+238:Total Nodes+FB/MCells           27/128  (21%)
+239:Total cascade used              0
+240:Total input pins                38
+241:Total output pins               20
+242:Total Pts                       72
 243:
-244:                                                                                    
-245:                                                                                    
-246:                                                                                    
-247:                          C                                                         
-248:                          P                S                                        
-249:                          U                Y                                        
-250:                     C C  1       D     C CS                                        
-251:                     P P  _       R     P P_                                        
-252:                     U U  D       A     U UR                                        
-253:                     1 1  T       M     1 1E                                        
-254:                     _ _  A   G   _   V _ _S   G       V                            
-255:                     D D  C   N   C   C A RE   N       C                            
-256:                     4 3  K   D   S   C S WT   D       C                            
-257:                    -------------------------------------------                     
-258:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
-259:                  /    10   8   6   4   2  84  82  80  78  76    \                 
-260:         CPU1_D5 | 12                    (*)                   74 |                 
-261:             VCC | 13                                          73 |                 
-262:             TDI | 14                                          72 | GND             
-263:   CPU1_HALT_OUT | 15                                          71 | TDO             
-264:          MEM_OE | 16                                          70 |                 
-265:        CPU1_A23 | 17                                          69 |                 
-266:        CPU1_A22 | 18                                          68 |                 
-267:             GND | 19                                          67 |                 
-268:        CPU1_A21 | 20                                          66 | VCC             
-269:        CPU1_A20 | 21                                          65 |                 
+244:Final global control pins assignment (if applicable)...
+245:-------------------------------------------------------
+246:F_CPU0_INT1 assigned to pin  81
+247:F_CPU0_INT2 assigned to pin  83
+248:
+249:
+250:
+251:Performing input pin pre-assignments ...
+252:------------------------------------
+253:CPU1_AS assigned to pin  2
+254:F_CPU0_INT2 assigned to pin  83
+255:CPU1_RW assigned to pin  1
+256:SYS_RESET assigned to pin  84
+257:F_CPU0_INT2_LATCHED.AP equation needs patching.
+258:F_CPU0_INT1_LATCHED.AP equation needs patching.
+259:2 control equtions need patching
+260:
+261:Attempt to place floating signals ...
+262:------------------------------------
+263:CPU1_D5 is placed at pin 12 (MC 3)
+264:CPU1_D4 is placed at pin 11 (MC 5)
+265:CPU1_D3 is placed at pin 10 (MC 6)
+266:CPU1_D2 is placed at pin 9 (MC 8)
+267:F_CPU0_INT2_LATCHED is placed at feedback node 609 (MC 9)
+268:F_CPU0_INT1_LATCHED is placed at feedback node 610 (MC 10)
+269:CPU1_D1 is placed at pin 8 (MC 11)
 
 LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 6
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Jun 09 19:38:06 2023
+Created Sun Jun 18 21:25:38 2023
 
-270:        CPU1_A19 | 22                 ATF1508                  64 |                 
-271:             TMS | 23               84-Lead PLCC               63 |                 
-272:        CPU1_A18 | 24                                          62 | TCK             
-273:        CPU1_A17 | 25                                          61 |                 
-274:             VCC | 26                                          60 |                 
-275:        CPU1_A16 | 27                                          59 | GND             
-276:        CPU1_A15 | 28                                          58 |                 
-277:        CPU1_A14 | 29                                          57 |                 
-278:        CPU1_A13 | 30                                          56 |                 
-279:        CPU1_A12 | 31                                          55 |                 
-280:             GND | 32                                          54 |                 
-281:                  \     34  36  38  40  42  44  46  48  50  52   /                 
-282:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
-283:                    --------------------------------------------                     
-284:                      C C C C C V C C C G V C C C G C         V                     
-285:                      P P P P P C P P P N C P P P N P         C                     
-286:                      U U U U U C U U U D C U U U D U         C                     
-287:                      1 1 1 1 1   1 1 0     0 1 1   1                               
-288:                      _ _ _ _ _   _ _ _     _ _ _   _                               
-289:                      A A A A R   I I 1     1 F F   F                               
-290:                      1 1 9 8 E   N N _     _ C C   C                               
-291:                      1 0     S   T T H     R 2 1   0                               
-292:                              E   A A A     E                                       
-293:                              T   C C L     S                                       
-294:                              _   K K T     E                                       
-295:                              O   1 0 _     T                                       
-296:                              U       R     _                                       
-297:
-298:*/
-299:
-300:
-301:
+270:F_CPU0_INT2_LATCHED.AP is placed at feedback node 612 (MC 12)
+271:CPU1_D0 is placed at pin 6 (MC 13)
+272:CPU0_BARR2 is placed at pin 5 (MC 14)
+273:F_CPU0_INT1_LATCHED.AP is placed at feedback node 615 (MC 15)
+274:CPU0_BARR1 is placed at pin 4 (MC 16)
+275:CPU1_A19 is placed at pin 22 (MC 17)
+276:CPU1_A20 is placed at pin 21 (MC 19)
+277:CPU1_A21 is placed at pin 20 (MC 21)
+278:CPU1_A22 is placed at pin 18 (MC 24)
+279:CPU1_A23 is placed at pin 17 (MC 25)
+280:CPU1_D7 is placed at pin 16 (MC 27)
+281:CPU1_D6 is placed at pin 15 (MC 29)
+282:TDI is placed at pin 14 (MC 32)
+283:CPU1_A12 is placed at pin 31 (MC 35)
+284:CPU1_A13 is placed at pin 30 (MC 37)
+285:CPU1_A14 is placed at pin 29 (MC 38)
+286:CPU1_A15 is placed at pin 28 (MC 40)
+287:CPU1_A16 is placed at pin 27 (MC 43)
+288:CPU1_A17 is placed at pin 25 (MC 45)
+289:CPU1_A18 is placed at pin 24 (MC 46)
+290:Com_Ctrl_128 is placed at feedback node 646 (MC 46)
+291:Com_Ctrl_127 is placed at feedback node 647 (MC 47)
+292:TMS is placed at pin 23 (MC 48)
+293:Com_Ctrl_126 is placed at feedback node 648 (MC 48)
+294:DRAM_CS is placed at pin 41 (MC 49)
+295:CPU1_INTACK0 is placed at pin 40 (MC 51)
+296:CPU1_INTACK1 is placed at pin 39 (MC 53)
+297:CPU1_INTACK2 is placed at pin 37 (MC 56)
+298:CPU1_A8 is placed at pin 36 (MC 57)
+299:CPU1_A9 is placed at pin 35 (MC 59)
+300:CPU1_A10 is placed at pin 34 (MC 61)
+301:CPU1_A11 is placed at pin 33 (MC 64)
+302:CPU1_VPA is placed at pin 44 (MC 65)
+303:CPU1_FC2 is placed at pin 45 (MC 67)
+304:CPU1_FC1 is placed at pin 46 (MC 69)
+305:CPU1_FC0 is placed at pin 48 (MC 72)
+306:CPU1_IPL2 is placed at pin 49 (MC 73)
+307:CPU0_C1HALTREQ is placed at pin 50 (MC 75)
+308:CPU1_IPL1 is placed at pin 51 (MC 77)
+309:CPU1_IPL0 is placed at pin 52 (MC 80)
+310:F_CPU0_BARR1 is placed at pin 54 (MC 83)
+311:F_CPU0_BARR2 is placed at pin 55 (MC 85)
+312:MEM_OE is placed at pin 56 (MC 86)
+313:CPU1_DTACK is placed at pin 58 (MC 91)
+314:CPU1_IRQL7 is placed at pin 60 (MC 93)
+315:CPU1_IRQL6 is placed at pin 61 (MC 94)
+316:TCK is placed at pin 62 (MC 96)
+317:CPU1_IRQL5 is placed at pin 63 (MC 97)
+318:CPU1_IRQL4 is placed at pin 64 (MC 99)
+319:DRAM_DTACK is placed at pin 65 (MC 101)
+320:CPU0_INT_REQ2 is placed at pin 69 (MC 107)
+321:CPU0_INT_REQ1 is placed at pin 70 (MC 109)
+322:TDO is placed at pin 71 (MC 112)
+323:F_CPU0_INT1 is placed at pin 81 (MC 128)
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 7
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sun Jun 18 21:25:38 2023
+
+324:
+325:                                                                                    
+326:                                                                                    
+327:                                             F   F                                  
+328:                                  C C        _   _                                  
+329:                                  P P      S C   C                                  
+330:                                  U U      Y P   P                                  
+331:                     C C  C C   C 0 0   C CS U   U                                  
+332:                     P P  P P   P _ _   P P_ 0   0                                  
+333:                     U U  U U   U B B   U UR _   _                                  
+334:                     1 1  1 1   1 A A   1 1E I   I                                  
+335:                     _ _  _ _ G _ R R V _ _S N G N     V                            
+336:                     D D  D D N D R R C A RE T N T     C                            
+337:                     4 3  2 1 D 0 2 1 C S WT 2 D 1     C                            
+338:                    -------------------------------------------                     
+339:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+340:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+341:         CPU1_D5 | 12                    (*)                   74 |                 
+342:             VCC | 13                                          73 |                 
+343:             TDI | 14                                          72 | GND             
+344:         CPU1_D6 | 15                                          71 | TDO             
+345:         CPU1_D7 | 16                                          70 | CPU0_INT_REQ1   
+346:        CPU1_A23 | 17                                          69 | CPU0_INT_REQ2   
+347:        CPU1_A22 | 18                                          68 |                 
+348:             GND | 19                                          67 |                 
+349:        CPU1_A21 | 20                                          66 | VCC             
+350:        CPU1_A20 | 21                                          65 | DRAM_DTACK      
+351:        CPU1_A19 | 22                 ATF1508                  64 | CPU1_IRQL4      
+352:             TMS | 23               84-Lead PLCC               63 | CPU1_IRQL5      
+353:        CPU1_A18 | 24                                          62 | TCK             
+354:        CPU1_A17 | 25                                          61 | CPU1_IRQL6      
+355:             VCC | 26                                          60 | CPU1_IRQL7      
+356:        CPU1_A16 | 27                                          59 | GND             
+357:        CPU1_A15 | 28                                          58 | CPU1_DTACK      
+358:        CPU1_A14 | 29                                          57 |                 
+359:        CPU1_A13 | 30                                          56 | MEM_OE          
+360:        CPU1_A12 | 31                                          55 | F_CPU0_BARR2    
+361:             GND | 32                                          54 | F_CPU0_BARR1    
+362:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+363:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+364:                    --------------------------------------------                     
+365:                      C C C C C V C C D G V C C C G C C C C C V                     
+366:                      P P P P P C P P R N C P P P N P P P P P C                     
+367:                      U U U U U C U U A D C U U U D U U U U U C                     
+368:                      1 1 1 1 1   1 1 M     1 1 1   1 1 0 1 1                       
+369:                      _ _ _ _ _   _ _ _     _ _ _   _ _ _ _ _                       
+370:                      A A A A I   I I C     V F F   F I C I I                       
+371:                      1 1 9 8 N   N N S     P C C   C P 1 P P                       
+372:                      1 0     T   T T       A 2 1   0 L H L L                       
+373:                              A   A A                 2 A 1 0                       
+374:                              C   C C                   L                           
+375:                              K   K K                   T                           
+376:                              2   1 0                   R                           
+377:                                                        E                           
+
+LISTING FOR LOGIC DESCRIPTION FILE: CPU1_CPLDA.pld                   Page 8
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sun Jun 18 21:25:38 2023
+
+378:
+379:*/
+380:
+381:
+382:
 
 
 
