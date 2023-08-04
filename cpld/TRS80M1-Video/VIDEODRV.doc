@@ -1,0 +1,728 @@
+
+*******************************************************************************
+                                     VGA4A
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1504ispplcc44  Library DLIB-h-40-1
+Created         Fri Aug 04 14:22:33 2023
+Name            VGA4A
+Partno          VGA4A
+Revision        01
+Date            05/10/2022
+Designer        Sponaugle
+Company         Ratiometric
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+CLK_12M.d  =>
+    !CLK_12M
+
+CLK_12M.ar  =>
+    !RESET_IN
+
+CLK_12M.ck  =>
+    CLK_25M
+
+HSYNC_COUNTER0.d  =>
+    !HSYNC_COUNTER0
+
+HSYNC_COUNTER0.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER0.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER1.d  =>
+    HSYNC_COUNTER0 & !HSYNC_COUNTER1
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER1
+
+HSYNC_COUNTER1.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER1.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER2.d  =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & !HSYNC_COUNTER2
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER2
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER2
+
+HSYNC_COUNTER2.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER2.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER2T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1
+
+HSYNC_COUNTER3.d  =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & !HSYNC_COUNTER3
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER3
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER3
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER3
+
+HSYNC_COUNTER3.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER3.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER3T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2
+
+HSYNC_COUNTER4.d  =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      !HSYNC_COUNTER4
+  # !HSYNC_COUNTER3 & HSYNC_COUNTER4
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER4
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER4
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER4
+
+HSYNC_COUNTER4.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER4.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER4T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3
+
+HSYNC_COUNTER5.d  =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & !HSYNC_COUNTER5 & !HSYNC_COUNTER9
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & !HSYNC_COUNTER5 & !HSYNC_COUNTER8
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & !HSYNC_COUNTER5 & HSYNC_COUNTER7
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & !HSYNC_COUNTER5 & HSYNC_COUNTER6
+  # !HSYNC_COUNTER4 & HSYNC_COUNTER5
+  # !HSYNC_COUNTER3 & HSYNC_COUNTER5
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER5
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER5
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER5
+
+HSYNC_COUNTER5.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER5.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER5T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4
+
+HSYNC_COUNTER6.d  =>
+    !HSYNC_COUNTER5 & HSYNC_COUNTER6
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & !HSYNC_COUNTER6
+  # !HSYNC_COUNTER4 & HSYNC_COUNTER6
+  # !HSYNC_COUNTER3 & HSYNC_COUNTER6
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER6
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER6
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER6
+
+HSYNC_COUNTER6.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER6.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER6T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5
+
+HSYNC_COUNTER7.d  =>
+    !HSYNC_COUNTER6 & HSYNC_COUNTER7
+  # !HSYNC_COUNTER5 & HSYNC_COUNTER7
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & HSYNC_COUNTER6 & !HSYNC_COUNTER7
+  # !HSYNC_COUNTER4 & HSYNC_COUNTER7
+  # !HSYNC_COUNTER3 & HSYNC_COUNTER7
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER7
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER7
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER7
+
+HSYNC_COUNTER7.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER7.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER7T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & HSYNC_COUNTER6
+
+HSYNC_COUNTER8.d  =>
+    !HSYNC_COUNTER7 & HSYNC_COUNTER8 & !HSYNC_COUNTER9
+  # !HSYNC_COUNTER6 & HSYNC_COUNTER8 & !HSYNC_COUNTER9
+  # !HSYNC_COUNTER5 & HSYNC_COUNTER8 & !HSYNC_COUNTER9
+  # !HSYNC_COUNTER6 & HSYNC_COUNTER7 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER5 & HSYNC_COUNTER7 & HSYNC_COUNTER8
+  # HSYNC_COUNTER6 & !HSYNC_COUNTER7 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER5 & HSYNC_COUNTER6 & HSYNC_COUNTER8
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & HSYNC_COUNTER6 & HSYNC_COUNTER7 & 
+      !HSYNC_COUNTER8
+  # HSYNC_COUNTER5 & !HSYNC_COUNTER7 & HSYNC_COUNTER8
+  # HSYNC_COUNTER5 & !HSYNC_COUNTER6 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER4 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER3 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER8
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER8
+
+HSYNC_COUNTER8.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER8.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER8T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & HSYNC_COUNTER6 & HSYNC_COUNTER7
+
+HSYNC_COUNTER9.d  =>
+    !HSYNC_COUNTER8 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER6 & HSYNC_COUNTER7 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER5 & HSYNC_COUNTER7 & HSYNC_COUNTER9
+  # HSYNC_COUNTER6 & !HSYNC_COUNTER7 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER5 & HSYNC_COUNTER6 & HSYNC_COUNTER9
+  # HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & HSYNC_COUNTER6 & HSYNC_COUNTER7 & 
+      HSYNC_COUNTER8 & !HSYNC_COUNTER9
+  # HSYNC_COUNTER5 & !HSYNC_COUNTER7 & HSYNC_COUNTER9
+  # HSYNC_COUNTER5 & !HSYNC_COUNTER6 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER4 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER3 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER2 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER1 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER0 & HSYNC_COUNTER9
+
+HSYNC_COUNTER9.ar  =>
+    !RESET_IN
+
+HSYNC_COUNTER9.ck  =>
+    CLK_12M
+
+HSYNC_COUNTER9T =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & HSYNC_COUNTER5 & HSYNC_COUNTER6 & HSYNC_COUNTER7 & 
+      HSYNC_COUNTER8
+
+HSYNC_DISPLAY_ACTIVE =>
+    HSYNC_COUNTER7 & !HSYNC_COUNTER9
+  # !HSYNC_COUNTER7 & HSYNC_COUNTER8 & !HSYNC_COUNTER9
+  # !HSYNC_COUNTER7 & !HSYNC_COUNTER8 & HSYNC_COUNTER9
+
+HSYNC_PATTERN =>
+    !HSYNC_COUNTER6 & !HSYNC_COUNTER7 & !HSYNC_COUNTER8 & !HSYNC_COUNTER9
+
+HSYNC_ZERO =>
+    !HSYNC_COUNTER9
+  # !HSYNC_COUNTER8
+  # HSYNC_COUNTER7
+  # HSYNC_COUNTER6
+  # HSYNC_COUNTER5
+  # !HSYNC_COUNTER4
+  # !HSYNC_COUNTER3
+  # !HSYNC_COUNTER2
+  # !HSYNC_COUNTER1
+  # !HSYNC_COUNTER0
+
+PIXEL_OUT.d  =>
+    HSYNC_COUNTER2 & HSYNC_COUNTER7 & !HSYNC_COUNTER9 & VSYNC_COUNTER5 & 
+      !VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & !HSYNC_COUNTER7 & !HSYNC_COUNTER8 & HSYNC_COUNTER9 & 
+      VSYNC_COUNTER5 & !VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & !HSYNC_COUNTER7 & HSYNC_COUNTER8 & !HSYNC_COUNTER9 & 
+      VSYNC_COUNTER5 & !VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & HSYNC_COUNTER7 & !HSYNC_COUNTER9 & !VSYNC_COUNTER5 & 
+      VSYNC_COUNTER6 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & !HSYNC_COUNTER7 & !HSYNC_COUNTER8 & HSYNC_COUNTER9 & 
+      !VSYNC_COUNTER5 & VSYNC_COUNTER6 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & !HSYNC_COUNTER7 & HSYNC_COUNTER8 & !HSYNC_COUNTER9 & 
+      !VSYNC_COUNTER5 & VSYNC_COUNTER6 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & HSYNC_COUNTER7 & !HSYNC_COUNTER9 & !VSYNC_COUNTER6 & 
+      VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & !HSYNC_COUNTER7 & !HSYNC_COUNTER8 & HSYNC_COUNTER9 & 
+      !VSYNC_COUNTER6 & VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # HSYNC_COUNTER2 & !HSYNC_COUNTER7 & HSYNC_COUNTER8 & !HSYNC_COUNTER9 & 
+      !VSYNC_COUNTER6 & VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+
+PIXEL_OUT.ar  =>
+    !RESET_IN
+
+PIXEL_OUT.ck  =>
+    !CLK_12M
+
+SYNC_OUT.d  =>
+    HSYNC_COUNTER9 & VSYNC_COUNTER9
+  # HSYNC_COUNTER9 & !VSYNC_COUNTER8
+  # HSYNC_COUNTER9 & VSYNC_COUNTER7
+  # HSYNC_COUNTER9 & VSYNC_COUNTER6
+  # HSYNC_COUNTER9 & VSYNC_COUNTER5
+  # HSYNC_COUNTER9 & VSYNC_COUNTER4
+  # HSYNC_COUNTER9 & VSYNC_COUNTER3
+  # HSYNC_COUNTER9 & !VSYNC_COUNTER0 & !VSYNC_COUNTER1
+  # HSYNC_COUNTER9 & !VSYNC_COUNTER2
+  # HSYNC_COUNTER8 & HSYNC_COUNTER9
+  # HSYNC_COUNTER8 & VSYNC_COUNTER9
+  # HSYNC_COUNTER8 & !VSYNC_COUNTER8
+  # HSYNC_COUNTER8 & VSYNC_COUNTER7
+  # HSYNC_COUNTER8 & VSYNC_COUNTER6
+  # HSYNC_COUNTER8 & VSYNC_COUNTER5
+  # HSYNC_COUNTER8 & VSYNC_COUNTER4
+  # HSYNC_COUNTER8 & VSYNC_COUNTER3
+  # HSYNC_COUNTER8 & !VSYNC_COUNTER0 & !VSYNC_COUNTER1
+  # HSYNC_COUNTER8 & !VSYNC_COUNTER2
+  # HSYNC_COUNTER7 & HSYNC_COUNTER9
+  # HSYNC_COUNTER7 & VSYNC_COUNTER9
+  # HSYNC_COUNTER7 & !VSYNC_COUNTER8
+  # HSYNC_COUNTER7 & VSYNC_COUNTER7
+  # HSYNC_COUNTER7 & VSYNC_COUNTER6
+  # HSYNC_COUNTER7 & VSYNC_COUNTER5
+  # HSYNC_COUNTER7 & VSYNC_COUNTER4
+  # HSYNC_COUNTER7 & VSYNC_COUNTER3
+  # HSYNC_COUNTER7 & !VSYNC_COUNTER0 & !VSYNC_COUNTER1
+  # HSYNC_COUNTER7 & !VSYNC_COUNTER2
+  # HSYNC_COUNTER6 & VSYNC_COUNTER9
+  # HSYNC_COUNTER6 & !VSYNC_COUNTER8
+  # HSYNC_COUNTER6 & VSYNC_COUNTER7
+  # HSYNC_COUNTER6 & VSYNC_COUNTER6
+  # HSYNC_COUNTER6 & VSYNC_COUNTER5
+  # HSYNC_COUNTER6 & VSYNC_COUNTER4
+  # HSYNC_COUNTER6 & VSYNC_COUNTER3
+  # HSYNC_COUNTER6 & !VSYNC_COUNTER0 & !VSYNC_COUNTER1
+  # HSYNC_COUNTER6 & !VSYNC_COUNTER2
+
+SYNC_OUT.ap  =>
+    !RESET_IN
+
+SYNC_OUT.ck  =>
+    !CLK_12M
+
+VSYNC_CLOCK_A.d  =>
+    HSYNC_COUNTER0 & HSYNC_COUNTER1 & HSYNC_COUNTER2 & HSYNC_COUNTER3 & 
+      HSYNC_COUNTER4 & !HSYNC_COUNTER5 & !HSYNC_COUNTER6 & !HSYNC_COUNTER7 & 
+      HSYNC_COUNTER8 & HSYNC_COUNTER9
+
+VSYNC_CLOCK_A.ar  =>
+    !RESET_IN
+
+VSYNC_CLOCK_A.ck  =>
+    !CLK_12M
+
+VSYNC_CLOCK_B.d  =>
+    VSYNC_CLOCK_A
+
+VSYNC_CLOCK_B.ar  =>
+    !RESET_IN
+
+VSYNC_CLOCK_B.ck  =>
+    CLK_12M
+
+VSYNC_COUNTER0.d  =>
+    !VSYNC_COUNTER0
+
+VSYNC_COUNTER0.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER0.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER1.d  =>
+    VSYNC_COUNTER0 & !VSYNC_COUNTER1
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER1
+
+VSYNC_COUNTER1.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER1.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER2.d  =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & !VSYNC_COUNTER2
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER2
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER2
+
+VSYNC_COUNTER2.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER2.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER2T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1
+
+VSYNC_COUNTER3.d  =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      VSYNC_COUNTER9
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      !VSYNC_COUNTER8
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      VSYNC_COUNTER7
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      VSYNC_COUNTER6
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      VSYNC_COUNTER5
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER3
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER3
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER3
+
+VSYNC_COUNTER3.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER3.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER3T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2
+
+VSYNC_COUNTER4.d  =>
+    !VSYNC_COUNTER3 & VSYNC_COUNTER4
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      !VSYNC_COUNTER4
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER4
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER4
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER4
+
+VSYNC_COUNTER4.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER4.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER4T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3
+
+VSYNC_COUNTER5.d  =>
+    !VSYNC_COUNTER4 & VSYNC_COUNTER5
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER5
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & !VSYNC_COUNTER5
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER5
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER5
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER5
+
+VSYNC_COUNTER5.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER5.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER5T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4
+
+VSYNC_COUNTER6.d  =>
+    !VSYNC_COUNTER5 & VSYNC_COUNTER6
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER6
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER6
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & !VSYNC_COUNTER6
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER6
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER6
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER6
+
+VSYNC_COUNTER6.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER6.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER6T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5
+
+VSYNC_COUNTER7.d  =>
+    !VSYNC_COUNTER6 & VSYNC_COUNTER7
+  # !VSYNC_COUNTER5 & VSYNC_COUNTER7
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER7
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER7
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER6 & !VSYNC_COUNTER7
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER7
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER7
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER7
+
+VSYNC_COUNTER7.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER7.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER7T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER6
+
+VSYNC_COUNTER8.d  =>
+    !VSYNC_COUNTER7 & VSYNC_COUNTER8 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER6 & VSYNC_COUNTER8 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER5 & VSYNC_COUNTER8 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER8 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER8 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER6 & VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER5 & VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # VSYNC_COUNTER6 & !VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER5 & VSYNC_COUNTER6 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER6 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER6 & VSYNC_COUNTER8
+  # VSYNC_COUNTER5 & !VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # VSYNC_COUNTER5 & !VSYNC_COUNTER6 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER5 & VSYNC_COUNTER8
+  # VSYNC_COUNTER4 & !VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # VSYNC_COUNTER4 & !VSYNC_COUNTER6 & VSYNC_COUNTER8
+  # VSYNC_COUNTER4 & !VSYNC_COUNTER5 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER4 & VSYNC_COUNTER8
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER6 & VSYNC_COUNTER7 & 
+      !VSYNC_COUNTER8
+  # VSYNC_COUNTER3 & !VSYNC_COUNTER7 & VSYNC_COUNTER8
+  # VSYNC_COUNTER3 & !VSYNC_COUNTER6 & VSYNC_COUNTER8
+  # VSYNC_COUNTER3 & !VSYNC_COUNTER5 & VSYNC_COUNTER8
+  # VSYNC_COUNTER3 & !VSYNC_COUNTER4 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER8
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER8
+
+VSYNC_COUNTER8.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER8.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER8T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER6 & VSYNC_COUNTER7
+
+VSYNC_COUNTER9.d  =>
+    !VSYNC_COUNTER7 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER6 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER5 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER4 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER3 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER8 & VSYNC_COUNTER9
+  # VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER6 & VSYNC_COUNTER7 & 
+      VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # !VSYNC_COUNTER2 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER1 & VSYNC_COUNTER9
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER9
+
+VSYNC_COUNTER9.ar  =>
+    !RESET_IN
+
+VSYNC_COUNTER9.ck  =>
+    VSYNC_CLOCK_B
+
+VSYNC_COUNTER9T =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & VSYNC_COUNTER3 & 
+      VSYNC_COUNTER4 & VSYNC_COUNTER5 & VSYNC_COUNTER6 & VSYNC_COUNTER7 & 
+      VSYNC_COUNTER8
+
+VSYNC_DISPLAY_ACTIVE =>
+    VSYNC_COUNTER5 & !VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # !VSYNC_COUNTER5 & VSYNC_COUNTER6 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+  # !VSYNC_COUNTER6 & VSYNC_COUNTER7 & !VSYNC_COUNTER8 & !VSYNC_COUNTER9
+
+VSYNC_OUTPUT_VSYNC =>
+    VSYNC_COUNTER0 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & !VSYNC_COUNTER4 & 
+      !VSYNC_COUNTER5 & !VSYNC_COUNTER6 & !VSYNC_COUNTER7 & VSYNC_COUNTER8 & 
+      !VSYNC_COUNTER9
+  # !VSYNC_COUNTER0 & VSYNC_COUNTER1 & VSYNC_COUNTER2 & !VSYNC_COUNTER3 & 
+      !VSYNC_COUNTER4 & !VSYNC_COUNTER5 & !VSYNC_COUNTER6 & !VSYNC_COUNTER7 & 
+      VSYNC_COUNTER8 & !VSYNC_COUNTER9
+
+VSYNC_PATTERN =>
+    !HSYNC_COUNTER7 & !HSYNC_COUNTER8 & HSYNC_COUNTER9
+  # !HSYNC_COUNTER9
+
+VSYNC_ZERO =>
+    VSYNC_COUNTER9
+  # !VSYNC_COUNTER8
+  # VSYNC_COUNTER7
+  # VSYNC_COUNTER6
+  # VSYNC_COUNTER5
+  # VSYNC_COUNTER4
+  # VSYNC_COUNTER3
+  # !VSYNC_COUNTER2
+  # !VSYNC_COUNTER1
+  # !VSYNC_COUNTER0
+
+hsync_counter_3_field =>
+    HSYNC_COUNTER2 , HSYNC_COUNTER1 , HSYNC_COUNTER0
+
+hsync_counter_4_field =>
+    HSYNC_COUNTER3 , HSYNC_COUNTER2 , HSYNC_COUNTER1 , HSYNC_COUNTER0
+
+hsync_counter_field =>
+    HSYNC_COUNTER9 , HSYNC_COUNTER8 , HSYNC_COUNTER7 , HSYNC_COUNTER6 , 
+      HSYNC_COUNTER5 , HSYNC_COUNTER4 , HSYNC_COUNTER3 , HSYNC_COUNTER2 , 
+      HSYNC_COUNTER1 , HSYNC_COUNTER0
+
+vsync_counter_4_field =>
+    VSYNC_COUNTER3 , VSYNC_COUNTER2 , VSYNC_COUNTER1 , VSYNC_COUNTER0
+
+vsync_counter_field =>
+    VSYNC_COUNTER9 , VSYNC_COUNTER8 , VSYNC_COUNTER7 , VSYNC_COUNTER6 , 
+      VSYNC_COUNTER5 , VSYNC_COUNTER4 , VSYNC_COUNTER3 , VSYNC_COUNTER2 , 
+      VSYNC_COUNTER1 , VSYNC_COUNTER0
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    CLK_12M                     67       N        -       -       -     
+    CLK_12M             d       67       M        1       0       1     
+    CLK_12M             ar      67       M        1       0       1     
+    CLK_12M             ck      67       M        1       0       1     
+    CLK_25M                     43       V        -       -       -     
+    HSYNC_COUNTER0              45       N        -       -       -     
+    HSYNC_COUNTER0      d       45       M        1       0       1     
+    HSYNC_COUNTER0      ar      45       M        1       0       1     
+    HSYNC_COUNTER0      ck      45       M        1       0       1     
+    HSYNC_COUNTER1              46       N        -       -       -     
+    HSYNC_COUNTER1      d       46       M        2       0       1     
+    HSYNC_COUNTER1      ar      46       M        1       0       1     
+    HSYNC_COUNTER1      ck      46       M        1       0       1     
+    HSYNC_COUNTER2              47       N        -       -       -     
+    HSYNC_COUNTER2      d       47       M        3       0       1     
+    HSYNC_COUNTER2      ar      47       M        1       0       1     
+    HSYNC_COUNTER2      ck      47       M        1       0       1     
+    HSYNC_COUNTER2T             0        I        1       -       -     
+    HSYNC_COUNTER3              48       N        -       -       -     
+    HSYNC_COUNTER3      d       48       M        4       0       1     
+    HSYNC_COUNTER3      ar      48       M        1       0       1     
+    HSYNC_COUNTER3      ck      48       M        1       0       1     
+    HSYNC_COUNTER3T             0        I        1       -       -     
+    HSYNC_COUNTER4              49       N        -       -       -     
+    HSYNC_COUNTER4      d       49       M        5       0       1     
+    HSYNC_COUNTER4      ar      49       M        1       0       1     
+    HSYNC_COUNTER4      ck      49       M        1       0       1     
+    HSYNC_COUNTER4T             0        I        1       -       -     
+    HSYNC_COUNTER5              50       N        -       -       -     
+    HSYNC_COUNTER5      d       50       M        9       0       1     
+    HSYNC_COUNTER5      ar      50       M        1       0       1     
+    HSYNC_COUNTER5      ck      50       M        1       0       1     
+    HSYNC_COUNTER5T             0        I        1       -       -     
+    HSYNC_COUNTER6              51       N        -       -       -     
+    HSYNC_COUNTER6      d       51       M        7       0       1     
+    HSYNC_COUNTER6      ar      51       M        1       0       1     
+    HSYNC_COUNTER6      ck      51       M        1       0       1     
+    HSYNC_COUNTER6T             0        I        1       -       -     
+    HSYNC_COUNTER7              52       N        -       -       -     
+    HSYNC_COUNTER7      d       52       M        8       0       1     
+    HSYNC_COUNTER7      ar      52       M        1       0       1     
+    HSYNC_COUNTER7      ck      52       M        1       0       1     
+    HSYNC_COUNTER7T             0        I        1       -       -     
+    HSYNC_COUNTER8              53       N        -       -       -     
+    HSYNC_COUNTER8      d       53       M        15      0       1     
+    HSYNC_COUNTER8      ar      53       M        1       0       1     
+    HSYNC_COUNTER8      ck      53       M        1       0       1     
+    HSYNC_COUNTER8T             0        I        1       -       -     
+    HSYNC_COUNTER9              54       N        -       -       -     
+    HSYNC_COUNTER9      d       54       M        13      0       1     
+    HSYNC_COUNTER9      ar      54       M        1       0       1     
+    HSYNC_COUNTER9      ck      54       M        1       0       1     
+    HSYNC_COUNTER9T             0        I        1       -       -     
+    HSYNC_DISPLAY_ACTIVE        0        I        3       -       -     
+    HSYNC_PATTERN               0        I        1       -       -     
+    HSYNC_ZERO                  0        I        10      -       -     
+    PIXEL_OUT                   4        V        -       -       -     
+    PIXEL_OUT           d       4        X        9       0       1     
+    PIXEL_OUT           ar      4        X        1       0       1     
+    PIXEL_OUT           ck      4        X        1       0       1     
+    RESET_IN                    1        V        -       -       -     
+    SYNC_OUT                    5        V        -       -       -     
+    SYNC_OUT            d       5        X        38      0       1     
+    SYNC_OUT            ap      5        X        1       0       1     
+    SYNC_OUT            ck      5        X        1       0       1     
+    VSYNC_CLOCK_A               65       N        -       -       -     
+    VSYNC_CLOCK_A       d       65       M        1       0       1     
+    VSYNC_CLOCK_A       ar      65       M        1       0       1     
+    VSYNC_CLOCK_A       ck      65       M        1       0       1     
+    VSYNC_CLOCK_B               66       N        -       -       -     
+    VSYNC_CLOCK_B       d       66       M        1       0       1     
+    VSYNC_CLOCK_B       ar      66       M        1       0       1     
+    VSYNC_CLOCK_B       ck      66       M        1       0       1     
+    VSYNC_COUNTER0              55       N        -       -       -     
+    VSYNC_COUNTER0      d       55       M        1       0       1     
+    VSYNC_COUNTER0      ar      55       M        1       0       1     
+    VSYNC_COUNTER0      ck      55       M        1       0       1     
+    VSYNC_COUNTER1              56       N        -       -       -     
+    VSYNC_COUNTER1      d       56       M        2       0       1     
+    VSYNC_COUNTER1      ar      56       M        1       0       1     
+    VSYNC_COUNTER1      ck      56       M        1       0       1     
+    VSYNC_COUNTER2              57       N        -       -       -     
+    VSYNC_COUNTER2      d       57       M        3       0       1     
+    VSYNC_COUNTER2      ar      57       M        1       0       1     
+    VSYNC_COUNTER2      ck      57       M        1       0       1     
+    VSYNC_COUNTER2T             0        I        1       -       -     
+    VSYNC_COUNTER3              58       N        -       -       -     
+    VSYNC_COUNTER3      d       58       M        9       0       1     
+    VSYNC_COUNTER3      ar      58       M        1       0       1     
+    VSYNC_COUNTER3      ck      58       M        1       0       1     
+    VSYNC_COUNTER3T             0        I        1       -       -     
+    VSYNC_COUNTER4              59       N        -       -       -     
+    VSYNC_COUNTER4      d       59       M        5       0       1     
+    VSYNC_COUNTER4      ar      59       M        1       0       1     
+    VSYNC_COUNTER4      ck      59       M        1       0       1     
+    VSYNC_COUNTER4T             0        I        1       -       -     
+    VSYNC_COUNTER5              60       N        -       -       -     
+    VSYNC_COUNTER5      d       60       M        6       0       1     
+    VSYNC_COUNTER5      ar      60       M        1       0       1     
+    VSYNC_COUNTER5      ck      60       M        1       0       1     
+    VSYNC_COUNTER5T             0        I        1       -       -     
+    VSYNC_COUNTER6              61       N        -       -       -     
+    VSYNC_COUNTER6      d       61       M        7       0       1     
+    VSYNC_COUNTER6      ar      61       M        1       0       1     
+    VSYNC_COUNTER6      ck      61       M        1       0       1     
+    VSYNC_COUNTER6T             0        I        1       -       -     
+    VSYNC_COUNTER7              62       N        -       -       -     
+    VSYNC_COUNTER7      d       62       M        8       0       1     
+    VSYNC_COUNTER7      ar      62       M        1       0       1     
+    VSYNC_COUNTER7      ck      62       M        1       0       1     
+    VSYNC_COUNTER7T             0        I        1       -       -     
+    VSYNC_COUNTER8              63       N        -       -       -     
+    VSYNC_COUNTER8      d       63       M        29      0       1     
+    VSYNC_COUNTER8      ar      63       M        1       0       1     
+    VSYNC_COUNTER8      ck      63       M        1       0       1     
+    VSYNC_COUNTER8T             0        I        1       -       -     
+    VSYNC_COUNTER9              64       N        -       -       -     
+    VSYNC_COUNTER9      d       64       M        10      0       1     
+    VSYNC_COUNTER9      ar      64       M        1       0       1     
+    VSYNC_COUNTER9      ck      64       M        1       0       1     
+    VSYNC_COUNTER9T             0        I        1       -       -     
+    VSYNC_DISPLAY_ACTIVE        0        I        3       -       -     
+    VSYNC_OUTPUT_VSYNC          0        I        2       -       -     
+    VSYNC_PATTERN               0        I        2       -       -     
+    VSYNC_ZERO                  0        I        10      -       -     
+    hsync_counter_3_field        0        F        -       -       -     
+    hsync_counter_4_field        0        F        -       -       -     
+    hsync_counter_field         0        F        -       -       -     
+    vsync_counter_4_field        0        F        -       -       -     
+    vsync_counter_field         0        F        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

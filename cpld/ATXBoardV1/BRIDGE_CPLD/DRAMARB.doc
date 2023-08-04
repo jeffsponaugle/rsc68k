@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          f1504ispplcc44  Library DLIB-h-40-1
-Created         Sun Jun 18 22:12:46 2023
+Created         Sat Jun 24 09:21:49 2023
 Name            DRAMARB
 Partno          DRAMARB
 Revision        01
@@ -467,10 +467,10 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CAS_PRE             d       60       M        1       0       1     
     CAS_PRE             ap      60       M        4       0       1     
     CAS_PRE             ck      60       M        1       0       1     
-    CLK_16M_INTERNAL            0        V        -       -       -     
-    CLK_16M_INTERNAL    d       0        X        1       0       1     
-    CLK_16M_INTERNAL    ar      0        X        1       0       1     
-    CLK_16M_INTERNAL    ck      0        X        1       0       1     
+    CLK_16M_INTERNAL            24       V        -       -       -     
+    CLK_16M_INTERNAL    d       24       X        1       0       1     
+    CLK_16M_INTERNAL    ar      24       X        1       0       1     
+    CLK_16M_INTERNAL    ck      24       X        1       0       1     
     CLK_32M                     2        V        -       -       -     
     CPU0_A1                     25       V        -       -       -     
     CPU0_DRAM_DTACK             18       V        1       0       1     
@@ -480,7 +480,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CPU1_A1                     26       V        -       -       -     
     CPU1_DRAM_DTACK             19       V        1       0       1     
     CPU1_LDS                    31       V        -       -       -     
-    CPU1_RW                     0        V        -       -       -     
+    CPU1_RW                     33       V        -       -       -     
     CPU1_UDS                    28       V        -       -       -     
     DRAM_AB                     20       V        -       -       -     
     DRAM_AB             d       20       X        1       0       1     
@@ -529,10 +529,10 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     REFRESH_COMPLETED_PRE2d       63       M        1       0       1     
     REFRESH_COMPLETED_PRE2ap      63       M        2       0       1     
     REFRESH_COMPLETED_PRE2ck      63       M        1       0       1     
-    REFRESH_GRANT               0        V        -       -       -     
-    REFRESH_GRANT       d       0        X        3       0       1     
-    REFRESH_GRANT       ap      0        X        3       0       1     
-    REFRESH_GRANT       ck      0        X        1       0       1     
+    REFRESH_GRANT               31       V        -       -       -     
+    REFRESH_GRANT       d       31       X        3       0       1     
+    REFRESH_GRANT       ap      31       X        3       0       1     
+    REFRESH_GRANT       ck      31       X        1       0       1     
     REFRESH_REQUESTED           57       N        -       -       -     
     REFRESH_REQUESTED   d       57       M        1       0       1     
     REFRESH_REQUESTED   ap      57       M        2       0       1     
@@ -586,6 +586,14 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     REQ_CLOCKED1        ap      46       M        1       0       1     
     REQ_CLOCKED1        ck      46       M        1       0       1     
     SYS_RESET                   1        V        -       -       -     
+    UNUSED_IO0                  34       V        -       -       -     
+    UNUSED_IO1                  36       V        -       -       -     
+    UNUSED_IO2                  37       V        -       -       -     
+    UNUSED_IO3                  39       V        -       -       -     
+    UNUSED_IO4                  40       V        -       -       -     
+    UNUSED_IO5                  41       V        -       -       -     
+    UNUSED_IONLY0               43       V        -       -       -     
+    UNUSED_IONLY1               44       V        -       -       -     
 
 
 LEGEND    D : default variable         F : field      G : group

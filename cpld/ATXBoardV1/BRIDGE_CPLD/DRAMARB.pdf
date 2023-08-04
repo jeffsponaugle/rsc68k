@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Sun Jun 18 22:12:46 2023 "}
+  {DBtime "Sat Jun 24 09:21:49 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,25 +33,35 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P CAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P CAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P CAS2 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P CAS3 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P RAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P RAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P AREQ0 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P AREQ1 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P GRANT0 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P GRANT1 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P DRAM_AB {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P CPU0_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P CPU1_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P CPU0_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P CPU0_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P CPU1_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P UNUSE0 {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P CLK_32M {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P CAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P CAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P CAS2 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P CAS3 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P RAS0 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P RAS1 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P AREQ0 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P AREQ1 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P GRANT0 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P GRANT1 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P DRAM_AB {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P CLK_16M_ {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P CPU0_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P CPU1_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P CPU0_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P CPU1_UDS {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P CPU0_LDS {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P REFRESH_ {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P CPU1_RW {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P UNUSED0 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P UNUSED1 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P UNUSED2 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P UNUSED3 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P UNUSED4 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P UNUSED5 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P UNUSE1 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
    {P CPU0_DRA {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P CPU1_DRA {Pt "I/O"}{Lq 0}{Ploc 360 40}}
    {P DRAM_RW {Pt "I/O"}{Lq 0}{Ploc 360 60}}
@@ -60,10 +70,22 @@
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 230 430}
+   {Rdl 230 670}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
+   {Pnl 120 650}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 610}
+   {Pnl 120 590}
+   {Pnl 120 570}
+   {Pnl 120 550}
+   {Pnl 120 530}
+   {Pnl 120 510}
+   {Pnl 120 490}
+   {Pnl 120 470}
+   {Pnl 120 450}
+   {Pnl 120 430}
    {Pnl 120 410}
    {Pnl 120 390}
    {Pnl 120 370}
@@ -82,19 +104,30 @@
    {Pnl 120 110}
    {Pnl 120 90}
    {Pnl 120 70}
-   {Pnl 120 50}
    [Ts 15][Tj "LC"]
    {Pnl 340 30}
    {Pnl 340 50}
    {Pnl 340 70}
 
-   {Sd A 1 2 4 5 6 8 9 11 12 14 16 17 20 25 26 27 28 29 31 18 19 21}
+   {Sd A 43 1 2 4 5 6 8 9 11 12 14 16 17 20 24 25 26 27 28 29 31 33 34 36 37 39 40 41 44 18 19 21}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 420 330 0}
+   {R 130 660 330 0}
+   {L 130 640 100 640}
+   {L 130 650 140 640 130 630}
+   {L 130 600 100 600}
+   {L 130 580 100 580}
+   {L 130 560 100 560}
+   {L 130 540 100 540}
+   {L 130 520 100 520}
+   {L 130 500 100 500}
+   {L 130 480 100 480}
+   {L 130 460 100 460}
+   {L 130 440 100 440}
+   {L 130 420 100 420}
    {L 130 400 100 400}
    {L 130 380 100 380}
    {L 130 360 100 360}
@@ -113,31 +146,40 @@
    {L 130 100 100 100}
    {L 130 80 100 80}
    {L 130 60 100 60}
-   {L 130 40 100 40}
    {L 330 20 360 20}
    {L 330 40 360 40}
    {L 330 60 360 60}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "SYS_RESE" 140 400}
-   {T "CLK_32M" 140 380}
-   {T "CAS0" 140 360}
-   {T "CAS1" 140 340}
-   {T "CAS2" 140 320}
-   {T "CAS3" 140 300}
-   {T "RAS0" 140 280}
-   {T "RAS1" 140 260}
-   {T "AREQ0" 140 240}
-   {T "AREQ1" 140 220}
-   {T "GRANT0" 140 200}
-   {T "GRANT1" 140 180}
-   {T "DRAM_AB" 140 160}
-   {T "CPU0_A1" 140 140}
-   {T "CPU1_A1" 140 120}
-   {T "CPU0_UDS" 140 100}
-   {T "CPU1_UDS" 140 80}
-   {T "CPU0_LDS" 140 60}
-   {T "CPU1_LDS" 140 40}
+   {T "UNUSE0" 140 640}
+   {T "SYS_RESE" 140 600}
+   {T "CLK_32M" 140 580}
+   {T "CAS0" 140 560}
+   {T "CAS1" 140 540}
+   {T "CAS2" 140 520}
+   {T "CAS3" 140 500}
+   {T "RAS0" 140 480}
+   {T "RAS1" 140 460}
+   {T "AREQ0" 140 440}
+   {T "AREQ1" 140 420}
+   {T "GRANT0" 140 400}
+   {T "GRANT1" 140 380}
+   {T "DRAM_AB" 140 360}
+   {T "CLK_16M_" 140 340}
+   {T "CPU0_A1" 140 320}
+   {T "CPU1_A1" 140 300}
+   {T "CPU0_UDS" 140 280}
+   {T "CPU1_UDS" 140 260}
+   {T "CPU0_LDS" 140 240}
+   {T "REFRESH_" 140 220}
+   {T "CPU1_RW" 140 200}
+   {T "UNUSED0" 140 180}
+   {T "UNUSED1" 140 160}
+   {T "UNUSED2" 140 140}
+   {T "UNUSED3" 140 120}
+   {T "UNUSED4" 140 100}
+   {T "UNUSED5" 140 80}
+   {T "UNUSE1" 140 60}
    [Tj "RC"]
    {T "CPU0_DRA" 320 20}
    {T "CPU1_DRA" 320 40}
@@ -149,13 +191,13 @@
 
   {ATR
    {IN
-    {Org 100 40}
+    {Org 100 60}
     {Ty 255}
    }
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\DRAMARB 230 420}
+    {At PLD C:\DRAMARB 230 660}
    }
   }
  }
@@ -165,6 +207,8 @@
   }
 
   {NET_DEF
+   {N UNUSE0
+   }
    {N SYS_RESE
    }
    {N CLK_32M
@@ -191,6 +235,8 @@
    }
    {N DRAM_AB
    }
+   {N CLK_16M_
+   }
    {N CPU0_A1
    }
    {N CPU1_A1
@@ -201,7 +247,23 @@
    }
    {N CPU0_LDS
    }
-   {N CPU1_LDS
+   {N REFRESH_
+   }
+   {N CPU1_RW
+   }
+   {N UNUSED0
+   }
+   {N UNUSED1
+   }
+   {N UNUSED2
+   }
+   {N UNUSED3
+   }
+   {N UNUSED4
+   }
+   {N UNUSED5
+   }
+   {N UNUSE1
    }
    {N CPU0_DRA
    }

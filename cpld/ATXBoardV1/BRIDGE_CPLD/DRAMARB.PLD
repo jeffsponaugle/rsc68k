@@ -19,28 +19,35 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 /** Pins that will be exposed in the final design  **/
 
 // INPUTS
-Pin[2] = CLK_32M;                  /* Clock */
-Pin[1] = SYS_RESET;                /* Active Low Reset */
+Pin[2]     = CLK_32M;                  /* Clock */
+Pin[1]     = SYS_RESET;                /* Active Low Reset */
 Pin[12,14] = [AREQ0..1];                  /* Active Low Request, clocked internaly on CLK+ edge */
 Pin[25,26] = CPU0_A1, CPU1_A1;
 Pin[27,28] = CPU0_UDS, CPU1_UDS;
 Pin[29,31] = CPU0_LDS, CPU1_LDS;
-Pin[28] = CPU0_RW;
-Pin     = CPU1_RW;
+Pin[28]    = CPU0_RW;
+Pin[33]    = CPU1_RW;
 
 // OUTPUTS
-Pin[9,11] = [RAS0..1];
+Pin[9,11]    = [RAS0..1];
 Pin[4,5,6,8] = [CAS0..3];
-Pin[21,20] = DRAM_RW, DRAM_AB;
-Pin[18,19] = CPU0_DRAM_DTACK, CPU1_DRAM_DTACK;
+Pin[21,20]   = DRAM_RW, DRAM_AB;
+Pin[18,19]   = CPU0_DRAM_DTACK, CPU1_DRAM_DTACK;
 
-
-
-Pin[16,17] = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
+Pin[16,17]   = [GRANT0..1];                /* Active Low Grant, clocked output on CLK- edge */
 
 /* Pins that are being exposed to enable debugging */
-Pin = REFRESH_GRANT;
-Pin = CLK_16M_INTERNAL;
+Pin[31] = REFRESH_GRANT;
+Pin[24] = CLK_16M_INTERNAL;
+
+Pin[34] = UNUSED_IO0;
+Pin[36] = UNUSED_IO1;
+Pin[37] = UNUSED_IO2;
+Pin[39] = UNUSED_IO3;
+Pin[40] = UNUSED_IO4;
+Pin[41] = UNUSED_IO5;
+Pin[43] = UNUSED_IONLY0;
+Pin[44] = UNUSED_IONLY1;
 
 NODE [REQ_CLOCKED0..1];
 NODE PE_BIAS;
@@ -373,6 +380,7 @@ TDO is placed at pin 38 (MC 56)
                  _  _              N                             
                  D  D              T                             
                  T  T              E                             
+
 
 
 */
