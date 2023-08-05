@@ -19,7 +19,9 @@ Pin[4]  = PIXEL_OUT;
 NODE [HSYNC_COUNTER0..9];
 NODE [VSYNC_COUNTER0..9];
 NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
-NODE CLK_12M;
+Pin =CLK_12M;
+Pin =HSYNC_ZERO;
+Pin =VSYNC_ZERO;
 
 CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
@@ -160,13 +162,13 @@ FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
 VSYNC_ZERO = !(vsync_counter_field:['d'263]);
 
 /* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row that we want to output pixel data.  Rows 32-223 (192 rows) */
-VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'32..'d'223]);
+VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
 
 /* VSYNC_OUTPUT_VSYNC == 1 when on a row that we want to output a vertical sync signal on. The last 3 rows */
 VSYNC_OUTPUT_VSYNC = (vsync_counter_field:['d'261..'d'263]);
 
 /* HSYNC_DISPLAY_ACTIVE == 1 when on the part of a line where we want output pixel data */
-HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'128..'d'639]);
+HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'180..'d'691]);
 
 /* VSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Vertical SYNC, but inverted.  
    This value is ==1 at the locations that we want the SYNC signal to be 0. */
