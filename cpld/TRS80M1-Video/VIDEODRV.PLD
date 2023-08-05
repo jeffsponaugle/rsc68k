@@ -165,10 +165,10 @@ VSYNC_ZERO = !(vsync_counter_field:['d'263]);
 VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
 
 /* VSYNC_OUTPUT_VSYNC == 1 when on a row that we want to output a vertical sync signal on. The last 3 rows */
-VSYNC_OUTPUT_VSYNC = (vsync_counter_field:['d'261..'d'263]);
+VSYNC_OUTPUT_VSYNC = (vsync_counter_field:['d'262..'d'263]);
 
 /* HSYNC_DISPLAY_ACTIVE == 1 when on the part of a line where we want output pixel data */
-HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'180..'d'691]);
+HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'196..'d'707]);
 
 /* VSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Vertical SYNC, but inverted.  
    This value is ==1 at the locations that we want the SYNC signal to be 0. */
@@ -188,7 +188,7 @@ SYNC_OUT.d = !(
 SYNC_OUT.ck = !CLK_12M;
 SYNC_OUT.ap = !RESET_IN;
 
-PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER2);
+PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE &HSYNC_COUNTER5 & VSYNC_COUNTER4);
 PIXEL_OUT.ck = !CLK_12M;
 PIXEL_OUT.ar = !RESET_IN;
 
