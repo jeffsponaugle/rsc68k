@@ -15,13 +15,16 @@ Pin[43] = CLK_25M;                  /* 25.175Mhz input clock  - Master Pixel Clo
 Pin[1]  = RESET_IN;                /* Active Low Reset */
 Pin[5]  = SYNC_OUT;
 Pin[4]  = PIXEL_OUT;
+Pin[6]  = CLK_12M;
+Pin     = [CHAR_COL0..5];        /* 6 bits for picking which character to display */
+Pin     = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) */
 
 NODE [HSYNC_COUNTER0..9];
 NODE [VSYNC_COUNTER0..9];
 NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
-Pin =CLK_12M;
-Pin =HSYNC_ZERO;
-Pin =VSYNC_ZERO;
+NODE HSYNC_ZERO;
+NODE VSYNC_ZERO;
+NODE VSYNC_DISPLAY_ACTIVE;
 
 CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
@@ -161,6 +164,76 @@ FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
 
 VSYNC_ZERO = !(vsync_counter_field:['d'263]);
 
+/* FONTLINE_RESET - Reset counter if the value==11, so it counts from 0-11.  Also hold in reset
+    if we are not in the active area (VSYNC_DISPLAY_ACTIVE) */
+NODE FONTLINE_RESET;
+
+FONTLINE_RESET = (FONTLINE0 & FONTLINE1 & !FONTLINE2 & FONTLINE3) # !VSYNC_DISPLAY_ACTIVE;
+FONTLINE_INC = 'b'1;
+
+FONTLINE0.d =  (  (FONTLINE_INC&!FONTLINE0) 
+        # (!FONTLINE_INC&FONTLINE0)
+        ) & !FONTLINE_RESET;     
+FONTLINE0.ck = VSYNC_CLOCK_B;
+
+FONTLINE1.d =  (  (FONTLINE_INC&((FONTLINE0&!FONTLINE1) # (!FONTLINE0&FONTLINE1))) 
+        # ((!FONTLINE_INC&FONTLINE1))
+        ) & !FONTLINE_RESET;
+FONTLINE1.ck = VSYNC_CLOCK_B;
+
+FONTLINE2T = FONTLINE0&FONTLINE1;
+FONTLINE2.d =  (  (FONTLINE_INC&((FONTLINE2T&!FONTLINE2) # (!FONTLINE2T&FONTLINE2))) 
+        # ((!FONTLINE_INC&FONTLINE2))
+        ) & !FONTLINE_RESET;
+FONTLINE2.ck = VSYNC_CLOCK_B;
+
+FONTLINE3T = FONTLINE2T&FONTLINE2;
+FONTLINE3.d =  ( (FONTLINE_INC&((FONTLINE3T&!FONTLINE3) # (!FONTLINE3T&FONTLINE3))) 
+        # ((!FONTLINE_INC&FONTLINE3))
+        ) & !FONTLINE_RESET;
+FONTLINE3.ck = VSYNC_CLOCK_B;
+
+/* The CHAR_COL outputs count from 0-63 starting at HSYNC_COUNTER value 192.  
+   This is used to directly drive the character ROM for a test image.  In normal use
+   these bits will be used to derive the memory address for the video memory lookup.
+   It takes teh HSYNC_COUNTER bits from 3-6 and as binary 101 to the upper three bit.  
+   This is equivilent to subtracting 192 from the total counter value, but only providing
+   bits 3-8;
+*/
+
+CHAR_COL0 = HSYNC_COUNTER3;
+CHAR_COL1 = HSYNC_COUNTER4;
+CHAR_COL2 = HSYNC_COUNTER5;
+CHAR_COL3 = !HSYNC_COUNTER6;
+CHAR_COL4 = (  (HSYNC_COUNTER6 & !HSYNC_COUNTER7)
+	          # (!HSYNC_COUNTER6 & HSYNC_COUNTER7));
+CHAR_COL5 = (  (!HSYNC_COUNTER8 & !HSYNC_COUNTER7)
+	          # (HSYNC_COUNTER6 & HSYNC_COUNTER8 & HSYNC_COUNTER7)
+	          # (!HSYNC_COUNTER6 & !HSYNC_COUNTER8));
+
+/*
+A0 = HSYNC_COUNTER6;
+A1 = HSYNC_COUNTER7;
+A2 = HSYNC_COUNTER8;
+A3 = HSYNC_COUNTER9;
+
+S0 = !HSYNC_COUNTER6;
+
+S1 = ((HSYNC_COUNTER6 & !HSYNC_COUNTER7)
+	# (!HSYNC_COUNTER6 & HSYNC_COUNTER7));
+
+S2 = ((!A2 & !HSYNC_COUNTER7)
+	# (HSYNC_COUNTER6 & HSYNC_COUNTER8 & HSYNC_COUNTER7)
+	# (!HSYNC_COUNTER6 & !HSYNC_COUNTER8));
+
+S3 = ((!HSYNC_COUNTER8 & !HSYNC_COUNTER9 & !HSYNC_COUNTER6)
+	# (HSYNC_COUNTER7 & HSYNC_COUNTER9 & HSYNC_COUNTER6)
+	# (HSYNC_COUNTER8 & HSYNC_COUNTER9)
+	# (!HSYNC_COUNTER7 & !HSYNC_COUNTER8 & !HSYNC_COUNTER9));
+
+*/
+
+
 /* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row that we want to output pixel data.  Rows 32-223 (192 rows) */
 VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
 
@@ -194,13 +267,12 @@ PIXEL_OUT.ar = !RESET_IN;
 
 /*
 Total dedicated input used:	2/4 	(50%)
-Total I/O pins used		6/32 	(18%)
-Total Logic cells used 		44/64 	(68%)
-Total Flip-Flop used 		25/64 	(39%)
-Total Foldback logic used 	0/64 	(0%)
-Total Nodes+FB/MCells 		25/64 	(39%)
-Total cascade used 		19
+Total I/O pins used		17/32 	(53%)
+Total Logic cells used 		55/64 	(85%)
+Total Flip-Flop used 		29/64 	(45%)
+Total Foldback logic used 	2/64 	(3%)
+Total Nodes+FB/MCells 		56/64 	(87%)
+Total cascade used 		1
 Total input pins 		6
-Total output pins 		2
-Total Pts 			156
-*/
+Total output pins 		13
+Total Pts 			221*/

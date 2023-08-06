@@ -9,12 +9,43 @@ Location None;
 Device   f1504ispplcc44;
 
 
-Pin  = [A0..A7];        /* Input bits A */
+Pin  = [A0..A3];        /* Input bits A */
 /*Pin  = [B0..B4];  */      /* Input bits B */
-Pin  = [S0..S7];        /* SUM output bits S*/
-Pin  = [B0..B7]; 
-
+Pin  = [S0..S3];        /* SUM output bits S*/
+ 
 /* Adder testing.. No carry input, no carry output */
+
+/* Adder that adds 1101 - same as subtracting 192 from 10 bit number */
+
+B0 = 'b'1;
+B1 = 'b'0;
+B2 = 'b'1;
+B3 = 'b'1;
+
+C0 = 'b'0;
+
+P0 = A0 $ B0;
+G0 = A0 & B0;
+S0 = P0 $ C0;
+C1 = G0;
+
+P1 = A1 $ B1;
+G1 = A1 & B1;
+S1 = P1 $ C1;
+C2 = G1 # (P1&C1);
+
+P2 = A2 $ B2;
+G2 = A2 & B2;
+S2 = P2 $ C2;
+C3 = G2 # (P2&C2);
+
+P3 = A3 $ B3;
+G3 = A3 & B3;
+S3 = P3 $ C3;
+
+
+
+/*
 
 C0 = 'b'0;
 
@@ -43,6 +74,7 @@ G4 = A4 & B4;
 S4 = P4 $ C4;
 C5 = G4 # (P4&C4);
 
+*/
 
 
 /*
