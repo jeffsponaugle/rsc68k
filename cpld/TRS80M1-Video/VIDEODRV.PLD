@@ -18,6 +18,7 @@ Pin[4]  = PIXEL_OUT;
 Pin[6]  = CLK_12M;
 Pin     = [CHAR_COL0..5];        /* 6 bits for picking which character to display */
 Pin     = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) */
+Pin     = [DIN0..7];
 
 NODE [HSYNC_COUNTER0..9];
 NODE [VSYNC_COUNTER0..9];
@@ -25,6 +26,7 @@ NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
 NODE HSYNC_ZERO;
 NODE VSYNC_ZERO;
 NODE VSYNC_DISPLAY_ACTIVE;
+NODE [SHIFTREG0..7];
 
 CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
@@ -232,7 +234,21 @@ S3 = ((!HSYNC_COUNTER8 & !HSYNC_COUNTER9 & !HSYNC_COUNTER6)
 	# (!HSYNC_COUNTER7 & !HSYNC_COUNTER8 & !HSYNC_COUNTER9));
 
 */
+/* SHIFTREG_LOAD = 1 if the shift register will load from the databus, ==0 and it will shift from 0 to 7; */
 
+SHIFTREG_LOAD = hsync_counter_3_field:['b111'];
+
+SHIFTREG0.d = (SHIFTREG_LOAD & DIN0);
+SHIFTREG1.d = (SHIFTREG_LOAD & DIN1) # ( !SHIFTREG_LOAD & SHIFTREG0);
+SHIFTREG2.d = (SHIFTREG_LOAD & DIN2) # ( !SHIFTREG_LOAD & SHIFTREG1);
+SHIFTREG3.d = (SHIFTREG_LOAD & DIN3) # ( !SHIFTREG_LOAD & SHIFTREG2);
+SHIFTREG4.d = (SHIFTREG_LOAD & DIN4) # ( !SHIFTREG_LOAD & SHIFTREG3);
+SHIFTREG5.d = (SHIFTREG_LOAD & DIN5) # ( !SHIFTREG_LOAD & SHIFTREG4);
+SHIFTREG6.d = (SHIFTREG_LOAD & DIN6) # ( !SHIFTREG_LOAD & SHIFTREG5);
+SHIFTREG7.d = (SHIFTREG_LOAD & DIN7) # ( !SHIFTREG_LOAD & SHIFTREG6);
+
+[SHIFTREG0..7].ck = !CLK_12M;
+[SHIFTREG0..7].ar = !RESET_IN;
 
 /* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row that we want to output pixel data.  Rows 32-223 (192 rows) */
 VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
@@ -241,7 +257,7 @@ VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
 VSYNC_OUTPUT_VSYNC = (vsync_counter_field:['d'262..'d'263]);
 
 /* HSYNC_DISPLAY_ACTIVE == 1 when on the part of a line where we want output pixel data */
-HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'196..'d'707]);
+HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'200..'d'711]);
 
 /* VSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Vertical SYNC, but inverted.  
    This value is ==1 at the locations that we want the SYNC signal to be 0. */
@@ -261,18 +277,19 @@ SYNC_OUT.d = !(
 SYNC_OUT.ck = !CLK_12M;
 SYNC_OUT.ap = !RESET_IN;
 
-PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE &HSYNC_COUNTER5 & VSYNC_COUNTER4);
+PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
 PIXEL_OUT.ck = !CLK_12M;
 PIXEL_OUT.ar = !RESET_IN;
 
 /*
 Total dedicated input used:	2/4 	(50%)
 Total I/O pins used		17/32 	(53%)
-Total Logic cells used 		55/64 	(85%)
+Total Logic cells used 		50/64 	(78%)
 Total Flip-Flop used 		29/64 	(45%)
 Total Foldback logic used 	2/64 	(3%)
-Total Nodes+FB/MCells 		56/64 	(87%)
-Total cascade used 		1
+Total Nodes+FB/MCells 		36/64 	(56%)
+Total cascade used 		16
 Total input pins 		6
 Total output pins 		13
-Total Pts 			221*/
+Total Pts 			177
+*/
