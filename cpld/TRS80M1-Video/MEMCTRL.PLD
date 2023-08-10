@@ -35,8 +35,13 @@ Pin[58]     = VRAM_80X25_CS;
 
 Pin[61,63,64,65,67]     = [SRAM_FLASH_PAGE_A14..18];
 
-Pin[68]     = IO_CASS_CS;
-Pin[69]     = SYS_RESET;
+Pin[45]    = CASS_OUT_D0;
+Pin[46]    = CASS_OUT_D1;
+Pin[48]    = CASS_OUT_D2;
+Pin[49]    = CASS_IN_D7;
+Pin[60]    = V64_32_VIDEO_MODE;
+
+Pin[69]    = SYS_RESET;
 Pin[1]     = RESET_BTN_IN;      /* Active Low Reset Button, with DS zero hold circuit */
 Pin[2]     = DEBUG_BTN_IN;      /* Active Low Debug NMI button.  Debounce but no hold circutry */
 
@@ -50,14 +55,7 @@ Pin[81]    = UNUSED_PIN7_IO;
 Pin[84]    = UNUSED_PIN8_INPUT;
 Pin[70]    = UNUSED_PIN9_IO;
 Pin[73]    = UNUSED_PIN10_IO;
-Pin[45]    = UNUSED_PIN11_IO;
-Pin[46]    = UNUSED_PIN12_IO;
-Pin[48]    = UNUSED_PIN13_IO;
-Pin[49]    = UNUSED_PIN14_IO;
-Pin[60]    = UNUSED_PIN15_IO;
-
-
-
+Pin[68]    = UNUSED_PIN13_IO;
 
 
 /* This definition forces A8 and A9 to be assigned to pin inputs for later use.  In the current design they are not needed for
@@ -128,11 +126,7 @@ MMAP_HARDWARE_ACCESS = REGION0_CONFIG7 & ISMEMORYACCESS &
                                        # cpu_address_bus:'h'3EXX
                                        # cpu_address_bus:'h'3FXX);
 
-IO_CASS_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XXFC
-                            # cpu_address_bus:'h'XXFD
-                            # cpu_address_bus:'h'XXFE
-                            # cpu_address_bus:'h'XXFF 
-                            ));
+
 
 /* IO Write to IO address 0x75 and 0x76 go to the 7-Segment Display connector. For debugging, POST codes */
 
@@ -270,6 +264,23 @@ REGION3_CONFIG7.ar = !SYS_RESET;
 [SYSTEM_CONFIG7..0].d = [Z80_D7..0].io;
 [SYSTEM_CONFIG7..0].ar = !SYS_RESET;
 
+
+IO_CASS_CS_WR = !(!Z80_IOWR &  (cpu_address_bus:'h'XXFC
+                            # cpu_address_bus:'h'XXFD
+                            # cpu_address_bus:'h'XXFE
+                            # cpu_address_bus:'h'XXFF 
+                            ));
+
+CASS_OUT_D0.d = Z80_D0;
+CASS_OUT_D0.ck = IO_CASS_CS_WR;
+CASS_OUT_D1.d = Z80_D1;
+CASS_OUT_D1.ck = IO_CASS_CS_WR;
+CASS_OUT_D2.d = Z80_D2;
+CASS_OUT_D2.ck = IO_CASS_CS_WR;
+V64_32_VIDEO_MODE.d = Z80_D3;
+V64_32_VIDEO_MODE.ck = IO_CASS_CS_WR;
+
+
 Z80_NMI.d = DEBUG_BTN_IN;
 Z80_NMI.ck = CLK_DIV16;
 Z80_NMI.ap = !SYS_RESET;
@@ -284,18 +295,18 @@ SYS_RESET.ck = CLK_DIV16;
 /*
 
 Total dedicated input used:	3/4 	(75%)
-Total I/O pins used		51/64 	(79%)
-Total Logic cells used 		67/128 	(52%)
-Total Flip-Flop used 		46/128 	(35%)
-Total Foldback logic used 	5/128 	(3%)
-Total Nodes+FB/MCells 		72/128 	(56%)
+Total I/O pins used		53/64 	(82%)
+Total Logic cells used 		69/128 	(53%)
+Total Flip-Flop used 		50/128 	(39%)
+Total Foldback logic used 	7/128 	(5%)
+Total Nodes+FB/MCells 		76/128 	(59%)
 Total cascade used 		0
 Total input pins 		35
-Total output pins 		19
-Total Pts 			194
+Total output pins 		21
+Total Pts 			198
 
 
-                                                                                          
+                                                                           
                                         D R                                         
                                         E E                                         
                                         B S                                         
@@ -317,7 +328,7 @@ Total Pts 			194
           Z80_A7 | 15                                          71 | TDO             
           Z80_A6 | 16                                          70 |                 
           Z80_A5 | 17                                          69 | SYS_RESET       
-          Z80_A4 | 18                                          68 | IO_CASS_CS      
+          Z80_A4 | 18                                          68 |                 
              GND | 19                                          67 | SRAM_FLASH_PAGE_A18
           Z80_A3 | 20                                          66 | VCC             
           Z80_A2 | 21                                          65 | SRAM_FLASH_PAGE_A17
@@ -325,7 +336,7 @@ Total Pts 			194
              TMS | 23               84-Lead PLCC               63 | SRAM_FLASH_PAGE_A15
           Z80_A0 | 24                                          62 | TCK             
          Z80_CLK | 25                                          61 | SRAM_FLASH_PAGE_A14
-             VCC | 26                                          60 | SRAM_FLASH_PAGE_A13
+             VCC | 26                                          60 | V64_32_VIDEO_MODE
           Z80_D7 | 27                                          59 | GND             
           Z80_D6 | 28                                          58 | VRAM_80X25_CS   
           Z80_D5 | 29                                          57 | VRAM_CS         
@@ -335,21 +346,19 @@ Total Pts 			194
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
-                      Z Z Z Z Z V Z Z Z G V Z     G     S S   V                     
-                      8 8 8 8 8 C 8 8 8 N C 8     N     E E   C                     
-                      0 0 0 0 0 C 0 0 0 D C 0     D     V V   C                     
-                      _ _ _ _ _   _ _ _     _           E E                         
-                      D D D M M   I I N     I           N N                         
-                      2 1 0 E E   O O M     N           S S                         
-                            M M   R W I     T           E E                         
-                            R W   D R                   G G                         
-                            D R                         _ _                         
-                                                        A B                         
-                                                        _ _                         
+                      Z Z Z Z Z V Z Z Z G V Z C C G C   S S   V                     
+                      8 8 8 8 8 C 8 8 8 N C 8 A A N A   E E   C                     
+                      0 0 0 0 0 C 0 0 0 D C 0 S S D S   V V   C                     
+                      _ _ _ _ _   _ _ _     _ S S   S   E E                         
+                      D D D M M   I I N     I _ _   _   N N                         
+                      2 1 0 E E   O O M     N O O   O   S S                         
+                            M M   R W I     T U U   U   E E                         
+                            R W   D R         T T   T   G G                         
+                            D R               _ _   _   _ _                         
+                                              D D   D   A B                         
+                                              0 1   2   _ _                         
                                                         C C                         
-                                                        S S                         
-
-
+                                                        S S  
 
 
 

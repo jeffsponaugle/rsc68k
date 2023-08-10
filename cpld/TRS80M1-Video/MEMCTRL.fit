@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Wed Aug 09 10:35:58 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Wed Aug 09 19:04:56 2023
 
 
 fit1508 C:\MEMCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -84,10 +84,10 @@ Z80_A8 is placed at pin 12 (MC 3)
 REGION1_CONFIG5 is placed at feedback node 603 (MC 3)
 REGION1_CONFIG4 is placed at feedback node 604 (MC 4)
 Z80_A9 is placed at pin 11 (MC 5)
-REGION1_CONFIG2 is placed at feedback node 605 (MC 5)
+REGION1_CONFIG3 is placed at feedback node 605 (MC 5)
 Z80_A10 is placed at pin 10 (MC 6)
-REGION1_CONFIG3 is placed at feedback node 606 (MC 6)
-REGION1_CONFIG1 is placed at feedback node 607 (MC 7)
+REGION1_CONFIG1 is placed at feedback node 606 (MC 6)
+REGION1_CONFIG2 is placed at feedback node 607 (MC 7)
 Z80_A11 is placed at pin 9 (MC 8)
 REGION1_CONFIG0 is placed at feedback node 608 (MC 8)
 REGION0_CONFIG7 is placed at feedback node 609 (MC 9)
@@ -99,20 +99,20 @@ Z80_A13 is placed at pin 6 (MC 13)
 REGION0_CONFIG3 is placed at feedback node 613 (MC 13)
 Z80_A14 is placed at pin 5 (MC 14)
 REGION0_CONFIG2 is placed at feedback node 614 (MC 14)
-REGION0_CONFIG1 is placed at feedback node 615 (MC 15)
-Com_Ctrl_266 is placed at foldback expander node 315 (MC 15)
+REGION0_CONFIG0 is placed at feedback node 615 (MC 15)
+Com_Ctrl_305 is placed at foldback expander node 315 (MC 15)
 Z80_A15 is placed at pin 4 (MC 16)
-REGION0_CONFIG0 is placed at feedback node 616 (MC 16)
-Com_Ctrl_265 is placed at foldback expander node 316 (MC 16)
+REGION0_CONFIG1 is placed at feedback node 616 (MC 16)
+Com_Ctrl_304 is placed at foldback expander node 316 (MC 16)
 Z80_A1 is placed at pin 22 (MC 17)
 REGION3_CONFIG7 is placed at feedback node 617 (MC 17)
 REGION3_CONFIG6 is placed at feedback node 618 (MC 18)
 Z80_A2 is placed at pin 21 (MC 19)
 REGION3_CONFIG5 is placed at feedback node 619 (MC 19)
-REGION3_CONFIG3 is placed at feedback node 620 (MC 20)
+REGION3_CONFIG4 is placed at feedback node 620 (MC 20)
 Z80_A3 is placed at pin 20 (MC 21)
-REGION3_CONFIG4 is placed at feedback node 621 (MC 21)
-REGION3_CONFIG2 is placed at feedback node 622 (MC 22)
+REGION3_CONFIG2 is placed at feedback node 621 (MC 21)
+REGION3_CONFIG3 is placed at feedback node 622 (MC 22)
 REGION3_CONFIG1 is placed at feedback node 623 (MC 23)
 Z80_A4 is placed at pin 18 (MC 24)
 REGION3_CONFIG0 is placed at feedback node 624 (MC 24)
@@ -126,10 +126,10 @@ Z80_A7 is placed at pin 15 (MC 29)
 REGION2_CONFIG3 is placed at feedback node 629 (MC 29)
 REGION2_CONFIG2 is placed at feedback node 630 (MC 30)
 REGION2_CONFIG1 is placed at feedback node 631 (MC 31)
-Com_Ctrl_264 is placed at foldback expander node 331 (MC 31)
+Com_Ctrl_303 is placed at foldback expander node 331 (MC 31)
 TDI is placed at pin 14 (MC 32)
 REGION2_CONFIG0 is placed at feedback node 632 (MC 32)
-Com_Ctrl_263 is placed at foldback expander node 332 (MC 32)
+Com_Ctrl_302 is placed at foldback expander node 332 (MC 32)
 Z80_D3 is placed at pin 31 (MC 35)
 CLK_DIV2 is placed at feedback node 636 (MC 36)
 Z80_D4 is placed at pin 30 (MC 37)
@@ -142,15 +142,15 @@ SYSTEM_CONFIG6 is placed at feedback node 640 (MC 40)
 SYSTEM_CONFIG7 is placed at feedback node 641 (MC 41)
 SYSTEM_CONFIG5 is placed at feedback node 642 (MC 42)
 Z80_D7 is placed at pin 27 (MC 43)
-SYSTEM_CONFIG3 is placed at feedback node 643 (MC 43)
-SYSTEM_CONFIG4 is placed at feedback node 644 (MC 44)
+SYSTEM_CONFIG4 is placed at feedback node 643 (MC 43)
+SYSTEM_CONFIG3 is placed at feedback node 644 (MC 44)
 Z80_CLK is placed at pin 25 (MC 45)
 Z80_A0 is placed at pin 24 (MC 46)
 SYSTEM_CONFIG2 is placed at feedback node 646 (MC 46)
 SYSTEM_CONFIG0 is placed at feedback node 647 (MC 47)
 TMS is placed at pin 23 (MC 48)
 SYSTEM_CONFIG1 is placed at feedback node 648 (MC 48)
-Com_Ctrl_262 is placed at foldback expander node 348 (MC 48)
+Com_Ctrl_301 is placed at foldback expander node 348 (MC 48)
 Z80_NMI is placed at pin 41 (MC 49)
 Z80_IOWR is placed at pin 40 (MC 51)
 Z80_IORD is placed at pin 39 (MC 53)
@@ -164,21 +164,25 @@ REGION1_CS is placed at feedback node 663 (MC 63)
 Z80_D2 is placed at pin 33 (MC 64)
 REGION0_CS is placed at feedback node 664 (MC 64)
 Z80_INT is placed at pin 44 (MC 65)
+CASS_OUT_D0 is placed at pin 45 (MC 67)
+CASS_OUT_D1 is placed at pin 46 (MC 69)
+CASS_OUT_D2 is placed at pin 48 (MC 72)
 SEVENSEG_A_CS is placed at pin 50 (MC 75)
 SEVENSEG_B_CS is placed at pin 51 (MC 77)
+Com_Ctrl_300 is placed at foldback expander node 380 (MC 80)
 SRAM_CS is placed at pin 54 (MC 83)
 FLASH_CS is placed at pin 55 (MC 85)
 KEYBOARD_CS is placed at pin 56 (MC 86)
 VRAM_CS is placed at pin 57 (MC 88)
 VRAM_80X25_CS is placed at pin 58 (MC 91)
-SRAM_FLASH_PAGE_A13 is placed at pin 60 (MC 93)
+V64_32_VIDEO_MODE is placed at pin 60 (MC 93)
 SRAM_FLASH_PAGE_A14 is placed at pin 61 (MC 94)
 TCK is placed at pin 62 (MC 96)
+Com_Ctrl_300 is placed at foldback expander node 396 (MC 96)
 SRAM_FLASH_PAGE_A15 is placed at pin 63 (MC 97)
 SRAM_FLASH_PAGE_A16 is placed at pin 64 (MC 99)
 SRAM_FLASH_PAGE_A17 is placed at pin 65 (MC 101)
 SRAM_FLASH_PAGE_A18 is placed at pin 67 (MC 104)
-IO_CASS_CS is placed at pin 68 (MC 105)
 SYS_RESET is placed at pin 69 (MC 107)
 TDO is placed at pin 71 (MC 112)
 UNUSED_PIN1_OUTPUT is placed at pin 74 (MC 117)
@@ -205,7 +209,7 @@ UNUSED_PIN1_OUTPUT is placed at pin 74 (MC 117)
           Z80_A7 | 15                                          71 | TDO             
           Z80_A6 | 16                                          70 |                 
           Z80_A5 | 17                                          69 | SYS_RESET       
-          Z80_A4 | 18                                          68 | IO_CASS_CS      
+          Z80_A4 | 18                                          68 |                 
              GND | 19                                          67 | SRAM_FLASH_PAGE_A18
           Z80_A3 | 20                                          66 | VCC             
           Z80_A2 | 21                                          65 | SRAM_FLASH_PAGE_A17
@@ -213,7 +217,7 @@ UNUSED_PIN1_OUTPUT is placed at pin 74 (MC 117)
              TMS | 23               84-Lead PLCC               63 | SRAM_FLASH_PAGE_A15
           Z80_A0 | 24                                          62 | TCK             
          Z80_CLK | 25                                          61 | SRAM_FLASH_PAGE_A14
-             VCC | 26                                          60 | SRAM_FLASH_PAGE_A13
+             VCC | 26                                          60 | V64_32_VIDEO_MODE
           Z80_D7 | 27                                          59 | GND             
           Z80_D6 | 28                                          58 | VRAM_80X25_CS   
           Z80_D5 | 29                                          57 | VRAM_CS         
@@ -223,17 +227,17 @@ UNUSED_PIN1_OUTPUT is placed at pin 74 (MC 117)
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
-                      Z Z Z Z Z V Z Z Z G V Z     G     S S   V                     
-                      8 8 8 8 8 C 8 8 8 N C 8     N     E E   C                     
-                      0 0 0 0 0 C 0 0 0 D C 0     D     V V   C                     
-                      _ _ _ _ _   _ _ _     _           E E                         
-                      D D D M M   I I N     I           N N                         
-                      2 1 0 E E   O O M     N           S S                         
-                            M M   R W I     T           E E                         
-                            R W   D R                   G G                         
-                            D R                         _ _                         
-                                                        A B                         
-                                                        _ _                         
+                      Z Z Z Z Z V Z Z Z G V Z C C G C   S S   V                     
+                      8 8 8 8 8 C 8 8 8 N C 8 A A N A   E E   C                     
+                      0 0 0 0 0 C 0 0 0 D C 0 S S D S   V V   C                     
+                      _ _ _ _ _   _ _ _     _ S S   S   E E                         
+                      D D D M M   I I N     I _ _   _   N N                         
+                      2 1 0 E E   O O M     N O O   O   S S                         
+                            M M   R W I     T U U   U   E E                         
+                            R W   D R         T T   T   G G                         
+                            D R               _ _   _   _ _                         
+                                              D D   D   A B                         
+                                              0 1   2   _ _                         
                                                         C C                         
                                                         S S                         
 
@@ -261,17 +265,17 @@ Z80_A4			(MC4	P)   : MUX 3		Ref (B24p)
 SYS_RESET		(MC1	P)   : MUX 6		Ref (G107p)
 Z80_D3			(MC14	P)   : MUX 9		Ref (C35p)
 Z80_A3			(MC3	P)   : MUX 11		Ref (B21p)
-Z80_A0			(MC9	P)   : MUX 12		Ref (C46p)
+Z80_A0			(MC10	P)   : MUX 12		Ref (C46p)
 Z80_A5			(MC5	P)   : MUX 14		Ref (B25p)
-Z80_D0			(MC11	P)   : MUX 16		Ref (D59p)
+Z80_D0			(MC12	P)   : MUX 16		Ref (D59p)
 Z80_D5			(MC16	P)   : MUX 17		Ref (C38p)
 Z80_D6			(MC17	P)   : MUX 21		Ref (C40p)
-Z80_D1			(MC12	P)   : MUX 26		Ref (D61p)
+Z80_D1			(MC9	P)   : MUX 26		Ref (D61p)
 Z80_IOWR		(MC8	P)   : MUX 27		Ref (D51p)
 Z80_D7			(MC18	P)   : MUX 28		Ref (C43p)
 Z80_A2			(MC2	P)   : MUX 29		Ref (B19p)
 Z80_D2			(MC13	P)   : MUX 30		Ref (D64p)
-Z80_A1			(MC10	P)   : MUX 31		Ref (B17p)
+Z80_A1			(MC11	P)   : MUX 31		Ref (B17p)
 Z80_A7			(MC7	P)   : MUX 32		Ref (B29p)
 
 FanIn assignment for block B [18]
@@ -286,17 +290,17 @@ Z80_A4			(MC4	P)   : MUX 3		Ref (B24p)
 SYS_RESET		(MC1	P)   : MUX 6		Ref (G107p)
 Z80_D3			(MC14	P)   : MUX 9		Ref (C35p)
 Z80_A3			(MC3	P)   : MUX 11		Ref (B21p)
-Z80_A0			(MC9	P)   : MUX 12		Ref (C46p)
+Z80_A0			(MC10	P)   : MUX 12		Ref (C46p)
 Z80_A5			(MC5	P)   : MUX 14		Ref (B25p)
-Z80_D0			(MC11	P)   : MUX 16		Ref (D59p)
+Z80_D0			(MC12	P)   : MUX 16		Ref (D59p)
 Z80_D5			(MC16	P)   : MUX 17		Ref (C38p)
 Z80_D6			(MC17	P)   : MUX 21		Ref (C40p)
-Z80_D1			(MC12	P)   : MUX 26		Ref (D61p)
+Z80_D1			(MC9	P)   : MUX 26		Ref (D61p)
 Z80_IOWR		(MC8	P)   : MUX 27		Ref (D51p)
 Z80_D7			(MC18	P)   : MUX 28		Ref (C43p)
 Z80_A2			(MC2	P)   : MUX 29		Ref (B19p)
 Z80_D2			(MC13	P)   : MUX 30		Ref (D64p)
-Z80_A1			(MC10	P)   : MUX 31		Ref (B17p)
+Z80_A1			(MC11	P)   : MUX 31		Ref (B17p)
 Z80_A7			(MC7	P)   : MUX 32		Ref (B29p)
 
 FanIn assignment for block C [24]
@@ -310,22 +314,22 @@ Z80_A6			(MC12	P)   : MUX 0		Ref (B27p)
 Z80_D4			(MC21	P)   : MUX 1		Ref (C37p)
 Z80_A4			(MC10	P)   : MUX 3		Ref (B24p)
 SYS_RESET		(MC7	P)   : MUX 6		Ref (G107p)
-Z80_D1			(MC18	P)   : MUX 8		Ref (D61p)
+Z80_D1			(MC15	P)   : MUX 8		Ref (D61p)
 Z80_IOWR		(MC14	P)   : MUX 9		Ref (D51p)
 Z80_A3			(MC9	P)   : MUX 11		Ref (B21p)
 Z80_A5			(MC11	P)   : MUX 14		Ref (B25p)
 Z80_D3			(MC20	P)   : MUX 15		Ref (C35p)
-Z80_D0			(MC17	P)   : MUX 16		Ref (D59p)
+Z80_D0			(MC18	P)   : MUX 16		Ref (D59p)
 Z80_D5			(MC22	P)   : MUX 17		Ref (C38p)
 CLK_DIV2		(MC1	FB)  : MUX 18		Ref (C36fb)
 Z80_D6			(MC23	P)   : MUX 21		Ref (C40p)
 CLK_DIV8		(MC2	FB)  : MUX 22		Ref (C37fb)
-Z80_A0			(MC15	P)   : MUX 26		Ref (C46p)
+Z80_A0			(MC16	P)   : MUX 26		Ref (C46p)
 Z80_D7			(MC24	P)   : MUX 28		Ref (C43p)
 Z80_A2			(MC8	P)   : MUX 29		Ref (B19p)
 Z80_D2			(MC19	P)   : MUX 30		Ref (D64p)
 Z80_A7			(MC13	P)   : MUX 32		Ref (B29p)
-Z80_A1			(MC16	P)   : MUX 33		Ref (B17p)
+Z80_A1			(MC17	P)   : MUX 33		Ref (B17p)
 CLK_DIV4		(MC4	FB)  : MUX 36		Ref (C39fb)
 SYSTEM_CONFIG0		(MC5	FB)  : MUX 37		Ref (C47fb)
 CLK_DIV16		(MC3	FB)  : MUX 38		Ref (C38fb)
@@ -352,90 +356,88 @@ Z80_MEMWR		(MC9	P)   : MUX 15		Ref (D56p)
 Z80_A12			(MC6	P)   : MUX 24		Ref (A11p)
 DEBUG_BTN_IN		(MC11	FB)  : MUX 38		Ref (OE2)
 
-FanIn assignment for block E [10]
+FanIn assignment for block E [13]
 {
-Z80_A0,Z80_A6,Z80_A4,Z80_A3,Z80_A7,Z80_IORD,Z80_IOWR,Z80_A2,Z80_A5,Z80_A1,
+Z80_A0,Z80_A6,Z80_A4,Z80_A3,Z80_A5,Z80_D0,Z80_IORD,Z80_D1,Z80_IOWR,Z80_A2,Z80_D2,Z80_A1,Z80_A7,
 }
 Multiplexer assignment for block E
-Z80_A0			(MC8	P)   : MUX 0		Ref (C46p)
+Z80_A0			(MC9	P)   : MUX 0		Ref (C46p)
 Z80_A6			(MC5	P)   : MUX 2		Ref (B27p)
 Z80_A4			(MC3	P)   : MUX 9		Ref (B24p)
 Z80_A3			(MC2	P)   : MUX 11		Ref (B21p)
-Z80_A7			(MC6	P)   : MUX 14		Ref (B29p)
-Z80_IORD		(MC10	P)   : MUX 17		Ref (D53p)
+Z80_A5			(MC4	P)   : MUX 14		Ref (B25p)
+Z80_D0			(MC11	P)   : MUX 16		Ref (D59p)
+Z80_IORD		(MC13	P)   : MUX 17		Ref (D53p)
+Z80_D1			(MC8	P)   : MUX 20		Ref (D61p)
 Z80_IOWR		(MC7	P)   : MUX 27		Ref (D51p)
 Z80_A2			(MC1	P)   : MUX 29		Ref (B19p)
-Z80_A5			(MC4	P)   : MUX 30		Ref (B25p)
-Z80_A1			(MC9	P)   : MUX 31		Ref (B17p)
+Z80_D2			(MC12	P)   : MUX 30		Ref (D64p)
+Z80_A1			(MC10	P)   : MUX 31		Ref (B17p)
+Z80_A7			(MC6	P)   : MUX 32		Ref (B29p)
 
-FanIn assignment for block F [25]
+FanIn assignment for block F [29]
 {
-REGION0_CONFIG0,REGION0_CONFIG1,REGION2_CONFIG0,REGION2_CONFIG6,REGION0_CONFIG6,REGION0_CONFIG7,REGION1_CONFIG6,REGION2_CONFIG1,REGION1_CS,REGION3_CONFIG0,REGION2_CS,REGION0_CS,REGION1_CONFIG1,REGION1_CONFIG0,REGION3_CS,REGION3_CONFIG6,REGION3_CONFIG1,
-Z80_A13,Z80_A11,Z80_A14,Z80_A12,Z80_A10,Z80_MEMRD,Z80_A15,Z80_MEMWR,
+REGION3_CONFIG6,REGION2_CS,REGION1_CONFIG0,REGION0_CONFIG0,REGION0_CONFIG7,REGION3_CONFIG0,REGION1_CS,REGION2_CONFIG6,REGION0_CS,REGION3_CS,REGION2_CONFIG0,REGION1_CONFIG6,REGION0_CONFIG6,
+Z80_A6,Z80_A4,Z80_A11,Z80_A14,Z80_A2,Z80_A15,Z80_IOWR,Z80_D3,Z80_A7,Z80_A3,Z80_A13,Z80_A12,Z80_A10,Z80_MEMRD,Z80_A5,Z80_MEMWR,
 }
 Multiplexer assignment for block F
-Z80_A13			(MC21	P)   : MUX 0		Ref (A13p)
-REGION0_CONFIG0		(MC7	FB)  : MUX 1		Ref (A16fb)
-Z80_A11			(MC19	P)   : MUX 3		Ref (A8p)
-REGION0_CONFIG1		(MC6	FB)  : MUX 5		Ref (A15fb)
-REGION2_CONFIG0		(MC13	FB)  : MUX 7		Ref (B32fb)
-Z80_A14			(MC18	P)   : MUX 8		Ref (A14p)
-Z80_A12			(MC20	P)   : MUX 10		Ref (A11p)
-REGION2_CONFIG6		(MC11	FB)  : MUX 11		Ref (B26fb)
-REGION0_CONFIG6		(MC5	FB)  : MUX 13		Ref (A10fb)
-REGION0_CONFIG7		(MC4	FB)  : MUX 15		Ref (A9fb)
-REGION1_CONFIG6		(MC1	FB)  : MUX 16		Ref (A2fb)
-REGION2_CONFIG1		(MC12	FB)  : MUX 17		Ref (B31fb)
-REGION1_CS		(MC16	FB)  : MUX 19		Ref (D63fb)
-REGION3_CONFIG0		(MC10	FB)  : MUX 20		Ref (B24fb)
-REGION2_CS		(MC15	FB)  : MUX 21		Ref (D62fb)
-REGION0_CS		(MC17	FB)  : MUX 23		Ref (D64fb)
-REGION1_CONFIG1		(MC2	FB)  : MUX 24		Ref (A7fb)
-Z80_A10			(MC25	P)   : MUX 27		Ref (A6p)
-Z80_MEMRD		(MC22	P)   : MUX 28		Ref (D57p)
-REGION1_CONFIG0		(MC3	FB)  : MUX 30		Ref (A8fb)
-Z80_A15			(MC24	P)   : MUX 32		Ref (A16p)
-REGION3_CS		(MC14	FB)  : MUX 33		Ref (D61fb)
-REGION3_CONFIG6		(MC8	FB)  : MUX 34		Ref (B18fb)
-Z80_MEMWR		(MC23	P)   : MUX 35		Ref (D56p)
-REGION3_CONFIG1		(MC9	FB)  : MUX 38		Ref (B23fb)
+REGION3_CONFIG6		(MC6	FB)  : MUX 0		Ref (B18fb)
+REGION2_CS		(MC11	FB)  : MUX 1		Ref (D62fb)
+Z80_A6			(MC18	P)   : MUX 2		Ref (B27p)
+Z80_A4			(MC16	P)   : MUX 3		Ref (B24p)
+REGION1_CONFIG0		(MC2	FB)  : MUX 4		Ref (A8fb)
+REGION0_CONFIG0		(MC5	FB)  : MUX 5		Ref (A15fb)
+Z80_A11			(MC23	P)   : MUX 7		Ref (A8p)
+Z80_A14			(MC22	P)   : MUX 8		Ref (A14p)
+Z80_A2			(MC14	P)   : MUX 9		Ref (B19p)
+Z80_A15			(MC28	P)   : MUX 10		Ref (A16p)
+REGION0_CONFIG7		(MC3	FB)  : MUX 11		Ref (A9fb)
+REGION3_CONFIG0		(MC7	FB)  : MUX 12		Ref (B24fb)
+Z80_IOWR		(MC20	P)   : MUX 13		Ref (D51p)
+Z80_D3			(MC21	P)   : MUX 15		Ref (C35p)
+Z80_A7			(MC19	P)   : MUX 16		Ref (B29p)
+Z80_A3			(MC15	P)   : MUX 17		Ref (B21p)
+REGION1_CS		(MC12	FB)  : MUX 19		Ref (D63fb)
+Z80_A13			(MC25	P)   : MUX 20		Ref (A13p)
+REGION2_CONFIG6		(MC8	FB)  : MUX 21		Ref (B26fb)
+REGION0_CS		(MC13	FB)  : MUX 23		Ref (D64fb)
+Z80_A12			(MC24	P)   : MUX 24		Ref (A11p)
+REGION3_CS		(MC10	FB)  : MUX 25		Ref (D61fb)
+Z80_A10			(MC29	P)   : MUX 27		Ref (A6p)
+Z80_MEMRD		(MC26	P)   : MUX 28		Ref (D57p)
+REGION2_CONFIG0		(MC9	FB)  : MUX 29		Ref (B32fb)
+Z80_A5			(MC17	P)   : MUX 30		Ref (B25p)
+Z80_MEMWR		(MC27	P)   : MUX 35		Ref (D56p)
+REGION1_CONFIG6		(MC1	FB)  : MUX 38		Ref (A2fb)
+REGION0_CONFIG6		(MC4	FB)  : MUX 39		Ref (A10fb)
 
-FanIn assignment for block G [30]
+FanIn assignment for block G [22]
 {
 CLK_DIV16,
-REGION0_CONFIG4,REGION3_CONFIG3,REGION2_CONFIG5,REGION1_CONFIG2,REGION0_CS,REGION1_CONFIG3,REGION2_CONFIG3,REGION1_CONFIG5,REGION2_CONFIG2,REGION1_CONFIG4,REGION3_CONFIG5,REGION0_CONFIG5,RESET_BTN_IN,REGION3_CONFIG2,REGION2_CONFIG4,REGION0_CONFIG2,REGION0_CONFIG3,REGION1_CS,REGION3_CONFIG4,REGION3_CS,REGION2_CS,
-Z80_A6,Z80_A4,Z80_A2,Z80_IOWR,Z80_A5,Z80_IORD,Z80_A7,Z80_A3,
+REGION3_CONFIG1,REGION0_CONFIG4,REGION0_CONFIG1,REGION3_CONFIG4,REGION2_CONFIG2,REGION1_CONFIG3,REGION3_CONFIG3,REGION0_CONFIG2,RESET_BTN_IN,REGION1_CS,REGION2_CONFIG1,REGION1_CONFIG4,REGION1_CONFIG2,REGION2_CONFIG3,REGION3_CS,REGION3_CONFIG2,REGION0_CS,REGION2_CONFIG4,REGION1_CONFIG1,REGION0_CONFIG3,REGION2_CS,
 }
 Multiplexer assignment for block G
-Z80_A6			(MC26	P)   : MUX 0		Ref (B27p)
-REGION0_CONFIG4		(MC6	FB)  : MUX 1		Ref (A12fb)
-Z80_A4			(MC24	P)   : MUX 3		Ref (B24p)
-REGION3_CONFIG3		(MC10	FB)  : MUX 4		Ref (B20fb)
-REGION2_CONFIG5		(MC13	FB)  : MUX 5		Ref (B27fb)
-REGION1_CONFIG2		(MC3	FB)  : MUX 6		Ref (A5fb)
-REGION0_CS		(MC21	FB)  : MUX 7		Ref (D64fb)
-Z80_A2			(MC22	P)   : MUX 9		Ref (B19p)
-REGION1_CONFIG3		(MC4	FB)  : MUX 12		Ref (A6fb)
-Z80_IOWR		(MC28	P)   : MUX 13		Ref (D51p)
-Z80_A5			(MC25	P)   : MUX 14		Ref (B25p)
-REGION2_CONFIG3		(MC15	FB)  : MUX 15		Ref (B29fb)
-REGION1_CONFIG5		(MC1	FB)  : MUX 18		Ref (A3fb)
-REGION2_CONFIG2		(MC16	FB)  : MUX 19		Ref (B30fb)
-REGION1_CONFIG4		(MC2	FB)  : MUX 20		Ref (A4fb)
-REGION3_CONFIG5		(MC9	FB)  : MUX 22		Ref (B19fb)
-REGION0_CONFIG5		(MC5	FB)  : MUX 23		Ref (A11fb)
-RESET_BTN_IN		(MC30	FB)  : MUX 24		Ref (GCLR)
-Z80_IORD		(MC29	P)   : MUX 25		Ref (D53p)
-REGION3_CONFIG2		(MC12	FB)  : MUX 26		Ref (B22fb)
-REGION2_CONFIG4		(MC14	FB)  : MUX 27		Ref (B28fb)
-REGION0_CONFIG2		(MC8	FB)  : MUX 29		Ref (A14fb)
-REGION0_CONFIG3		(MC7	FB)  : MUX 31		Ref (A13fb)
-Z80_A7			(MC27	P)   : MUX 32		Ref (B29p)
-Z80_A3			(MC23	P)   : MUX 33		Ref (B21p)
-REGION1_CS		(MC20	FB)  : MUX 35		Ref (D63fb)
-REGION3_CONFIG4		(MC11	FB)  : MUX 36		Ref (B21fb)
-REGION3_CS		(MC18	FB)  : MUX 37		Ref (D61fb)
-CLK_DIV16		(MC17	FB)  : MUX 38		Ref (C38fb)
+REGION3_CONFIG1		(MC12	FB)  : MUX 0		Ref (B23fb)
+REGION0_CONFIG4		(MC5	FB)  : MUX 1		Ref (A12fb)
+CLK_DIV16		(MC17	FB)  : MUX 2		Ref (C38fb)
+REGION0_CONFIG1		(MC8	FB)  : MUX 3		Ref (A16fb)
+REGION3_CONFIG4		(MC9	FB)  : MUX 4		Ref (B20fb)
+REGION2_CONFIG2		(MC15	FB)  : MUX 5		Ref (B30fb)
+REGION1_CONFIG3		(MC2	FB)  : MUX 6		Ref (A5fb)
+REGION3_CONFIG3		(MC11	FB)  : MUX 8		Ref (B22fb)
+REGION0_CONFIG2		(MC7	FB)  : MUX 11		Ref (A14fb)
+RESET_BTN_IN		(MC22	FB)  : MUX 14		Ref (GCLR)
+REGION1_CS		(MC20	FB)  : MUX 15		Ref (D63fb)
+REGION2_CONFIG1		(MC16	FB)  : MUX 17		Ref (B31fb)
+REGION1_CONFIG4		(MC1	FB)  : MUX 20		Ref (A4fb)
+REGION1_CONFIG2		(MC4	FB)  : MUX 22		Ref (A7fb)
+REGION2_CONFIG3		(MC14	FB)  : MUX 23		Ref (B29fb)
+REGION3_CS		(MC18	FB)  : MUX 25		Ref (D61fb)
+REGION3_CONFIG2		(MC10	FB)  : MUX 28		Ref (B21fb)
+REGION0_CS		(MC21	FB)  : MUX 29		Ref (D64fb)
+REGION2_CONFIG4		(MC13	FB)  : MUX 31		Ref (B28fb)
+REGION1_CONFIG1		(MC3	FB)  : MUX 32		Ref (A6fb)
+REGION0_CONFIG3		(MC6	FB)  : MUX 33		Ref (A13fb)
 REGION2_CS		(MC19	FB)  : MUX 39		Ref (D62fb)
 
 FanIn assignment for block H [2]
@@ -450,16 +452,19 @@ Creating JEDEC file C:\MEMCTRL.jed ...
 
 PLCC84 programmed logic:
 -----------------------------------
-CLK_DIV4.D = !CLK_DIV4.Q;
+CASS_OUT_D1.D = Z80_D1;
+
+CASS_OUT_D0.D = Z80_D0;
+
+CASS_OUT_D2.D = Z80_D2;
 
 CLK_DIV2.D = !CLK_DIV2.Q;
 
-CLK_DIV16.D = !CLK_DIV16.Q;
-
-!IO_CASS_CS = ((Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD)
-	# (Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOWR));
+CLK_DIV4.D = !CLK_DIV4.Q;
 
 CLK_DIV8.D = !CLK_DIV8.Q;
+
+CLK_DIV16.D = !CLK_DIV16.Q;
 
 !KEYBOARD_CS = ((REGION0_CONFIG7.Q & !Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMRD)
 	# (REGION0_CONFIG7.Q & !Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMWR));
@@ -478,12 +483,12 @@ REGION0_CONFIG5.D = Z80_D5;
 
 REGION0_CONFIG6.D = Z80_D6;
 
-REGION0_CONFIG7.D = Z80_D7;
-
 REGION0_CS = (Z80_A14
 	# (REGION0_CONFIG7.Q & Z80_A11 & Z80_A12 & Z80_A13)
 	# (Z80_MEMRD & Z80_MEMWR)
 	# Z80_A15);
+
+REGION0_CONFIG7.D = Z80_D7;
 
 REGION1_CONFIG0.D = Z80_D0;
 
@@ -501,10 +506,10 @@ REGION1_CONFIG6.D = Z80_D6;
 
 REGION1_CONFIG7.D = Z80_D7;
 
-REGION2_CONFIG0.D = Z80_D0;
-
 REGION1_CS = ((Z80_A14 & !Z80_A15 & !Z80_MEMRD)
 	# (Z80_A14 & !Z80_A15 & !Z80_MEMWR));
+
+REGION2_CONFIG0.D = Z80_D0;
 
 REGION2_CONFIG1.D = Z80_D1;
 
@@ -518,12 +523,12 @@ REGION2_CONFIG5.D = Z80_D5;
 
 REGION2_CONFIG6.D = Z80_D6;
 
+REGION3_CONFIG0.D = Z80_D0;
+
 REGION2_CONFIG7.D = Z80_D7;
 
 REGION2_CS = ((!Z80_A14 & Z80_A15 & !Z80_MEMRD)
 	# (!Z80_A14 & Z80_A15 & !Z80_MEMWR));
-
-REGION3_CONFIG0.D = Z80_D0;
 
 REGION3_CONFIG1.D = Z80_D1;
 
@@ -531,9 +536,9 @@ REGION3_CONFIG2.D = Z80_D2;
 
 REGION3_CONFIG3.D = Z80_D3;
 
-REGION3_CONFIG5.D = Z80_D5;
-
 REGION3_CONFIG4.D = Z80_D4;
+
+REGION3_CONFIG5.D = Z80_D5;
 
 REGION3_CONFIG6.D = Z80_D6;
 
@@ -542,11 +547,11 @@ REGION3_CONFIG7.D = Z80_D7;
 REGION3_CS = ((Z80_A14 & Z80_A15 & !Z80_MEMRD)
 	# (Z80_A14 & Z80_A15 & !Z80_MEMWR));
 
-!SEVENSEG_B_CS = ((!Z80_A0 & Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IORD)
-	# (!Z80_A0 & Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR));
-
 !SEVENSEG_A_CS = ((Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IORD)
 	# (Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR));
+
+!SEVENSEG_B_CS = ((!Z80_A0 & Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IORD)
+	# (!Z80_A0 & Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR));
 
 SYSTEM_CONFIG0.D = Z80_D0;
 
@@ -560,32 +565,29 @@ SYSTEM_CONFIG4.D = Z80_D4;
 
 SYSTEM_CONFIG5.D = Z80_D5;
 
-SYSTEM_CONFIG6.D = Z80_D6;
-
 SYSTEM_CONFIG7.D = Z80_D7;
 
+SYSTEM_CONFIG6.D = Z80_D6;
+
+SYS_RESET.D = RESET_BTN_IN;
+
+V64_32_VIDEO_MODE.D = Z80_D3;
+
 !UNUSED_PIN1_OUTPUT = (!Z80_A8 & !Z80_A9);
+
+!VRAM_CS = ((REGION0_CONFIG7.Q & Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMRD)
+	# (REGION0_CONFIG7.Q & Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMWR));
+
+Z80_NMI.D = DEBUG_BTN_IN;
+
+VRAM_80X25_CS = 1;
 
 Z80_CLK = ((!SYSTEM_CONFIG0.Q & SYSTEM_CONFIG1.Q & CLK_DIV4.Q)
 	# (SYSTEM_CONFIG0.Q & SYSTEM_CONFIG1.Q & CLK_DIV2.Q)
 	# (!SYSTEM_CONFIG0.Q & !SYSTEM_CONFIG1.Q & CLK_DIV16.Q)
 	# (SYSTEM_CONFIG0.Q & !SYSTEM_CONFIG1.Q & CLK_DIV8.Q));
 
-SYS_RESET.D = RESET_BTN_IN;
-
-VRAM_80X25_CS = 1;
-
-!VRAM_CS = ((REGION0_CONFIG7.Q & Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMRD)
-	# (REGION0_CONFIG7.Q & Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMWR));
-
 Z80_INT = 1;
-
-Z80_NMI.D = DEBUG_BTN_IN;
-
-SRAM_FLASH_PAGE_A14 = ((REGION2_CONFIG1.Q & REGION2_CS)
-	# (REGION3_CONFIG1.Q & REGION3_CS)
-	# (REGION0_CONFIG1.Q & !REGION0_CS)
-	# (REGION1_CONFIG1.Q & REGION1_CS));
 
 !FLASH_CS = ((REGION2_CONFIG6.Q & REGION2_CS)
 	# (REGION3_CONFIG6.Q & REGION3_CS)
@@ -597,210 +599,220 @@ SRAM_FLASH_PAGE_A14 = ((REGION2_CONFIG1.Q & REGION2_CS)
 	# (!REGION0_CONFIG6.Q & !REGION0_CS)
 	# (!REGION1_CONFIG6.Q & REGION1_CS));
 
-SRAM_FLASH_PAGE_A13 = ((REGION2_CONFIG0.Q & REGION2_CS)
-	# (REGION3_CONFIG0.Q & REGION3_CS)
-	# (REGION0_CONFIG0.Q & !REGION0_CS)
-	# (REGION1_CONFIG0.Q & REGION1_CS));
-
-SRAM_FLASH_PAGE_A17 = ((REGION2_CONFIG4.Q & REGION2_CS)
-	# (REGION3_CONFIG4.Q & REGION3_CS)
-	# (REGION0_CONFIG4.Q & !REGION0_CS)
-	# (REGION1_CONFIG4.Q & REGION1_CS));
-
-SRAM_FLASH_PAGE_A15 = ((REGION2_CONFIG2.Q & REGION2_CS)
+SRAM_FLASH_PAGE_A16 = ((REGION2_CONFIG2.Q & REGION2_CS)
 	# (REGION3_CONFIG2.Q & REGION3_CS)
 	# (REGION0_CONFIG2.Q & !REGION0_CS)
 	# (REGION1_CONFIG2.Q & REGION1_CS));
 
-SRAM_FLASH_PAGE_A16 = ((REGION2_CONFIG3.Q & REGION2_CS)
+SRAM_FLASH_PAGE_A14 = ((REGION2_CONFIG0.Q & REGION2_CS)
+	# (REGION3_CONFIG0.Q & REGION3_CS)
+	# (REGION0_CONFIG0.Q & !REGION0_CS)
+	# (REGION1_CONFIG0.Q & REGION1_CS));
+
+SRAM_FLASH_PAGE_A15 = ((REGION2_CONFIG1.Q & REGION2_CS)
+	# (REGION3_CONFIG1.Q & REGION3_CS)
+	# (REGION0_CONFIG1.Q & !REGION0_CS)
+	# (REGION1_CONFIG1.Q & REGION1_CS));
+
+SRAM_FLASH_PAGE_A17 = ((REGION2_CONFIG3.Q & REGION2_CS)
 	# (REGION3_CONFIG3.Q & REGION3_CS)
 	# (REGION0_CONFIG3.Q & !REGION0_CS)
 	# (REGION1_CONFIG3.Q & REGION1_CS));
 
-SRAM_FLASH_PAGE_A18 = ((REGION2_CONFIG5.Q & REGION2_CS)
-	# (REGION3_CONFIG5.Q & REGION3_CS)
-	# (REGION0_CONFIG5.Q & !REGION0_CS)
-	# (REGION1_CONFIG5.Q & REGION1_CS));
+SRAM_FLASH_PAGE_A18 = ((REGION2_CONFIG4.Q & REGION2_CS)
+	# (REGION3_CONFIG4.Q & REGION3_CS)
+	# (REGION0_CONFIG4.Q & !REGION0_CS)
+	# (REGION1_CONFIG4.Q & REGION1_CS));
 
-!Com_Ctrl_262 = (!Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
+!Com_Ctrl_300 = (Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOWR);
 
-!Com_Ctrl_263 = (Z80_A0 & Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
+!Com_Ctrl_301 = (!Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
 
-!Com_Ctrl_264 = (!Z80_A0 & Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
+!Com_Ctrl_302 = (Z80_A0 & Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
 
-!Com_Ctrl_265 = (Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
+!Com_Ctrl_303 = (!Z80_A0 & Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
 
-!Com_Ctrl_266 = (!Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
+!Com_Ctrl_304 = (Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
 
-CLK_DIV4.C = CLK_DIV2.Q;
+!Com_Ctrl_305 = (!Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOWR);
+
+CASS_OUT_D1.C = Com_Ctrl_300;
+
+CASS_OUT_D0.C = Com_Ctrl_300;
+
+CASS_OUT_D2.C = Com_Ctrl_300;
 
 CLK_DIV2.C = CLK_IN;
 
-CLK_DIV16.C = CLK_DIV8.Q;
+CLK_DIV4.C = CLK_DIV2.Q;
 
 CLK_DIV8.C = CLK_DIV4.Q;
 
-REGION0_CONFIG0.C = Com_Ctrl_266;
+CLK_DIV16.C = CLK_DIV8.Q;
+
+REGION0_CONFIG0.C = Com_Ctrl_305;
 
 REGION0_CONFIG0.AR = !SYS_RESET.Q;
 
-REGION0_CONFIG1.C = Com_Ctrl_266;
+REGION0_CONFIG1.C = Com_Ctrl_305;
 
 REGION0_CONFIG1.AR = !SYS_RESET.Q;
 
-REGION0_CONFIG2.C = Com_Ctrl_266;
+REGION0_CONFIG2.C = Com_Ctrl_305;
 
 REGION0_CONFIG2.AR = !SYS_RESET.Q;
 
-REGION0_CONFIG3.C = Com_Ctrl_266;
+REGION0_CONFIG3.C = Com_Ctrl_305;
 
 REGION0_CONFIG3.AR = !SYS_RESET.Q;
 
-REGION0_CONFIG4.C = Com_Ctrl_266;
+REGION0_CONFIG4.C = Com_Ctrl_305;
 
 REGION0_CONFIG4.AR = !SYS_RESET.Q;
 
-REGION0_CONFIG5.C = Com_Ctrl_266;
+REGION0_CONFIG5.C = Com_Ctrl_305;
 
 REGION0_CONFIG5.AR = !SYS_RESET.Q;
 
-REGION0_CONFIG6.C = Com_Ctrl_266;
+REGION0_CONFIG6.C = Com_Ctrl_305;
 
 REGION0_CONFIG6.AP = !SYS_RESET.Q;
 
-REGION0_CONFIG7.C = Com_Ctrl_266;
+REGION0_CONFIG7.C = Com_Ctrl_305;
 
 REGION0_CONFIG7.AP = !SYS_RESET.Q;
 
-REGION1_CONFIG0.C = Com_Ctrl_265;
+REGION1_CONFIG0.C = Com_Ctrl_304;
 
 REGION1_CONFIG0.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG1.C = Com_Ctrl_265;
+REGION1_CONFIG1.C = Com_Ctrl_304;
 
 REGION1_CONFIG1.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG2.C = Com_Ctrl_265;
+REGION1_CONFIG2.C = Com_Ctrl_304;
 
 REGION1_CONFIG2.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG3.C = Com_Ctrl_265;
+REGION1_CONFIG3.C = Com_Ctrl_304;
 
 REGION1_CONFIG3.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG4.C = Com_Ctrl_265;
+REGION1_CONFIG4.C = Com_Ctrl_304;
 
 REGION1_CONFIG4.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG5.C = Com_Ctrl_265;
+REGION1_CONFIG5.C = Com_Ctrl_304;
 
 REGION1_CONFIG5.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG6.C = Com_Ctrl_265;
+REGION1_CONFIG6.C = Com_Ctrl_304;
 
 REGION1_CONFIG6.AR = !SYS_RESET.Q;
 
-REGION1_CONFIG7.C = Com_Ctrl_265;
+REGION1_CONFIG7.C = Com_Ctrl_304;
 
 REGION1_CONFIG7.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG0.C = Com_Ctrl_264;
+REGION2_CONFIG0.C = Com_Ctrl_303;
 
 REGION2_CONFIG0.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG1.C = Com_Ctrl_264;
+REGION2_CONFIG1.C = Com_Ctrl_303;
 
 REGION2_CONFIG1.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG2.C = Com_Ctrl_264;
+REGION2_CONFIG2.C = Com_Ctrl_303;
 
 REGION2_CONFIG2.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG3.C = Com_Ctrl_264;
+REGION2_CONFIG3.C = Com_Ctrl_303;
 
 REGION2_CONFIG3.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG4.C = Com_Ctrl_264;
+REGION2_CONFIG4.C = Com_Ctrl_303;
 
 REGION2_CONFIG4.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG5.C = Com_Ctrl_264;
+REGION2_CONFIG5.C = Com_Ctrl_303;
 
 REGION2_CONFIG5.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG6.C = Com_Ctrl_264;
+REGION2_CONFIG6.C = Com_Ctrl_303;
 
 REGION2_CONFIG6.AR = !SYS_RESET.Q;
 
-REGION2_CONFIG7.C = Com_Ctrl_264;
-
-REGION2_CONFIG7.AR = !SYS_RESET.Q;
-
-REGION3_CONFIG0.C = Com_Ctrl_263;
+REGION3_CONFIG0.C = Com_Ctrl_302;
 
 REGION3_CONFIG0.AR = !SYS_RESET.Q;
 
-REGION3_CONFIG1.C = Com_Ctrl_263;
+REGION2_CONFIG7.C = Com_Ctrl_303;
+
+REGION2_CONFIG7.AR = !SYS_RESET.Q;
+
+REGION3_CONFIG1.C = Com_Ctrl_302;
 
 REGION3_CONFIG1.AR = !SYS_RESET.Q;
 
-REGION3_CONFIG2.C = Com_Ctrl_263;
+REGION3_CONFIG2.C = Com_Ctrl_302;
 
 REGION3_CONFIG2.AR = !SYS_RESET.Q;
 
-REGION3_CONFIG3.C = Com_Ctrl_263;
+REGION3_CONFIG3.C = Com_Ctrl_302;
 
 REGION3_CONFIG3.AR = !SYS_RESET.Q;
 
-REGION3_CONFIG5.C = Com_Ctrl_263;
-
-REGION3_CONFIG5.AR = !SYS_RESET.Q;
-
-REGION3_CONFIG4.C = Com_Ctrl_263;
+REGION3_CONFIG4.C = Com_Ctrl_302;
 
 REGION3_CONFIG4.AR = !SYS_RESET.Q;
 
-REGION3_CONFIG6.C = Com_Ctrl_263;
+REGION3_CONFIG5.C = Com_Ctrl_302;
+
+REGION3_CONFIG5.AR = !SYS_RESET.Q;
+
+REGION3_CONFIG6.C = Com_Ctrl_302;
 
 REGION3_CONFIG6.AR = !SYS_RESET.Q;
 
-REGION3_CONFIG7.C = Com_Ctrl_263;
+REGION3_CONFIG7.C = Com_Ctrl_302;
 
 REGION3_CONFIG7.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG0.C = Com_Ctrl_262;
+SYSTEM_CONFIG0.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG0.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG1.C = Com_Ctrl_262;
+SYSTEM_CONFIG1.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG1.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG2.C = Com_Ctrl_262;
+SYSTEM_CONFIG2.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG2.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG3.C = Com_Ctrl_262;
+SYSTEM_CONFIG3.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG3.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG4.C = Com_Ctrl_262;
+SYSTEM_CONFIG4.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG4.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG5.C = Com_Ctrl_262;
+SYSTEM_CONFIG5.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG5.AR = !SYS_RESET.Q;
 
-SYSTEM_CONFIG6.C = Com_Ctrl_262;
-
-SYSTEM_CONFIG6.AR = !SYS_RESET.Q;
-
-SYSTEM_CONFIG7.C = Com_Ctrl_262;
+SYSTEM_CONFIG7.C = Com_Ctrl_301;
 
 SYSTEM_CONFIG7.AR = !SYS_RESET.Q;
 
+SYSTEM_CONFIG6.C = Com_Ctrl_301;
+
+SYSTEM_CONFIG6.AR = !SYS_RESET.Q;
+
 SYS_RESET.C = CLK_DIV16.Q;
+
+V64_32_VIDEO_MODE.C = Com_Ctrl_300;
 
 Z80_NMI.C = CLK_DIV16.Q;
 
@@ -844,6 +856,9 @@ Pin 39 = Z80_IORD; /* MC 53 */
 Pin 40 = Z80_IOWR; /* MC 51 */ 
 Pin 41 = Z80_NMI; /* MC 49 */ 
 Pin 44 = Z80_INT; /* MC 65 */ 
+Pin 45 = CASS_OUT_D0; /* MC 67 */ 
+Pin 46 = CASS_OUT_D1; /* MC 69 */ 
+Pin 48 = CASS_OUT_D2; /* MC 72 */ 
 Pin 50 = SEVENSEG_A_CS; /* MC 75 */ 
 Pin 51 = SEVENSEG_B_CS; /* MC 77 */ 
 Pin 54 = SRAM_CS; /* MC 83 */ 
@@ -851,30 +866,31 @@ Pin 55 = FLASH_CS; /* MC 85 */
 Pin 56 = KEYBOARD_CS; /* MC 86 */ 
 Pin 57 = VRAM_CS; /* MC 88 */ 
 Pin 58 = VRAM_80X25_CS; /* MC 91 */ 
-Pin 60 = SRAM_FLASH_PAGE_A13; /* MC 93 */ 
+Pin 60 = V64_32_VIDEO_MODE; /* MC 93 */ 
 Pin 61 = SRAM_FLASH_PAGE_A14; /* MC 94 */ 
 Pin 62 = TCK; /* MC 96 */ 
 Pin 63 = SRAM_FLASH_PAGE_A15; /* MC 97 */ 
 Pin 64 = SRAM_FLASH_PAGE_A16; /* MC 99 */ 
 Pin 65 = SRAM_FLASH_PAGE_A17; /* MC 101 */ 
 Pin 67 = SRAM_FLASH_PAGE_A18; /* MC 104 */ 
-Pin 68 = IO_CASS_CS; /* MC 105 */ 
 Pin 69 = SYS_RESET; /* MC 107 */ 
 Pin 71 = TDO; /* MC 112 */ 
 Pin 74 = UNUSED_PIN1_OUTPUT; /* MC 117 */ 
 Pin 83 = CLK_IN;
-PINNODE 315 = Com_Ctrl_266; /* MC 15 Foldback */
-PINNODE 316 = Com_Ctrl_265; /* MC 16 Foldback */
-PINNODE 331 = Com_Ctrl_264; /* MC 31 Foldback */
-PINNODE 332 = Com_Ctrl_263; /* MC 32 Foldback */
-PINNODE 348 = Com_Ctrl_262; /* MC 48 Foldback */
+PINNODE 315 = Com_Ctrl_305; /* MC 15 Foldback */
+PINNODE 316 = Com_Ctrl_304; /* MC 16 Foldback */
+PINNODE 331 = Com_Ctrl_303; /* MC 31 Foldback */
+PINNODE 332 = Com_Ctrl_302; /* MC 32 Foldback */
+PINNODE 348 = Com_Ctrl_301; /* MC 48 Foldback */
+PINNODE 380 = Com_Ctrl_300; /* MC 80 Foldback */
+PINNODE 396 = Com_Ctrl_300; /* MC 96 Foldback */
 PINNODE 601 = REGION1_CONFIG7; /* MC 1 Feedback */
 PINNODE 602 = REGION1_CONFIG6; /* MC 2 Feedback */
 PINNODE 603 = REGION1_CONFIG5; /* MC 3 Feedback */
 PINNODE 604 = REGION1_CONFIG4; /* MC 4 Feedback */
-PINNODE 605 = REGION1_CONFIG2; /* MC 5 Feedback */
-PINNODE 606 = REGION1_CONFIG3; /* MC 6 Feedback */
-PINNODE 607 = REGION1_CONFIG1; /* MC 7 Feedback */
+PINNODE 605 = REGION1_CONFIG3; /* MC 5 Feedback */
+PINNODE 606 = REGION1_CONFIG1; /* MC 6 Feedback */
+PINNODE 607 = REGION1_CONFIG2; /* MC 7 Feedback */
 PINNODE 608 = REGION1_CONFIG0; /* MC 8 Feedback */
 PINNODE 609 = REGION0_CONFIG7; /* MC 9 Feedback */
 PINNODE 610 = REGION0_CONFIG6; /* MC 10 Feedback */
@@ -882,14 +898,14 @@ PINNODE 611 = REGION0_CONFIG5; /* MC 11 Feedback */
 PINNODE 612 = REGION0_CONFIG4; /* MC 12 Feedback */
 PINNODE 613 = REGION0_CONFIG3; /* MC 13 Feedback */
 PINNODE 614 = REGION0_CONFIG2; /* MC 14 Feedback */
-PINNODE 615 = REGION0_CONFIG1; /* MC 15 Feedback */
-PINNODE 616 = REGION0_CONFIG0; /* MC 16 Feedback */
+PINNODE 615 = REGION0_CONFIG0; /* MC 15 Feedback */
+PINNODE 616 = REGION0_CONFIG1; /* MC 16 Feedback */
 PINNODE 617 = REGION3_CONFIG7; /* MC 17 Feedback */
 PINNODE 618 = REGION3_CONFIG6; /* MC 18 Feedback */
 PINNODE 619 = REGION3_CONFIG5; /* MC 19 Feedback */
-PINNODE 620 = REGION3_CONFIG3; /* MC 20 Feedback */
-PINNODE 621 = REGION3_CONFIG4; /* MC 21 Feedback */
-PINNODE 622 = REGION3_CONFIG2; /* MC 22 Feedback */
+PINNODE 620 = REGION3_CONFIG4; /* MC 20 Feedback */
+PINNODE 621 = REGION3_CONFIG2; /* MC 21 Feedback */
+PINNODE 622 = REGION3_CONFIG3; /* MC 22 Feedback */
 PINNODE 623 = REGION3_CONFIG1; /* MC 23 Feedback */
 PINNODE 624 = REGION3_CONFIG0; /* MC 24 Feedback */
 PINNODE 625 = REGION2_CONFIG7; /* MC 25 Feedback */
@@ -907,8 +923,8 @@ PINNODE 639 = CLK_DIV4; /* MC 39 Feedback */
 PINNODE 640 = SYSTEM_CONFIG6; /* MC 40 Feedback */
 PINNODE 641 = SYSTEM_CONFIG7; /* MC 41 Feedback */
 PINNODE 642 = SYSTEM_CONFIG5; /* MC 42 Feedback */
-PINNODE 643 = SYSTEM_CONFIG3; /* MC 43 Feedback */
-PINNODE 644 = SYSTEM_CONFIG4; /* MC 44 Feedback */
+PINNODE 643 = SYSTEM_CONFIG4; /* MC 43 Feedback */
+PINNODE 644 = SYSTEM_CONFIG3; /* MC 44 Feedback */
 PINNODE 646 = SYSTEM_CONFIG2; /* MC 46 Feedback */
 PINNODE 647 = SYSTEM_CONFIG0; /* MC 47 Feedback */
 PINNODE 648 = SYSTEM_CONFIG1; /* MC 48 Feedback */
@@ -939,9 +955,9 @@ MC1   0         --                         REGION1_CONFIG7 Dc-r-  --           -
 MC2   0         --                         REGION1_CONFIG6 Dc-r-  --           --             3     slow
 MC3   12   --   Z80_A8              INPUT  REGION1_CONFIG5 Dc-r-  --           --             3     slow
 MC4   0         --                         REGION1_CONFIG4 Dc-r-  --           --             3     slow
-MC5   11   --   Z80_A9              INPUT  REGION1_CONFIG2 Dc-r-  --           --             3     slow
-MC6   10   --   Z80_A10             INPUT  REGION1_CONFIG3 Dc-r-  --           --             3     slow
-MC7   0         --                         REGION1_CONFIG1 Dc-r-  --           --             3     slow
+MC5   11   --   Z80_A9              INPUT  REGION1_CONFIG3 Dc-r-  --           --             3     slow
+MC6   10   --   Z80_A10             INPUT  REGION1_CONFIG1 Dc-r-  --           --             3     slow
+MC7   0         --                         REGION1_CONFIG2 Dc-r-  --           --             3     slow
 MC8   9    --   Z80_A11             INPUT  REGION1_CONFIG0 Dc-r-  --           --             3     slow
 MC9   0         --                         REGION0_CONFIG7 Dc--p  --           --             3     slow
 MC10  0         --                         REGION0_CONFIG6 Dc--p  --           --             3     slow
@@ -949,14 +965,14 @@ MC11  8    --   Z80_A12             INPUT  REGION0_CONFIG5 Dc-r-  --           -
 MC12  0         --                         REGION0_CONFIG4 Dc-r-  --           --             3     slow
 MC13  6    --   Z80_A13             INPUT  REGION0_CONFIG3 Dc-r-  --           --             3     slow
 MC14  5    --   Z80_A14             INPUT  REGION0_CONFIG2 Dc-r-  --           --             3     slow
-MC15  0         --                         REGION0_CONFIG1 Dc-r-  Com_Ctrl_266 --             4     slow
-MC16  4    --   Z80_A15             INPUT  REGION0_CONFIG0 Dc-r-  Com_Ctrl_265 --             4     slow
+MC15  0         --                         REGION0_CONFIG0 Dc-r-  Com_Ctrl_305 --             4     slow
+MC16  4    --   Z80_A15             INPUT  REGION0_CONFIG1 Dc-r-  Com_Ctrl_304 --             4     slow
 MC17  22   --   Z80_A1              INPUT  REGION3_CONFIG7 Dc-r-  --           --             3     slow
 MC18  0         --                         REGION3_CONFIG6 Dc-r-  --           --             3     slow
 MC19  21   --   Z80_A2              INPUT  REGION3_CONFIG5 Dc-r-  --           --             3     slow
-MC20  0         --                         REGION3_CONFIG3 Dc-r-  --           --             3     slow
-MC21  20   --   Z80_A3              INPUT  REGION3_CONFIG4 Dc-r-  --           --             3     slow
-MC22  0         --                         REGION3_CONFIG2 Dc-r-  --           --             3     slow
+MC20  0         --                         REGION3_CONFIG4 Dc-r-  --           --             3     slow
+MC21  20   --   Z80_A3              INPUT  REGION3_CONFIG2 Dc-r-  --           --             3     slow
+MC22  0         --                         REGION3_CONFIG3 Dc-r-  --           --             3     slow
 MC23  0         --                         REGION3_CONFIG1 Dc-r-  --           --             3     slow
 MC24  18   --   Z80_A4              INPUT  REGION3_CONFIG0 Dc-r-  --           --             3     slow
 MC25  17   --   Z80_A5              INPUT  REGION2_CONFIG7 Dc-r-  --           --             3     slow
@@ -965,8 +981,8 @@ MC27  16   --   Z80_A6              INPUT  REGION2_CONFIG5 Dc-r-  --           -
 MC28  0         --                         REGION2_CONFIG4 Dc-r-  --           --             3     slow
 MC29  15   --   Z80_A7              INPUT  REGION2_CONFIG3 Dc-r-  --           --             3     slow
 MC30  0         --                         REGION2_CONFIG2 Dc-r-  --           --             3     slow
-MC31  0         --                         REGION2_CONFIG1 Dc-r-  Com_Ctrl_264 --             4     slow
-MC32  14   --   TDI                 INPUT  REGION2_CONFIG0 Dc-r-  Com_Ctrl_263 --             4     slow
+MC31  0         --                         REGION2_CONFIG1 Dc-r-  Com_Ctrl_303 --             4     slow
+MC32  14   --   TDI                 INPUT  REGION2_CONFIG0 Dc-r-  Com_Ctrl_302 --             4     slow
 MC33  0         --                         --                     --           --             0     slow
 MC34  0         --                         --                     --           --             0     slow
 MC35  31   --   Z80_D3              INPUT  --                     --           --             0     slow
@@ -977,12 +993,12 @@ MC39  0         --                         CLK_DIV4        Dc---  --           -
 MC40  28   --   Z80_D6              INPUT  SYSTEM_CONFIG6  Dc-r-  --           --             3     slow
 MC41  0         --                         SYSTEM_CONFIG7  Dc-r-  --           --             3     slow
 MC42  0         --                         SYSTEM_CONFIG5  Dc-r-  --           --             3     slow
-MC43  27   --   Z80_D7              INPUT  SYSTEM_CONFIG3  Dc-r-  --           --             3     slow
-MC44  0         --                         SYSTEM_CONFIG4  Dc-r-  --           --             3     slow
+MC43  27   --   Z80_D7              INPUT  SYSTEM_CONFIG4  Dc-r-  --           --             3     slow
+MC44  0         --                         SYSTEM_CONFIG3  Dc-r-  --           --             3     slow
 MC45  25   on   Z80_CLK             C----  --                     --           --             4     slow
 MC46  24   --   Z80_A0              INPUT  SYSTEM_CONFIG2  Dc-r-  --           --             3     slow
 MC47  0         --                         SYSTEM_CONFIG0  Dc-r-  --           --             3     slow
-MC48  23   --   TMS                 INPUT  SYSTEM_CONFIG1  Dc-r-  Com_Ctrl_262 --             4     slow
+MC48  23   --   TMS                 INPUT  SYSTEM_CONFIG1  Dc-r-  Com_Ctrl_301 --             4     slow
 MC49  41   on   Z80_NMI             Dc--p  --                     --           --             3     slow
 MC50  0         --                         --                     --           --             0     slow
 MC51  40   --   Z80_IOWR            INPUT  --                     --           --             0     slow
@@ -1001,12 +1017,12 @@ MC63  0         --                         REGION1_CS      C----  --           -
 MC64  33   --   Z80_D2              INPUT  REGION0_CS      C----  --           --             4     slow
 MC65  44   on   Z80_INT             C----  --                     --           --             0     slow
 MC66  0         --                         --                     --           --             0     slow
-MC67  45        --                         --                     --           --             0     slow
+MC67  45   on   CASS_OUT_D0         Dc---  --                     --           --             2     slow
 MC68  0         --                         --                     --           --             0     slow
-MC69  46        --                         --                     --           --             0     slow
+MC69  46   on   CASS_OUT_D1         Dc---  --                     --           --             2     slow
 MC70  0         --                         --                     --           --             0     slow
 MC71  0         --                         --                     --           --             0     slow
-MC72  48        --                         --                     --           --             0     slow
+MC72  48   on   CASS_OUT_D2         Dc---  --                     --           --             2     slow
 MC73  49        --                         --                     --           --             0     slow
 MC74  0         --                         --                     --           --             0     slow
 MC75  50   on   SEVENSEG_A_CS       C----  --                     --           --             2     slow
@@ -1014,7 +1030,7 @@ MC76  0         --                         --                     --           -
 MC77  51   on   SEVENSEG_B_CS       C----  --                     --           --             2     slow
 MC78  0         --                         --                     --           --             0     slow
 MC79  0         --                         --                     --           --             0     slow
-MC80  52        --                         --                     --           --             0     slow
+MC80  52        --                         --                     Com_Ctrl_300 --             1     slow
 MC81  0         --                         --                     --           --             0     slow
 MC82  0         --                         --                     --           --             0     slow
 MC83  54   on   SRAM_CS             C----  --                     --           --             4     slow
@@ -1027,10 +1043,10 @@ MC89  0         --                         --                     --           -
 MC90  0         --                         --                     --           --             0     slow
 MC91  58   on   VRAM_80X25_CS       C----  --                     --           --             0     slow
 MC92  0         --                         --                     --           --             0     slow
-MC93  60   on   SRAM_FLASH_PAGE_A13 C----  --                     --           --             4     slow
+MC93  60   on   V64_32_VIDEO_MODE   Dc---  --                     --           --             2     slow
 MC94  61   on   SRAM_FLASH_PAGE_A14 C----  --                     --           --             4     slow
 MC95  0         --                         --                     --           --             0     slow
-MC96  62   --   TCK                 INPUT  --                     --           --             0     slow
+MC96  62   --   TCK                 INPUT  --                     Com_Ctrl_300 --             1     slow
 MC97  63   on   SRAM_FLASH_PAGE_A15 C----  --                     --           --             4     slow
 MC98  0         --                         --                     --           --             0     slow
 MC99  64   on   SRAM_FLASH_PAGE_A16 C----  --                     --           --             4     slow
@@ -1039,7 +1055,7 @@ MC101 65   on   SRAM_FLASH_PAGE_A17 C----  --                     --           -
 MC102 0         --                         --                     --           --             0     slow
 MC103 0         --                         --                     --           --             0     slow
 MC104 67   on   SRAM_FLASH_PAGE_A18 C----  --                     --           --             4     slow
-MC105 68   on   IO_CASS_CS          C----  --                     --           --             2     slow
+MC105 68        --                         --                     --           --             0     slow
 MC106 0         --                         --                     --           --             0     slow
 MC107 69   on   SYS_RESET           Dc---  --                     --           --             2     slow
 MC108 0         --                         --                     --           --             0     slow
@@ -1073,21 +1089,21 @@ A: LC1	- LC16		16/16(100%)	8/16(50%)	2/16(12%)	50/80(62%)	(18)	0
 B: LC17	- LC32		16/16(100%)	8/16(50%)	2/16(12%)	50/80(62%)	(18)	0
 C: LC33	- LC48		13/16(81%)	8/16(50%)	1/16(6%)	36/80(45%)	(24)	0
 D: LC49	- LC64		5/16(31%)	8/16(50%)	0/16(0%)	13/80(16%)	(11)	0
-E: LC65	- LC80		3/16(18%)	3/16(18%)	0/16(0%)	4/80(5%)	(10)	0
-F: LC81	- LC96		7/16(43%)	8/16(50%)	0/16(0%)	20/80(25%)	(25)	0
-G: LC97	- LC112		6/16(37%)	7/16(43%)	0/16(0%)	20/80(25%)	(30)	0
+E: LC65	- LC80		6/16(37%)	6/16(37%)	1/16(6%)	11/80(13%)	(13)	0
+F: LC81	- LC96		7/16(43%)	8/16(50%)	1/16(6%)	19/80(23%)	(29)	0
+G: LC97	- LC112		5/16(31%)	6/16(37%)	0/16(0%)	18/80(22%)	(22)	0
 H: LC113- LC128		1/16(6%)	1/16(6%)	0/16(0%)	1/80(1%)	(2)	0
 
 Total dedicated input used:	3/4 	(75%)
-Total I/O pins used		51/64 	(79%)
-Total Logic cells used 		67/128 	(52%)
-Total Flip-Flop used 		46/128 	(35%)
-Total Foldback logic used 	5/128 	(3%)
-Total Nodes+FB/MCells 		72/128 	(56%)
+Total I/O pins used		53/64 	(82%)
+Total Logic cells used 		69/128 	(53%)
+Total Flip-Flop used 		50/128 	(39%)
+Total Foldback logic used 	7/128 	(5%)
+Total Nodes+FB/MCells 		76/128 	(59%)
 Total cascade used 		0
 Total input pins 		35
-Total output pins 		19
-Total Pts 			194
+Total output pins 		21
+Total Pts 			198
 Creating pla file C:\MEMCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS

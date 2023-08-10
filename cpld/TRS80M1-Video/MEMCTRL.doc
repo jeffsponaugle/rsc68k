@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          f1508ispplcc84  Library DLIB-h-40-2
-Created         Wed Aug 09 10:35:58 2023
+Created         Wed Aug 09 19:04:56 2023
 Name            Z80_MEMCTRL
 Partno          Z80_MEMCTRL
 Revision        01
@@ -18,6 +18,42 @@ Location        None
 ===============================================================================
                             Expanded Product Terms
 ===============================================================================
+
+CASS_OUT_D0.d  =>
+    Z80_D0
+
+CASS_OUT_D0.ck  =>
+    Z80_IOWR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+CASS_OUT_D1.d  =>
+    Z80_D1
+
+CASS_OUT_D1.ck  =>
+    Z80_IOWR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+CASS_OUT_D2.d  =>
+    Z80_D2
+
+CASS_OUT_D2.ck  =>
+    Z80_IOWR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
 
 CLK_DIV2.d  =>
     !CLK_DIV2
@@ -61,8 +97,8 @@ FLASH_CS =>
   # REGION0_CS & REGION1_CS & REGION2_CS & !REGION3_CONFIG6
   # !REGION0_CONFIG6 & REGION1_CS & REGION2_CS & !REGION3_CONFIG6
 
-IO_CASS_CS =>
-    Z80_IORD & Z80_IOWR
+IO_CASS_CS_WR =>
+    Z80_IOWR
   # !Z80_A7
   # !Z80_A6
   # !Z80_A5
@@ -702,41 +738,35 @@ SRAM_CS =>
   # REGION0_CS & REGION1_CS & REGION2_CS & REGION3_CONFIG6
   # REGION0_CONFIG6 & REGION1_CS & REGION2_CS & REGION3_CONFIG6
 
-SRAM_FLASH_PAGE_A13 =>
+SRAM_FLASH_PAGE_A14 =>
     REGION0_CONFIG0 & !REGION0_CS
   # REGION1_CONFIG0 & !REGION1_CS
   # REGION2_CONFIG0 & !REGION2_CS
   # REGION3_CONFIG0 & !REGION3_CS
 
-SRAM_FLASH_PAGE_A14 =>
+SRAM_FLASH_PAGE_A15 =>
     REGION0_CONFIG1 & !REGION0_CS
   # REGION1_CONFIG1 & !REGION1_CS
   # REGION2_CONFIG1 & !REGION2_CS
   # REGION3_CONFIG1 & !REGION3_CS
 
-SRAM_FLASH_PAGE_A15 =>
+SRAM_FLASH_PAGE_A16 =>
     REGION0_CONFIG2 & !REGION0_CS
   # REGION1_CONFIG2 & !REGION1_CS
   # REGION2_CONFIG2 & !REGION2_CS
   # REGION3_CONFIG2 & !REGION3_CS
 
-SRAM_FLASH_PAGE_A16 =>
+SRAM_FLASH_PAGE_A17 =>
     REGION0_CONFIG3 & !REGION0_CS
   # REGION1_CONFIG3 & !REGION1_CS
   # REGION2_CONFIG3 & !REGION2_CS
   # REGION3_CONFIG3 & !REGION3_CS
 
-SRAM_FLASH_PAGE_A17 =>
+SRAM_FLASH_PAGE_A18 =>
     REGION0_CONFIG4 & !REGION0_CS
   # REGION1_CONFIG4 & !REGION1_CS
   # REGION2_CONFIG4 & !REGION2_CS
   # REGION3_CONFIG4 & !REGION3_CS
-
-SRAM_FLASH_PAGE_A18 =>
-    REGION0_CONFIG5 & !REGION0_CS
-  # REGION1_CONFIG5 & !REGION1_CS
-  # REGION2_CONFIG5 & !REGION2_CS
-  # REGION3_CONFIG5 & !REGION3_CS
 
 SYSTEM_CONFIG0.d  =>
     Z80_D0.io 
@@ -884,6 +914,18 @@ UNUSED_PIN1_OUTPUT =>
     Z80_A8
   # Z80_A9
 
+V64_32_VIDEO_MODE.d  =>
+    Z80_D3
+
+V64_32_VIDEO_MODE.ck  =>
+    Z80_IOWR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
 VRAM_80X25_CS =>
     1 
 
@@ -929,6 +971,16 @@ Pin Variable                                    Pterms   Max     Min
 Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
 --- --------            ---     ---     ----    ------  ------  -----   
 
+    CASS_IN_D7                  49       V        -       -       -     
+    CASS_OUT_D0                 45       V        -       -       -     
+    CASS_OUT_D0         d       45       X        1       0       1     
+    CASS_OUT_D0         ck      45       X        7       0       1     
+    CASS_OUT_D1                 46       V        -       -       -     
+    CASS_OUT_D1         d       46       X        1       0       1     
+    CASS_OUT_D1         ck      46       X        7       0       1     
+    CASS_OUT_D2                 48       V        -       -       -     
+    CASS_OUT_D2         d       48       X        1       0       1     
+    CASS_OUT_D2         ck      48       X        7       0       1     
     CLK_DIV2                    85       N        -       -       -     
     CLK_DIV2            d       85       M        1       0       1     
     CLK_DIV2            ck      85       M        1       0       1     
@@ -944,7 +996,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CLK_IN                      83       V        -       -       -     
     DEBUG_BTN_IN                2        V        -       -       -     
     FLASH_CS                    55       V        16      0       1     
-    IO_CASS_CS                  68       V        7       0       1     
+    IO_CASS_CS_WR               0        I        7       -       -     
     ISIOACCESS                  0        I        2       -       -     
     ISMEMORYACCESS              0        I        2       -       -     
     KEYBOARD_CS                 56       V        8       0       1     
@@ -1085,7 +1137,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     SEVENSEG_A_CS               50       V        9       0       1     
     SEVENSEG_B_CS               51       V        9       0       1     
     SRAM_CS                     54       V        16      0       1     
-    SRAM_FLASH_PAGE_A13         60       V        4       0       1     
     SRAM_FLASH_PAGE_A14         61       V        4       0       1     
     SRAM_FLASH_PAGE_A15         63       V        4       0       1     
     SRAM_FLASH_PAGE_A16         64       V        4       0       1     
@@ -1127,10 +1178,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     SYS_RESET           d       69       X        1       0       1     
     SYS_RESET           ck      69       X        1       0       1     
     UNUSED_PIN10_IO             73       V        -       -       -     
-    UNUSED_PIN11_IO             45       V        -       -       -     
-    UNUSED_PIN12_IO             46       V        -       -       -     
-    UNUSED_PIN13_IO             48       V        -       -       -     
-    UNUSED_PIN14_IO             49       V        -       -       -     
+    UNUSED_PIN13_IO             68       V        -       -       -     
     UNUSED_PIN1_OUTPUT          74       V        2       0       1     
     UNUSED_PIN2_IO              75       V        -       -       -     
     UNUSED_PIN3_IO              76       V        -       -       -     
@@ -1140,6 +1188,9 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     UNUSED_PIN7_IO              81       V        -       -       -     
     UNUSED_PIN8_INPUT           84       V        -       -       -     
     UNUSED_PIN9_IO              70       V        -       -       -     
+    V64_32_VIDEO_MODE           60       V        -       -       -     
+    V64_32_VIDEO_MODE   d       60       X        1       0       1     
+    V64_32_VIDEO_MODE   ck      60       X        7       0       1     
     VRAM_80X25_CS               58       V        1       0       1     
     VRAM_CS                     57       V        8       0       1     
     Z80_A0                      24       V        -       -       -     
