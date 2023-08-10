@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          f1508ispplcc84  Library DLIB-h-40-2
-Created         Wed Aug 09 19:04:56 2023
+Created         Wed Aug 09 22:06:39 2023
 Name            Z80_MEMCTRL
 Partno          Z80_MEMCTRL
 Revision        01
@@ -20,7 +20,7 @@ Location        None
 ===============================================================================
 
 CASS_OUT_D0.d  =>
-    Z80_D0
+    Z80_D0.io 
 
 CASS_OUT_D0.ck  =>
     Z80_IOWR
@@ -32,7 +32,7 @@ CASS_OUT_D0.ck  =>
   # !Z80_A2
 
 CASS_OUT_D1.d  =>
-    Z80_D1
+    Z80_D1.io 
 
 CASS_OUT_D1.ck  =>
     Z80_IOWR
@@ -44,7 +44,7 @@ CASS_OUT_D1.ck  =>
   # !Z80_A2
 
 CASS_OUT_D2.d  =>
-    Z80_D2
+    Z80_D2.io 
 
 CASS_OUT_D2.ck  =>
     Z80_IOWR
@@ -97,6 +97,15 @@ FLASH_CS =>
   # REGION0_CS & REGION1_CS & REGION2_CS & !REGION3_CONFIG6
   # !REGION0_CONFIG6 & REGION1_CS & REGION2_CS & !REGION3_CONFIG6
 
+IO_CASS_CS_RD =>
+    Z80_IORD
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
 IO_CASS_CS_WR =>
     Z80_IOWR
   # !Z80_A7
@@ -115,7 +124,7 @@ ISMEMORYACCESS =>
   # !Z80_MEMWR
 
 KEYBOARD_CS =>
-    Z80_MEMRD & Z80_MEMWR
+    Z80_MEMRD
   # !REGION0_CONFIG7
   # Z80_A15
   # Z80_A14
@@ -915,7 +924,7 @@ UNUSED_PIN1_OUTPUT =>
   # Z80_A9
 
 V64_32_VIDEO_MODE.d  =>
-    Z80_D3
+    Z80_D3.io 
 
 V64_32_VIDEO_MODE.ck  =>
     Z80_IOWR
@@ -944,6 +953,54 @@ Z80_CLK =>
   # CLK_DIV8 & SYSTEM_CONFIG0 & !SYSTEM_CONFIG1
   # CLK_DIV4 & !SYSTEM_CONFIG0 & SYSTEM_CONFIG1
   # CLK_DIV2 & SYSTEM_CONFIG0 & SYSTEM_CONFIG1
+
+Z80_D0 =>
+    0 
+
+Z80_D0.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D1 =>
+    0 
+
+Z80_D1.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D2 =>
+    0 
+
+Z80_D2.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D3 =>
+    V64_32_VIDEO_MODE
+
+Z80_D3.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D4 =>
+    0 
+
+Z80_D4.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D5 =>
+    0 
+
+Z80_D5.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D6 =>
+    V64_32_VIDEO_MODE
+
+Z80_D6.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
+
+Z80_D7 =>
+    CASS_IN_D7
+
+Z80_D7.oe  =>
+    Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IORD
 
 Z80_INT =>
     1 
@@ -996,6 +1053,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CLK_IN                      83       V        -       -       -     
     DEBUG_BTN_IN                2        V        -       -       -     
     FLASH_CS                    55       V        16      0       1     
+    IO_CASS_CS_RD               0        I        7       -       -     
     IO_CASS_CS_WR               0        I        7       -       -     
     ISIOACCESS                  0        I        2       -       -     
     ISMEMORYACCESS              0        I        2       -       -     
@@ -1178,7 +1236,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     SYS_RESET           d       69       X        1       0       1     
     SYS_RESET           ck      69       X        1       0       1     
     UNUSED_PIN10_IO             73       V        -       -       -     
-    UNUSED_PIN13_IO             68       V        -       -       -     
+    UNUSED_PIN11_IO             68       V        -       -       -     
     UNUSED_PIN1_OUTPUT          74       V        2       0       1     
     UNUSED_PIN2_IO              75       V        -       -       -     
     UNUSED_PIN3_IO              76       V        -       -       -     
@@ -1210,22 +1268,30 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     Z80_A14                     5        V        -       -       -     
     Z80_A15                     4        V        -       -       -     
     Z80_CLK                     25       V        4       0       1     
-    Z80_D0                      35       V        -       -       -     
+    Z80_D0                      35       V        1       0       1     
     Z80_D0              io      35       X        -       -       -     
-    Z80_D1                      34       V        -       -       -     
+    Z80_D0              oe      35       X        1       0       1     
+    Z80_D1                      34       V        1       0       1     
     Z80_D1              io      34       X        -       -       -     
-    Z80_D2                      33       V        -       -       -     
+    Z80_D1              oe      34       X        1       0       1     
+    Z80_D2                      33       V        1       0       1     
     Z80_D2              io      33       X        -       -       -     
-    Z80_D3                      31       V        -       -       -     
+    Z80_D2              oe      33       X        1       0       1     
+    Z80_D3                      31       V        1       0       1     
     Z80_D3              io      31       X        -       -       -     
-    Z80_D4                      30       V        -       -       -     
+    Z80_D3              oe      31       X        1       0       1     
+    Z80_D4                      30       V        1       0       1     
     Z80_D4              io      30       X        -       -       -     
-    Z80_D5                      29       V        -       -       -     
+    Z80_D4              oe      30       X        1       0       1     
+    Z80_D5                      29       V        1       0       1     
     Z80_D5              io      29       X        -       -       -     
-    Z80_D6                      28       V        -       -       -     
+    Z80_D5              oe      29       X        1       0       1     
+    Z80_D6                      28       V        1       0       1     
     Z80_D6              io      28       X        -       -       -     
-    Z80_D7                      27       V        -       -       -     
+    Z80_D6              oe      28       X        1       0       1     
+    Z80_D7                      27       V        1       0       1     
     Z80_D7              io      27       X        -       -       -     
+    Z80_D7              oe      27       X        1       0       1     
     Z80_INT                     44       V        1       0       1     
     Z80_IORD                    39       V        -       -       -     
     Z80_IOWR                    40       V        -       -       -     

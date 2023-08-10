@@ -55,7 +55,7 @@ Pin[81]    = UNUSED_PIN7_IO;
 Pin[84]    = UNUSED_PIN8_INPUT;
 Pin[70]    = UNUSED_PIN9_IO;
 Pin[73]    = UNUSED_PIN10_IO;
-Pin[68]    = UNUSED_PIN13_IO;
+Pin[68]    = UNUSED_PIN11_IO;
 
 
 /* This definition forces A8 and A9 to be assigned to pin inputs for later use.  In the current design they are not needed for
@@ -203,7 +203,7 @@ SRAM_FLASH_PAGE_A18 = ((!REGION0_CS) & REGION0_CONFIG4 ) #
                       ((!REGION3_CS) & REGION3_CONFIG4 );
 
 
-KEYBOARD_CS = !(ISMEMORYACCESS & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'38XX
+KEYBOARD_CS = !(!Z80_MEMRD & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'38XX
                                                         # cpu_address_bus:'h'39XX
                                                         # cpu_address_bus:'h'3AXX
                                                         # cpu_address_bus:'h'3BXX
@@ -214,6 +214,35 @@ VRAM_CS = !(ISMEMORYACCESS & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'3CXX
                                                     # cpu_address_bus:'h'3EXX 
                                                     # cpu_address_bus:'h'3FXX 
                                                     ));
+
+
+/* to allow the CPU to read from the cassette port we need to turn off/on the oe for the databus. */
+
+
+IO_CASS_CS_WR = !(!Z80_IOWR &  (cpu_address_bus:'h'XXFC
+                            # cpu_address_bus:'h'XXFD
+                            # cpu_address_bus:'h'XXFE
+                            # cpu_address_bus:'h'XXFF 
+                            ));
+
+IO_CASS_CS_RD = !(!Z80_IORD &  (cpu_address_bus:'h'XXFC
+                            # cpu_address_bus:'h'XXFD
+                            # cpu_address_bus:'h'XXFE
+                            # cpu_address_bus:'h'XXFF 
+                            ));
+
+
+
+[Z80_D7..0].oe = !IO_CASS_CS_RD;
+
+Z80_D0 = 'b'0;
+Z80_D1 = 'b'0;
+Z80_D2 = 'b'0;
+Z80_D3 = V64_32_VIDEO_MODE;
+Z80_D4 = 'b'0;
+Z80_D5 = 'b'0;
+Z80_D6 = V64_32_VIDEO_MODE;
+Z80_D7 = CASS_IN_D7;
 
 
 /*
@@ -265,21 +294,15 @@ REGION3_CONFIG7.ar = !SYS_RESET;
 [SYSTEM_CONFIG7..0].ar = !SYS_RESET;
 
 
-IO_CASS_CS_WR = !(!Z80_IOWR &  (cpu_address_bus:'h'XXFC
-                            # cpu_address_bus:'h'XXFD
-                            # cpu_address_bus:'h'XXFE
-                            # cpu_address_bus:'h'XXFF 
-                            ));
 
-CASS_OUT_D0.d = Z80_D0;
+CASS_OUT_D0.d = Z80_D0.io;
 CASS_OUT_D0.ck = IO_CASS_CS_WR;
-CASS_OUT_D1.d = Z80_D1;
+CASS_OUT_D1.d = Z80_D1.io;
 CASS_OUT_D1.ck = IO_CASS_CS_WR;
-CASS_OUT_D2.d = Z80_D2;
+CASS_OUT_D2.d = Z80_D2.io;
 CASS_OUT_D2.ck = IO_CASS_CS_WR;
-V64_32_VIDEO_MODE.d = Z80_D3;
+V64_32_VIDEO_MODE.d = Z80_D3.io;
 V64_32_VIDEO_MODE.ck = IO_CASS_CS_WR;
-
 
 Z80_NMI.d = DEBUG_BTN_IN;
 Z80_NMI.ck = CLK_DIV16;
@@ -287,9 +310,6 @@ Z80_NMI.ap = !SYS_RESET;
 
 SYS_RESET.d = RESET_BTN_IN;
 SYS_RESET.ck = CLK_DIV16;
-
-
-
 
 
 /*
