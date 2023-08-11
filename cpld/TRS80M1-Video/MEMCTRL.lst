@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
   1:Name     Z80_MEMCTRL;
   2:PartNo   Z80_MEMCTRL;
@@ -52,237 +52,237 @@ Created Wed Aug 09 22:06:38 2023
  45:Pin[1]     = RESET_BTN_IN;      /* Active Low Reset Button, with DS zero hold circuit */
  46:Pin[2]     = DEBUG_BTN_IN;      /* Active Low Debug NMI button.  Debounce but no hold circutry */
  47:
- 48:Pin[74]    = UNUSED_PIN1_OUTPUT;
- 49:Pin[75]    = UNUSED_PIN2_IO;
- 50:Pin[76]    = UNUSED_PIN3_IO;
- 51:Pin[77]    = UNUSED_PIN4_IO;
- 52:Pin[79]    = UNUSED_PIN5_IO;
- 53:Pin[80]    = UNUSED_PIN6_IO;
+ 48:Pin[68]    = VID_CPLD_1;
+ 49:Pin[70]    = VID_CPLD_2;
+ 50:Pin[73]    = VID_CPLD_3;
+ 51:Pin[74]    = VID_CPLD_4;
+ 52:Pin[75]    = VID_CPLD_5;
+ 53:Pin[76]    = UNUSED_PIN1_IO;
 
 LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 2
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
- 54:Pin[81]    = UNUSED_PIN7_IO;
- 55:Pin[84]    = UNUSED_PIN8_INPUT;
- 56:Pin[70]    = UNUSED_PIN9_IO;
- 57:Pin[73]    = UNUSED_PIN10_IO;
- 58:Pin[68]    = UNUSED_PIN11_IO;
+ 54:Pin[77]    = UNUSED_PIN2_IO;
+ 55:Pin[79]    = UNUSED_PIN3_IO;
+ 56:Pin[80]    = UNUSED_PIN4_IO;
+ 57:Pin[81]    = UNUSED_PIN5_IO;
+ 58:Pin[84]    = UNUSED_PIN6_INPUT;
  59:
  60:
- 61:/* This definition forces A8 and A9 to be assigned to pin inputs for later use.  In the current design they are not needed for
- 62:        chip select creation. */
- 63:
- 64:UNUSED_PIN1_OUTPUT = Z80_A8 # Z80_A9;
- 65:
- 66:/* Hold values to force output pin creation. */
- 67:Z80_INT = 'b'1;
- 68:VRAM_80X25_CS = 'b'1;
- 69:
- 70:/* Internal nodes (FLIP-FLOPS) */
- 71:
- 72:NODE    CLK_DIV2,CLK_DIV4,CLK_DIV8,CLK_DIV16;
- 73:NODE    [REGION0_CONFIG7..0];
- 74:NODE    [REGION1_CONFIG7..0];
- 75:NODE    [REGION2_CONFIG7..0];
- 76:NODE    [REGION3_CONFIG7..0];
- 77:NODE    [SYSTEM_CONFIG7..0];
- 78:
- 79:FIELD cpu_address_bus = [Z80_A15..0];
- 80:
- 81:CLK_DIV2.d = !CLK_DIV2;             /* DIV2 = 14.161 Mhz */
- 82:CLK_DIV2.ck = CLK_IN;
- 83:
- 84:CLK_DIV4.d = !CLK_DIV4;             /* DIV2 = 7.0805 Mhz */
- 85:CLK_DIV4.ck = CLK_DIV2;
- 86:
- 87:CLK_DIV8.d = !CLK_DIV8;             /* DIV2 = 3.54025 Mhz */
- 88:CLK_DIV8.ck = CLK_DIV4;
- 89:
- 90:CLK_DIV16.d = !CLK_DIV16;             /* DIV2 = 1.77 Mhz */
- 91:CLK_DIV16.ck = CLK_DIV8;
- 92:
+ 61:
+ 62:/* This definition forces A8 and A9 to be assigned to pin inputs for later use.  In the current design they are not needed for
+ 63:        chip select creation. */
+ 64:
+ 65:UNUSED_PIN5_IO = Z80_A8 # Z80_A9 # VID_CPLD_1 # VID_CPLD_2 # VID_CPLD_3 # VID_CPLD_4 # VID_CPLD_5;
+ 66:
+ 67:/* Hold values to force output pin creation. */
+ 68:Z80_INT = 'b'1;
+ 69:VRAM_80X25_CS = 'b'1;
+ 70:
+ 71:/* Internal nodes (FLIP-FLOPS) */
+ 72:
+ 73:NODE    CLK_DIV2,CLK_DIV4,CLK_DIV8,CLK_DIV16;
+ 74:NODE    [REGION0_CONFIG7..0];
+ 75:NODE    [REGION1_CONFIG7..0];
+ 76:NODE    [REGION2_CONFIG7..0];
+ 77:NODE    [REGION3_CONFIG7..0];
+ 78:NODE    [SYSTEM_CONFIG7..0];
+ 79:
+ 80:FIELD cpu_address_bus = [Z80_A15..0];
+ 81:
+ 82:CLK_DIV2.d = !CLK_DIV2;             /* DIV2 = 14.161 Mhz */
+ 83:CLK_DIV2.ck = CLK_IN;
+ 84:
+ 85:CLK_DIV4.d = !CLK_DIV4;             /* DIV2 = 7.0805 Mhz */
+ 86:CLK_DIV4.ck = CLK_DIV2;
+ 87:
+ 88:CLK_DIV8.d = !CLK_DIV8;             /* DIV2 = 3.54025 Mhz */
+ 89:CLK_DIV8.ck = CLK_DIV4;
+ 90:
+ 91:CLK_DIV16.d = !CLK_DIV16;             /* DIV2 = 1.77 Mhz */
+ 92:CLK_DIV16.ck = CLK_DIV8;
  93:
- 94:/* Generate CPU clock based on config regster:
- 95:
- 96:     bit 0,1:  CPU Speed
- 97:                    00 = Divide/16
- 98:                    01 = Divide/8
- 99:                    10 = Divide/4
-100:                    11 = Divide/2
-101:
-102:*/
-103:
+ 94:
+ 95:/* Generate CPU clock based on config regster:
+ 96:
+ 97:     bit 0,1:  CPU Speed
+ 98:                    00 = Divide/16
+ 99:                    01 = Divide/8
+100:                    10 = Divide/4
+101:                    11 = Divide/2
+102:
+103:*/
 104:
-105:Z80_CLK = (!SYSTEM_CONFIG1 & !SYSTEM_CONFIG0 & CLK_DIV16)
-106:        # (!SYSTEM_CONFIG1 & SYSTEM_CONFIG0 & CLK_DIV8)
-107:        # (SYSTEM_CONFIG1 & !SYSTEM_CONFIG0 & CLK_DIV4)
+105:
+106:Z80_CLK = (!SYSTEM_CONFIG1 & !SYSTEM_CONFIG0 & CLK_DIV16)
+107:        # (!SYSTEM_CONFIG1 & SYSTEM_CONFIG0 & CLK_DIV8)
 
 LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 3
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
-108:        # (SYSTEM_CONFIG1 & SYSTEM_CONFIG0 & CLK_DIV2);
-109:
-110:/*CLK_DIV2_OUT = CLK_DIV2;*/
-111:
-112:ISMEMORYACCESS = !Z80_MEMRD # !Z80_MEMWR;
-113:ISIOACCESS = !Z80_IORD # !Z80_IOWR;
-114:
-115:/* NMAP_HARDWARE_ACCESS == 1 if there is a memory accces to the hardware mmap region (0x3800-0x3FFF) AND the REGION 0 bit to all 
-116:   hardware acesss is REGION0_CONFIG7==1 */
-117:
+108:        # (SYSTEM_CONFIG1 & !SYSTEM_CONFIG0 & CLK_DIV4)
+109:        # (SYSTEM_CONFIG1 & SYSTEM_CONFIG0 & CLK_DIV2);
+110:
+111:/*CLK_DIV2_OUT = CLK_DIV2;*/
+112:
+113:ISMEMORYACCESS = !Z80_MEMRD # !Z80_MEMWR;
+114:ISIOACCESS = !Z80_IORD # !Z80_IOWR;
+115:
+116:/* NMAP_HARDWARE_ACCESS == 1 if there is a memory accces to the hardware mmap region (0x3800-0x3FFF) AND the REGION 0 bit to all 
+117:   hardware acesss is REGION0_CONFIG7==1 */
 118:
-119:MMAP_HARDWARE_ACCESS = REGION0_CONFIG7 & ISMEMORYACCESS & 
-120:                                        (cpu_address_bus:'h'38XX
-121:                                       # cpu_address_bus:'h'39XX
-122:                                       # cpu_address_bus:'h'3AXX
-123:                                       # cpu_address_bus:'h'3BXX
-124:                                       # cpu_address_bus:'h'3CXX
-125:                                       # cpu_address_bus:'h'3DXX
-126:                                       # cpu_address_bus:'h'3EXX
-127:                                       # cpu_address_bus:'h'3FXX);
-128:
+119:
+120:MMAP_HARDWARE_ACCESS = REGION0_CONFIG7 & ISMEMORYACCESS & 
+121:                                        (cpu_address_bus:'h'38XX
+122:                                       # cpu_address_bus:'h'39XX
+123:                                       # cpu_address_bus:'h'3AXX
+124:                                       # cpu_address_bus:'h'3BXX
+125:                                       # cpu_address_bus:'h'3CXX
+126:                                       # cpu_address_bus:'h'3DXX
+127:                                       # cpu_address_bus:'h'3EXX
+128:                                       # cpu_address_bus:'h'3FXX);
 129:
 130:
-131:/* IO Write to IO address 0x75 and 0x76 go to the 7-Segment Display connector. For debugging, POST codes */
-132:
-133:SEVENSEG_A_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX75 
-134:                            ));
-135:
-136:SEVENSEG_B_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX76 
-137:                            ));
-138:
+131:
+132:/* IO Write to IO address 0x75 and 0x76 go to the 7-Segment Display connector. For debugging, POST codes */
+133:
+134:SEVENSEG_A_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX75 
+135:                            ));
+136:
+137:SEVENSEG_B_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX76 
+138:                            ));
 139:
-140:/* These Regionx_CSs are low when a given memory access is in progress to that region.
-141:   For Region 0, if the MMAP_HARDWARE_ACCESS ==1 the access is to a hardware memory mapped
-142:   device in Region 0, so we should not enable SRAM or FLASH for Region 0 */
-143:
-144:NODE REGION0_CS,REGION1_CS, REGION2_CS, REGION3_CS;
-145:
-146:REGION0_CS = !(ISMEMORYACCESS & !MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'0XXX
-147:                                                        # cpu_address_bus:'h'1XXX
-148:                                                        # cpu_address_bus:'h'2XXX
-149:                                                        # cpu_address_bus:'h'3XXX
-150:                                                        ));
-151:
-152:REGION1_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'4XXX
-153:                               # cpu_address_bus:'h'5XXX
-154:                               # cpu_address_bus:'h'6XXX
-155:                               # cpu_address_bus:'h'7XXX
-156:                               ));
-157:REGION2_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'8XXX
-158:                               # cpu_address_bus:'h'9XXX
-159:                               # cpu_address_bus:'h'AXXX
-160:                               # cpu_address_bus:'h'BXXX
-161:                               ));
+140:
+141:/* These Regionx_CSs are low when a given memory access is in progress to that region.
+142:   For Region 0, if the MMAP_HARDWARE_ACCESS ==1 the access is to a hardware memory mapped
+143:   device in Region 0, so we should not enable SRAM or FLASH for Region 0 */
+144:
+145:NODE REGION0_CS,REGION1_CS, REGION2_CS, REGION3_CS;
+146:
+147:REGION0_CS = !(ISMEMORYACCESS & !MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'0XXX
+148:                                                        # cpu_address_bus:'h'1XXX
+149:                                                        # cpu_address_bus:'h'2XXX
+150:                                                        # cpu_address_bus:'h'3XXX
+151:                                                        ));
+152:
+153:REGION1_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'4XXX
+154:                               # cpu_address_bus:'h'5XXX
+155:                               # cpu_address_bus:'h'6XXX
+156:                               # cpu_address_bus:'h'7XXX
+157:                               ));
+158:REGION2_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'8XXX
+159:                               # cpu_address_bus:'h'9XXX
+160:                               # cpu_address_bus:'h'AXXX
+161:                               # cpu_address_bus:'h'BXXX
 
 LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 4
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
-162:REGION3_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'CXXX
-163:                               # cpu_address_bus:'h'DXXX
-164:                               # cpu_address_bus:'h'EXXX
-165:                               # cpu_address_bus:'h'FXXX
-166:                               ));
-167:
-168:/* Based on the Region config for each region, determine if a SRAM acesss is in order */
-169:
-170:SRAM_CS = (REGION0_CS # REGION0_CONFIG6) &
-171:          (REGION1_CS # REGION1_CONFIG6) &
-172:          (REGION2_CS # REGION2_CONFIG6) &
-173:          (REGION3_CS # REGION3_CONFIG6);
-174:
-175:FLASH_CS = (REGION0_CS # !REGION0_CONFIG6) &
-176:           (REGION1_CS # !REGION1_CONFIG6) &
-177:           (REGION2_CS # !REGION2_CONFIG6) &
-178:          ( REGION3_CS # !REGION3_CONFIG6);
-179:
-180:SRAM_FLASH_PAGE_A14 = ((!REGION0_CS) & REGION0_CONFIG0 ) #
-181:                      ((!REGION1_CS) & REGION1_CONFIG0 ) #
-182:                      ((!REGION2_CS) & REGION2_CONFIG0 ) #
-183:                      ((!REGION3_CS) & REGION3_CONFIG0 );
-184:
-185:SRAM_FLASH_PAGE_A15 = ((!REGION0_CS) & REGION0_CONFIG1 ) #
-186:                      ((!REGION1_CS) & REGION1_CONFIG1 ) #
-187:                      ((!REGION2_CS) & REGION2_CONFIG1 ) #
-188:                      ((!REGION3_CS) & REGION3_CONFIG1 );
-189:
-190:SRAM_FLASH_PAGE_A16 = ((!REGION0_CS) & REGION0_CONFIG2 ) #
-191:                      ((!REGION1_CS) & REGION1_CONFIG2 ) #
-192:                      ((!REGION2_CS) & REGION2_CONFIG2 ) #
-193:                      ((!REGION3_CS) & REGION3_CONFIG2 );
-194:
-195:SRAM_FLASH_PAGE_A17 = ((!REGION0_CS) & REGION0_CONFIG3 ) #
-196:                      ((!REGION1_CS) & REGION1_CONFIG3 ) #
-197:                      ((!REGION2_CS) & REGION2_CONFIG3 ) #
-198:                      ((!REGION3_CS) & REGION3_CONFIG3 );
-199:
-200:SRAM_FLASH_PAGE_A18 = ((!REGION0_CS) & REGION0_CONFIG4 ) #
-201:                      ((!REGION1_CS) & REGION1_CONFIG4 ) #
-202:                      ((!REGION2_CS) & REGION2_CONFIG4 ) #
-203:                      ((!REGION3_CS) & REGION3_CONFIG4 );
-204:
+162:                               ));
+163:REGION3_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'CXXX
+164:                               # cpu_address_bus:'h'DXXX
+165:                               # cpu_address_bus:'h'EXXX
+166:                               # cpu_address_bus:'h'FXXX
+167:                               ));
+168:
+169:/* Based on the Region config for each region, determine if a SRAM acesss is in order */
+170:
+171:SRAM_CS = (REGION0_CS # REGION0_CONFIG6) &
+172:          (REGION1_CS # REGION1_CONFIG6) &
+173:          (REGION2_CS # REGION2_CONFIG6) &
+174:          (REGION3_CS # REGION3_CONFIG6);
+175:
+176:FLASH_CS = (REGION0_CS # !REGION0_CONFIG6) &
+177:           (REGION1_CS # !REGION1_CONFIG6) &
+178:           (REGION2_CS # !REGION2_CONFIG6) &
+179:          ( REGION3_CS # !REGION3_CONFIG6);
+180:
+181:SRAM_FLASH_PAGE_A14 = ((!REGION0_CS) & REGION0_CONFIG0 ) #
+182:                      ((!REGION1_CS) & REGION1_CONFIG0 ) #
+183:                      ((!REGION2_CS) & REGION2_CONFIG0 ) #
+184:                      ((!REGION3_CS) & REGION3_CONFIG0 );
+185:
+186:SRAM_FLASH_PAGE_A15 = ((!REGION0_CS) & REGION0_CONFIG1 ) #
+187:                      ((!REGION1_CS) & REGION1_CONFIG1 ) #
+188:                      ((!REGION2_CS) & REGION2_CONFIG1 ) #
+189:                      ((!REGION3_CS) & REGION3_CONFIG1 );
+190:
+191:SRAM_FLASH_PAGE_A16 = ((!REGION0_CS) & REGION0_CONFIG2 ) #
+192:                      ((!REGION1_CS) & REGION1_CONFIG2 ) #
+193:                      ((!REGION2_CS) & REGION2_CONFIG2 ) #
+194:                      ((!REGION3_CS) & REGION3_CONFIG2 );
+195:
+196:SRAM_FLASH_PAGE_A17 = ((!REGION0_CS) & REGION0_CONFIG3 ) #
+197:                      ((!REGION1_CS) & REGION1_CONFIG3 ) #
+198:                      ((!REGION2_CS) & REGION2_CONFIG3 ) #
+199:                      ((!REGION3_CS) & REGION3_CONFIG3 );
+200:
+201:SRAM_FLASH_PAGE_A18 = ((!REGION0_CS) & REGION0_CONFIG4 ) #
+202:                      ((!REGION1_CS) & REGION1_CONFIG4 ) #
+203:                      ((!REGION2_CS) & REGION2_CONFIG4 ) #
+204:                      ((!REGION3_CS) & REGION3_CONFIG4 );
 205:
-206:KEYBOARD_CS = !(!Z80_MEMRD & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'38XX
-207:                                                        # cpu_address_bus:'h'39XX
-208:                                                        # cpu_address_bus:'h'3AXX
-209:                                                        # cpu_address_bus:'h'3BXX
-210:                                                        ));
-211:
-212:VRAM_CS = !(ISMEMORYACCESS & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'3CXX
-213:                                                    # cpu_address_bus:'h'3DXX 
-214:                                                    # cpu_address_bus:'h'3EXX 
-215:                                                    # cpu_address_bus:'h'3FXX 
+206:
+207:KEYBOARD_CS = !(!Z80_MEMRD & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'38XX
+208:                                                        # cpu_address_bus:'h'39XX
+209:                                                        # cpu_address_bus:'h'3AXX
+210:                                                        # cpu_address_bus:'h'3BXX
+211:                                                        ));
+212:
+213:VRAM_CS = !(ISMEMORYACCESS & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'3CXX
+214:                                                    # cpu_address_bus:'h'3DXX 
+215:                                                    # cpu_address_bus:'h'3EXX 
 
 LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 5
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
-216:                                                    ));
-217:
+216:                                                    # cpu_address_bus:'h'3FXX 
+217:                                                    ));
 218:
-219:/* to allow the CPU to read from the cassette port we need to turn off/on the oe for the databus. */
-220:
+219:
+220:/* to allow the CPU to read from the cassette port we need to turn off/on the oe for the databus. */
 221:
-222:IO_CASS_CS_WR = !(!Z80_IOWR &  (cpu_address_bus:'h'XXFC
-223:                            # cpu_address_bus:'h'XXFD
-224:                            # cpu_address_bus:'h'XXFE
-225:                            # cpu_address_bus:'h'XXFF 
-226:                            ));
-227:
-228:IO_CASS_CS_RD = !(!Z80_IORD &  (cpu_address_bus:'h'XXFC
-229:                            # cpu_address_bus:'h'XXFD
-230:                            # cpu_address_bus:'h'XXFE
-231:                            # cpu_address_bus:'h'XXFF 
-232:                            ));
-233:
+222:
+223:IO_CASS_CS_WR = !(!Z80_IOWR &  (cpu_address_bus:'h'XXFC
+224:                            # cpu_address_bus:'h'XXFD
+225:                            # cpu_address_bus:'h'XXFE
+226:                            # cpu_address_bus:'h'XXFF 
+227:                            ));
+228:
+229:IO_CASS_CS_RD = !(!Z80_IORD &  (cpu_address_bus:'h'XXFC
+230:                            # cpu_address_bus:'h'XXFD
+231:                            # cpu_address_bus:'h'XXFE
+232:                            # cpu_address_bus:'h'XXFF 
+233:                            ));
 234:
-235:
-236:[Z80_D7..0].oe = !IO_CASS_CS_RD;
-237:
-238:Z80_D0 = 'b'0;
-239:Z80_D1 = 'b'0;
-240:Z80_D2 = 'b'0;
-241:Z80_D3 = V64_32_VIDEO_MODE;
-242:Z80_D4 = 'b'0;
-243:Z80_D5 = 'b'0;
-244:Z80_D6 = V64_32_VIDEO_MODE;
-245:Z80_D7 = CASS_IN_D7;
-246:
+235:SREG_CS_RD = !(!Z80_IORD & (cpu_address_bus:'h'XX74));
+236:
+237:[Z80_D7..0].oe = (!IO_CASS_CS_RD) # (!SREG_CS_RD);
+238:
+239:Z80_D0 = ((!IO_CASS_CS_RD) & 'b'0) # ((!SREG_CS_RD) & SYSTEM_CONFIG0);
+240:Z80_D1 = ((!IO_CASS_CS_RD) & 'b'0) # ((!SREG_CS_RD) & SYSTEM_CONFIG1);
+241:Z80_D2 = ((!IO_CASS_CS_RD) & 'b'0) # ((!SREG_CS_RD) & SYSTEM_CONFIG2);
+242:Z80_D3 = ((!IO_CASS_CS_RD) & V64_32_VIDEO_MODE) # ((!SREG_CS_RD) & SYSTEM_CONFIG3);
+243:Z80_D4 = ((!IO_CASS_CS_RD) & 'b'0) # ((!SREG_CS_RD) & SYSTEM_CONFIG4);
+244:Z80_D5 = ((!IO_CASS_CS_RD) & 'b'0) # ((!SREG_CS_RD) & SYSTEM_CONFIG5);
+245:Z80_D6 = ((!IO_CASS_CS_RD) & V64_32_VIDEO_MODE) # ((!SREG_CS_RD) & SYSTEM_CONFIG6);
+246:Z80_D7 = ((!IO_CASS_CS_RD) & CASS_IN_D7) # ((!SREG_CS_RD) & SYSTEM_CONFIG7);
 247:
 248:/*
 249:REGION Congig Register:
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
 270:REGION1_CONFIG7.ar = !SYS_RESET;
 271:
@@ -358,101 +358,98 @@ Created Wed Aug 09 22:06:38 2023
 311:SYS_RESET.d = RESET_BTN_IN;
 312:SYS_RESET.ck = CLK_DIV16;
 313:
-314:
-315:/*
-316:
-317:Total dedicated input used:     3/4     (75%)
-318:Total I/O pins used             53/64   (82%)
-319:Total Logic cells used          69/128  (53%)
-320:Total Flip-Flop used            50/128  (39%)
-321:Total Foldback logic used       7/128   (5%)
-322:Total Nodes+FB/MCells           76/128  (59%)
-323:Total cascade used              0
+314:/*
+315:
+316:Total dedicated input used:     3/4     (75%)
+317:Total I/O pins used             54/64   (84%)
+318:Total Logic cells used          78/128  (60%)
+319:Total Flip-Flop used            50/128  (39%)
+320:Total Foldback logic used       7/128   (5%)
+321:Total Nodes+FB/MCells           85/128  (66%)
+322:Total cascade used              0
+323:Total input pins                28
 
 LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 7
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
-324:Total input pins                35
-325:Total output pins               21
-326:Total Pts                       198
+324:Total output pins               29
+325:Total Pts                       218
+326:
 327:
-328:
-329:                                                                           
-330:                                        D R                                         
-331:                                        E E                                         
-332:                                        B S                                         
-333:                                        U E                                         
-334:                                        G T                                         
-335:                       Z  Z Z   Z Z Z   _ _                                         
-336:                     Z 8  8 8   8 8 8   B B  C                                      
-337:                     8 0  0 0   0 0 0   T T  L                                      
-338:                     0 _  _ _   _ _ _   N N  K                                      
-339:                     _ A  A A G A A A V _ _  _ G       V                            
-340:                     A 1  1 1 N 1 1 1 C I I  I N       C                            
-341:                     9 0  1 2 D 3 4 5 C N N  N D       C                            
-342:                    -------------------------------------------                     
-343:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
-344:                  /    10   8   6   4   2  84  82  80  78  76    \                 
-345:          Z80_A8 | 12                    (*)                   74 | UNUSED_PIN1_OUTPUT
-346:             VCC | 13                                          73 |                 
-347:             TDI | 14                                          72 | GND             
-348:          Z80_A7 | 15                                          71 | TDO             
-349:          Z80_A6 | 16                                          70 |                 
-350:          Z80_A5 | 17                                          69 | SYS_RESET       
-351:          Z80_A4 | 18                                          68 |                 
-352:             GND | 19                                          67 | SRAM_FLASH_PAGE_A18
-353:          Z80_A3 | 20                                          66 | VCC             
-354:          Z80_A2 | 21                                          65 | SRAM_FLASH_PAGE_A17
-355:          Z80_A1 | 22                 ATF1508                  64 | SRAM_FLASH_PAGE_A16
-356:             TMS | 23               84-Lead PLCC               63 | SRAM_FLASH_PAGE_A15
-357:          Z80_A0 | 24                                          62 | TCK             
-358:         Z80_CLK | 25                                          61 | SRAM_FLASH_PAGE_A14
-359:             VCC | 26                                          60 | V64_32_VIDEO_MODE
-360:          Z80_D7 | 27                                          59 | GND             
-361:          Z80_D6 | 28                                          58 | VRAM_80X25_CS   
-362:          Z80_D5 | 29                                          57 | VRAM_CS         
-363:          Z80_D4 | 30                                          56 | KEYBOARD_CS     
-364:          Z80_D3 | 31                                          55 | FLASH_CS        
-365:             GND | 32                                          54 | SRAM_CS         
-366:                  \     34  36  38  40  42  44  46  48  50  52   /                 
-367:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
-368:                    --------------------------------------------                     
-369:                      Z Z Z Z Z V Z Z Z G V Z C C G C   S S   V                     
-370:                      8 8 8 8 8 C 8 8 8 N C 8 A A N A   E E   C                     
-371:                      0 0 0 0 0 C 0 0 0 D C 0 S S D S   V V   C                     
-372:                      _ _ _ _ _   _ _ _     _ S S   S   E E                         
-373:                      D D D M M   I I N     I _ _   _   N N                         
-374:                      2 1 0 E E   O O M     N O O   O   S S                         
-375:                            M M   R W I     T U U   U   E E                         
-376:                            R W   D R         T T   T   G G                         
-377:                            D R               _ _   _   _ _                         
+328:                                                                                    
+329:                                        D R                                         
+330:                                        E E                                         
+331:                                        B S                                         
+332:                                        U E                                         
+333:                                        G T                                         
+334:                       Z  Z Z   Z Z Z   _ _                                         
+335:                     Z 8  8 8   8 8 8   B B  C                                      
+336:                     8 0  0 0   0 0 0   T T  L                                      
+337:                     0 _  _ _   _ _ _   N N  K                                      
+338:                     _ A  A A G A A A V _ _  _ G       V                            
+339:                     A 1  1 1 N 1 1 1 C I I  I N       C                            
+340:                     9 0  1 2 D 3 4 5 C N N  N D       C                            
+341:                    -------------------------------------------                     
+342:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+343:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+344:          Z80_A8 | 12                    (*)                   74 | UNUSED_PIN1_OUTPUT
+345:             VCC | 13                                          73 |                 
+346:             TDI | 14                                          72 | GND             
+347:          Z80_A7 | 15                                          71 | TDO             
+348:          Z80_A6 | 16                                          70 |                 
+349:          Z80_A5 | 17                                          69 | SYS_RESET       
+350:          Z80_A4 | 18                                          68 |                 
+351:             GND | 19                                          67 | SRAM_FLASH_PAGE_A18
+352:          Z80_A3 | 20                                          66 | VCC             
+353:          Z80_A2 | 21                                          65 | SRAM_FLASH_PAGE_A17
+354:          Z80_A1 | 22                 ATF1508                  64 | SRAM_FLASH_PAGE_A16
+355:             TMS | 23               84-Lead PLCC               63 | SRAM_FLASH_PAGE_A15
+356:          Z80_A0 | 24                                          62 | TCK             
+357:         Z80_CLK | 25                                          61 | SRAM_FLASH_PAGE_A14
+358:             VCC | 26                                          60 | V64_32_VIDEO_MODE
+359:          Z80_D7 | 27                                          59 | GND             
+360:          Z80_D6 | 28                                          58 | VRAM_80X25_CS   
+361:          Z80_D5 | 29                                          57 | VRAM_CS         
+362:          Z80_D4 | 30                                          56 | KEYBOARD_CS     
+363:          Z80_D3 | 31                                          55 | FLASH_CS        
+364:             GND | 32                                          54 | SRAM_CS         
+365:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+366:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+367:                    --------------------------------------------                     
+368:                      Z Z Z Z Z V Z Z Z G V Z C C G C C S S   V                     
+369:                      8 8 8 8 8 C 8 8 8 N C 8 A A N A A E E   C                     
+370:                      0 0 0 0 0 C 0 0 0 D C 0 S S D S S V V   C                     
+371:                      _ _ _ _ _   _ _ _     _ S S   S S E E                         
+372:                      D D D M M   I I N     I _ _   _ _ N N                         
+373:                      2 1 0 E E   O O M     N O O   O I S S                         
+374:                            M M   R W I     T U U   U N E E                         
+375:                            R W   D R         T T   T _ G G                         
+376:                            D R               _ _   _ D _ _                         
+377:                                              D D   D 7 A B                         
 
 LISTING FOR LOGIC DESCRIPTION FILE: MEMCTRL.pld                      Page 8
 
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Wed Aug 09 22:06:38 2023
+Created Thu Aug 10 13:53:04 2023
 
-378:                                              D D   D   A B                         
-379:                                              0 1   2   _ _                         
-380:                                                        C C                         
-381:                                                        S S  
+378:                                              0 1   2   _ _                         
+379:                                                        C C                         
+380:                                                        S S                         
+381:
 382:
 383:
-384:
+384:*/
 385:
 386:
-387:*/
+387:
 388:
 389:
-390:
-391:
-392:
 
 
 

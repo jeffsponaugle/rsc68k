@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Wed Aug 09 22:06:39 2023 "}
+  {DBtime "Thu Aug 10 13:53:05 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -62,16 +62,16 @@
    {P CASS_O2 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
    {P CASS_I7 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
    {P V64_32_V {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P UNUSED_ {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P VID_CP1 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
    {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P UNU {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P UNUSED_P {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P UNUSE {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P UNUS {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P UNU {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P UNU {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P UNU {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P UNU {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P VID_CP2 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P VID_CP3 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P VID_CP4 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P VID_CP5 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P UNUSED_P {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P UNUSED_ {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P UNUSED {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P UNUSE {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
    {P UNU {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P Z80_CLK {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P Z80_D7 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
@@ -95,7 +95,7 @@
    {P SRAM_F16 {Pt "I/O"}{Lq 0}{Ploc 360 400}}
    {P SRAM_F17 {Pt "I/O"}{Lq 0}{Ploc 360 420}}
    {P SRAM_F18 {Pt "I/O"}{Lq 0}{Ploc 360 440}}
-   {P UNUSED {Pt "I/O"}{Lq 0}{Ploc 360 460}}
+   {P UNUS {Pt "I/O"}{Lq 0}{Ploc 360 460}}
   }
 
   {PKG
@@ -171,7 +171,7 @@
    {Pnl 340 450}
    {Pnl 340 470}
 
-   {Sd A 83 1 2 4 5 6 8 9 10 11 12 15 16 17 18 20 21 22 24 36 37 39 40 41 45 46 48 49 60 68 69 70 73 75 76 77 79 80 81 84 25 27 28 29 30 31 33 34 35 44 50 51 54 55 56 57 58 61 63 64 65 67 74}
+   {Sd A 83 1 2 4 5 6 8 9 10 11 12 15 16 17 18 20 21 22 24 36 37 39 40 41 45 46 48 49 60 68 69 70 73 74 75 76 77 79 80 84 25 27 28 29 30 31 33 34 35 44 50 51 54 55 56 57 58 61 63 64 65 67 81}
   }
 
   {PIC
@@ -273,16 +273,16 @@
    {T "CASS_O2" 140 280}
    {T "CASS_I7" 140 260}
    {T "V64_32_V" 140 240}
-   {T "UNUSED_" 140 220}
+   {T "VID_CP1" 140 220}
    {T "SYS_RESE" 140 200}
-   {T "UNU" 140 180}
-   {T "UNUSED_P" 140 160}
-   {T "UNUSE" 140 140}
-   {T "UNUS" 140 120}
-   {T "UNU" 140 100}
-   {T "UNU" 140 80}
-   {T "UNU" 140 60}
-   {T "UNU" 140 40}
+   {T "VID_CP2" 140 180}
+   {T "VID_CP3" 140 160}
+   {T "VID_CP4" 140 140}
+   {T "VID_CP5" 140 120}
+   {T "UNUSED_P" 140 100}
+   {T "UNUSED_" 140 80}
+   {T "UNUSED" 140 60}
+   {T "UNUSE" 140 40}
    {T "UNU" 140 20}
    [Tj "RC"]
    {T "Z80_CLK" 320 20}
@@ -307,7 +307,7 @@
    {T "SRAM_F16" 320 400}
    {T "SRAM_F17" 320 420}
    {T "SRAM_F18" 320 440}
-   {T "UNUSED" 320 460}
+   {T "UNUS" 320 460}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1508ISPPLCC84" 230 -10}
@@ -389,25 +389,25 @@
    }
    {N V64_32_V
    }
-   {N UNUSED_
+   {N VID_CP1
    }
    {N SYS_RESE
    }
-   {N UNU
+   {N VID_CP2
+   }
+   {N VID_CP3
+   }
+   {N VID_CP4
+   }
+   {N VID_CP5
    }
    {N UNUSED_P
    }
+   {N UNUSED_
+   }
+   {N UNUSED
+   }
    {N UNUSE
-   }
-   {N UNUS
-   }
-   {N UNU
-   }
-   {N UNU
-   }
-   {N UNU
-   }
-   {N UNU
    }
    {N UNU
    }
@@ -455,7 +455,7 @@
    }
    {N SRAM_F18
    }
-   {N UNUSED
+   {N UNUS
    }
   }
 

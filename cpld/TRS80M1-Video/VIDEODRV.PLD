@@ -13,12 +13,13 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 
 Pin[43] = CLK_25M;                  /* 25.175Mhz input clock  - Master Pixel Clock */
 Pin[1]  = RESET_IN;                /* Active Low Reset */
+Pin[2]  = V64OR32MODE;
 Pin[5]  = SYNC_OUT;
 Pin[4]  = PIXEL_OUT;
 Pin[6]  = CLK_12M;
-Pin     = [CHAR_COL0..5];        /* 6 bits for picking which character to display */
-Pin     = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) */
-Pin     = [DIN0..7];
+Pin[8,9,11,12,14,16] = [CHAR_COL0..5];        /* 6 bits for picking which character to display */
+Pin[20,21,24,25]     = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) */
+Pin[31,33,34,36,37,39,40,41]     = [DIN0..7];
 
 NODE [HSYNC_COUNTER0..9];
 NODE [VSYNC_COUNTER0..9];
@@ -236,7 +237,7 @@ S3 = ((!HSYNC_COUNTER8 & !HSYNC_COUNTER9 & !HSYNC_COUNTER6)
 */
 /* SHIFTREG_LOAD = 1 if the shift register will load from the databus, ==0 and it will shift from 0 to 7; */
 
-SHIFTREG_LOAD = hsync_counter_3_field:['b111'];
+SHIFTREG_LOAD = hsync_counter_3_field:['b'111];
 
 SHIFTREG0.d = (SHIFTREG_LOAD & DIN0);
 SHIFTREG1.d = (SHIFTREG_LOAD & DIN1) # ( !SHIFTREG_LOAD & SHIFTREG0);
@@ -283,13 +284,13 @@ PIXEL_OUT.ar = !RESET_IN;
 
 /*
 Total dedicated input used:	2/4 	(50%)
-Total I/O pins used		17/32 	(53%)
-Total Logic cells used 		50/64 	(78%)
-Total Flip-Flop used 		29/64 	(45%)
+Total I/O pins used		25/32 	(78%)
+Total Logic cells used 		59/64 	(92%)
+Total Flip-Flop used 		37/64 	(57%)
 Total Foldback logic used 	2/64 	(3%)
-Total Nodes+FB/MCells 		36/64 	(56%)
-Total cascade used 		16
-Total input pins 		6
+Total Nodes+FB/MCells 		60/64 	(93%)
+Total cascade used 		1
+Total input pins 		14
 Total output pins 		13
-Total Pts 			177
+Total Pts 			233
 */
