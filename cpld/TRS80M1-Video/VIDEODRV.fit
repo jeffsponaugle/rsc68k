@@ -1,7 +1,7 @@
-Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Thu Aug 10 21:36:49 2023
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Fri Aug 11 13:23:29 2023
 
 
-fit1504 C:\VIDEODRV.tt2 -CUPL -dev P1504C44 -JTAG ON
+fit1504 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VIDEODRV.tt2 -CUPL -dev P1504C44 -JTAG ON
 
 
 ****** Initial fitting strategy and property ******
@@ -56,7 +56,7 @@ fit1504 C:\VIDEODRV.tt2 -CUPL -dev P1504C44 -JTAG ON
 ---------------------------------------------------------
  Fitter_Pass 2, Preassign = KEEP, NODE ASSIGN : OFF 
  ... 
-Info: C:\VIDEODRV uses 90% of the logic resources in device PLCC44
+Info: C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VIDEODRV uses 90% of the logic resources in device PLCC44
   If you wish to have more pins available for future logic change
   Atmel recommends using a larger device.
  ## Warning : Placement fail 
@@ -353,7 +353,7 @@ XXL_213			(MC5	FB)  : MUX 36		Ref (A7fb)
 HSYNC_COUNTER6		(MC4	FB)  : MUX 38		Ref (A6fb)
 SHIFTREG1		(MC19	FB)  : MUX 39		Ref (D63fb)
 
-Creating JEDEC file C:\VIDEODRV.jed ...
+Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VIDEODRV.jed ...
 
 PLCC44 programmed logic:
 -----------------------------------
@@ -932,7 +932,7 @@ Total cascade used 		1
 Total input pins 		14
 Total output pins 		13
 Total Pts 			233
-Creating pla file C:\VIDEODRV.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VIDEODRV.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
 $Device PLCC44 fits 
