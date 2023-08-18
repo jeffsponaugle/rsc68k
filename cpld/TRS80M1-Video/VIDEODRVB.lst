@@ -1,0 +1,403 @@
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+  1:Name     M1NTSC;
+  2:PartNo   M1NTSC;
+  3:Date     05/10/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1504ispplcc44;
+ 10:
+ 11:PROPERTY ATMEL {TDI_PULLUP = ON};
+ 12:PROPERTY ATMEL {TMS_PULLUP = ON};
+ 13:
+ 14:Pin[43] = CLK_25M;                  /* 25.175Mhz input clock  - Master Pixel Clock */
+ 15:Pin[1]  = RESET_IN;                /* Active Low Reset */
+ 16:Pin[2]  = V64OR32MODE;
+ 17:Pin[5]  = SYNC_OUT;
+ 18:Pin[4]  = PIXEL_OUT;
+ 19:Pin[6]  = CLK_12M;
+ 20:Pin[8,9,11,12,14,16] = [CHAR_COL0..5];        /* 6 bits for picking which character to display */
+ 21:Pin[20,21,24,25]     = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) */
+ 22:Pin[31,33,34,36,37,39,40,41]     = [DIN0..7];
+ 23:
+ 24:Pin[17,18,19,26] = [VMEM_ROW3..0];
+ 25:
+ 26:Pin[27] = UNUSED5;
+ 27:Pin[28] = UNUSED6;
+ 28:Pin[29] = UNUSED7;
+ 29:Pin[44] = UNUSED8;
+ 30:
+ 31:
+ 32:NODE [HSYNC_COUNTER0..9];
+ 33:NODE [VSYNC_COUNTER0..9];
+ 34:NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
+ 35:NODE HSYNC_ZERO;
+ 36:NODE VSYNC_ZERO;
+ 37:NODE VSYNC_DISPLAY_ACTIVE;
+ 38:NODE [SHIFTREG0..7];
+ 39:
+ 40:CLK_12M.d = !CLK_12M;
+ 41:CLK_12M.ck = CLK_25M;
+ 42:CLK_12M.ar = !RESET_IN;
+ 43:
+ 44:
+ 45:
+ 46:
+ 47:
+ 48:
+ 49:/* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
+ 50:
+ 51:HSYNC_COUNTER0.d = !HSYNC_COUNTER0 & HSYNC_ZERO;
+ 52:HSYNC_COUNTER0.ck = CLK_12M;
+ 53:HSYNC_COUNTER0.ar = !RESET_IN;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+ 54:
+ 55:HSYNC_COUNTER1.d = ((HSYNC_COUNTER0&!HSYNC_COUNTER1) # (!HSYNC_COUNTER0&HSYNC_COUNTER1)) & HSYNC_ZERO;
+ 56:HSYNC_COUNTER1.ck = CLK_12M;
+ 57:HSYNC_COUNTER1.ar = !RESET_IN;
+ 58:
+ 59:HSYNC_COUNTER2T = HSYNC_COUNTER0&HSYNC_COUNTER1;
+ 60:HSYNC_COUNTER2.d = ((HSYNC_COUNTER2T&!HSYNC_COUNTER2) # (!HSYNC_COUNTER2T&HSYNC_COUNTER2)) & HSYNC_ZERO;
+ 61:HSYNC_COUNTER2.ck = CLK_12M;
+ 62:HSYNC_COUNTER2.ar = !RESET_IN;
+ 63:
+ 64:HSYNC_COUNTER3T = HSYNC_COUNTER2T&HSYNC_COUNTER2;
+ 65:HSYNC_COUNTER3.d = ((HSYNC_COUNTER3T&!HSYNC_COUNTER3) # (!HSYNC_COUNTER3T&HSYNC_COUNTER3)) & HSYNC_ZERO;
+ 66:HSYNC_COUNTER3.ck = CLK_12M;
+ 67:HSYNC_COUNTER3.ar = !RESET_IN;
+ 68:
+ 69:HSYNC_COUNTER4T = HSYNC_COUNTER3T&HSYNC_COUNTER3;
+ 70:HSYNC_COUNTER4.d = ((HSYNC_COUNTER4T&!HSYNC_COUNTER4) # (!HSYNC_COUNTER4T&HSYNC_COUNTER4)) & HSYNC_ZERO;
+ 71:HSYNC_COUNTER4.ck = CLK_12M;
+ 72:HSYNC_COUNTER4.ar = !RESET_IN;
+ 73:
+ 74:HSYNC_COUNTER5T = HSYNC_COUNTER4T&HSYNC_COUNTER4;
+ 75:HSYNC_COUNTER5.d = ((HSYNC_COUNTER5T&!HSYNC_COUNTER5) # (!HSYNC_COUNTER5T&HSYNC_COUNTER5)) & HSYNC_ZERO;
+ 76:HSYNC_COUNTER5.ck = CLK_12M;
+ 77:HSYNC_COUNTER5.ar = !RESET_IN;
+ 78:
+ 79:HSYNC_COUNTER6T = HSYNC_COUNTER5T&HSYNC_COUNTER5;
+ 80:HSYNC_COUNTER6.d = ((HSYNC_COUNTER6T&!HSYNC_COUNTER6) # (!HSYNC_COUNTER6T&HSYNC_COUNTER6)) & HSYNC_ZERO;
+ 81:HSYNC_COUNTER6.ck = CLK_12M;
+ 82:HSYNC_COUNTER6.ar = !RESET_IN;
+ 83:
+ 84:HSYNC_COUNTER7T = HSYNC_COUNTER6T&HSYNC_COUNTER6;
+ 85:HSYNC_COUNTER7.d = ((HSYNC_COUNTER7T&!HSYNC_COUNTER7) # (!HSYNC_COUNTER7T&HSYNC_COUNTER7)) & HSYNC_ZERO;
+ 86:HSYNC_COUNTER7.ck = CLK_12M;
+ 87:HSYNC_COUNTER7.ar = !RESET_IN;
+ 88:
+ 89:HSYNC_COUNTER8T = HSYNC_COUNTER7T&HSYNC_COUNTER7;
+ 90:HSYNC_COUNTER8.d = ((HSYNC_COUNTER8T&!HSYNC_COUNTER8) # (!HSYNC_COUNTER8T&HSYNC_COUNTER8)) & HSYNC_ZERO;
+ 91:HSYNC_COUNTER8.ck = CLK_12M;
+ 92:HSYNC_COUNTER8.ar = !RESET_IN;
+ 93:
+ 94:HSYNC_COUNTER9T = HSYNC_COUNTER8T&HSYNC_COUNTER8;
+ 95:HSYNC_COUNTER9.d = ((HSYNC_COUNTER9T&!HSYNC_COUNTER9) # (!HSYNC_COUNTER9T&HSYNC_COUNTER9)) & HSYNC_ZERO;
+ 96:HSYNC_COUNTER9.ck = CLK_12M;
+ 97:HSYNC_COUNTER9.ar = !RESET_IN;
+ 98:
+ 99:FIELD hsync_counter_field = [HSYNC_COUNTER9..0];
+100:FIELD hsync_counter_3_field = [HSYNC_COUNTER2..0];
+101:FIELD hsync_counter_4_field = [HSYNC_COUNTER3..0];
+102:
+103:/* 
+104:   HSYNC_ZERO is 0 when we need to loop the counter.  This is Logical AND'ed with the other inputs to each
+105:   counters .d value, so when we are at the loop location, the next location loaded will be 0.
+106:   HSYNC_ZERO us normally at 1, and goes to 0 for 1 clock cycle ( CLK25 low to CLK25 low ), and that
+107:   edge is also used to increment the vertical counters via VSYNC_CLOCK.
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+108:*/
+109:
+110:HSYNC_ZERO = !(hsync_counter_field:['d'799]);
+111:
+112:/* 
+113:   The VSYNC_CLOCK signal is used to increment the V_SYNC counter at the end of each horizontal sync row.   
+114:   The reason for two FFs is to first capture the HSYNC value (on the clock edge opposite of the counter itself changing)
+115:   followed by a second FF to sync the V_SYNC increment with the rising edge of CLK_25M.   This allows both the H_SYNC and V_SYNC 
+116:   counters to be used in logical operations that are clocked on the same clock signal (falling CLK_25M)
+117:*/
+118:
+119:
+120:VSYNC_CLOCK_A.d = !HSYNC_ZERO;
+121:VSYNC_CLOCK_A.ck = !CLK_12M;
+122:VSYNC_CLOCK_A.ar = !RESET_IN;
+123:
+124:VSYNC_CLOCK_B.d = VSYNC_CLOCK_A;
+125:VSYNC_CLOCK_B.ck = CLK_12M;
+126:VSYNC_CLOCK_B.ar = !RESET_IN;
+127:
+128:/* Vertical Sync 9 bit counter, 0-498.  VSYNC_ZERO is used to reset this counter so it loops from 498 back to 0 */
+129:
+130:VSYNC_COUNTER0.d = (!VSYNC_COUNTER0) & VSYNC_ZERO;
+131:VSYNC_COUNTER0.ck = VSYNC_CLOCK_B;
+132:VSYNC_COUNTER0.ar = !RESET_IN;
+133:
+134:VSYNC_COUNTER1.d = ((VSYNC_COUNTER0&!VSYNC_COUNTER1) # (!VSYNC_COUNTER0&VSYNC_COUNTER1)) & VSYNC_ZERO;
+135:VSYNC_COUNTER1.ck = VSYNC_CLOCK_B;
+136:VSYNC_COUNTER1.ar = !RESET_IN;
+137:
+138:VSYNC_COUNTER2T = VSYNC_COUNTER0&VSYNC_COUNTER1;
+139:VSYNC_COUNTER2.d = ((VSYNC_COUNTER2T&!VSYNC_COUNTER2) # (!VSYNC_COUNTER2T&VSYNC_COUNTER2)) & VSYNC_ZERO;
+140:VSYNC_COUNTER2.ck = VSYNC_CLOCK_B;
+141:VSYNC_COUNTER2.ar = !RESET_IN;
+142:
+143:VSYNC_COUNTER3T = VSYNC_COUNTER2T&VSYNC_COUNTER2;
+144:VSYNC_COUNTER3.d = ((VSYNC_COUNTER3T&!VSYNC_COUNTER3) # (!VSYNC_COUNTER3T&VSYNC_COUNTER3)) & VSYNC_ZERO;
+145:VSYNC_COUNTER3.ck = VSYNC_CLOCK_B;
+146:VSYNC_COUNTER3.ar = !RESET_IN;
+147:
+148:VSYNC_COUNTER4T = VSYNC_COUNTER3T&VSYNC_COUNTER3;
+149:VSYNC_COUNTER4.d = ((VSYNC_COUNTER4T&!VSYNC_COUNTER4) # (!VSYNC_COUNTER4T&VSYNC_COUNTER4)) & VSYNC_ZERO;
+150:VSYNC_COUNTER4.ck = VSYNC_CLOCK_B;
+151:VSYNC_COUNTER4.ar = !RESET_IN;
+152:
+153:VSYNC_COUNTER5T = VSYNC_COUNTER4T&VSYNC_COUNTER4;
+154:VSYNC_COUNTER5.d = ((VSYNC_COUNTER5T&!VSYNC_COUNTER5) # (!VSYNC_COUNTER5T&VSYNC_COUNTER5)) & VSYNC_ZERO;
+155:VSYNC_COUNTER5.ck = VSYNC_CLOCK_B;
+156:VSYNC_COUNTER5.ar = !RESET_IN;
+157:
+158:VSYNC_COUNTER6T = VSYNC_COUNTER5T&VSYNC_COUNTER5;
+159:VSYNC_COUNTER6.d = ((VSYNC_COUNTER6T&!VSYNC_COUNTER6) # (!VSYNC_COUNTER6T&VSYNC_COUNTER6)) & VSYNC_ZERO;
+160:VSYNC_COUNTER6.ck = VSYNC_CLOCK_B;
+161:VSYNC_COUNTER6.ar = !RESET_IN;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+162:
+163:VSYNC_COUNTER7T = VSYNC_COUNTER6T&VSYNC_COUNTER6;
+164:VSYNC_COUNTER7.d = ((VSYNC_COUNTER7T&!VSYNC_COUNTER7) # (!VSYNC_COUNTER7T&VSYNC_COUNTER7)) & VSYNC_ZERO;
+165:VSYNC_COUNTER7.ck = VSYNC_CLOCK_B;
+166:VSYNC_COUNTER7.ar = !RESET_IN;
+167:
+168:VSYNC_COUNTER8T = VSYNC_COUNTER7T&VSYNC_COUNTER7;
+169:VSYNC_COUNTER8.d = ((VSYNC_COUNTER8T&!VSYNC_COUNTER8) # (!VSYNC_COUNTER8T&VSYNC_COUNTER8)) & VSYNC_ZERO;
+170:VSYNC_COUNTER8.ck = VSYNC_CLOCK_B;
+171:VSYNC_COUNTER8.ar = !RESET_IN;
+172:
+173:VSYNC_COUNTER9T = VSYNC_COUNTER8T&VSYNC_COUNTER8;
+174:VSYNC_COUNTER9.d = ((VSYNC_COUNTER9T&!VSYNC_COUNTER9) # (!VSYNC_COUNTER9T&VSYNC_COUNTER9)) & VSYNC_ZERO;
+175:VSYNC_COUNTER9.ck = VSYNC_CLOCK_B;
+176:VSYNC_COUNTER9.ar = !RESET_IN;
+177:
+178:FIELD vsync_counter_field = [VSYNC_COUNTER9..0];
+179:FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
+180:
+181:VSYNC_ZERO = !(vsync_counter_field:['d'263]);
+182:
+183:/* FONTLINE_RESET - Reset counter if the value==11, so it counts from 0-11.  Also hold in reset
+184:    if we are not in the active area (VSYNC_DISPLAY_ACTIVE) */
+185:NODE FONTLINE_RESET;
+186:
+187:FONTLINE_RESET = (FONTLINE0 & FONTLINE1 & !FONTLINE2 & FONTLINE3) # !VSYNC_DISPLAY_ACTIVE;
+188:FONTLINE_INC = 'b'1;
+189:
+190:FONTLINE0.d =  (  (FONTLINE_INC&!FONTLINE0) 
+191:        # (!FONTLINE_INC&FONTLINE0)
+192:        ) & !FONTLINE_RESET;     
+193:FONTLINE0.ck = VSYNC_CLOCK_B;
+194:
+195:FONTLINE1.d =  (  (FONTLINE_INC&((FONTLINE0&!FONTLINE1) # (!FONTLINE0&FONTLINE1))) 
+196:        # ((!FONTLINE_INC&FONTLINE1))
+197:        ) & !FONTLINE_RESET;
+198:FONTLINE1.ck = VSYNC_CLOCK_B;
+199:
+200:FONTLINE2T = FONTLINE0&FONTLINE1;
+201:FONTLINE2.d =  (  (FONTLINE_INC&((FONTLINE2T&!FONTLINE2) # (!FONTLINE2T&FONTLINE2))) 
+202:        # ((!FONTLINE_INC&FONTLINE2))
+203:        ) & !FONTLINE_RESET;
+204:FONTLINE2.ck = VSYNC_CLOCK_B;
+205:
+206:FONTLINE3T = FONTLINE2T&FONTLINE2;
+207:FONTLINE3.d =  ( (FONTLINE_INC&((FONTLINE3T&!FONTLINE3) # (!FONTLINE3T&FONTLINE3))) 
+208:        # ((!FONTLINE_INC&FONTLINE3))
+209:        ) & !FONTLINE_RESET;
+210:FONTLINE3.ck = VSYNC_CLOCK_B;
+211:
+212:/* 
+213:   VMEM_ROW is the output that picks the text row we are displaying from video memory.  This increments from 0 to 16
+214:   each time the FONTLINE is at 11 (the end of the current font row).
+215:
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+216:   VMEM_ROW is held at zero until we get the the active part of the display.  It will increment as the FONTLINE transitions 
+217:   from 11 back to 0.
+218:*/
+219:
+220:VMEM_ROW_INCREMENT = (FONTLINE0 & FONTLINE1 & !FONTLINE2 & FONTLINE3);
+221:VMEM_ROW_RESET = !VSYNC_DISPLAY_ACTIVE;
+222:
+223:VMEM_ROW0.d =  (  (VMEM_ROW_INCREMENT&!VMEM_ROW0) 
+224:        # (!VMEM_ROW_INCREMENT&VMEM_ROW0)
+225:        ) & !VMEM_ROW_RESET;     
+226:VMEM_ROW0.ck = VSYNC_CLOCK_B;
+227:
+228:VMEM_ROW1.d =  (  (VMEM_ROW_INCREMENT&((VMEM_ROW0&!VMEM_ROW1) # (!VMEM_ROW0&VMEM_ROW1))) 
+229:        # ((!VMEM_ROW_INCREMENT&VMEM_ROW1))
+230:        ) & !VMEM_ROW_RESET;
+231:VMEM_ROW1.ck = VSYNC_CLOCK_B;
+232:
+233:VMEM_ROW2T = VMEM_ROW0&VMEM_ROW1;
+234:VMEM_ROW2.d =  (  (VMEM_ROW_INCREMENT&((VMEM_ROW2T&!VMEM_ROW2) # (!VMEM_ROW2T&VMEM_ROW2))) 
+235:        # ((!VMEM_ROW_INCREMENT&VMEM_ROW2))
+236:        ) & !VMEM_ROW_RESET;
+237:VMEM_ROW2.ck = VSYNC_CLOCK_B;
+238:
+239:VMEM_ROW3T = VMEM_ROW2T&VMEM_ROW2;
+240:VMEM_ROW3.d =  ( (VMEM_ROW_INCREMENT&((VMEM_ROW3T&!VMEM_ROW3) # (!VMEM_ROW3T&VMEM_ROW3))) 
+241:        # ((!VMEM_ROW_INCREMENT&VMEM_ROW3))
+242:        ) & !VMEM_ROW_RESET;
+243:VMEM_ROW3.ck = VSYNC_CLOCK_B;
+244:
+245:
+246:
+247:/* The CHAR_COL outputs count from 0-63 starting at HSYNC_COUNTER value 192.  
+248:   This is used to directly drive the character ROM for a test image.  In normal use
+249:   these bits will be used to derive the memory address for the video memory lookup.
+250:   It takes teh HSYNC_COUNTER bits from 3-6 and as binary 101 to the upper three bit.  
+251:   This is equivilent to subtracting 192 from the total counter value, but only providing
+252:   bits 3-8;
+253:*/
+254:
+255:CHAR_COL0 = HSYNC_COUNTER3;
+256:CHAR_COL1 = HSYNC_COUNTER4;
+257:CHAR_COL2 = HSYNC_COUNTER5;
+258:CHAR_COL3 = !HSYNC_COUNTER6;
+259:CHAR_COL4 = (  (HSYNC_COUNTER6 & !HSYNC_COUNTER7)
+260:                  # (!HSYNC_COUNTER6 & HSYNC_COUNTER7));
+261:CHAR_COL5 = (  (!HSYNC_COUNTER8 & !HSYNC_COUNTER7)
+262:                  # (HSYNC_COUNTER6 & HSYNC_COUNTER8 & HSYNC_COUNTER7)
+263:                  # (!HSYNC_COUNTER6 & !HSYNC_COUNTER8));
+264:
+265:/*
+266:A0 = HSYNC_COUNTER6;
+267:A1 = HSYNC_COUNTER7;
+268:A2 = HSYNC_COUNTER8;
+269:A3 = HSYNC_COUNTER9;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 6
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+270:
+271:S0 = !HSYNC_COUNTER6;
+272:
+273:S1 = ((HSYNC_COUNTER6 & !HSYNC_COUNTER7)
+274:        # (!HSYNC_COUNTER6 & HSYNC_COUNTER7));
+275:
+276:S2 = ((!A2 & !HSYNC_COUNTER7)
+277:        # (HSYNC_COUNTER6 & HSYNC_COUNTER8 & HSYNC_COUNTER7)
+278:        # (!HSYNC_COUNTER6 & !HSYNC_COUNTER8));
+279:
+280:S3 = ((!HSYNC_COUNTER8 & !HSYNC_COUNTER9 & !HSYNC_COUNTER6)
+281:        # (HSYNC_COUNTER7 & HSYNC_COUNTER9 & HSYNC_COUNTER6)
+282:        # (HSYNC_COUNTER8 & HSYNC_COUNTER9)
+283:        # (!HSYNC_COUNTER7 & !HSYNC_COUNTER8 & !HSYNC_COUNTER9));
+284:
+285:*/
+286:/* SHIFTREG_LOAD = 1 if the shift register will load from the databus, ==0 and it will shift from 0 to 7; */
+287:
+288:SHIFTREG_LOAD = hsync_counter_3_field:['b'111];
+289:
+290:SHIFTREG0.d = (SHIFTREG_LOAD & DIN0);
+291:SHIFTREG1.d = (SHIFTREG_LOAD & DIN1) # ( !SHIFTREG_LOAD & SHIFTREG0);
+292:SHIFTREG2.d = (SHIFTREG_LOAD & DIN2) # ( !SHIFTREG_LOAD & SHIFTREG1);
+293:SHIFTREG3.d = (SHIFTREG_LOAD & DIN3) # ( !SHIFTREG_LOAD & SHIFTREG2);
+294:SHIFTREG4.d = (SHIFTREG_LOAD & DIN4) # ( !SHIFTREG_LOAD & SHIFTREG3);
+295:SHIFTREG5.d = (SHIFTREG_LOAD & DIN5) # ( !SHIFTREG_LOAD & SHIFTREG4);
+296:SHIFTREG6.d = (SHIFTREG_LOAD & DIN6) # ( !SHIFTREG_LOAD & SHIFTREG5);
+297:SHIFTREG7.d = (SHIFTREG_LOAD & DIN7) # ( !SHIFTREG_LOAD & SHIFTREG6);
+298:
+299:[SHIFTREG0..7].ck = !CLK_12M;
+300:[SHIFTREG0..7].ar = !RESET_IN;
+301:
+302:/* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row that we want to output pixel data.  Rows 32-223 (192 rows) */
+303:VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
+304:
+305:/* VSYNC_OUTPUT_VSYNC == 1 when on a row that we want to output a vertical sync signal on. The last 3 rows */
+306:VSYNC_OUTPUT_VSYNC = (vsync_counter_field:['d'262..'d'263]);
+307:
+308:/* HSYNC_DISPLAY_ACTIVE == 1 when on the part of a line where we want output pixel data */
+309:HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'200..'d'711]);
+310:
+311:/* VSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Vertical SYNC, but inverted.  
+312:   This value is ==1 at the locations that we want the SYNC signal to be 0. */
+313:VSYNC_PATTERN = (hsync_counter_field:['d'0..'d'639]);
+314:
+315:/* HSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Horizontal SYNC, but inverted.  
+316:   This value is ==1 at the locations that we want the SYNC signal to be 0. */
+317:HSYNC_PATTERN = (hsync_counter_field:['d'0..'d'63]);
+318:
+319:
+320:/* The actual SYNC output pin is either doing a line with the HSYNC pattern, or the VSYNC pattern */
+321:
+322:SYNC_OUT.d = !( 
+323:                 (VSYNC_OUTPUT_VSYNC & VSYNC_PATTERN)
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 7
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 12 23:06:21 2023
+
+324:               # (!VSYNC_OUTPUT_VSYNC & HSYNC_PATTERN)
+325:              );
+326:SYNC_OUT.ck = !CLK_12M;
+327:SYNC_OUT.ap = !RESET_IN;
+328:
+329:PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
+330:PIXEL_OUT.ck = !CLK_12M;
+331:PIXEL_OUT.ar = !RESET_IN;
+332:
+333:/*
+334:Total dedicated input used:     2/4     (50%)
+335:Total I/O pins used             25/32   (78%)
+336:Total Logic cells used          59/64   (92%)
+337:Total Flip-Flop used            37/64   (57%)
+338:Total Foldback logic used       2/64    (3%)
+339:Total Nodes+FB/MCells           60/64   (93%)
+340:Total cascade used              1
+341:Total input pins                14
+342:Total output pins               13
+343:Total Pts                       233
+344:*/
+345:
+
+
+
