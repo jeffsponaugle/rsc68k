@@ -1,11 +1,11 @@
-{COMPONENT C:\VIDEODRV.SYM
+{COMPONENT C:\VIDEODRVB.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Thu Aug 10 21:36:48 2023 "}
+  {DBtime "Sat Aug 12 23:06:21 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,24 +33,32 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P CLK_25M {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P RESET_IN {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P V64OR32M {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P PIXEL_OU {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P SYNC_OUT {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P CLK_12M {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P FONTLI0 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P FONTLI1 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P FONTLI2 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P FONTLI3 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P DIN0 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P DIN1 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P DIN2 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P DIN3 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P DIN4 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P DIN5 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P DIN6 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P DIN7 {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P CLK_25M {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P RESET_IN {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P V64OR32M {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P PIXEL_OU {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P SYNC_OUT {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P CLK_12M {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P VMEM_R3 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P VMEM_R2 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P VMEM_R1 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P FONTLI0 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P FONTLI1 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P FONTLI2 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P FONTLI3 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P VMEM_R0 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P UNUSED5 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P UNUSED6 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P UNUSED7 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P DIN0 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P DIN1 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P DIN2 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P DIN3 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P DIN4 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P DIN5 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P DIN6 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P DIN7 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P UNUSED8 {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P CHAR_C0 {Pt "I/O"}{Lq 0}{Ploc 350 20}}
    {P CHAR_C1 {Pt "I/O"}{Lq 0}{Ploc 350 40}}
    {P CHAR_C2 {Pt "I/O"}{Lq 0}{Ploc 350 60}}
@@ -62,12 +70,20 @@
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 225 410}
+   {Rdl 225 570}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 390}
+   {Pnl 120 550}
    [Ts 15][Tj "RC"]
+   {Pnl 120 510}
+   {Pnl 120 490}
+   {Pnl 120 470}
+   {Pnl 120 450}
+   {Pnl 120 430}
+   {Pnl 120 410}
+   {Pnl 120 390}
+   {Pnl 120 370}
    {Pnl 120 350}
    {Pnl 120 330}
    {Pnl 120 310}
@@ -93,15 +109,23 @@
    {Pnl 330 110}
    {Pnl 330 130}
 
-   {Sd A 43 1 2 4 5 6 20 21 24 25 31 33 34 36 37 39 40 41 8 9 11 12 14 16}
+   {Sd A 43 1 2 4 5 6 17 18 19 20 21 24 25 26 27 28 29 31 33 34 36 37 39 40 41 44 8 9 11 12 14 16}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 400 320 0}
+   {R 130 560 320 0}
+   {L 130 540 100 540}
+   {L 130 550 140 540 130 530}
+   {L 130 500 100 500}
+   {L 130 480 100 480}
+   {L 130 460 100 460}
+   {L 130 440 100 440}
+   {L 130 420 100 420}
+   {L 130 400 100 400}
    {L 130 380 100 380}
-   {L 130 390 140 380 130 370}
+   {L 130 360 100 360}
    {L 130 340 100 340}
    {L 130 320 100 320}
    {L 130 300 100 300}
@@ -127,24 +151,32 @@
    {L 320 120 350 120}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "CLK_25M" 140 380}
-   {T "RESET_IN" 140 340}
-   {T "V64OR32M" 140 320}
-   {T "PIXEL_OU" 140 300}
-   {T "SYNC_OUT" 140 280}
-   {T "CLK_12M" 140 260}
-   {T "FONTLI0" 140 240}
-   {T "FONTLI1" 140 220}
-   {T "FONTLI2" 140 200}
-   {T "FONTLI3" 140 180}
-   {T "DIN0" 140 160}
-   {T "DIN1" 140 140}
-   {T "DIN2" 140 120}
-   {T "DIN3" 140 100}
-   {T "DIN4" 140 80}
-   {T "DIN5" 140 60}
-   {T "DIN6" 140 40}
-   {T "DIN7" 140 20}
+   {T "CLK_25M" 140 540}
+   {T "RESET_IN" 140 500}
+   {T "V64OR32M" 140 480}
+   {T "PIXEL_OU" 140 460}
+   {T "SYNC_OUT" 140 440}
+   {T "CLK_12M" 140 420}
+   {T "VMEM_R3" 140 400}
+   {T "VMEM_R2" 140 380}
+   {T "VMEM_R1" 140 360}
+   {T "FONTLI0" 140 340}
+   {T "FONTLI1" 140 320}
+   {T "FONTLI2" 140 300}
+   {T "FONTLI3" 140 280}
+   {T "VMEM_R0" 140 260}
+   {T "UNUSED5" 140 240}
+   {T "UNUSED6" 140 220}
+   {T "UNUSED7" 140 200}
+   {T "DIN0" 140 180}
+   {T "DIN1" 140 160}
+   {T "DIN2" 140 140}
+   {T "DIN3" 140 120}
+   {T "DIN4" 140 100}
+   {T "DIN5" 140 80}
+   {T "DIN6" 140 60}
+   {T "DIN7" 140 40}
+   {T "UNUSED8" 140 20}
    [Tj "RC"]
    {T "CHAR_C0" 310 20}
    {T "CHAR_C1" 310 40}
@@ -165,7 +197,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\VIDEODRV 225 400}
+    {At PLD C:\VIDEODRVB 225 560}
    }
   }
  }
@@ -187,6 +219,12 @@
    }
    {N CLK_12M
    }
+   {N VMEM_R3
+   }
+   {N VMEM_R2
+   }
+   {N VMEM_R1
+   }
    {N FONTLI0
    }
    {N FONTLI1
@@ -194,6 +232,14 @@
    {N FONTLI2
    }
    {N FONTLI3
+   }
+   {N VMEM_R0
+   }
+   {N UNUSED5
+   }
+   {N UNUSED6
+   }
+   {N UNUSED7
    }
    {N DIN0
    }
@@ -210,6 +256,8 @@
    {N DIN6
    }
    {N DIN7
+   }
+   {N UNUSED8
    }
    {N CHAR_C0
    }
