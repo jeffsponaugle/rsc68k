@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Thu Aug 17 23:23:43 2023 "}
+  {DBtime "Fri Aug 18 14:20:33 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,38 +33,39 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P CLK_IN {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
-   {P RESET_BT {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
-   {P DEBUG_BT {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
-   {P Z80_A15 {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
-   {P Z80_A14 {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
-   {P Z80_A13 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
-   {P Z80_A12 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
-   {P Z80_A11 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
-   {P Z80_A10 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
-   {P Z80_A9 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
-   {P Z80_A8 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
-   {P Z80_A7 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
-   {P Z80_A6 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
-   {P Z80_A5 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
-   {P Z80_A4 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
-   {P Z80_A3 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
-   {P Z80_A2 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
-   {P Z80_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
-   {P Z80_A0 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
-   {P Z80_MEMR {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
-   {P Z80_IORE {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
-   {P Z80_RD {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
-   {P Z80_WR {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
-   {P Z80_NMI {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
-   {P CASS_O0 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
-   {P CASS_O1 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P CASS_O2 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
-   {P CASS_I7 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P VID_MEM_ {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P V64_32_V {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P VID_RW {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P CLK_IN {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P RESET_BT {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P DEBUG_BT {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P Z80_A15 {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
+   {P Z80_A14 {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
+   {P Z80_A13 {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
+   {P Z80_A12 {Pt "INPUT"}{Lq 0}{Ploc 100 560}}
+   {P Z80_A11 {Pt "INPUT"}{Lq 0}{Ploc 100 540}}
+   {P Z80_A10 {Pt "INPUT"}{Lq 0}{Ploc 100 520}}
+   {P Z80_A9 {Pt "INPUT"}{Lq 0}{Ploc 100 500}}
+   {P Z80_A8 {Pt "INPUT"}{Lq 0}{Ploc 100 480}}
+   {P Z80_A7 {Pt "INPUT"}{Lq 0}{Ploc 100 460}}
+   {P Z80_A6 {Pt "INPUT"}{Lq 0}{Ploc 100 440}}
+   {P Z80_A5 {Pt "INPUT"}{Lq 0}{Ploc 100 420}}
+   {P Z80_A4 {Pt "INPUT"}{Lq 0}{Ploc 100 400}}
+   {P Z80_A3 {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P Z80_A2 {Pt "INPUT"}{Lq 0}{Ploc 100 360}}
+   {P Z80_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P Z80_A0 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P Z80_MEMR {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P Z80_IORE {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P Z80_RD {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P Z80_WR {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P Z80_NMI {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P CASS_O0 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P CASS_O1 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P CASS_O2 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P CASS_I7 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P VID_MEM_ {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P V64_32_V {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P VID_RW {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P SYS_RESE {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P RTC_AS {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
    {P Z80_RFSH {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P Z80_CLK {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P Z80_D7 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
@@ -93,21 +94,21 @@
    {P VID_CP4 {Pt "I/O"}{Lq 0}{Ploc 360 500}}
    {P VID_CP5 {Pt "I/O"}{Lq 0}{Ploc 360 520}}
    {P RTC_CS {Pt "I/O"}{Lq 0}{Ploc 360 540}}
-   {P RTC_AS {Pt "I/O"}{Lq 0}{Ploc 360 560}}
-   {P RTC_DS {Pt "I/O"}{Lq 0}{Ploc 360 580}}
-   {P RTC_A_LA {Pt "I/O"}{Lq 0}{Ploc 360 600}}
-   {P UNUSED1_ {Pt "I/O"}{Lq 0}{Ploc 360 620}}
+   {P RTC_DS {Pt "I/O"}{Lq 0}{Ploc 360 560}}
+   {P RTC_A_LA {Pt "I/O"}{Lq 0}{Ploc 360 580}}
+   {P UNUSED1_ {Pt "I/O"}{Lq 0}{Ploc 360 600}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 230 710}
+   {Rdl 230 730}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 690}
+   {Pnl 120 710}
    [Ts 15][Tj "RC"]
+   {Pnl 120 670}
    {Pnl 120 650}
    {Pnl 120 630}
    {Pnl 120 610}
@@ -171,17 +172,17 @@
    {Pnl 340 570}
    {Pnl 340 590}
    {Pnl 340 610}
-   {Pnl 340 630}
 
-   {Sd A 83 1 2 4 5 6 8 9 10 11 12 15 16 17 18 20 21 22 24 36 37 39 40 41 45 46 48 49 57 60 68 69 84 25 27 28 29 30 31 33 34 35 44 50 51 52 54 55 56 58 61 63 64 65 67 70 73 74 75 76 77 79 80 81}
+   {Sd A 83 1 2 4 5 6 8 9 10 11 12 15 16 17 18 20 21 22 24 36 37 39 40 41 45 46 48 49 57 60 68 69 77 84 25 27 28 29 30 31 33 34 35 44 50 51 52 54 55 56 58 61 63 64 65 67 70 73 74 75 76 79 80 81}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 700 330 0}
-   {L 130 680 100 680}
-   {L 130 690 140 680 130 670}
+   {R 130 720 330 0}
+   {L 130 700 100 700}
+   {L 130 710 140 700 130 690}
+   {L 130 660 100 660}
    {L 130 640 100 640}
    {L 130 620 100 620}
    {L 130 600 100 600}
@@ -244,41 +245,41 @@
    {L 330 560 360 560}
    {L 330 580 360 580}
    {L 330 600 360 600}
-   {L 330 620 360 620}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "CLK_IN" 140 680}
-   {T "RESET_BT" 140 640}
-   {T "DEBUG_BT" 140 620}
-   {T "Z80_A15" 140 600}
-   {T "Z80_A14" 140 580}
-   {T "Z80_A13" 140 560}
-   {T "Z80_A12" 140 540}
-   {T "Z80_A11" 140 520}
-   {T "Z80_A10" 140 500}
-   {T "Z80_A9" 140 480}
-   {T "Z80_A8" 140 460}
-   {T "Z80_A7" 140 440}
-   {T "Z80_A6" 140 420}
-   {T "Z80_A5" 140 400}
-   {T "Z80_A4" 140 380}
-   {T "Z80_A3" 140 360}
-   {T "Z80_A2" 140 340}
-   {T "Z80_A1" 140 320}
-   {T "Z80_A0" 140 300}
-   {T "Z80_MEMR" 140 280}
-   {T "Z80_IORE" 140 260}
-   {T "Z80_RD" 140 240}
-   {T "Z80_WR" 140 220}
-   {T "Z80_NMI" 140 200}
-   {T "CASS_O0" 140 180}
-   {T "CASS_O1" 140 160}
-   {T "CASS_O2" 140 140}
-   {T "CASS_I7" 140 120}
-   {T "VID_MEM_" 140 100}
-   {T "V64_32_V" 140 80}
-   {T "VID_RW" 140 60}
-   {T "SYS_RESE" 140 40}
+   {T "CLK_IN" 140 700}
+   {T "RESET_BT" 140 660}
+   {T "DEBUG_BT" 140 640}
+   {T "Z80_A15" 140 620}
+   {T "Z80_A14" 140 600}
+   {T "Z80_A13" 140 580}
+   {T "Z80_A12" 140 560}
+   {T "Z80_A11" 140 540}
+   {T "Z80_A10" 140 520}
+   {T "Z80_A9" 140 500}
+   {T "Z80_A8" 140 480}
+   {T "Z80_A7" 140 460}
+   {T "Z80_A6" 140 440}
+   {T "Z80_A5" 140 420}
+   {T "Z80_A4" 140 400}
+   {T "Z80_A3" 140 380}
+   {T "Z80_A2" 140 360}
+   {T "Z80_A1" 140 340}
+   {T "Z80_A0" 140 320}
+   {T "Z80_MEMR" 140 300}
+   {T "Z80_IORE" 140 280}
+   {T "Z80_RD" 140 260}
+   {T "Z80_WR" 140 240}
+   {T "Z80_NMI" 140 220}
+   {T "CASS_O0" 140 200}
+   {T "CASS_O1" 140 180}
+   {T "CASS_O2" 140 160}
+   {T "CASS_I7" 140 140}
+   {T "VID_MEM_" 140 120}
+   {T "V64_32_V" 140 100}
+   {T "VID_RW" 140 80}
+   {T "SYS_RESE" 140 60}
+   {T "RTC_AS" 140 40}
    {T "Z80_RFSH" 140 20}
    [Tj "RC"]
    {T "Z80_CLK" 320 20}
@@ -308,10 +309,9 @@
    {T "VID_CP4" 320 500}
    {T "VID_CP5" 320 520}
    {T "RTC_CS" 320 540}
-   {T "RTC_AS" 320 560}
-   {T "RTC_DS" 320 580}
-   {T "RTC_A_LA" 320 600}
-   {T "UNUSED1_" 320 620}
+   {T "RTC_DS" 320 560}
+   {T "RTC_A_LA" 320 580}
+   {T "UNUSED1_" 320 600}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1508ISPPLCC84" 230 -10}
@@ -325,7 +325,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\MEMCTRL 230 700}
+    {At PLD C:\MEMCTRL 230 720}
    }
   }
  }
@@ -399,6 +399,8 @@
    }
    {N SYS_RESE
    }
+   {N RTC_AS
+   }
    {N Z80_RFSH
    }
    {N Z80_CLK
@@ -454,8 +456,6 @@
    {N VID_CP5
    }
    {N RTC_CS
-   }
-   {N RTC_AS
    }
    {N RTC_DS
    }
