@@ -15,51 +15,67 @@ PROPERTY ATMEL {TMS_PULLUP = ON};
 
 Pin[83] = CLK_25M;                 /* 25.175Mhz input clock  - Master Pixel Clock */
 Pin[1]  = RESET_IN;                /* Active Low Reset */
-Pin  = V64OR32MODE;
-Pin = VID_IO_CS;
-Pin = VID_MEM_CS;
-Pin = VID_RW;
-Pin  = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) FM_A0-FM_A3 */
-Pin  = [FONTSEL0..3];         /* 4 bits for selecting the font.  FM_A12-FM_A15 */
-Pin  = [CPU_A0..3];           /* Address bits 0-3 from the CPU.  Used for IO and FM access */
-Pin = VID_80X25MEM_CS;
+Pin[2]  = V64OR32MODE;
+Pin[84]  = VID_IO_CS;
+Pin[4]  = VID_MEM_CS;
+Pin[5]  = VID_RW;
+Pin[6,8,9,10]  = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) FM_A0-FM_A3 */
+Pin[11,12,15,16]  = [FONTSEL0..3];         /* 4 bits for selecting the font.  FM_A12-FM_A15 */
+Pin[17,18,20,21]  = [CPU_A0..3];           /* Address bits 0-3 from the CPU.  Used for IO and FM access */
+Pin[22]  = VID_80X25MEM_CS;
 
 /* OUTPUTS 25 Pins of 63 Total */
-Pin  = NTSC_SYNC_OUT;
-Pin  = NTSC_PIXEL_OUT;
-Pin  = VGA_HSYNC_OUT;
-Pin  = VGA_VSYNC_OUT;
-Pin  = VGA_VIDEO_OUT;
-Pin  = [VM_PAGE0..3];         /* The visable page (1k) of VRAM in CPU space.  VM_A10-VM_A13 */
-Pin = Z80_WAIT;
-Pin = VM_OE;
-Pin = VM_WE;
-Pin = VM_AD_CLR;
-Pin = VM_AD_CLK;
-Pin = VM_AD_CLKEN;
-Pin = CP_VM_AD_OE;
-Pin = VM_DATA_OE;
-Pin = VM_DATA_LATCH;
-Pin = CP_FM_DATA_OE;
-Pin = CP_FM_DATA_DIR;
-Pin = VM_AD_RCLK;
-Pin = VM_AD_OE;
-Pin = CP_VM_DW_OE;
-Pin = CP_VM_DR_OE;
-Pin = CP_VM_DR_LE;
+Pin[60]  = NTSC_SYNC_OUT;
+Pin[61] = NTSC_PIXEL_OUT;
+Pin[63]  = VGA_HSYNC_OUT;
+Pin[64] = VGA_VSYNC_OUT;
+Pin[65]  = VGA_VIDEO_OUT;
+Pin[24,25,27,28]  = [VM_PAGE0..3];         /* The visable page (1k) of VRAM in CPU space.  VM_A10-VM_A13 */
+Pin[29] = Z80_WAIT;
+Pin[30] = VM_OE;
+Pin[31] = VM_WE;
+Pin[33] = VM_AD_CLR;
+Pin[34] = VM_AD_CLK;
+Pin[35] = VM_AD_CLKEN;
+Pin[36]= CP_VM_AD_OE;
+Pin[37] = VM_DATA_OE;
+Pin[39] = VM_DATA_LATCH;
+Pin[40] = CP_FM_DATA_OE;
+Pin[41] = CP_FM_DATA_DIR;
+Pin[44] = VM_AD_RCLK;
+Pin[45] = VM_AD_OE;
+Pin[46] = CP_VM_DW_OE;
+Pin[48] = CP_VM_DR_OE;
+Pin[49] = CP_VM_DR_LE;
 
 /* BIDIRECTIONAL 19 Pins of 63 Total */
 
-Pin  = [DIN0..7];             /* FM_D0-FM_D7 */
-Pin  = CPU_2KPAGE_A10;        /* Line A10 from CPU used if we are accessing in the 2K mapping */        
-Pin  = [CPU_D0..7];           /* Data input bits from CPU for writing to config registers */
-Pin = VID_CPLD_5;
-Pin = VID_CPLD_4;
+Pin[50,51,52,54,55,56,57,58]  = [DIN0..7];             /* FM_D0-FM_D7 */
+Pin[81]  = CPU_2KPAGE_A10;        /* Line A10 from CPU used if we are accessing in the 2K mapping */        
+Pin[67,68,69,70,73,74,75,76]  = [CPU_D0..7];           /* Data input bits from CPU for writing to config registers */
+Pin[77] = VID_CPLD_5;
+Pin[79] = VID_CPLD_4;
 
 
 /* Force Pin Assignment */
 
-VID_CPLD_4 = VID_CPLD_5;
+VID_CPLD_4 = VID_CPLD_5 # V64OR32MODE # VID_IO_CS # VID_80X25MEM_CS;
+
+[CPU_A0..3] = 'b'1;
+CPU_2KPAGE_A10 = 'b'1;
+VGA_HSYNC_OUT = 'b'1;
+VGA_VSYNC_OUT = 'b'1;
+VGA_VIDEO_OUT = 'b'1;
+Z80_WAIT = 'b'1;
+VM_OE = 'b'1;
+VM_WE = 'b'1;
+VM_AD_CLR = 'b'1;
+VM_AD_CLK = 'b'1;
+VM_AD_CLKEN = 'b'1;
+CP_FM_DATA_OE = 'b'1;
+CP_FM_DATA_DIR = 'b'1;
+VM_AD_RCLK = 'b'1;
+
 
 /* Signal that needs to be created */
 
@@ -129,6 +145,26 @@ CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
 CLK_12M.ar = !RESET_IN;
 
+/*  
+    Configuration Registers 
+    CONFA is IO Write to 0x7A 
+    CONFB is IO Write to 0x7B
+    
+*/
+
+VCONFAWRITE = !VID_IO_CS & !CPU_A0 & !CPU_A1 & !VID_RW;
+VCONFBWRITE = !VID_IO_CS & CPU_A0 & !CPU_A1 & !VID_RW;
+
+[VCONFA0..7].ck = VCONFAWRITE;
+[VCONFA0..7].d = [CPU_D0..7];
+[VCONFA0..7].ar = !RESET_IN;
+
+[VCONFB0..7].ck = VCONFBWRITE;
+[VCONFB0..7].d = [CPU_D0..7];
+[VCONFB0..7].ar = !RESET_IN;
+
+[FONTSEL0..3] = [VCONFA4..7]; /* Font Select output from config register A */
+[VM_PAGE0..3] = [VCONFA0..3]; /* Video Memory Page Select from config register A */
 
 /* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
 
@@ -341,16 +377,73 @@ NTSC_PIXEL_OUT.ck = !CLK_12M;
 NTSC_PIXEL_OUT.ar = !RESET_IN;
 
 /*
-Total dedicated input used:	2/4 	(50%)
-Total I/O pins used		29/32 	(90%)
-Total Logic cells used 		50/64 	(78%)
-Total Flip-Flop used 		41/64 	(64%)
-Total Foldback logic used 	19/64 	(29%)
-Total Nodes+FB/MCells 		66/64 	(103%)
-Total cascade used 		3
-Total input pins 		14
-Total output pins 		17
-Total Pts 			178
+
+                                  
+                                                                                    
+                                                                                    
+                                        V                                           
+                                    V   6            V   V                          
+                       F  F F   F   I   4  V         I   I                          
+                     F O  O O   O   D   O RI         D   D                          
+                     O N  N N   N   _   R ED C       _   _                          
+                     N T  T T   T V M   3 S_ L       C   C C C                      
+                     T L  L L   L I E   2 EI K       P   P P P                      
+                     S I  I I   I D M   M TO _       L   L U U                      
+                     E N  N N G N _ _ V O __ 2 G     D V D _ _                      
+                     L E  E E N E R C C D IC 5 N     _ C _ D D                      
+                     0 3  2 1 D 0 W S C E NS M D     4 C 5 7 6                      
+                    -------------------------------------------                     
+                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+                  /    10   8   6   4   2  84  82  80  78  76    \                 
+        FONTSEL1 | 12                    (*)                   74 | CPU_D5          
+             VCC | 13                                          73 | CPU_D4          
+             TDI | 14                                          72 | GND             
+        FONTSEL2 | 15                                          71 | TDO             
+        FONTSEL3 | 16                                          70 | CPU_D3          
+          CPU_A0 | 17                                          69 | CPU_D2          
+          CPU_A1 | 18                                          68 | CPU_D1          
+             GND | 19                                          67 | CPU_D0          
+          CPU_A2 | 20                                          66 | VCC             
+          CPU_A3 | 21                                          65 | VGA_VIDEO_OUT   
+ VID_80X25MEM_CS | 22                 ATF1508                  64 | VGA_VSYNC_OUT   
+             TMS | 23               84-Lead PLCC               63 | VGA_HSYNC_OUT   
+        VM_PAGE0 | 24                                          62 | TCK             
+        VM_PAGE1 | 25                                          61 | NTSC_PIXEL_OUT  
+             VCC | 26                                          60 | NTSC_SYNC_OUT   
+        VM_PAGE2 | 27                                          59 | GND             
+        VM_PAGE3 | 28                                          58 | DIN7            
+        Z80_WAIT | 29                                          57 | DIN6            
+           VM_OE | 30                                          56 | DIN5            
+           VM_WE | 31                                          55 | DIN4            
+             GND | 32                                          54 | DIN3            
+                  \     34  36  38  40  42  44  46  48  50  52   /                 
+                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+              	    --------------------------------------------                     
+                      V V V C V V V C C G V V V C G C C D D D V                     
+                      M M M P M C M P P N C M M P N P P I I I C                     
+                      _ _ _ _ _ C _ _ _ D C _ _ _ D _ _ N N N C                     
+                      A A A V D   D F F     A A V   V V 0 1 2                       
+                      D D D M A   A M M     D D M   M M                             
+                      _ _ _ _ T   T _ _     _ _ _   _ _                             
+                      C C C A A   A D D     R O D   D D                             
+                      L L L D _   _ A A     C E W   R R                             
+                      R K K _ O   L T T     L   _   _ _                             
+                          E O E   A A A     K   O   O L                             
+                          N E     T _ _         E   E E                             
+                                  C O D                                             
+                                  H E I                          
+
+
+Total dedicated input used:	4/4 	(100%)
+Total I/O pins used		63/64 	(98%)
+Total Logic cells used 		102/128 	(79%)
+Total Flip-Flop used 		58/128 	(45%)
+Total Foldback logic used 	4/128 	(3%)
+Total Nodes+FB/MCells 		105/128 	(82%)
+Total cascade used 		1
+Total input pins 		28
+Total output pins 		39
+Total Pts 			269
 */
 
 /*

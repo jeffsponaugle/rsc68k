@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Wed Aug 23 22:31:28 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Mon Aug 28 21:15:46 2023
 
 
 fit1508 C:\VIDEODRVB.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -48,6 +48,9 @@ fit1508 C:\VIDEODRVB.tt2 -CUPL -dev P1508C84 -JTAG ON
  ITD2 = ON
  Fast_inlatch = off
  *******************************
+Info: C:\VIDEODRVB uses 95% of the pins available in device PLCC84
+  If you wish to have more pins available for future logic changes
+  Atmel  recommends using a larger device
 ---------------------------------------------------------
  Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
  ... 
@@ -55,6 +58,10 @@ fit1508 C:\VIDEODRVB.tt2 -CUPL -dev P1508C84 -JTAG ON
  ## ERROR : Bad user pin assignement 
 ---------------------------------------------------------
  Fitter_Pass 2, Preassign = KEEP, NODE ASSIGN : OFF 
+ ... 
+ ## Warning : Placement fail 
+---------------------------------------------------------
+ Fitter_Pass 3, Preassign = KEEP, CASCADE_LOGIC : (TRY) 
  ... 
 
 Performing global Output Enable pin assignments ...
@@ -66,7 +73,6 @@ Performing global pin assignments ...
 
 Final global control pins assignment (if applicable)...
 -------------------------------------------------------
-VID_MEM_CS assigned to pin  2
 CLK_25M assigned to pin  83
 RESET_IN assigned to pin  1
 
@@ -74,127 +80,196 @@ RESET_IN assigned to pin  1
 
 Performing input pin pre-assignments ...
 ------------------------------------
-VID_MEM_CS assigned to pin  2
+V64OR32MODE assigned to pin  2
 CLK_25M assigned to pin  83
 RESET_IN assigned to pin  1
+VID_IO_CS assigned to pin  84
 
 Attempt to place floating signals ...
 ------------------------------------
 VSYNC_COUNTER0 is placed at feedback node 601 (MC 1)
 VSYNC_COUNTER1 is placed at feedback node 602 (MC 2)
-VID_RW is placed at pin 12 (MC 3)
-VSYNC_COUNTER4 is placed at feedback node 604 (MC 4)
-VID_CPLD_5 is placed at pin 11 (MC 5)
-VSYNC_COUNTER5 is placed at feedback node 606 (MC 6)
-VSYNC_COUNTER6 is placed at feedback node 608 (MC 8)
-VSYNC_COUNTER2 is placed at feedback node 609 (MC 9)
-VSYNC_ZERO is placed at foldback expander node 310 (MC 10)
-VSYNC_COUNTER7 is placed at feedback node 611 (MC 11)
-VSYNC_COUNTER8 is placed at feedback node 613 (MC 13)
-FONTLINE3 is placed at pin 5 (MC 14)
-VSYNC_COUNTER3 is placed at feedback node 615 (MC 15)
-NTSC_SYNC_OUT is placed at pin 4 (MC 16)
-DIN1 is placed at pin 22 (MC 17)
-DIN3 is placed at pin 21 (MC 19)
-VM_DATA_OE is placed at pin 20 (MC 21)
-VSYNC_DISPLAY_ACTIVE is placed at feedback node 623 (MC 23)
-FONTLINE0 is placed at pin 18 (MC 24)
-FONTLINE1 is placed at pin 17 (MC 25)
-CLK_12M is placed at feedback node 626 (MC 26)
-FONTLINE2 is placed at pin 16 (MC 27)
-NTSC_PIXEL_OUT is placed at pin 15 (MC 29)
+FONTSEL1 is placed at pin 12 (MC 3)
+VSYNC_COUNTER5 is placed at feedback node 604 (MC 4)
+FONTSEL0 is placed at pin 11 (MC 5)
+FONTLINE3 is placed at pin 10 (MC 6)
+VSYNC_COUNTER2 is placed at feedback node 607 (MC 7)
+FONTLINE2 is placed at pin 9 (MC 8)
+VSYNC_COUNTER6 is placed at feedback node 609 (MC 9)
+XXL_361 is placed at feedback node 610 (MC 10)
+FONTLINE1 is placed at pin 8 (MC 11)
+VSYNC_COUNTER3 is placed at feedback node 612 (MC 12)
+FONTLINE0 is placed at pin 6 (MC 13)
+VSYNC_ZERO is placed at foldback expander node 313 (MC 13)
+VID_RW is placed at pin 5 (MC 14)
+VSYNC_COUNTER8 is placed at feedback node 615 (MC 15)
+VID_MEM_CS is placed at pin 4 (MC 16)
+VSYNC_COUNTER7 is placed at feedback node 616 (MC 16)
+VID_80X25MEM_CS is placed at pin 22 (MC 17)
+VCONFB6 is placed at feedback node 617 (MC 17)
+VSYNC_DISPLAY_ACTIVE is placed at feedback node 618 (MC 18)
+CPU_A3 is placed at pin 21 (MC 19)
+VDP_VRAM_CS_EDGE is placed at feedback node 620 (MC 20)
+CPU_A2 is placed at pin 20 (MC 21)
+CPU_VRAM_CS_EDGE is placed at feedback node 622 (MC 22)
+XXL_365 is placed at feedback node 623 (MC 23)
+CPU_A1 is placed at pin 18 (MC 24)
+CPU_A0 is placed at pin 17 (MC 25)
+FB_349 is placed at foldback expander node 325 (MC 25)
+XXL_350 is placed at feedback node 626 (MC 26)
+FONTSEL3 is placed at pin 16 (MC 27)
+FB_348 is placed at foldback expander node 327 (MC 27)
+XXL_363 is placed at feedback node 628 (MC 28)
+FONTSEL2 is placed at pin 15 (MC 29)
+VSYNC_ZERO is placed at foldback expander node 329 (MC 29)
+XXL_364 is placed at feedback node 630 (MC 30)
+XXL_360 is placed at feedback node 631 (MC 31)
 TDI is placed at pin 14 (MC 32)
-VSYNC_COUNTER9 is placed at feedback node 632 (MC 32)
-VSYNC_ZERO is placed at foldback expander node 332 (MC 32)
-CPU_VRAM_CS_GNT is placed at feedback node 633 (MC 33)
-VRAM_SHARED_STATE is placed at feedback node 634 (MC 34)
-VID_CPLD_4 is placed at pin 31 (MC 35)
-VDP_VRAM_CS_GNT is placed at feedback node 636 (MC 36)
-VM_AD_OE is placed at pin 30 (MC 37)
-VM_DATA_LATCH is placed at pin 29 (MC 38)
-VDP_VRAM_CS_EDGE is placed at feedback node 639 (MC 39)
-CP_VM_DR_OE is placed at pin 28 (MC 40)
-HSYNC_COUNTER5 is placed at feedback node 642 (MC 42)
-CP_VM_AD_OE is placed at pin 27 (MC 43)
-CPU_VRAM_CS_EDGE is placed at feedback node 644 (MC 44)
-CP_VM_DR_LE is placed at pin 25 (MC 45)
-CP_VM_DW_OE is placed at pin 24 (MC 46)
-FB_231 is placed at foldback expander node 346 (MC 46)
-FB_230 is placed at foldback expander node 347 (MC 47)
+XXL_362 is placed at feedback node 632 (MC 32)
+VSYNC_CLOCK_A is placed at feedback node 633 (MC 33)
+VCONFB2 is placed at feedback node 634 (MC 34)
+VM_WE is placed at pin 31 (MC 35)
+VCONFB3 is placed at feedback node 636 (MC 36)
+VM_OE is placed at pin 30 (MC 37)
+Z80_WAIT is placed at pin 29 (MC 38)
+VCONFB1 is placed at feedback node 639 (MC 39)
+VM_PAGE3 is placed at pin 28 (MC 40)
+VCONFB0 is placed at feedback node 641 (MC 41)
+HSYNC_COUNTER6 is placed at feedback node 642 (MC 42)
+VM_PAGE2 is placed at pin 27 (MC 43)
+XXL_358 is placed at feedback node 644 (MC 44)
+VM_PAGE1 is placed at pin 25 (MC 45)
+VM_PAGE0 is placed at pin 24 (MC 46)
+XXL_356 is placed at feedback node 647 (MC 47)
 TMS is placed at pin 23 (MC 48)
 HSYNC_COUNTER7 is placed at feedback node 648 (MC 48)
-VSYNC_CLOCK_A is placed at feedback node 649 (MC 49)
-SHIFTREG5 is placed at feedback node 650 (MC 50)
-SHIFTREG2 is placed at feedback node 651 (MC 51)
-SHIFTREG3 is placed at feedback node 652 (MC 52)
-SHIFTREG4 is placed at feedback node 653 (MC 53)
-SHIFTREG1 is placed at feedback node 654 (MC 54)
-HSYNC_COUNTER4 is placed at feedback node 656 (MC 56)
-DIN5 is placed at pin 36 (MC 57)
-HSYNC_COUNTER6 is placed at feedback node 658 (MC 58)
-DIN4 is placed at pin 35 (MC 59)
-HSYNC_COUNTER8 is placed at feedback node 661 (MC 61)
-HSYNC_COUNTER9 is placed at feedback node 664 (MC 64)
-DIN2 is placed at pin 44 (MC 65)
-HSYNC_COUNTER0 is placed at feedback node 666 (MC 66)
-DIN6 is placed at pin 45 (MC 67)
-SHIFTREG0 is placed at feedback node 668 (MC 68)
-DIN7 is placed at pin 46 (MC 69)
-FONTLINE_RESET is placed at feedback node 670 (MC 70)
-HSYNC_COUNTER1 is placed at feedback node 671 (MC 71)
-DIN0 is placed at pin 48 (MC 72)
-HSYNC_COUNTER2 is placed at feedback node 674 (MC 74)
-HSYNC_COUNTER3 is placed at feedback node 676 (MC 76)
-SHIFTREG7 is placed at feedback node 678 (MC 78)
-SHIFTREG6 is placed at feedback node 679 (MC 79)
-VSYNC_CLOCK_B is placed at feedback node 680 (MC 80)
+CP_FM_DATA_DIR is placed at pin 41 (MC 49)
+VDP_VRAM_CS_GNT is placed at feedback node 650 (MC 50)
+CP_FM_DATA_OE is placed at pin 40 (MC 51)
+VRAM_SHARED_STATE is placed at feedback node 652 (MC 52)
+VM_DATA_LATCH is placed at pin 39 (MC 53)
+CPU_VRAM_CS_GNT is placed at feedback node 654 (MC 54)
+HSYNC_COUNTER5 is placed at feedback node 655 (MC 55)
+VM_DATA_OE is placed at pin 37 (MC 56)
+CP_VM_AD_OE is placed at pin 36 (MC 57)
+SHIFTREG1 is placed at feedback node 658 (MC 58)
+VM_AD_CLKEN is placed at pin 35 (MC 59)
+SHIFTREG2 is placed at feedback node 660 (MC 60)
+VM_AD_CLK is placed at pin 34 (MC 61)
+XXL_357 is placed at feedback node 662 (MC 62)
+XXL_359 is placed at feedback node 663 (MC 63)
+VM_AD_CLR is placed at pin 33 (MC 64)
+VM_AD_RCLK is placed at pin 44 (MC 65)
+VCONFB5 is placed at feedback node 666 (MC 66)
+VM_AD_OE is placed at pin 45 (MC 67)
+VCONFB4 is placed at feedback node 668 (MC 68)
+CP_VM_DW_OE is placed at pin 46 (MC 69)
+VCONFB7 is placed at feedback node 670 (MC 70)
+XXL_351 is placed at feedback node 671 (MC 71)
+CP_VM_DR_OE is placed at pin 48 (MC 72)
+CP_VM_DR_LE is placed at pin 49 (MC 73)
+HSYNC_COUNTER3 is placed at feedback node 674 (MC 74)
+DIN0 is placed at pin 50 (MC 75)
+XXL_353 is placed at feedback node 675 (MC 75)
+SHIFTREG7 is placed at feedback node 676 (MC 76)
+DIN1 is placed at pin 51 (MC 77)
+XXL_352 is placed at feedback node 677 (MC 77)
+SHIFTREG5 is placed at feedback node 678 (MC 78)
+SHIFTREG4 is placed at feedback node 679 (MC 79)
+DIN2 is placed at pin 52 (MC 80)
+SHIFTREG3 is placed at feedback node 680 (MC 80)
+DIN3 is placed at pin 54 (MC 83)
+DIN4 is placed at pin 55 (MC 85)
+DIN5 is placed at pin 56 (MC 86)
+DIN6 is placed at pin 57 (MC 88)
+DIN7 is placed at pin 58 (MC 91)
+CLK_12M is placed at feedback node 691 (MC 91)
+HSYNC_COUNTER9 is placed at feedback node 692 (MC 92)
+NTSC_SYNC_OUT is placed at pin 60 (MC 93)
+NTSC_PIXEL_OUT is placed at pin 61 (MC 94)
+XXL_354 is placed at feedback node 695 (MC 95)
 TCK is placed at pin 62 (MC 96)
+XXL_355 is placed at feedback node 696 (MC 96)
+VGA_HSYNC_OUT is placed at pin 63 (MC 97)
+VGA_VSYNC_OUT is placed at pin 64 (MC 99)
+VGA_VIDEO_OUT is placed at pin 65 (MC 101)
+VSYNC_COUNTER4 is placed at feedback node 702 (MC 102)
+VSYNC_CLOCK_B is placed at feedback node 703 (MC 103)
+CPU_D0 is placed at pin 67 (MC 104)
+HSYNC_COUNTER0 is placed at feedback node 704 (MC 104)
+CPU_D1 is placed at pin 68 (MC 105)
+HSYNC_COUNTER4 is placed at feedback node 705 (MC 105)
+SHIFTREG0 is placed at feedback node 706 (MC 106)
+CPU_D2 is placed at pin 69 (MC 107)
+FONTLINE_RESET is placed at feedback node 707 (MC 107)
+VSYNC_COUNTER9 is placed at feedback node 708 (MC 108)
+CPU_D3 is placed at pin 70 (MC 109)
+HSYNC_COUNTER8 is placed at feedback node 709 (MC 109)
+HSYNC_COUNTER1 is placed at feedback node 710 (MC 110)
+HSYNC_COUNTER2 is placed at feedback node 711 (MC 111)
 TDO is placed at pin 71 (MC 112)
+SHIFTREG6 is placed at feedback node 712 (MC 112)
+CPU_D4 is placed at pin 73 (MC 115)
+CPU_D5 is placed at pin 74 (MC 117)
+CPU_D6 is placed at pin 75 (MC 118)
+CPU_D7 is placed at pin 76 (MC 120)
+VID_CPLD_5 is placed at pin 77 (MC 123)
+VID_CPLD_4 is placed at pin 79 (MC 125)
+CPU_2KPAGE_A10 is placed at pin 81 (MC 128)
 
                                                                                     
                                                                                     
-                                                                                    
-                     V                  V                                           
-                     I            F     I                                           
-                     D            O     D R                                         
-                     _            N     _ E  C                                      
-                     C            T     M S  L                                      
-                     P            L     E E  K                                      
-                     L            I     M T  _                                      
-                     D        G   N   V _ _  2 G       V                            
-                     _        N   E   C C I  5 N       C                            
-                     5        D   3   C S N  M D       C                            
+                                        V                                           
+                                    V   6            V   V                          
+                       F  F F   F   I   4  V         I   I                          
+                     F O  O O   O   D   O RI         D   D                          
+                     O N  N N   N   _   R ED C       _   _                          
+                     N T  T T   T V M   3 S_ L       C   C C C                      
+                     T L  L L   L I E   2 EI K       P   P P P                      
+                     S I  I I   I D M   M TO _       L   L U U                      
+                     E N  N N G N _ _ V O __ 2 G     D V D _ _                      
+                     L E  E E N E R C C D IC 5 N     _ C _ D D                      
+                     0 3  2 1 D 0 W S C E NS M D     4 C 5 7 6                      
                     -------------------------------------------                     
                    / 11   9   7   5   3   1  83  81  79  77  75 \                  
                   /    10   8   6   4   2  84  82  80  78  76    \                 
-          VID_RW | 12                    (*)                   74 |                 
-             VCC | 13                                          73 |                 
+        FONTSEL1 | 12                    (*)                   74 | CPU_D5          
+             VCC | 13                                          73 | CPU_D4          
              TDI | 14                                          72 | GND             
-  NTSC_PIXEL_OUT | 15                                          71 | TDO             
-       FONTLINE2 | 16                                          70 |                 
-       FONTLINE1 | 17                                          69 |                 
-       FONTLINE0 | 18                                          68 |                 
-             GND | 19                                          67 |                 
-      VM_DATA_OE | 20                                          66 | VCC             
-            DIN3 | 21                                          65 |                 
-            DIN1 | 22                 ATF1508                  64 |                 
-             TMS | 23               84-Lead PLCC               63 |                 
-     CP_VM_DW_OE | 24                                          62 | TCK             
-     CP_VM_DR_LE | 25                                          61 |                 
-             VCC | 26                                          60 |                 
-     CP_VM_AD_OE | 27                                          59 | GND             
-     CP_VM_DR_OE | 28                                          58 |                 
-   VM_DATA_LATCH | 29                                          57 |                 
-        VM_AD_OE | 30                                          56 |                 
-      VID_CPLD_4 | 31                                          55 |                 
-             GND | 32                                          54 |                 
+        FONTSEL2 | 15                                          71 | TDO             
+        FONTSEL3 | 16                                          70 | CPU_D3          
+          CPU_A0 | 17                                          69 | CPU_D2          
+          CPU_A1 | 18                                          68 | CPU_D1          
+             GND | 19                                          67 | CPU_D0          
+          CPU_A2 | 20                                          66 | VCC             
+          CPU_A3 | 21                                          65 | VGA_VIDEO_OUT   
+ VID_80X25MEM_CS | 22                 ATF1508                  64 | VGA_VSYNC_OUT   
+             TMS | 23               84-Lead PLCC               63 | VGA_HSYNC_OUT   
+        VM_PAGE0 | 24                                          62 | TCK             
+        VM_PAGE1 | 25                                          61 | NTSC_PIXEL_OUT  
+             VCC | 26                                          60 | NTSC_SYNC_OUT   
+        VM_PAGE2 | 27                                          59 | GND             
+        VM_PAGE3 | 28                                          58 | DIN7            
+        Z80_WAIT | 29                                          57 | DIN6            
+           VM_OE | 30                                          56 | DIN5            
+           VM_WE | 31                                          55 | DIN4            
+             GND | 32                                          54 | DIN3            
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
               	    --------------------------------------------                     
-                          D D   V       G V D D D G D         V                     
-                          I I   C       N C I I I N I         C                     
-                          N N   C       D C N N N D N         C                     
-                          4 5               2 6 7   0                               
+                      V V V C V V V C C G V V V C G C C D D D V                     
+                      M M M P M C M P P N C M M P N P P I I I C                     
+                      _ _ _ _ _ C _ _ _ D C _ _ _ D _ _ N N N C                     
+                      A A A V D   D F F     A A V   V V 0 1 2                       
+                      D D D M A   A M M     D D M   M M                             
+                      _ _ _ _ T   T _ _     _ _ _   _ _                             
+                      C C C A A   A D D     R O D   D D                             
+                      L L L D _   _ A A     C E W   R R                             
+                      R K K _ O   L T T     L   _   _ _                             
+                          E O E   A A A     K   O   O L                             
+                          N E     T _ _         E   E E                             
+                                  C O D                                             
+                                  H E I                                             
 
 
 
@@ -208,155 +283,236 @@ NC = Unused I/O pins which must be unconnected on the board
 
 Universal-Interconnect-Multiplexer assignments
 ------------------------------------------------
-FanIn assignment for block A [22]
+FanIn assignment for block A [21]
 {
-CLK_12M,
-FONTLINE2,FONTLINE0,FONTLINE3,FONTLINE_RESET,FONTLINE1,
-HSYNC_COUNTER6,HSYNC_COUNTER9,HSYNC_COUNTER8,HSYNC_COUNTER7,
-RESET_IN,
-VSYNC_COUNTER6,VSYNC_COUNTER3,VSYNC_COUNTER0,VSYNC_COUNTER1,VSYNC_COUNTER9,VSYNC_COUNTER8,VSYNC_COUNTER2,VSYNC_COUNTER7,VSYNC_CLOCK_B,VSYNC_COUNTER5,VSYNC_COUNTER4,
+CPU_D4,CPU_D5,
+FONTLINE2,FONTLINE1,FONTLINE3,FONTLINE0,FONTLINE_RESET,
+VSYNC_COUNTER5,VSYNC_COUNTER4,VSYNC_COUNTER8,VSYNC_COUNTER2,VSYNC_COUNTER7,VSYNC_COUNTER1,VSYNC_COUNTER6,VSYNC_COUNTER3,VSYNC_CLOCK_B,VSYNC_COUNTER0,VSYNC_COUNTER9,
+XXL_362,XXL_365,XXL_361,
 }
 Multiplexer assignment for block A
-HSYNC_COUNTER6		(MC17	FB)  : MUX 1		Ref (D58fb)
-FONTLINE2		(MC14	P)   : MUX 2		Ref (B27p)
-FONTLINE0		(MC11	P)   : MUX 3		Ref (B24p)
-VSYNC_COUNTER6		(MC5	FB)  : MUX 4		Ref (A8fb)
-VSYNC_COUNTER3		(MC10	FB)  : MUX 5		Ref (A15fb)
-VSYNC_COUNTER0		(MC1	FB)  : MUX 8		Ref (A1fb)
-HSYNC_COUNTER9		(MC19	FB)  : MUX 9		Ref (D64fb)
-VSYNC_COUNTER1		(MC2	FB)  : MUX 10		Ref (A2fb)
-VSYNC_COUNTER9		(MC15	FB)  : MUX 11		Ref (B32fb)
-FONTLINE3		(MC9	P)   : MUX 12		Ref (A14p)
-VSYNC_COUNTER8		(MC8	FB)  : MUX 15		Ref (A13fb)
-FONTLINE_RESET		(MC20	FB)  : MUX 16		Ref (E70fb)
-VSYNC_COUNTER2		(MC6	FB)  : MUX 17		Ref (A9fb)
-CLK_12M			(MC13	FB)  : MUX 21		Ref (B26fb)
-HSYNC_COUNTER8		(MC18	FB)  : MUX 25		Ref (D61fb)
-VSYNC_COUNTER7		(MC7	FB)  : MUX 27		Ref (A11fb)
-FONTLINE1		(MC12	P)   : MUX 30		Ref (B25p)
-VSYNC_CLOCK_B		(MC21	FB)  : MUX 31		Ref (E80fb)
-VSYNC_COUNTER5		(MC4	FB)  : MUX 32		Ref (A6fb)
-RESET_IN		(MC22	FB)  : MUX 34		Ref (GCLR)
-VSYNC_COUNTER4		(MC3	FB)  : MUX 38		Ref (A4fb)
-HSYNC_COUNTER7		(MC16	FB)  : MUX 39		Ref (C48fb)
+VSYNC_COUNTER5		(MC3	FB)  : MUX 2		Ref (A4fb)
+FONTLINE2		(MC6	P)   : MUX 3		Ref (A8p)
+VSYNC_COUNTER4		(MC16	FB)  : MUX 4		Ref (G102fb)
+VSYNC_COUNTER8		(MC12	FB)  : MUX 7		Ref (A15fb)
+VSYNC_COUNTER2		(MC5	FB)  : MUX 8		Ref (A7fb)
+CPU_D4			(MC20	P)   : MUX 9		Ref (H115p)
+FONTLINE1		(MC9	P)   : MUX 10		Ref (A11p)
+VSYNC_COUNTER7		(MC13	FB)  : MUX 11		Ref (A16fb)
+FONTLINE3		(MC4	P)   : MUX 15		Ref (A6p)
+VSYNC_COUNTER1		(MC2	FB)  : MUX 16		Ref (A2fb)
+VSYNC_COUNTER6		(MC7	FB)  : MUX 17		Ref (A9fb)
+VSYNC_COUNTER3		(MC10	FB)  : MUX 21		Ref (A12fb)
+VSYNC_CLOCK_B		(MC17	FB)  : MUX 22		Ref (G103fb)
+VSYNC_COUNTER0		(MC1	FB)  : MUX 26		Ref (A1fb)
+FONTLINE0		(MC11	P)   : MUX 28		Ref (A13p)
+VSYNC_COUNTER9		(MC19	FB)  : MUX 29		Ref (G108fb)
+CPU_D5			(MC21	P)   : MUX 31		Ref (H117p)
+XXL_362			(MC15	FB)  : MUX 33		Ref (B32fb)
+FONTLINE_RESET		(MC18	FB)  : MUX 35		Ref (G107fb)
+XXL_365			(MC14	FB)  : MUX 38		Ref (B23fb)
+XXL_361			(MC8	FB)  : MUX 39		Ref (A10fb)
 
-FanIn assignment for block B [25]
+FanIn assignment for block B [19]
 {
-CLK_12M,
-FONTLINE2,FONTLINE0,FONTLINE1,FONTLINE_RESET,
-HSYNC_COUNTER6,HSYNC_COUNTER3,HSYNC_COUNTER5,HSYNC_COUNTER4,HSYNC_COUNTER9,HSYNC_COUNTER8,HSYNC_COUNTER7,
-SHIFTREG7,
-VSYNC_COUNTER6,VSYNC_COUNTER3,VSYNC_COUNTER0,VSYNC_COUNTER7,VSYNC_COUNTER1,VSYNC_COUNTER8,VSYNC_COUNTER2,VSYNC_DISPLAY_ACTIVE,VSYNC_COUNTER5,VSYNC_CLOCK_B,VSYNC_COUNTER9,VSYNC_COUNTER4,
+CPU_D6,CPU_D7,CPU_VRAM_CS_GNT,
+VSYNC_COUNTER2,VSYNC_COUNTER7,VSYNC_COUNTER0,VSYNC_COUNTER4,VSYNC_COUNTER3,VID_RW,VID_MEM_CS,VID_IO_CS,VDP_VRAM_CS_GNT,VSYNC_COUNTER6,VRAM_SHARED_STATE,VSYNC_COUNTER5,VSYNC_COUNTER8,VSYNC_COUNTER1,VSYNC_COUNTER9,
+XXL_350,
 }
 Multiplexer assignment for block B
-HSYNC_COUNTER6		(MC19	FB)  : MUX 1		Ref (D58fb)
-FONTLINE2		(MC14	P)   : MUX 2		Ref (B27p)
-FONTLINE0		(MC11	P)   : MUX 3		Ref (B24p)
-VSYNC_COUNTER6		(MC5	FB)  : MUX 4		Ref (A8fb)
-VSYNC_COUNTER3		(MC9	FB)  : MUX 5		Ref (A15fb)
-HSYNC_COUNTER3		(MC23	FB)  : MUX 7		Ref (E76fb)
-VSYNC_COUNTER0		(MC1	FB)  : MUX 8		Ref (A1fb)
-VSYNC_COUNTER7		(MC7	FB)  : MUX 9		Ref (A11fb)
-VSYNC_COUNTER1		(MC2	FB)  : MUX 10		Ref (A2fb)
-HSYNC_COUNTER5		(MC16	FB)  : MUX 11		Ref (C42fb)
-VSYNC_COUNTER8		(MC8	FB)  : MUX 13		Ref (A13fb)
-FONTLINE1		(MC12	P)   : MUX 14		Ref (B25p)
-VSYNC_COUNTER2		(MC6	FB)  : MUX 15		Ref (A9fb)
-FONTLINE_RESET		(MC22	FB)  : MUX 16		Ref (E70fb)
-VSYNC_DISPLAY_ACTIVE		(MC10	FB)  : MUX 18		Ref (B23fb)
-CLK_12M			(MC13	FB)  : MUX 21		Ref (B26fb)
-HSYNC_COUNTER4		(MC18	FB)  : MUX 22		Ref (D56fb)
-HSYNC_COUNTER9		(MC21	FB)  : MUX 23		Ref (D64fb)
-HSYNC_COUNTER8		(MC20	FB)  : MUX 25		Ref (D61fb)
-VSYNC_COUNTER5		(MC4	FB)  : MUX 26		Ref (A6fb)
-VSYNC_CLOCK_B		(MC25	FB)  : MUX 27		Ref (E80fb)
-VSYNC_COUNTER9		(MC15	FB)  : MUX 33		Ref (B32fb)
-SHIFTREG7		(MC24	FB)  : MUX 35		Ref (E78fb)
-VSYNC_COUNTER4		(MC3	FB)  : MUX 38		Ref (A4fb)
-HSYNC_COUNTER7		(MC17	FB)  : MUX 39		Ref (C48fb)
+VSYNC_COUNTER2		(MC4	FB)  : MUX 0		Ref (A7fb)
+VSYNC_COUNTER7		(MC8	FB)  : MUX 1		Ref (A16fb)
+VSYNC_COUNTER0		(MC1	FB)  : MUX 2		Ref (A1fb)
+VSYNC_COUNTER4		(MC13	FB)  : MUX 4		Ref (G102fb)
+VSYNC_COUNTER3		(MC6	FB)  : MUX 5		Ref (A12fb)
+CPU_D6			(MC19	P)   : MUX 7		Ref (H118p)
+VID_RW			(MC16	P)   : MUX 8		Ref (A14p)
+CPU_D7			(MC17	P)   : MUX 9		Ref (H120p)
+VID_MEM_CS		(MC18	P)   : MUX 10		Ref (A16p)
+XXL_350			(MC9	FB)  : MUX 11		Ref (B26fb)
+VID_IO_CS		(MC15	FB)  : MUX 15		Ref (OE1)
+VDP_VRAM_CS_GNT		(MC10	FB)  : MUX 16		Ref (D50fb)
+VSYNC_COUNTER6		(MC5	FB)  : MUX 17		Ref (A9fb)
+VRAM_SHARED_STATE		(MC11	FB)  : MUX 18		Ref (D52fb)
+VSYNC_COUNTER5		(MC3	FB)  : MUX 20		Ref (A4fb)
+VSYNC_COUNTER8		(MC7	FB)  : MUX 25		Ref (A15fb)
+VSYNC_COUNTER1		(MC2	FB)  : MUX 28		Ref (A2fb)
+CPU_VRAM_CS_GNT		(MC12	FB)  : MUX 30		Ref (D54fb)
+VSYNC_COUNTER9		(MC14	FB)  : MUX 31		Ref (G108fb)
 
-FanIn assignment for block C [18]
+FanIn assignment for block C [19]
 {
-CPU_VRAM_CS_EDGE,CPU_VRAM_CS_GNT,CLK_12M,
-HSYNC_COUNTER8,HSYNC_COUNTER4,HSYNC_COUNTER6,HSYNC_COUNTER0,HSYNC_COUNTER2,HSYNC_COUNTER5,HSYNC_COUNTER3,HSYNC_COUNTER7,HSYNC_COUNTER9,HSYNC_COUNTER1,
-VDP_VRAM_CS_GNT,VRAM_SHARED_STATE,VID_CPLD_5,VID_RW,VID_MEM_CS,
+CPU_D1,CPU_D2,CPU_D0,CPU_D3,CLK_12M,
+HSYNC_COUNTER1,HSYNC_COUNTER4,HSYNC_COUNTER2,HSYNC_COUNTER7,HSYNC_COUNTER6,HSYNC_COUNTER5,HSYNC_COUNTER0,HSYNC_COUNTER8,HSYNC_COUNTER9,HSYNC_COUNTER3,
+VID_IO_CS,VID_RW,
+XXL_353,XXL_354,
 }
 Multiplexer assignment for block C
-HSYNC_COUNTER8		(MC10	FB)  : MUX 3		Ref (D61fb)
-HSYNC_COUNTER4		(MC8	FB)  : MUX 4		Ref (D56fb)
-CPU_VRAM_CS_EDGE		(MC6	FB)  : MUX 5		Ref (C44fb)
-CPU_VRAM_CS_GNT		(MC2	FB)  : MUX 6		Ref (C33fb)
-VDP_VRAM_CS_GNT		(MC4	FB)  : MUX 8		Ref (C36fb)
-VRAM_SHARED_STATE		(MC3	FB)  : MUX 10		Ref (C34fb)
-HSYNC_COUNTER6		(MC9	FB)  : MUX 11		Ref (D58fb)
-HSYNC_COUNTER0		(MC12	FB)  : MUX 14		Ref (E66fb)
-HSYNC_COUNTER2		(MC14	FB)  : MUX 15		Ref (E74fb)
-VID_CPLD_5		(MC18	P)   : MUX 19		Ref (A5p)
-CLK_12M			(MC1	FB)  : MUX 21		Ref (B26fb)
-HSYNC_COUNTER5		(MC5	FB)  : MUX 23		Ref (C42fb)
-HSYNC_COUNTER3		(MC15	FB)  : MUX 25		Ref (E76fb)
-HSYNC_COUNTER7		(MC7	FB)  : MUX 27		Ref (C48fb)
-VID_RW			(MC16	P)   : MUX 29		Ref (A3p)
-VID_MEM_CS		(MC17	FB)  : MUX 34		Ref (OE2)
-HSYNC_COUNTER9		(MC11	FB)  : MUX 37		Ref (D64fb)
-HSYNC_COUNTER1		(MC13	FB)  : MUX 38		Ref (E71fb)
+HSYNC_COUNTER1		(MC12	FB)  : MUX 1		Ref (G110fb)
+CPU_D1			(MC17	P)   : MUX 2		Ref (G105p)
+VID_IO_CS		(MC14	FB)  : MUX 3		Ref (OE1)
+HSYNC_COUNTER4		(MC10	FB)  : MUX 5		Ref (G105fb)
+CPU_D2			(MC18	P)   : MUX 6		Ref (G107p)
+HSYNC_COUNTER2		(MC13	FB)  : MUX 7		Ref (G111fb)
+VID_RW			(MC15	P)   : MUX 8		Ref (A14p)
+HSYNC_COUNTER7		(MC2	FB)  : MUX 9		Ref (C48fb)
+HSYNC_COUNTER6		(MC1	FB)  : MUX 11		Ref (C42fb)
+HSYNC_COUNTER5		(MC3	FB)  : MUX 14		Ref (D55fb)
+CPU_D0			(MC16	P)   : MUX 15		Ref (G104p)
+HSYNC_COUNTER0		(MC9	FB)  : MUX 16		Ref (G104fb)
+HSYNC_COUNTER8		(MC11	FB)  : MUX 19		Ref (G109fb)
+XXL_353			(MC5	FB)  : MUX 21		Ref (E75fb)
+HSYNC_COUNTER9		(MC7	FB)  : MUX 23		Ref (F92fb)
+CPU_D3			(MC19	P)   : MUX 24		Ref (G109p)
+CLK_12M			(MC6	FB)  : MUX 27		Ref (F91fb)
+XXL_354			(MC8	FB)  : MUX 29		Ref (F95fb)
+HSYNC_COUNTER3		(MC4	FB)  : MUX 33		Ref (E74fb)
 
-FanIn assignment for block D [21]
+FanIn assignment for block D [22]
 {
-CLK_12M,
-DIN5,DIN2,DIN3,DIN1,DIN4,
-HSYNC_COUNTER1,HSYNC_COUNTER6,HSYNC_COUNTER0,HSYNC_COUNTER2,HSYNC_COUNTER4,HSYNC_COUNTER5,HSYNC_COUNTER8,HSYNC_COUNTER3,HSYNC_COUNTER9,HSYNC_COUNTER7,
-SHIFTREG1,SHIFTREG2,SHIFTREG3,SHIFTREG4,SHIFTREG0,
+CLK_12M,CPU_VRAM_CS_EDGE,CPU_VRAM_CS_GNT,
+DIN2,DIN1,
+HSYNC_COUNTER0,HSYNC_COUNTER6,HSYNC_COUNTER5,HSYNC_COUNTER2,HSYNC_COUNTER3,HSYNC_COUNTER8,HSYNC_COUNTER7,HSYNC_COUNTER4,HSYNC_COUNTER1,HSYNC_COUNTER9,
+SHIFTREG1,SHIFTREG0,SHIFTREG7,
+VRAM_SHARED_STATE,VDP_VRAM_CS_GNT,VSYNC_DISPLAY_ACTIVE,
+XXL_352,
 }
 Multiplexer assignment for block D
-HSYNC_COUNTER1		(MC14	FB)  : MUX 0		Ref (E71fb)
-HSYNC_COUNTER6		(MC9	FB)  : MUX 1		Ref (D58fb)
-SHIFTREG1		(MC7	FB)  : MUX 2		Ref (D54fb)
-CLK_12M			(MC1	FB)  : MUX 3		Ref (B26fb)
-DIN5			(MC19	P)   : MUX 4		Ref (D57p)
-DIN2			(MC21	P)   : MUX 7		Ref (E65p)
-HSYNC_COUNTER0		(MC12	FB)  : MUX 8		Ref (E66fb)
-DIN3			(MC18	P)   : MUX 11		Ref (B19p)
-SHIFTREG2		(MC4	FB)  : MUX 14		Ref (D51fb)
-DIN1			(MC17	P)   : MUX 15		Ref (B17p)
-DIN4			(MC20	P)   : MUX 16		Ref (D59p)
-HSYNC_COUNTER2		(MC15	FB)  : MUX 17		Ref (E74fb)
-HSYNC_COUNTER4		(MC8	FB)  : MUX 22		Ref (D56fb)
-HSYNC_COUNTER5		(MC2	FB)  : MUX 23		Ref (C42fb)
-SHIFTREG3		(MC5	FB)  : MUX 24		Ref (D52fb)
-HSYNC_COUNTER8		(MC10	FB)  : MUX 25		Ref (D61fb)
-SHIFTREG4		(MC6	FB)  : MUX 34		Ref (D53fb)
-HSYNC_COUNTER3		(MC16	FB)  : MUX 35		Ref (E76fb)
-SHIFTREG0		(MC13	FB)  : MUX 36		Ref (E68fb)
-HSYNC_COUNTER9		(MC11	FB)  : MUX 37		Ref (D64fb)
-HSYNC_COUNTER7		(MC3	FB)  : MUX 39		Ref (C48fb)
+VRAM_SHARED_STATE		(MC6	FB)  : MUX 0		Ref (D52fb)
+XXL_352			(MC12	FB)  : MUX 1		Ref (E77fb)
+CLK_12M			(MC13	FB)  : MUX 3		Ref (F91fb)
+DIN2			(MC21	P)   : MUX 4		Ref (E80p)
+HSYNC_COUNTER0		(MC15	FB)  : MUX 6		Ref (G104fb)
+CPU_VRAM_CS_EDGE		(MC2	FB)  : MUX 8		Ref (B22fb)
+HSYNC_COUNTER6		(MC3	FB)  : MUX 9		Ref (C42fb)
+VDP_VRAM_CS_GNT		(MC5	FB)  : MUX 10		Ref (D50fb)
+SHIFTREG1		(MC9	FB)  : MUX 11		Ref (D58fb)
+HSYNC_COUNTER5		(MC8	FB)  : MUX 14		Ref (D55fb)
+HSYNC_COUNTER2		(MC20	FB)  : MUX 15		Ref (G111fb)
+HSYNC_COUNTER3		(MC10	FB)  : MUX 17		Ref (E74fb)
+HSYNC_COUNTER8		(MC18	FB)  : MUX 19		Ref (G109fb)
+HSYNC_COUNTER7		(MC4	FB)  : MUX 21		Ref (C48fb)
+HSYNC_COUNTER4		(MC16	FB)  : MUX 23		Ref (G105fb)
+VSYNC_DISPLAY_ACTIVE		(MC1	FB)  : MUX 28		Ref (B18fb)
+CPU_VRAM_CS_GNT		(MC7	FB)  : MUX 30		Ref (D54fb)
+HSYNC_COUNTER1		(MC19	FB)  : MUX 31		Ref (G110fb)
+SHIFTREG0		(MC17	FB)  : MUX 33		Ref (G106fb)
+DIN1			(MC22	P)   : MUX 34		Ref (E77p)
+SHIFTREG7		(MC11	FB)  : MUX 35		Ref (E76fb)
+HSYNC_COUNTER9		(MC14	FB)  : MUX 37		Ref (F92fb)
 
-FanIn assignment for block E [16]
+FanIn assignment for block E [25]
 {
-CLK_12M,
-DIN7,DIN6,DIN0,
-FONTLINE2,FONTLINE0,FONTLINE3,FONTLINE1,
-HSYNC_COUNTER0,HSYNC_COUNTER3,HSYNC_COUNTER1,HSYNC_COUNTER2,
-SHIFTREG6,SHIFTREG5,
-VSYNC_DISPLAY_ACTIVE,VSYNC_CLOCK_A,
+CPU_D7,CPU_VRAM_CS_GNT,CPU_D4,CPU_D5,CLK_12M,
+DIN4,DIN3,DIN5,DIN7,
+HSYNC_COUNTER4,HSYNC_COUNTER6,HSYNC_COUNTER5,HSYNC_COUNTER2,HSYNC_COUNTER1,HSYNC_COUNTER3,HSYNC_COUNTER0,
+SHIFTREG2,SHIFTREG4,SHIFTREG3,SHIFTREG6,
+VRAM_SHARED_STATE,VID_MEM_CS,VID_RW,VID_IO_CS,VDP_VRAM_CS_GNT,
 }
 Multiplexer assignment for block E
-VSYNC_DISPLAY_ACTIVE		(MC2	FB)  : MUX 0		Ref (B23fb)
-FONTLINE2		(MC6	P)   : MUX 2		Ref (B27p)
-FONTLINE0		(MC3	P)   : MUX 3		Ref (B24p)
-FONTLINE3		(MC1	P)   : MUX 8		Ref (A14p)
-DIN7			(MC15	P)   : MUX 9		Ref (E69p)
-SHIFTREG6		(MC13	FB)  : MUX 11		Ref (E79fb)
-FONTLINE1		(MC4	P)   : MUX 14		Ref (B25p)
-DIN6			(MC14	P)   : MUX 15		Ref (E67p)
-HSYNC_COUNTER0		(MC9	FB)  : MUX 18		Ref (E66fb)
-CLK_12M			(MC5	FB)  : MUX 21		Ref (B26fb)
-HSYNC_COUNTER3		(MC12	FB)  : MUX 25		Ref (E76fb)
-HSYNC_COUNTER1		(MC10	FB)  : MUX 28		Ref (E71fb)
-DIN0			(MC16	P)   : MUX 29		Ref (E72p)
-VSYNC_CLOCK_A		(MC7	FB)  : MUX 30		Ref (D49fb)
-SHIFTREG5		(MC8	FB)  : MUX 32		Ref (D50fb)
-HSYNC_COUNTER2		(MC11	FB)  : MUX 35		Ref (E74fb)
+VRAM_SHARED_STATE		(MC3	FB)  : MUX 0		Ref (D52fb)
+CPU_D7			(MC20	P)   : MUX 1		Ref (H120p)
+CPU_VRAM_CS_GNT		(MC4	FB)  : MUX 2		Ref (D54fb)
+HSYNC_COUNTER4		(MC12	FB)  : MUX 3		Ref (G105fb)
+VID_MEM_CS		(MC21	P)   : MUX 4		Ref (A16p)
+DIN4			(MC23	P)   : MUX 5		Ref (F85p)
+SHIFTREG2		(MC6	FB)  : MUX 7		Ref (D60fb)
+CPU_D4			(MC18	P)   : MUX 9		Ref (H115p)
+HSYNC_COUNTER6		(MC1	FB)  : MUX 11		Ref (C42fb)
+VID_RW			(MC17	P)   : MUX 12		Ref (A14p)
+DIN3			(MC22	P)   : MUX 13		Ref (F83p)
+HSYNC_COUNTER5		(MC5	FB)  : MUX 14		Ref (D55fb)
+VID_IO_CS		(MC16	FB)  : MUX 15		Ref (OE1)
+VDP_VRAM_CS_GNT		(MC2	FB)  : MUX 16		Ref (D50fb)
+SHIFTREG4		(MC8	FB)  : MUX 17		Ref (E79fb)
+DIN5			(MC24	P)   : MUX 19		Ref (F86p)
+CPU_D5			(MC19	P)   : MUX 21		Ref (H117p)
+SHIFTREG3		(MC9	FB)  : MUX 23		Ref (E80fb)
+DIN7			(MC25	P)   : MUX 24		Ref (F91p)
+CLK_12M			(MC10	FB)  : MUX 25		Ref (F91fb)
+SHIFTREG6		(MC15	FB)  : MUX 27		Ref (G112fb)
+HSYNC_COUNTER2		(MC14	FB)  : MUX 29		Ref (G111fb)
+HSYNC_COUNTER1		(MC13	FB)  : MUX 31		Ref (G110fb)
+HSYNC_COUNTER3		(MC7	FB)  : MUX 33		Ref (E74fb)
+HSYNC_COUNTER0		(MC11	FB)  : MUX 36		Ref (G104fb)
+
+FanIn assignment for block F [25]
+{
+CLK_12M,
+HSYNC_COUNTER8,HSYNC_COUNTER6,HSYNC_COUNTER5,HSYNC_COUNTER1,HSYNC_COUNTER4,HSYNC_COUNTER2,HSYNC_COUNTER3,HSYNC_COUNTER9,HSYNC_COUNTER7,
+RESET_IN,
+SHIFTREG7,
+VSYNC_COUNTER7,VSYNC_COUNTER5,VSYNC_COUNTER3,VSYNC_COUNTER8,VSYNC_COUNTER1,VSYNC_COUNTER6,VSYNC_COUNTER9,VSYNC_COUNTER2,VSYNC_DISPLAY_ACTIVE,VSYNC_COUNTER4,
+XXL_359,XXL_358,XXL_357,
+}
+Multiplexer assignment for block F
+VSYNC_COUNTER7		(MC7	FB)  : MUX 1		Ref (A16fb)
+VSYNC_COUNTER5		(MC2	FB)  : MUX 2		Ref (A4fb)
+HSYNC_COUNTER8		(MC22	FB)  : MUX 3		Ref (G109fb)
+VSYNC_COUNTER3		(MC5	FB)  : MUX 5		Ref (A12fb)
+VSYNC_COUNTER8		(MC6	FB)  : MUX 7		Ref (A15fb)
+XXL_359			(MC14	FB)  : MUX 9		Ref (D63fb)
+VSYNC_COUNTER1		(MC1	FB)  : MUX 10		Ref (A2fb)
+VSYNC_COUNTER6		(MC4	FB)  : MUX 11		Ref (A9fb)
+VSYNC_COUNTER9		(MC21	FB)  : MUX 13		Ref (G108fb)
+HSYNC_COUNTER6		(MC9	FB)  : MUX 15		Ref (C42fb)
+HSYNC_COUNTER5		(MC12	FB)  : MUX 16		Ref (D55fb)
+HSYNC_COUNTER1		(MC23	FB)  : MUX 17		Ref (G110fb)
+XXL_358			(MC10	FB)  : MUX 19		Ref (C44fb)
+VSYNC_COUNTER2		(MC3	FB)  : MUX 20		Ref (A7fb)
+XXL_357			(MC13	FB)  : MUX 21		Ref (D62fb)
+HSYNC_COUNTER4		(MC20	FB)  : MUX 23		Ref (G105fb)
+CLK_12M			(MC17	FB)  : MUX 25		Ref (F91fb)
+VSYNC_DISPLAY_ACTIVE		(MC8	FB)  : MUX 28		Ref (B18fb)
+HSYNC_COUNTER2		(MC24	FB)  : MUX 29		Ref (G111fb)
+HSYNC_COUNTER3		(MC15	FB)  : MUX 33		Ref (E74fb)
+RESET_IN		(MC25	FB)  : MUX 34		Ref (GCLR)
+SHIFTREG7		(MC16	FB)  : MUX 35		Ref (E76fb)
+HSYNC_COUNTER9		(MC18	FB)  : MUX 37		Ref (F92fb)
+VSYNC_COUNTER4		(MC19	FB)  : MUX 38		Ref (G102fb)
+HSYNC_COUNTER7		(MC11	FB)  : MUX 39		Ref (C48fb)
+
+FanIn assignment for block G [20]
+{
+CLK_12M,
+DIN6,DIN0,
+FONTLINE0,FONTLINE2,FONTLINE3,FONTLINE1,
+HSYNC_COUNTER2,HSYNC_COUNTER1,HSYNC_COUNTER0,
+SHIFTREG5,
+VSYNC_DISPLAY_ACTIVE,VSYNC_CLOCK_B,VSYNC_CLOCK_A,
+XXL_356,XXL_351,XXL_364,XXL_360,XXL_355,XXL_363,
+}
+Multiplexer assignment for block G
+FONTLINE0		(MC4	P)   : MUX 0		Ref (A13p)
+DIN6			(MC19	P)   : MUX 3		Ref (F88p)
+SHIFTREG5		(MC12	FB)  : MUX 5		Ref (E78fb)
+DIN0			(MC20	P)   : MUX 6		Ref (E75p)
+FONTLINE2		(MC2	P)   : MUX 7		Ref (A8p)
+FONTLINE3		(MC1	P)   : MUX 9		Ref (A6p)
+XXL_356			(MC10	FB)  : MUX 11		Ref (C47fb)
+VSYNC_DISPLAY_ACTIVE		(MC5	FB)  : MUX 14		Ref (B18fb)
+HSYNC_COUNTER2		(MC18	FB)  : MUX 15		Ref (G111fb)
+XXL_351			(MC11	FB)  : MUX 18		Ref (E71fb)
+XXL_364			(MC7	FB)  : MUX 19		Ref (B30fb)
+VSYNC_CLOCK_B		(MC15	FB)  : MUX 20		Ref (G103fb)
+HSYNC_COUNTER1		(MC17	FB)  : MUX 21		Ref (G110fb)
+FONTLINE1		(MC3	P)   : MUX 24		Ref (A11p)
+XXL_360			(MC8	FB)  : MUX 25		Ref (B31fb)
+CLK_12M			(MC13	FB)  : MUX 27		Ref (F91fb)
+XXL_355			(MC14	FB)  : MUX 33		Ref (F96fb)
+HSYNC_COUNTER0		(MC16	FB)  : MUX 34		Ref (G104fb)
+XXL_363			(MC6	FB)  : MUX 37		Ref (B28fb)
+VSYNC_CLOCK_A		(MC9	FB)  : MUX 38		Ref (C33fb)
+
+FanIn assignment for block H [4]
+{
+VID_IO_CS,V64OR32MODE,VID_CPLD_5,VID_80X25MEM_CS,
+}
+Multiplexer assignment for block H
+VID_IO_CS		(MC1	FB)  : MUX 3		Ref (OE1)
+V64OR32MODE		(MC2	FB)  : MUX 4		Ref (OE2)
+VID_CPLD_5		(MC4	P)   : MUX 8		Ref (H123p)
+VID_80X25MEM_CS		(MC3	P)   : MUX 15		Ref (B17p)
 
 Creating JEDEC file C:\VIDEODRVB.jed ...
 
@@ -364,11 +520,25 @@ PLCC84 programmed logic:
 -----------------------------------
 CLK_12M.D = !CLK_12M.Q;
 
+CPU_2KPAGE_A10 = 1;
+
+CPU_A2 = 0;
+
+CPU_A0 = 1;
+
+CPU_A1 = 0;
+
+CPU_A3 = 0;
+
 CPU_VRAM_CS_EDGE.D = 0;
 
-!CP_VM_AD_OE = (!CPU_VRAM_CS_GNT.Q & !VRAM_SHARED_STATE.Q);
+CP_FM_DATA_DIR = 1;
 
 CPU_VRAM_CS_GNT.D = CPU_VRAM_CS_EDGE.Q;
+
+CP_FM_DATA_OE = 1;
+
+!CP_VM_AD_OE = (!CPU_VRAM_CS_GNT.Q & !VRAM_SHARED_STATE.Q);
 
 CP_VM_DR_LE = (!CPU_VRAM_CS_GNT.Q & VID_RW & !VRAM_SHARED_STATE.Q);
 
@@ -376,235 +546,319 @@ CP_VM_DR_LE = (!CPU_VRAM_CS_GNT.Q & VID_RW & !VRAM_SHARED_STATE.Q);
 
 !CP_VM_DW_OE = (!CPU_VRAM_CS_GNT.Q & !VID_RW & !VRAM_SHARED_STATE.Q);
 
-!NTSC_SYNC_OUT.D = ((VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !HSYNC_COUNTER7.Q & !HSYNC_COUNTER8.Q)
-	# (!HSYNC_COUNTER9.Q & !HSYNC_COUNTER7.Q & !HSYNC_COUNTER8.Q & !HSYNC_COUNTER6.Q)
-	# (!HSYNC_COUNTER9.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q));
-
 SHIFTREG0.D = (DIN0 & HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q);
 
-SHIFTREG1.D = ((SHIFTREG0.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG0.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN1)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG0.Q));
+!NTSC_SYNC_OUT.D = ((!HSYNC_COUNTER7.Q & !HSYNC_COUNTER8.Q & !HSYNC_COUNTER9.Q & !HSYNC_COUNTER6.Q)
+	# (VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !HSYNC_COUNTER9.Q)
+	# (VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !HSYNC_COUNTER7.Q & !HSYNC_COUNTER8.Q));
 
-SHIFTREG2.D = ((SHIFTREG1.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG1.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN2)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG1.Q));
+SHIFTREG1.D = ((SHIFTREG0.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN1)
+	# (SHIFTREG0.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG0.Q & !HSYNC_COUNTER1.Q));
 
-SHIFTREG3.D = ((SHIFTREG2.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG2.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN3)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG2.Q));
+SHIFTREG2.D = ((SHIFTREG1.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN2)
+	# (SHIFTREG1.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG1.Q & !HSYNC_COUNTER1.Q));
 
-SHIFTREG4.D = ((SHIFTREG3.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG3.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN4)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG3.Q));
+SHIFTREG3.D = ((SHIFTREG2.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN3)
+	# (SHIFTREG2.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG2.Q & !HSYNC_COUNTER1.Q));
 
-SHIFTREG5.D = ((SHIFTREG4.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG4.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN5)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG4.Q));
+SHIFTREG4.D = ((SHIFTREG3.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN4)
+	# (SHIFTREG3.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG3.Q & !HSYNC_COUNTER1.Q));
 
-SHIFTREG6.D = ((SHIFTREG5.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG5.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN6)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG5.Q));
+SHIFTREG5.D = ((SHIFTREG4.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN5)
+	# (SHIFTREG4.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG4.Q & !HSYNC_COUNTER1.Q));
 
-SHIFTREG7.D = ((SHIFTREG6.Q & !HSYNC_COUNTER1.Q)
-	# (SHIFTREG6.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & DIN7)
-	# (!HSYNC_COUNTER2.Q & SHIFTREG6.Q));
+SHIFTREG6.D = ((SHIFTREG5.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN6)
+	# (SHIFTREG5.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG5.Q & !HSYNC_COUNTER1.Q));
+
+SHIFTREG7.D = ((SHIFTREG6.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q & DIN7)
+	# (SHIFTREG6.Q & !HSYNC_COUNTER2.Q)
+	# (SHIFTREG6.Q & !HSYNC_COUNTER1.Q));
+
+VM_PAGE0.D = CPU_D0;
+
+VM_PAGE1.D = CPU_D1;
+
+VM_PAGE2.D = CPU_D2;
+
+VM_PAGE3.D = CPU_D3;
+
+FONTSEL1.D = CPU_D5;
+
+FONTSEL0.D = CPU_D4;
+
+FONTSEL2.D = CPU_D6;
+
+VCONFB0.D = CPU_D0;
+
+FONTSEL3.D = CPU_D7;
+
+VCONFB1.D = CPU_D1;
+
+VCONFB2.D = CPU_D2;
+
+VCONFB3.D = CPU_D3;
+
+VCONFB4.D = CPU_D4;
+
+VCONFB5.D = CPU_D5;
+
+VCONFB6.D = CPU_D6;
+
+VCONFB7.D = CPU_D7;
 
 VDP_VRAM_CS_EDGE.D = 0;
 
 VDP_VRAM_CS_GNT.D = 1;
 
-VID_CPLD_4 = VID_CPLD_5;
+VGA_HSYNC_OUT = 1;
 
-VM_DATA_LATCH = (!VDP_VRAM_CS_GNT.Q & VRAM_SHARED_STATE.Q);
+VGA_VIDEO_OUT = 1;
+
+VGA_VSYNC_OUT = 1;
+
+!VID_CPLD_4 = (!V64OR32MODE & !VID_80X25MEM_CS & !VID_CPLD_5 & !VID_IO_CS);
+
+VM_AD_CLR = 1;
+
+VM_AD_CLK = 1;
+
+VM_AD_CLKEN = 1;
 
 !VM_AD_OE = (!VDP_VRAM_CS_GNT.Q & VRAM_SHARED_STATE.Q);
 
+VM_AD_RCLK = 1;
+
+VM_DATA_LATCH = (!VDP_VRAM_CS_GNT.Q & VRAM_SHARED_STATE.Q);
+
 VM_DATA_OE = 1;
+
+VM_OE = 1;
+
+VM_WE = 1;
 
 VRAM_SHARED_STATE.D = !VRAM_SHARED_STATE.Q;
 
 VSYNC_CLOCK_B.D = VSYNC_CLOCK_A.Q;
 
-VSYNC_DISPLAY_ACTIVE = ((VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER3.Q)
-	# (!VSYNC_COUNTER5.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_COUNTER6.Q)
-	# (!VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_COUNTER6.Q)
-	# (VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !VSYNC_COUNTER6.Q)
-	# (VSYNC_COUNTER5.Q & !VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_COUNTER3.Q)
+!VSYNC_ZERO = (VSYNC_COUNTER0.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q);
+
+VSYNC_DISPLAY_ACTIVE = (XXL_350
 	# (VSYNC_COUNTER5.Q & !VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_COUNTER4.Q));
 
-!VSYNC_ZERO = (VSYNC_COUNTER0.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q);
+Z80_WAIT = 1;
 
 VSYNC_CLOCK_A.D = (HSYNC_COUNTER9.Q & HSYNC_COUNTER8.Q & !HSYNC_COUNTER7.Q & !HSYNC_COUNTER6.Q & !HSYNC_COUNTER5.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q);
 
-FONTLINE_RESET = ((FONTLINE0.Q & FONTLINE1.Q & !FONTLINE2.Q & FONTLINE3.Q)
-	# !VSYNC_DISPLAY_ACTIVE);
+HSYNC_COUNTER1.D = ((HSYNC_COUNTER0.Q & !HSYNC_COUNTER1.Q)
+	# (!HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q));
+
+FONTLINE_RESET = (!VSYNC_DISPLAY_ACTIVE
+	# (FONTLINE0.Q & FONTLINE1.Q & !FONTLINE2.Q & FONTLINE3.Q));
 
 HSYNC_COUNTER0.D = !HSYNC_COUNTER0.Q;
 
-HSYNC_COUNTER1.D = ((!HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q)
-	# (HSYNC_COUNTER0.Q & !HSYNC_COUNTER1.Q));
+HSYNC_COUNTER4.D = XXL_351;
 
-HSYNC_COUNTER2.D = ((HSYNC_COUNTER2.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER1.Q & !HSYNC_COUNTER2.Q & HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q));
+HSYNC_COUNTER2.D = ((!HSYNC_COUNTER2.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q)
+	# (HSYNC_COUNTER2.Q & !HSYNC_COUNTER1.Q)
+	# (HSYNC_COUNTER2.Q & !HSYNC_COUNTER0.Q));
 
-HSYNC_COUNTER3.D = ((HSYNC_COUNTER3.Q & !HSYNC_COUNTER1.Q)
-	# (HSYNC_COUNTER3.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER2.Q & !HSYNC_COUNTER3.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q));
+HSYNC_COUNTER3.D = ((HSYNC_COUNTER3.Q & !HSYNC_COUNTER0.Q)
+	# (!HSYNC_COUNTER3.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER2.Q)
+	# (HSYNC_COUNTER3.Q & !HSYNC_COUNTER2.Q)
+	# (HSYNC_COUNTER3.Q & !HSYNC_COUNTER1.Q));
 
-HSYNC_COUNTER4.D = ((HSYNC_COUNTER4.Q & !HSYNC_COUNTER2.Q)
-	# (HSYNC_COUNTER4.Q & !HSYNC_COUNTER1.Q)
-	# (HSYNC_COUNTER4.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER3.Q & !HSYNC_COUNTER4.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q));
+!HSYNC_COUNTER5.D = ((!HSYNC_COUNTER5.Q & !HSYNC_COUNTER0.Q)
+	# XXL_352
+	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER8.Q & HSYNC_COUNTER9.Q));
 
-!HSYNC_COUNTER5.D = ((!HSYNC_COUNTER5.Q & !HSYNC_COUNTER1.Q)
-	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER2.Q)
-	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER3.Q)
-	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER4.Q)
-	# (HSYNC_COUNTER5.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q)
-	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER8.Q & HSYNC_COUNTER9.Q)
-	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER0.Q));
+HSYNC_COUNTER6.D = ((!HSYNC_COUNTER5.Q & HSYNC_COUNTER6.Q)
+	# XXL_353
+	# (HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q));
 
-HSYNC_COUNTER6.D = ((HSYNC_COUNTER6.Q & !HSYNC_COUNTER4.Q)
-	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER3.Q)
-	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER2.Q)
-	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER1.Q)
-	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER5.Q & HSYNC_COUNTER6.Q));
+HSYNC_COUNTER7.D = ((!HSYNC_COUNTER7.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER6.Q & HSYNC_COUNTER5.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q)
+	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER6.Q)
+	# XXL_354
+	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER0.Q));
 
-HSYNC_COUNTER7.D = ((HSYNC_COUNTER7.Q & !HSYNC_COUNTER5.Q)
-	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER4.Q)
-	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER3.Q)
-	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER2.Q)
-	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER1.Q)
-	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER5.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q));
+!HSYNC_COUNTER8.D = (XXL_356
+	# XXL_355);
 
-!HSYNC_COUNTER8.D = ((!HSYNC_COUNTER8.Q & !HSYNC_COUNTER2.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER3.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER4.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER5.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER6.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER7.Q)
-	# (HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & !HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER9.Q)
-	# (HSYNC_COUNTER8.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER5.Q & HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER0.Q)
-	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER1.Q));
-
-HSYNC_COUNTER9.D = ((HSYNC_COUNTER9.Q & HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER5.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER4.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER3.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER2.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER1.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER0.Q)
-	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q)
-	# (HSYNC_COUNTER9.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER5.Q)
-	# (HSYNC_COUNTER8.Q & !HSYNC_COUNTER9.Q & HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & HSYNC_COUNTER5.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q)
+HSYNC_COUNTER9.D = (XXL_357
+	# XXL_358
 	# (!HSYNC_COUNTER8.Q & HSYNC_COUNTER9.Q));
 
-NTSC_PIXEL_OUT.D = ((HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & !HSYNC_COUNTER4.Q & !HSYNC_COUNTER3.Q & !HSYNC_COUNTER5.Q & !HSYNC_COUNTER8.Q)
-	# (!HSYNC_COUNTER7.Q & HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & !HSYNC_COUNTER8.Q)
-	# (!HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER8.Q)
-	# (!HSYNC_COUNTER6.Q & HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & !HSYNC_COUNTER8.Q)
-	# (HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER5.Q)
-	# (HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER3.Q)
-	# (HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER4.Q));
+NTSC_PIXEL_OUT.D = ((HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER4.Q)
+	# XXL_359
+	# (HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER3.Q));
 
-VSYNC_COUNTER1.D = ((!VSYNC_COUNTER0.Q & VSYNC_COUNTER1.Q & VSYNC_ZERO)
-	# (VSYNC_COUNTER0.Q & !VSYNC_COUNTER1.Q & VSYNC_ZERO));
+VSYNC_COUNTER2.D = ((!VSYNC_COUNTER2.Q & VSYNC_ZERO & VSYNC_COUNTER0.Q & VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER2.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER2.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q));
 
 VSYNC_COUNTER0.D = (!VSYNC_COUNTER0.Q & VSYNC_ZERO);
 
-VSYNC_COUNTER2.D = ((VSYNC_COUNTER2.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER1.Q & !VSYNC_COUNTER2.Q & VSYNC_ZERO & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER1.Q & VSYNC_COUNTER2.Q & VSYNC_ZERO));
+VSYNC_COUNTER1.D = ((VSYNC_COUNTER0.Q & !VSYNC_COUNTER1.Q & VSYNC_ZERO)
+	# (!VSYNC_COUNTER0.Q & VSYNC_COUNTER1.Q & VSYNC_ZERO));
 
-VSYNC_COUNTER3.D = ((VSYNC_COUNTER3.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
-	# (VSYNC_COUNTER3.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER2.Q & !VSYNC_COUNTER3.Q & VSYNC_ZERO & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER2.Q & VSYNC_COUNTER3.Q & VSYNC_ZERO));
+VSYNC_COUNTER3.D = ((VSYNC_COUNTER3.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
+	# (!VSYNC_COUNTER3.Q & VSYNC_ZERO & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q & VSYNC_COUNTER2.Q)
+	# (VSYNC_COUNTER3.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
+	# (VSYNC_COUNTER3.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q));
 
-VSYNC_COUNTER4.D = ((VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
-	# (VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
-	# (VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER3.Q & !VSYNC_COUNTER4.Q & VSYNC_ZERO & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER3.Q & VSYNC_COUNTER4.Q & VSYNC_ZERO));
+VSYNC_COUNTER4.D = XXL_360;
 
-VSYNC_COUNTER5.D = ((VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
-	# (VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
-	# (VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
-	# (VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER4.Q & !VSYNC_COUNTER5.Q & VSYNC_ZERO & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
+VSYNC_COUNTER5.D = (XXL_361
 	# (!VSYNC_COUNTER4.Q & VSYNC_COUNTER5.Q & VSYNC_ZERO));
 
-VSYNC_COUNTER6.D = ((VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q)
-	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
-	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
-	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
-	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & VSYNC_ZERO & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER5.Q & VSYNC_COUNTER6.Q & VSYNC_ZERO));
+VSYNC_COUNTER6.D = ((!VSYNC_COUNTER5.Q & VSYNC_COUNTER6.Q & VSYNC_ZERO)
+	# XXL_362
+	# (VSYNC_COUNTER5.Q & !VSYNC_COUNTER6.Q & VSYNC_ZERO & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q));
 
-VSYNC_COUNTER7.D = ((VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER5.Q)
-	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q)
-	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
-	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
-	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
-	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER6.Q & !VSYNC_COUNTER7.Q & VSYNC_ZERO & VSYNC_COUNTER5.Q & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER6.Q & VSYNC_COUNTER7.Q & VSYNC_ZERO));
+VSYNC_COUNTER9.D = (XXL_364
+	# XXL_363);
 
-VSYNC_COUNTER8.D = ((VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER6.Q)
-	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER5.Q)
+VSYNC_COUNTER7.D = ((!VSYNC_COUNTER7.Q & VSYNC_ZERO & VSYNC_COUNTER0.Q & VSYNC_COUNTER6.Q & VSYNC_COUNTER5.Q & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER6.Q)
+	# XXL_365
+	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q));
+
+VSYNC_COUNTER8.D = ((VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER5.Q)
 	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q)
 	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
 	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
 	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
 	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & VSYNC_ZERO & VSYNC_COUNTER6.Q & VSYNC_COUNTER5.Q & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER7.Q & VSYNC_COUNTER8.Q & VSYNC_ZERO));
+	# (!VSYNC_COUNTER8.Q & VSYNC_ZERO & VSYNC_COUNTER6.Q & VSYNC_COUNTER5.Q & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q & VSYNC_COUNTER7.Q)
+	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER7.Q)
+	# (VSYNC_COUNTER8.Q & VSYNC_ZERO & !VSYNC_COUNTER6.Q));
 
-VSYNC_COUNTER9.D = ((VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER7.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER6.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER5.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
-	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
-	# (VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_ZERO & VSYNC_COUNTER7.Q & VSYNC_COUNTER6.Q & VSYNC_COUNTER5.Q & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q)
-	# (!VSYNC_COUNTER8.Q & VSYNC_COUNTER9.Q & VSYNC_ZERO));
+FONTLINE2.D = ((!FONTLINE2.Q & !FONTLINE_RESET & FONTLINE1.Q & FONTLINE0.Q)
+	# (FONTLINE2.Q & !FONTLINE_RESET & !FONTLINE0.Q)
+	# (FONTLINE2.Q & !FONTLINE_RESET & !FONTLINE1.Q));
 
 FONTLINE0.D = (!FONTLINE0.Q & !FONTLINE_RESET);
 
-FONTLINE1.D = ((FONTLINE0.Q & !FONTLINE1.Q & !FONTLINE_RESET)
-	# (!FONTLINE0.Q & FONTLINE1.Q & !FONTLINE_RESET));
+FONTLINE1.D = ((!FONTLINE0.Q & FONTLINE1.Q & !FONTLINE_RESET)
+	# (FONTLINE0.Q & !FONTLINE1.Q & !FONTLINE_RESET));
 
-FONTLINE2.D = ((FONTLINE2.Q & !FONTLINE_RESET & !FONTLINE1.Q)
-	# (FONTLINE0.Q & !FONTLINE2.Q & !FONTLINE_RESET & FONTLINE1.Q)
-	# (!FONTLINE0.Q & FONTLINE2.Q & !FONTLINE_RESET));
+FONTLINE3.D = ((FONTLINE3.Q & !FONTLINE_RESET & !FONTLINE1.Q)
+	# (!FONTLINE3.Q & !FONTLINE_RESET & FONTLINE0.Q & FONTLINE1.Q & FONTLINE2.Q)
+	# (FONTLINE3.Q & !FONTLINE_RESET & !FONTLINE2.Q)
+	# (FONTLINE3.Q & !FONTLINE_RESET & !FONTLINE0.Q));
 
-FONTLINE3.D = ((FONTLINE3.Q & !FONTLINE_RESET & !FONTLINE0.Q)
-	# (FONTLINE3.Q & !FONTLINE_RESET & !FONTLINE1.Q)
-	# (FONTLINE2.Q & !FONTLINE3.Q & !FONTLINE_RESET & FONTLINE0.Q & FONTLINE1.Q)
-	# (!FONTLINE2.Q & FONTLINE3.Q & !FONTLINE_RESET));
+!FB_348 = (VRAM_SHARED_STATE.Q & !VDP_VRAM_CS_GNT.Q);
 
-!FB_230 = (VRAM_SHARED_STATE.Q & !VDP_VRAM_CS_GNT.Q);
+!FB_349 = (!CPU_VRAM_CS_GNT.Q & !VRAM_SHARED_STATE.Q);
 
-!FB_231 = (!CPU_VRAM_CS_GNT.Q & !VRAM_SHARED_STATE.Q);
+XXL_350 = ((!VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !VSYNC_COUNTER5.Q & VSYNC_COUNTER6.Q)
+	# (!VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_COUNTER6.Q)
+	# (VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !VSYNC_COUNTER6.Q)
+	# (!VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & VSYNC_COUNTER3.Q & VSYNC_COUNTER5.Q)
+	# (VSYNC_COUNTER7.Q & !VSYNC_COUNTER8.Q & !VSYNC_COUNTER9.Q & !VSYNC_COUNTER4.Q & !VSYNC_COUNTER3.Q));
+
+XXL_351 = ((HSYNC_COUNTER4.Q & !HSYNC_COUNTER1.Q)
+	# (HSYNC_COUNTER4.Q & !HSYNC_COUNTER0.Q)
+	# (!HSYNC_COUNTER4.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER3.Q)
+	# (HSYNC_COUNTER4.Q & !HSYNC_COUNTER3.Q)
+	# (HSYNC_COUNTER4.Q & !HSYNC_COUNTER2.Q));
+
+XXL_352 = ((!HSYNC_COUNTER5.Q & !HSYNC_COUNTER2.Q)
+	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER3.Q)
+	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER4.Q)
+	# (HSYNC_COUNTER5.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER0.Q)
+	# (!HSYNC_COUNTER5.Q & !HSYNC_COUNTER1.Q));
+
+XXL_353 = ((HSYNC_COUNTER6.Q & !HSYNC_COUNTER3.Q)
+	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER2.Q)
+	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER1.Q)
+	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER6.Q & !HSYNC_COUNTER4.Q));
+
+XXL_354 = ((HSYNC_COUNTER7.Q & !HSYNC_COUNTER4.Q)
+	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER3.Q)
+	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER2.Q)
+	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER1.Q)
+	# (HSYNC_COUNTER7.Q & !HSYNC_COUNTER5.Q));
+
+XXL_355 = ((!HSYNC_COUNTER8.Q & !HSYNC_COUNTER3.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER4.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER5.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER6.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER2.Q));
+
+XXL_356 = ((!HSYNC_COUNTER7.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & !HSYNC_COUNTER5.Q & !HSYNC_COUNTER6.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER9.Q)
+	# (HSYNC_COUNTER8.Q & HSYNC_COUNTER7.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER2.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER5.Q & HSYNC_COUNTER6.Q & HSYNC_COUNTER0.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER0.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER1.Q)
+	# (!HSYNC_COUNTER8.Q & !HSYNC_COUNTER7.Q));
+
+XXL_357 = ((HSYNC_COUNTER9.Q & !HSYNC_COUNTER7.Q & HSYNC_COUNTER5.Q)
+	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER4.Q)
+	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER3.Q)
+	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER2.Q)
+	# (HSYNC_COUNTER9.Q & HSYNC_COUNTER6.Q & !HSYNC_COUNTER7.Q));
+
+XXL_358 = ((HSYNC_COUNTER9.Q & !HSYNC_COUNTER0.Q)
+	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q)
+	# (HSYNC_COUNTER9.Q & HSYNC_COUNTER7.Q & !HSYNC_COUNTER5.Q)
+	# (!HSYNC_COUNTER9.Q & HSYNC_COUNTER1.Q & HSYNC_COUNTER0.Q & HSYNC_COUNTER6.Q & HSYNC_COUNTER7.Q & HSYNC_COUNTER5.Q & HSYNC_COUNTER8.Q & HSYNC_COUNTER4.Q & HSYNC_COUNTER3.Q & HSYNC_COUNTER2.Q)
+	# (HSYNC_COUNTER9.Q & !HSYNC_COUNTER1.Q));
+
+XXL_359 = ((HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & !HSYNC_COUNTER8.Q & !HSYNC_COUNTER7.Q)
+	# (!HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER8.Q)
+	# (HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & !HSYNC_COUNTER8.Q & !HSYNC_COUNTER6.Q)
+	# (!HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & HSYNC_COUNTER5.Q & HSYNC_COUNTER7.Q & HSYNC_COUNTER6.Q)
+	# (HSYNC_COUNTER9.Q & SHIFTREG7.Q & VSYNC_DISPLAY_ACTIVE & !HSYNC_COUNTER4.Q & !HSYNC_COUNTER3.Q & !HSYNC_COUNTER5.Q & !HSYNC_COUNTER8.Q));
+
+XXL_360 = ((VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
+	# (!VSYNC_COUNTER4.Q & VSYNC_ZERO & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q & VSYNC_COUNTER3.Q)
+	# (VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
+	# (VSYNC_COUNTER4.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q));
+
+XXL_361 = ((VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
+	# (VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
+	# (!VSYNC_COUNTER5.Q & VSYNC_ZERO & VSYNC_COUNTER3.Q & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q & VSYNC_COUNTER4.Q)
+	# (VSYNC_COUNTER5.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q));
+
+XXL_362 = ((VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
+	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
+	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
+	# (VSYNC_COUNTER6.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q));
+
+XXL_363 = ((VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER6.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER5.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER7.Q));
+
+XXL_364 = ((VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER0.Q)
+	# (!VSYNC_COUNTER9.Q & VSYNC_ZERO & VSYNC_COUNTER2.Q & VSYNC_COUNTER1.Q & VSYNC_COUNTER0.Q & VSYNC_COUNTER8.Q & VSYNC_COUNTER7.Q & VSYNC_COUNTER6.Q & VSYNC_COUNTER5.Q & VSYNC_COUNTER4.Q & VSYNC_COUNTER3.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER8.Q)
+	# (VSYNC_COUNTER9.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q));
+
+XXL_365 = ((VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER4.Q)
+	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER3.Q)
+	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER2.Q)
+	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER1.Q)
+	# (VSYNC_COUNTER7.Q & VSYNC_ZERO & !VSYNC_COUNTER5.Q));
 
 CLK_12M.C = CLK_25M;
 
@@ -612,17 +866,17 @@ CLK_12M.AR = !RESET_IN;
 
 CPU_VRAM_CS_EDGE.C = !VID_MEM_CS;
 
-CPU_VRAM_CS_EDGE.AP = FB_231;
+CPU_VRAM_CS_EDGE.AP = FB_349;
 
 CPU_VRAM_CS_GNT.C = !VRAM_SHARED_STATE.Q;
-
-NTSC_SYNC_OUT.C = !CLK_12M.Q;
-
-NTSC_SYNC_OUT.AP = !RESET_IN;
 
 SHIFTREG0.C = !CLK_12M.Q;
 
 SHIFTREG0.AR = !RESET_IN;
+
+NTSC_SYNC_OUT.C = !CLK_12M.Q;
+
+NTSC_SYNC_OUT.AP = !RESET_IN;
 
 SHIFTREG1.C = !CLK_12M.Q;
 
@@ -652,9 +906,73 @@ SHIFTREG7.C = !CLK_12M.Q;
 
 SHIFTREG7.AR = !RESET_IN;
 
+VM_PAGE0.C = 0;
+
+VM_PAGE0.AR = !RESET_IN;
+
+VM_PAGE1.C = 0;
+
+VM_PAGE1.AR = !RESET_IN;
+
+VM_PAGE2.C = 0;
+
+VM_PAGE2.AR = !RESET_IN;
+
+VM_PAGE3.C = 0;
+
+VM_PAGE3.AR = !RESET_IN;
+
+FONTSEL1.C = 0;
+
+FONTSEL1.AR = !RESET_IN;
+
+FONTSEL0.C = 0;
+
+FONTSEL0.AR = !RESET_IN;
+
+FONTSEL2.C = 0;
+
+FONTSEL2.AR = !RESET_IN;
+
+VCONFB0.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB0.AR = !RESET_IN;
+
+FONTSEL3.C = 0;
+
+FONTSEL3.AR = !RESET_IN;
+
+VCONFB1.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB1.AR = !RESET_IN;
+
+VCONFB2.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB2.AR = !RESET_IN;
+
+VCONFB3.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB3.AR = !RESET_IN;
+
+VCONFB4.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB4.AR = !RESET_IN;
+
+VCONFB5.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB5.AR = !RESET_IN;
+
+VCONFB6.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB6.AR = !RESET_IN;
+
+VCONFB7.C = (!VID_IO_CS & !VID_RW);
+
+VCONFB7.AR = !RESET_IN;
+
 VDP_VRAM_CS_EDGE.C = 0;
 
-VDP_VRAM_CS_EDGE.AP = FB_230;
+VDP_VRAM_CS_EDGE.AP = FB_348;
 
 VDP_VRAM_CS_GNT.C = VRAM_SHARED_STATE.Q;
 
@@ -668,13 +986,17 @@ VSYNC_CLOCK_A.C = !CLK_12M.Q;
 
 VSYNC_CLOCK_A.AR = !RESET_IN;
 
+HSYNC_COUNTER1.C = CLK_12M.Q;
+
+HSYNC_COUNTER1.AR = !RESET_IN;
+
 HSYNC_COUNTER0.C = CLK_12M.Q;
 
 HSYNC_COUNTER0.AR = !RESET_IN;
 
-HSYNC_COUNTER1.C = CLK_12M.Q;
+HSYNC_COUNTER4.C = CLK_12M.Q;
 
-HSYNC_COUNTER1.AR = !RESET_IN;
+HSYNC_COUNTER4.AR = !RESET_IN;
 
 HSYNC_COUNTER2.C = CLK_12M.Q;
 
@@ -683,10 +1005,6 @@ HSYNC_COUNTER2.AR = !RESET_IN;
 HSYNC_COUNTER3.C = CLK_12M.Q;
 
 HSYNC_COUNTER3.AR = !RESET_IN;
-
-HSYNC_COUNTER4.C = CLK_12M.Q;
-
-HSYNC_COUNTER4.AR = !RESET_IN;
 
 HSYNC_COUNTER5.C = CLK_12M.Q;
 
@@ -712,17 +1030,17 @@ NTSC_PIXEL_OUT.C = !CLK_12M.Q;
 
 NTSC_PIXEL_OUT.AR = !RESET_IN;
 
-VSYNC_COUNTER1.C = VSYNC_CLOCK_B.Q;
+VSYNC_COUNTER2.C = VSYNC_CLOCK_B.Q;
 
-VSYNC_COUNTER1.AR = !RESET_IN;
+VSYNC_COUNTER2.AR = !RESET_IN;
 
 VSYNC_COUNTER0.C = VSYNC_CLOCK_B.Q;
 
 VSYNC_COUNTER0.AR = !RESET_IN;
 
-VSYNC_COUNTER2.C = VSYNC_CLOCK_B.Q;
+VSYNC_COUNTER1.C = VSYNC_CLOCK_B.Q;
 
-VSYNC_COUNTER2.AR = !RESET_IN;
+VSYNC_COUNTER1.AR = !RESET_IN;
 
 VSYNC_COUNTER3.C = VSYNC_CLOCK_B.Q;
 
@@ -740,6 +1058,10 @@ VSYNC_COUNTER6.C = VSYNC_CLOCK_B.Q;
 
 VSYNC_COUNTER6.AR = !RESET_IN;
 
+VSYNC_COUNTER9.C = VSYNC_CLOCK_B.Q;
+
+VSYNC_COUNTER9.AR = !RESET_IN;
+
 VSYNC_COUNTER7.C = VSYNC_CLOCK_B.Q;
 
 VSYNC_COUNTER7.AR = !RESET_IN;
@@ -748,15 +1070,11 @@ VSYNC_COUNTER8.C = VSYNC_CLOCK_B.Q;
 
 VSYNC_COUNTER8.AR = !RESET_IN;
 
-VSYNC_COUNTER9.C = VSYNC_CLOCK_B.Q;
-
-VSYNC_COUNTER9.AR = !RESET_IN;
+FONTLINE2.C = VSYNC_CLOCK_B.Q;
 
 FONTLINE0.C = VSYNC_CLOCK_B.Q;
 
 FONTLINE1.C = VSYNC_CLOCK_B.Q;
-
-FONTLINE2.C = VSYNC_CLOCK_B.Q;
 
 FONTLINE3.C = VSYNC_CLOCK_B.Q;
 
@@ -764,78 +1082,138 @@ FONTLINE3.C = VSYNC_CLOCK_B.Q;
 PLCC84 Pin/Node Placement:
 ------------------------------------
 Pin 1  = RESET_IN;
-Pin 2  = VID_MEM_CS;
-Pin 4  = NTSC_SYNC_OUT; /* MC 16 */
-Pin 5  = FONTLINE3; /* MC 14 */
-Pin 11 = VID_CPLD_5; /* MC  5 */
-Pin 12 = VID_RW; /* MC  3 */
+Pin 2  = V64OR32MODE;
+Pin 4  = VID_MEM_CS; /* MC 16 */
+Pin 5  = VID_RW; /* MC 14 */
+Pin 6  = FONTLINE0; /* MC 13 */
+Pin 8  = FONTLINE1; /* MC 11 */
+Pin 9  = FONTLINE2; /* MC 8 */
+Pin 10 = FONTLINE3; /* MC  6 */
+Pin 11 = FONTSEL0; /* MC  5 */
+Pin 12 = FONTSEL1; /* MC  3 */
 Pin 14 = TDI; /* MC 32 */ 
-Pin 15 = NTSC_PIXEL_OUT; /* MC 29 */ 
-Pin 16 = FONTLINE2; /* MC 27 */ 
-Pin 17 = FONTLINE1; /* MC 25 */ 
-Pin 18 = FONTLINE0; /* MC 24 */ 
-Pin 20 = VM_DATA_OE; /* MC 21 */ 
-Pin 21 = DIN3; /* MC 19 */ 
-Pin 22 = DIN1; /* MC 17 */ 
+Pin 15 = FONTSEL2; /* MC 29 */ 
+Pin 16 = FONTSEL3; /* MC 27 */ 
+Pin 17 = CPU_A0; /* MC 25 */ 
+Pin 18 = CPU_A1; /* MC 24 */ 
+Pin 20 = CPU_A2; /* MC 21 */ 
+Pin 21 = CPU_A3; /* MC 19 */ 
+Pin 22 = VID_80X25MEM_CS; /* MC 17 */ 
 Pin 23 = TMS; /* MC 48 */ 
-Pin 24 = CP_VM_DW_OE; /* MC 46 */ 
-Pin 25 = CP_VM_DR_LE; /* MC 45 */ 
-Pin 27 = CP_VM_AD_OE; /* MC 43 */ 
-Pin 28 = CP_VM_DR_OE; /* MC 40 */ 
-Pin 29 = VM_DATA_LATCH; /* MC 38 */ 
-Pin 30 = VM_AD_OE; /* MC 37 */ 
-Pin 31 = VID_CPLD_4; /* MC 35 */ 
-Pin 35 = DIN4; /* MC 59 */ 
-Pin 36 = DIN5; /* MC 57 */ 
-Pin 44 = DIN2; /* MC 65 */ 
-Pin 45 = DIN6; /* MC 67 */ 
-Pin 46 = DIN7; /* MC 69 */ 
-Pin 48 = DIN0; /* MC 72 */ 
+Pin 24 = VM_PAGE0; /* MC 46 */ 
+Pin 25 = VM_PAGE1; /* MC 45 */ 
+Pin 27 = VM_PAGE2; /* MC 43 */ 
+Pin 28 = VM_PAGE3; /* MC 40 */ 
+Pin 29 = Z80_WAIT; /* MC 38 */ 
+Pin 30 = VM_OE; /* MC 37 */ 
+Pin 31 = VM_WE; /* MC 35 */ 
+Pin 33 = VM_AD_CLR; /* MC 64 */ 
+Pin 34 = VM_AD_CLK; /* MC 61 */ 
+Pin 35 = VM_AD_CLKEN; /* MC 59 */ 
+Pin 36 = CP_VM_AD_OE; /* MC 57 */ 
+Pin 37 = VM_DATA_OE; /* MC 56 */ 
+Pin 39 = VM_DATA_LATCH; /* MC 53 */ 
+Pin 40 = CP_FM_DATA_OE; /* MC 51 */ 
+Pin 41 = CP_FM_DATA_DIR; /* MC 49 */ 
+Pin 44 = VM_AD_RCLK; /* MC 65 */ 
+Pin 45 = VM_AD_OE; /* MC 67 */ 
+Pin 46 = CP_VM_DW_OE; /* MC 69 */ 
+Pin 48 = CP_VM_DR_OE; /* MC 72 */ 
+Pin 49 = CP_VM_DR_LE; /* MC 73 */ 
+Pin 50 = DIN0; /* MC 75 */ 
+Pin 51 = DIN1; /* MC 77 */ 
+Pin 52 = DIN2; /* MC 80 */ 
+Pin 54 = DIN3; /* MC 83 */ 
+Pin 55 = DIN4; /* MC 85 */ 
+Pin 56 = DIN5; /* MC 86 */ 
+Pin 57 = DIN6; /* MC 88 */ 
+Pin 58 = DIN7; /* MC 91 */ 
+Pin 60 = NTSC_SYNC_OUT; /* MC 93 */ 
+Pin 61 = NTSC_PIXEL_OUT; /* MC 94 */ 
 Pin 62 = TCK; /* MC 96 */ 
+Pin 63 = VGA_HSYNC_OUT; /* MC 97 */ 
+Pin 64 = VGA_VSYNC_OUT; /* MC 99 */ 
+Pin 65 = VGA_VIDEO_OUT; /* MC 101 */ 
+Pin 67 = CPU_D0; /* MC 104 */ 
+Pin 68 = CPU_D1; /* MC 105 */ 
+Pin 69 = CPU_D2; /* MC 107 */ 
+Pin 70 = CPU_D3; /* MC 109 */ 
 Pin 71 = TDO; /* MC 112 */ 
+Pin 73 = CPU_D4; /* MC 115 */ 
+Pin 74 = CPU_D5; /* MC 117 */ 
+Pin 75 = CPU_D6; /* MC 118 */ 
+Pin 76 = CPU_D7; /* MC 120 */ 
+Pin 77 = VID_CPLD_5; /* MC 123 */ 
+Pin 79 = VID_CPLD_4; /* MC 125 */ 
+Pin 81 = CPU_2KPAGE_A10; /* MC 128 */ 
 Pin 83 = CLK_25M;
-PINNODE 310 = VSYNC_ZERO; /* MC 10 Foldback */
-PINNODE 332 = VSYNC_ZERO; /* MC 32 Foldback */
-PINNODE 346 = FB_231; /* MC 46 Foldback */
-PINNODE 347 = FB_230; /* MC 47 Foldback */
+Pin 84 = VID_IO_CS;
+PINNODE 313 = VSYNC_ZERO; /* MC 13 Foldback */
+PINNODE 325 = FB_349; /* MC 25 Foldback */
+PINNODE 327 = FB_348; /* MC 27 Foldback */
+PINNODE 329 = VSYNC_ZERO; /* MC 29 Foldback */
 PINNODE 601 = VSYNC_COUNTER0; /* MC 1 Feedback */
 PINNODE 602 = VSYNC_COUNTER1; /* MC 2 Feedback */
-PINNODE 604 = VSYNC_COUNTER4; /* MC 4 Feedback */
-PINNODE 606 = VSYNC_COUNTER5; /* MC 6 Feedback */
-PINNODE 608 = VSYNC_COUNTER6; /* MC 8 Feedback */
-PINNODE 609 = VSYNC_COUNTER2; /* MC 9 Feedback */
-PINNODE 611 = VSYNC_COUNTER7; /* MC 11 Feedback */
-PINNODE 613 = VSYNC_COUNTER8; /* MC 13 Feedback */
-PINNODE 615 = VSYNC_COUNTER3; /* MC 15 Feedback */
-PINNODE 623 = VSYNC_DISPLAY_ACTIVE; /* MC 23 Feedback */
-PINNODE 626 = CLK_12M; /* MC 26 Feedback */
-PINNODE 632 = VSYNC_COUNTER9; /* MC 32 Feedback */
-PINNODE 633 = CPU_VRAM_CS_GNT; /* MC 33 Feedback */
-PINNODE 634 = VRAM_SHARED_STATE; /* MC 34 Feedback */
-PINNODE 636 = VDP_VRAM_CS_GNT; /* MC 36 Feedback */
-PINNODE 639 = VDP_VRAM_CS_EDGE; /* MC 39 Feedback */
-PINNODE 642 = HSYNC_COUNTER5; /* MC 42 Feedback */
-PINNODE 644 = CPU_VRAM_CS_EDGE; /* MC 44 Feedback */
+PINNODE 604 = VSYNC_COUNTER5; /* MC 4 Feedback */
+PINNODE 607 = VSYNC_COUNTER2; /* MC 7 Feedback */
+PINNODE 609 = VSYNC_COUNTER6; /* MC 9 Feedback */
+PINNODE 610 = XXL_361; /* MC 10 Feedback */
+PINNODE 612 = VSYNC_COUNTER3; /* MC 12 Feedback */
+PINNODE 615 = VSYNC_COUNTER8; /* MC 15 Feedback */
+PINNODE 616 = VSYNC_COUNTER7; /* MC 16 Feedback */
+PINNODE 617 = VCONFB6; /* MC 17 Feedback */
+PINNODE 618 = VSYNC_DISPLAY_ACTIVE; /* MC 18 Feedback */
+PINNODE 620 = VDP_VRAM_CS_EDGE; /* MC 20 Feedback */
+PINNODE 622 = CPU_VRAM_CS_EDGE; /* MC 22 Feedback */
+PINNODE 623 = XXL_365; /* MC 23 Feedback */
+PINNODE 626 = XXL_350; /* MC 26 Feedback */
+PINNODE 628 = XXL_363; /* MC 28 Feedback */
+PINNODE 630 = XXL_364; /* MC 30 Feedback */
+PINNODE 631 = XXL_360; /* MC 31 Feedback */
+PINNODE 632 = XXL_362; /* MC 32 Feedback */
+PINNODE 633 = VSYNC_CLOCK_A; /* MC 33 Feedback */
+PINNODE 634 = VCONFB2; /* MC 34 Feedback */
+PINNODE 636 = VCONFB3; /* MC 36 Feedback */
+PINNODE 639 = VCONFB1; /* MC 39 Feedback */
+PINNODE 641 = VCONFB0; /* MC 41 Feedback */
+PINNODE 642 = HSYNC_COUNTER6; /* MC 42 Feedback */
+PINNODE 644 = XXL_358; /* MC 44 Feedback */
+PINNODE 647 = XXL_356; /* MC 47 Feedback */
 PINNODE 648 = HSYNC_COUNTER7; /* MC 48 Feedback */
-PINNODE 649 = VSYNC_CLOCK_A; /* MC 49 Feedback */
-PINNODE 650 = SHIFTREG5; /* MC 50 Feedback */
-PINNODE 651 = SHIFTREG2; /* MC 51 Feedback */
-PINNODE 652 = SHIFTREG3; /* MC 52 Feedback */
-PINNODE 653 = SHIFTREG4; /* MC 53 Feedback */
-PINNODE 654 = SHIFTREG1; /* MC 54 Feedback */
-PINNODE 656 = HSYNC_COUNTER4; /* MC 56 Feedback */
-PINNODE 658 = HSYNC_COUNTER6; /* MC 58 Feedback */
-PINNODE 661 = HSYNC_COUNTER8; /* MC 61 Feedback */
-PINNODE 664 = HSYNC_COUNTER9; /* MC 64 Feedback */
-PINNODE 666 = HSYNC_COUNTER0; /* MC 66 Feedback */
-PINNODE 668 = SHIFTREG0; /* MC 68 Feedback */
-PINNODE 670 = FONTLINE_RESET; /* MC 70 Feedback */
-PINNODE 671 = HSYNC_COUNTER1; /* MC 71 Feedback */
-PINNODE 674 = HSYNC_COUNTER2; /* MC 74 Feedback */
-PINNODE 676 = HSYNC_COUNTER3; /* MC 76 Feedback */
-PINNODE 678 = SHIFTREG7; /* MC 78 Feedback */
-PINNODE 679 = SHIFTREG6; /* MC 79 Feedback */
-PINNODE 680 = VSYNC_CLOCK_B; /* MC 80 Feedback */
+PINNODE 650 = VDP_VRAM_CS_GNT; /* MC 50 Feedback */
+PINNODE 652 = VRAM_SHARED_STATE; /* MC 52 Feedback */
+PINNODE 654 = CPU_VRAM_CS_GNT; /* MC 54 Feedback */
+PINNODE 655 = HSYNC_COUNTER5; /* MC 55 Feedback */
+PINNODE 658 = SHIFTREG1; /* MC 58 Feedback */
+PINNODE 660 = SHIFTREG2; /* MC 60 Feedback */
+PINNODE 662 = XXL_357; /* MC 62 Feedback */
+PINNODE 663 = XXL_359; /* MC 63 Feedback */
+PINNODE 666 = VCONFB5; /* MC 66 Feedback */
+PINNODE 668 = VCONFB4; /* MC 68 Feedback */
+PINNODE 670 = VCONFB7; /* MC 70 Feedback */
+PINNODE 671 = XXL_351; /* MC 71 Feedback */
+PINNODE 674 = HSYNC_COUNTER3; /* MC 74 Feedback */
+PINNODE 675 = XXL_353; /* MC 75 Feedback */
+PINNODE 676 = SHIFTREG7; /* MC 76 Feedback */
+PINNODE 677 = XXL_352; /* MC 77 Feedback */
+PINNODE 678 = SHIFTREG5; /* MC 78 Feedback */
+PINNODE 679 = SHIFTREG4; /* MC 79 Feedback */
+PINNODE 680 = SHIFTREG3; /* MC 80 Feedback */
+PINNODE 691 = CLK_12M; /* MC 91 Feedback */
+PINNODE 692 = HSYNC_COUNTER9; /* MC 92 Feedback */
+PINNODE 695 = XXL_354; /* MC 95 Feedback */
+PINNODE 696 = XXL_355; /* MC 96 Feedback */
+PINNODE 702 = VSYNC_COUNTER4; /* MC 102 Feedback */
+PINNODE 703 = VSYNC_CLOCK_B; /* MC 103 Feedback */
+PINNODE 704 = HSYNC_COUNTER0; /* MC 104 Feedback */
+PINNODE 705 = HSYNC_COUNTER4; /* MC 105 Feedback */
+PINNODE 706 = SHIFTREG0; /* MC 106 Feedback */
+PINNODE 707 = FONTLINE_RESET; /* MC 107 Feedback */
+PINNODE 708 = VSYNC_COUNTER9; /* MC 108 Feedback */
+PINNODE 709 = HSYNC_COUNTER8; /* MC 109 Feedback */
+PINNODE 710 = HSYNC_COUNTER1; /* MC 110 Feedback */
+PINNODE 711 = HSYNC_COUNTER2; /* MC 111 Feedback */
+PINNODE 712 = SHIFTREG6; /* MC 112 Feedback */
 
 ** Resource Usage **
 
@@ -854,160 +1232,160 @@ DCERP Field = Summary of Allocations.
 
 For input only = INPUT.
 
-MCell Pin# Oe   PinDrive       DCERP  FBDrive              DCERP  Foldback   CascadeOut              TotPT output_slew
-MC1   0         --                    VSYNC_COUNTER0       Dc-g-  --         --                      2     slow
-MC2   0         --                    VSYNC_COUNTER1       Dc-g-  --         --                      3     slow
-MC3   12   --   VID_RW         INPUT  --                          --         -> VSYNC_COUNTER4       5     slow
-MC4   0         --                    VSYNC_COUNTER4       Dc-g-  --         --                      1     slow
-MC5   11   --   VID_CPLD_5     INPUT  --                          --         -> VSYNC_COUNTER5       5     slow
-MC6   10        --                    VSYNC_COUNTER5       Dc-g-  --         --                      2     slow
-MC7   0         --                    --                          --         -> VSYNC_COUNTER6       5     slow
-MC8   9         --                    VSYNC_COUNTER6       Dc-g-  --         --                      3     slow
-MC9   0         --                    VSYNC_COUNTER2       Dc-g-  --         --                      4     slow
-MC10  0         --                    --                          VSYNC_ZERO -> VSYNC_COUNTER7       5     slow
-MC11  8         --                    VSYNC_COUNTER7       Dc-g-  NA         --                      5     slow
-MC12  0         --                    --                          NA         -> VSYNC_COUNTER8       5     slow
-MC13  6         --                    VSYNC_COUNTER8       Dc-g-  NA         --                      5     slow
-MC14  5    on   FONTLINE3      Dc---  --                          NA         --                      5     slow
-MC15  0         --                    VSYNC_COUNTER3       Dc-g-  NA         --                      5     slow
-MC16  4    on   NTSC_SYNC_OUT  Dc--p  --                          NA         --                      5     slow
-MC17  22   --   DIN1           INPUT  --                          --         --                      0     slow
-MC18  0         --                    --                          --         --                      0     slow
-MC19  21   --   DIN3           INPUT  --                          --         --                      0     slow
-MC20  0         --                    --                          --         --                      0     slow
-MC21  20   on   VM_DATA_OE     C----  --                          --         --                      0     slow
-MC22  0         --                    --                          --         -> VSYNC_DISPLAY_ACTIVE 5     slow
-MC23  0         --                    VSYNC_DISPLAY_ACTIVE C----  --         --                      1     slow
-MC24  18   on   FONTLINE0      Dc---  --                          --         --                      2     slow
-MC25  17   on   FONTLINE1      Dc---  --                          --         --                      3     slow
-MC26  0         --                    CLK_12M              Dg-g-  --         --                      1     slow
-MC27  16   on   FONTLINE2      Dc---  --                          --         --                      4     slow
-MC28  0         --                    --                          --         -> NTSC_PIXEL_OUT       5     slow
-MC29  15   on   NTSC_PIXEL_OUT Dc-g-  --                          --         --                      3     slow
-MC30  0         --                    --                          --         -> VSYNC_COUNTER9       5     slow
-MC31  0         --                    --                          --         -> VSYNC_COUNTER9       5     slow
-MC32  14   --   TDI            INPUT  VSYNC_COUNTER9       Dc-g-  VSYNC_ZERO --                      2     slow
-MC33  0         --                    CPU_VRAM_CS_GNT      Dc---  --         --                      2     slow
-MC34  0         --                    VRAM_SHARED_STATE    Dc---  --         --                      2     slow
-MC35  31   on   VID_CPLD_4     C----  --                          --         --                      1     slow
-MC36  0         --                    VDP_VRAM_CS_GNT      Dc---  --         --                      1     slow
-MC37  30   on   VM_AD_OE       C----  --                          --         --                      1     slow
-MC38  29   on   VM_DATA_LATCH  C----  --                          --         --                      1     slow
-MC39  0         --                    VDP_VRAM_CS_EDGE     D---p  --         --                      1     slow
-MC40  28   on   CP_VM_DR_OE    C----  --                          --         --                      1     slow
-MC41  0         --                    --                          --         -> HSYNC_COUNTER5       5     slow
-MC42  0         --                    HSYNC_COUNTER5       Dc-g-  --         --                      3     slow
-MC43  27   on   CP_VM_AD_OE    C----  --                          --         --                      1     slow
-MC44  0         --                    CPU_VRAM_CS_EDGE     Dg--p  --         --                      1     slow
-MC45  25   on   CP_VM_DR_LE    C----  --                          --         --                      1     slow
-MC46  24   on   CP_VM_DW_OE    C----  --                          FB_231     --                      2     slow
-MC47  0         --                    --                          FB_230     -> HSYNC_COUNTER7       5     slow
-MC48  23   --   TMS            INPUT  HSYNC_COUNTER7       Dc-g-  NA         --                      5     slow
-MC49  41        --                    VSYNC_CLOCK_A        Dc-g-  --         --                      2     slow
-MC50  0         --                    SHIFTREG5            Dc-g-  NA         --                      5     slow
-MC51  40        --                    SHIFTREG2            Dc-g-  NA         --                      5     slow
-MC52  0         --                    SHIFTREG3            Dc-g-  NA         --                      5     slow
-MC53  39        --                    SHIFTREG4            Dc-g-  NA         --                      5     slow
-MC54  0         --                    SHIFTREG1            Dc-g-  NA         --                      5     slow
-MC55  0         --                    --                          --         -> HSYNC_COUNTER4       5     slow
-MC56  37        --                    HSYNC_COUNTER4       Dc-g-  --         --                      1     slow
-MC57  36   --   DIN5           INPUT  --                          --         -> HSYNC_COUNTER6       5     slow
-MC58  0         --                    HSYNC_COUNTER6       Dc-g-  --         --                      3     slow
-MC59  35   --   DIN4           INPUT  --                          --         -> HSYNC_COUNTER8       5     slow
-MC60  0         --                    --                          --         -> HSYNC_COUNTER8       5     slow
-MC61  34        --                    HSYNC_COUNTER8       Dc-g-  --         --                      1     slow
-MC62  0         --                    --                          --         -> HSYNC_COUNTER9       5     slow
-MC63  0         --                    --                          --         -> HSYNC_COUNTER9       5     slow
-MC64  33        --                    HSYNC_COUNTER9       Dc-g-  --         --                      2     slow
-MC65  44   --   DIN2           INPUT  --                          --         --                      0     slow
-MC66  0         --                    HSYNC_COUNTER0       Dc-g-  --         --                      2     slow
-MC67  45   --   DIN6           INPUT  --                          --         --                      0     slow
-MC68  0         --                    SHIFTREG0            Dc-g-  --         --                      2     slow
-MC69  46   --   DIN7           INPUT  --                          --         --                      0     slow
-MC70  0         --                    FONTLINE_RESET       C----  --         --                      2     slow
-MC71  0         --                    HSYNC_COUNTER1       Dc-g-  --         --                      3     slow
-MC72  48   --   DIN0           INPUT  --                          --         --                      0     slow
-MC73  49        --                    --                          --         --                      0     slow
-MC74  0         --                    HSYNC_COUNTER2       Dc-g-  --         --                      4     slow
-MC75  50        --                    --                          --         --                      0     slow
-MC76  0         --                    HSYNC_COUNTER3       Dc-g-  NA         --                      5     slow
-MC77  51        --                    --                          --         --                      0     slow
-MC78  0         --                    SHIFTREG7            Dc-g-  NA         --                      5     slow
-MC79  0         --                    SHIFTREG6            Dc-g-  NA         --                      5     slow
-MC80  52        --                    VSYNC_CLOCK_B        Dc-g-  --         --                      2     slow
-MC81  0         --                    --                          --         --                      0     slow
-MC82  0         --                    --                          --         --                      0     slow
-MC83  54        --                    --                          --         --                      0     slow
-MC84  0         --                    --                          --         --                      0     slow
-MC85  55        --                    --                          --         --                      0     slow
-MC86  56        --                    --                          --         --                      0     slow
-MC87  0         --                    --                          --         --                      0     slow
-MC88  57        --                    --                          --         --                      0     slow
-MC89  0         --                    --                          --         --                      0     slow
-MC90  0         --                    --                          --         --                      0     slow
-MC91  58        --                    --                          --         --                      0     slow
-MC92  0         --                    --                          --         --                      0     slow
-MC93  60        --                    --                          --         --                      0     slow
-MC94  61        --                    --                          --         --                      0     slow
-MC95  0         --                    --                          --         --                      0     slow
-MC96  62   --   TCK            INPUT  --                          --         --                      0     slow
-MC97  63        --                    --                          --         --                      0     slow
-MC98  0         --                    --                          --         --                      0     slow
-MC99  64        --                    --                          --         --                      0     slow
-MC100 0         --                    --                          --         --                      0     slow
-MC101 65        --                    --                          --         --                      0     slow
-MC102 0         --                    --                          --         --                      0     slow
-MC103 0         --                    --                          --         --                      0     slow
-MC104 67        --                    --                          --         --                      0     slow
-MC105 68        --                    --                          --         --                      0     slow
-MC106 0         --                    --                          --         --                      0     slow
-MC107 69        --                    --                          --         --                      0     slow
-MC108 0         --                    --                          --         --                      0     slow
-MC109 70        --                    --                          --         --                      0     slow
-MC110 0         --                    --                          --         --                      0     slow
-MC111 0         --                    --                          --         --                      0     slow
-MC112 71   --   TDO            INPUT  --                          --         --                      0     slow
-MC113 0         --                    --                          --         --                      0     slow
-MC114 0         --                    --                          --         --                      0     slow
-MC115 73        --                    --                          --         --                      0     slow
-MC116 0         --                    --                          --         --                      0     slow
-MC117 74        --                    --                          --         --                      0     slow
-MC118 75        --                    --                          --         --                      0     slow
-MC119 0         --                    --                          --         --                      0     slow
-MC120 76        --                    --                          --         --                      0     slow
-MC121 0         --                    --                          --         --                      0     slow
-MC122 0         --                    --                          --         --                      0     slow
-MC123 77        --                    --                          --         --                      0     slow
-MC124 0         --                    --                          --         --                      0     slow
-MC125 79        --                    --                          --         --                      0     slow
-MC126 80        --                    --                          --         --                      0     slow
-MC127 0         --                    --                          --         --                      0     slow
-MC128 81        --                    --                          --         --                      0     slow
-MC0   2         VID_MEM_CS     INPUT  --                          --         --                      0     slow
-MC0   1         RESET_IN       INPUT  --                          --         --                      0     slow
-MC0   84        --                    --                          --         --                      0     slow
-MC0   83        CLK_25M        INPUT  --                          --         --                      0     slow
+MCell Pin# Oe   PinDrive        DCERP  FBDrive              DCERP  Foldback   CascadeOut        TotPT output_slew
+MC1   0         --                     VSYNC_COUNTER0       Dc-g-  --         --                2     slow
+MC2   0         --                     VSYNC_COUNTER1       Dc-g-  --         --                3     slow
+MC3   12   on   FONTSEL1        D--g-  --                          --         --                1     slow
+MC4   0         --                     VSYNC_COUNTER5       Dc-g-  --         --                3     slow
+MC5   11   on   FONTSEL0        D--g-  --                          --         --                1     slow
+MC6   10   on   FONTLINE3       Dc---  --                          NA         --                5     slow
+MC7   0         --                     VSYNC_COUNTER2       Dc-g-  --         --                4     slow
+MC8   9    on   FONTLINE2       Dc---  --                          --         --                4     slow
+MC9   0         --                     VSYNC_COUNTER6       Dc-g-  --         --                4     slow
+MC10  0         --                     XXL_361              C----  NA         --                5     slow
+MC11  8    on   FONTLINE1       Dc---  --                          --         --                3     slow
+MC12  0         --                     VSYNC_COUNTER3       Dc-g-  NA         --                5     slow
+MC13  6    on   FONTLINE0       Dc---  --                          VSYNC_ZERO --                3     slow
+MC14  5    --   VID_RW          INPUT  --                          NA         -> VSYNC_COUNTER8 5     slow
+MC15  0         --                     VSYNC_COUNTER8       Dc-g-  NA         --                5     slow
+MC16  4    --   VID_MEM_CS      INPUT  VSYNC_COUNTER7       Dc-g-  NA         --                5     slow
+MC17  22   --   VID_80X25MEM_CS INPUT  VCONFB6              Dc-g-  --         --                2     slow
+MC18  0         --                     VSYNC_DISPLAY_ACTIVE C----  --         --                2     slow
+MC19  21   on   CPU_A3          C----  --                          --         --                0     slow
+MC20  0         --                     VDP_VRAM_CS_EDGE     D---p  --         --                1     slow
+MC21  20   on   CPU_A2          C----  --                          --         --                0     slow
+MC22  0         --                     CPU_VRAM_CS_EDGE     Dc--p  --         --                2     slow
+MC23  0         --                     XXL_365              C----  NA         --                5     slow
+MC24  18   on   CPU_A1          C----  --                          --         --                0     slow
+MC25  17   on   CPU_A0          C----  --                          FB_349     --                1     slow
+MC26  0         --                     XXL_350              C----  NA         --                5     slow
+MC27  16   on   FONTSEL3        D--g-  --                          FB_348     --                2     slow
+MC28  0         --                     XXL_363              C----  NA         --                5     slow
+MC29  15   on   FONTSEL2        D--g-  --                          VSYNC_ZERO --                2     slow
+MC30  0         --                     XXL_364              C----  NA         --                5     slow
+MC31  0         --                     XXL_360              C----  NA         --                5     slow
+MC32  14   --   TDI             INPUT  XXL_362              C----  NA         --                5     slow
+MC33  0         --                     VSYNC_CLOCK_A        Dc-g-  --         --                2     slow
+MC34  0         --                     VCONFB2              Dc-g-  --         --                2     slow
+MC35  31   on   VM_WE           C----  --                          --         --                0     slow
+MC36  0         --                     VCONFB3              Dc-g-  --         --                2     slow
+MC37  30   on   VM_OE           C----  --                          --         --                0     slow
+MC38  29   on   Z80_WAIT        C----  --                          --         --                0     slow
+MC39  0         --                     VCONFB1              Dc-g-  --         --                2     slow
+MC40  28   on   VM_PAGE3        D--g-  --                          --         --                1     slow
+MC41  0         --                     VCONFB0              Dc-g-  --         --                2     slow
+MC42  0         --                     HSYNC_COUNTER6       Dc-g-  --         --                4     slow
+MC43  27   on   VM_PAGE2        D--g-  --                          --         --                1     slow
+MC44  0         --                     XXL_358              C----  NA         --                5     slow
+MC45  25   on   VM_PAGE1        D--g-  --                          --         --                1     slow
+MC46  24   on   VM_PAGE0        D--g-  --                          --         --                1     slow
+MC47  0         --                     XXL_356              C----  NA         --                5     slow
+MC48  23   --   TMS             INPUT  HSYNC_COUNTER7       Dc-g-  NA         --                5     slow
+MC49  41   on   CP_FM_DATA_DIR  C----  --                          --         --                0     slow
+MC50  0         --                     VDP_VRAM_CS_GNT      Dc---  --         --                1     slow
+MC51  40   on   CP_FM_DATA_OE   C----  --                          --         --                0     slow
+MC52  0         --                     VRAM_SHARED_STATE    Dc---  --         --                2     slow
+MC53  39   on   VM_DATA_LATCH   C----  --                          --         --                1     slow
+MC54  0         --                     CPU_VRAM_CS_GNT      Dc---  --         --                2     slow
+MC55  0         --                     HSYNC_COUNTER5       Dc-g-  --         --                4     slow
+MC56  37   on   VM_DATA_OE      C----  --                          --         --                0     slow
+MC57  36   on   CP_VM_AD_OE     C----  --                          --         --                1     slow
+MC58  0         --                     SHIFTREG1            Dc-g-  NA         --                5     slow
+MC59  35   on   VM_AD_CLKEN     C----  --                          --         --                0     slow
+MC60  0         --                     SHIFTREG2            Dc-g-  NA         --                5     slow
+MC61  34   on   VM_AD_CLK       C----  --                          --         --                0     slow
+MC62  0         --                     XXL_357              C----  NA         --                5     slow
+MC63  0         --                     XXL_359              C----  NA         --                5     slow
+MC64  33   on   VM_AD_CLR       C----  --                          --         --                0     slow
+MC65  44   on   VM_AD_RCLK      C----  --                          --         --                0     slow
+MC66  0         --                     VCONFB5              Dc-g-  --         --                2     slow
+MC67  45   on   VM_AD_OE        C----  --                          --         --                1     slow
+MC68  0         --                     VCONFB4              Dc-g-  --         --                2     slow
+MC69  46   on   CP_VM_DW_OE     C----  --                          --         --                1     slow
+MC70  0         --                     VCONFB7              Dc-g-  --         --                2     slow
+MC71  0         --                     XXL_351              C----  NA         --                5     slow
+MC72  48   on   CP_VM_DR_OE     C----  --                          --         --                1     slow
+MC73  49   on   CP_VM_DR_LE     C----  --                          --         --                1     slow
+MC74  0         --                     HSYNC_COUNTER3       Dc-g-  NA         --                5     slow
+MC75  50   --   DIN0            INPUT  XXL_353              C----  NA         --                5     slow
+MC76  0         --                     SHIFTREG7            Dc-g-  NA         --                5     slow
+MC77  51   --   DIN1            INPUT  XXL_352              C----  NA         --                5     slow
+MC78  0         --                     SHIFTREG5            Dc-g-  NA         --                5     slow
+MC79  0         --                     SHIFTREG4            Dc-g-  NA         --                5     slow
+MC80  52   --   DIN2            INPUT  SHIFTREG3            Dc-g-  NA         --                5     slow
+MC81  0         --                     --                          --         --                0     slow
+MC82  0         --                     --                          --         --                0     slow
+MC83  54   --   DIN3            INPUT  --                          --         --                0     slow
+MC84  0         --                     --                          --         --                0     slow
+MC85  55   --   DIN4            INPUT  --                          --         --                0     slow
+MC86  56   --   DIN5            INPUT  --                          --         --                0     slow
+MC87  0         --                     --                          --         --                0     slow
+MC88  57   --   DIN6            INPUT  --                          --         --                0     slow
+MC89  0         --                     --                          --         --                0     slow
+MC90  0         --                     --                          --         --                0     slow
+MC91  58   --   DIN7            INPUT  CLK_12M              Dg-g-  --         --                1     slow
+MC92  0         --                     HSYNC_COUNTER9       Dc-g-  --         --                4     slow
+MC93  60   on   NTSC_SYNC_OUT   Dc--p  --                          NA         --                5     slow
+MC94  61   on   NTSC_PIXEL_OUT  Dc-g-  --                          --         --                4     slow
+MC95  0         --                     XXL_354              C----  NA         --                5     slow
+MC96  62   --   TCK             INPUT  XXL_355              C----  NA         --                5     slow
+MC97  63   on   VGA_HSYNC_OUT   C----  --                          --         --                0     slow
+MC98  0         --                     --                          --         --                0     slow
+MC99  64   on   VGA_VSYNC_OUT   C----  --                          --         --                0     slow
+MC100 0         --                     --                          --         --                0     slow
+MC101 65   on   VGA_VIDEO_OUT   C----  --                          --         --                0     slow
+MC102 0         --                     VSYNC_COUNTER4       Dc-g-  --         --                2     slow
+MC103 0         --                     VSYNC_CLOCK_B        Dc-g-  --         --                2     slow
+MC104 67   --   CPU_D0          INPUT  HSYNC_COUNTER0       Dc-g-  --         --                2     slow
+MC105 68   --   CPU_D1          INPUT  HSYNC_COUNTER4       Dc-g-  --         --                2     slow
+MC106 0         --                     SHIFTREG0            Dc-g-  --         --                2     slow
+MC107 69   --   CPU_D2          INPUT  FONTLINE_RESET       C----  --         --                2     slow
+MC108 0         --                     VSYNC_COUNTER9       Dc-g-  --         --                3     slow
+MC109 70   --   CPU_D3          INPUT  HSYNC_COUNTER8       Dc-g-  --         --                3     slow
+MC110 0         --                     HSYNC_COUNTER1       Dc-g-  --         --                3     slow
+MC111 0         --                     HSYNC_COUNTER2       Dc-g-  --         --                4     slow
+MC112 71   --   TDO             INPUT  SHIFTREG6            Dc-g-  NA         --                5     slow
+MC113 0         --                     --                          --         --                0     slow
+MC114 0         --                     --                          --         --                0     slow
+MC115 73   --   CPU_D4          INPUT  --                          --         --                0     slow
+MC116 0         --                     --                          --         --                0     slow
+MC117 74   --   CPU_D5          INPUT  --                          --         --                0     slow
+MC118 75   --   CPU_D6          INPUT  --                          --         --                0     slow
+MC119 0         --                     --                          --         --                0     slow
+MC120 76   --   CPU_D7          INPUT  --                          --         --                0     slow
+MC121 0         --                     --                          --         --                0     slow
+MC122 0         --                     --                          --         --                0     slow
+MC123 77   --   VID_CPLD_5      INPUT  --                          --         --                0     slow
+MC124 0         --                     --                          --         --                0     slow
+MC125 79   on   VID_CPLD_4      C----  --                          --         --                1     slow
+MC126 80        --                     --                          --         --                0     slow
+MC127 0         --                     --                          --         --                0     slow
+MC128 81   on   CPU_2KPAGE_A10  C----  --                          --         --                0     slow
+MC0   2         V64OR32MODE     INPUT  --                          --         --                0     slow
+MC0   1         RESET_IN        INPUT  --                          --         --                0     slow
+MC0   84        VID_IO_CS       INPUT  --                          --         --                0     slow
+MC0   83        CLK_25M         INPUT  --                          --         --                0     slow
 
 Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
-A: LC1	- LC16		11/16(68%)	4/16(25%)	1/16(6%)	65/80(81%)	(22)	5
-B: LC17	- LC32		8/16(50%)	8/16(50%)	1/16(6%)	36/80(45%)	(25)	4
-C: LC33	- LC48		14/16(87%)	8/16(50%)	2/16(12%)	33/80(41%)	(18)	2
-D: LC49	- LC64		10/16(62%)	2/16(12%)	0/16(0%)	64/80(80%)	(21)	6
-E: LC65	- LC80		9/16(56%)	4/16(25%)	0/16(0%)	30/80(37%)	(16)	0
-F: LC81	- LC96		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	(0)	0
-G: LC97	- LC112		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	(0)	0
-H: LC113- LC128		0/16(0%)	0/16(0%)	0/16(0%)	0/80(0%)	(0)	0
+A: LC1	- LC16		15/16(93%)	8/16(50%)	1/16(6%)	58/80(72%)	(21)	1
+B: LC17	- LC32		16/16(100%)	8/16(50%)	3/16(18%)	42/80(52%)	(19)	0
+C: LC33	- LC48		16/16(100%)	8/16(50%)	0/16(0%)	33/80(41%)	(19)	0
+D: LC49	- LC64		16/16(100%)	8/16(50%)	0/16(0%)	31/80(38%)	(22)	0
+E: LC65	- LC80		16/16(100%)	8/16(50%)	0/16(0%)	50/80(62%)	(25)	0
+F: LC81	- LC96		6/16(37%)	8/16(50%)	0/16(0%)	24/80(30%)	(25)	0
+G: LC97	- LC112		14/16(87%)	8/16(50%)	0/16(0%)	30/80(37%)	(20)	0
+H: LC113- LC128		2/16(12%)	7/16(43%)	0/16(0%)	1/80(1%)	(4)	0
 
-Total dedicated input used:	3/4 	(75%)
-Total I/O pins used		28/64 	(43%)
-Total Logic cells used 		69/128 	(53%)
-Total Flip-Flop used 		42/128 	(32%)
+Total dedicated input used:	4/4 	(100%)
+Total I/O pins used		63/64 	(98%)
+Total Logic cells used 		102/128 	(79%)
+Total Flip-Flop used 		58/128 	(45%)
 Total Foldback logic used 	4/128 	(3%)
-Total Nodes+FB/MCells 		56/128 	(43%)
-Total cascade used 		17
-Total input pins 		17
-Total output pins 		14
-Total Pts 			228
+Total Nodes+FB/MCells 		105/128 	(82%)
+Total cascade used 		1
+Total input pins 		28
+Total output pins 		39
+Total Pts 			269
 Creating pla file C:\VIDEODRVB.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
