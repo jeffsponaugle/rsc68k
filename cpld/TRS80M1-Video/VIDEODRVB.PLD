@@ -34,10 +34,12 @@ Pin[24,25,27,28]  = [VM_PAGE0..3];         /* The visable page (1k) of VRAM in C
 Pin[29] = Z80_WAIT;
 Pin[30] = VM_OE;
 Pin[31] = VM_WE;
+Pin[79] = FM_OE;
+Pin[77] = FM_WE;
 Pin[33] = VM_AD_CLR;
 Pin[34] = VM_AD_CLK;
 Pin[35] = VM_AD_CLKEN;
-Pin[36]= CP_VM_AD_OE;
+Pin[36] = CP_VM_AD_OE;
 Pin[37] = VM_DATA_OE;
 Pin[39] = VM_DATA_LATCH;
 Pin[40] = CP_FM_DATA_OE;
@@ -53,13 +55,12 @@ Pin[49] = CP_VM_DR_LE;
 Pin[50,51,52,54,55,56,57,58]  = [DIN0..7];             /* FM_D0-FM_D7 */
 Pin[81]  = CPU_2KPAGE_A10;        /* Line A10 from CPU used if we are accessing in the 2K mapping */        
 Pin[67,68,69,70,73,74,75,76]  = [CPU_D0..7];           /* Data input bits from CPU for writing to config registers */
-Pin[77] = VID_CPLD_5;
-Pin[79] = VID_CPLD_4;
+Pin[80] = VID_CPLD_4;
 
 
 /* Force Pin Assignment */
 
-VID_CPLD_4 = VID_CPLD_5 # V64OR32MODE # VID_IO_CS # VID_80X25MEM_CS;
+VID_CPLD_4 = V64OR32MODE # VID_IO_CS # VID_80X25MEM_CS;
 
 [CPU_A0..3] = 'b'1;
 CPU_2KPAGE_A10 = 'b'1;
@@ -67,8 +68,9 @@ VGA_HSYNC_OUT = 'b'1;
 VGA_VSYNC_OUT = 'b'1;
 VGA_VIDEO_OUT = 'b'1;
 Z80_WAIT = 'b'1;
-VM_OE = 'b'1;
-VM_WE = 'b'1;
+
+
+FM_WE = 'b'1;
 VM_AD_CLR = 'b'1;
 VM_AD_CLK = 'b'1;
 VM_AD_CLKEN = 'b'1;
@@ -88,7 +90,7 @@ NODE CPU_VRAM_CS_EDGE, CPU_VRAM_CS_GNT;
 NODE VDP_VRAM_CS_GNT, VDP_VRAM_CS_EDGE;
 NODE VRAM_SHARED_STATE;
 
-/* local variable that defines who has access */
+/* local variable that defines who has access.  Active low so ==0 means access */
 
 CPU_ACCESS_GRANTED = CPU_VRAM_CS_GNT # VRAM_SHARED_STATE;
 VDP_ACCESS_GRANTED = VDP_VRAM_CS_GNT # !VRAM_SHARED_STATE;
@@ -97,28 +99,120 @@ VDP_ACCESS_GRANTED = VDP_VRAM_CS_GNT # !VRAM_SHARED_STATE;
 VRAM_SHARED_STATE.d = !VRAM_SHARED_STATE;
 VRAM_SHARED_STATE.ck = CLK_12M;
 /* The other flip flops for memory access */
+
+/*  
+    CPU_VRAM_CS_EDGE captures the falling edge of the VID_MEM_CS signal.  This captured
+    edge is then fed into the CPU_VRAM_CS_GNT flipflop which is clocked when the SHARED_STATE
+    state machine enters the CPU-access state.   If the VDP_OR_FONT_ACCESS bit is set to 1, we
+    will ignore any VID_MEM_CS activity since that activity is destined for the font memory. 
+    On RESET both of these flipflops are set to 1.
+    The EDGE flopflip is reset to 1 as soon as CPU_ACCESS_GRANTED goes low, which happens at the 
+    start of a state machine cycle where the CPU access is taking place.
+*/
 CPU_VRAM_CS_EDGE.ck = !VID_MEM_CS;
 CPU_VRAM_CS_EDGE.d = 'b'0;
-CPU_VRAM_CS_EDGE.ap = CPU_ACCESS_GRANTED;
+CPU_VRAM_CS_EDGE.ap = !CPU_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
 
 CPU_VRAM_CS_GNT.ck = !VRAM_SHARED_STATE;
 CPU_VRAM_CS_GNT.d = CPU_VRAM_CS_EDGE;
+CPU_VRAM_CS_GNT.ap = !RESET_IN;
+
+/* 
+    VDP_VRAM_CS_EDGE captures the falling edge of the VID_VM_CS signal which is a signal from 
+    the video processor requesting access to video memory.  This captured edge is then fed into
+    the VDP_VRAM_CS_GNT flipflop which is clocked when the SHARED_STATE state machine enters the 
+    VDP-access cycle.  Like above, if the VDP_OR_FONT_ACCESS bit is set to 1, we will ignore any 
+    VID_VM_CS activity since we want all accesses to be reserved for CPU to font memory access.
+*/
+
 
 VDP_VRAM_CS_GNT.ck = VRAM_SHARED_STATE;
 VDP_VRAM_CS_GNT.d = VID_VM_CS;
 
 VDP_VRAM_CS_EDGE.ck = !VID_VM_CS;
 VDP_VRAM_CS_EDGE.d = 'b'0;
-VDP_VRAM_CS_EDGE.ap = VDP_ACCESS_GRANTED;
+VDP_VRAM_CS_EDGE.ap = !VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
 
+/* 
+   CP_VM_AD_OE enabled the address bus values to flow from the CPU to the video memory.
+   This set of buffers is enabled when we are in a CPU_ACCESS_GRANTED state. 
+*/
 CP_VM_AD_OE = CPU_ACCESS_GRANTED;
-CP_VM_DW_OE = CPU_ACCESS_GRANTED # VID_RW;
-CP_VM_DR_LE = !(CPU_ACCESS_GRANTED # !VID_RW);
-CP_VM_DR_OE = VID_MEM_CS # !VID_RW;
 
-VM_AD_OE =  VDP_ACCESS_GRANTED;
-VM_DATA_LATCH = !VDP_ACCESS_GRANTED;
-VM_DATA_OE = VID_VM_CS;
+/* 
+   CP_VM_DW_OE enabled the data bus values to flow from the CPU to the video memory
+   for a video write operation.
+   This set of buffers is enabled when we are in a CPU_ACCESS_GRANTED, we are doing a write, and
+   VDP_OR_FONT_ACCESS is ==0 (indicating video RAM access is allowed) 
+*/
+
+CP_VM_DW_OE = CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS;
+
+/* 
+   CP_VM_DR_LW is the latch input on the data buffers going to the CPU from video memory.  This latch
+   is 'latched' at the end of the CPU_ACCESS_GRANTED cycle where the VID_RW signal is ==1, indicating
+   a CPU read operation.  This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram 
+   access is disabled.
+
+   The signal is inverted because going from a 1 to 0 is what does the latch operation.
+*/
+
+CP_VM_DR_LE = !(CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS );
+
+/*
+   CP_VM_DR_OE is the output enable from the data latch used for reading from video memory.
+   This output enable is active is there is an active request from the CPU to video memory 
+   (VID_MEM_CS) and the operation is a READ, and VDP_OR_FONT_ACCESS=0 (indicating video ram 
+   access is enabled)
+*/
+CP_VM_DR_OE = VID_MEM_CS # !VID_RW # VDP_OR_FONT_ACCESS;
+
+/*
+   VM_AD_OE is the output enable for the address buffers that put video controller addresses
+   on the address bus of video memory.  It is enabled if we are doing a VDP_ACCESS_GRANTED cycle
+   but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+*/
+VM_AD_OE =  VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS;
+
+/*
+   VM_DATA_LATCH is the latch input on the data buffers going to the VDP from video memory.  This latch
+   is 'latched' at the end of the VDP_ACCESS_GRANTED cycle where the VID_RW signal is ==1, indicating
+   a CPU read operation.  This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram 
+   access is disabled.
+
+   The signal is inverted because going from a 1 to 0 is what does the latch operation.
+
+*/
+VM_DATA_LATCH = !(VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS);
+
+/* 
+   VM_DATA_OE is the output enable for teh data latch used fo reading video memory from the video display 
+   processor.   This output is enabled if the VID_VM_CS signal from the VDP is active, but disabled if 
+   VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+*/
+VM_DATA_OE = VID_VM_CS # VDP_OR_FONT_ACCESS;
+
+/* 
+   VM_OE - Enable the output drivers on the video RAM.  this should be enabled(==0):
+        (1) CPU_ACCESS_GRANTED==0 AND VID_RW==1
+        (2) VDP_ACCESS_GRANTED==0
+        but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+
+*/
+
+VM_OE = (CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS) & (VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS);
+
+/* VM_WE - Enable writing to video memory.  This should be enabled(==0):
+        (1) CPU_ACCESS_GRANTED==0 and VID_RW==0
+        but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+*/
+VM_WE = (CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS);
+
+/* FM_OE - Enable the output drivers of the font RAM.  This should be enabled(==0):
+           (1) If VDP_OR_FONT_ACCESS == 0, output should always be on.
+           (2) IF VDP_OR_FONT_ACCESS == 1, output should be on IF
+*/
+FM_OE = 'b'1;
 
 /* 
    Video Configuration Register A 
@@ -148,7 +242,14 @@ CLK_12M.ar = !RESET_IN;
 /*  
     Configuration Registers 
     CONFA is IO Write to 0x7A 
+        Bit 0-3: Video Memory Page Select (1K pages)
+        Bit 4-7: Font Memory Select (Pick font)
     CONFB is IO Write to 0x7B
+        Bit 0-5: Font Memory Page Select (1K pages)
+        Bit 6:
+        Bit 7: 0=Video RAM Visable, and VIDEO OUTPUT enabled.
+               1=Font RAM Visable to CPU, and VIDEO_OUTPUT disabled.
+               VDP_OR_FONT_ACCESS
     
 */
 
@@ -165,6 +266,8 @@ VCONFBWRITE = !VID_IO_CS & CPU_A0 & !CPU_A1 & !VID_RW;
 
 [FONTSEL0..3] = [VCONFA4..7]; /* Font Select output from config register A */
 [VM_PAGE0..3] = [VCONFA0..3]; /* Video Memory Page Select from config register A */
+
+VDP_OR_FONT_ACCESS = VCONFB7;
 
 /* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
 
@@ -435,15 +538,15 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
 
 
 Total dedicated input used:	4/4 	(100%)
-Total I/O pins used		63/64 	(98%)
-Total Logic cells used 		102/128 	(79%)
+Total I/O pins used		64/64 	(100%)
+Total Logic cells used 		106/128 	(82%)
 Total Flip-Flop used 		58/128 	(45%)
-Total Foldback logic used 	4/128 	(3%)
-Total Nodes+FB/MCells 		105/128 	(82%)
+Total Foldback logic used 	2/128 	(1%)
+Total Nodes+FB/MCells 		107/128 	(83%)
 Total cascade used 		1
-Total input pins 		28
-Total output pins 		39
-Total Pts 			269
+Total input pins 		27
+Total output pins 		41
+Total Pts 			275
 */
 
 /*

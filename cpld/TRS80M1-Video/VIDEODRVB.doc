@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          f1508ispplcc84  Library DLIB-h-40-2
-Created         Mon Aug 28 21:15:46 2023
+Created         Sun Sep 03 21:56:16 2023
 Name            M1NTSC
 Partno          M1NTSC
 Revision        01
@@ -51,14 +51,18 @@ CPU_VRAM_CS_EDGE.d  =>
     0 
 
 CPU_VRAM_CS_EDGE.ap  =>
-    CPU_VRAM_CS_GNT
-  # VRAM_SHARED_STATE
+    !CPU_VRAM_CS_GNT & !VRAM_SHARED_STATE
+  # VCONFB7
+  # !RESET_IN
 
 CPU_VRAM_CS_EDGE.ck  =>
     !VID_MEM_CS
 
 CPU_VRAM_CS_GNT.d  =>
     CPU_VRAM_CS_EDGE
+
+CPU_VRAM_CS_GNT.ap  =>
+    !RESET_IN
 
 CPU_VRAM_CS_GNT.ck  =>
     !VRAM_SHARED_STATE
@@ -74,16 +78,24 @@ CP_VM_AD_OE =>
   # VRAM_SHARED_STATE
 
 CP_VM_DR_LE =>
-    !CPU_VRAM_CS_GNT & VID_RW & !VRAM_SHARED_STATE
+    !CPU_VRAM_CS_GNT & !VCONFB7 & VID_RW & !VRAM_SHARED_STATE
 
 CP_VM_DR_OE =>
     VID_MEM_CS
   # !VID_RW
+  # VCONFB7
 
 CP_VM_DW_OE =>
     CPU_VRAM_CS_GNT
   # VRAM_SHARED_STATE
   # VID_RW
+  # VCONFB7
+
+FM_OE =>
+    1 
+
+FM_WE =>
+    1 
 
 FONTLINE0.d  =>
     !FONTLINE0 & !FONTLINE_RESET
@@ -678,12 +690,16 @@ VDP_ACCESS_GRANTED =>
     VDP_VRAM_CS_GNT
   # !VRAM_SHARED_STATE
 
+VDP_OR_FONT_ACCESS =>
+    VCONFB7
+
 VDP_VRAM_CS_EDGE.d  =>
     0 
 
 VDP_VRAM_CS_EDGE.ap  =>
-    VDP_VRAM_CS_GNT
-  # !VRAM_SHARED_STATE
+    !VDP_VRAM_CS_GNT & VRAM_SHARED_STATE
+  # VCONFB7
+  # !RESET_IN
 
 VDP_VRAM_CS_EDGE.ck  =>
     0 
@@ -704,8 +720,7 @@ VGA_VSYNC_OUT =>
     1 
 
 VID_CPLD_4 =>
-    VID_CPLD_5
-  # V64OR32MODE
+    V64OR32MODE
   # VID_IO_CS
   # VID_80X25MEM_CS
 
@@ -724,18 +739,24 @@ VM_AD_CLR =>
 VM_AD_OE =>
     VDP_VRAM_CS_GNT
   # !VRAM_SHARED_STATE
+  # VCONFB7
 
 VM_AD_RCLK =>
     1 
 
 VM_DATA_LATCH =>
-    !VDP_VRAM_CS_GNT & VRAM_SHARED_STATE
+    !VCONFB7 & !VDP_VRAM_CS_GNT & VRAM_SHARED_STATE
 
 VM_DATA_OE =>
     1 
 
 VM_OE =>
-    1 
+    VCONFB7
+  # VDP_VRAM_CS_GNT & !VID_RW
+  # CPU_VRAM_CS_GNT & VDP_VRAM_CS_GNT
+  # VDP_VRAM_CS_GNT & VRAM_SHARED_STATE
+  # !VID_RW & !VRAM_SHARED_STATE
+  # CPU_VRAM_CS_GNT & !VRAM_SHARED_STATE
 
 VM_PAGE0 =>
     VCONFA0
@@ -750,7 +771,10 @@ VM_PAGE3 =>
     VCONFA3
 
 VM_WE =>
-    1 
+    CPU_VRAM_CS_GNT
+  # VRAM_SHARED_STATE
+  # VID_RW
+  # VCONFB7
 
 VRAM_SHARED_STATE.d  =>
     !VRAM_SHARED_STATE
@@ -1038,17 +1062,18 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     CPU_D7                      76       V        -       -       -     
     CPU_VRAM_CS_EDGE            86       N        -       -       -     
     CPU_VRAM_CS_EDGE    d       86       M        1       0       1     
-    CPU_VRAM_CS_EDGE    ap      86       M        2       0       1     
+    CPU_VRAM_CS_EDGE    ap      86       M        3       0       1     
     CPU_VRAM_CS_EDGE    ck      86       M        1       0       1     
     CPU_VRAM_CS_GNT             87       N        -       -       -     
     CPU_VRAM_CS_GNT     d       87       M        1       0       1     
+    CPU_VRAM_CS_GNT     ap      87       M        1       0       1     
     CPU_VRAM_CS_GNT     ck      87       M        1       0       1     
     CP_FM_DATA_DIR              41       V        1       0       1     
     CP_FM_DATA_OE               40       V        1       0       1     
     CP_VM_AD_OE                 36       V        2       0       1     
     CP_VM_DR_LE                 49       V        1       0       1     
-    CP_VM_DR_OE                 48       V        2       0       1     
-    CP_VM_DW_OE                 46       V        3       0       1     
+    CP_VM_DR_OE                 48       V        3       0       1     
+    CP_VM_DW_OE                 46       V        4       0       1     
     DIN0                        50       V        -       -       -     
     DIN1                        51       V        -       -       -     
     DIN2                        52       V        -       -       -     
@@ -1057,6 +1082,8 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     DIN5                        56       V        -       -       -     
     DIN6                        57       V        -       -       -     
     DIN7                        58       V        -       -       -     
+    FM_OE                       79       V        1       0       1     
+    FM_WE                       77       V        1       0       1     
     FONTLINE0                   6        V        -       -       -     
     FONTLINE0           d       6        X        1       0       1     
     FONTLINE0           ck      6        X        1       0       1     
@@ -1238,9 +1265,10 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     VCONFB7             ck      106      M        1       0       1     
     VCONFBWRITE                 0        I        1       -       -     
     VDP_ACCESS_GRANTED          0        I        2       -       -     
+    VDP_OR_FONT_ACCESS          0        I        1       -       -     
     VDP_VRAM_CS_EDGE            89       N        -       -       -     
     VDP_VRAM_CS_EDGE    d       89       M        1       0       1     
-    VDP_VRAM_CS_EDGE    ap      89       M        2       0       1     
+    VDP_VRAM_CS_EDGE    ap      89       M        3       0       1     
     VDP_VRAM_CS_EDGE    ck      89       M        1       0       1     
     VDP_VRAM_CS_GNT             88       N        -       -       -     
     VDP_VRAM_CS_GNT     d       88       M        1       0       1     
@@ -1249,8 +1277,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     VGA_VIDEO_OUT               65       V        1       0       1     
     VGA_VSYNC_OUT               64       V        1       0       1     
     VID_80X25MEM_CS             22       V        -       -       -     
-    VID_CPLD_4                  79       V        4       0       1     
-    VID_CPLD_5                  77       V        -       -       -     
+    VID_CPLD_4                  80       V        3       0       1     
     VID_IO_CS                   84       V        -       -       -     
     VID_MEM_CS                  4        V        -       -       -     
     VID_RW                      5        V        -       -       -     
@@ -1258,16 +1285,16 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     VM_AD_CLK                   34       V        1       0       1     
     VM_AD_CLKEN                 35       V        1       0       1     
     VM_AD_CLR                   33       V        1       0       1     
-    VM_AD_OE                    45       V        2       0       1     
+    VM_AD_OE                    45       V        3       0       1     
     VM_AD_RCLK                  44       V        1       0       1     
     VM_DATA_LATCH               39       V        1       0       1     
     VM_DATA_OE                  37       V        1       0       1     
-    VM_OE                       30       V        1       0       1     
+    VM_OE                       30       V        6       0       1     
     VM_PAGE0                    24       V        1       0       1     
     VM_PAGE1                    25       V        1       0       1     
     VM_PAGE2                    27       V        1       0       1     
     VM_PAGE3                    28       V        1       0       1     
-    VM_WE                       31       V        1       0       1     
+    VM_WE                       31       V        4       0       1     
     VRAM_SHARED_STATE           90       N        -       -       -     
     VRAM_SHARED_STATE   d       90       M        1       0       1     
     VRAM_SHARED_STATE   ck      90       M        1       0       1     
