@@ -3,7 +3,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 1
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
   1:Name     M1NTSC;
   2:PartNo   M1NTSC;
@@ -64,7 +64,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 2
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
  54:
  55:/* BIDIRECTIONAL 19 Pins of 63 Total */
@@ -126,7 +126,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 3
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 108:    state machine enters the CPU-access state.   If the VDP_OR_FONT_ACCESS bit is set to 1, we
 109:    will ignore any VID_MEM_CS activity since that activity is destined for the font memory. 
@@ -188,7 +188,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 4
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 162:   The signal is inverted because going from a 1 to 0 is what does the latch operation.
 163:*/
@@ -250,7 +250,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 5
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 216:/* 
 217:   FM_OE - Enable the output drivers of the font RAM.  This should be enabled(==0):
@@ -312,7 +312,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 6
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 270:               VDP_OR_FONT_ACCESS
 271:    
@@ -374,7 +374,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 7
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 324:HSYNC_COUNTER2.d = ((HSYNC_COUNTER2T&!HSYNC_COUNTER2) # (!HSYNC_COUNTER2T&HSYNC_COUNTER2)) & HSYNC_ZERO;
 325:HSYNC_COUNTER2.ck = CLK_12M;
@@ -436,7 +436,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 8
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 378:   The reason for two FFs is to first capture the HSYNC value (on the clock edge opposite of the counter itself changing)
 379:   followed by a second FF to sync the V_SYNC increment with the rising edge of CLK_25M.   This allows both the H_SYNC and V_SYNC 
@@ -498,7 +498,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 9
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 432:VSYNC_COUNTER8T = VSYNC_COUNTER7T&VSYNC_COUNTER7;
 433:VSYNC_COUNTER8.d = ((VSYNC_COUNTER8T&!VSYNC_COUNTER8) # (!VSYNC_COUNTER8T&VSYNC_COUNTER8)) & VSYNC_ZERO;
@@ -560,7 +560,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 10
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 486:
 487:SHIFTREG0.d = (SHIFTREG_LOAD & DIN0);
@@ -622,7 +622,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 11
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 540:                     E N  N N G N _ _ V O __ 2 G   D _ V _ _ _                      
 541:                     L E  E E N E R C C D IC 5 N   _ O C W D D                      
@@ -684,7 +684,7 @@ LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 12
 CUPL(WM): Universal Compiler for Programmable Logic
 Version 5.0a Serial# 60008009
 Copyright (c) 1983, 1998 Logical Devices, Inc.
-Created Fri Sep 15 15:43:31 2023
+Created Fri Sep 15 19:24:52 2023
 
 594:Total Pts                       303*/
 595:

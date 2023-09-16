@@ -529,7 +529,7 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
 /*
 
                                                                                                                                                                   
-                                        V                                           
+                                         V                                           
                                     V   6          V                                
                        F  F F   F   I   4  V       I                                
                      F O  O O   O   D   O RI       D                                
@@ -566,7 +566,7 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
              GND | 32                                          54 | DIN3            
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
-                    	    --------------------------------------------                     
+              	    --------------------------------------------                     
                       M M M C V V V C V G V V V C G C C D D D V                     
                       O O O P M C M P M N C M M P N P P I I I C                     
                       D D D _ _ C _ _ _ D C _ _ _ D _ _ N N N C                     
@@ -579,7 +579,7 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
                             O E   A A E     L E O   O L                             
                             E     T _ S     O   E   E E                             
                                   C O E     C                                       
-                                  H E T     K                                       
+                                  H E T     K                                                 
                                             
 
 Total dedicated input used:	4/4 	(100%)
@@ -591,5 +591,7 @@ Total Nodes+FB/MCells 		104/128 	(81%)
 Total cascade used 		1
 Total input pins 		32
 Total output pins 		35
-Total Pts 			303*/
+Total Pts 			303
+
+*/
 
