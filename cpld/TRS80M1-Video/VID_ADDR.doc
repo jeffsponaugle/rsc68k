@@ -1,0 +1,713 @@
+
+*******************************************************************************
+                                     ADDER
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1504ispplcc44  Library DLIB-h-40-1
+Created         Fri Sep 15 15:08:58 2023
+Name            ADDER
+Partno          ADDER
+Revision        01
+Date            04/18/2022
+Designer        Sponaugle
+Company         Ratiometric
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+B0 =>
+    0 
+
+B1 =>
+    0 
+
+B2 =>
+    0 
+
+B3 =>
+    0 
+
+B4 =>
+    MODE0 & MODE1 & !MODE2
+
+B5 =>
+    MODE0 & MODE1 & !MODE2
+
+B6 =>
+    !MODE0 & MODE1 & !MODE2
+
+B7 =>
+    MODE1 & !MODE2
+
+B8 =>
+    MODE1 & !MODE2
+
+B9 =>
+    MODE1 & !MODE2
+
+B10 =>
+    MODE1 & !MODE2
+
+B11 =>
+    MODE1 & !MODE2
+
+B12 =>
+    MODE1 & !MODE2
+
+B13 =>
+    MODE1 & !MODE2
+
+C0 =>
+    MODE0 & !MODE1 & !MODE2
+
+C1 =>
+    MODE0 & !MODE1 & !MODE2 & S0
+
+C2 =>
+    MODE0 & !MODE1 & !MODE2 & S0 & S1
+
+C3 =>
+    MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2
+
+C4 =>
+    MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2 & S3
+
+C5 =>
+    MODE0 & MODE1 & !MODE2 & S4
+  # MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2 & S3 & S4
+
+C6 =>
+    MODE0 & MODE1 & !MODE2 & S5
+  # MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2 & S3 & S4 & S5
+  # MODE0 & MODE1 & !MODE2 & S4 & !S5
+
+C7 =>
+    !MODE0 & MODE1 & !MODE2 & S6
+  # C6 & !MODE0 & MODE1 & !MODE2 & !S6
+  # C6 & MODE2 & S6
+  # C6 & MODE0 & S6
+  # C6 & !MODE1 & S6
+
+C8 =>
+    MODE1 & !MODE2 & S7
+  # C7 & MODE1 & !MODE2 & !S7
+  # C7 & !MODE1 & S7
+  # C7 & MODE2 & S7
+
+C9 =>
+    MODE1 & !MODE2 & S8
+  # C8 & MODE1 & !MODE2 & !S8
+  # C8 & !MODE1 & S8
+  # C8 & MODE2 & S8
+
+C10 =>
+    MODE1 & !MODE2 & S9
+  # C9 & MODE1 & !MODE2 & !S9
+  # C9 & !MODE1 & S9
+  # C9 & MODE2 & S9
+
+C11 =>
+    MODE1 & !MODE2 & S10
+  # C10 & MODE1 & !MODE2 & !S10
+  # C10 & !MODE1 & S10
+  # C10 & MODE2 & S10
+
+C12 =>
+    MODE1 & !MODE2 & S11
+  # C11 & MODE1 & !MODE2 & !S11
+  # C11 & !MODE1 & S11
+  # C11 & MODE2 & S11
+
+C13 =>
+    MODE1 & !MODE2 & S12
+  # C12 & MODE1 & !MODE2 & !S12
+  # C12 & !MODE1 & S12
+  # C12 & MODE2 & S12
+
+G0 =>
+    0 
+
+G1 =>
+    0 
+
+G2 =>
+    0 
+
+G3 =>
+    0 
+
+G4 =>
+    MODE0 & MODE1 & !MODE2 & S4
+
+G5 =>
+    MODE0 & MODE1 & !MODE2 & S5
+
+G6 =>
+    !MODE0 & MODE1 & !MODE2 & S6
+
+G7 =>
+    MODE1 & !MODE2 & S7
+
+G8 =>
+    MODE1 & !MODE2 & S8
+
+G9 =>
+    MODE1 & !MODE2 & S9
+
+G10 =>
+    MODE1 & !MODE2 & S10
+
+G11 =>
+    MODE1 & !MODE2 & S11
+
+G12 =>
+    MODE1 & !MODE2 & S12
+
+G13 =>
+    MODE1 & !MODE2 & S13
+
+P0 =>
+    S0
+
+P1 =>
+    S1
+
+P2 =>
+    S2
+
+P3 =>
+    S3
+
+P4 =>
+    MODE2 & S4
+  # !MODE1 & S4
+  # !MODE0 & S4
+  # MODE0 & MODE1 & !MODE2 & !S4
+
+P5 =>
+    MODE2 & S5
+  # !MODE1 & S5
+  # !MODE0 & S5
+  # MODE0 & MODE1 & !MODE2 & !S5
+
+P6 =>
+    MODE2 & S6
+  # !MODE1 & S6
+  # MODE0 & S6
+  # !MODE0 & MODE1 & !MODE2 & !S6
+
+P7 =>
+    MODE2 & S7
+  # !MODE1 & S7
+  # MODE1 & !MODE2 & !S7
+
+P8 =>
+    MODE2 & S8
+  # !MODE1 & S8
+  # MODE1 & !MODE2 & !S8
+
+P9 =>
+    MODE2 & S9
+  # !MODE1 & S9
+  # MODE1 & !MODE2 & !S9
+
+P10 =>
+    MODE2 & S10
+  # !MODE1 & S10
+  # MODE1 & !MODE2 & !S10
+
+P11 =>
+    MODE2 & S11
+  # !MODE1 & S11
+  # MODE1 & !MODE2 & !S11
+
+P12 =>
+    MODE2 & S12
+  # !MODE1 & S12
+  # MODE1 & !MODE2 & !S12
+
+P13 =>
+    MODE2 & S13
+  # !MODE1 & S13
+  # MODE1 & !MODE2 & !S13
+
+S0.d  =>
+    MODE2 & S0
+  # MODE1 & S0
+  # !MODE0 & S0
+  # MODE0 & !MODE1 & !MODE2 & !S0
+
+S0.ar  =>
+    VM_ADDR_RESET
+
+S0.ck  =>
+    VM_ADDR_CLOCK
+
+S1.d  =>
+    MODE2 & S1
+  # MODE1 & S1
+  # !MODE0 & S1
+  # !S0 & S1
+  # MODE0 & !MODE1 & !MODE2 & S0 & !S1
+
+S1.ar  =>
+    VM_ADDR_RESET
+
+S1.ck  =>
+    VM_ADDR_CLOCK
+
+S2.d  =>
+    MODE2 & S2
+  # MODE1 & S2
+  # !MODE0 & S2
+  # !S0 & S2
+  # !S1 & S2
+  # MODE0 & !MODE1 & !MODE2 & S0 & S1 & !S2
+
+S2.ar  =>
+    VM_ADDR_RESET
+
+S2.ck  =>
+    VM_ADDR_CLOCK
+
+S3.d  =>
+    MODE2 & S3
+  # MODE1 & S3
+  # !MODE0 & S3
+  # !S0 & S3
+  # !S1 & S3
+  # !S2 & S3
+  # MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2 & !S3
+
+S3.ar  =>
+    VM_ADDR_RESET
+
+S3.ck  =>
+    VM_ADDR_CLOCK
+
+S4.d  =>
+    MODE2 & S4
+  # MODE0 & MODE1 & !MODE2 & !S4
+  # !MODE0 & S4
+  # !MODE1 & !S0 & S4
+  # !MODE1 & !S1 & S4
+  # !MODE1 & !S2 & S4
+  # !MODE1 & !S3 & S4
+  # MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2 & S3 & !S4
+
+S4.ar  =>
+    VM_ADDR_RESET
+
+S4.ck  =>
+    VM_ADDR_CLOCK
+
+S5.d  =>
+    MODE2 & S5
+  # MODE0 & MODE1 & !MODE2 & !S4 & !S5
+  # !MODE0 & S5
+  # !MODE1 & !S0 & S5
+  # !MODE1 & !S1 & S5
+  # !MODE1 & !S2 & S5
+  # !MODE1 & !S4 & S5
+  # !MODE1 & !S3 & S5
+  # MODE0 & !MODE1 & !MODE2 & S0 & S1 & S2 & S3 & S4 & !S5
+  # MODE0 & MODE1 & !MODE2 & S4 & S5
+
+S5.ar  =>
+    VM_ADDR_RESET
+
+S5.ck  =>
+    VM_ADDR_CLOCK
+
+S6.d  =>
+    !C6 & !MODE0 & MODE1 & !MODE2 & !S6
+  # !C6 & MODE2 & S6
+  # !C6 & MODE0 & S6
+  # !C6 & !MODE1 & S6
+  # C6 & !MODE0 & MODE1 & !MODE2 & S6
+  # C6 & MODE2 & !S6
+  # C6 & MODE0 & !S6
+  # C6 & !MODE1 & !S6
+
+S6.ar  =>
+    VM_ADDR_RESET
+
+S6.ck  =>
+    VM_ADDR_CLOCK
+
+S7.d  =>
+    !C7 & MODE1 & !MODE2 & !S7
+  # !C7 & !MODE1 & S7
+  # !C7 & MODE2 & S7
+  # C7 & !MODE1 & !S7
+  # C7 & MODE2 & !S7
+  # C7 & MODE1 & !MODE2 & S7
+
+S7.ar  =>
+    VM_ADDR_RESET
+
+S7.ck  =>
+    VM_ADDR_CLOCK
+
+S8.d  =>
+    !C8 & MODE1 & !MODE2 & !S8
+  # !C8 & !MODE1 & S8
+  # !C8 & MODE2 & S8
+  # C8 & !MODE1 & !S8
+  # C8 & MODE2 & !S8
+  # C8 & MODE1 & !MODE2 & S8
+
+S8.ar  =>
+    VM_ADDR_RESET
+
+S8.ck  =>
+    VM_ADDR_CLOCK
+
+S9.d  =>
+    !C9 & MODE1 & !MODE2 & !S9
+  # !C9 & !MODE1 & S9
+  # !C9 & MODE2 & S9
+  # C9 & !MODE1 & !S9
+  # C9 & MODE2 & !S9
+  # C9 & MODE1 & !MODE2 & S9
+
+S9.ar  =>
+    VM_ADDR_RESET
+
+S9.ck  =>
+    VM_ADDR_CLOCK
+
+S10.d  =>
+    !C10 & MODE1 & !MODE2 & !S10
+  # !C10 & !MODE1 & S10
+  # !C10 & MODE2 & S10
+  # C10 & !MODE1 & !S10
+  # C10 & MODE2 & !S10
+  # C10 & MODE1 & !MODE2 & S10
+
+S10.ar  =>
+    VM_ADDR_RESET
+
+S10.ck  =>
+    VM_ADDR_CLOCK
+
+S11.d  =>
+    !C11 & MODE1 & !MODE2 & !S11
+  # !C11 & !MODE1 & S11
+  # !C11 & MODE2 & S11
+  # C11 & !MODE1 & !S11
+  # C11 & MODE2 & !S11
+  # C11 & MODE1 & !MODE2 & S11
+
+S11.ar  =>
+    VM_ADDR_RESET
+
+S11.ck  =>
+    VM_ADDR_CLOCK
+
+S12.d  =>
+    !C12 & MODE1 & !MODE2 & !S12
+  # !C12 & !MODE1 & S12
+  # !C12 & MODE2 & S12
+  # C12 & !MODE1 & !S12
+  # C12 & MODE2 & !S12
+  # C12 & MODE1 & !MODE2 & S12
+
+S12.ar  =>
+    VM_ADDR_RESET
+
+S12.ck  =>
+    VM_ADDR_CLOCK
+
+S13.d  =>
+    !C13 & MODE1 & !MODE2 & !S13
+  # !C13 & !MODE1 & S13
+  # !C13 & MODE2 & S13
+  # C13 & !MODE1 & !S13
+  # C13 & MODE2 & !S13
+  # C13 & MODE1 & !MODE2 & S13
+
+S13.ar  =>
+    VM_ADDR_RESET
+
+S13.ck  =>
+    VM_ADDR_CLOCK
+
+UNUSED1 =>
+    0 
+
+UNUSED2 =>
+    0 
+
+UNUSED3 =>
+    0 
+
+UNUSED4 =>
+    0 
+
+UNUSED5 =>
+    0 
+
+UNUSED6 =>
+    0 
+
+UNUSED7 =>
+    0 
+
+UNUSED8 =>
+    0 
+
+VM_A0 =>
+    S0
+
+VM_A0.oe  =>
+    !VM_ADDR_OE
+
+VM_A1 =>
+    S1
+
+VM_A1.oe  =>
+    !VM_ADDR_OE
+
+VM_A2 =>
+    S2
+
+VM_A2.oe  =>
+    !VM_ADDR_OE
+
+VM_A3 =>
+    S3
+
+VM_A3.oe  =>
+    !VM_ADDR_OE
+
+VM_A4 =>
+    S4
+
+VM_A4.oe  =>
+    !VM_ADDR_OE
+
+VM_A5 =>
+    S5
+
+VM_A5.oe  =>
+    !VM_ADDR_OE
+
+VM_A6 =>
+    S6
+
+VM_A6.oe  =>
+    !VM_ADDR_OE
+
+VM_A7 =>
+    S7
+
+VM_A7.oe  =>
+    !VM_ADDR_OE
+
+VM_A8 =>
+    S8
+
+VM_A8.oe  =>
+    !VM_ADDR_OE
+
+VM_A9 =>
+    S9
+
+VM_A9.oe  =>
+    !VM_ADDR_OE
+
+VM_A10 =>
+    S10 & !VM_ADDR_OE
+  # VM_ADDR_OE & VM_PAGE0
+
+VM_A11 =>
+    S11 & !VM_ADDR_OE
+  # VM_ADDR_OE & VM_PAGE1
+
+VM_A12 =>
+    S12 & !VM_ADDR_OE
+  # VM_ADDR_OE & VM_PAGE2
+
+VM_A13 =>
+    S13 & !VM_ADDR_OE
+  # VM_ADDR_OE & VM_PAGE3
+
+mode_field =>
+    MODE2 , MODE1 , MODE0
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    B0                          0        I        1       -       -     
+    B1                          0        I        1       -       -     
+    B2                          0        I        1       -       -     
+    B3                          0        I        1       -       -     
+    B4                          0        I        1       -       -     
+    B5                          0        I        1       -       -     
+    B6                          0        I        1       -       -     
+    B7                          0        I        1       -       -     
+    B8                          0        I        1       -       -     
+    B9                          0        I        1       -       -     
+    B10                         0        I        1       -       -     
+    B11                         0        I        1       -       -     
+    B12                         0        I        1       -       -     
+    B13                         0        I        1       -       -     
+    C0                          0        I        1       -       -     
+    C1                          0        I        1       -       -     
+    C2                          0        I        1       -       -     
+    C3                          0        I        1       -       -     
+    C4                          0        I        1       -       -     
+    C5                          0        I        2       -       -     
+    C6                          52       N        3       0       1     
+    C7                          51       N        5       0       1     
+    C8                          50       N        4       0       1     
+    C9                          49       N        4       0       1     
+    C10                         48       N        4       0       1     
+    C11                         47       N        4       0       1     
+    C12                         46       N        4       0       1     
+    C13                         45       N        4       0       1     
+    G0                          0        I        1       -       -     
+    G1                          0        I        1       -       -     
+    G2                          0        I        1       -       -     
+    G3                          0        I        1       -       -     
+    G4                          0        I        1       -       -     
+    G5                          0        I        1       -       -     
+    G6                          0        I        1       -       -     
+    G7                          0        I        1       -       -     
+    G8                          0        I        1       -       -     
+    G9                          0        I        1       -       -     
+    G10                         0        I        1       -       -     
+    G11                         0        I        1       -       -     
+    G12                         0        I        1       -       -     
+    G13                         0        I        1       -       -     
+    MODE0                       41       V        -       -       -     
+    MODE1                       40       V        -       -       -     
+    MODE2                       39       V        -       -       -     
+    P0                          0        I        1       -       -     
+    P1                          0        I        1       -       -     
+    P2                          0        I        1       -       -     
+    P3                          0        I        1       -       -     
+    P4                          0        I        4       -       -     
+    P5                          0        I        4       -       -     
+    P6                          0        I        4       -       -     
+    P7                          0        I        3       -       -     
+    P8                          0        I        3       -       -     
+    P9                          0        I        3       -       -     
+    P10                         0        I        3       -       -     
+    P11                         0        I        3       -       -     
+    P12                         0        I        3       -       -     
+    P13                         0        I        3       -       -     
+    S0                          66       N        -       -       -     
+    S0                  d       66       M        4       0       1     
+    S0                  ar      66       M        1       0       1     
+    S0                  ck      66       M        1       0       1     
+    S1                          65       N        -       -       -     
+    S1                  d       65       M        5       0       1     
+    S1                  ar      65       M        1       0       1     
+    S1                  ck      65       M        1       0       1     
+    S2                          64       N        -       -       -     
+    S2                  d       64       M        6       0       1     
+    S2                  ar      64       M        1       0       1     
+    S2                  ck      64       M        1       0       1     
+    S3                          63       N        -       -       -     
+    S3                  d       63       M        7       0       1     
+    S3                  ar      63       M        1       0       1     
+    S3                  ck      63       M        1       0       1     
+    S4                          62       N        -       -       -     
+    S4                  d       62       M        8       0       1     
+    S4                  ar      62       M        1       0       1     
+    S4                  ck      62       M        1       0       1     
+    S5                          61       N        -       -       -     
+    S5                  d       61       M        10      0       1     
+    S5                  ar      61       M        1       0       1     
+    S5                  ck      61       M        1       0       1     
+    S6                          60       N        -       -       -     
+    S6                  d       60       M        8       0       1     
+    S6                  ar      60       M        1       0       1     
+    S6                  ck      60       M        1       0       1     
+    S7                          59       N        -       -       -     
+    S7                  d       59       M        6       0       1     
+    S7                  ar      59       M        1       0       1     
+    S7                  ck      59       M        1       0       1     
+    S8                          58       N        -       -       -     
+    S8                  d       58       M        6       0       1     
+    S8                  ar      58       M        1       0       1     
+    S8                  ck      58       M        1       0       1     
+    S9                          57       N        -       -       -     
+    S9                  d       57       M        6       0       1     
+    S9                  ar      57       M        1       0       1     
+    S9                  ck      57       M        1       0       1     
+    S10                         56       N        -       -       -     
+    S10                 d       56       M        6       0       1     
+    S10                 ar      56       M        1       0       1     
+    S10                 ck      56       M        1       0       1     
+    S11                         55       N        -       -       -     
+    S11                 d       55       M        6       0       1     
+    S11                 ar      55       M        1       0       1     
+    S11                 ck      55       M        1       0       1     
+    S12                         54       N        -       -       -     
+    S12                 d       54       M        6       0       1     
+    S12                 ar      54       M        1       0       1     
+    S12                 ck      54       M        1       0       1     
+    S13                         53       N        -       -       -     
+    S13                 d       53       M        6       0       1     
+    S13                 ar      53       M        1       0       1     
+    S13                 ck      53       M        1       0       1     
+    UNUSED1                     8        V        1       0       1     
+    UNUSED2                     18       V        1       0       1     
+    UNUSED3                     19       V        1       0       1     
+    UNUSED4                     20       V        1       0       1     
+    UNUSED5                     17       V        1       0       1     
+    UNUSED6                     28       V        1       0       1     
+    UNUSED7                     26       V        1       0       1     
+    UNUSED8                     27       V        1       0       1     
+    VM_A0                       9        V        1       0       1     
+    VM_A0               oe      9        X        1       0       1     
+    VM_A1                       11       V        1       0       1     
+    VM_A1               oe      11       X        1       0       1     
+    VM_A2                       12       V        1       0       1     
+    VM_A2               oe      12       X        1       0       1     
+    VM_A3                       14       V        1       0       1     
+    VM_A3               oe      14       X        1       0       1     
+    VM_A4                       16       V        1       0       1     
+    VM_A4               oe      16       X        1       0       1     
+    VM_A5                       21       V        1       0       1     
+    VM_A5               oe      21       X        1       0       1     
+    VM_A6                       24       V        1       0       1     
+    VM_A6               oe      24       X        1       0       1     
+    VM_A7                       25       V        1       0       1     
+    VM_A7               oe      25       X        1       0       1     
+    VM_A8                       31       V        1       0       1     
+    VM_A8               oe      31       X        1       0       1     
+    VM_A9                       29       V        1       0       1     
+    VM_A9               oe      29       X        1       0       1     
+    VM_A10                      33       V        2       0       1     
+    VM_A11                      34       V        2       0       1     
+    VM_A12                      36       V        2       0       1     
+    VM_A13                      37       V        2       0       1     
+    VM_ADDR_CLOCK               43       V        -       -       -     
+    VM_ADDR_OE                  1        V        -       -       -     
+    VM_ADDR_RESET               44       V        -       -       -     
+    VM_PAGE0                    6        V        -       -       -     
+    VM_PAGE1                    5        V        -       -       -     
+    VM_PAGE2                    4        V        -       -       -     
+    VM_PAGE3                    2        V        -       -       -     
+    mode_field                  0        F        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

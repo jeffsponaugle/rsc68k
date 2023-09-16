@@ -21,8 +21,8 @@ Pin[4]  = VID_MEM_CS;
 Pin[5]  = VID_RW;
 Pin[6,8,9,10]  = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) FM_A0-FM_A3 */
 Pin[11,12,15,16]  = [FONTSEL0..3];         /* 4 bits for selecting the font.  FM_A12-FM_A15 */
-Pin[17,18,20,21]  = [CPU_A0..3];           /* Address bits 0-3 from the CPU.  Used for IO and FM access */
-Pin[22]  = VID_80X25MEM_CS;
+Pin[17,18]  = [CPU_A0..1];           /* Address bits 0-3 from the CPU.  Used for IO and FM access */
+
 
 /* OUTPUTS 25 Pins of 63 Total */
 Pin[60]  = NTSC_SYNC_OUT;
@@ -36,16 +36,18 @@ Pin[30] = VM_OE;
 Pin[31] = VM_WE;
 Pin[79] = FM_OE;
 Pin[77] = FM_WE;
-Pin[33] = VM_AD_CLR;
-Pin[34] = VM_AD_CLK;
-Pin[35] = VM_AD_CLKEN;
+Pin[33] = MODE0;
+Pin[34] = MODE1;
+Pin[35] = MODE2;
+Pin[41] = VM_ADDR_RESET;
+Pin[44] = VM_ADDR_CLOCK;
+Pin[45] = VM_ADDR_OE;
+
 Pin[36] = CP_VM_AD_OE;
 Pin[37] = VM_DATA_OE;
 Pin[39] = VM_DATA_LATCH;
 Pin[40] = CP_FM_DATA_OE;
-Pin[41] = CP_FM_DATA_DIR;
-Pin[44] = VM_AD_RCLK;
-Pin[45] = VM_AD_OE;
+
 Pin[46] = CP_VM_DW_OE;
 Pin[48] = CP_VM_DR_OE;
 Pin[49] = CP_VM_DR_LE;
@@ -53,30 +55,30 @@ Pin[49] = CP_VM_DR_LE;
 /* BIDIRECTIONAL 19 Pins of 63 Total */
 
 Pin[50,51,52,54,55,56,57,58]  = [DIN0..7];             /* FM_D0-FM_D7 */
-Pin[81]  = CPU_2KPAGE_A10;        /* Line A10 from CPU used if we are accessing in the 2K mapping */        
+   
 Pin[67,68,69,70,73,74,75,76]  = [CPU_D0..7];           /* Data input bits from CPU for writing to config registers */
-Pin[80] = VID_CPLD_4;
+Pin[80]  = VID_CPLD_4;  /* To CPU */
+Pin[81]  = VID_CPLD_5;  /* To CPU */           
+Pin[22]  = VID_CPLD_6;  /* To Other CPLD */
+
+Pin[20] = FM_A10;
+Pin[21] = FM_A11;
 
 
-/* Force Pin Assignment */
+/* Force Pin Assignment NEEDS TO BE DEFINED */
 
-VID_CPLD_4 = V64OR32MODE # VID_IO_CS # VID_80X25MEM_CS;
-
-[CPU_A0..3] = 'b'1;
-CPU_2KPAGE_A10 = 'b'1;
+VID_CPLD_4 = V64OR32MODE # VID_IO_CS # VID_CPLD_6;
 VGA_HSYNC_OUT = 'b'1;
 VGA_VSYNC_OUT = 'b'1;
 VGA_VIDEO_OUT = 'b'1;
 Z80_WAIT = 'b'1;
 
+VM_ADDR_CLOCK = MODE0 & MODE1 & MODE2;
+VM_ADDR_RESET = !MODE0 & MODE1 & !MODE2;
 
-FM_WE = 'b'1;
-VM_AD_CLR = 'b'1;
-VM_AD_CLK = 'b'1;
-VM_AD_CLKEN = 'b'1;
 CP_FM_DATA_OE = 'b'1;
-CP_FM_DATA_DIR = 'b'1;
-VM_AD_RCLK = 'b'1;
+UNUSED1 = 'b'1;
+UNUSED2 = 'b'1;
 
 
 /* Signal that needs to be created */
@@ -136,6 +138,9 @@ VDP_VRAM_CS_EDGE.ap = !VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
 /* 
    CP_VM_AD_OE enabled the address bus values to flow from the CPU to the video memory.
    This set of buffers is enabled when we are in a CPU_ACCESS_GRANTED state. 
+   We don't need to qualify this with VDP_OR_FONT_ACCESS becuase if we are doing a video memory
+   access we need the addres lines passed through, and if we are doing a font memory access passing 
+   the font address to the video memory will not make any difference.
 */
 CP_VM_AD_OE = CPU_ACCESS_GRANTED;
 
@@ -149,7 +154,7 @@ CP_VM_AD_OE = CPU_ACCESS_GRANTED;
 CP_VM_DW_OE = CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS;
 
 /* 
-   CP_VM_DR_LW is the latch input on the data buffers going to the CPU from video memory.  This latch
+   CP_VM_DR_LE is the latch input on the data buffers going to the CPU from video memory.  This latch
    is 'latched' at the end of the CPU_ACCESS_GRANTED cycle where the VID_RW signal is ==1, indicating
    a CPU read operation.  This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram 
    access is disabled.
@@ -168,11 +173,11 @@ CP_VM_DR_LE = !(CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS );
 CP_VM_DR_OE = VID_MEM_CS # !VID_RW # VDP_OR_FONT_ACCESS;
 
 /*
-   VM_AD_OE is the output enable for the address buffers that put video controller addresses
+   VM_ADDR_OE is the output enable for the address buffers that put video controller addresses
    on the address bus of video memory.  It is enabled if we are doing a VDP_ACCESS_GRANTED cycle
    but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
 */
-VM_AD_OE =  VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS;
+VM_ADDR_OE =  VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS;
 
 /*
    VM_DATA_LATCH is the latch input on the data buffers going to the VDP from video memory.  This latch
@@ -208,11 +213,24 @@ VM_OE = (CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS) & (VDP_ACCESS_GRANTE
 */
 VM_WE = (CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS);
 
-/* FM_OE - Enable the output drivers of the font RAM.  This should be enabled(==0):
-           (1) If VDP_OR_FONT_ACCESS == 0, output should always be on.
+/* 
+   FM_OE - Enable the output drivers of the font RAM.  This should be enabled(==0):
+           (1) If VDP_OR_FONT_ACCESS == 0, output should always be on.  The output goes to the DIN
+           pins on the CPLD to be used for video rendering,
            (2) IF VDP_OR_FONT_ACCESS == 1, output should be on IF
+               VID_MEM_CS==0 and VID_RW==1 which indicated the CPU is doing a read of font memory.
+
 */
-FM_OE = 'b'1;
+
+FM_OE = (VDP_OR_FONT_ACCESS) & (!VDP_OR_FONT_ACCESS # VID_MEM_CS # !VID_RW);
+
+/*
+   FM_WE - Enable the write operation of the font RAM - the should be enabled(==0):
+           ONLY if VDP_OR_FONT_ACCESS == 1 ( CPU is configured for FONT RAM access) 
+           AND VID_MEM_CS==0 and VID_RW==0
+*/
+
+FM_WE = !VDP_OR_FONT_ACCESS # VID_MEM_CS # VID_RW;
 
 /* 
    Video Configuration Register A 
@@ -233,7 +251,7 @@ NODE HSYNC_ZERO;
 NODE VSYNC_ZERO;
 NODE VSYNC_DISPLAY_ACTIVE;
 NODE [SHIFTREG0..7];
-
+NODE FONTLINE_RESET;
 
 CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
@@ -264,8 +282,31 @@ VCONFBWRITE = !VID_IO_CS & CPU_A0 & !CPU_A1 & !VID_RW;
 [VCONFB0..7].d = [CPU_D0..7];
 [VCONFB0..7].ar = !RESET_IN;
 
-[FONTSEL0..3] = [VCONFA4..7]; /* Font Select output from config register A */
+/* FONTSEL0-3 are connected to the font RAM address bits 12,13,14,15
+   if (VDP_OR_FONT_ACCESS==0) FONTSEL should refect the VCONFA4-7 register.
+   if (VDP_OR_FONT_ACCESS==1) FONTSEL should refect the VCONFB2-5 register.
+      In this second case, we also want to output VCONFB0-1
+*/
+
+FONTSEL0 = (!VDP_OR_FONT_ACCESS & VCONFA4) # (VDP_OR_FONT_ACCESS & VCONFB2);
+FONTSEL1 = (!VDP_OR_FONT_ACCESS & VCONFA5) # (VDP_OR_FONT_ACCESS & VCONFB3);
+FONTSEL2 = (!VDP_OR_FONT_ACCESS & VCONFA6) # (VDP_OR_FONT_ACCESS & VCONFB4);
+FONTSEL3 = (!VDP_OR_FONT_ACCESS & VCONFA7) # (VDP_OR_FONT_ACCESS & VCONFB5);
+
+FM_A10 = VCONFB0;
+FM_A10.oe = VDP_OR_FONT_ACCESS;
+FM_A11 = VCONFB1;
+FM_A11.oe = VDP_OR_FONT_ACCESS;
+
 [VM_PAGE0..3] = [VCONFA0..3]; /* Video Memory Page Select from config register A */
+
+/* 
+   The first four bits of the font memory address bus are based on the FONTLINE variable
+   which counts which line inside a particular font we are on.   This is only used of 
+   VDP_OR_FONT_ACCESS==0.  If VDP_OR_FONT_ACCESS==1, we are only allowing CPU
+   access to font RAM, so lets use the CPU address bits 0-3 for the same 4 address
+   bits on the font RAM.
+*/
 
 VDP_OR_FONT_ACCESS = VCONFB7;
 
@@ -405,7 +446,6 @@ VSYNC_ZERO = !(vsync_counter_field:['d'263]);
 
 /* FONTLINE_RESET - Reset counter if the value==11, so it counts from 0-11.  Also hold in reset
     if we are not in the active area (VSYNC_DISPLAY_ACTIVE) */
-NODE FONTLINE_RESET;
 
 FONTLINE_RESET = (FONTLINE0 & FONTLINE1 & !FONTLINE2 & FONTLINE3) # !VSYNC_DISPLAY_ACTIVE;
 FONTLINE_INC = 'b'1;
@@ -431,6 +471,13 @@ FONTLINE3.d =  ( (FONTLINE_INC&((FONTLINE3T&!FONTLINE3) # (!FONTLINE3T&FONTLINE3
         # ((!FONTLINE_INC&FONTLINE3))
         ) & !FONTLINE_RESET;
 FONTLINE3.ck = VSYNC_CLOCK_B;
+
+/* 
+   If VDP_OR_FONT_ACCESS==1 we want to disable the FONTLINE outputs so the CPU address drivers can 
+   drive the font RAM
+*/
+
+[FONTLINE0..3].oe = !VDP_OR_FONT_ACCESS;
 
 
 /* SHIFTREG_LOAD = 1 if the shift register will load from the databus, ==0 and it will shift from 0 to 7; */
@@ -481,20 +528,18 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
 
 /*
 
-                                  
-                                                                                    
-                                                                                    
+                                                                                                                                                                  
                                         V                                           
-                                    V   6            V   V                          
-                       F  F F   F   I   4  V         I   I                          
-                     F O  O O   O   D   O RI         D   D                          
-                     O N  N N   N   _   R ED C       _   _                          
-                     N T  T T   T V M   3 S_ L       C   C C C                      
-                     T L  L L   L I E   2 EI K       P   P P P                      
-                     S I  I I   I D M   M TO _       L   L U U                      
-                     E N  N N G N _ _ V O __ 2 G     D V D _ _                      
-                     L E  E E N E R C C D IC 5 N     _ C _ D D                      
-                     0 3  2 1 D 0 W S C E NS M D     4 C 5 7 6                      
+                                    V   6          V                                
+                       F  F F   F   I   4  V       I                                
+                     F O  O O   O   D   O RI       D                                
+                     O N  N N   N   _   R ED C     _                                
+                     N T  T T   T V M   3 S_ L     C       C C                      
+                     T L  L L   L I E   2 EI K     P F   F P P                      
+                     S I  I I   I D M   M TO _     L M   M U U                      
+                     E N  N N G N _ _ V O __ 2 G   D _ V _ _ _                      
+                     L E  E E N E R C C D IC 5 N   _ O C W D D                      
+                     0 3  2 1 D 0 W S C E NS M D   4 E C E 7 6                      
                     -------------------------------------------                     
                    / 11   9   7   5   3   1  83  81  79  77  75 \                  
                   /    10   8   6   4   2  84  82  80  78  76    \                 
@@ -506,9 +551,9 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
           CPU_A0 | 17                                          69 | CPU_D2          
           CPU_A1 | 18                                          68 | CPU_D1          
              GND | 19                                          67 | CPU_D0          
-          CPU_A2 | 20                                          66 | VCC             
-          CPU_A3 | 21                                          65 | VGA_VIDEO_OUT   
- VID_80X25MEM_CS | 22                 ATF1508                  64 | VGA_VSYNC_OUT   
+          FM_A10 | 20                                          66 | VCC             
+          FM_A11 | 21                                          65 | VGA_VIDEO_OUT   
+      VID_CPLD_6 | 22                 ATF1508                  64 | VGA_VSYNC_OUT   
              TMS | 23               84-Lead PLCC               63 | VGA_HSYNC_OUT   
         VM_PAGE0 | 24                                          62 | TCK             
         VM_PAGE1 | 25                                          61 | NTSC_PIXEL_OUT  
@@ -521,69 +566,30 @@ NTSC_PIXEL_OUT.ar = !RESET_IN;
              GND | 32                                          54 | DIN3            
                   \     34  36  38  40  42  44  46  48  50  52   /                 
                    \  33  35  37  39  41  43  45  47  49  51  53/                  
-              	    --------------------------------------------                     
-                      V V V C V V V C C G V V V C G C C D D D V                     
-                      M M M P M C M P P N C M M P N P P I I I C                     
-                      _ _ _ _ _ C _ _ _ D C _ _ _ D _ _ N N N C                     
-                      A A A V D   D F F     A A V   V V 0 1 2                       
-                      D D D M A   A M M     D D M   M M                             
-                      _ _ _ _ T   T _ _     _ _ _   _ _                             
-                      C C C A A   A D D     R O D   D D                             
-                      L L L D _   _ A A     C E W   R R                             
-                      R K K _ O   L T T     L   _   _ _                             
-                          E O E   A A A     K   O   O L                             
-                          N E     T _ _         E   E E                             
-                                  C O D                                             
-                                  H E I                          
-
+                    	    --------------------------------------------                     
+                      M M M C V V V C V G V V V C G C C D D D V                     
+                      O O O P M C M P M N C M M P N P P I I I C                     
+                      D D D _ _ C _ _ _ D C _ _ _ D _ _ N N N C                     
+                      E E E V D   D F A     A A V   V V 0 1 2                       
+                      0 1 2 M A   A M D     D D M   M M                             
+                            _ T   T _ D     D D _   _ _                             
+                            A A   A D R     R R D   D D                             
+                            D _   _ A _     _ _ W   R R                             
+                            _ O   L T R     C O _   _ _                             
+                            O E   A A E     L E O   O L                             
+                            E     T _ S     O   E   E E                             
+                                  C O E     C                                       
+                                  H E T     K                                       
+                                            
 
 Total dedicated input used:	4/4 	(100%)
-Total I/O pins used		64/64 	(100%)
-Total Logic cells used 		106/128 	(82%)
+Total I/O pins used		63/64 	(98%)
+Total Logic cells used 		103/128 	(80%)
 Total Flip-Flop used 		58/128 	(45%)
 Total Foldback logic used 	2/128 	(1%)
-Total Nodes+FB/MCells 		107/128 	(83%)
+Total Nodes+FB/MCells 		104/128 	(81%)
 Total cascade used 		1
-Total input pins 		27
-Total output pins 		41
-Total Pts 			275
-*/
+Total input pins 		32
+Total output pins 		35
+Total Pts 			303*/
 
-/*
-
-CPLD Signals
-SCHEMATIC      <-> CPLDNAME
-----------         ------------
-64OR32_MODE    <-> V46OR32MODE
-SYS_RESET      <-> RESET_IN
-VID_CPLD_4     <-> VID_CPLD_4
-VID_CPLD_5     <-> VID_CPLD_5
-VID_IO_CS      <-> VID_IO_CS
-VID_MEM_CS     <-> VID_MEM_CS
-VID_RW         <-> VID_RW
-Z80_WAIT       <-> Z80_WAIT
-VM_OE          <-> VM_OE
-VM_WE          <-> VM_WE
-FM_D0-FM_D7    <-> DIN0..7
-FM_A0-FM_A3    <-> FONTLINE0..3
-FM_A12-FM_A15  <-> FONTSEL0..3
-VM_AD_CLR      <-> VM_AD_CLR
-VM_AD_CLK      <-> VM_AD_CLK
-CP_VM_AD_OE    <-> CP_VM_AD_OE
-CP_FM_AD_OE    <-> CP_FM_AD_OE
-VM_DATA_OE     <-> VM_DATA_OE
-VM_DATA_LATCH  <-> VM_DATA_LATCH
-CP_FM_DATA_OE  <-> CP_FM_DATA_OE
-CP_FM_DATA_DIR <-> CP_FM_DATA_DIR
-VM_AD_RCLK     <-> VM_AD_RCLK
-VM_AD_OE       <-> VM_AD_OE
-CP_VM_DW_OE    <-> CP_VM_DW_OE
-CP_VM_DR_OE    <-> CP_VM_DR_OE
-CP_VM_DR_LE    <-> CP_VM_DR_LE
-VM_AD_CLKEN    <-> VM_AD_CLKEN
-CPU_A0-CPU_A3  <-> CPU_A0-CPU_A3
-CPU_A10	       <-> CPU_2KPAGE_A10
-VM_A10-VM_A13  <-> VM_PAGE0..3
-VID_80X25MEM_CS <-> VID_80X25MEM_CS
-
-*/
