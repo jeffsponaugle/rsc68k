@@ -11,7 +11,7 @@ Device   f1504ispplcc44;
 
 Pin[9,11,12,14,16,21,24,25,31,29,33,34,36,37]  = [VM_A0..13];        /* SUM output bits S*/
 Pin[1]  = VM_ADDR_OE;            /* Active low enable output of VM_A0-VM_A9 */
-Pin[44] = VM_ADDR_RESET;
+Pin[44] = VM_ADDR_RESET;         /* Active High reset of address counter */
 Pin[43] = VM_ADDR_CLOCK;
 Pin[39,40,41] = [MODE2..0];     /* MODE detemines what happend in the internal counter on ClockIn positive edge */
 Pin[2,4,5,6] = [VM_PAGE3..0];  /* Input from main CPLD with the page select for CPU access to video memory */
