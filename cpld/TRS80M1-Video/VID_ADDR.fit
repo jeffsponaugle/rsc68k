@@ -1,4 +1,4 @@
-Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Thu Sep 21 19:50:48 2023
+Atmel ATF1504AS Fitter Version 1.8.7.8 ,running Thu Sep 21 20:53:23 2023
 
 
 fit1504 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VID_ADDR.tt2 -CUPL -dev P1504C44 -JTAG ON
@@ -300,21 +300,16 @@ XXL_151			(MC8	FB)  : MUX 35		Ref (B26fb)
 VM_A9			(MC13	FB)  : MUX 37		Ref (C41fb)
 VM_ADDR_OE		(MC18	FB)  : MUX 38		Ref (GCLR)
 
-FanIn assignment for block D [9]
+FanIn assignment for block D [5]
 {
-S10,S11,S13,S12,
 VM_PAGE0,VM_PAGE3,VM_PAGE1,VM_PAGE2,VM_ADDR_OE,
 }
 Multiplexer assignment for block D
-VM_PAGE0		(MC6	P)   : MUX 0		Ref (A11p)
-VM_PAGE3		(MC9	FB)  : MUX 12		Ref (OE2)
-S10			(MC2	FB)  : MUX 20		Ref (A6fb)
-S11			(MC3	FB)  : MUX 22		Ref (A7fb)
-S13			(MC4	FB)  : MUX 23		Ref (B27fb)
-S12			(MC1	FB)  : MUX 26		Ref (A5fb)
-VM_PAGE1		(MC7	P)   : MUX 28		Ref (A14p)
-VM_PAGE2		(MC8	P)   : MUX 30		Ref (A16p)
-VM_ADDR_OE		(MC5	FB)  : MUX 38		Ref (GCLR)
+VM_PAGE0		(MC2	P)   : MUX 0		Ref (A11p)
+VM_PAGE3		(MC5	FB)  : MUX 12		Ref (OE2)
+VM_PAGE1		(MC3	P)   : MUX 32		Ref (A14p)
+VM_PAGE2		(MC4	P)   : MUX 36		Ref (A16p)
+VM_ADDR_OE		(MC1	FB)  : MUX 38		Ref (GCLR)
 
 Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VID_ADDR.jed ...
 
@@ -355,17 +350,13 @@ UNUSED6 = VID_CPLD_6;
 
 UNUSED8 = VID_CPLD_6;
 
-VM_A10 = ((VM_ADDR_OE & VM_PAGE0)
-	# (S10.Q & !VM_ADDR_OE));
+VM_A10 = (VM_ADDR_OE & VM_PAGE0);
 
-VM_A11 = ((VM_ADDR_OE & VM_PAGE1)
-	# (S11.Q & !VM_ADDR_OE));
+VM_A11 = (VM_ADDR_OE & VM_PAGE1);
 
-VM_A12 = ((VM_ADDR_OE & VM_PAGE2)
-	# (S12.Q & !VM_ADDR_OE));
+VM_A12 = (VM_ADDR_OE & VM_PAGE2);
 
-VM_A13 = ((VM_ADDR_OE & VM_PAGE3)
-	# (S13.Q & !VM_ADDR_OE));
+VM_A13 = (VM_ADDR_OE & VM_PAGE3);
 
 VM_A6.D = (XXL_150
 	# XXL_151);
@@ -727,11 +718,11 @@ MC45  0         --                   XXL_145  C----  NA        --             5 
 MC46  31   PT   VM_A8         Dg-r-  --              --        --             4     slow
 MC47  0         --                   XXL_144  C----  NA        --             5     slow
 MC48  32   --   TCK           INPUT  XXL_143  C----  NA        --             5     slow
-MC49  33   on   VM_A10        C----  --              --        --             2     slow
+MC49  33   on   VM_A10        C----  --              --        --             1     slow
 MC50  0         --                   --              --        --             0     slow
-MC51  34   on   VM_A11        C----  --              --        --             2     slow
-MC52  36   on   VM_A12        C----  --              --        --             2     slow
-MC53  37   on   VM_A13        C----  --              --        --             2     slow
+MC51  34   on   VM_A11        C----  --              --        --             1     slow
+MC52  36   on   VM_A12        C----  --              --        --             1     slow
+MC53  37   on   VM_A13        C----  --              --        --             1     slow
 MC54  0         --                   --              --        --             0     slow
 MC55  0         --                   --              --        --             0     slow
 MC56  38   --   TDO           INPUT  --              --        --             0     slow
@@ -752,7 +743,7 @@ Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
 A: LC1	- LC16		16/16(100%)	8/16(50%)	0/16(0%)	63/80(78%)	(25)	0
 B: LC17	- LC32		15/16(93%)	8/16(50%)	0/16(0%)	48/80(60%)	(24)	0
 C: LC33	- LC48		15/16(93%)	8/16(50%)	0/16(0%)	51/80(63%)	(22)	0
-D: LC49	- LC64		4/16(25%)	8/16(50%)	0/16(0%)	8/80(10%)	(9)	0
+D: LC49	- LC64		4/16(25%)	8/16(50%)	0/16(0%)	4/80(5%)	(5)	0
 
 Total dedicated input used:	4/4 	(100%)
 Total I/O pins used		32/32 	(100%)
@@ -763,7 +754,7 @@ Total Nodes+FB/MCells 		50/64 	(78%)
 Total cascade used 		0
 Total input pins 		15
 Total output pins 		21
-Total Pts 			170
+Total Pts 			166
 Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VID_ADDR.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS

@@ -58,10 +58,17 @@ FIELD mode_field = [MODE2..0];
     The upper 4 address bits are equal to VM_PAGEx if the VM_AddrOE input is high signaling CPU access to video memory.
     If VM_AddrOE is low video output is accessing video memory so the internal 14 bit counter value is used.
 */
+/*
 VM_A10 = (S10 & !VM_ADDR_OE ) # ( VM_PAGE0 & VM_ADDR_OE);
 VM_A11 = (S11 & !VM_ADDR_OE ) # ( VM_PAGE1 & VM_ADDR_OE); 
 VM_A12 = (S12 & !VM_ADDR_OE ) # ( VM_PAGE2 & VM_ADDR_OE);
 VM_A13 = (S13 & !VM_ADDR_OE ) # ( VM_PAGE3 & VM_ADDR_OE);
+*/
+
+VM_A10 = ( VM_PAGE0 & VM_ADDR_OE);
+VM_A11 = ( VM_PAGE1 & VM_ADDR_OE); 
+VM_A12 = ( VM_PAGE2 & VM_ADDR_OE);
+VM_A13 = ( VM_PAGE3 & VM_ADDR_OE);
 
 /* Carry IN is 1 for increment by 1 mode, MODE=001 */
 C0 = mode_field:['d'1];

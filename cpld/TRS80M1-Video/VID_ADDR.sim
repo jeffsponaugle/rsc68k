@@ -560,19 +560,15 @@ VM_A9.oe  =>
     !VM_ADDR_OE
 
 VM_A10 =>
-    S10 & !VM_ADDR_OE
-  # VM_ADDR_OE & VM_PAGE0
+    VM_ADDR_OE & VM_PAGE0
 
 VM_A11 =>
-    S11 & !VM_ADDR_OE
-  # VM_ADDR_OE & VM_PAGE1
+    VM_ADDR_OE & VM_PAGE1
 
 VM_A12 =>
-    S12 & !VM_ADDR_OE
-  # VM_ADDR_OE & VM_PAGE2
+    VM_ADDR_OE & VM_PAGE2
 
 VM_A13 =>
-    S13 & !VM_ADDR_OE
-  # VM_ADDR_OE & VM_PAGE3
+    VM_ADDR_OE & VM_PAGE3
 
 %END

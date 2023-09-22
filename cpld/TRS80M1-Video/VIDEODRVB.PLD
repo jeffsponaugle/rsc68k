@@ -479,6 +479,8 @@ FONTLINE3.d =  ( (FONTLINE_INC&((FONTLINE3T&!FONTLINE3) # (!FONTLINE3T&FONTLINE3
         ) & !FONTLINE_RESET;
 FONTLINE3.ck = VSYNC_CLOCK_B;
 
+FIELD fontline_field = [FONTLINE3..0];
+
 /* 
    If VDP_OR_FONT_ACCESS==1 we want to disable the FONTLINE outputs so the CPU address drivers can 
    drive the font RAM
@@ -522,7 +524,7 @@ HSYNC_PATTERN = (hsync_counter_field:['d'0..'d'63]);
 
 
 MODE_INC = (hsync_counter_field:['d'194..'d'704]) & VSYNC_DISPLAY_ACTIVE;
-MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE;
+MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE & (!(fontline_field:['d'11]));
 
 VID_VM_CS.d = MODE_INC & hsync_counter_3_field:['d'2..'d'7];
 VID_VM_CS.ck = !CLK_12M;
