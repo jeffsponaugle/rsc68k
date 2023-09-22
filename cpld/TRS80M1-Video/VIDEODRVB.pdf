@@ -1,11 +1,11 @@
-{COMPONENT C:\VIDEODRVB.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VIDEODRVB.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Tue Sep 19 18:31:29 2023 "}
+  {DBtime "Thu Sep 21 19:54:32 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -325,7 +325,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\VIDEODRVB 230 720}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VIDEODRVB 230 720}
    }
   }
  }

@@ -319,14 +319,14 @@ HSYNC_PATTERN = (hsync_counter_field:['d'0..'d'63]);
 
 /* The actual SYNC output pin is either doing a line with the HSYNC pattern, or the VSYNC pattern */
 
-SYNC_OUT.d = !( 
+SYNC_OUT.d = ( 
                  (VSYNC_OUTPUT_VSYNC & VSYNC_PATTERN)
                # (!VSYNC_OUTPUT_VSYNC & HSYNC_PATTERN)
               );
 SYNC_OUT.ck = !CLK_12M;
 SYNC_OUT.ap = !RESET_IN;
 
-PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
+PIXEL_OUT.d = !(HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
 PIXEL_OUT.ck = !CLK_12M;
 PIXEL_OUT.ar = !RESET_IN;
 

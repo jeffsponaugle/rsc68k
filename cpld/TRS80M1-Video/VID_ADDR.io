@@ -1,4 +1,4 @@
-CHIP "C:\VID_ADDR"
+CHIP "C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\VID_ADDR"
 BEGIN
 
     DEVICE = "PLCC44";
@@ -6,16 +6,17 @@ BEGIN
     "C7"                                      : NODE_NUM = 602 ;
     "VM_A1"                                   : OUTPUT_PIN = 11 ;
     "VM_A0"                                   : OUTPUT_PIN = 9 ;
-    "UNUSED1"                                 : OUTPUT_PIN = 8 ;
+    "VID_CPLD_6"                              : INPUT_PIN = 8 ;
+    "S12"                                     : NODE_NUM = 605 ;
     "S10"                                     : NODE_NUM = 606 ;
-    "S12"                                     : NODE_NUM = 607 ;
+    "S11"                                     : NODE_NUM = 607 ;
     "TDI"                                     : INPUT_PIN = 7 ;
-    "S11"                                     : NODE_NUM = 608 ;
-    "XXL_149"                                 : NODE_NUM = 609 ;
-    "C6"                                      : NODE_NUM = 610 ;
+    "XXL_149"                                 : NODE_NUM = 608 ;
+    "C6"                                      : NODE_NUM = 609 ;
+    "XXL_150"                                 : NODE_NUM = 610 ;
     "VM_PAGE0"                                : INPUT_PIN = 6 ;
-    "XXL_138"                                 : NODE_NUM = 611 ;
-    "XXL_136"                                 : NODE_NUM = 612 ;
+    "XXL_136"                                 : NODE_NUM = 611 ;
+    "XXL_138"                                 : NODE_NUM = 612 ;
     "XXL_137"                                 : NODE_NUM = 613 ;
     "VM_PAGE1"                                : INPUT_PIN = 5 ;
     "XXL_148"                                 : NODE_NUM = 614 ;
@@ -23,7 +24,6 @@ BEGIN
     "VM_PAGE2"                                : INPUT_PIN = 4 ;
     "XXL_140"                                 : NODE_NUM = 616 ;
     "VM_A5"                                   : OUTPUT_PIN = 21 ;
-    "C11"                                     : NODE_NUM = 618 ;
     "UNUSED4"                                 : OUTPUT_PIN = 20 ;
     "UNUSED3"                                 : OUTPUT_PIN = 19 ;
     "UNUSED2"                                 : OUTPUT_PIN = 18 ;
@@ -34,11 +34,11 @@ BEGIN
     "XXL_151"                                 : NODE_NUM = 626 ;
     "S13"                                     : NODE_NUM = 627 ;
     "XXL_135"                                 : NODE_NUM = 628 ;
-    "XXL_142"                                 : NODE_NUM = 629 ;
+    "XXL_147"                                 : NODE_NUM = 629 ;
     "VM_A3"                                   : OUTPUT_PIN = 14 ;
-    "XXL_141"                                 : NODE_NUM = 631 ;
+    "XXL_142"                                 : NODE_NUM = 631 ;
     "TMS"                                     : INPUT_PIN = 13 ;
-    "XXL_150"                                 : NODE_NUM = 632 ;
+    "XXL_141"                                 : NODE_NUM = 632 ;
     "VM_A6"                                   : OUTPUT_PIN = 24 ;
     "VM_A7"                                   : OUTPUT_PIN = 25 ;
     "UNUSED7"                                 : OUTPUT_PIN = 26 ;
@@ -47,9 +47,9 @@ BEGIN
     "C12"                                     : NODE_NUM = 639 ;
     "UNUSED6"                                 : OUTPUT_PIN = 28 ;
     "VM_A9"                                   : OUTPUT_PIN = 29 ;
-    "C10"                                     : NODE_NUM = 642 ;
-    "XXL_146"                                 : NODE_NUM = 643 ;
-    "XXL_147"                                 : NODE_NUM = 644 ;
+    "C11"                                     : NODE_NUM = 642 ;
+    "C10"                                     : NODE_NUM = 643 ;
+    "XXL_146"                                 : NODE_NUM = 644 ;
     "XXL_145"                                 : NODE_NUM = 645 ;
     "VM_A8"                                   : OUTPUT_PIN = 31 ;
     "XXL_144"                                 : NODE_NUM = 647 ;

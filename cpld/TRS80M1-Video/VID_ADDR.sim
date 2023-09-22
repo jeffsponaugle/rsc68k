@@ -24,7 +24,6 @@ PIN  56 =  S10
 PIN  55 =  S11 
 PIN  54 =  S12 
 PIN  53 =  S13 
-PIN   8 =  UNUSED1 
 PIN  18 =  UNUSED2 
 PIN  19 =  UNUSED3 
 PIN  20 =  UNUSED4 
@@ -32,6 +31,7 @@ PIN  17 =  UNUSED5
 PIN  28 =  UNUSED6 
 PIN  26 =  UNUSED7 
 PIN  27 =  UNUSED8 
+PIN   8 =  VID_CPLD_6 
 PIN   9 =  VM_A0 
 PIN  11 =  VM_A1 
 PIN  12 =  VM_A2 
@@ -478,29 +478,26 @@ S13.ar  =>
 S13.ck  =>
     VM_ADDR_CLOCK
 
-UNUSED1 =>
-    0 
-
 UNUSED2 =>
-    0 
+    VID_CPLD_6
 
 UNUSED3 =>
-    0 
+    VID_CPLD_6
 
 UNUSED4 =>
-    0 
+    VID_CPLD_6
 
 UNUSED5 =>
-    0 
+    VID_CPLD_6
 
 UNUSED6 =>
-    0 
+    VID_CPLD_6
 
 UNUSED7 =>
-    0 
+    VID_CPLD_6
 
 UNUSED8 =>
-    0 
+    VID_CPLD_6
 
 VM_A0 =>
     S0

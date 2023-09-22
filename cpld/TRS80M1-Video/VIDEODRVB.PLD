@@ -551,14 +551,14 @@ MODE2 = 'b'0;
 
 /* The actual SYNC output pin is either doing a line with the HSYNC pattern, or the VSYNC pattern */
 
-NTSC_SYNC_OUT.d = !( 
+NTSC_SYNC_OUT.d = ( 
                  (VSYNC_OUTPUT_VSYNC & VSYNC_PATTERN)
                # (!VSYNC_OUTPUT_VSYNC & HSYNC_PATTERN)
               );
 NTSC_SYNC_OUT.ck = !CLK_12M;
 NTSC_SYNC_OUT.ap = !RESET_IN;
 
-NTSC_PIXEL_OUT.d = (HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
+NTSC_PIXEL_OUT.d = !(HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
 NTSC_PIXEL_OUT.ck = !CLK_12M;
 NTSC_PIXEL_OUT.ar = !RESET_IN;
 
