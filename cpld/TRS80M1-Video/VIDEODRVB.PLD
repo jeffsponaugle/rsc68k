@@ -122,6 +122,7 @@ CPU_VRAM_CS_GNT.ap = !RESET_IN;
 
 VDP_VRAM_CS_GNT.ck = VRAM_SHARED_STATE;
 VDP_VRAM_CS_GNT.d = VID_VM_CS;
+VDP_VRAM_CS_GNT.ap = !RESET_IN;
 
 VDP_VRAM_CS_EDGE.ck = !VID_VM_CS;
 VDP_VRAM_CS_EDGE.d = 'b'0;
@@ -461,23 +462,27 @@ FONTLINE0.d =  (  (FONTLINE_INC&!FONTLINE0)
         # (!FONTLINE_INC&FONTLINE0)
         ) & !FONTLINE_RESET;     
 FONTLINE0.ck = VSYNC_CLOCK_B;
+FONTLINE0.ar = !RESET_IN;
 
 FONTLINE1.d =  (  (FONTLINE_INC&((FONTLINE0&!FONTLINE1) # (!FONTLINE0&FONTLINE1))) 
         # ((!FONTLINE_INC&FONTLINE1))
         ) & !FONTLINE_RESET;
 FONTLINE1.ck = VSYNC_CLOCK_B;
+FONTLINE1.ar = !RESET_IN;
 
 FONTLINE2T = FONTLINE0&FONTLINE1;
 FONTLINE2.d =  (  (FONTLINE_INC&((FONTLINE2T&!FONTLINE2) # (!FONTLINE2T&FONTLINE2))) 
         # ((!FONTLINE_INC&FONTLINE2))
         ) & !FONTLINE_RESET;
 FONTLINE2.ck = VSYNC_CLOCK_B;
+FONTLINE2.ar = !RESET_IN;
 
 FONTLINE3T = FONTLINE2T&FONTLINE2;
 FONTLINE3.d =  ( (FONTLINE_INC&((FONTLINE3T&!FONTLINE3) # (!FONTLINE3T&FONTLINE3))) 
         # ((!FONTLINE_INC&FONTLINE3))
         ) & !FONTLINE_RESET;
 FONTLINE3.ck = VSYNC_CLOCK_B;
+FONTLINE3.ar = !RESET_IN;
 
 FIELD fontline_field = [FONTLINE3..0];
 
@@ -522,9 +527,14 @@ VSYNC_PATTERN = (hsync_counter_field:['d'0..'d'639]);
    This value is ==1 at the locations that we want the SYNC signal to be 0. */
 HSYNC_PATTERN = (hsync_counter_field:['d'0..'d'63]);
 
-
 MODE_INC = (hsync_counter_field:['d'194..'d'704]) & VSYNC_DISPLAY_ACTIVE;
 MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE & (!(fontline_field:['d'11]));
+
+/* 
+    Chip Select is enabled (low) during the 6 cycles before each pixel load into the shift register.
+   MODE_INC is used because that signal is also active starting 6 cycles before the active part of a line ending
+   just after the last character is loaded.  Adding the hsync_counter_3_field makes it pulse for 6 of the 8 cycles.
+*/
 
 VID_VM_CS.d = MODE_INC & hsync_counter_3_field:['d'2..'d'7];
 VID_VM_CS.ck = !CLK_12M;
@@ -546,6 +556,7 @@ VM_ADDR_RESET = !VSYNC_DISPLAY_ACTIVE;
 */
 VM_ADDR_CLOCK.d = hsync_counter_3_field:['d'0];
 VM_ADDR_CLOCK.ck = !CLK_12M;
+VM_ADDR_CLOCK.ar = !RESET_IN;
 
 MODE0 = MODE_INC;
 MODE1 = MODE_SUB64;
