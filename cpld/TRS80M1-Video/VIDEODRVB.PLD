@@ -254,6 +254,7 @@ NODE VSYNC_DISPLAY_ACTIVE;
 NODE [SHIFTREG0..7];
 NODE FONTLINE_RESET;
 
+
 CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
 CLK_12M.ar = !RESET_IN;
@@ -558,9 +559,11 @@ VM_ADDR_CLOCK.d = hsync_counter_3_field:['d'0];
 VM_ADDR_CLOCK.ck = !CLK_12M;
 VM_ADDR_CLOCK.ar = !RESET_IN;
 
-MODE0 = MODE_INC;
-MODE1 = MODE_SUB64;
-MODE2 = 'b'0;
+MODE0.d = MODE_INC;
+MODE1.d = MODE_SUB64;
+MODE2.d = 'b'0;
+
+[MODE2..0].ck = !CLK_12M;
 
 /* The actual SYNC output pin is either doing a line with the HSYNC pattern, or the VSYNC pattern */
 
