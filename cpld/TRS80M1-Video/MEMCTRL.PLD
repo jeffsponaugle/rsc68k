@@ -70,7 +70,7 @@ UNUSED2_IO = Z80_A8 & Z80_A9 & V64_32_VIDEO_MODE;
 
 /* Hold values to force output pin creation. */
 Z80_INT = 'b'1;
-EXP_EN = 'b'1;
+EXP_EN = 'b'0;
 VID_CPLD_4 = 'b'1;
 VID_CPLD_5 = 'b'1;
 VID_80X25MEM_CS = 'b'1;
