@@ -261,20 +261,24 @@ CLK_12M.ar = !RESET_IN;
 
 /*  
     Configuration Registers 
-    CONFA is IO Write to 0x7A 
-        Bit 0-3: Video Memory Page Select (1K pages)
-        Bit 4-7: Font Memory Select (Pick font)
-    CONFB is IO Write to 0x7B
-        Bit 0-5: Font Memory Page Select (1K pages)
+    CONFA is IO Write to 0x7A  (0111 1010)
+        Bit 0-3: Character Memory Page Select (Which 1K page of CHARACTER RAM is visable to the CPU )
+        Bit 4-7: Font Memory Select (Which font is being used for actual video rendering.  Each FONT is 4K in size)
+    CONFB is IO Write to 0x7B  (0111 1011)
+        Bit 0-5: Font Memory Page Select (Which 1K page of FONT RAM is visable to the CPU)
         Bit 6:
-        Bit 7: 0=Video RAM Visable, and VIDEO OUTPUT enabled.
-               1=Font RAM Visable to CPU, and VIDEO_OUTPUT disabled.
+        Bit 7: 0=CHARACTER RAM Visable, and VIDEO OUTPUT enabled.
+               1=FONT RAM Visable to CPU, and VIDEO_OUTPUT disabled.
                VDP_OR_FONT_ACCESS
     
 */
 
-VCONFAWRITE = !VID_IO_CS & !CPU_A0 & !CPU_A1 & !VID_RW;
-VCONFBWRITE = !VID_IO_CS & CPU_A0 & !CPU_A1 & !VID_RW;
+/* 
+   VCONF a/b WRITE is 0 during a register write, transition to 1 at the end of the write cycle.
+   The edge going from 0 to 1 latches the values in the register 
+*/
+VCONFAWRITE = !(!VID_IO_CS & !CPU_A0 & CPU_A1 & !VID_RW);
+VCONFBWRITE = !(!VID_IO_CS & CPU_A0 & CPU_A1 & !VID_RW);
 
 [VCONFA0..7].ck = VCONFAWRITE;
 [VCONFA0..7].d = [CPU_D0..7];
@@ -286,15 +290,15 @@ VCONFBWRITE = !VID_IO_CS & CPU_A0 & !CPU_A1 & !VID_RW;
 
 /* FONTSEL0-3 are connected to the font RAM address bits 12,13,14,15
    if (VDP_OR_FONT_ACCESS==0) FONTSEL should refect the VCONFA4-7 register.
+       This allows those bits to select what FONT is used for the active video output.
    if (VDP_OR_FONT_ACCESS==1) FONTSEL should refect the VCONFB2-5 register.
-      In this second case, we also want to output VCONFB0-1
+      In this second case, we also want to output VCONFB0-1 to font RAM address bits 10,11.
 */
 
 FONTSEL0 = (!VDP_OR_FONT_ACCESS & VCONFA4) # (VDP_OR_FONT_ACCESS & VCONFB2);
 FONTSEL1 = (!VDP_OR_FONT_ACCESS & VCONFA5) # (VDP_OR_FONT_ACCESS & VCONFB3);
 FONTSEL2 = (!VDP_OR_FONT_ACCESS & VCONFA6) # (VDP_OR_FONT_ACCESS & VCONFB4);
 FONTSEL3 = (!VDP_OR_FONT_ACCESS & VCONFA7) # (VDP_OR_FONT_ACCESS & VCONFB5);
-
 
 /* 
    As mentioned above, if VDP_OR_FONT_ACCESS==1, we are allowing CPU access to the FONT memory.  
