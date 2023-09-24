@@ -1,4 +1,4 @@
-CHIP "C:\MEMCTRL"
+CHIP "C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL"
 BEGIN
 
     DEVICE = "PLCC84";
@@ -54,40 +54,38 @@ BEGIN
     "Z80_D4"                                  : OUTPUT_PIN = 30 ;
     "Z80_D5"                                  : OUTPUT_PIN = 29 ;
     "Z80_D6"                                  : OUTPUT_PIN = 28 ;
-    "CLK_DIV2"                                : NODE_NUM = 642 ;
     "Z80_D7"                                  : OUTPUT_PIN = 27 ;
-    "CLK_DIV16"                               : NODE_NUM = 644 ;
     "Z80_CLK"                                 : OUTPUT_PIN = 25 ;
     "Z80_A0"                                  : INPUT_PIN = 24 ;
-    "CLK_DIV8"                                : NODE_NUM = 646 ;
-    "Com_Ctrl_363"                            : NODE_NUM = 647 ;
     "TMS"                                     : INPUT_PIN = 23 ;
-    "CLK_DIV4"                                : NODE_NUM = 648 ;
     "Z80_NMI"                                 : OUTPUT_PIN = 41 ;
     "Z80_WR"                                  : INPUT_PIN = 40 ;
     "Z80_RD"                                  : INPUT_PIN = 39 ;
-    "SYSTEM_CONFIG5"                          : NODE_NUM = 655 ;
     "Z80_IOREQ"                               : INPUT_PIN = 37 ;
-    "SYSTEM_CONFIG4"                          : NODE_NUM = 656 ;
     "Z80_MEMREQ"                              : INPUT_PIN = 36 ;
-    "SYSTEM_CONFIG6"                          : NODE_NUM = 657 ;
-    "SYSTEM_CONFIG2"                          : NODE_NUM = 658 ;
+    "CLK_DIV16"                               : NODE_NUM = 657 ;
+    "Com_Ctrl_363"                            : NODE_NUM = 658 ;
     "Z80_D0"                                  : OUTPUT_PIN = 35 ;
     "SYSTEM_CONFIG3"                          : NODE_NUM = 660 ;
     "Z80_D1"                                  : OUTPUT_PIN = 34 ;
-    "SYSTEM_CONFIG1"                          : NODE_NUM = 662 ;
-    "SYSTEM_CONFIG0"                          : NODE_NUM = 663 ;
+    "SYSTEM_CONFIG0"                          : NODE_NUM = 662 ;
+    "SYSTEM_CONFIG1"                          : NODE_NUM = 663 ;
     "Z80_D2"                                  : OUTPUT_PIN = 33 ;
     "Z80_INT"                                 : OUTPUT_PIN = 44 ;
+    "SYSTEM_CONFIG5"                          : NODE_NUM = 666 ;
     "CASS_OUT_D0"                             : OUTPUT_PIN = 45 ;
+    "CLK_DIV2"                                : NODE_NUM = 668 ;
     "CASS_OUT_D1"                             : OUTPUT_PIN = 46 ;
+    "RTC_DS_1"                                : NODE_NUM = 670 ;
+    "RTC_DS_0"                                : NODE_NUM = 671 ;
     "CASS_OUT_D2"                             : OUTPUT_PIN = 48 ;
     "CASS_IN_D7"                              : INPUT_PIN = 49 ;
+    "SYSTEM_CONFIG7"                          : NODE_NUM = 673 ;
     "SEVENSEG_A_CS"                           : OUTPUT_PIN = 50 ;
-    "RTC_DS_1"                                : NODE_NUM = 676 ;
+    "SYSTEM_CONFIG6"                          : NODE_NUM = 676 ;
     "SEVENSEG_B_CS"                           : OUTPUT_PIN = 51 ;
-    "SYSTEM_CONFIG7"                          : NODE_NUM = 678 ;
-    "RTC_DS_0"                                : NODE_NUM = 679 ;
+    "SYSTEM_CONFIG4"                          : NODE_NUM = 678 ;
+    "SYSTEM_CONFIG2"                          : NODE_NUM = 679 ;
     "UNUSED2_IO"                              : OUTPUT_PIN = 52 ;
     "SRAM_CS"                                 : OUTPUT_PIN = 54 ;
     "FLASH_CS"                                : OUTPUT_PIN = 55 ;
@@ -108,7 +106,9 @@ BEGIN
     "EXP_EN"                                  : OUTPUT_PIN = 73 ;
     "VID_CPLD_4"                              : OUTPUT_PIN = 74 ;
     "VID_CPLD_5"                              : OUTPUT_PIN = 75 ;
+    "CLK_DIV4"                                : NODE_NUM = 719 ;
     "RTC_CS"                                  : OUTPUT_PIN = 76 ;
+    "CLK_DIV8"                                : NODE_NUM = 722 ;
     "RTC_AS"                                  : OUTPUT_PIN = 77 ;
     "RTC_DS"                                  : OUTPUT_PIN = 79 ;
     "RTC_A_LATCH"                             : OUTPUT_PIN = 80 ;

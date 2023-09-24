@@ -66,7 +66,8 @@ Pin[52]    = UNUSED2_IO;
     	chip select creation. */
 
 UNUSED1_IO = Z80_A8 # Z80_A9;
-UNUSED2_IO = Z80_A8 & Z80_A9 & V64_32_VIDEO_MODE;
+UNUSED2_IO = Z80_A8 & Z80_A9;
+
 
 /* Hold values to force output pin creation. */
 Z80_INT = 'b'1;
@@ -117,14 +118,14 @@ Z80_CLK = (!SYSTEM_CONFIG1 & !SYSTEM_CONFIG0 & CLK_DIV16)
 
 /* CLK_DIV2_OUT = CLK_DIV2; */
 
-ISMEMORYACCESS = !Z80_MEMREQ;
-ISIOACCESS = !Z80_IOREQ;
+ISMEMORYACCESS = !Z80_MEMREQ & Z80_RFSH;
+ISIOACCESS = !Z80_IOREQ  & Z80_RFSH;
 
 /* NMAP_HARDWARE_ACCESS == 1 if there is a memory accces to the hardware mmap region (0x3800-0x3FFF) AND the REGION 0 bit to all 
    hardware acesss is REGION0_CONFIG7==1 */
 
 
-MMAP_HARDWARE_ACCESS = REGION0_CONFIG7 & ISMEMORYACCESS & 
+MMAP_HARDWARE_ACCESS = !REGION0_CONFIG7 & ISMEMORYACCESS & 
                                         (cpu_address_bus:'h'38XX
                                        # cpu_address_bus:'h'39XX
                                        # cpu_address_bus:'h'3AXX
@@ -175,15 +176,15 @@ REGION3_CS = !(ISMEMORYACCESS & (cpu_address_bus:'h'CXXX
 
 /* Based on the Region config for each region, determine if a SRAM acesss is in order */
 
-SRAM_CS = (REGION0_CS # REGION0_CONFIG6) &
-          (REGION1_CS # REGION1_CONFIG6) &
-          (REGION2_CS # REGION2_CONFIG6) &
-          (REGION3_CS # REGION3_CONFIG6);
+SRAM_CS = (REGION0_CS # !REGION0_CONFIG6) &
+          (REGION1_CS # !REGION1_CONFIG6) &
+          (REGION2_CS # !REGION2_CONFIG6) &
+          (REGION3_CS # !REGION3_CONFIG6);
 
-FLASH_CS = (REGION0_CS # !REGION0_CONFIG6) &
-           (REGION1_CS # !REGION1_CONFIG6) &
-           (REGION2_CS # !REGION2_CONFIG6) &
-          ( REGION3_CS # !REGION3_CONFIG6);
+FLASH_CS = (REGION0_CS # REGION0_CONFIG6) &
+           (REGION1_CS # REGION1_CONFIG6) &
+           (REGION2_CS # REGION2_CONFIG6) &
+          ( REGION3_CS # REGION3_CONFIG6);
 
 SRAM_FLASH_PAGE_A14 = ((!REGION0_CS) & REGION0_CONFIG0 ) #
                       ((!REGION1_CS) & REGION1_CONFIG0 ) #
@@ -278,7 +279,10 @@ RTC_DS_0.ap = RTC_CS;
 RTC_DS_1.d = RTC_DS_0;
 RTC_DS_1.ck = !Z80_CLK;
 RTC_DS_1.ap = RTC_CS;
+/*
 RTC_DS = RTC_DS_0 # !RTC_DS_1;
+*/
+RTC_DS = 'b'0;
 
 /* to allow the CPU to read from the cassette port we need to turn off/on the oe for the databus. */
 
@@ -329,10 +333,11 @@ Z80_D7 = ((!IO_CASS_CS_RD) & CASS_IN_D7) #
          ((!SREG_CS_RD) & SYSTEM_CONFIG7) # 
          ((!REGION0_CONFIG_RD) & REGION0_CONFIG7);
 
+
 /*
 REGION Congig Register:
-        bit 7 -    HARDWARE ENABLED in the PAGE. 1=HARDWARE ON, 0=HARDWARE OFF
-        bit 6 -    0=SRAM, 1=FLASH
+        bit 7 -    HARDWARE ENABLED in the PAGE. 1=HARDWARE OFF, 0=HARDWARE ON
+        bit 6 -    0=FLASH, 1=SRAM
         bit 5 -    0=RO, 1=RW
         bit 4,3 
             2,1,0  5-bit page selection (16K page, 32 pages, 512k total)
@@ -356,28 +361,28 @@ REGION3_CONFIG_RD = !((ISIOACCESS & !Z80_RD) & (cpu_address_bus:'h'XX73));
 [REGION0_CONFIG7..0].ck = REGION0_CONFIG_WR;
 [REGION0_CONFIG7..0].d = [Z80_D7..0].io;
 [REGION0_CONFIG5..0].ar = !SYS_RESET;
-REGION0_CONFIG6.ap = !SYS_RESET;
-REGION0_CONFIG7.ap = !SYS_RESET;
+REGION0_CONFIG6.ar = !SYS_RESET;
+REGION0_CONFIG7.ar = !SYS_RESET;
 
 [REGION1_CONFIG7..0].ck = REGION1_CONFIG_WR;
 [REGION1_CONFIG7..0].d = [Z80_D7..0].io;
 [REGION1_CONFIG4..0].ar = !SYS_RESET;
 REGION1_CONFIG5.ap = !SYS_RESET;
-REGION1_CONFIG6.ar = !SYS_RESET;
+REGION1_CONFIG6.ap = !SYS_RESET;
 REGION1_CONFIG7.ar = !SYS_RESET;
 
 [REGION2_CONFIG7..0].ck = REGION2_CONFIG_WR;
 [REGION2_CONFIG7..0].d = [Z80_D7..0].io;
 [REGION2_CONFIG4..0].ar = !SYS_RESET;
 REGION2_CONFIG5.ap = !SYS_RESET;
-REGION2_CONFIG6.ar = !SYS_RESET;
+REGION2_CONFIG6.ap = !SYS_RESET;
 REGION2_CONFIG7.ar = !SYS_RESET;
 
 [REGION3_CONFIG7..0].ck = REGION3_CONFIG_WR;
 [REGION3_CONFIG7..0].d = [Z80_D7..0].io;
 [REGION3_CONFIG4..0].ar = !SYS_RESET;
 REGION3_CONFIG5.ap = !SYS_RESET;
-REGION3_CONFIG6.ar = !SYS_RESET;
+REGION3_CONFIG6.ap = !SYS_RESET;
 REGION3_CONFIG7.ar = !SYS_RESET;
 
 /* System Configuration Registers - 
