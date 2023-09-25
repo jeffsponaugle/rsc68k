@@ -47,7 +47,6 @@ Pin[69]    = SYS_RESET;
 Pin[1]     = RESET_BTN_IN;      /* Active Low Reset Button, with DS zero hold circuit */
 Pin[2]     = DEBUG_BTN_IN;      /* Active Low Debug NMI button.  Debounce but no hold circutry */
 
-
 Pin[73]    = EXP_EN;
 
 Pin[74]    = VID_CPLD_4;
@@ -235,11 +234,18 @@ VID_MEM_CS.ck = Z80_CLK;
    operation the Z80_RD signal will be low, forcing this signal to be high (==READ).   If the Z80_RD signal is high and the Z80_RFSH
    signal is also high the must be a memory write cycle.   We set the VID_RW signal low to indicate the write cycle.   The reason
    for all of this work is because the Z80 normally does not assert the Z80_WR signal during a write operation until one full cycle 
-   after the fall of the MEM_REQ signal.  This signal will give a 1/2 clock cycle advantage during a write 
+   after the fall of the MEM_REQ signal.  This signal will give a 1/2 clock cycle advantage during a write.
+
+   Since this is the only RW signal to the video controller, we need to make it also work for IO Access (VID_IO_ACCESS).  If
+   VID_IO_CS is active, we will make the VID_RW signal just the CPU_WR signal.
 */
-VID_RW.d  = VID_MEM_ACCESS # !Z80_RFSH # !Z80_RD;
-VID_RW.ap = VID_MEM_ACCESS;
-VID_RW.ck = Z80_CLK;
+NODE VID_RW_GATE;
+
+VID_RW_GATE.d  = VID_MEM_ACCESS # !Z80_RFSH # !Z80_RD;
+VID_RW_GATE.ap = VID_MEM_ACCESS;
+VID_RW_GATE.ck = Z80_CLK;
+
+VID_RW = (!VID_MEM_ACCESS & VID_RW_GATE) # (!VID_IO_CS & Z80_WR);
 
 VID_IO_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX7A
                             # cpu_address_bus:'h'XX7B
@@ -265,22 +271,25 @@ RTC_A_LATCH = !(ISIOACCESS & !Z80_WR & (cpu_address_bus:'h'XX77));
 
 */
 
-NODE RTC_DS_0, RTC_DS_1;
+NODE RTC_DS_0, RTC_DS_1, RTC_AS_0;
 
 RTC_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX78));
-RTC_AS.d = RTC_CS;
-RTC_AS.ck = !Z80_CLK;
-RTC_AS.ap = RTC_CS;
 
-RTC_DS_0.d = RTC_AS;
-RTC_DS_0.ck = Z80_CLK;
-RTC_DS_0.ap = RTC_CS;
+RTC_AS_0.d = RTC_CS;
+RTC_AS_0.ck = Z80_CLK;
+RTC_AS_0.ap = !RTC_CS;
+
+RTC_AS = RTC_AS_0 & !RTC_CS;
+
+RTC_DS_0.d = !RTC_CS;
+RTC_DS_0.ck = !Z80_CLK;
+RTC_DS_0.ar = RTC_CS;
 
 RTC_DS_1.d = RTC_DS_0;
 RTC_DS_1.ck = !Z80_CLK;
-RTC_DS_1.ap = RTC_CS;
+RTC_DS_1.ar = RTC_CS;
 /*
-RTC_DS = RTC_DS_0 # !RTC_DS_1;
+RTC_DS = RTC_DS_1;
 */
 RTC_DS = 'b'0;
 
@@ -418,15 +427,14 @@ SYS_RESET.ck = CLK_DIV16;
 
 Total dedicated input used:	4/4 	(100%)
 Total I/O pins used		64/64 	(100%)
-Total Logic cells used 		87/128 	(67%)
+Total Logic cells used 		88/128 	(68%)
 Total Flip-Flop used 		55/128 	(42%)
 Total Foldback logic used 	12/128 	(9%)
-Total Nodes+FB/MCells 		99/128 	(77%)
+Total Nodes+FB/MCells 		100/128 	(78%)
 Total cascade used 		0
 Total input pins 		29
 Total output pins 		39
-Total Pts 			234
-
+Total Pts 			243
                                                                                     
                                         D R                                         
                                         E E        R                                
@@ -479,9 +487,7 @@ Total Pts 			234
                             Q                 D D   D 7 A B O                       
                                               0 1   2   _ _                         
                                                         C C                         
-                                                        S S                         
-
-
+                                                        S S   
 
 */
 
