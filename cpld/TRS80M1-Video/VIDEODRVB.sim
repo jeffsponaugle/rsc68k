@@ -713,7 +713,10 @@ VCONFA0.ar  =>
     !RESET_IN
 
 VCONFA0.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA1.d  =>
     CPU_D1
@@ -722,7 +725,10 @@ VCONFA1.ar  =>
     !RESET_IN
 
 VCONFA1.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA2.d  =>
     CPU_D2
@@ -731,7 +737,10 @@ VCONFA2.ar  =>
     !RESET_IN
 
 VCONFA2.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA3.d  =>
     CPU_D3
@@ -740,7 +749,10 @@ VCONFA3.ar  =>
     !RESET_IN
 
 VCONFA3.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA4.d  =>
     CPU_D4
@@ -749,7 +761,10 @@ VCONFA4.ar  =>
     !RESET_IN
 
 VCONFA4.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA5.d  =>
     CPU_D5
@@ -758,7 +773,10 @@ VCONFA5.ar  =>
     !RESET_IN
 
 VCONFA5.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA6.d  =>
     CPU_D6
@@ -767,7 +785,10 @@ VCONFA6.ar  =>
     !RESET_IN
 
 VCONFA6.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFA7.d  =>
     CPU_D7
@@ -776,10 +797,16 @@ VCONFA7.ar  =>
     !RESET_IN
 
 VCONFA7.ck  =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFAWRITE =>
-    !CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB0.d  =>
     CPU_D0
@@ -788,7 +815,10 @@ VCONFB0.ar  =>
     !RESET_IN
 
 VCONFB0.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB1.d  =>
     CPU_D1
@@ -797,7 +827,10 @@ VCONFB1.ar  =>
     !RESET_IN
 
 VCONFB1.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB2.d  =>
     CPU_D2
@@ -806,7 +839,10 @@ VCONFB2.ar  =>
     !RESET_IN
 
 VCONFB2.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB3.d  =>
     CPU_D3
@@ -815,7 +851,10 @@ VCONFB3.ar  =>
     !RESET_IN
 
 VCONFB3.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB4.d  =>
     CPU_D4
@@ -824,7 +863,10 @@ VCONFB4.ar  =>
     !RESET_IN
 
 VCONFB4.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB5.d  =>
     CPU_D5
@@ -833,7 +875,10 @@ VCONFB5.ar  =>
     !RESET_IN
 
 VCONFB5.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB6.d  =>
     CPU_D6
@@ -842,7 +887,10 @@ VCONFB6.ar  =>
     !RESET_IN
 
 VCONFB6.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFB7.d  =>
     CPU_D7
@@ -851,10 +899,16 @@ VCONFB7.ar  =>
     !RESET_IN
 
 VCONFB7.ck  =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VCONFBWRITE =>
-    CPU_A0 & !CPU_A1 & !VID_IO_CS & !VID_RW
+    VID_IO_CS
+  # !CPU_A0
+  # !CPU_A1
+  # VID_RW
 
 VDP_ACCESS_GRANTED =>
     VDP_VRAM_CS_GNT
