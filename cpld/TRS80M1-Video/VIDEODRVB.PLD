@@ -81,7 +81,7 @@ NODE CLK_12M;
 /* 5 FFs used for protecting access to video memory */
 NODE CPU_VRAM_CS_EDGE, CPU_VRAM_CS_GNT;
 NODE VDP_VRAM_CS_GNT, VDP_VRAM_CS_EDGE;
-NODE VRAM_SHARED_STATE;
+NODE VRAM_SHARED_STATE,VRAM_SHARED_STATE_DELAYED;
 NODE VID_VM_CS;
 
 /* local variable that defines who has access.  Active low so ==0 means access */
@@ -92,6 +92,11 @@ VDP_ACCESS_GRANTED = VDP_VRAM_CS_GNT # !VRAM_SHARED_STATE;
 /* The variable that flips back and forth to allow equal access */
 VRAM_SHARED_STATE.d = !VRAM_SHARED_STATE;
 VRAM_SHARED_STATE.ck = CLK_12M;
+
+VRAM_SHARED_STATE_DELAYED.d = VRAM_SHARED_STATE;
+VRAM_SHARED_STATE_DELAYED.ck = !CLK_12M;
+
+
 /* The other flip flops for memory access */
 
 /*  
@@ -109,7 +114,7 @@ CPU_VRAM_CS_EDGE.ap = !CPU_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
 
 CPU_VRAM_CS_GNT.ck = !VRAM_SHARED_STATE;
 CPU_VRAM_CS_GNT.d = CPU_VRAM_CS_EDGE;
-CPU_VRAM_CS_GNT.ap = !RESET_IN;
+CPU_VRAM_CS_GNT.ap = !RESET_IN # (VRAM_SHARED_STATE & !VRAM_SHARED_STATE_DELAYED);
 
 /* 
     VDP_VRAM_CS_EDGE captures the falling edge of the VID_VM_CS signal which is a signal from 
