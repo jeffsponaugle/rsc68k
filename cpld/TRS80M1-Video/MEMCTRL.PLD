@@ -73,7 +73,6 @@ Z80_INT = 'b'1;
 EXP_EN = 'b'0;
 VID_CPLD_4 = 'b'1;
 VID_CPLD_5 = 'b'1;
-VID_80X25MEM_CS = 'b'1;
 
 /* Internal nodes (FLIP-FLOPS) */
 
@@ -217,6 +216,8 @@ KEYBOARD_CS = !(!Z80_MEMREQ & !Z80_RD & MMAP_HARDWARE_ACCESS & (cpu_address_bus:
                                                         # cpu_address_bus:'h'3BXX
                                                         ));
 
+VID_80X25MEM_CS = 'b'0;
+
 VID_MEM_ACCESS = !(!Z80_MEMREQ & MMAP_HARDWARE_ACCESS & (cpu_address_bus:'h'3CXX
                                                     # cpu_address_bus:'h'3DXX 
                                                     # cpu_address_bus:'h'3EXX 
@@ -273,7 +274,7 @@ RTC_A_LATCH = !(ISIOACCESS & !Z80_WR & (cpu_address_bus:'h'XX77));
 
 NODE RTC_DS_0, RTC_DS_1, RTC_AS_0;
 
-RTC_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX78));
+RTC_CS = !(ISIOACCESS & (cpu_address_bus:'h'XX78));
 
 RTC_AS_0.d = RTC_CS;
 RTC_AS_0.ck = Z80_CLK;
@@ -288,10 +289,10 @@ RTC_DS_0.ar = RTC_CS;
 RTC_DS_1.d = RTC_DS_0;
 RTC_DS_1.ck = !Z80_CLK;
 RTC_DS_1.ar = RTC_CS;
-/*
+
 RTC_DS = RTC_DS_1;
-*/
-RTC_DS = 'b'0;
+
+
 
 /* to allow the CPU to read from the cassette port we need to turn off/on the oe for the databus. */
 

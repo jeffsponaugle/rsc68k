@@ -1027,7 +1027,7 @@ RTC_CS =>
   # Z80_A0
 
 RTC_DS =>
-    0 
+    RTC_DS_1
 
 RTC_DS_0.d  =>
     !RTC_CS
@@ -1314,7 +1314,7 @@ V64_32_VIDEO_MODE.ck  =>
   # !Z80_A2
 
 VID_80X25MEM_CS =>
-    1 
+    0 
 
 VID_CPLD_4 =>
     1 
