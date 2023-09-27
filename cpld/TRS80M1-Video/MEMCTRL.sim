@@ -51,6 +51,7 @@ PIN 132 =  REGION3_CS
 PIN   1 =  RESET_BTN_IN 
 PIN  77 =  RTC_AS 
 PIN 136 =  RTC_AS_0 
+PIN 137 =  RTC_AS_1 
 PIN  80 =  RTC_A_LATCH 
 PIN  76 =  RTC_CS 
 PIN  79 =  RTC_DS 
@@ -990,15 +991,26 @@ REGION3_CS =>
   # !Z80_A14
 
 RTC_AS =>
-    RTC_AS_0 & !RTC_CS
+    RTC_AS_0 & !RTC_AS_1 & !RTC_CS
 
 RTC_AS_0.d  =>
-    RTC_CS
+    1 
 
-RTC_AS_0.ap  =>
-    !RTC_CS
+RTC_AS_0.ar  =>
+    RTC_DS_1
+  # !SYS_RESET
 
 RTC_AS_0.ck  =>
+    !RTC_CS
+
+RTC_AS_1.d  =>
+    RTC_AS_0
+
+RTC_AS_1.ar  =>
+    RTC_DS_1
+  # !SYS_RESET
+
+RTC_AS_1.ck  =>
     Z80_CLK
 
 RTC_A_LATCH =>
@@ -1034,6 +1046,7 @@ RTC_DS_0.d  =>
 
 RTC_DS_0.ar  =>
     RTC_CS
+  # !SYS_RESET
 
 RTC_DS_0.ck  =>
     !Z80_CLK
@@ -1043,6 +1056,7 @@ RTC_DS_1.d  =>
 
 RTC_DS_1.ar  =>
     RTC_CS
+  # !SYS_RESET
 
 RTC_DS_1.ck  =>
     !Z80_CLK

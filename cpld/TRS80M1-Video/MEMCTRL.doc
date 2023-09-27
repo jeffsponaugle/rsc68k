@@ -1,0 +1,1763 @@
+
+*******************************************************************************
+                                  Z80_MEMCTRL
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          f1508ispplcc84  Library DLIB-h-40-2
+Created         Tue Sep 26 17:59:57 2023
+Name            Z80_MEMCTRL
+Partno          Z80_MEMCTRL
+Revision        01
+Date            05/10/2022
+Designer        Sponaugle
+Company         Ratiometric
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+CASS_OUT_D0.d  =>
+    Z80_D0.io 
+
+CASS_OUT_D0.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+CASS_OUT_D1.d  =>
+    Z80_D1.io 
+
+CASS_OUT_D1.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+CASS_OUT_D2.d  =>
+    Z80_D2.io 
+
+CASS_OUT_D2.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+CLK_DIV2.d  =>
+    !CLK_DIV2
+
+CLK_DIV2.ck  =>
+    CLK_IN
+
+CLK_DIV4.d  =>
+    !CLK_DIV4
+
+CLK_DIV4.ck  =>
+    CLK_DIV2
+
+CLK_DIV8.d  =>
+    !CLK_DIV8
+
+CLK_DIV8.ck  =>
+    CLK_DIV4
+
+CLK_DIV16.d  =>
+    !CLK_DIV16
+
+CLK_DIV16.ck  =>
+    CLK_DIV8
+
+EXP_EN =>
+    0 
+
+FLASH_CS =>
+    REGION0_CS & REGION1_CS & REGION2_CS & REGION3_CS
+  # REGION0_CONFIG6 & REGION1_CS & REGION2_CS & REGION3_CS
+  # REGION0_CS & REGION1_CONFIG6 & REGION2_CS & REGION3_CS
+  # REGION0_CONFIG6 & REGION1_CONFIG6 & REGION2_CS & REGION3_CS
+  # REGION0_CS & REGION1_CS & REGION2_CONFIG6 & REGION3_CS
+  # REGION0_CONFIG6 & REGION1_CS & REGION2_CONFIG6 & REGION3_CS
+  # REGION0_CS & REGION1_CONFIG6 & REGION2_CONFIG6 & REGION3_CS
+  # REGION0_CONFIG6 & REGION1_CONFIG6 & REGION2_CONFIG6 & REGION3_CS
+  # REGION0_CS & REGION1_CS & REGION2_CONFIG6 & REGION3_CONFIG6
+  # REGION0_CONFIG6 & REGION1_CS & REGION2_CONFIG6 & REGION3_CONFIG6
+  # REGION0_CS & REGION1_CONFIG6 & REGION2_CONFIG6 & REGION3_CONFIG6
+  # REGION0_CONFIG6 & REGION1_CONFIG6 & REGION2_CONFIG6 & REGION3_CONFIG6
+  # REGION0_CS & REGION1_CONFIG6 & REGION2_CS & REGION3_CONFIG6
+  # REGION0_CONFIG6 & REGION1_CONFIG6 & REGION2_CS & REGION3_CONFIG6
+  # REGION0_CS & REGION1_CS & REGION2_CS & REGION3_CONFIG6
+  # REGION0_CONFIG6 & REGION1_CS & REGION2_CS & REGION3_CONFIG6
+
+IO_CASS_CS_RD =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_RD
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+IO_CASS_CS_WR =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+ISIOACCESS =>
+    !Z80_IOREQ & Z80_RFSH
+
+ISMEMORYACCESS =>
+    !Z80_MEMREQ & Z80_RFSH
+
+KEYBOARD_CS =>
+    Z80_MEMREQ
+  # Z80_RD
+  # REGION0_CONFIG7
+  # !Z80_RFSH
+  # Z80_A15
+  # Z80_A14
+  # !Z80_A13
+  # !Z80_A12
+  # !Z80_A11
+  # Z80_A10
+
+MMAP_HARDWARE_ACCESS =>
+    !REGION0_CONFIG7 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & 
+      !Z80_MEMREQ & Z80_RFSH
+
+REGION0_CONFIG0.d  =>
+    Z80_D0.io 
+
+REGION0_CONFIG0.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG0.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG1.d  =>
+    Z80_D1.io 
+
+REGION0_CONFIG1.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG1.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG2.d  =>
+    Z80_D2.io 
+
+REGION0_CONFIG2.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG2.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG3.d  =>
+    Z80_D3.io 
+
+REGION0_CONFIG3.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG3.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG4.d  =>
+    Z80_D4.io 
+
+REGION0_CONFIG4.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG4.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG5.d  =>
+    Z80_D5.io 
+
+REGION0_CONFIG5.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG5.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG6.d  =>
+    Z80_D6.io 
+
+REGION0_CONFIG6.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG6.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG7.d  =>
+    Z80_D7.io 
+
+REGION0_CONFIG7.ar  =>
+    !SYS_RESET
+
+REGION0_CONFIG7.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG_RD =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_RD
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CONFIG_WR =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+REGION0_CS =>
+    Z80_MEMREQ
+  # !Z80_RFSH
+  # Z80_A14
+  # !REGION0_CONFIG7 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & 
+      !Z80_MEMREQ & Z80_RFSH
+  # Z80_A15
+
+REGION1_CONFIG0.d  =>
+    Z80_D0.io 
+
+REGION1_CONFIG0.ar  =>
+    !SYS_RESET
+
+REGION1_CONFIG0.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG1.d  =>
+    Z80_D1.io 
+
+REGION1_CONFIG1.ar  =>
+    !SYS_RESET
+
+REGION1_CONFIG1.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG2.d  =>
+    Z80_D2.io 
+
+REGION1_CONFIG2.ar  =>
+    !SYS_RESET
+
+REGION1_CONFIG2.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG3.d  =>
+    Z80_D3.io 
+
+REGION1_CONFIG3.ar  =>
+    !SYS_RESET
+
+REGION1_CONFIG3.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG4.d  =>
+    Z80_D4.io 
+
+REGION1_CONFIG4.ar  =>
+    !SYS_RESET
+
+REGION1_CONFIG4.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG5.d  =>
+    Z80_D5.io 
+
+REGION1_CONFIG5.ap  =>
+    !SYS_RESET
+
+REGION1_CONFIG5.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG6.d  =>
+    Z80_D6.io 
+
+REGION1_CONFIG6.ap  =>
+    !SYS_RESET
+
+REGION1_CONFIG6.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG7.d  =>
+    Z80_D7.io 
+
+REGION1_CONFIG7.ar  =>
+    !SYS_RESET
+
+REGION1_CONFIG7.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG_RD =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_RD
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CONFIG_WR =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+REGION1_CS =>
+    Z80_MEMREQ
+  # !Z80_RFSH
+  # Z80_A15
+  # !Z80_A14
+
+REGION2_CONFIG0.d  =>
+    Z80_D0.io 
+
+REGION2_CONFIG0.ar  =>
+    !SYS_RESET
+
+REGION2_CONFIG0.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG1.d  =>
+    Z80_D1.io 
+
+REGION2_CONFIG1.ar  =>
+    !SYS_RESET
+
+REGION2_CONFIG1.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG2.d  =>
+    Z80_D2.io 
+
+REGION2_CONFIG2.ar  =>
+    !SYS_RESET
+
+REGION2_CONFIG2.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG3.d  =>
+    Z80_D3.io 
+
+REGION2_CONFIG3.ar  =>
+    !SYS_RESET
+
+REGION2_CONFIG3.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG4.d  =>
+    Z80_D4.io 
+
+REGION2_CONFIG4.ar  =>
+    !SYS_RESET
+
+REGION2_CONFIG4.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG5.d  =>
+    Z80_D5.io 
+
+REGION2_CONFIG5.ap  =>
+    !SYS_RESET
+
+REGION2_CONFIG5.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG6.d  =>
+    Z80_D6.io 
+
+REGION2_CONFIG6.ap  =>
+    !SYS_RESET
+
+REGION2_CONFIG6.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG7.d  =>
+    Z80_D7.io 
+
+REGION2_CONFIG7.ar  =>
+    !SYS_RESET
+
+REGION2_CONFIG7.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG_RD =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_RD
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CONFIG_WR =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+REGION2_CS =>
+    Z80_MEMREQ
+  # !Z80_RFSH
+  # !Z80_A15
+  # Z80_A14
+
+REGION3_CONFIG0.d  =>
+    Z80_D0.io 
+
+REGION3_CONFIG0.ar  =>
+    !SYS_RESET
+
+REGION3_CONFIG0.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG1.d  =>
+    Z80_D1.io 
+
+REGION3_CONFIG1.ar  =>
+    !SYS_RESET
+
+REGION3_CONFIG1.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG2.d  =>
+    Z80_D2.io 
+
+REGION3_CONFIG2.ar  =>
+    !SYS_RESET
+
+REGION3_CONFIG2.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG3.d  =>
+    Z80_D3.io 
+
+REGION3_CONFIG3.ar  =>
+    !SYS_RESET
+
+REGION3_CONFIG3.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG4.d  =>
+    Z80_D4.io 
+
+REGION3_CONFIG4.ar  =>
+    !SYS_RESET
+
+REGION3_CONFIG4.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG5.d  =>
+    Z80_D5.io 
+
+REGION3_CONFIG5.ap  =>
+    !SYS_RESET
+
+REGION3_CONFIG5.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG6.d  =>
+    Z80_D6.io 
+
+REGION3_CONFIG6.ap  =>
+    !SYS_RESET
+
+REGION3_CONFIG6.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG7.d  =>
+    Z80_D7.io 
+
+REGION3_CONFIG7.ar  =>
+    !SYS_RESET
+
+REGION3_CONFIG7.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG_RD =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_RD
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CONFIG_WR =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+REGION3_CS =>
+    Z80_MEMREQ
+  # !Z80_RFSH
+  # !Z80_A15
+  # !Z80_A14
+
+RTC_AS =>
+    RTC_AS_0 & !RTC_AS_1 & !RTC_CS
+
+RTC_AS_0.d  =>
+    1 
+
+RTC_AS_0.ar  =>
+    RTC_DS_1
+  # !SYS_RESET
+
+RTC_AS_0.ck  =>
+    !RTC_CS
+
+RTC_AS_1.d  =>
+    RTC_AS_0
+
+RTC_AS_1.ar  =>
+    RTC_DS_1
+  # !SYS_RESET
+
+RTC_AS_1.ck  =>
+    Z80_CLK
+
+RTC_A_LATCH =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # !Z80_A1
+  # !Z80_A0
+
+RTC_CS =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+RTC_DS =>
+    RTC_DS_1
+
+RTC_DS_0.d  =>
+    !RTC_CS
+
+RTC_DS_0.ar  =>
+    RTC_CS
+  # !SYS_RESET
+
+RTC_DS_0.ck  =>
+    !Z80_CLK
+
+RTC_DS_1.d  =>
+    RTC_DS_0
+
+RTC_DS_1.ar  =>
+    RTC_CS
+  # !SYS_RESET
+
+RTC_DS_1.ck  =>
+    !Z80_CLK
+
+SEVENSEG_A_CS =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # !Z80_A0
+
+SEVENSEG_B_CS =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # !Z80_A1
+  # Z80_A0
+
+SRAM_CS =>
+    REGION0_CS & REGION1_CS & REGION2_CS & REGION3_CS
+  # !REGION0_CONFIG6 & REGION1_CS & REGION2_CS & REGION3_CS
+  # REGION0_CS & !REGION1_CONFIG6 & REGION2_CS & REGION3_CS
+  # !REGION0_CONFIG6 & !REGION1_CONFIG6 & REGION2_CS & REGION3_CS
+  # REGION0_CS & REGION1_CS & !REGION2_CONFIG6 & REGION3_CS
+  # !REGION0_CONFIG6 & REGION1_CS & !REGION2_CONFIG6 & REGION3_CS
+  # REGION0_CS & !REGION1_CONFIG6 & !REGION2_CONFIG6 & REGION3_CS
+  # !REGION0_CONFIG6 & !REGION1_CONFIG6 & !REGION2_CONFIG6 & REGION3_CS
+  # REGION0_CS & REGION1_CS & !REGION2_CONFIG6 & !REGION3_CONFIG6
+  # !REGION0_CONFIG6 & REGION1_CS & !REGION2_CONFIG6 & !REGION3_CONFIG6
+  # REGION0_CS & !REGION1_CONFIG6 & !REGION2_CONFIG6 & !REGION3_CONFIG6
+  # !REGION0_CONFIG6 & !REGION1_CONFIG6 & !REGION2_CONFIG6 & !REGION3_CONFIG6
+  # REGION0_CS & !REGION1_CONFIG6 & REGION2_CS & !REGION3_CONFIG6
+  # !REGION0_CONFIG6 & !REGION1_CONFIG6 & REGION2_CS & !REGION3_CONFIG6
+  # REGION0_CS & REGION1_CS & REGION2_CS & !REGION3_CONFIG6
+  # !REGION0_CONFIG6 & REGION1_CS & REGION2_CS & !REGION3_CONFIG6
+
+SRAM_FLASH_PAGE_A14 =>
+    REGION0_CONFIG0 & !REGION0_CS
+  # REGION1_CONFIG0 & !REGION1_CS
+  # REGION2_CONFIG0 & !REGION2_CS
+  # REGION3_CONFIG0 & !REGION3_CS
+
+SRAM_FLASH_PAGE_A15 =>
+    REGION0_CONFIG1 & !REGION0_CS
+  # REGION1_CONFIG1 & !REGION1_CS
+  # REGION2_CONFIG1 & !REGION2_CS
+  # REGION3_CONFIG1 & !REGION3_CS
+
+SRAM_FLASH_PAGE_A16 =>
+    REGION0_CONFIG2 & !REGION0_CS
+  # REGION1_CONFIG2 & !REGION1_CS
+  # REGION2_CONFIG2 & !REGION2_CS
+  # REGION3_CONFIG2 & !REGION3_CS
+
+SRAM_FLASH_PAGE_A17 =>
+    REGION0_CONFIG3 & !REGION0_CS
+  # REGION1_CONFIG3 & !REGION1_CS
+  # REGION2_CONFIG3 & !REGION2_CS
+  # REGION3_CONFIG3 & !REGION3_CS
+
+SRAM_FLASH_PAGE_A18 =>
+    REGION0_CONFIG4 & !REGION0_CS
+  # REGION1_CONFIG4 & !REGION1_CS
+  # REGION2_CONFIG4 & !REGION2_CS
+  # REGION3_CONFIG4 & !REGION3_CS
+
+SREG_CS_RD =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_RD
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG0.d  =>
+    Z80_D0.io 
+
+SYSTEM_CONFIG0.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG0.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG1.d  =>
+    Z80_D1.io 
+
+SYSTEM_CONFIG1.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG1.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG2.d  =>
+    Z80_D2.io 
+
+SYSTEM_CONFIG2.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG2.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG3.d  =>
+    Z80_D3.io 
+
+SYSTEM_CONFIG3.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG3.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG4.d  =>
+    Z80_D4.io 
+
+SYSTEM_CONFIG4.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG4.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG5.d  =>
+    Z80_D5.io 
+
+SYSTEM_CONFIG5.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG5.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG6.d  =>
+    Z80_D6.io 
+
+SYSTEM_CONFIG6.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG6.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYSTEM_CONFIG7.d  =>
+    Z80_D7.io 
+
+SYSTEM_CONFIG7.ar  =>
+    !SYS_RESET
+
+SYSTEM_CONFIG7.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # Z80_A3
+  # !Z80_A2
+  # Z80_A1
+  # Z80_A0
+
+SYS_RESET.d  =>
+    RESET_BTN_IN
+
+SYS_RESET.ck  =>
+    CLK_DIV16
+
+UNUSED1_IO =>
+    Z80_A8
+  # Z80_A9
+
+UNUSED2_IO =>
+    Z80_A8 & Z80_A9
+
+V64_32_VIDEO_MODE.d  =>
+    Z80_D3.io 
+
+V64_32_VIDEO_MODE.ck  =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_WR
+  # !Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A2
+
+VID_80X25MEM_CS =>
+    0 
+
+VID_CPLD_4 =>
+    1 
+
+VID_CPLD_5 =>
+    1 
+
+VID_IO_CS =>
+    Z80_IOREQ
+  # !Z80_RFSH
+  # Z80_A7
+  # !Z80_A6
+  # !Z80_A5
+  # !Z80_A4
+  # !Z80_A3
+  # !Z80_A1 & !Z80_A2
+  # Z80_A1 & Z80_A2
+
+VID_MEM_ACCESS =>
+    Z80_MEMREQ
+  # REGION0_CONFIG7
+  # !Z80_RFSH
+  # Z80_A15
+  # Z80_A14
+  # !Z80_A13
+  # !Z80_A12
+  # !Z80_A11
+  # !Z80_A10
+
+VID_MEM_CS.d  =>
+    Z80_MEMREQ
+  # REGION0_CONFIG7
+  # !Z80_RFSH
+  # Z80_A15
+  # Z80_A14
+  # !Z80_A13
+  # !Z80_A12
+  # !Z80_A11
+  # !Z80_A10
+
+VID_MEM_CS.ap  =>
+    Z80_MEMREQ
+  # REGION0_CONFIG7
+  # !Z80_RFSH
+  # Z80_A15
+  # Z80_A14
+  # !Z80_A13
+  # !Z80_A12
+  # !Z80_A11
+  # !Z80_A10
+
+VID_MEM_CS.ck  =>
+    Z80_CLK
+
+VID_RW =>
+    !VID_IO_CS & Z80_WR
+  # !REGION0_CONFIG7 & VID_RW_GATE & Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & 
+      !Z80_A14 & !Z80_A15 & !Z80_MEMREQ & Z80_RFSH
+
+VID_RW_GATE.d  =>
+    Z80_MEMREQ
+  # REGION0_CONFIG7
+  # !Z80_RFSH
+  # Z80_A15
+  # Z80_A14
+  # !Z80_A13
+  # !Z80_A12
+  # !Z80_A11
+  # !Z80_A10
+  # !Z80_RD
+
+VID_RW_GATE.ap  =>
+    Z80_MEMREQ
+  # REGION0_CONFIG7
+  # !Z80_RFSH
+  # Z80_A15
+  # Z80_A14
+  # !Z80_A13
+  # !Z80_A12
+  # !Z80_A11
+  # !Z80_A10
+
+VID_RW_GATE.ck  =>
+    Z80_CLK
+
+Z80_CLK =>
+    CLK_DIV16 & !SYSTEM_CONFIG0 & !SYSTEM_CONFIG1
+  # CLK_DIV8 & SYSTEM_CONFIG0 & !SYSTEM_CONFIG1
+  # CLK_DIV4 & !SYSTEM_CONFIG0 & SYSTEM_CONFIG1
+  # CLK_DIV2 & SYSTEM_CONFIG0 & SYSTEM_CONFIG1
+
+Z80_D0 =>
+    REGION0_CONFIG0 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG0 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D0.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D1 =>
+    REGION0_CONFIG1 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG1 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D1.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D2 =>
+    REGION0_CONFIG2 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG2 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D2.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D3 =>
+    REGION0_CONFIG3 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # V64_32_VIDEO_MODE & Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG3 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D3.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D4 =>
+    REGION0_CONFIG4 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG4 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D4.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D5 =>
+    REGION0_CONFIG5 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG5 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D5.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D6 =>
+    REGION0_CONFIG6 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # V64_32_VIDEO_MODE & Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG6 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D6.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_D7 =>
+    REGION0_CONFIG7 & !Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # CASS_IN_D7 & Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # SYSTEM_CONFIG7 & !Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & 
+      Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH
+
+Z80_D7.oe  =>
+    !Z80_A0 & !Z80_A1 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & 
+      !Z80_IOREQ & !Z80_RD & Z80_RFSH
+  # Z80_A2 & Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & Z80_A7 & !Z80_IOREQ & !Z80_RD & 
+      Z80_RFSH
+
+Z80_INT =>
+    1 
+
+Z80_NMI.d  =>
+    DEBUG_BTN_IN
+
+Z80_NMI.ap  =>
+    !SYS_RESET
+
+Z80_NMI.ck  =>
+    CLK_DIV16
+
+cpu_address_bus =>
+    Z80_A15 , Z80_A14 , Z80_A13 , Z80_A12 , Z80_A11 , Z80_A10 , Z80_A9 , 
+      Z80_A8 , Z80_A7 , Z80_A6 , Z80_A5 , Z80_A4 , Z80_A3 , Z80_A2 , Z80_A1 , 
+      Z80_A0
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    CASS_IN_D7                  49       V        -       -       -     
+    CASS_OUT_D0                 45       V        -       -       -     
+    CASS_OUT_D0         d       45       X        1       0       1     
+    CASS_OUT_D0         ck      45       X        9       0       1     
+    CASS_OUT_D1                 46       V        -       -       -     
+    CASS_OUT_D1         d       46       X        1       0       1     
+    CASS_OUT_D1         ck      46       X        9       0       1     
+    CASS_OUT_D2                 48       V        -       -       -     
+    CASS_OUT_D2         d       48       X        1       0       1     
+    CASS_OUT_D2         ck      48       X        9       0       1     
+    CLK_DIV2                    85       N        -       -       -     
+    CLK_DIV2            d       85       M        1       0       1     
+    CLK_DIV2            ck      85       M        1       0       1     
+    CLK_DIV4                    86       N        -       -       -     
+    CLK_DIV4            d       86       M        1       0       1     
+    CLK_DIV4            ck      86       M        1       0       1     
+    CLK_DIV8                    87       N        -       -       -     
+    CLK_DIV8            d       87       M        1       0       1     
+    CLK_DIV8            ck      87       M        1       0       1     
+    CLK_DIV16                   88       N        -       -       -     
+    CLK_DIV16           d       88       M        1       0       1     
+    CLK_DIV16           ck      88       M        1       0       1     
+    CLK_IN                      83       V        -       -       -     
+    DEBUG_BTN_IN                2        V        -       -       -     
+    EXP_EN                      73       V        1       0       1     
+    FLASH_CS                    55       V        16      0       1     
+    IO_CASS_CS_RD               0        I        9       -       -     
+    IO_CASS_CS_WR               0        I        9       -       -     
+    ISIOACCESS                  0        I        1       -       -     
+    ISMEMORYACCESS              0        I        1       -       -     
+    KEYBOARD_CS                 56       V        10      0       1     
+    MMAP_HARDWARE_ACCESS        0        I        1       -       -     
+    REGION0_CONFIG0             96       N        -       -       -     
+    REGION0_CONFIG0     d       96       M        1       0       1     
+    REGION0_CONFIG0     ar      96       M        1       0       1     
+    REGION0_CONFIG0     ck      96       M        11      0       1     
+    REGION0_CONFIG1             95       N        -       -       -     
+    REGION0_CONFIG1     d       95       M        1       0       1     
+    REGION0_CONFIG1     ar      95       M        1       0       1     
+    REGION0_CONFIG1     ck      95       M        11      0       1     
+    REGION0_CONFIG2             94       N        -       -       -     
+    REGION0_CONFIG2     d       94       M        1       0       1     
+    REGION0_CONFIG2     ar      94       M        1       0       1     
+    REGION0_CONFIG2     ck      94       M        11      0       1     
+    REGION0_CONFIG3             93       N        -       -       -     
+    REGION0_CONFIG3     d       93       M        1       0       1     
+    REGION0_CONFIG3     ar      93       M        1       0       1     
+    REGION0_CONFIG3     ck      93       M        11      0       1     
+    REGION0_CONFIG4             92       N        -       -       -     
+    REGION0_CONFIG4     d       92       M        1       0       1     
+    REGION0_CONFIG4     ar      92       M        1       0       1     
+    REGION0_CONFIG4     ck      92       M        11      0       1     
+    REGION0_CONFIG5             91       N        -       -       -     
+    REGION0_CONFIG5     d       91       M        1       0       1     
+    REGION0_CONFIG5     ar      91       M        1       0       1     
+    REGION0_CONFIG5     ck      91       M        11      0       1     
+    REGION0_CONFIG6             90       N        -       -       -     
+    REGION0_CONFIG6     d       90       M        1       0       1     
+    REGION0_CONFIG6     ar      90       M        1       0       1     
+    REGION0_CONFIG6     ck      90       M        11      0       1     
+    REGION0_CONFIG7             89       N        -       -       -     
+    REGION0_CONFIG7     d       89       M        1       0       1     
+    REGION0_CONFIG7     ar      89       M        1       0       1     
+    REGION0_CONFIG7     ck      89       M        11      0       1     
+    REGION0_CONFIG_RD           0        I        11      -       -     
+    REGION0_CONFIG_WR           0        I        11      -       -     
+    REGION0_CS                  129      N        5       0       1     
+    REGION1_CONFIG0             104      N        -       -       -     
+    REGION1_CONFIG0     d       104      M        1       0       1     
+    REGION1_CONFIG0     ar      104      M        1       0       1     
+    REGION1_CONFIG0     ck      104      M        11      0       1     
+    REGION1_CONFIG1             103      N        -       -       -     
+    REGION1_CONFIG1     d       103      M        1       0       1     
+    REGION1_CONFIG1     ar      103      M        1       0       1     
+    REGION1_CONFIG1     ck      103      M        11      0       1     
+    REGION1_CONFIG2             102      N        -       -       -     
+    REGION1_CONFIG2     d       102      M        1       0       1     
+    REGION1_CONFIG2     ar      102      M        1       0       1     
+    REGION1_CONFIG2     ck      102      M        11      0       1     
+    REGION1_CONFIG3             101      N        -       -       -     
+    REGION1_CONFIG3     d       101      M        1       0       1     
+    REGION1_CONFIG3     ar      101      M        1       0       1     
+    REGION1_CONFIG3     ck      101      M        11      0       1     
+    REGION1_CONFIG4             100      N        -       -       -     
+    REGION1_CONFIG4     d       100      M        1       0       1     
+    REGION1_CONFIG4     ar      100      M        1       0       1     
+    REGION1_CONFIG4     ck      100      M        11      0       1     
+    REGION1_CONFIG5             99       N        -       -       -     
+    REGION1_CONFIG5     d       99       M        1       0       1     
+    REGION1_CONFIG5     ap      99       M        1       0       1     
+    REGION1_CONFIG5     ck      99       M        11      0       1     
+    REGION1_CONFIG6             98       N        -       -       -     
+    REGION1_CONFIG6     d       98       M        1       0       1     
+    REGION1_CONFIG6     ap      98       M        1       0       1     
+    REGION1_CONFIG6     ck      98       M        11      0       1     
+    REGION1_CONFIG7             97       N        -       -       -     
+    REGION1_CONFIG7     d       97       M        1       0       1     
+    REGION1_CONFIG7     ar      97       M        1       0       1     
+    REGION1_CONFIG7     ck      97       M        11      0       1     
+    REGION1_CONFIG_RD           0        I        11      -       -     
+    REGION1_CONFIG_WR           0        I        11      -       -     
+    REGION1_CS                  130      N        4       0       1     
+    REGION2_CONFIG0             112      N        -       -       -     
+    REGION2_CONFIG0     d       112      M        1       0       1     
+    REGION2_CONFIG0     ar      112      M        1       0       1     
+    REGION2_CONFIG0     ck      112      M        11      0       1     
+    REGION2_CONFIG1             111      N        -       -       -     
+    REGION2_CONFIG1     d       111      M        1       0       1     
+    REGION2_CONFIG1     ar      111      M        1       0       1     
+    REGION2_CONFIG1     ck      111      M        11      0       1     
+    REGION2_CONFIG2             110      N        -       -       -     
+    REGION2_CONFIG2     d       110      M        1       0       1     
+    REGION2_CONFIG2     ar      110      M        1       0       1     
+    REGION2_CONFIG2     ck      110      M        11      0       1     
+    REGION2_CONFIG3             109      N        -       -       -     
+    REGION2_CONFIG3     d       109      M        1       0       1     
+    REGION2_CONFIG3     ar      109      M        1       0       1     
+    REGION2_CONFIG3     ck      109      M        11      0       1     
+    REGION2_CONFIG4             108      N        -       -       -     
+    REGION2_CONFIG4     d       108      M        1       0       1     
+    REGION2_CONFIG4     ar      108      M        1       0       1     
+    REGION2_CONFIG4     ck      108      M        11      0       1     
+    REGION2_CONFIG5             107      N        -       -       -     
+    REGION2_CONFIG5     d       107      M        1       0       1     
+    REGION2_CONFIG5     ap      107      M        1       0       1     
+    REGION2_CONFIG5     ck      107      M        11      0       1     
+    REGION2_CONFIG6             106      N        -       -       -     
+    REGION2_CONFIG6     d       106      M        1       0       1     
+    REGION2_CONFIG6     ap      106      M        1       0       1     
+    REGION2_CONFIG6     ck      106      M        11      0       1     
+    REGION2_CONFIG7             105      N        -       -       -     
+    REGION2_CONFIG7     d       105      M        1       0       1     
+    REGION2_CONFIG7     ar      105      M        1       0       1     
+    REGION2_CONFIG7     ck      105      M        11      0       1     
+    REGION2_CONFIG_RD           0        I        11      -       -     
+    REGION2_CONFIG_WR           0        I        11      -       -     
+    REGION2_CS                  131      N        4       0       1     
+    REGION3_CONFIG0             120      N        -       -       -     
+    REGION3_CONFIG0     d       120      M        1       0       1     
+    REGION3_CONFIG0     ar      120      M        1       0       1     
+    REGION3_CONFIG0     ck      120      M        11      0       1     
+    REGION3_CONFIG1             119      N        -       -       -     
+    REGION3_CONFIG1     d       119      M        1       0       1     
+    REGION3_CONFIG1     ar      119      M        1       0       1     
+    REGION3_CONFIG1     ck      119      M        11      0       1     
+    REGION3_CONFIG2             118      N        -       -       -     
+    REGION3_CONFIG2     d       118      M        1       0       1     
+    REGION3_CONFIG2     ar      118      M        1       0       1     
+    REGION3_CONFIG2     ck      118      M        11      0       1     
+    REGION3_CONFIG3             117      N        -       -       -     
+    REGION3_CONFIG3     d       117      M        1       0       1     
+    REGION3_CONFIG3     ar      117      M        1       0       1     
+    REGION3_CONFIG3     ck      117      M        11      0       1     
+    REGION3_CONFIG4             116      N        -       -       -     
+    REGION3_CONFIG4     d       116      M        1       0       1     
+    REGION3_CONFIG4     ar      116      M        1       0       1     
+    REGION3_CONFIG4     ck      116      M        11      0       1     
+    REGION3_CONFIG5             115      N        -       -       -     
+    REGION3_CONFIG5     d       115      M        1       0       1     
+    REGION3_CONFIG5     ap      115      M        1       0       1     
+    REGION3_CONFIG5     ck      115      M        11      0       1     
+    REGION3_CONFIG6             114      N        -       -       -     
+    REGION3_CONFIG6     d       114      M        1       0       1     
+    REGION3_CONFIG6     ap      114      M        1       0       1     
+    REGION3_CONFIG6     ck      114      M        11      0       1     
+    REGION3_CONFIG7             113      N        -       -       -     
+    REGION3_CONFIG7     d       113      M        1       0       1     
+    REGION3_CONFIG7     ar      113      M        1       0       1     
+    REGION3_CONFIG7     ck      113      M        11      0       1     
+    REGION3_CONFIG_RD           0        I        11      -       -     
+    REGION3_CONFIG_WR           0        I        11      -       -     
+    REGION3_CS                  132      N        4       0       1     
+    RESET_BTN_IN                1        V        -       -       -     
+    RTC_AS                      77       V        1       0       1     
+    RTC_AS_0                    136      N        -       -       -     
+    RTC_AS_0            d       136      M        1       0       1     
+    RTC_AS_0            ar      136      M        2       0       1     
+    RTC_AS_0            ck      136      M        1       0       1     
+    RTC_AS_1                    137      N        -       -       -     
+    RTC_AS_1            d       137      M        1       0       1     
+    RTC_AS_1            ar      137      M        2       0       1     
+    RTC_AS_1            ck      137      M        1       0       1     
+    RTC_A_LATCH                 80       V        11      0       1     
+    RTC_CS                      76       V        10      0       1     
+    RTC_DS                      79       V        1       0       1     
+    RTC_DS_0                    134      N        -       -       -     
+    RTC_DS_0            d       134      M        1       0       1     
+    RTC_DS_0            ar      134      M        2       0       1     
+    RTC_DS_0            ck      134      M        1       0       1     
+    RTC_DS_1                    135      N        -       -       -     
+    RTC_DS_1            d       135      M        1       0       1     
+    RTC_DS_1            ar      135      M        2       0       1     
+    RTC_DS_1            ck      135      M        1       0       1     
+    SEVENSEG_A_CS               50       V        11      0       1     
+    SEVENSEG_B_CS               51       V        11      0       1     
+    SRAM_CS                     54       V        16      0       1     
+    SRAM_FLASH_PAGE_A14         61       V        4       0       1     
+    SRAM_FLASH_PAGE_A15         63       V        4       0       1     
+    SRAM_FLASH_PAGE_A16         64       V        4       0       1     
+    SRAM_FLASH_PAGE_A17         65       V        4       0       1     
+    SRAM_FLASH_PAGE_A18         67       V        4       0       1     
+    SREG_CS_RD                  0        I        11      -       -     
+    SYSTEM_CONFIG0              128      N        -       -       -     
+    SYSTEM_CONFIG0      d       128      M        1       0       1     
+    SYSTEM_CONFIG0      ar      128      M        1       0       1     
+    SYSTEM_CONFIG0      ck      128      M        11      0       1     
+    SYSTEM_CONFIG1              127      N        -       -       -     
+    SYSTEM_CONFIG1      d       127      M        1       0       1     
+    SYSTEM_CONFIG1      ar      127      M        1       0       1     
+    SYSTEM_CONFIG1      ck      127      M        11      0       1     
+    SYSTEM_CONFIG2              126      N        -       -       -     
+    SYSTEM_CONFIG2      d       126      M        1       0       1     
+    SYSTEM_CONFIG2      ar      126      M        1       0       1     
+    SYSTEM_CONFIG2      ck      126      M        11      0       1     
+    SYSTEM_CONFIG3              125      N        -       -       -     
+    SYSTEM_CONFIG3      d       125      M        1       0       1     
+    SYSTEM_CONFIG3      ar      125      M        1       0       1     
+    SYSTEM_CONFIG3      ck      125      M        11      0       1     
+    SYSTEM_CONFIG4              124      N        -       -       -     
+    SYSTEM_CONFIG4      d       124      M        1       0       1     
+    SYSTEM_CONFIG4      ar      124      M        1       0       1     
+    SYSTEM_CONFIG4      ck      124      M        11      0       1     
+    SYSTEM_CONFIG5              123      N        -       -       -     
+    SYSTEM_CONFIG5      d       123      M        1       0       1     
+    SYSTEM_CONFIG5      ar      123      M        1       0       1     
+    SYSTEM_CONFIG5      ck      123      M        11      0       1     
+    SYSTEM_CONFIG6              122      N        -       -       -     
+    SYSTEM_CONFIG6      d       122      M        1       0       1     
+    SYSTEM_CONFIG6      ar      122      M        1       0       1     
+    SYSTEM_CONFIG6      ck      122      M        11      0       1     
+    SYSTEM_CONFIG7              121      N        -       -       -     
+    SYSTEM_CONFIG7      d       121      M        1       0       1     
+    SYSTEM_CONFIG7      ar      121      M        1       0       1     
+    SYSTEM_CONFIG7      ck      121      M        11      0       1     
+    SYS_RESET                   69       V        -       -       -     
+    SYS_RESET           d       69       X        1       0       1     
+    SYS_RESET           ck      69       X        1       0       1     
+    UNUSED1_IO                  81       V        2       0       1     
+    UNUSED2_IO                  52       V        1       0       1     
+    V64_32_VIDEO_MODE           60       V        -       -       -     
+    V64_32_VIDEO_MODE   d       60       X        1       0       1     
+    V64_32_VIDEO_MODE   ck      60       X        9       0       1     
+    VID_80X25MEM_CS             58       V        1       0       1     
+    VID_CPLD_4                  74       V        1       0       1     
+    VID_CPLD_5                  75       V        1       0       1     
+    VID_IO_CS                   70       V        9       0       1     
+    VID_MEM_ACCESS              0        I        9       -       -     
+    VID_MEM_CS                  57       V        -       -       -     
+    VID_MEM_CS          d       57       X        9       0       1     
+    VID_MEM_CS          ap      57       X        9       0       1     
+    VID_MEM_CS          ck      57       X        1       0       1     
+    VID_RW                      68       V        2       0       1     
+    VID_RW_GATE                 133      N        -       -       -     
+    VID_RW_GATE         d       133      M        10      0       1     
+    VID_RW_GATE         ap      133      M        9       0       1     
+    VID_RW_GATE         ck      133      M        1       0       1     
+    Z80_A0                      24       V        -       -       -     
+    Z80_A1                      22       V        -       -       -     
+    Z80_A2                      21       V        -       -       -     
+    Z80_A3                      20       V        -       -       -     
+    Z80_A4                      18       V        -       -       -     
+    Z80_A5                      17       V        -       -       -     
+    Z80_A6                      16       V        -       -       -     
+    Z80_A7                      15       V        -       -       -     
+    Z80_A8                      12       V        -       -       -     
+    Z80_A9                      11       V        -       -       -     
+    Z80_A10                     10       V        -       -       -     
+    Z80_A11                     9        V        -       -       -     
+    Z80_A12                     8        V        -       -       -     
+    Z80_A13                     6        V        -       -       -     
+    Z80_A14                     5        V        -       -       -     
+    Z80_A15                     4        V        -       -       -     
+    Z80_CLK                     25       V        4       0       1     
+    Z80_D0                      35       V        2       0       1     
+    Z80_D0              io      35       X        -       -       -     
+    Z80_D0              oe      35       X        2       0       1     
+    Z80_D1                      34       V        2       0       1     
+    Z80_D1              io      34       X        -       -       -     
+    Z80_D1              oe      34       X        2       0       1     
+    Z80_D2                      33       V        2       0       1     
+    Z80_D2              io      33       X        -       -       -     
+    Z80_D2              oe      33       X        2       0       1     
+    Z80_D3                      31       V        3       0       1     
+    Z80_D3              io      31       X        -       -       -     
+    Z80_D3              oe      31       X        2       0       1     
+    Z80_D4                      30       V        2       0       1     
+    Z80_D4              io      30       X        -       -       -     
+    Z80_D4              oe      30       X        2       0       1     
+    Z80_D5                      29       V        2       0       1     
+    Z80_D5              io      29       X        -       -       -     
+    Z80_D5              oe      29       X        2       0       1     
+    Z80_D6                      28       V        3       0       1     
+    Z80_D6              io      28       X        -       -       -     
+    Z80_D6              oe      28       X        2       0       1     
+    Z80_D7                      27       V        3       0       1     
+    Z80_D7              io      27       X        -       -       -     
+    Z80_D7              oe      27       X        2       0       1     
+    Z80_INT                     44       V        1       0       1     
+    Z80_IOREQ                   37       V        -       -       -     
+    Z80_MEMREQ                  36       V        -       -       -     
+    Z80_NMI                     41       V        -       -       -     
+    Z80_NMI             d       41       X        1       0       1     
+    Z80_NMI             ap      41       X        1       0       1     
+    Z80_NMI             ck      41       X        1       0       1     
+    Z80_RD                      39       V        -       -       -     
+    Z80_RFSH                    84       V        -       -       -     
+    Z80_WR                      40       V        -       -       -     
+    cpu_address_bus             0        F        -       -       -     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

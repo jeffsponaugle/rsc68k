@@ -277,7 +277,7 @@ NODE RTC_DS_0, RTC_DS_1, RTC_AS_0, RTC_AS_1;
 RTC_CS = !(ISIOACCESS &  (cpu_address_bus:'h'XX78));
 
 /* This will create a pulse on AS that starts just after CS falls and lasts until the next rising
-   clock edge of CLK_12M.*/
+   clock edge of Z80_CLK .*/
 
 RTC_AS_0.d = 'b'1;
 RTC_AS_0.ck = !RTC_CS;
@@ -435,14 +435,14 @@ SYS_RESET.ck = CLK_DIV16;
 
 Total dedicated input used:	4/4 	(100%)
 Total I/O pins used		64/64 	(100%)
-Total Logic cells used 		88/128 	(68%)
-Total Flip-Flop used 		55/128 	(42%)
-Total Foldback logic used 	12/128 	(9%)
-Total Nodes+FB/MCells 		100/128 	(78%)
+Total Logic cells used 		89/128 	(69%)
+Total Flip-Flop used 		56/128 	(43%)
+Total Foldback logic used 	13/128 	(10%)
+Total Nodes+FB/MCells 		102/128 	(79%)
 Total cascade used 		0
 Total input pins 		29
 Total output pins 		39
-Total Pts 			243
+Total Pts 			247
                                                                                     
                                         D R                                         
                                         E E        R                                
@@ -495,7 +495,8 @@ Total Pts 			243
                             Q                 D D   D 7 A B O                       
                                               0 1   2   _ _                         
                                                         C C                         
-                                                        S S   
+                                                        S S                         
+
 
 */
 
