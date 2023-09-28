@@ -1,7 +1,7 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue Sep 26 17:59:57 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue Sep 26 20:57:34 2023
 
 
-fit1508 C:\MEMCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
+fit1508 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
 
 
 ****** Initial fitting strategy and property ******
@@ -48,7 +48,7 @@ fit1508 C:\MEMCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
  ITD2 = ON
  Fast_inlatch = off
  *******************************
-Info: C:\MEMCTRL uses 95% of the pins available in device PLCC84
+Info: C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL uses 95% of the pins available in device PLCC84
   If you wish to have more pins available for future logic changes
   Atmel  recommends using a larger device
 ---------------------------------------------------------
@@ -564,7 +564,7 @@ RTC_AS_0		(MC5	FB)  : MUX 35		Ref (E76fb)
 Z80_RFSH		(MC15	FB)  : MUX 37		Ref (OE1)
 RTC_AS_1		(MC4	FB)  : MUX 39		Ref (E74fb)
 
-Creating JEDEC file C:\MEMCTRL.jed ...
+Creating JEDEC file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL.jed ...
 
 PLCC84 programmed logic:
 -----------------------------------
@@ -1333,7 +1333,7 @@ Total cascade used 		0
 Total input pins 		29
 Total output pins 		39
 Total Pts 			247
-Creating pla file C:\MEMCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
 $Device PLCC84 fits 

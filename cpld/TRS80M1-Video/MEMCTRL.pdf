@@ -1,11 +1,11 @@
-{COMPONENT C:\MEMCTRL.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Tue Sep 26 17:59:57 2023 "}
+  {DBtime "Tue Sep 26 20:57:34 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -325,7 +325,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\MEMCTRL 230 680}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL 230 680}
    }
   }
  }
