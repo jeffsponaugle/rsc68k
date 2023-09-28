@@ -127,7 +127,7 @@ CPU_VRAM_CS_GNT.ap = !RESET_IN # (VRAM_SHARED_STATE & !VRAM_SHARED_STATE_DELAYED
 
 VDP_VRAM_CS_GNT.ck = VRAM_SHARED_STATE;
 VDP_VRAM_CS_GNT.d = VID_VM_CS;
-VDP_VRAM_CS_GNT.ap = !RESET_IN;
+VDP_VRAM_CS_GNT.ap = !RESET_IN # (!VRAM_SHARED_STATE & VRAM_SHARED_STATE_DELAYED);
 
 VDP_VRAM_CS_EDGE.ck = !VID_VM_CS;
 VDP_VRAM_CS_EDGE.d = 'b'0;
@@ -179,9 +179,8 @@ VM_ADDR_OE =  VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS;
 
 /*
    VM_DATA_LATCH is the latch input on the data buffers going to the VDP from video memory.  This latch
-   is 'latched' at the end of the VDP_ACCESS_GRANTED cycle where the VID_RW signal is ==1, indicating
-   a CPU read operation.  This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram 
-   access is disabled.
+   is 'latched' at the end of the VDP_ACCESS_GRANTED cycle .
+   This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram access is disabled.
 
    The signal is inverted because going from a 1 to 0 is what does the latch operation.
 

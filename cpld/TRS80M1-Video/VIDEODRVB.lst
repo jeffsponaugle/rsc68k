@@ -1,0 +1,767 @@
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+  1:Name       M1NTSC;
+  2:PartNo   M1NTSC;
+  3:Date     05/10/2022;
+  4:Revision 01;
+  5:Designer Sponaugle;
+  6:Company  Ratiometric;
+  7:Assembly None;
+  8:Location None;
+  9:Device   f1508ispplcc84;
+ 10:
+ 11:PROPERTY ATMEL {TDI_PULLUP = ON};
+ 12:PROPERTY ATMEL {TMS_PULLUP = ON};
+ 13:
+ 14:/* INPUTS 16 Pins of 63 Total */
+ 15:
+ 16:Pin[83] = CLK_25M;                 /* 25.175Mhz input clock  - Master Pixel Clock */
+ 17:Pin[1]  = RESET_IN;                /* Active Low Reset */
+ 18:Pin[2]  = V64OR32MODE;
+ 19:Pin[84]  = VID_IO_CS;
+ 20:Pin[4]  = VID_MEM_CS;
+ 21:Pin[5]  = VID_RW;
+ 22:Pin[6,8,9,10]  = [FONTLINE0..3];        /* 4 bits for picking the font row (but only 0-11 are used ) FM_A0-FM_A3 */
+ 23:Pin[11,12,15,16]  = [FONTSEL0..3];         /* 4 bits for selecting the font.  FM_A12-FM_A15 */
+ 24:Pin[17,18]  = [CPU_A0..1];           /* Address bits 0-3 from the CPU.  Used for IO and FM access */
+ 25:
+ 26:
+ 27:/* OUTPUTS  */
+ 28:Pin[60]  = NTSC_SYNC_OUT;
+ 29:Pin[61] = NTSC_PIXEL_OUT;
+ 30:Pin[63]  = VGA_HSYNC_OUT;
+ 31:Pin[64] = VGA_VSYNC_OUT;
+ 32:Pin[65]  = VGA_VIDEO_OUT;
+ 33:Pin[24,25,27,28]  = [VM_PAGE0..3];         /* The visable page (1k) of VRAM in CPU space.  VM_A10-VM_A13 */
+ 34:Pin[29] = Z80_WAIT;
+ 35:Pin[30] = VM_OE;
+ 36:Pin[31] = VM_WE;
+ 37:Pin[79] = FM_OE;
+ 38:Pin[77] = FM_WE;
+ 39:Pin[33] = MODE0;
+ 40:Pin[34] = MODE1;
+ 41:Pin[35] = MODE2;
+ 42:Pin[41] = VM_ADDR_RESET;
+ 43:Pin[44] = VM_ADDR_CLOCK;
+ 44:Pin[45] = VM_ADDR_OE;
+ 45:
+ 46:Pin[36] = CP_VM_AD_OE;
+ 47:Pin[37] = VM_DATA_OE;
+ 48:Pin[39] = VM_DATA_LATCH;
+ 49:Pin[40] = CP_FM_DATA_OE;
+ 50:
+ 51:Pin[46] = CP_VM_DW_OE;
+ 52:Pin[48] = CP_VM_DR_OE;
+ 53:Pin[49] = CP_VM_DR_LE;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+ 54:
+ 55:/* BIDIRECTIONAL 19 Pins of 63 Total */
+ 56:
+ 57:Pin[50,51,52,54,55,56,57,58]  = [DIN0..7];             /* FM_D0-FM_D7 */
+ 58:   
+ 59:Pin[67,68,69,70,73,74,75,76]  = [CPU_D0..7];           /* Data input bits from CPU for writing to config registers */
+ 60:Pin[80]  = VID_CPLD_4;  /* To CPU */
+ 61:Pin[81]  = VID_CPLD_5;  /* To CPU */           
+ 62:Pin[22]  = VID_CPLD_6;  /* To Other CPLD */
+ 63:
+ 64:Pin[20] = FM_A10;
+ 65:Pin[21] = FM_A11;
+ 66:
+ 67:
+ 68:/* Force Pin Assignment NEEDS TO BE DEFINED */
+ 69:
+ 70:VID_CPLD_4 = V64OR32MODE # VID_IO_CS # VID_CPLD_6 # Z80_WAIT # VID_CPLD_5;
+ 71:VGA_HSYNC_OUT = 'b'1;
+ 72:VGA_VSYNC_OUT = 'b'1;
+ 73:VGA_VIDEO_OUT = 'b'1;
+ 74:
+ 75:/* Signal that needs to be created */
+ 76:
+ 77:
+ 78:NODE CLK_12M;
+ 79:/* Signals for sharing accesss to video memory */
+ 80:
+ 81:/* 5 FFs used for protecting access to video memory */
+ 82:NODE CPU_VRAM_CS_EDGE, CPU_VRAM_CS_GNT;
+ 83:NODE VDP_VRAM_CS_GNT, VDP_VRAM_CS_EDGE;
+ 84:NODE VRAM_SHARED_STATE,VRAM_SHARED_STATE_DELAYED;
+ 85:NODE VID_VM_CS;
+ 86:
+ 87:/* local variable that defines who has access.  Active low so ==0 means access */
+ 88:
+ 89:CPU_ACCESS_GRANTED = CPU_VRAM_CS_GNT # VRAM_SHARED_STATE;
+ 90:VDP_ACCESS_GRANTED = VDP_VRAM_CS_GNT # !VRAM_SHARED_STATE;
+ 91:
+ 92:/* The variable that flips back and forth to allow equal access */
+ 93:VRAM_SHARED_STATE.d = !VRAM_SHARED_STATE;
+ 94:VRAM_SHARED_STATE.ck = CLK_12M;
+ 95:
+ 96:VRAM_SHARED_STATE_DELAYED.d = VRAM_SHARED_STATE;
+ 97:VRAM_SHARED_STATE_DELAYED.ck = !CLK_12M;
+ 98:
+ 99:
+100:/* The other flip flops for memory access */
+101:
+102:/*  
+103:    CPU_VRAM_CS_EDGE captures the falling edge of the VID_MEM_CS signal.  This captured
+104:    edge is then fed into the CPU_VRAM_CS_GNT flipflop which is clocked when the SHARED_STATE
+105:    state machine enters the CPU-access state.   If the VDP_OR_FONT_ACCESS bit is set to 1, we
+106:    will ignore any VID_MEM_CS activity since that activity is destined for the font memory. 
+107:    On RESET both of these flipflops are set to 1.
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+108:    The EDGE flopflip is reset to 1 as soon as CPU_ACCESS_GRANTED goes low, which happens at the 
+109:    start of a state machine cycle where the CPU access is taking place.
+110:*/
+111:CPU_VRAM_CS_EDGE.ck = !VID_MEM_CS;
+112:CPU_VRAM_CS_EDGE.d = 'b'0;
+113:CPU_VRAM_CS_EDGE.ap = !CPU_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
+114:
+115:CPU_VRAM_CS_GNT.ck = !VRAM_SHARED_STATE;
+116:CPU_VRAM_CS_GNT.d = CPU_VRAM_CS_EDGE;
+117:CPU_VRAM_CS_GNT.ap = !RESET_IN # (VRAM_SHARED_STATE & !VRAM_SHARED_STATE_DELAYED);
+118:
+119:/* 
+120:    VDP_VRAM_CS_EDGE captures the falling edge of the VID_VM_CS signal which is a signal from 
+121:    the video processor requesting access to video memory.  This captured edge is then fed into
+122:    the VDP_VRAM_CS_GNT flipflop which is clocked when the SHARED_STATE state machine enters the 
+123:    VDP-access cycle.  Like above, if the VDP_OR_FONT_ACCESS bit is set to 1, we will ignore any 
+124:    VID_VM_CS activity since we want all accesses to be reserved for CPU to font memory access.
+125:*/
+126:
+127:
+128:VDP_VRAM_CS_GNT.ck = VRAM_SHARED_STATE;
+129:VDP_VRAM_CS_GNT.d = VID_VM_CS;
+130:VDP_VRAM_CS_GNT.ap = !RESET_IN # (!VRAM_SHARED_STATE & VRAM_SHARED_STATE_DELAYED);
+131:
+132:VDP_VRAM_CS_EDGE.ck = !VID_VM_CS;
+133:VDP_VRAM_CS_EDGE.d = 'b'0;
+134:VDP_VRAM_CS_EDGE.ap = !VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
+135:
+136:/* 
+137:   CP_VM_AD_OE enabled the address bus values to flow from the CPU to the video memory.
+138:   This set of buffers is enabled when we are in a CPU_ACCESS_GRANTED state. 
+139:   We don't need to qualify this with VDP_OR_FONT_ACCESS becuase if we are doing a video memory
+140:   access we need the addres lines passed through, and if we are doing a font memory access passing 
+141:   the font address to the video memory will not make any difference.
+142:*/
+143:CP_VM_AD_OE = CPU_ACCESS_GRANTED;
+144:
+145:/* 
+146:   CP_VM_DW_OE enabled the data bus values to flow from the CPU to the video memory
+147:   for a video write operation.
+148:   This set of buffers is enabled when we are in a CPU_ACCESS_GRANTED, we are doing a write, and
+149:   VDP_OR_FONT_ACCESS is ==0 (indicating video RAM access is allowed) 
+150:*/
+151:
+152:CP_VM_DW_OE = CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS;
+153:
+154:/* 
+155:   CP_VM_DR_LE is the latch input on the data buffers going to the CPU from video memory.  This latch
+156:   is 'latched' at the end of the CPU_ACCESS_GRANTED cycle where the VID_RW signal is ==1, indicating
+157:   a CPU read operation.  This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram 
+158:   access is disabled.
+159:
+160:   The signal is inverted because going from a 1 to 0 is what does the latch operation.
+161:*/
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 4
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+162:
+163:CP_VM_DR_LE = !(CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS );
+164:
+165:/*
+166:   CP_VM_DR_OE is the output enable from the data latch used for reading from video memory.
+167:   This output enable is active is there is an active request from the CPU to video memory 
+168:   (VID_MEM_CS) and the operation is a READ, and VDP_OR_FONT_ACCESS=0 (indicating video ram 
+169:   access is enabled)
+170:*/
+171:CP_VM_DR_OE = VID_MEM_CS # !VID_RW # VDP_OR_FONT_ACCESS;
+172:
+173:/*
+174:   VM_ADDR_OE is the output enable for the address buffers that put video controller addresses
+175:   on the address bus of video memory.  It is enabled if we are doing a VDP_ACCESS_GRANTED cycle
+176:   but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+177:*/
+178:VM_ADDR_OE =  VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS;
+179:
+180:/*
+181:   VM_DATA_LATCH is the latch input on the data buffers going to the VDP from video memory.  This latch
+182:   is 'latched' at the end of the VDP_ACCESS_GRANTED cycle .
+183:   This latch is not active if VDP_OR_FONT_ACCESS==1, which indicated video ram access is disabled.
+184:
+185:   The signal is inverted because going from a 1 to 0 is what does the latch operation.
+186:
+187:*/
+188:VM_DATA_LATCH = !(VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS);
+189:
+190:/* 
+191:   VM_DATA_OE is the output enable for teh data latch used fo reading video memory from the video display 
+192:   processor.   This output is enabled if the VID_VM_CS signal from the VDP is active, but disabled if 
+193:   VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+194:*/
+195:VM_DATA_OE = VID_VM_CS # VDP_OR_FONT_ACCESS;
+196:
+197:/* 
+198:   VM_OE - Enable the output drivers on the video RAM.  this should be enabled(==0):
+199:        (1) CPU_ACCESS_GRANTED==0 AND VID_RW==1
+200:        (2) VDP_ACCESS_GRANTED==0
+201:        but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+202:
+203:*/
+204:
+205:VM_OE = (CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS) & (VDP_ACCESS_GRANTED # VDP_OR_FONT_ACCESS);
+206:
+207:/* VM_WE - Enable writing to video memory.  This should be enabled(==0):
+208:        (1) CPU_ACCESS_GRANTED==0 and VID_RW==0
+209:        but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
+210:*/
+211:VM_WE = (CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS);
+212:
+213:/* 
+214:   FM_OE - Enable the output drivers of the font RAM.  This should be enabled(==0):
+215:           (1) If VDP_OR_FONT_ACCESS == 0, output should always be on.  The output goes to the DIN
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 5
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+216:           pins on the CPLD to be used for video rendering,
+217:           (2) IF VDP_OR_FONT_ACCESS == 1, output should be on IF
+218:               VID_MEM_CS==0 and VID_RW==1 which indicated the CPU is doing a read of font memory.
+219:
+220:*/
+221:
+222:FM_OE = (VDP_OR_FONT_ACCESS) & (!VDP_OR_FONT_ACCESS # VID_MEM_CS # !VID_RW);
+223:
+224:/*
+225:   FM_WE - Enable the write operation of the font RAM - the should be enabled(==0):
+226:           ONLY if VDP_OR_FONT_ACCESS == 1 ( CPU is configured for FONT RAM access) 
+227:           AND VID_MEM_CS==0 and VID_RW==0
+228:*/
+229:
+230:FM_WE = !VDP_OR_FONT_ACCESS # VID_MEM_CS # VID_RW;
+231:
+232:/*
+233:   CP_FM_DATA_OE - Enable both the address lines and the data lines going from the CPU to the FONT RAM.  This should be enabled
+234:   only if the CPU is doing a memory access (VID_MEM_CS==0), and we are in the FONT RAM access mode(VDP_OR_FONT_ACCESS==1).
+235:*/
+236:
+237:CP_FM_DATA_OE = VID_MEM_CS # !VDP_OR_FONT_ACCESS;
+238:
+239:
+240:/* 
+241:   Video Configuration Register A 
+242:   D0,D1,D2,D3 = Select Video Memory Page Visable, D4,D5,D6,D7 = Select FONT
+243:*/
+244:NODE [VCONFA0..7];  
+245:/* 
+246:   Video Configuration Register B 
+247:   D0,D1,D2,D3,D4,D5 = Select Character RAM Page Visable, D7 = (=0 VIDEORAM Visible, =1 CHARCTERRAM Visible) 
+248:*/
+249:
+250:NODE [VCONFB0..7]; 
+251:
+252:NODE [HSYNC_COUNTER0..9];
+253:NODE [VSYNC_COUNTER0..9];
+254:NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
+255:NODE HSYNC_ZERO;
+256:NODE VSYNC_ZERO;
+257:NODE VSYNC_DISPLAY_ACTIVE;
+258:NODE [SHIFTREG0..7];
+259:NODE FONTLINE_RESET;
+260:
+261:
+262:CLK_12M.d = !CLK_12M;
+263:CLK_12M.ck = CLK_25M;
+264:CLK_12M.ar = !RESET_IN;
+265:
+266:/*  
+267:    Configuration Registers 
+268:    CONFA is IO Write to 0x7A  (0111 1010)
+269:        Bit 0-3: Character Memory Page Select (Which 1K page of CHARACTER RAM is visable to the CPU )
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 6
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+270:        Bit 4-7: Font Memory Select (Which font is being used for actual video rendering.  Each FONT is 4K in size)
+271:    CONFB is IO Write to 0x7B  (0111 1011)
+272:        Bit 0-5: Font Memory Page Select (Which 1K page of FONT RAM is visable to the CPU)
+273:        Bit 6:
+274:        Bit 7: 0=CHARACTER RAM Visable, and VIDEO OUTPUT enabled.
+275:               1=FONT RAM Visable to CPU, and VIDEO_OUTPUT disabled.
+276:               VDP_OR_FONT_ACCESS
+277:    
+278:*/
+279:
+280:/* 
+281:   VCONF a/b WRITE is 0 during a register write, transition to 1 at the end of the write cycle.
+282:   The edge going from 0 to 1 latches the values in the register 
+283:*/
+284:VCONFAWRITE = !(!VID_IO_CS & !CPU_A0 & CPU_A1 & !VID_RW);
+285:VCONFBWRITE = !(!VID_IO_CS & CPU_A0 & CPU_A1 & !VID_RW);
+286:
+287:[VCONFA0..7].ck = VCONFAWRITE;
+288:[VCONFA0..7].d = [CPU_D0..7];
+289:[VCONFA0..7].ar = !RESET_IN;
+290:
+291:[VCONFB0..7].ck = VCONFBWRITE;
+292:[VCONFB0..7].d = [CPU_D0..7];
+293:[VCONFB0..7].ar = !RESET_IN;
+294:
+295:/* FONTSEL0-3 are connected to the font RAM address bits 12,13,14,15
+296:   if (VDP_OR_FONT_ACCESS==0) FONTSEL should refect the VCONFA4-7 register.
+297:       This allows those bits to select what FONT is used for the active video output.
+298:   if (VDP_OR_FONT_ACCESS==1) FONTSEL should refect the VCONFB2-5 register.
+299:      In this second case, we also want to output VCONFB0-1 to font RAM address bits 10,11.
+300:*/
+301:
+302:FONTSEL0 = (!VDP_OR_FONT_ACCESS & VCONFA4) # (VDP_OR_FONT_ACCESS & VCONFB2);
+303:FONTSEL1 = (!VDP_OR_FONT_ACCESS & VCONFA5) # (VDP_OR_FONT_ACCESS & VCONFB3);
+304:FONTSEL2 = (!VDP_OR_FONT_ACCESS & VCONFA6) # (VDP_OR_FONT_ACCESS & VCONFB4);
+305:FONTSEL3 = (!VDP_OR_FONT_ACCESS & VCONFA7) # (VDP_OR_FONT_ACCESS & VCONFB5);
+306:
+307:/* 
+308:   As mentioned above, if VDP_OR_FONT_ACCESS==1, we are allowing CPU access to the FONT memory.  
+309:   To make this work, the CPU will drive A0-A9, and we need to provide the values for A10,A11, 
+310:   A12,A13,A14,and A15.   The drivers below will turn on in this case to drive A10 and A11, and the 4 lines 
+311:   above this will drive A12,A13,A14,A15. (FONTSEL0-3 will be connected to the FONT RAM on those pins)
+312:*/
+313:FM_A10 = VCONFB0;
+314:FM_A10.oe = VDP_OR_FONT_ACCESS;
+315:FM_A11 = VCONFB1;
+316:FM_A11.oe = VDP_OR_FONT_ACCESS;
+317:
+318:[VM_PAGE0..3] = [VCONFA0..3]; /* Video Memory Page Select from config register A */
+319:
+320:/* 
+321:   The first four bits of the font memory address bus are based on the FONTLINE variable
+322:   which counts which line inside a particular font we are on.   This is only used of 
+323:   VDP_OR_FONT_ACCESS==0.  If VDP_OR_FONT_ACCESS==1, we are only allowing CPU
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 7
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+324:   access to font RAM, so lets use the CPU address bits 0-3 for the same 4 address
+325:   bits on the font RAM.
+326:*/
+327:
+328:VDP_OR_FONT_ACCESS = VCONFB7;
+329:
+330:/* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
+331:
+332:HSYNC_COUNTER0.d = !HSYNC_COUNTER0 & HSYNC_ZERO;
+333:HSYNC_COUNTER0.ck = CLK_12M;
+334:HSYNC_COUNTER0.ar = !RESET_IN;
+335:
+336:HSYNC_COUNTER1.d = ((HSYNC_COUNTER0&!HSYNC_COUNTER1) # (!HSYNC_COUNTER0&HSYNC_COUNTER1)) & HSYNC_ZERO;
+337:HSYNC_COUNTER1.ck = CLK_12M;
+338:HSYNC_COUNTER1.ar = !RESET_IN;
+339:
+340:HSYNC_COUNTER2T = HSYNC_COUNTER0&HSYNC_COUNTER1;
+341:HSYNC_COUNTER2.d = ((HSYNC_COUNTER2T&!HSYNC_COUNTER2) # (!HSYNC_COUNTER2T&HSYNC_COUNTER2)) & HSYNC_ZERO;
+342:HSYNC_COUNTER2.ck = CLK_12M;
+343:HSYNC_COUNTER2.ar = !RESET_IN;
+344:
+345:HSYNC_COUNTER3T = HSYNC_COUNTER2T&HSYNC_COUNTER2;
+346:HSYNC_COUNTER3.d = ((HSYNC_COUNTER3T&!HSYNC_COUNTER3) # (!HSYNC_COUNTER3T&HSYNC_COUNTER3)) & HSYNC_ZERO;
+347:HSYNC_COUNTER3.ck = CLK_12M;
+348:HSYNC_COUNTER3.ar = !RESET_IN;
+349:
+350:HSYNC_COUNTER4T = HSYNC_COUNTER3T&HSYNC_COUNTER3;
+351:HSYNC_COUNTER4.d = ((HSYNC_COUNTER4T&!HSYNC_COUNTER4) # (!HSYNC_COUNTER4T&HSYNC_COUNTER4)) & HSYNC_ZERO;
+352:HSYNC_COUNTER4.ck = CLK_12M;
+353:HSYNC_COUNTER4.ar = !RESET_IN;
+354:
+355:HSYNC_COUNTER5T = HSYNC_COUNTER4T&HSYNC_COUNTER4;
+356:HSYNC_COUNTER5.d = ((HSYNC_COUNTER5T&!HSYNC_COUNTER5) # (!HSYNC_COUNTER5T&HSYNC_COUNTER5)) & HSYNC_ZERO;
+357:HSYNC_COUNTER5.ck = CLK_12M;
+358:HSYNC_COUNTER5.ar = !RESET_IN;
+359:
+360:HSYNC_COUNTER6T = HSYNC_COUNTER5T&HSYNC_COUNTER5;
+361:HSYNC_COUNTER6.d = ((HSYNC_COUNTER6T&!HSYNC_COUNTER6) # (!HSYNC_COUNTER6T&HSYNC_COUNTER6)) & HSYNC_ZERO;
+362:HSYNC_COUNTER6.ck = CLK_12M;
+363:HSYNC_COUNTER6.ar = !RESET_IN;
+364:
+365:HSYNC_COUNTER7T = HSYNC_COUNTER6T&HSYNC_COUNTER6;
+366:HSYNC_COUNTER7.d = ((HSYNC_COUNTER7T&!HSYNC_COUNTER7) # (!HSYNC_COUNTER7T&HSYNC_COUNTER7)) & HSYNC_ZERO;
+367:HSYNC_COUNTER7.ck = CLK_12M;
+368:HSYNC_COUNTER7.ar = !RESET_IN;
+369:
+370:HSYNC_COUNTER8T = HSYNC_COUNTER7T&HSYNC_COUNTER7;
+371:HSYNC_COUNTER8.d = ((HSYNC_COUNTER8T&!HSYNC_COUNTER8) # (!HSYNC_COUNTER8T&HSYNC_COUNTER8)) & HSYNC_ZERO;
+372:HSYNC_COUNTER8.ck = CLK_12M;
+373:HSYNC_COUNTER8.ar = !RESET_IN;
+374:
+375:HSYNC_COUNTER9T = HSYNC_COUNTER8T&HSYNC_COUNTER8;
+376:HSYNC_COUNTER9.d = ((HSYNC_COUNTER9T&!HSYNC_COUNTER9) # (!HSYNC_COUNTER9T&HSYNC_COUNTER9)) & HSYNC_ZERO;
+377:HSYNC_COUNTER9.ck = CLK_12M;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 8
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+378:HSYNC_COUNTER9.ar = !RESET_IN;
+379:
+380:FIELD hsync_counter_field = [HSYNC_COUNTER9..0];
+381:FIELD hsync_counter_3_field = [HSYNC_COUNTER2..0];
+382:FIELD hsync_counter_4_field = [HSYNC_COUNTER3..0];
+383:
+384:/* 
+385:   HSYNC_ZERO is 0 when we need to loop the counter.  This is Logical AND'ed with the other inputs to each
+386:   counters .d value, so when we are at the loop location, the next location loaded will be 0.
+387:   HSYNC_ZERO us normally at 1, and goes to 0 for 1 clock cycle ( CLK25 low to CLK25 low ), and that
+388:   edge is also used to increment the vertical counters via VSYNC_CLOCK.
+389:*/
+390:
+391:HSYNC_ZERO = !(hsync_counter_field:['d'799]);
+392:
+393:/* 
+394:   The VSYNC_CLOCK signal is used to increment the V_SYNC counter at the end of each horizontal sync row.   
+395:   The reason for two FFs is to first capture the HSYNC value (on the clock edge opposite of the counter itself changing)
+396:   followed by a second FF to sync the V_SYNC increment with the rising edge of CLK_25M.   This allows both the H_SYNC and V_SYNC 
+397:   counters to be used in logical operations that are clocked on the same clock signal (falling CLK_25M)
+398:*/
+399:
+400:
+401:VSYNC_CLOCK_A.d = !HSYNC_ZERO;
+402:VSYNC_CLOCK_A.ck = !CLK_12M;
+403:VSYNC_CLOCK_A.ar = !RESET_IN;
+404:
+405:VSYNC_CLOCK_B.d = VSYNC_CLOCK_A;
+406:VSYNC_CLOCK_B.ck = CLK_12M;
+407:VSYNC_CLOCK_B.ar = !RESET_IN;
+408:
+409:/* Vertical Sync 9 bit counter, 0-498.  VSYNC_ZERO is used to reset this counter so it loops from 498 back to 0 */
+410:
+411:VSYNC_COUNTER0.d = (!VSYNC_COUNTER0) & VSYNC_ZERO;
+412:VSYNC_COUNTER0.ck = VSYNC_CLOCK_B;
+413:VSYNC_COUNTER0.ar = !RESET_IN;
+414:
+415:VSYNC_COUNTER1.d = ((VSYNC_COUNTER0&!VSYNC_COUNTER1) # (!VSYNC_COUNTER0&VSYNC_COUNTER1)) & VSYNC_ZERO;
+416:VSYNC_COUNTER1.ck = VSYNC_CLOCK_B;
+417:VSYNC_COUNTER1.ar = !RESET_IN;
+418:
+419:VSYNC_COUNTER2T = VSYNC_COUNTER0&VSYNC_COUNTER1;
+420:VSYNC_COUNTER2.d = ((VSYNC_COUNTER2T&!VSYNC_COUNTER2) # (!VSYNC_COUNTER2T&VSYNC_COUNTER2)) & VSYNC_ZERO;
+421:VSYNC_COUNTER2.ck = VSYNC_CLOCK_B;
+422:VSYNC_COUNTER2.ar = !RESET_IN;
+423:
+424:VSYNC_COUNTER3T = VSYNC_COUNTER2T&VSYNC_COUNTER2;
+425:VSYNC_COUNTER3.d = ((VSYNC_COUNTER3T&!VSYNC_COUNTER3) # (!VSYNC_COUNTER3T&VSYNC_COUNTER3)) & VSYNC_ZERO;
+426:VSYNC_COUNTER3.ck = VSYNC_CLOCK_B;
+427:VSYNC_COUNTER3.ar = !RESET_IN;
+428:
+429:VSYNC_COUNTER4T = VSYNC_COUNTER3T&VSYNC_COUNTER3;
+430:VSYNC_COUNTER4.d = ((VSYNC_COUNTER4T&!VSYNC_COUNTER4) # (!VSYNC_COUNTER4T&VSYNC_COUNTER4)) & VSYNC_ZERO;
+431:VSYNC_COUNTER4.ck = VSYNC_CLOCK_B;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 9
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+432:VSYNC_COUNTER4.ar = !RESET_IN;
+433:
+434:VSYNC_COUNTER5T = VSYNC_COUNTER4T&VSYNC_COUNTER4;
+435:VSYNC_COUNTER5.d = ((VSYNC_COUNTER5T&!VSYNC_COUNTER5) # (!VSYNC_COUNTER5T&VSYNC_COUNTER5)) & VSYNC_ZERO;
+436:VSYNC_COUNTER5.ck = VSYNC_CLOCK_B;
+437:VSYNC_COUNTER5.ar = !RESET_IN;
+438:
+439:VSYNC_COUNTER6T = VSYNC_COUNTER5T&VSYNC_COUNTER5;
+440:VSYNC_COUNTER6.d = ((VSYNC_COUNTER6T&!VSYNC_COUNTER6) # (!VSYNC_COUNTER6T&VSYNC_COUNTER6)) & VSYNC_ZERO;
+441:VSYNC_COUNTER6.ck = VSYNC_CLOCK_B;
+442:VSYNC_COUNTER6.ar = !RESET_IN;
+443:
+444:VSYNC_COUNTER7T = VSYNC_COUNTER6T&VSYNC_COUNTER6;
+445:VSYNC_COUNTER7.d = ((VSYNC_COUNTER7T&!VSYNC_COUNTER7) # (!VSYNC_COUNTER7T&VSYNC_COUNTER7)) & VSYNC_ZERO;
+446:VSYNC_COUNTER7.ck = VSYNC_CLOCK_B;
+447:VSYNC_COUNTER7.ar = !RESET_IN;
+448:
+449:VSYNC_COUNTER8T = VSYNC_COUNTER7T&VSYNC_COUNTER7;
+450:VSYNC_COUNTER8.d = ((VSYNC_COUNTER8T&!VSYNC_COUNTER8) # (!VSYNC_COUNTER8T&VSYNC_COUNTER8)) & VSYNC_ZERO;
+451:VSYNC_COUNTER8.ck = VSYNC_CLOCK_B;
+452:VSYNC_COUNTER8.ar = !RESET_IN;
+453:
+454:VSYNC_COUNTER9T = VSYNC_COUNTER8T&VSYNC_COUNTER8;
+455:VSYNC_COUNTER9.d = ((VSYNC_COUNTER9T&!VSYNC_COUNTER9) # (!VSYNC_COUNTER9T&VSYNC_COUNTER9)) & VSYNC_ZERO;
+456:VSYNC_COUNTER9.ck = VSYNC_CLOCK_B;
+457:VSYNC_COUNTER9.ar = !RESET_IN;
+458:
+459:FIELD vsync_counter_field = [VSYNC_COUNTER9..0];
+460:FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
+461:
+462:VSYNC_ZERO = !(vsync_counter_field:['d'263]);
+463:
+464:/* FONTLINE_RESET - Reset counter if the value==11, so it counts from 0-11.  Also hold in reset
+465:    if we are not in the active area (VSYNC_DISPLAY_ACTIVE) */
+466:
+467:FONTLINE_RESET = (FONTLINE0 & FONTLINE1 & !FONTLINE2 & FONTLINE3) # !VSYNC_DISPLAY_ACTIVE;
+468:FONTLINE_INC = 'b'1;
+469:
+470:FONTLINE0.d =  (  (FONTLINE_INC&!FONTLINE0) 
+471:        # (!FONTLINE_INC&FONTLINE0)
+472:        ) & !FONTLINE_RESET;     
+473:FONTLINE0.ck = VSYNC_CLOCK_B;
+474:FONTLINE0.ar = !RESET_IN;
+475:
+476:FONTLINE1.d =  (  (FONTLINE_INC&((FONTLINE0&!FONTLINE1) # (!FONTLINE0&FONTLINE1))) 
+477:        # ((!FONTLINE_INC&FONTLINE1))
+478:        ) & !FONTLINE_RESET;
+479:FONTLINE1.ck = VSYNC_CLOCK_B;
+480:FONTLINE1.ar = !RESET_IN;
+481:
+482:FONTLINE2T = FONTLINE0&FONTLINE1;
+483:FONTLINE2.d =  (  (FONTLINE_INC&((FONTLINE2T&!FONTLINE2) # (!FONTLINE2T&FONTLINE2))) 
+484:        # ((!FONTLINE_INC&FONTLINE2))
+485:        ) & !FONTLINE_RESET;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 10
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+486:FONTLINE2.ck = VSYNC_CLOCK_B;
+487:FONTLINE2.ar = !RESET_IN;
+488:
+489:FONTLINE3T = FONTLINE2T&FONTLINE2;
+490:FONTLINE3.d =  ( (FONTLINE_INC&((FONTLINE3T&!FONTLINE3) # (!FONTLINE3T&FONTLINE3))) 
+491:        # ((!FONTLINE_INC&FONTLINE3))
+492:        ) & !FONTLINE_RESET;
+493:FONTLINE3.ck = VSYNC_CLOCK_B;
+494:FONTLINE3.ar = !RESET_IN;
+495:
+496:FIELD fontline_field = [FONTLINE3..0];
+497:
+498:/* 
+499:   If VDP_OR_FONT_ACCESS==1 we want to disable the FONTLINE outputs so the CPU address drivers can 
+500:   drive the font RAM
+501:*/
+502:
+503:[FONTLINE0..3].oe = !VDP_OR_FONT_ACCESS;
+504:
+505:
+506:/* SHIFTREG_LOAD = 1 if the shift register will load from the databus, ==0 and it will shift from 0 to 7; */
+507:
+508:SHIFTREG_LOAD = hsync_counter_3_field:['b'000];
+509:
+510:SHIFTREG0.d = (SHIFTREG_LOAD & DIN0);
+511:SHIFTREG1.d = (SHIFTREG_LOAD & DIN1) # ( !SHIFTREG_LOAD & SHIFTREG0);
+512:SHIFTREG2.d = (SHIFTREG_LOAD & DIN2) # ( !SHIFTREG_LOAD & SHIFTREG1);
+513:SHIFTREG3.d = (SHIFTREG_LOAD & DIN3) # ( !SHIFTREG_LOAD & SHIFTREG2);
+514:SHIFTREG4.d = (SHIFTREG_LOAD & DIN4) # ( !SHIFTREG_LOAD & SHIFTREG3);
+515:SHIFTREG5.d = (SHIFTREG_LOAD & DIN5) # ( !SHIFTREG_LOAD & SHIFTREG4);
+516:SHIFTREG6.d = (SHIFTREG_LOAD & DIN6) # ( !SHIFTREG_LOAD & SHIFTREG5);
+517:SHIFTREG7.d = (SHIFTREG_LOAD & DIN7) # ( !SHIFTREG_LOAD & SHIFTREG6);
+518:
+519:[SHIFTREG0..7].ck = !CLK_12M;
+520:[SHIFTREG0..7].ar = !RESET_IN;
+521:
+522:/* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row that we want to output pixel data.  Rows 32-223 (192 rows) */
+523:VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
+524:
+525:/* VSYNC_OUTPUT_VSYNC == 1 when on a row that we want to output a vertical sync signal on. The last 3 rows */
+526:VSYNC_OUTPUT_VSYNC = (vsync_counter_field:['d'262..'d'263]);
+527:
+528:/* HSYNC_DISPLAY_ACTIVE == 1 when on the part of a line where we want output pixel data */
+529:HSYNC_DISPLAY_ACTIVE = (hsync_counter_field:['d'200..'d'711]);
+530:
+531:/* VSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Vertical SYNC, but inverted.  
+532:   This value is ==1 at the locations that we want the SYNC signal to be 0. */
+533:VSYNC_PATTERN = (hsync_counter_field:['d'0..'d'639]);
+534:
+535:/* HSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Horizontal SYNC, but inverted.  
+536:   This value is ==1 at the locations that we want the SYNC signal to be 0. */
+537:HSYNC_PATTERN = (hsync_counter_field:['d'0..'d'63]);
+538:
+539:MODE_INC = (hsync_counter_field:['d'194..'d'704]) & VSYNC_DISPLAY_ACTIVE;
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 11
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+540:MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE & (!(fontline_field:['d'11]));
+541:
+542:/* 
+543:    Chip Select is enabled (low) during the 6 cycles before each pixel load into the shift register.
+544:   MODE_INC is used because that signal is also active starting 6 cycles before the active part of a line ending
+545:   just after the last character is loaded.  Adding the hsync_counter_3_field makes it pulse for 6 of the 8 cycles.
+546:*/
+547:
+548:VID_VM_CS.d = MODE_INC & hsync_counter_3_field:['d'2..'d'7];
+549:VID_VM_CS.ck = !CLK_12M;
+550:VID_VM_CS.ap = !RESET_IN;
+551:
+552:/* 
+553:   Lets keep the video memory address in reset when we are not in the active part of the display.
+554:   This will release the reset at the start of the first active scanline, which is enough time before
+555:   the actual video output and address incrementing.  
+556:*/
+557:VM_ADDR_RESET = !VSYNC_DISPLAY_ACTIVE;
+558:
+559:/*
+560:   Clocking into the address latches every 9 cycles at the beginning of the cycle.  Most of the time the MODE2..0 will
+561:   be equal to 0, which means no change on clocking.  
+562:   If MODE2..0 == 1, the address counter will increment by 1.
+563:   IF MODE2..0 == 2, the address counter will subtract 64.
+564:   If MODE2..0 == 3, the address counter will subtract 80.
+565:*/
+566:VM_ADDR_CLOCK.d = hsync_counter_3_field:['d'0];
+567:VM_ADDR_CLOCK.ck = !CLK_12M;
+568:VM_ADDR_CLOCK.ar = !RESET_IN;
+569:
+570:MODE0.d = MODE_INC;
+571:MODE1.d = MODE_SUB64;
+572:MODE2.d = 'b'0;
+573:
+574:[MODE2..0].ck = !CLK_12M;
+575:
+576:/* The actual SYNC output pin is either doing a line with the HSYNC pattern, or the VSYNC pattern */
+577:
+578:NTSC_SYNC_OUT.d = ( 
+579:                 (VSYNC_OUTPUT_VSYNC & VSYNC_PATTERN)
+580:               # (!VSYNC_OUTPUT_VSYNC & HSYNC_PATTERN)
+581:              );
+582:NTSC_SYNC_OUT.ck = !CLK_12M;
+583:NTSC_SYNC_OUT.ap = !RESET_IN;
+584:
+585:NTSC_PIXEL_OUT.d = !(HSYNC_DISPLAY_ACTIVE & VSYNC_DISPLAY_ACTIVE & SHIFTREG7);
+586:NTSC_PIXEL_OUT.ck = !CLK_12M;
+587:NTSC_PIXEL_OUT.ar = !RESET_IN;
+588:
+589:/*
+590:
+591:                                                                                  
+592:                                                                                    
+593:                                        V                                           
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 12
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+594:                                    V   6          V                                
+595:                       F  F F   F   I   4  V       I                                
+596:                     F O  O O   O   D   O RI       D                                
+597:                     O N  N N   N   _   R ED C     _                                
+598:                     N T  T T   T V M   3 S_ L     C       C C                      
+599:                     T L  L L   L I E   2 EI K     P F   F P P                      
+600:                     S I  I I   I D M   M TO _     L M   M U U                      
+601:                     E N  N N G N _ _ V O __ 2 G   D _ V _ _ _                      
+602:                     L E  E E N E R C C D IC 5 N   _ O C W D D                      
+603:                     0 3  2 1 D 0 W S C E NS M D   4 E C E 7 6                      
+604:                    -------------------------------------------                     
+605:                   / 11   9   7   5   3   1  83  81  79  77  75 \                  
+606:                  /    10   8   6   4   2  84  82  80  78  76    \                 
+607:        FONTSEL1 | 12                    (*)                   74 | CPU_D5          
+608:             VCC | 13                                          73 | CPU_D4          
+609:             TDI | 14                                          72 | GND             
+610:        FONTSEL2 | 15                                          71 | TDO             
+611:        FONTSEL3 | 16                                          70 | CPU_D3          
+612:          CPU_A0 | 17                                          69 | CPU_D2          
+613:          CPU_A1 | 18                                          68 | CPU_D1          
+614:             GND | 19                                          67 | CPU_D0          
+615:          FM_A10 | 20                                          66 | VCC             
+616:          FM_A11 | 21                                          65 | VGA_VIDEO_OUT   
+617:      VID_CPLD_6 | 22                 ATF1508                  64 | VGA_VSYNC_OUT   
+618:             TMS | 23               84-Lead PLCC               63 | VGA_HSYNC_OUT   
+619:        VM_PAGE0 | 24                                          62 | TCK             
+620:        VM_PAGE1 | 25                                          61 | NTSC_PIXEL_OUT  
+621:             VCC | 26                                          60 | NTSC_SYNC_OUT   
+622:        VM_PAGE2 | 27                                          59 | GND             
+623:        VM_PAGE3 | 28                                          58 | DIN7            
+624:        Z80_WAIT | 29                                          57 | DIN6            
+625:           VM_OE | 30                                          56 | DIN5            
+626:           VM_WE | 31                                          55 | DIN4            
+627:             GND | 32                                          54 | DIN3            
+628:                  \     34  36  38  40  42  44  46  48  50  52   /                 
+629:                   \  33  35  37  39  41  43  45  47  49  51  53/                  
+630:                    --------------------------------------------                     
+631:                      M M M C V V V C V G V V V C G C C D D D V                     
+632:                      O O O P M C M P M N C M M P N P P I I I C                     
+633:                      D D D _ _ C _ _ _ D C _ _ _ D _ _ N N N C                     
+634:                      E E E V D   D F A     A A V   V V 0 1 2                       
+635:                      0 1 2 M A   A M D     D D M   M M                             
+636:                            _ T   T _ D     D D _   _ _                             
+637:                            A A   A D R     R R D   D D                             
+638:                            D _   _ A _     _ _ W   R R                             
+639:                            _ O   L T R     C O _   _ _                             
+640:                            O E   A A E     L E O   O L                             
+641:                            E     T _ S     O   E   E E                             
+642:                                  C O E     C                                       
+643:                                  H E T     K                                       
+644:
+645:
+646:
+647:Total dedicated input used:     4/4     (100%)
+
+LISTING FOR LOGIC DESCRIPTION FILE: VIDEODRVB.pld                    Page 13
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Wed Sep 27 21:15:05 2023
+
+648:Total I/O pins used             63/64   (98%)
+649:Total Logic cells used          107/128         (83%)
+650:Total Flip-Flop used            60/128  (46%)
+651:Total Foldback logic used       2/128   (1%)
+652:Total Nodes+FB/MCells           108/128         (84%)
+653:Total cascade used              1
+654:Total input pins                30
+655:Total output pins               37
+656:Total Pts                       328
+657:
+658:*/
+659:
+660:
+661:
+
+
+
