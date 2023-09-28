@@ -126,8 +126,9 @@ CPU_VRAM_CS_GNT.ap = !RESET_IN # (VRAM_SHARED_STATE & !VRAM_SHARED_STATE_DELAYED
 
 
 VDP_VRAM_CS_GNT.ck = VRAM_SHARED_STATE;
-VDP_VRAM_CS_GNT.d = VID_VM_CS;
+VDP_VRAM_CS_GNT.d = VDP_VRAM_CS_EDGE;
 VDP_VRAM_CS_GNT.ap = !RESET_IN # (!VRAM_SHARED_STATE & VRAM_SHARED_STATE_DELAYED);
+/* VDP_VRAM_CS_GNT.ap = !RESET_IN */
 
 VDP_VRAM_CS_EDGE.ck = !VID_VM_CS;
 VDP_VRAM_CS_EDGE.d = 'b'0;
@@ -545,7 +546,7 @@ MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE & (!(
    just after the last character is loaded.  Adding the hsync_counter_3_field makes it pulse for 6 of the 8 cycles.
 */
 
-VID_VM_CS.d = MODE_INC & hsync_counter_3_field:['d'2..'d'7];
+VID_VM_CS.d = !(MODE_INC & hsync_counter_3_field:['d'2..'d'7]);
 VID_VM_CS.ck = !CLK_12M;
 VID_VM_CS.ap = !RESET_IN;
 
