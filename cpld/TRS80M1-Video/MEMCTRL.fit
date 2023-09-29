@@ -1,4 +1,4 @@
-Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Tue Sep 26 20:57:34 2023
+Atmel ATF1508AS Fitter Version 1.8.7.8 ,running Fri Sep 29 10:03:42 2023
 
 
 fit1508 C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL.tt2 -CUPL -dev P1508C84 -JTAG ON
@@ -330,42 +330,41 @@ Z80_A5			(MC13	P)   : MUX 30		Ref (B25p)
 Z80_A1			(MC18	P)   : MUX 31		Ref (B17p)
 Z80_RFSH		(MC17	FB)  : MUX 37		Ref (OE1)
 
-FanIn assignment for block C [30]
+FanIn assignment for block C [29]
 {
-CLK_DIV2,CLK_DIV8,CASS_IN_D7,CLK_DIV16,CLK_DIV4,Com_Ctrl_373,
+CLK_DIV2,CLK_DIV8,CASS_IN_D7,CLK_DIV4,Com_Ctrl_373,
 REGION0_CONFIG4,REGION0_CONFIG7,REGION0_CONFIG6,REGION0_CONFIG3,REGION0_CONFIG5,
 SYSTEM_CONFIG0,SYSTEM_CONFIG3,SYSTEM_CONFIG6,SYSTEM_CONFIG7,SYSTEM_CONFIG4,SYSTEM_CONFIG5,SYSTEM_CONFIG1,
 V64_32_VIDEO_MODE,
 Z80_A0,Z80_A6,Z80_A4,Z80_A2,Z80_A3,Z80_A5,Z80_RD,Z80_RFSH,Z80_A7,Z80_A1,Z80_IOREQ,
 }
 Multiplexer assignment for block C
-Z80_A0			(MC28	P)   : MUX 0		Ref (C46p)
+Z80_A0			(MC27	P)   : MUX 0		Ref (C46p)
 REGION0_CONFIG4		(MC4	FB)  : MUX 1		Ref (A12fb)
-Z80_A6			(MC23	P)   : MUX 2		Ref (B27p)
-Z80_A4			(MC21	P)   : MUX 3		Ref (B24p)
-V64_32_VIDEO_MODE		(MC18	P)   : MUX 4		Ref (F93p)
+Z80_A6			(MC22	P)   : MUX 2		Ref (B27p)
+Z80_A4			(MC20	P)   : MUX 3		Ref (B24p)
+V64_32_VIDEO_MODE		(MC17	P)   : MUX 4		Ref (F93p)
 SYSTEM_CONFIG0		(MC11	FB)  : MUX 5		Ref (D63fb)
 SYSTEM_CONFIG3		(MC9	FB)  : MUX 7		Ref (D60fb)
 CLK_DIV2		(MC12	FB)  : MUX 8		Ref (E66fb)
-Z80_A2			(MC19	P)   : MUX 9		Ref (B19p)
+Z80_A2			(MC18	P)   : MUX 9		Ref (B19p)
 CLK_DIV8		(MC13	FB)  : MUX 10		Ref (E68fb)
-Z80_A3			(MC20	P)   : MUX 11		Ref (B21p)
+Z80_A3			(MC19	P)   : MUX 11		Ref (B21p)
 SYSTEM_CONFIG6		(MC8	FB)  : MUX 13		Ref (D57fb)
-CASS_IN_D7		(MC30	P)   : MUX 14		Ref (E73p)
+CASS_IN_D7		(MC29	P)   : MUX 14		Ref (E73p)
 REGION0_CONFIG7		(MC1	FB)  : MUX 15		Ref (A9fb)
-Z80_A5			(MC22	P)   : MUX 16		Ref (B25p)
-Z80_RD			(MC29	P)   : MUX 17		Ref (D53p)
-CLK_DIV16		(MC15	FB)  : MUX 18		Ref (E71fb)
-SYSTEM_CONFIG7		(MC17	FB)  : MUX 19		Ref (E79fb)
+Z80_A5			(MC21	P)   : MUX 16		Ref (B25p)
+Z80_RD			(MC28	P)   : MUX 17		Ref (D53p)
+SYSTEM_CONFIG7		(MC16	FB)  : MUX 19		Ref (E79fb)
 SYSTEM_CONFIG4		(MC7	FB)  : MUX 22		Ref (D56fb)
 REGION0_CONFIG6		(MC3	FB)  : MUX 23		Ref (A11fb)
-Z80_RFSH		(MC26	FB)  : MUX 25		Ref (OE1)
+Z80_RFSH		(MC25	FB)  : MUX 25		Ref (OE1)
 REGION0_CONFIG3		(MC5	FB)  : MUX 27		Ref (A14fb)
 REGION0_CONFIG5		(MC2	FB)  : MUX 29		Ref (A10fb)
-SYSTEM_CONFIG5		(MC16	FB)  : MUX 31		Ref (E78fb)
-Z80_A7			(MC24	P)   : MUX 32		Ref (B29p)
-Z80_A1			(MC27	P)   : MUX 33		Ref (B17p)
-Z80_IOREQ		(MC25	P)   : MUX 35		Ref (D56p)
+SYSTEM_CONFIG5		(MC15	FB)  : MUX 31		Ref (E78fb)
+Z80_A7			(MC23	P)   : MUX 32		Ref (B29p)
+Z80_A1			(MC26	P)   : MUX 33		Ref (B17p)
+Z80_IOREQ		(MC24	P)   : MUX 35		Ref (D56p)
 CLK_DIV4		(MC14	FB)  : MUX 36		Ref (E70fb)
 Com_Ctrl_373		(MC6	FB)  : MUX 38		Ref (D55fb)
 SYSTEM_CONFIG1		(MC10	FB)  : MUX 39		Ref (D62fb)
@@ -706,10 +705,9 @@ VID_CPLD_5 = 1;
 
 !VID_RW_GATE.D = (!REGION0_CONFIG7.Q & Z80_A10 & Z80_A11 & Z80_A12 & Z80_A13 & !Z80_A14 & !Z80_A15 & !Z80_MEMREQ & Z80_RD & Z80_RFSH);
 
-Z80_CLK = ((!SYSTEM_CONFIG0.Q & SYSTEM_CONFIG1.Q & CLK_DIV4.Q)
-	# (SYSTEM_CONFIG0.Q & SYSTEM_CONFIG1.Q & CLK_DIV2.Q)
-	# (!SYSTEM_CONFIG0.Q & !SYSTEM_CONFIG1.Q & CLK_DIV16.Q)
-	# (SYSTEM_CONFIG0.Q & !SYSTEM_CONFIG1.Q & CLK_DIV8.Q));
+Z80_CLK = ((SYSTEM_CONFIG1.Q & SYSTEM_CONFIG0.Q & CLK_DIV2.Q)
+	# (!SYSTEM_CONFIG1.Q & CLK_DIV8.Q)
+	# (SYSTEM_CONFIG1.Q & CLK_DIV4.Q & !SYSTEM_CONFIG0.Q));
 
 Z80_D0 = ((!Z80_A0 & !Z80_A1 & !Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH & REGION0_CONFIG0.Q)
 	# (!Z80_A0 & !Z80_A1 & Z80_A2 & !Z80_A3 & Z80_A4 & Z80_A5 & Z80_A6 & !Z80_A7 & !Z80_IOREQ & !Z80_RD & Z80_RFSH & SYSTEM_CONFIG0.Q));
@@ -1224,7 +1222,7 @@ MC41  0         --                         --                     --           -
 MC42  0         --                         --                     --           --             0     slow
 MC43  27   PT   Z80_D7              C----  --                     --           --             4     slow
 MC44  0         --                         --                     --           --             0     slow
-MC45  25   on   Z80_CLK             C----  --                     --           --             4     slow
+MC45  25   on   Z80_CLK             C----  --                     --           --             3     slow
 MC46  24   --   Z80_A0              INPUT  --                     --           --             0     slow
 MC47  0         --                         --                     --           --             0     slow
 MC48  23   --   TMS                 INPUT  --                     --           --             0     slow
@@ -1316,7 +1314,7 @@ MC0   83        CLK_IN              INPUT  --                     --           -
 Logic Array Block	Logic Cells	I/O Pins	Foldbacks	TotalPT		FanIN	Cascades
 A: LC1	- LC16		16/16(100%)	8/16(50%)	2/16(12%)	50/80(62%)	(20)	0
 B: LC17	- LC32		16/16(100%)	8/16(50%)	2/16(12%)	50/80(62%)	(20)	0
-C: LC33	- LC48		6/16(37%)	8/16(50%)	0/16(0%)	22/80(27%)	(30)	0
+C: LC33	- LC48		6/16(37%)	8/16(50%)	0/16(0%)	21/80(26%)	(29)	0
 D: LC49	- LC64		11/16(68%)	8/16(50%)	1/16(6%)	33/80(41%)	(28)	0
 E: LC65	- LC80		16/16(100%)	8/16(50%)	4/16(25%)	34/80(42%)	(27)	0
 F: LC81	- LC96		7/16(43%)	8/16(50%)	2/16(12%)	20/80(25%)	(29)	0
@@ -1332,7 +1330,7 @@ Total Nodes+FB/MCells 		102/128 	(79%)
 Total cascade used 		0
 Total input pins 		29
 Total output pins 		39
-Total Pts 			247
+Total Pts 			246
 Creating pla file C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80M1-VIDEO\MEMCTRL.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS
