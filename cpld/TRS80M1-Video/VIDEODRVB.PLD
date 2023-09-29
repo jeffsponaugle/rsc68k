@@ -75,7 +75,7 @@ VGA_VIDEO_OUT = 'b'1;
 /* Signal that needs to be created */
 
 
-NODE CLK_12M;
+NODE CLK_12M,CLK_6M;
 /* Signals for sharing accesss to video memory */
 
 /* 5 FFs used for protecting access to video memory */
@@ -86,8 +86,8 @@ NODE VID_VM_CS;
 
 /* local variable that defines who has access.  Active low so ==0 means access */
 
-CPU_ACCESS_GRANTED = CPU_VRAM_CS_GNT # VRAM_SHARED_STATE;
-VDP_ACCESS_GRANTED = VDP_VRAM_CS_GNT # !VRAM_SHARED_STATE;
+CPU_ACCESS_GRANTED = CPU_VRAM_CS_GNT # VRAM_SHARED_STATE_DELAYED;
+VDP_ACCESS_GRANTED = VDP_VRAM_CS_GNT # !VRAM_SHARED_STATE_DELAYED;
 
 /* The variable that flips back and forth to allow equal access */
 VRAM_SHARED_STATE.d = !VRAM_SHARED_STATE;
@@ -114,7 +114,7 @@ CPU_VRAM_CS_EDGE.ap = !CPU_ACCESS_GRANTED # VDP_OR_FONT_ACCESS # !RESET_IN;
 
 CPU_VRAM_CS_GNT.ck = !VRAM_SHARED_STATE;
 CPU_VRAM_CS_GNT.d = CPU_VRAM_CS_EDGE;
-CPU_VRAM_CS_GNT.ap = !RESET_IN # (VRAM_SHARED_STATE & !VRAM_SHARED_STATE_DELAYED);
+CPU_VRAM_CS_GNT.ap = !RESET_IN;
 
 /* 
     VDP_VRAM_CS_EDGE captures the falling edge of the VID_VM_CS signal which is a signal from 
@@ -127,7 +127,7 @@ CPU_VRAM_CS_GNT.ap = !RESET_IN # (VRAM_SHARED_STATE & !VRAM_SHARED_STATE_DELAYED
 
 VDP_VRAM_CS_GNT.ck = VRAM_SHARED_STATE;
 VDP_VRAM_CS_GNT.d = VDP_VRAM_CS_EDGE;
-VDP_VRAM_CS_GNT.ap = !RESET_IN # (!VRAM_SHARED_STATE & VRAM_SHARED_STATE_DELAYED);
+VDP_VRAM_CS_GNT.ap = !RESET_IN;
 /* VDP_VRAM_CS_GNT.ap = !RESET_IN */
 
 VDP_VRAM_CS_EDGE.ck = !VID_VM_CS;
@@ -209,7 +209,7 @@ VM_OE = (CPU_ACCESS_GRANTED # !VID_RW # VDP_OR_FONT_ACCESS) & (VDP_ACCESS_GRANTE
         (1) CPU_ACCESS_GRANTED==0 and VID_RW==0
         but disabled if VDP_OR_FONT_ACCESS=1 (indicating video ram access is disabled)
 */
-VM_WE = (CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS);
+VM_WE = (CPU_ACCESS_GRANTED # VID_RW # VDP_OR_FONT_ACCESS  # !VRAM_SHARED_STATE  );
 
 /* 
    FM_OE - Enable the output drivers of the font RAM.  This should be enabled(==0):
@@ -263,6 +263,11 @@ NODE FONTLINE_RESET;
 CLK_12M.d = !CLK_12M;
 CLK_12M.ck = CLK_25M;
 CLK_12M.ar = !RESET_IN;
+
+
+CLK_6M.d = !CLK_6M;
+CLK_6M.ck = CLK_12M;
+CLK_6M.ar = !RESET_IN;
 
 /*  
     Configuration Registers 
@@ -546,7 +551,7 @@ MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE & (!(
    just after the last character is loaded.  Adding the hsync_counter_3_field makes it pulse for 6 of the 8 cycles.
 */
 
-VID_VM_CS.d = !(MODE_INC & hsync_counter_3_field:['d'2..'d'7]);
+VID_VM_CS.d = !(MODE_INC & hsync_counter_3_field:['d'4..'d'7]);
 VID_VM_CS.ck = !CLK_12M;
 VID_VM_CS.ap = !RESET_IN;
 
