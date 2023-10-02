@@ -12,6 +12,13 @@ PROPERTY ATMEL {TDI_PULLUP = ON};
 PROPERTY ATMEL {TMS_PULLUP = ON};
 /*PROPERTY ATMEL {open_collector=Z80_WAIT};*/
 
+
+/* 
+   *************************************************************************
+   PINs
+   *************************************************************************
+*/
+
 /* INPUTS 16 Pins of 63 Total */
 
 Pin[83] = CLK_25M;                 /* 25.175Mhz input clock  - Master Pixel Clock */
@@ -73,10 +80,12 @@ VGA_HSYNC_OUT = 'b'1;
 VGA_VSYNC_OUT = 'b'1;
 VGA_VIDEO_OUT = 'b'1;
 
-/* Signal that needs to be created */
-
-
-NODE CLK_12M,CLK_6M,CLK_12M_DELAYED;
+/* 
+   *************************************************************************
+   Internal NODES
+   *************************************************************************
+*/
+NODE CLK_12M,CLK_12M_DELAYED;
 /* Signals for sharing accesss to video memory */
 
 /* 5 FFs used for protecting access to video memory */
@@ -85,7 +94,48 @@ NODE VDP_VRAM_CS_GNT, VDP_VRAM_CS_EDGE;
 NODE VRAM_SHARED_STATE,VRAM_SHARED_STATE_DELAYEDQ1,VRAM_SHARED_STATE_DELAYEDQ2;
 NODE VID_VM_CS;
 
+/* 
+   Video Configuration Register A 
+   D0,D1,D2,D3 = Select Video Memory Page Visable, D4,D5,D6,D7 = Select FONT
+*/
+NODE [VCONFA0..7];  
+/* 
+   Video Configuration Register B 
+   D0,D1,D2,D3,D4,D5 = Select Character RAM Page Visable, D7 = (=0 VIDEORAM Visible, =1 CHARCTERRAM Visible) 
+*/
 
+NODE [VCONFB0..7]; 
+
+NODE [HSYNC_COUNTER0..9];
+NODE [VSYNC_COUNTER0..9];
+NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
+NODE HSYNC_ZERO;
+NODE VSYNC_ZERO;
+NODE VSYNC_DISPLAY_ACTIVE;
+NODE [SHIFTREG0..7];
+NODE FONTLINE_RESET;
+
+
+/* 
+   *************************************************************************
+   Clocks Used Internally
+   *************************************************************************
+*/
+CLK_12M.d = !CLK_12M;
+CLK_12M.ck = CLK_25M;
+CLK_12M.ar = !RESET_IN;
+
+CLK_12M_DELAYED.d = CLK_12M;
+CLK_12M_DELAYED.ck = !CLK_25M;
+CLK_12M.ap = !RESET_IN;
+
+PIXELCLOCK = CLK_12M;
+
+/* 
+   *************************************************************************
+   CPU/VIDEO Shared Access to SRAM Logic
+   *************************************************************************
+*/
 /* local variable that defines who has access.  Active low so ==0 means access */
 
 /* PRETEST CPU_ACCESS_GRANTED = CPU_VRAM_CS_GNT # VRAM_SHARED_STATE_DELAYED;
@@ -111,8 +161,6 @@ VRAM_SHARED_STATE_DELAYEDQ1.ap = !RESET_IN;
 VRAM_SHARED_STATE_DELAYEDQ2.d = VRAM_SHARED_STATE;
 VRAM_SHARED_STATE_DELAYEDQ2.ck = !CLK_12M_DELAYED;
 VRAM_SHARED_STATE_DELAYEDQ2.ap = !RESET_IN;
-
-
 
 /* The other flip flops for memory access */
 
@@ -257,50 +305,16 @@ FM_WE = !VDP_OR_FONT_ACCESS # VID_MEM_CS # VID_RW;
 
 CP_FM_DATA_OE = VID_MEM_CS # !VDP_OR_FONT_ACCESS;
 
-
 Z80_WAIT.d = 'b'0;
 Z80_WAIT.ck = !CPU_VRAM_CS_EDGE;
 Z80_WAIT.ap = !CPU_ACCESS_GRANTED # !RESET_IN;
 
-VID_CPLD_5.d = 'b'0;
-VID_CPLD_5.ck = !CPU_VRAM_CS_EDGE;
-VID_CPLD_5.ap = !CPU_ACCESS_GRANTED # !RESET_IN;
-
 
 /* 
-   Video Configuration Register A 
-   D0,D1,D2,D3 = Select Video Memory Page Visable, D4,D5,D6,D7 = Select FONT
+   *************************************************************************
+   Internal Register used for Configuration
+   *************************************************************************
 */
-NODE [VCONFA0..7];  
-/* 
-   Video Configuration Register B 
-   D0,D1,D2,D3,D4,D5 = Select Character RAM Page Visable, D7 = (=0 VIDEORAM Visible, =1 CHARCTERRAM Visible) 
-*/
-
-NODE [VCONFB0..7]; 
-
-NODE [HSYNC_COUNTER0..9];
-NODE [VSYNC_COUNTER0..9];
-NODE VSYNC_CLOCK_A,VSYNC_CLOCK_B;
-NODE HSYNC_ZERO;
-NODE VSYNC_ZERO;
-NODE VSYNC_DISPLAY_ACTIVE;
-NODE [SHIFTREG0..7];
-NODE FONTLINE_RESET;
-
-
-CLK_12M.d = !CLK_12M;
-CLK_12M.ck = CLK_25M;
-CLK_12M.ar = !RESET_IN;
-
-CLK_12M_DELAYED.d = CLK_12M;
-CLK_12M_DELAYED.ck = !CLK_25M;
-CLK_12M.ap = !RESET_IN;
-
-
-CLK_6M.d = !CLK_6M;
-CLK_6M.ck = CLK_12M;
-CLK_6M.ar = !RESET_IN;
 
 /*  
     Configuration Registers 
@@ -330,6 +344,14 @@ VCONFBWRITE = !(!VID_IO_CS & CPU_A0 & CPU_A1 & !VID_RW);
 [VCONFB0..7].ck = VCONFBWRITE;
 [VCONFB0..7].d = [CPU_D0..7];
 [VCONFB0..7].ar = !RESET_IN;
+
+
+/* 
+   *************************************************************************
+   Logic for selecting active Font, and active video page. Also driver
+   disable for active font in case of CPU Font access
+   *************************************************************************
+*/
 
 /* FONTSEL0-3 are connected to the font RAM address bits 12,13,14,15
    if (VDP_OR_FONT_ACCESS==0) FONTSEL should refect the VCONFA4-7 register.
@@ -365,6 +387,12 @@ FM_A11.oe = VDP_OR_FONT_ACCESS;
 */
 
 VDP_OR_FONT_ACCESS = VCONFB7;
+
+/* 
+   *************************************************************************
+   Horizontal and Vertical Sync Counters
+   *************************************************************************
+*/
 
 /* Horizontal Sync 10 bit counter, 0-799.  HSYNC_ZERO is used to reset this counter so it loops from 799 back to 0 */
 
@@ -500,6 +528,13 @@ FIELD vsync_counter_4_field = [VSYNC_COUNTER3..0];
 
 VSYNC_ZERO = !(vsync_counter_field:['d'263]);
 
+
+/* 
+   *************************************************************************
+   Logic for advancing through FONT lines
+   *************************************************************************
+*/
+
 /* FONTLINE_RESET - Reset counter if the value==11, so it counts from 0-11.  Also hold in reset
     if we are not in the active area (VSYNC_DISPLAY_ACTIVE) */
 
@@ -542,6 +577,12 @@ FIELD fontline_field = [FONTLINE3..0];
 [FONTLINE0..3].oe = !VDP_OR_FONT_ACCESS;
 
 
+/* 
+   *************************************************************************
+   Shift Register used to output display pixels and load from SRAM
+   *************************************************************************
+*/
+
 /* SHIFTREG_LOAD = 1 if the shift register will load from the databus, ==0 and it will shift from 0 to 7; */
 
 SHIFTREG_LOAD = hsync_counter_3_field:['b'111];
@@ -557,6 +598,13 @@ SHIFTREG7.d = (SHIFTREG_LOAD & DIN7) # ( !SHIFTREG_LOAD & SHIFTREG6);
 
 [SHIFTREG0..7].ck = !CLK_12M;
 [SHIFTREG0..7].ar = !RESET_IN;
+
+
+/* 
+   *************************************************************************
+   Logic for creating sync pulses and describing the active part of the screen
+   *************************************************************************
+*/
 
 /* VSYNC_DISPLAY_ACTIVE == 1 when on an active output row that we want to output pixel data.  Rows 32-223 (192 rows) */
 VSYNC_DISPLAY_ACTIVE = (vsync_counter_field:['d'40..'d'231]);
@@ -574,6 +622,13 @@ VSYNC_PATTERN = (hsync_counter_field:['d'0..'d'639]);
 /* HSYNC_PATTERN describes what a SYNC output line looks like for the display to see a Horizontal SYNC, but inverted.  
    This value is ==1 at the locations that we want the SYNC signal to be 0. */
 HSYNC_PATTERN = (hsync_counter_field:['d'0..'d'63]);
+
+
+/* 
+   *************************************************************************
+   Logic for addressing video memory for display usage
+   *************************************************************************
+*/
 
 MODE_INC = (hsync_counter_field:['d'194..'d'704]) & VSYNC_DISPLAY_ACTIVE;
 MODE_SUB64 = (hsync_counter_field:['d'711..'d'712]) & VSYNC_DISPLAY_ACTIVE & (!(fontline_field:['d'11]));
@@ -596,7 +651,7 @@ VID_VM_CS.ap = !RESET_IN;
 VM_ADDR_RESET = !VSYNC_DISPLAY_ACTIVE;
 
 /*
-   Clocking into the address latches every 9 cycles at the beginning of the cycle.  Most of the time the MODE2..0 will
+   Clocking into the address latches every 8 cycles at the beginning of the cycle.  Most of the time the MODE2..0 will
    be equal to 0, which means no change on clocking.  
    If MODE2..0 == 1, the address counter will increment by 1.
    IF MODE2..0 == 2, the address counter will subtract 64.
@@ -613,6 +668,12 @@ MODE2.d = 'b'0;
 [MODE2..0].ck = !CLK_12M;
 [MODE2..0].ar = !RESET_IN;
 
+
+/* 
+   *************************************************************************
+   Video output signals
+   *************************************************************************
+*/
 /* The actual SYNC output pin is either doing a line with the HSYNC pattern, or the VSYNC pattern */
 
 NTSC_SYNC_OUT.d = ( 
