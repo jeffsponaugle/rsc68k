@@ -1,11 +1,11 @@
-{COMPONENT C:\VID_MAIN_VGA.SYM
+{COMPONENT C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80SUPERM1-PROTO\VID_MAIN_VGA.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Mon Oct 02 20:40:23 2023 "}
+  {DBtime "Mon Oct 02 22:08:47 2023 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,12 +33,11 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P CLK_25M {Pt "INPUT"}{Lq 0}{Ploc 100 760}}
-   {P RESET_IN {Pt "INPUT"}{Lq 0}{Ploc 100 720}}
-   {P V64OR32M {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
-   {P VID_MEM_ {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
-   {P VID_RW {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
-   {P FONTLI2 {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
+   {P CLK_25M {Pt "INPUT"}{Lq 0}{Ploc 100 740}}
+   {P RESET_IN {Pt "INPUT"}{Lq 0}{Ploc 100 700}}
+   {P V64OR32M {Pt "INPUT"}{Lq 0}{Ploc 100 680}}
+   {P VID_MEM_ {Pt "INPUT"}{Lq 0}{Ploc 100 660}}
+   {P VID_RW {Pt "INPUT"}{Lq 0}{Ploc 100 640}}
    {P CPU_A0 {Pt "INPUT"}{Lq 0}{Ploc 100 620}}
    {P CPU_A1 {Pt "INPUT"}{Lq 0}{Ploc 100 600}}
    {P VID_CP6 {Pt "INPUT"}{Lq 0}{Ploc 100 580}}
@@ -72,43 +71,43 @@
    {P VID_IO_C {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P FONTLI0 {Pt "I/O"}{Lq 0}{Ploc 360 20}}
    {P FONTLI1 {Pt "I/O"}{Lq 0}{Ploc 360 40}}
-   {P FONTLI3 {Pt "I/O"}{Lq 0}{Ploc 360 60}}
-   {P FONTSEL0 {Pt "I/O"}{Lq 0}{Ploc 360 80}}
-   {P FONTSEL1 {Pt "I/O"}{Lq 0}{Ploc 360 100}}
-   {P FONTSEL2 {Pt "I/O"}{Lq 0}{Ploc 360 120}}
-   {P FONTSEL3 {Pt "I/O"}{Lq 0}{Ploc 360 140}}
-   {P FM_A10 {Pt "I/O"}{Lq 0}{Ploc 360 160}}
-   {P FM_A11 {Pt "I/O"}{Lq 0}{Ploc 360 180}}
-   {P VM_PAGE0 {Pt "I/O"}{Lq 0}{Ploc 360 200}}
-   {P VM_PAGE1 {Pt "I/O"}{Lq 0}{Ploc 360 220}}
-   {P VM_PAGE2 {Pt "I/O"}{Lq 0}{Ploc 360 240}}
-   {P VM_PAGE3 {Pt "I/O"}{Lq 0}{Ploc 360 260}}
-   {P VM_OE {Pt "I/O"}{Lq 0}{Ploc 360 280}}
-   {P VM_WE {Pt "I/O"}{Lq 0}{Ploc 360 300}}
-   {P CP_VM_AD {Pt "I/O"}{Lq 0}{Ploc 360 320}}
-   {P VM_DATA {Pt "I/O"}{Lq 0}{Ploc 360 340}}
-   {P VM_DATA_ {Pt "I/O"}{Lq 0}{Ploc 360 360}}
-   {P CP_FM_DA {Pt "I/O"}{Lq 0}{Ploc 360 380}}
-   {P VM_ADD {Pt "I/O"}{Lq 0}{Ploc 360 400}}
-   {P VM_ADDR {Pt "I/O"}{Lq 0}{Ploc 360 420}}
-   {P CP_VM_DW {Pt "I/O"}{Lq 0}{Ploc 360 440}}
-   {P CP_VM_D {Pt "I/O"}{Lq 0}{Ploc 360 460}}
-   {P CP_VM_DR {Pt "I/O"}{Lq 0}{Ploc 360 480}}
-   {P FM_WE {Pt "I/O"}{Lq 0}{Ploc 360 500}}
-   {P FM_OE {Pt "I/O"}{Lq 0}{Ploc 360 520}}
-   {P VID_CP4 {Pt "I/O"}{Lq 0}{Ploc 360 540}}
+   {P FONTLI2 {Pt "I/O"}{Lq 0}{Ploc 360 60}}
+   {P FONTLI3 {Pt "I/O"}{Lq 0}{Ploc 360 80}}
+   {P FONTSEL0 {Pt "I/O"}{Lq 0}{Ploc 360 100}}
+   {P FONTSEL1 {Pt "I/O"}{Lq 0}{Ploc 360 120}}
+   {P FONTSEL2 {Pt "I/O"}{Lq 0}{Ploc 360 140}}
+   {P FONTSEL3 {Pt "I/O"}{Lq 0}{Ploc 360 160}}
+   {P FM_A10 {Pt "I/O"}{Lq 0}{Ploc 360 180}}
+   {P FM_A11 {Pt "I/O"}{Lq 0}{Ploc 360 200}}
+   {P VM_PAGE0 {Pt "I/O"}{Lq 0}{Ploc 360 220}}
+   {P VM_PAGE1 {Pt "I/O"}{Lq 0}{Ploc 360 240}}
+   {P VM_PAGE2 {Pt "I/O"}{Lq 0}{Ploc 360 260}}
+   {P VM_PAGE3 {Pt "I/O"}{Lq 0}{Ploc 360 280}}
+   {P VM_OE {Pt "I/O"}{Lq 0}{Ploc 360 300}}
+   {P VM_WE {Pt "I/O"}{Lq 0}{Ploc 360 320}}
+   {P CP_VM_AD {Pt "I/O"}{Lq 0}{Ploc 360 340}}
+   {P VM_DATA {Pt "I/O"}{Lq 0}{Ploc 360 360}}
+   {P VM_DATA_ {Pt "I/O"}{Lq 0}{Ploc 360 380}}
+   {P CP_FM_DA {Pt "I/O"}{Lq 0}{Ploc 360 400}}
+   {P VM_ADD {Pt "I/O"}{Lq 0}{Ploc 360 420}}
+   {P VM_ADDR {Pt "I/O"}{Lq 0}{Ploc 360 440}}
+   {P CP_VM_DW {Pt "I/O"}{Lq 0}{Ploc 360 460}}
+   {P CP_VM_D {Pt "I/O"}{Lq 0}{Ploc 360 480}}
+   {P CP_VM_DR {Pt "I/O"}{Lq 0}{Ploc 360 500}}
+   {P FM_WE {Pt "I/O"}{Lq 0}{Ploc 360 520}}
+   {P FM_OE {Pt "I/O"}{Lq 0}{Ploc 360 540}}
+   {P VID_CP4 {Pt "I/O"}{Lq 0}{Ploc 360 560}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 230 790}
+   {Rdl 230 770}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 770}
+   {Pnl 120 750}
    [Ts 15][Tj "RC"]
-   {Pnl 120 730}
    {Pnl 120 710}
    {Pnl 120 690}
    {Pnl 120 670}
@@ -172,17 +171,17 @@
    {Pnl 340 510}
    {Pnl 340 530}
    {Pnl 340 550}
+   {Pnl 340 570}
 
-   {Sd A 83 1 2 4 5 9 17 18 22 29 33 34 35 44 50 51 52 54 55 56 57 58 60 61 63 64 65 67 68 69 70 73 74 75 76 81 84 6 8 10 11 12 15 16 20 21 24 25 27 28 30 31 36 37 39 40 41 45 46 48 49 77 79 80}
+   {Sd A 83 1 2 4 5 17 18 22 29 33 34 35 44 50 51 52 54 55 56 57 58 60 61 63 64 65 67 68 69 70 73 74 75 76 81 84 6 8 9 10 11 12 15 16 20 21 24 25 27 28 30 31 36 37 39 40 41 45 46 48 49 77 79 80}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 780 330 0}
-   {L 130 760 100 760}
-   {L 130 770 140 760 130 750}
-   {L 130 720 100 720}
+   {R 130 760 330 0}
+   {L 130 740 100 740}
+   {L 130 750 140 740 130 730}
    {L 130 700 100 700}
    {L 130 680 100 680}
    {L 130 660 100 660}
@@ -245,14 +244,14 @@
    {L 330 500 360 500}
    {L 330 520 360 520}
    {L 330 540 360 540}
+   {L 330 560 360 560}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "CLK_25M" 140 760}
-   {T "RESET_IN" 140 720}
-   {T "V64OR32M" 140 700}
-   {T "VID_MEM_" 140 680}
-   {T "VID_RW" 140 660}
-   {T "FONTLI2" 140 640}
+   {T "CLK_25M" 140 740}
+   {T "RESET_IN" 140 700}
+   {T "V64OR32M" 140 680}
+   {T "VID_MEM_" 140 660}
+   {T "VID_RW" 140 640}
    {T "CPU_A0" 140 620}
    {T "CPU_A1" 140 600}
    {T "VID_CP6" 140 580}
@@ -287,31 +286,32 @@
    [Tj "RC"]
    {T "FONTLI0" 320 20}
    {T "FONTLI1" 320 40}
-   {T "FONTLI3" 320 60}
-   {T "FONTSEL0" 320 80}
-   {T "FONTSEL1" 320 100}
-   {T "FONTSEL2" 320 120}
-   {T "FONTSEL3" 320 140}
-   {T "FM_A10" 320 160}
-   {T "FM_A11" 320 180}
-   {T "VM_PAGE0" 320 200}
-   {T "VM_PAGE1" 320 220}
-   {T "VM_PAGE2" 320 240}
-   {T "VM_PAGE3" 320 260}
-   {T "VM_OE" 320 280}
-   {T "VM_WE" 320 300}
-   {T "CP_VM_AD" 320 320}
-   {T "VM_DATA" 320 340}
-   {T "VM_DATA_" 320 360}
-   {T "CP_FM_DA" 320 380}
-   {T "VM_ADD" 320 400}
-   {T "VM_ADDR" 320 420}
-   {T "CP_VM_DW" 320 440}
-   {T "CP_VM_D" 320 460}
-   {T "CP_VM_DR" 320 480}
-   {T "FM_WE" 320 500}
-   {T "FM_OE" 320 520}
-   {T "VID_CP4" 320 540}
+   {T "FONTLI2" 320 60}
+   {T "FONTLI3" 320 80}
+   {T "FONTSEL0" 320 100}
+   {T "FONTSEL1" 320 120}
+   {T "FONTSEL2" 320 140}
+   {T "FONTSEL3" 320 160}
+   {T "FM_A10" 320 180}
+   {T "FM_A11" 320 200}
+   {T "VM_PAGE0" 320 220}
+   {T "VM_PAGE1" 320 240}
+   {T "VM_PAGE2" 320 260}
+   {T "VM_PAGE3" 320 280}
+   {T "VM_OE" 320 300}
+   {T "VM_WE" 320 320}
+   {T "CP_VM_AD" 320 340}
+   {T "VM_DATA" 320 360}
+   {T "VM_DATA_" 320 380}
+   {T "CP_FM_DA" 320 400}
+   {T "VM_ADD" 320 420}
+   {T "VM_ADDR" 320 440}
+   {T "CP_VM_DW" 320 460}
+   {T "CP_VM_D" 320 480}
+   {T "CP_VM_DR" 320 500}
+   {T "FM_WE" 320 520}
+   {T "FM_OE" 320 540}
+   {T "VID_CP4" 320 560}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "F1508ISPPLCC84" 230 -10}
@@ -325,7 +325,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\VID_MAIN_VGA 230 780}
+    {At PLD C:\USERS\JBS\DOCUMENTS\SRC\RSC68K\CPLD\TRS80SUPERM1-PROTO\VID_MAIN_VGA 230 760}
    }
   }
  }
@@ -344,8 +344,6 @@
    {N VID_MEM_
    }
    {N VID_RW
-   }
-   {N FONTLI2
    }
    {N CPU_A0
    }
@@ -412,6 +410,8 @@
    {N FONTLI0
    }
    {N FONTLI1
+   }
+   {N FONTLI2
    }
    {N FONTLI3
    }
