@@ -124,12 +124,13 @@ Z80_CLK = (!SYSTEM_CONFIG1 & !SYSTEM_CONFIG0 & CLK_DIV8)
 ISMEMORYACCESS = !Z80_MEMREQ & Z80_RFSH;
 ISIOACCESS = !Z80_IOREQ  & Z80_RFSH;
 
-/* NMAP_HARDWARE_ACCESS == 1 if there is a memory accces to the hardware mmap region (0x3800-0x3FFF) AND the REGION 0 bit to all 
+/* NMAP_HARDWARE_ACCESS == 1 if there is a memory accces to the hardware mmap region (0x3\700-0x3FFF) AND the REGION 0 bit to all 
    hardware acesss is REGION0_CONFIG7==1 */
 
 
 MMAP_HARDWARE_ACCESS = !REGION0_CONFIG7 & ISMEMORYACCESS & 
-                                        (cpu_address_bus:'h'38XX
+                                        ( cpu_address_bus:'h'37XX
+                                       # cpu_address_bus:'h'38XX
                                        # cpu_address_bus:'h'39XX
                                        # cpu_address_bus:'h'3AXX
                                        # cpu_address_bus:'h'3BXX

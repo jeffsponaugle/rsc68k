@@ -72,7 +72,7 @@ Pin[50,51,52,54,55,56,57,58]  = [DIN0..7];             /* FM_D0-FM_D7 */
 Pin[67,68,69,70,73,74,75,76]  = [CPU_D0..7];           /* Data input bits from CPU for writing to config registers */
 Pin[80]  = VID_CPLD_4;  /* To CPU */
 Pin[81]  = VID_CPLD_5;  /* To CPU */           
-Pin[22]  = VID_CPLD_6;  /* To Other CPLD */
+Pin[22]  = VID_CPLD_6;  /* To Other CPLD and CPU */
 
 Pin[20] = FM_A10;
 Pin[21] = FM_A11;
